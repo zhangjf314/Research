@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
-from paper_research.retrieval.context_builder import ContextItem
+from paper_research.retrieval.context_builder import ContextBuildTrace, ContextItem
 
 
 class TraceResult(BaseModel):
@@ -48,6 +48,7 @@ class RetrievalTrace(BaseModel):
     rerank_api_request_count: int = 0
     retrieval_scope: str = "unspecified"
     context_build_latency_ms: float = 0
+    context_strategy: ContextBuildTrace = Field(default_factory=ContextBuildTrace)
     embedding_provider: str = "unknown"
     embedding_model: str = "unknown"
     embedding_revision: str = "unknown"

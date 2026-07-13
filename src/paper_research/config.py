@@ -47,9 +47,15 @@ class Settings(BaseSettings):
     rerank_allow_fallback: bool = False
     llm_provider: str = "template"
     llm_model: str = "template-v1"
-    llm_base_url: str | None = None
+    llm_base_url: str | None = "https://api.siliconflow.cn/v1"
     llm_api_key: str | None = None
     llm_temperature: float = 0.0
+    llm_timeout_seconds: float = Field(default=120.0, gt=0, le=600)
+    llm_max_output_tokens: int = Field(default=2048, ge=128, le=65536)
+    llm_max_retries: int = Field(default=2, ge=0, le=2)
+    llm_input_cost_per_million: float | None = Field(default=None, ge=0)
+    llm_output_cost_per_million: float | None = Field(default=None, ge=0)
+    qa_context_token_budget: int = Field(default=12000, ge=512, le=100000)
     prompt_version: str = "claim-qa-v1"
     index_version: str = "hash-v1"
     dataset_version: str = "gold-set-v1-pending-review"
@@ -83,12 +89,29 @@ class Settings(BaseSettings):
             return []
         missing = list(self.embedding_configuration_issues)
         missing.extend(self.rerank_configuration_issues)
-        if self.llm_provider == "template":
-            missing.append("LLM_PROVIDER")
+        missing.extend(self.llm_configuration_issues)
+        return sorted(set(missing))
+
+    @property
+    def llm_configuration_issues(self) -> list[str]:
+        if self.app_profile != "production":
+            return []
+        provider = self.llm_provider.strip().lower()
+        if provider == "template" or provider not in {"siliconflow", "openai_compatible"}:
+            return ["LLM_PROVIDER"]
+        missing: list[str] = []
+        if (
+            "llm_model" not in self.model_fields_set
+            or not self.llm_model.strip()
+            or self.llm_model == "template-v1"
+        ):
+            missing.append("LLM_MODEL")
         if not self.llm_base_url:
             missing.append("LLM_BASE_URL")
         if not self.llm_api_key:
             missing.append("LLM_API_KEY")
+        if self.prompt_version == "qa-production-v1" and self.llm_temperature != 0:
+            missing.append("LLM_TEMPERATURE")
         return sorted(set(missing))
 
     @property
@@ -175,6 +198,10 @@ class Settings(BaseSettings):
             "rerank_allow_fallback": self.rerank_allow_fallback,
             "llm_provider": self.llm_provider,
             "llm_model": self.llm_model,
+            "llm_timeout_seconds": self.llm_timeout_seconds,
+            "llm_max_output_tokens": self.llm_max_output_tokens,
+            "llm_max_retries": self.llm_max_retries,
+            "qa_context_token_budget": self.qa_context_token_budget,
             "prompt_version": self.prompt_version,
             "index_version": self.index_version,
             "dataset_version": self.dataset_version,

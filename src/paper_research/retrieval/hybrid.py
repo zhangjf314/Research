@@ -174,6 +174,7 @@ class HybridRetriever:
                 else round((rerank_finished - retrieval_finished) * 1000, 3)
             ),
             context_build_latency_ms=round((context_finished - rerank_finished) * 1000, 3),
+            context_strategy=self.context_builder.last_trace,
             pre_rerank_candidate_count=len(rerank_candidates),
             rerank_output_count=len(reranked),
             rerank_fallback_occurred=outcome.fallback_occurred if outcome else False,

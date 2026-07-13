@@ -10,6 +10,7 @@ from paper_research.indexing.embedding import (
 from paper_research.providers.llm import (
     LLMProvider,
     OpenAICompatibleLLMProvider,
+    SiliconFlowLLMProvider,
     TemplateLLMProvider,
 )
 from paper_research.retrieval.reranker import (
@@ -80,20 +81,41 @@ def build_provider_bundle(settings: Settings) -> ProviderBundle:
 
     reranker = build_reranker(settings)
 
+    llm = build_llm_provider(settings)
+    return ProviderBundle(embedding, reranker, llm, settings.provider_metadata)
+
+
+def build_llm_provider(settings: Settings) -> LLMProvider:
+    if settings.llm_configuration_issues:
+        raise ProviderConfigurationError(
+            "production LLM is not configured: "
+            + ", ".join(settings.llm_configuration_issues)
+        )
     if settings.llm_provider == "template":
-        llm: LLMProvider = TemplateLLMProvider()
-    elif settings.llm_provider == "openai_compatible":
-        if not settings.llm_base_url or not settings.llm_api_key:
-            raise ProviderConfigurationError("LLM_BASE_URL and LLM_API_KEY are required")
-        llm = OpenAICompatibleLLMProvider(
+        return TemplateLLMProvider()
+    if not settings.llm_base_url or not settings.llm_api_key:
+        raise ProviderConfigurationError("LLM_BASE_URL and LLM_API_KEY are required")
+    if settings.llm_provider == "siliconflow":
+        return SiliconFlowLLMProvider(
+            settings.llm_base_url,
+            settings.llm_api_key,
+            settings.llm_model,
+            temperature=settings.llm_temperature,
+            timeout_seconds=settings.llm_timeout_seconds,
+            max_output_tokens=settings.llm_max_output_tokens,
+            max_retries=settings.llm_max_retries,
+            input_cost_per_million=settings.llm_input_cost_per_million,
+            output_cost_per_million=settings.llm_output_cost_per_million,
+        )
+    if settings.llm_provider == "openai_compatible":
+        return OpenAICompatibleLLMProvider(
             settings.llm_base_url,
             settings.llm_api_key,
             settings.llm_model,
             settings.llm_temperature,
+            settings.llm_timeout_seconds,
         )
-    else:
-        raise ProviderConfigurationError(f"unsupported LLM provider: {settings.llm_provider}")
-    return ProviderBundle(embedding, reranker, llm, settings.provider_metadata)
+    raise ProviderConfigurationError(f"unsupported LLM provider: {settings.llm_provider}")
 
 
 def build_reranker(settings: Settings) -> Reranker:

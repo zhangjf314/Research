@@ -50,6 +50,16 @@ evidence-based default. See
 [`docs/reranker-ablation-v1.md`](docs/reranker-ablation-v1.md) and
 [`docs/stage11b-real-reranker.md`](docs/stage11b-real-reranker.md).
 
+Stage 11C adds an evidence-bound SiliconFlow `Qwen/Qwen3-8B` ordinary-QA adapter,
+strict claim-level paper/page/block citations, token-budget context tracing, and a
+resumable smoke/dev/full evaluator. Retrieval remains Jina Structural Hybrid and the
+Reranker remains disabled. The real 50-query run completed with 100% final JSON/schema
+validity and 100% refusal accuracy, but only 38.9% required-claim coverage, 10.3%
+citation precision, and 9.7% citation recall. These results validate the integration,
+not production answer quality; see
+[`docs/qa-production-v1.md`](docs/qa-production-v1.md) and
+[`docs/stage11c-qa-audit.md`](docs/stage11c-qa-audit.md).
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.
