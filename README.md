@@ -39,6 +39,17 @@ and unanswerable scopes separately. See
 unanswerable queries were human-approved by `zjf` on 2026-07-13; Stage 11B may now begin
 with Reranker still disabled by default.
 
+Stage 11B adds a strict Jina `jina-reranker-v3` adapter and a reranker-only ablation
+runner. Retrieval is frozen to the Stage 11A.5 Jina Structural Hybrid snapshot:
+retrieve Top-30, rerank all Top-30 candidates, and evaluate Top-10. Production
+configuration fails explicitly when the model or API key is missing; formal ablations
+require `RERANK_ALLOW_FALLBACK=false`. The real three-way run completed on 2026-07-14
+with zero failures and zero fallbacks. Jina v3 did not improve paper-scoped Hit@1 or
+MRR and its total P95 latency was 63.66 seconds, so `RERANK_ENABLED=false` remains the
+evidence-based default. See
+[`docs/reranker-ablation-v1.md`](docs/reranker-ablation-v1.md) and
+[`docs/stage11b-real-reranker.md`](docs/stage11b-real-reranker.md).
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.

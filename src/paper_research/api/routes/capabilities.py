@@ -53,6 +53,7 @@ def capabilities() -> CapabilitiesResponse:
         except psycopg.Error as exc:
             checkpoint_detail = f"postgres: {type(exc).__name__}"
     embedding_ready = not settings.embedding_configuration_issues
+    reranker_ready = not settings.rerank_configuration_issues
     items = {
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
@@ -92,8 +93,12 @@ def capabilities() -> CapabilitiesResponse:
             detail=f"{settings.embedding_provider}/{settings.embedding_model}",
         ),
         "reranker": Capability(
-            status="disabled" if not settings.rerank_enabled else "configured",
-            configured=settings.rerank_enabled,
+            status=(
+                "disabled"
+                if not settings.rerank_enabled
+                else "configured" if reranker_ready else "degraded"
+            ),
+            configured=settings.rerank_enabled and reranker_ready,
             verified=settings.rerank_provider == "lexical" and settings.rerank_enabled,
             detail=f"{settings.rerank_provider}/{settings.rerank_model}",
         ),

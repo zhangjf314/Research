@@ -15,6 +15,7 @@ from paper_research.providers.llm import (
 from paper_research.retrieval.reranker import (
     CrossEncoderReranker,
     DisabledReranker,
+    JinaReranker,
     LexicalReranker,
     Reranker,
 )
@@ -96,17 +97,33 @@ def build_provider_bundle(settings: Settings) -> ProviderBundle:
 
 
 def build_reranker(settings: Settings) -> Reranker:
-
     if not settings.rerank_enabled:
         return DisabledReranker()
+    if settings.rerank_configuration_issues:
+        raise ProviderConfigurationError(
+            "production reranker is not configured: "
+            + ", ".join(settings.rerank_configuration_issues)
+        )
     elif settings.rerank_provider == "lexical":
         return LexicalReranker()
+    elif settings.rerank_provider == "jina":
+        assert settings.rerank_base_url is not None
+        assert settings.rerank_api_key is not None
+        return JinaReranker(
+            base_url=settings.rerank_base_url,
+            api_key=settings.rerank_api_key,
+            model=settings.rerank_model,
+            timeout_seconds=settings.rerank_timeout_seconds,
+            max_retries=settings.rerank_max_retries,
+            allow_fallback=settings.rerank_allow_fallback,
+            fallback=LexicalReranker() if settings.rerank_allow_fallback else None,
+        )
     elif settings.rerank_provider == "cross_encoder":
-        if not settings.rerank_base_url:
-            raise ProviderConfigurationError("RERANK_BASE_URL is required")
+        assert settings.rerank_base_url is not None
         return CrossEncoderReranker(
             settings.rerank_base_url,
             settings.rerank_api_key,
             settings.rerank_model,
+            settings.rerank_timeout_seconds,
         )
     raise ProviderConfigurationError(f"unsupported rerank provider: {settings.rerank_provider}")
