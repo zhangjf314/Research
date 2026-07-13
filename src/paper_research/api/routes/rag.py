@@ -71,10 +71,16 @@ def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
         ContextBuilder(include_neighbors=True),
         JsonlTraceRepository(settings.retrieval_trace_path),
         provider_metadata=settings.provider_metadata,
+        rerank_input_k=settings.rerank_input_k,
+        rerank_output_k=settings.rerank_output_k,
     ).retrieve(
         payload.query,
         payload.filters,
-        recall_k=payload.recall_k,
+        recall_k=(
+            max(payload.recall_k, settings.rerank_input_k)
+            if settings.rerank_enabled
+            else payload.recall_k
+        ),
         top_k=payload.top_k,
     )
 

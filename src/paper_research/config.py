@@ -38,8 +38,13 @@ class Settings(BaseSettings):
     rerank_provider: str = "lexical"
     rerank_model: str = "lexical-v1"
     rerank_enabled: bool = False
-    rerank_base_url: str | None = None
+    rerank_base_url: str | None = "https://api.jina.ai/v1"
     rerank_api_key: str | None = None
+    rerank_input_k: int = Field(default=30, ge=1, le=100)
+    rerank_output_k: int = Field(default=30, ge=1, le=100)
+    rerank_timeout_seconds: float = Field(default=60.0, gt=0, le=600)
+    rerank_max_retries: int = Field(default=2, ge=0, le=10)
+    rerank_allow_fallback: bool = False
     llm_provider: str = "template"
     llm_model: str = "template-v1"
     llm_base_url: str | None = None
@@ -68,6 +73,8 @@ class Settings(BaseSettings):
     def validate_profile(self) -> "Settings":
         if self.app_profile not in {"baseline", "production"}:
             raise ValueError("APP_PROFILE must be baseline or production")
+        if self.rerank_output_k > self.rerank_input_k:
+            raise ValueError("RERANK_OUTPUT_K must not exceed RERANK_INPUT_K")
         return self
 
     @property
@@ -75,16 +82,37 @@ class Settings(BaseSettings):
         if self.app_profile != "production":
             return []
         missing = list(self.embedding_configuration_issues)
-        if self.rerank_enabled and self.rerank_provider == "lexical":
-            missing.append("RERANK_PROVIDER")
-        if self.rerank_enabled and not self.rerank_base_url:
-            missing.append("RERANK_BASE_URL")
+        missing.extend(self.rerank_configuration_issues)
         if self.llm_provider == "template":
             missing.append("LLM_PROVIDER")
         if not self.llm_base_url:
             missing.append("LLM_BASE_URL")
         if not self.llm_api_key:
             missing.append("LLM_API_KEY")
+        return sorted(set(missing))
+
+    @property
+    def rerank_configuration_issues(self) -> list[str]:
+        if self.app_profile != "production" or not self.rerank_enabled:
+            return []
+        provider = self.rerank_provider.strip().lower()
+        if provider == "lexical":
+            return ["RERANK_PROVIDER"]
+        if provider not in {"jina", "cross_encoder"}:
+            return ["RERANK_PROVIDER"]
+        missing: list[str] = []
+        if (
+            "rerank_model" not in self.model_fields_set
+            or not self.rerank_model.strip()
+            or self.rerank_model == "lexical-v1"
+        ):
+            missing.append("RERANK_MODEL")
+        if not self.rerank_api_key:
+            missing.append("RERANK_API_KEY")
+        if provider == "cross_encoder" and (
+            "rerank_base_url" not in self.model_fields_set or not self.rerank_base_url
+        ):
+            missing.append("RERANK_BASE_URL")
         return sorted(set(missing))
 
     @property
@@ -140,6 +168,11 @@ class Settings(BaseSettings):
             "rerank_provider": self.rerank_provider,
             "rerank_model": self.rerank_model,
             "rerank_enabled": self.rerank_enabled,
+            "rerank_input_k": self.rerank_input_k,
+            "rerank_output_k": self.rerank_output_k,
+            "rerank_timeout_seconds": self.rerank_timeout_seconds,
+            "rerank_max_retries": self.rerank_max_retries,
+            "rerank_allow_fallback": self.rerank_allow_fallback,
             "llm_provider": self.llm_provider,
             "llm_model": self.llm_model,
             "prompt_version": self.prompt_version,

@@ -17,6 +17,17 @@ class TraceResult(BaseModel):
     sparse_rank: int | None = None
 
 
+class RerankTraceCandidate(BaseModel):
+    chunk_id: str
+    paper_id: str
+    pre_rerank_rank: int
+    pre_rerank_score: float
+    rerank_score: float | None = None
+    post_rerank_rank: int | None = None
+    dense_rank: int | None = None
+    sparse_rank: int | None = None
+
+
 class RetrievalTrace(BaseModel):
     trace_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     query: str
@@ -25,10 +36,17 @@ class RetrievalTrace(BaseModel):
     sparse_results: list[TraceResult]
     fusion_results: list[TraceResult]
     rerank_results: list[TraceResult]
+    rerank_candidates: list[RerankTraceCandidate] = Field(default_factory=list)
     final_context: list[ContextItem]
     latency_ms: float
     retrieval_latency_ms: float = 0
     rerank_latency_ms: float = 0
+    pre_rerank_candidate_count: int = 0
+    rerank_output_count: int = 0
+    rerank_fallback_occurred: bool = False
+    rerank_failure_reason: str | None = None
+    rerank_api_request_count: int = 0
+    retrieval_scope: str = "unspecified"
     context_build_latency_ms: float = 0
     embedding_provider: str = "unknown"
     embedding_model: str = "unknown"
