@@ -103,8 +103,12 @@ def capabilities() -> CapabilitiesResponse:
             detail=f"{settings.rerank_provider}/{settings.rerank_model}",
         ),
         "llm": Capability(
-            status="available" if settings.llm_provider == "template" else "configured",
-            configured=settings.llm_provider != "template" or settings.app_profile == "baseline",
+            status=(
+                "available"
+                if settings.llm_provider == "template" and settings.app_profile == "baseline"
+                else "configured" if not settings.llm_configuration_issues else "degraded"
+            ),
+            configured=not settings.llm_configuration_issues,
             verified=settings.llm_provider == "template",
             detail=f"{settings.llm_provider}/{settings.llm_model}",
         ),

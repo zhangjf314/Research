@@ -68,7 +68,10 @@ def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
         DenseRetriever(embedding, store),
         BM25Retriever(chunks),
         reranker,
-        ContextBuilder(include_neighbors=True),
+        ContextBuilder(
+            include_neighbors=True,
+            max_tokens=settings.qa_context_token_budget,
+        ),
         JsonlTraceRepository(settings.retrieval_trace_path),
         provider_metadata=settings.provider_metadata,
         rerank_input_k=settings.rerank_input_k,
