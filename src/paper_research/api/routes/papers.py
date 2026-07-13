@@ -19,7 +19,7 @@ from paper_research.indexing.service import IndexingService
 from paper_research.indexing.vector_store import QdrantVectorStore
 from paper_research.ingestion.upload_service import UploadService, UploadValidationError
 from paper_research.models.paper import PaperStatus
-from paper_research.providers.factory import build_provider_bundle
+from paper_research.providers.factory import build_embedding_provider
 from paper_research.repositories.paper import PaperRepository
 from paper_research.schemas.paper import PaperCreate, PaperRead, PaperUploadResponse
 
@@ -56,7 +56,7 @@ def index_paper(paper_id: uuid.UUID, db: DbSession) -> dict[str, int | str]:
     paper.parse_status = PaperStatus.indexing
     repository.save(paper)
     try:
-        providers = build_provider_bundle(settings)
+        embedding = build_embedding_provider(settings)
         store = QdrantVectorStore(
             QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key),
             IndexRegistry(settings.data_dir / "index_registry.json").resolve(
@@ -69,7 +69,7 @@ def index_paper(paper_id: uuid.UUID, db: DbSession) -> dict[str, int | str]:
         )
         chunks = IndexingService(
             StructuralChunker(settings.chunk_max_tokens, settings.chunk_overlap_tokens),
-            providers.embedding,
+            embedding,
             store,
         ).index(
             str(paper_id),

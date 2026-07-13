@@ -33,7 +33,7 @@ class IndexingService:
             if line.strip()
         ]
         chunks = self.chunker.chunk(paper_id, blocks)
-        vectors = self.embedding.embed([chunk.chunk_text for chunk in chunks])
+        vectors = self.embedding.embed_documents([chunk.chunk_text for chunk in chunks])
         self.vector_store.upsert(chunks, vectors)
         chunks_path.parent.mkdir(parents=True, exist_ok=True)
         with chunks_path.open("w", encoding="utf-8", newline="\n") as stream:

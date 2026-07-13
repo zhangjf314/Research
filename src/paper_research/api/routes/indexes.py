@@ -11,6 +11,12 @@ class IndexSwitchRequest(BaseModel):
     collection: str
 
 
+@router.get("")
+def index_registry() -> dict:
+    settings = get_settings()
+    return IndexRebuildService(settings).registry.read()
+
+
 @router.post("/rebuild")
 def rebuild_index() -> dict:
     return IndexRebuildService(get_settings()).rebuild()

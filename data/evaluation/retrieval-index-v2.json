@@ -1,0 +1,34 @@
+{
+  "index_manifest_version": "retrieval-index-v2",
+  "created_at": "2026-07-13T15:21:52.519360+00:00",
+  "construction_method": "Filtered 34-document snapshot of the completed real Jina Production index; Jina vectors copied unchanged and Hash vectors recomputed over identical payloads",
+  "source_collections": {
+    "hash": "papers_hash_v1__20260713104355",
+    "jina": "papers_jina_v5_text_small_1024__jina_embeddings_v5_text_small_v1__20260713144312"
+  },
+  "collections": {
+    "hash": {
+      "name": "papers_hash_eval34_v2__20260713152149",
+      "provider": "hash",
+      "model": "hash-v1",
+      "dimension": 384,
+      "paper_count": 34,
+      "point_count": 2062,
+      "chunk_signature": "07f23a3a7456e61ac92467ab6cc65f5a0d8cae5cbd9877718879010d8b8d5fb2"
+    },
+    "jina": {
+      "name": "papers_jina_eval34_v2__20260713152149",
+      "provider": "jina",
+      "model": "jina-embeddings-v5-text-small",
+      "revision": "v1",
+      "dimension": 1024,
+      "paper_count": 34,
+      "point_count": 2062,
+      "chunk_signature": "07f23a3a7456e61ac92467ab6cc65f5a0d8cae5cbd9877718879010d8b8d5fb2",
+      "document_task": "retrieval.passage",
+      "query_task": "retrieval.query"
+    }
+  },
+  "registry_switched": false,
+  "source_collections_modified": false
+}

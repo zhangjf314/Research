@@ -1,0 +1,5 @@
+variant,hit_at_1,recall_at_1,hit_at_5,recall_at_5,hit_at_10,recall_at_10,mrr,ndcg_at_10,block_hit_at_10,mean_latency_ms,p50_latency_ms,p95_latency_ms,query_count,failure_count,index_build_duration_seconds,paper_count,point_count
+hash_structural_dense,0.0625,0.0625,0.166667,0.166667,0.291667,0.291667,0.112318,0.153385,0.0,13.336,3.702,47.556,48,0,,,2065
+hash_structural_hybrid,0.104167,0.104167,0.208333,0.208333,0.3125,0.302083,0.157722,0.190887,0.0,23.645,12.726,56.249,48,0,,,2065
+jina_structural_dense,0.041667,0.041667,0.145833,0.135417,0.208333,0.208333,0.081713,0.111196,0.020833,461.735,418.289,568.862,48,0,475.512,36,2064
+jina_structural_hybrid,0.020833,0.020833,0.125,0.125,0.291667,0.291667,0.08225,0.131263,0.0625,436.747,420.941,509.93,48,0,475.512,36,2064

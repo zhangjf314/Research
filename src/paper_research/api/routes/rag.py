@@ -12,7 +12,12 @@ from paper_research.config import get_settings
 from paper_research.generation.qa_service import Answer, QAService
 from paper_research.indexing.registry import IndexRegistry
 from paper_research.indexing.vector_store import QdrantVectorStore
-from paper_research.providers.factory import ProviderConfigurationError, build_provider_bundle
+from paper_research.providers.factory import (
+    ProviderConfigurationError,
+    build_embedding_provider,
+    build_provider_bundle,
+    build_reranker,
+)
 from paper_research.retrieval.context_builder import ContextBuilder, ContextItem
 from paper_research.retrieval.dense import DenseRetriever
 from paper_research.retrieval.filters import RetrievalFilter
@@ -50,7 +55,8 @@ def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
     )
     if not chunks:
         raise HTTPException(status_code=409, detail="no indexed chunk files found")
-    providers = build_provider_bundle(settings)
+    embedding = build_embedding_provider(settings)
+    reranker = build_reranker(settings)
     store = QdrantVectorStore(
         QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key),
         IndexRegistry(settings.data_dir / "index_registry.json").resolve(
@@ -59,9 +65,9 @@ def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
         settings.embedding_dimensions,
     )
     return HybridRetriever(
-        DenseRetriever(providers.embedding, store),
+        DenseRetriever(embedding, store),
         BM25Retriever(chunks),
-        providers.reranker,
+        reranker,
         ContextBuilder(include_neighbors=True),
         JsonlTraceRepository(settings.retrieval_trace_path),
         provider_metadata=settings.provider_metadata,
