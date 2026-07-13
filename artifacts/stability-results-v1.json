@@ -1,0 +1,668 @@
+{
+  "started_at": "2026-07-13T09:45:48.684693+00:00",
+  "completed_at": "2026-07-13T09:48:36.156143+00:00",
+  "target_papers": 30,
+  "actual_unique_papers": 30,
+  "target_met": true,
+  "parse_success_rate": 1.0,
+  "mean_parse_ms": 3822.812,
+  "mean_index_ms": 91.763,
+  "retrieval_queries": 100,
+  "mean_retrieval_ms": 295.309,
+  "p95_retrieval_ms": 353.266,
+  "mean_qa_ms": 7.799,
+  "p95_qa_ms": 9.017,
+  "deep_research_runs": 3,
+  "deep_research_ms": [
+    1034.705,
+    973.202,
+    883.527
+  ],
+  "failure_count": 0,
+  "failure_rate": 0.0,
+  "retry_attempts": 0,
+  "retry_successes": 0,
+  "retry_success_rate": 0.0,
+  "llm_tokens": 0,
+  "estimated_cost_usd": 0.0,
+  "service_restart_recovered": true,
+  "memory_snapshots": [
+    {
+      "label": "start",
+      "containers": [
+        {
+          "BlockIO": "0B / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "3.801MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "216kB / 219kB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "49.1MB / 30.6MB",
+          "CPUPerc": "0.12%",
+          "Container": "ec93daa6217471b6ec5e88d6bcf61979d115c83a88cb4c4acaf7ea0e46080ae5",
+          "ID": "ec93daa62174",
+          "MemPerc": "2.57%",
+          "MemUsage": "199.3MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "5.35MB / 1.69MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "24.7MB / 770kB",
+          "CPUPerc": "0.00%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.37%",
+          "MemUsage": "28.46MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "39.9kB / 54.4kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "20.1MB / 0B",
+          "CPUPerc": "0.31%",
+          "Container": "70bfd7ad7bac11cd1223c3f37ff4a58efaa7bf0e29aa9d33db189061ad077da9",
+          "ID": "70bfd7ad7bac",
+          "MemPerc": "0.09%",
+          "MemUsage": "6.984MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "1.21kB / 126B",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "19.1MB / 2.56MB",
+          "CPUPerc": "0.29%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "1.86%",
+          "MemUsage": "144.1MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "1.23MB / 298kB",
+          "PIDs": "107"
+        }
+      ]
+    },
+    {
+      "label": "after_ingestion",
+      "containers": [
+        {
+          "BlockIO": "4.1kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.512MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "20.2MB / 20.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "56.6MB / 282MB",
+          "CPUPerc": "0.12%",
+          "Container": "ec93daa6217471b6ec5e88d6bcf61979d115c83a88cb4c4acaf7ea0e46080ae5",
+          "ID": "ec93daa62174",
+          "MemPerc": "6.68%",
+          "MemUsage": "516.9MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "78.6MB / 20.2MB",
+          "PIDs": "30"
+        },
+        {
+          "BlockIO": "25.3MB / 2.15MB",
+          "CPUPerc": "0.01%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.37%",
+          "MemUsage": "28.66MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "296kB / 428kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "20.1MB / 0B",
+          "CPUPerc": "0.30%",
+          "Container": "70bfd7ad7bac11cd1223c3f37ff4a58efaa7bf0e29aa9d33db189061ad077da9",
+          "ID": "70bfd7ad7bac",
+          "MemPerc": "0.10%",
+          "MemUsage": "7.91MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "1.21kB / 126B",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "19.2MB / 29.6MB",
+          "CPUPerc": "0.27%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "2.20%",
+          "MemUsage": "170.4MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17MB / 370kB",
+          "PIDs": "110"
+        }
+      ]
+    },
+    {
+      "label": "after_workload",
+      "containers": [
+        {
+          "BlockIO": "4.1kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "4.195MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "25.4MB / 25.5MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "56.8MB / 346MB",
+          "CPUPerc": "0.11%",
+          "Container": "ec93daa6217471b6ec5e88d6bcf61979d115c83a88cb4c4acaf7ea0e46080ae5",
+          "ID": "ec93daa62174",
+          "MemPerc": "7.20%",
+          "MemUsage": "557.2MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "94.3MB / 25.9MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "25.3MB / 2.19MB",
+          "CPUPerc": "0.00%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.37%",
+          "MemUsage": "28.57MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "296kB / 428kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "20.1MB / 0B",
+          "CPUPerc": "0.29%",
+          "Container": "70bfd7ad7bac11cd1223c3f37ff4a58efaa7bf0e29aa9d33db189061ad077da9",
+          "ID": "70bfd7ad7bac",
+          "MemPerc": "0.10%",
+          "MemUsage": "7.594MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "1.21kB / 126B",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "24.3MB / 30MB",
+          "CPUPerc": "0.37%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "2.89%",
+          "MemUsage": "223.8MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.8MB / 15.7MB",
+          "PIDs": "135"
+        }
+      ]
+    },
+    {
+      "label": "after_restart",
+      "containers": [
+        {
+          "BlockIO": "12.3kB / 0B",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "4.184MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "2.91kB / 2.02kB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "98.9MB / 0B",
+          "CPUPerc": "20.11%",
+          "Container": "ec93daa6217471b6ec5e88d6bcf61979d115c83a88cb4c4acaf7ea0e46080ae5",
+          "ID": "ec93daa62174",
+          "MemPerc": "1.82%",
+          "MemUsage": "141.1MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "5.47kB / 3.67kB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "7.24MB / 28.7kB",
+          "CPUPerc": "2.02%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.31%",
+          "MemUsage": "23.96MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "3.76kB / 2.69kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "6.14MB / 0B",
+          "CPUPerc": "2.13%",
+          "Container": "70bfd7ad7bac11cd1223c3f37ff4a58efaa7bf0e29aa9d33db189061ad077da9",
+          "ID": "70bfd7ad7bac",
+          "MemPerc": "0.07%",
+          "MemUsage": "5.766MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "1.59kB / 126B",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "9.76MB / 1.09MB",
+          "CPUPerc": "0.46%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "3.75%",
+          "MemUsage": "290.4MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "7.93kB / 9.19kB",
+          "PIDs": "108"
+        }
+      ]
+    }
+  ],
+  "memory_growth_conclusion": "inconclusive from discrete docker stats snapshots; no soak test",
+  "elapsed_seconds": 167.471,
+  "failures": [],
+  "parse_records": [
+    {
+      "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+      "source": "data\\raw\\audit\\1706.03762.pdf",
+      "success": true,
+      "duplicate": true,
+      "latency_ms": 26.713
+    },
+    {
+      "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+      "source": "data\\raw\\audit\\1810.04805.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 914.027
+    },
+    {
+      "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+      "source": "data\\raw\\audit\\1910.10683.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3227.203
+    },
+    {
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "source": "data\\raw\\audit\\2001.08361.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 1606.941
+    },
+    {
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "source": "data\\raw\\audit\\2005.14165.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 7682.495
+    },
+    {
+      "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+      "source": "data\\raw\\audit\\2104.08691.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 907.636
+    },
+    {
+      "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+      "source": "data\\raw\\audit\\2106.09685.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 1354.515
+    },
+    {
+      "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+      "source": "data\\raw\\audit\\2203.02155.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2829.97
+    },
+    {
+      "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+      "source": "data\\raw\\audit\\2210.11416.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2433.881
+    },
+    {
+      "paper_id": "66bdef13-b19a-447c-b36a-a238232e7635",
+      "source": "data\\raw\\audit\\2302.13971.pdf",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 1414.138
+    },
+    {
+      "paper_id": "2e5d1b2e-e518-4209-8ae6-f0c5180dbd1d",
+      "source": "2504.14891v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 4260.177
+    },
+    {
+      "paper_id": "dedb0565-7aa4-4c84-a16f-ab5289940c17",
+      "source": "2605.27444v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 5771.379
+    },
+    {
+      "paper_id": "1ffef7f0-a179-4dd2-bc46-53e10869de40",
+      "source": "2405.13622v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 6663.079
+    },
+    {
+      "paper_id": "5bf81004-1c2b-4e6f-9649-f6a8434658f6",
+      "source": "2404.10981v2",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 7644.793
+    },
+    {
+      "paper_id": "e7106539-de6f-4205-b98c-bc4a105c0749",
+      "source": "2503.16581v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3817.312
+    },
+    {
+      "paper_id": "b4c6ebe7-8901-4470-ae42-4d176e54533c",
+      "source": "2403.10081v3",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3924.081
+    },
+    {
+      "paper_id": "77c96017-773f-4a30-b0cc-05164686c4da",
+      "source": "2509.12382v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2454.477
+    },
+    {
+      "paper_id": "514ce1f3-1e2a-4008-86ab-b2192c59b517",
+      "source": "2508.14066v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2398.908
+    },
+    {
+      "paper_id": "f3e54d1e-5bf8-4681-bc85-08dffe9e3af1",
+      "source": "2411.02832v2",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2644.89
+    },
+    {
+      "paper_id": "57096016-befb-441d-b801-f4754922dc65",
+      "source": "2309.15217v2",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2503.128
+    },
+    {
+      "paper_id": "78a312a3-9911-40d2-9b76-f29b1800d592",
+      "source": "2601.11863v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 9638.04
+    },
+    {
+      "paper_id": "c8237222-df36-412d-8c7f-dd7cacde7434",
+      "source": "2507.06956v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 5835.36
+    },
+    {
+      "paper_id": "560749aa-79ed-4194-b914-dbaa1a66c2f3",
+      "source": "2409.03759v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 2974.401
+    },
+    {
+      "paper_id": "2c63d96e-7ec1-452f-a363-85a5f3906021",
+      "source": "2409.11353v3",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 4427.303
+    },
+    {
+      "paper_id": "bb1bf7d1-03ca-492b-b7d1-740872e49a36",
+      "source": "2602.07525v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 4997.369
+    },
+    {
+      "paper_id": "4016fde0-2999-4e02-a07a-45882432e0c7",
+      "source": "2606.28358v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3840.987
+    },
+    {
+      "paper_id": "7687988e-0da8-4155-9c02-0bc36da9eda4",
+      "source": "2510.22344v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 5769.302
+    },
+    {
+      "paper_id": "af71246d-2541-4866-aa3a-0cba1a4c0eca",
+      "source": "2502.00306v2",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 5774.243
+    },
+    {
+      "paper_id": "b20eb569-30a9-435c-a7ca-cda0b9dc44d9",
+      "source": "2507.23334v2",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3416.093
+    },
+    {
+      "paper_id": "e0b2608d-2b70-4a69-926b-b879d90cc070",
+      "source": "2504.19754v1",
+      "success": true,
+      "duplicate": false,
+      "latency_ms": 3531.515
+    }
+  ],
+  "index_records": [
+    {
+      "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+      "success": true,
+      "chunk_count": 25,
+      "latency_ms": 74.406
+    },
+    {
+      "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+      "success": true,
+      "chunk_count": 42,
+      "latency_ms": 94.206
+    },
+    {
+      "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+      "success": true,
+      "chunk_count": 151,
+      "latency_ms": 172.784
+    },
+    {
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "success": true,
+      "chunk_count": 66,
+      "latency_ms": 113.908
+    },
+    {
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "success": true,
+      "chunk_count": 172,
+      "latency_ms": 187.223
+    },
+    {
+      "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+      "success": true,
+      "chunk_count": 45,
+      "latency_ms": 76.619
+    },
+    {
+      "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+      "success": true,
+      "chunk_count": 66,
+      "latency_ms": 97.348
+    },
+    {
+      "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+      "success": true,
+      "chunk_count": 129,
+      "latency_ms": 168.18
+    },
+    {
+      "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+      "success": true,
+      "chunk_count": 148,
+      "latency_ms": 161.345
+    },
+    {
+      "paper_id": "66bdef13-b19a-447c-b36a-a238232e7635",
+      "success": true,
+      "chunk_count": 69,
+      "latency_ms": 94.136
+    },
+    {
+      "paper_id": "2e5d1b2e-e518-4209-8ae6-f0c5180dbd1d",
+      "success": true,
+      "chunk_count": 59,
+      "latency_ms": 104.636
+    },
+    {
+      "paper_id": "dedb0565-7aa4-4c84-a16f-ab5289940c17",
+      "success": true,
+      "chunk_count": 35,
+      "latency_ms": 61.786
+    },
+    {
+      "paper_id": "1ffef7f0-a179-4dd2-bc46-53e10869de40",
+      "success": true,
+      "chunk_count": 67,
+      "latency_ms": 98.645
+    },
+    {
+      "paper_id": "5bf81004-1c2b-4e6f-9649-f6a8434658f6",
+      "success": true,
+      "chunk_count": 102,
+      "latency_ms": 112.553
+    },
+    {
+      "paper_id": "e7106539-de6f-4205-b98c-bc4a105c0749",
+      "success": true,
+      "chunk_count": 37,
+      "latency_ms": 62.39
+    },
+    {
+      "paper_id": "b4c6ebe7-8901-4470-ae42-4d176e54533c",
+      "success": true,
+      "chunk_count": 58,
+      "latency_ms": 84.692
+    },
+    {
+      "paper_id": "77c96017-773f-4a30-b0cc-05164686c4da",
+      "success": true,
+      "chunk_count": 30,
+      "latency_ms": 52.085
+    },
+    {
+      "paper_id": "514ce1f3-1e2a-4008-86ab-b2192c59b517",
+      "success": true,
+      "chunk_count": 40,
+      "latency_ms": 57.314
+    },
+    {
+      "paper_id": "f3e54d1e-5bf8-4681-bc85-08dffe9e3af1",
+      "success": true,
+      "chunk_count": 28,
+      "latency_ms": 52.899
+    },
+    {
+      "paper_id": "57096016-befb-441d-b801-f4754922dc65",
+      "success": true,
+      "chunk_count": 20,
+      "latency_ms": 46.515
+    },
+    {
+      "paper_id": "78a312a3-9911-40d2-9b76-f29b1800d592",
+      "success": true,
+      "chunk_count": 28,
+      "latency_ms": 53.729
+    },
+    {
+      "paper_id": "c8237222-df36-412d-8c7f-dd7cacde7434",
+      "success": true,
+      "chunk_count": 38,
+      "latency_ms": 65.691
+    },
+    {
+      "paper_id": "560749aa-79ed-4194-b914-dbaa1a66c2f3",
+      "success": true,
+      "chunk_count": 51,
+      "latency_ms": 74.603
+    },
+    {
+      "paper_id": "2c63d96e-7ec1-452f-a363-85a5f3906021",
+      "success": true,
+      "chunk_count": 44,
+      "latency_ms": 70.434
+    },
+    {
+      "paper_id": "bb1bf7d1-03ca-492b-b7d1-740872e49a36",
+      "success": true,
+      "chunk_count": 79,
+      "latency_ms": 105.468
+    },
+    {
+      "paper_id": "4016fde0-2999-4e02-a07a-45882432e0c7",
+      "success": true,
+      "chunk_count": 43,
+      "latency_ms": 72.561
+    },
+    {
+      "paper_id": "7687988e-0da8-4155-9c02-0bc36da9eda4",
+      "success": true,
+      "chunk_count": 118,
+      "latency_ms": 112.364
+    },
+    {
+      "paper_id": "af71246d-2541-4866-aa3a-0cba1a4c0eca",
+      "success": true,
+      "chunk_count": 88,
+      "latency_ms": 117.702
+    },
+    {
+      "paper_id": "b20eb569-30a9-435c-a7ca-cda0b9dc44d9",
+      "success": true,
+      "chunk_count": 27,
+      "latency_ms": 51.328
+    },
+    {
+      "paper_id": "e0b2608d-2b70-4a69-926b-b879d90cc070",
+      "success": true,
+      "chunk_count": 30,
+      "latency_ms": 55.329
+    }
+  ]
+}

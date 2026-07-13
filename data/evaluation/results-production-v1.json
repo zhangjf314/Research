@@ -1,0 +1,33 @@
+{
+  "status": "BLOCKED",
+  "generated_at": "2026-07-13T10:56:29.866730+00:00",
+  "dataset": "data\\evaluation\\gold-set-v1.jsonl",
+  "dataset_version": "gold-set-v1-pending-review",
+  "total_items": 50,
+  "approved_items": 0,
+  "pending_items_excluded": 50,
+  "model_configuration": {
+    "app_profile": "baseline",
+    "embedding_provider": "hash",
+    "embedding_model": "hash-v1",
+    "embedding_revision": "v1",
+    "embedding_dimension": 384,
+    "rerank_provider": "lexical",
+    "rerank_model": "lexical-v1",
+    "rerank_enabled": false,
+    "llm_provider": "template",
+    "llm_model": "template-v1",
+    "prompt_version": "claim-qa-v1",
+    "index_version": "hash-v1",
+    "dataset_version": "gold-set-v1-pending-review",
+    "collection": "papers_hash_v1"
+  },
+  "random_seed": 42,
+  "blockers": [
+    "human gold approval incomplete: 0/50 approved",
+    "APP_PROFILE is baseline, expected production"
+  ],
+  "results": [],
+  "token_usage": null,
+  "cost": null
+}

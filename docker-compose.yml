@@ -1,0 +1,100 @@
+services:
+  api:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://paper:paper@postgres:5432/paper_research
+      QDRANT_URL: http://qdrant:6333
+      REDIS_URL: redis://redis:6379/0
+      APP_PROFILE: ${APP_PROFILE:-baseline}
+      BASELINE_COLLECTION: papers_hash_v1
+      PRODUCTION_COLLECTION: papers_production_v1
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-hash}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-hash-v1}
+      EMBEDDING_REVISION: ${EMBEDDING_REVISION:-v1}
+      EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-384}
+      RERANK_PROVIDER: ${RERANK_PROVIDER:-lexical}
+      RERANK_MODEL: ${RERANK_MODEL:-lexical-v1}
+      RERANK_ENABLED: ${RERANK_ENABLED:-false}
+      RERANK_BASE_URL: ${RERANK_BASE_URL:-}
+      RERANK_API_KEY: ${RERANK_API_KEY:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-template}
+      LLM_MODEL: ${LLM_MODEL:-template-v1}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_TEMPERATURE: ${LLM_TEMPERATURE:-0}
+      PROMPT_VERSION: ${PROMPT_VERSION:-claim-qa-v1}
+      INDEX_VERSION: ${INDEX_VERSION:-hash-v1}
+      DATASET_VERSION: ${DATASET_VERSION:-gold-set-v1-pending-review}
+      CHECKPOINT_PROVIDER: postgres
+      CHECKPOINT_DATABASE_URL: postgresql://paper:paper@postgres:5432/paper_research
+      DATA_DIR: /app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    volumes:
+      - app_data:/app/data
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: paper_research
+      POSTGRES_USER: paper
+      POSTGRES_PASSWORD: paper
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paper -d paper_research"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  redis_data:
+  app_data:

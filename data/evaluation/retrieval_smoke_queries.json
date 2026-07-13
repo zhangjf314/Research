@@ -1,0 +1,12 @@
+[
+  {"query": "self attention transformer architecture", "paper_id": "1706.03762"},
+  {"query": "bidirectional transformer pretraining masked language model BERT", "paper_id": "1810.04805"},
+  {"query": "text to text transfer transformer T5", "paper_id": "1910.10683"},
+  {"query": "neural language model scaling laws compute dataset size", "paper_id": "2001.08361"},
+  {"query": "few shot language learners GPT-3", "paper_id": "2005.14165"},
+  {"query": "learning to summarize from human feedback", "paper_id": "2104.08691"},
+  {"query": "LoRA low rank adaptation", "paper_id": "2106.09685"},
+  {"query": "training language models to follow instructions human feedback", "paper_id": "2203.02155"},
+  {"query": "scaling instruction finetuned language models Flan", "paper_id": "2210.11416"},
+  {"query": "LLaMA open efficient foundation language models", "paper_id": "2302.13971"}
+]

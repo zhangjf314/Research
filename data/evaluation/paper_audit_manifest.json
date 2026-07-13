@@ -1,0 +1,12 @@
+[
+  {"arxiv_id": "1706.03762", "title": "Attention Is All You Need"},
+  {"arxiv_id": "1810.04805", "title": "BERT: Pre-training of Deep Bidirectional Transformers"},
+  {"arxiv_id": "1910.10683", "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer"},
+  {"arxiv_id": "2001.08361", "title": "Scaling Laws for Neural Language Models"},
+  {"arxiv_id": "2005.14165", "title": "Language Models are Few-Shot Learners"},
+  {"arxiv_id": "2104.08691", "title": "Learning to Summarize from Human Feedback"},
+  {"arxiv_id": "2106.09685", "title": "LoRA: Low-Rank Adaptation of Large Language Models"},
+  {"arxiv_id": "2203.02155", "title": "Training language models to follow instructions with human feedback"},
+  {"arxiv_id": "2210.11416", "title": "Scaling Instruction-Finetuned Language Models"},
+  {"arxiv_id": "2302.13971", "title": "LLaMA: Open and Efficient Foundation Language Models"}
+]

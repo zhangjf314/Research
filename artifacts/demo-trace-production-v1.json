@@ -1,0 +1,25 @@
+{
+  "status": "BLOCKED",
+  "executed_at": "2026-07-13T10:34:24Z",
+  "app_profile": "baseline",
+  "embedding_provider": "hash",
+  "embedding_model": "hash-v1",
+  "rerank_enabled": false,
+  "rerank_provider": "lexical",
+  "llm_provider": "template",
+  "llm_model": "template-v1",
+  "prompt_version": "claim-qa-v1",
+  "index_version": "hash-v1",
+  "dataset_version": "gold-set-v1-pending-review",
+  "human_approved_items": 0,
+  "input_tokens": null,
+  "output_tokens": null,
+  "cost_usd": null,
+  "latency_ms": null,
+  "blockers": [
+    "50/50 human gold approval incomplete (actual 0/50)",
+    "real Embedding provider not configured",
+    "real Cross-Encoder provider not configured",
+    "real OpenAI-compatible LLM provider not configured"
+  ]
+}

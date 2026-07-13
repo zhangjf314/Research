@@ -1,0 +1,195 @@
+{
+  "run_id": "e2e-v1-20260713T094429Z",
+  "topic": "retrieval augmented generation for scientific literature review: methods evaluation and limitations",
+  "started_at": "2026-07-13T09:44:29.548205+00:00",
+  "providers": {
+    "query_rewriter": "deterministic QueryRewriter",
+    "external_search": [
+      "arXiv Atom API",
+      "Semantic Scholar Graph API"
+    ],
+    "pdf_download": "httpx via CachedRetryClient",
+    "parser": "ParserRouter (PyMuPDF baseline; OCR fallback when routed)",
+    "embedding": "HashEmbeddingProvider(dimensions=384)",
+    "vector_store": "Qdrant HTTP",
+    "sparse": "BM25Retriever",
+    "fusion": "RRF(k=60)",
+    "reranker": "LexicalReranker",
+    "report": "deterministic evidence-template generator (no LLM)",
+    "workflow": "LangGraph with InMemorySaver"
+  },
+  "tool_calls": [
+    {
+      "method": "POST",
+      "path": "/search/papers",
+      "status_code": 200,
+      "latency_ms": 11268.61
+    },
+    {
+      "method": "POST",
+      "path": "/search/import",
+      "status_code": 200,
+      "latency_ms": 3183.526
+    },
+    {
+      "method": "POST",
+      "path": "/papers/c6280b03-2184-49fe-9b39-eedb1c58b416/index",
+      "status_code": 200,
+      "latency_ms": 74.084
+    },
+    {
+      "method": "POST",
+      "path": "/search/import",
+      "status_code": 200,
+      "latency_ms": 3035.427
+    },
+    {
+      "method": "POST",
+      "path": "/papers/923458f4-7500-4243-a924-da3ef46f385f/index",
+      "status_code": 200,
+      "latency_ms": 48.271
+    },
+    {
+      "method": "POST",
+      "path": "/search/import",
+      "status_code": 200,
+      "latency_ms": 8765.902
+    },
+    {
+      "method": "POST",
+      "path": "/papers/d4c32e98-c78f-4ff6-9d0b-7651e5dca230/index",
+      "status_code": 200,
+      "latency_ms": 146.363
+    },
+    {
+      "method": "POST",
+      "path": "/retrieve",
+      "status_code": 200,
+      "latency_ms": 56.838
+    },
+    {
+      "method": "POST",
+      "path": "/retrieve",
+      "status_code": 200,
+      "latency_ms": 47.907
+    },
+    {
+      "method": "POST",
+      "path": "/retrieve",
+      "status_code": 200,
+      "latency_ms": 48.22
+    },
+    {
+      "method": "POST",
+      "path": "/research/deep",
+      "status_code": 200,
+      "latency_ms": 102.72
+    }
+  ],
+  "search": {
+    "rewritten_queries": [
+      "retrieval augmented generation for scientific literature review: methods evaluation and limitations",
+      "retrieval augmented generation for scientific literature review methods evaluation and limitations",
+      "retrieval augmented generation for scientific literature review methods"
+    ],
+    "candidate_count": 8,
+    "source_errors": {
+      "semantic_scholar": "HTTPStatusError: Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=retrieval+augmented+generation+for+scientific+literature+review+methods&limit=8&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+    }
+  },
+  "imports": [
+    {
+      "paper_id": "c6280b03-2184-49fe-9b39-eedb1c58b416",
+      "source": "arxiv",
+      "source_id": "2602.17856v1",
+      "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
+      "parse_status": "PARSED",
+      "index_status": "READY",
+      "chunk_count": 21
+    },
+    {
+      "paper_id": "923458f4-7500-4243-a924-da3ef46f385f",
+      "source": "arxiv",
+      "source_id": "2411.18583v1",
+      "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+      "parse_status": "PARSED",
+      "index_status": "READY",
+      "chunk_count": 17
+    },
+    {
+      "paper_id": "d4c32e98-c78f-4ff6-9d0b-7651e5dca230",
+      "source": "arxiv",
+      "source_id": "2601.05264v1",
+      "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "parse_status": "PARSED",
+      "index_status": "READY",
+      "chunk_count": 88
+    }
+  ],
+  "retrievals": [
+    {
+      "query": "retrieval augmented generation for scientific literature review: methods evaluation and limitations main methods",
+      "trace_id": "fd215a5f-7a60-4643-b1d0-6158acb3e60a",
+      "context_count": 3,
+      "latency_ms": 27.041,
+      "pages": [
+        1,
+        9
+      ]
+    },
+    {
+      "query": "retrieval augmented generation for scientific literature review: methods evaluation and limitations evaluation results",
+      "trace_id": "73d60594-e032-4edc-b0c2-6892801068f3",
+      "context_count": 3,
+      "latency_ms": 19.865,
+      "pages": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "query": "retrieval augmented generation for scientific literature review: methods evaluation and limitations limitations",
+      "trace_id": "9f0690ad-db83-43b7-b874-ce43ec439b05",
+      "context_count": 3,
+      "latency_ms": 18.482,
+      "pages": [
+        1,
+        9
+      ]
+    }
+  ],
+  "deep_research": {
+    "task_id": "0f620805-7222-41de-a556-3659b8a734df",
+    "status": "COMPLETED",
+    "stop_reason": "research_complete",
+    "subquestion_count": 4,
+    "evidence_gap_count": 0,
+    "iteration_count": 1,
+    "node_history": [
+      "understand",
+      "plan",
+      "local_search",
+      "assess",
+      "synthesize",
+      "report",
+      "validate"
+    ],
+    "citation_count": 20,
+    "valid_citation_count": 20
+  },
+  "metrics": {
+    "paper_count": 3,
+    "parse_success_rate": 1.0,
+    "indexed_chunk_count": 126,
+    "retrieval_rounds": 3,
+    "workflow_iterations": 1,
+    "tool_call_count": 11,
+    "llm_input_tokens": 0,
+    "llm_output_tokens": 0,
+    "estimated_cost_usd": 0.0,
+    "elapsed_seconds": 26.95,
+    "citation_check_pass_rate": 1.0
+  },
+  "completed_at": "2026-07-13T09:44:56.498028+00:00"
+}

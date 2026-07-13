@@ -1,0 +1,113 @@
+{
+  "run": {
+    "started_at": "2026-07-13T09:42:55.833422+00:00",
+    "dataset": "data\\evaluation\\gold-set-v1.jsonl",
+    "dataset_version": "gold-set-v1-pending-review",
+    "items": 50,
+    "answerable_items": 48,
+    "human_approved_items": 0,
+    "random_seed": 42,
+    "embedding_model": "HashEmbeddingProvider(dimensions=384)",
+    "reranker_model": "LexicalReranker",
+    "answer_model": "extractive-top-context baseline",
+    "python": "3.12.13",
+    "configuration": {
+      "dense_recall_k": 20,
+      "sparse_recall_k": 20,
+      "top_k": 10
+    },
+    "quality_status": "provisional: all 50 annotations remain pending human review"
+  },
+  "results": {
+    "fixed_chunk_dense": {
+      "hit_at_1": 0.291667,
+      "hit_at_5": 0.458333,
+      "recall_at_5": 0.458333,
+      "recall_at_10": 0.604167,
+      "mrr": 0.367907,
+      "ndcg_at_10": 0.423156,
+      "faithfulness": 0.963247,
+      "citation_coverage": 0.05854,
+      "citation_correctness": 0.066667,
+      "unsupported_claim_rate": 0.036753,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 1.762,
+      "p95_latency_ms": 2.36
+    },
+    "structural_chunk_dense": {
+      "hit_at_1": 0.770833,
+      "hit_at_5": 0.875,
+      "recall_at_5": 0.854167,
+      "recall_at_10": 0.854167,
+      "mrr": 0.804514,
+      "ndcg_at_10": 0.813783,
+      "faithfulness": 0.995533,
+      "citation_coverage": 0.784686,
+      "citation_correctness": 0.108333,
+      "unsupported_claim_rate": 0.004467,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 1.923,
+      "p95_latency_ms": 2.215
+    },
+    "structural_chunk_sparse": {
+      "hit_at_1": 0.708333,
+      "hit_at_5": 0.8125,
+      "recall_at_5": 0.8125,
+      "recall_at_10": 0.8125,
+      "mrr": 0.756944,
+      "ndcg_at_10": 0.771327,
+      "faithfulness": 0.981207,
+      "citation_coverage": 0.628873,
+      "citation_correctness": 0.229167,
+      "unsupported_claim_rate": 0.018793,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 4.856,
+      "p95_latency_ms": 5.293
+    },
+    "structural_chunk_hybrid": {
+      "hit_at_1": 0.770833,
+      "hit_at_5": 0.875,
+      "recall_at_5": 0.854167,
+      "recall_at_10": 0.895833,
+      "mrr": 0.801819,
+      "ndcg_at_10": 0.822294,
+      "faithfulness": 0.993047,
+      "citation_coverage": 0.781877,
+      "citation_correctness": 0.170833,
+      "unsupported_claim_rate": 0.006953,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 6.828,
+      "p95_latency_ms": 7.445
+    },
+    "structural_chunk_hybrid_rerank": {
+      "hit_at_1": 0.541667,
+      "hit_at_5": 0.729167,
+      "recall_at_5": 0.729167,
+      "recall_at_10": 0.791667,
+      "mrr": 0.622917,
+      "ndcg_at_10": 0.663462,
+      "faithfulness": 0.949523,
+      "citation_coverage": 0.121064,
+      "citation_correctness": 0.2,
+      "unsupported_claim_rate": 0.050477,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 9.832,
+      "p95_latency_ms": 10.579
+    },
+    "hybrid_rerank_neighbor_context": {
+      "hit_at_1": 0.541667,
+      "hit_at_5": 0.729167,
+      "recall_at_5": 0.729167,
+      "recall_at_10": 0.791667,
+      "mrr": 0.622917,
+      "ndcg_at_10": 0.663462,
+      "faithfulness": 0.987017,
+      "citation_coverage": 0.075718,
+      "citation_correctness": 0.2,
+      "unsupported_claim_rate": 0.012983,
+      "unanswerable_accuracy": 0.96,
+      "mean_latency_ms": 9.865,
+      "p95_latency_ms": 10.622
+    }
+  }
+}

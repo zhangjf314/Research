@@ -1,0 +1,837 @@
+{
+  "started_at": "2026-07-13T10:50:42.356900+00:00",
+  "duration_seconds": 182.703,
+  "profile": "baseline",
+  "queries": 276,
+  "periodic_imports": 4,
+  "deep_research_runs": 3,
+  "api_restart_performed": true,
+  "failures": 0,
+  "failure_details": [],
+  "mean_query_ms": 268.794,
+  "p95_query_ms": 333.428,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cost_usd": 0.0,
+  "samples": [
+    {
+      "elapsed_seconds": 0.125,
+      "containers": [
+        {
+          "BlockIO": "63.6MB / 37.3MB",
+          "CPUPerc": "0.12%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.14%",
+          "MemUsage": "397.8MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "27.5MB / 17.2MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "26.9MB / 233kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "7.898MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "28kB / 16.9kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "4.234MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "27.2MB / 27.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "70.4MB / 9.99MB",
+          "CPUPerc": "0.01%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.58%",
+          "MemUsage": "45.07MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "228kB / 68.3kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.55%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.26%",
+          "MemUsage": "484.2MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17MB / 276kB",
+          "PIDs": "109"
+        }
+      ],
+      "postgres": "2|9|50",
+      "qdrant_points": 2065,
+      "redis_keys": 5
+    },
+    {
+      "elapsed_seconds": 15.297,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 37.3MB",
+          "CPUPerc": "0.11%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.62%",
+          "MemUsage": "434.8MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "30.3MB / 18.4MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.1MB / 299kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.11%",
+          "MemUsage": "8.566MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "33kB / 18.7kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.41MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "28.2MB / 28.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.4MB / 10.3MB",
+          "CPUPerc": "0.00%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.60%",
+          "MemUsage": "46.1MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "395kB / 129kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.42%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.25%",
+          "MemUsage": "560.9MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.1MB / 3MB",
+          "PIDs": "133"
+        }
+      ],
+      "postgres": "2|18|100",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 30.453,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 37.3MB",
+          "CPUPerc": "0.14%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.67%",
+          "MemUsage": "439.1MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "33.4MB / 19.6MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.1MB / 356kB",
+          "CPUPerc": "0.36%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.11%",
+          "MemUsage": "8.574MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "38.6kB / 20.7kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.688MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "29.3MB / 29.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.6MB / 10.3MB",
+          "CPUPerc": "0.02%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.61%",
+          "MemUsage": "47.26MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "395kB / 129kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.72%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.79%",
+          "MemUsage": "525.9MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.2MB / 6.14MB",
+          "PIDs": "132"
+        }
+      ],
+      "postgres": "2|18|100",
+      "qdrant_points": 2065,
+      "redis_keys": 7
+    },
+    {
+      "elapsed_seconds": 45.359,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 37.3MB",
+          "CPUPerc": "0.12%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.68%",
+          "MemUsage": "439.4MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "36.4MB / 20.7MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.2MB / 414kB",
+          "CPUPerc": "0.35%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.016MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "43.4kB / 22.4kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.516MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "30.3MB / 30.4MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.6MB / 10.4MB",
+          "CPUPerc": "0.01%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.61%",
+          "MemUsage": "47.08MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "395kB / 129kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.45%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.01%",
+          "MemUsage": "542.8MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.3MB / 9.1MB",
+          "PIDs": "133"
+        }
+      ],
+      "postgres": "2|18|100",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 60.078,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 37.3MB",
+          "CPUPerc": "0.11%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.68%",
+          "MemUsage": "439.6MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "39.5MB / 21.8MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.2MB / 471kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.121MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "48.6kB / 24.2kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.289MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "31.4MB / 31.4MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 11.2MB",
+          "CPUPerc": "0.08%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.62%",
+          "MemUsage": "47.63MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "396kB / 130kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.40%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.12%",
+          "MemUsage": "550.7MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.3MB / 12.1MB",
+          "PIDs": "135"
+        }
+      ],
+      "postgres": "2|18|100",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 75.156,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 37.3MB",
+          "CPUPerc": "0.15%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.82%",
+          "MemUsage": "450.3MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "42.3MB / 23MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.3MB / 524kB",
+          "CPUPerc": "0.32%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.11%",
+          "MemUsage": "8.543MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "53.2kB / 25.8kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.06%",
+          "MemUsage": "4.449MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "32.3MB / 32.4MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 12.8MB",
+          "CPUPerc": "0.12%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.62%",
+          "MemUsage": "47.88MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "561kB / 188kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.48%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.01%",
+          "MemUsage": "542.5MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.4MB / 14.9MB",
+          "PIDs": "133"
+        }
+      ],
+      "postgres": "2|27|150",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 90.156,
+      "containers": [
+        {
+          "BlockIO": "84.2MB / 38.7MB",
+          "CPUPerc": "0.11%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "5.90%",
+          "MemUsage": "457MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "45.3MB / 24.1MB",
+          "PIDs": "30"
+        },
+        {
+          "BlockIO": "27.3MB / 586kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.11%",
+          "MemUsage": "8.438MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "58.6kB / 27.7kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.07%",
+          "MemUsage": "5.039MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "33.4MB / 33.5MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 13.8MB",
+          "CPUPerc": "0.12%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.62%",
+          "MemUsage": "48.14MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "561kB / 188kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.35%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.95%",
+          "MemUsage": "537.7MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.5MB / 17.8MB",
+          "PIDs": "134"
+        }
+      ],
+      "postgres": "2|27|150",
+      "qdrant_points": 2065,
+      "redis_keys": 7
+    },
+    {
+      "elapsed_seconds": 105.156,
+      "containers": [
+        {
+          "BlockIO": "105MB / 0B",
+          "CPUPerc": "0.13%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.63%",
+          "MemUsage": "203.5MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "2.02MB / 744kB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.4MB / 627kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "7.875MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "63.6kB / 30.1kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.04%",
+          "MemUsage": "2.824MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "34.1MB / 34.2MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 15.2MB",
+          "CPUPerc": "0.11%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.61%",
+          "MemUsage": "47.57MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "565kB / 192kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.44%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.02%",
+          "MemUsage": "543.3MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.6MB / 19.8MB",
+          "PIDs": "133"
+        }
+      ],
+      "postgres": "2|27|150",
+      "qdrant_points": 2065,
+      "redis_keys": 7
+    },
+    {
+      "elapsed_seconds": 120.453,
+      "containers": [
+        {
+          "BlockIO": "105MB / 0B",
+          "CPUPerc": "0.12%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.58%",
+          "MemUsage": "199.5MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "5.16MB / 1.9MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.4MB / 688kB",
+          "CPUPerc": "0.32%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.086MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "68.6kB / 31.9kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.04%",
+          "MemUsage": "3.117MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "35.2MB / 35.2MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 16.5MB",
+          "CPUPerc": "0.11%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.63%",
+          "MemUsage": "48.7MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "565kB / 192kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.50%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.98%",
+          "MemUsage": "540.5MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.6MB / 23MB",
+          "PIDs": "132"
+        }
+      ],
+      "postgres": "2|27|150",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 135.453,
+      "containers": [
+        {
+          "BlockIO": "105MB / 0B",
+          "CPUPerc": "0.12%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.69%",
+          "MemUsage": "208.2MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "7.97MB / 3.1MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.5MB / 750kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.11%",
+          "MemUsage": "8.129MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "73.4kB / 33.6kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.04%",
+          "MemUsage": "3.473MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "36.1MB / 36.2MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 17.9MB",
+          "CPUPerc": "0.11%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.62%",
+          "MemUsage": "48.22MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "730kB / 250kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.53%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.98%",
+          "MemUsage": "540MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.7MB / 25.7MB",
+          "PIDs": "133"
+        }
+      ],
+      "postgres": "2|36|200",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 150.172,
+      "containers": [
+        {
+          "BlockIO": "105MB / 0B",
+          "CPUPerc": "0.16%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.62%",
+          "MemUsage": "202.9MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "11MB / 4.21MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.5MB / 803kB",
+          "CPUPerc": "0.39%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.07MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "78.6kB / 35.4kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "4.016MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "37.2MB / 37.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 19.1MB",
+          "CPUPerc": "0.12%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.63%",
+          "MemUsage": "48.67MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "731kB / 252kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.40%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.01%",
+          "MemUsage": "542.2MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.8MB / 28.7MB",
+          "PIDs": "134"
+        }
+      ],
+      "postgres": "2|36|200",
+      "qdrant_points": 2065,
+      "redis_keys": 5
+    },
+    {
+      "elapsed_seconds": 165.187,
+      "containers": [
+        {
+          "BlockIO": "105MB / 69.6kB",
+          "CPUPerc": "0.12%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.65%",
+          "MemUsage": "205.1MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "14MB / 5.32MB",
+          "PIDs": "30"
+        },
+        {
+          "BlockIO": "27.6MB / 860kB",
+          "CPUPerc": "0.31%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.008MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "83.7kB / 37.3kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "4.082MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "38.2MB / 38.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 36.3MB",
+          "CPUPerc": "0.00%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.63%",
+          "MemUsage": "48.98MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "731kB / 252kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.60%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "6.90%",
+          "MemUsage": "534.4MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "17.9MB / 31.7MB",
+          "PIDs": "132"
+        }
+      ],
+      "postgres": "2|36|200",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    },
+    {
+      "elapsed_seconds": 180.141,
+      "containers": [
+        {
+          "BlockIO": "105MB / 69.6kB",
+          "CPUPerc": "0.11%",
+          "Container": "67939230c617d8a525f40eb0bff3a584fcdc84b8266f7808cf789de43e668fe9",
+          "ID": "67939230c617",
+          "MemPerc": "2.71%",
+          "MemUsage": "209.9MiB / 7.558GiB",
+          "Name": "research-api-1",
+          "NetIO": "17MB / 6.43MB",
+          "PIDs": "29"
+        },
+        {
+          "BlockIO": "27.7MB / 913kB",
+          "CPUPerc": "1.85%",
+          "Container": "fb21e99d12d8e7cc7c2436a2bd810bc7f3b58918b0a9410b5ebbd94325bb4804",
+          "ID": "fb21e99d12d8",
+          "MemPerc": "0.10%",
+          "MemUsage": "8.062MiB / 7.558GiB",
+          "Name": "research-redis-1",
+          "NetIO": "88.5kB / 39kB",
+          "PIDs": "6"
+        },
+        {
+          "BlockIO": "16.4kB / 4.1kB",
+          "CPUPerc": "0.00%",
+          "Container": "cc49b6353522ef732d5728b53cf4376e14cdd1540af393ac651355f228b91ce1",
+          "ID": "cc49b6353522",
+          "MemPerc": "0.05%",
+          "MemUsage": "3.91MiB / 7.558GiB",
+          "Name": "research-nginx-1",
+          "NetIO": "39.3MB / 39.3MB",
+          "PIDs": "2"
+        },
+        {
+          "BlockIO": "72.7MB / 36.4MB",
+          "CPUPerc": "1.93%",
+          "Container": "90f646d614f575bb56eed125519dd20298d05f61c073cd02346247be86cd345b",
+          "ID": "90f646d614f5",
+          "MemPerc": "0.64%",
+          "MemUsage": "49.27MiB / 7.558GiB",
+          "Name": "research-postgres-1",
+          "NetIO": "731kB / 252kB",
+          "PIDs": "7"
+        },
+        {
+          "BlockIO": "58.8MB / 129MB",
+          "CPUPerc": "0.36%",
+          "Container": "3114a72154aa956c1baf8a87f5d364e18c78dbe05a3fa31271c2a724a40ab3d0",
+          "ID": "3114a72154aa",
+          "MemPerc": "7.03%",
+          "MemUsage": "544.3MiB / 7.558GiB",
+          "Name": "research-qdrant-1",
+          "NetIO": "18MB / 34.7MB",
+          "PIDs": "134"
+        }
+      ],
+      "postgres": "2|36|200",
+      "qdrant_points": 2065,
+      "redis_keys": 6
+    }
+  ]
+}

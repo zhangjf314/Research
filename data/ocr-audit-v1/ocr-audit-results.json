@@ -1,0 +1,88 @@
+{
+  "tesseract_executable": "D:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+  "tessdata_prefix": "D:\\Program Files\\Tesseract-OCR\\tessdata",
+  "results": [
+    {
+      "pdf_type": "text",
+      "path": "data\\ocr-audit-v1\\text-native.pdf",
+      "parser_name": "pymupdf",
+      "is_ocr": false,
+      "ocr_confidence": null,
+      "source_pages": [
+        1
+      ],
+      "parse_warnings": [],
+      "block_count": 2,
+      "chunk_count": 1,
+      "parse_latency_ms": 13.537,
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "page_preserved": true,
+      "normalized_blocks": true,
+      "indexed": true,
+      "qa_returned": true,
+      "citation_page": 1,
+      "citation_page_end": 1,
+      "citation_contains_expected_page": true
+    },
+    {
+      "pdf_type": "mixed",
+      "path": "data\\ocr-audit-v1\\mixed-native-scanned.pdf",
+      "parser_name": "ocr",
+      "is_ocr": true,
+      "ocr_confidence": null,
+      "source_pages": [
+        1,
+        2
+      ],
+      "parse_warnings": [
+        {
+          "code": "OCR_CONFIDENCE_UNAVAILABLE",
+          "message": "PyMuPDF OCR output does not expose Tesseract confidence values.",
+          "page": null
+        }
+      ],
+      "block_count": 3,
+      "chunk_count": 1,
+      "parse_latency_ms": 533.096,
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "page_preserved": true,
+      "normalized_blocks": true,
+      "indexed": true,
+      "qa_returned": true,
+      "citation_page": 1,
+      "citation_page_end": 2,
+      "citation_contains_expected_page": true
+    },
+    {
+      "pdf_type": "scanned",
+      "path": "data\\ocr-audit-v1\\fully-scanned.pdf",
+      "parser_name": "ocr",
+      "is_ocr": true,
+      "ocr_confidence": null,
+      "source_pages": [
+        1
+      ],
+      "parse_warnings": [
+        {
+          "code": "OCR_CONFIDENCE_UNAVAILABLE",
+          "message": "PyMuPDF OCR output does not expose Tesseract confidence values.",
+          "page": null
+        }
+      ],
+      "block_count": 2,
+      "chunk_count": 1,
+      "parse_latency_ms": 367.224,
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "page_preserved": true,
+      "normalized_blocks": true,
+      "indexed": true,
+      "qa_returned": true,
+      "citation_page": 1,
+      "citation_page_end": 1,
+      "citation_contains_expected_page": true
+    }
+  ]
+}
