@@ -52,7 +52,7 @@ def capabilities() -> CapabilitiesResponse:
                 )
         except psycopg.Error as exc:
             checkpoint_detail = f"postgres: {type(exc).__name__}"
-    production_ready = not settings.production_configuration_issues
+    embedding_ready = not settings.embedding_configuration_issues
     items = {
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
@@ -84,7 +84,7 @@ def capabilities() -> CapabilitiesResponse:
         "embedding": Capability(
             status=(
                 "available"
-                if settings.app_profile == "baseline" or production_ready
+                if settings.app_profile == "baseline" or embedding_ready
                 else "degraded"
             ),
             configured=settings.embedding_provider != "hash" or settings.app_profile == "baseline",

@@ -28,7 +28,7 @@ class DenseRetriever:
     ) -> list[RetrievalResult]:
         if not query.strip():
             return []
-        vector = self.embedding.embed([query])[0]
+        vector = self.embedding.embed_query(query)
         effective_paper_ids = retrieval_filter.paper_ids if retrieval_filter else paper_ids
         candidates = [
             RetrievalResult(chunk=chunk, score=score)

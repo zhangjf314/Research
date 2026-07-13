@@ -1,5 +1,44 @@
 # PaperResearch Agent
 
+## Stage 11A — real Embedding retrieval evaluation
+
+Work on branch `eval/real-embedding-v1` adds a Jina
+`jina-embeddings-v5-text-small` provider and a pure-retrieval four-way ablation runner.
+The Stage 11A path keeps `RERANK_ENABLED=false`, uses `LLM_PROVIDER=template`, and does
+not call QA or Deep Research. Hash and Jina vectors use independent versioned Qdrant
+collections; a failed Production build never switches the logical collection.
+
+Offline checks:
+
+```powershell
+python scripts\check_embedding_provider.py
+python -m pytest
+python -m ruff check .
+python -m compileall src scripts
+```
+
+After configuring the ignored local Production environment, the real workflow is:
+
+```powershell
+Copy-Item .env.stage11a.local .env -Force
+python scripts\check_embedding_provider.py
+Invoke-RestMethod -Method Post http://localhost/api/v1/indexes/rebuild
+python scripts\run_retrieval_ablation_v1.py
+```
+
+Never paste or log `EMBEDDING_API_KEY`. See
+[`docs/stage11a-real-embedding.md`](docs/stage11a-real-embedding.md) for configuration,
+collection, metric, and rollback boundaries.
+
+Stage 11A.5 corrects the retrieval protocol without enabling a Reranker or LLM. It
+preserves `gold-set-v1.jsonl`, records the 34-document Production boundary in
+`data/evaluation/production-corpus-v1.json`, and evaluates known-paper, multi-paper,
+and unanswerable scopes separately. See
+[`docs/retrieval-gold-v2-audit.md`](docs/retrieval-gold-v2-audit.md) and
+[`docs/retrieval-ablation-v2.md`](docs/retrieval-ablation-v2.md). The two rewritten
+unanswerable queries were human-approved by `zjf` on 2026-07-13; Stage 11B may now begin
+with Reranker still disabled by default.
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.
