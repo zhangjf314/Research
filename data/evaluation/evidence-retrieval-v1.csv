@@ -1,0 +1,5 @@
+variant,query_count,answerable_count,unanswerable_count,exact_gold_block_availability,gold_page_availability,gold_block_recall,multi_paper_all_source_coverage,non_evidence_rate,metadata_contamination_rate,duplicate_evidence_rate,mean_context_token_count,truncation_rate,evidence_role_precision,candidate_to_selected_compression_ratio,unanswerable_nonempty_rate,mean_latency_ms,p95_latency_ms,claim_evidence_set_recall,all_required_claims_evidence_available,claim_level_metric_status
+baseline_retrieval,50,48,2,0.4375,0.708333,0.269792,1,0.734043,0.024706,0.104037,3160.08,0,0.085667,1.0,1,0.662628,1.8912,,,pending claim-evidence human annotation
+evidence_unit_retrieval,50,48,2,0.541667,0.770833,0.235417,1,0.0,0.0,0.0,1711.42,0,0.486667,22.142,1,5.959516,8.9585,,,pending claim-evidence human annotation
+routed_evidence_retrieval,50,48,2,0.645833,0.875,0.319444,1,0.0,0.0,0.0,1697.5,0,0.593333,4.08,1,16.73599,23.6248,,,pending claim-evidence human annotation
+claim_first_evidence_retrieval,50,48,2,0.125,0.25,0.042361,1,0.0,0.0,0.0,194.46,0,0.655556,39.6,0,0.030932,0.0435,,,pending claim-evidence human annotation

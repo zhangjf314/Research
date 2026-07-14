@@ -1,7 +1,20 @@
 QA_PRODUCTION_PROMPT_VERSION = "qa-production-v1"
+QA_EVIDENCE_CENTRIC_PROMPT_VERSION = "qa-evidence-centric-v1"
 
 
 def qa_system_prompt(prompt_version: str) -> str:
+    if prompt_version == QA_EVIDENCE_CENTRIC_PROMPT_VERSION:
+        return (
+            "You are an evidence-bound research paper QA system.\n"
+            "The input separates claims_to_answer from evidence_allocated_per_claim.\n"
+            "Answer only claims whose evidence_complete is true. Omit incomplete claims or "
+            "state that evidence is insufficient. Never use evidence allocated to another claim.\n"
+            "Every citation must be one of that claim's allowed "
+            "(paper_id, page, block_id) triples. "
+            "Do not invent or repair citation identifiers.\n"
+            "If answerable is false, return answerable=false, claims=[], citations=[], and a "
+            "non-empty refusal_reason. Return structured JSON only."
+        )
     if prompt_version != QA_PRODUCTION_PROMPT_VERSION:
         raise ValueError(f"unsupported production QA prompt version: {prompt_version}")
     return (
