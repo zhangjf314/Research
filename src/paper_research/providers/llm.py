@@ -67,6 +67,7 @@ class GenerationResult(StructuredQA):
     retry_count: int = 0
     retry_reasons: list[str] = Field(default_factory=list)
     rate_limit_events: int = 0
+    diagnostic_attempts: list[dict[str, Any]] = Field(default_factory=list)
 
     @property
     def insufficient_evidence(self) -> bool:
@@ -81,11 +82,13 @@ class LLMProviderError(RuntimeError):
         api_request_count: int = 0,
         retry_reasons: list[str] | None = None,
         rate_limit_events: int = 0,
+        diagnostic_attempts: list[dict[str, Any]] | None = None,
     ) -> None:
         super().__init__(message)
         self.api_request_count = api_request_count
         self.retry_reasons = list(retry_reasons or [])
         self.rate_limit_events = rate_limit_events
+        self.diagnostic_attempts = list(diagnostic_attempts or [])
 
 
 class LLMProvider(ABC):
@@ -204,6 +207,7 @@ class SiliconFlowLLMProvider(LLMProvider):
         requests = 0
         rate_limits = 0
         retry_reasons: list[str] = []
+        diagnostic_attempts: list[dict[str, Any]] = []
         for attempt in range(self.max_retries + 1):
             requests += 1
             try:
@@ -225,6 +229,13 @@ class SiliconFlowLLMProvider(LLMProvider):
                     raise LLMProviderError(reason, api_request_count=requests)
                 body = response.json()
                 content = body["choices"][0]["message"]["content"]
+                diagnostic_attempts.append(
+                    {
+                        "attempt": requests,
+                        "model": str(body.get("model") or self.model_name),
+                        "sanitized_output": self._sanitize_model_output(content),
+                    }
+                )
                 parsed = StructuredQA.model_validate(json.loads(content))
                 self._validate_context_citations(parsed, context)
                 usage_body = body.get("usage") or {}
@@ -239,6 +250,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                     retry_count=len(retry_reasons),
                     retry_reasons=retry_reasons,
                     rate_limit_events=rate_limits,
+                    diagnostic_attempts=diagnostic_attempts,
                 )
             except LLMProviderError:
                 raise
@@ -262,8 +274,17 @@ class SiliconFlowLLMProvider(LLMProvider):
                     api_request_count=requests,
                     retry_reasons=[*retry_reasons, reason],
                     rate_limit_events=rate_limits,
+                    diagnostic_attempts=diagnostic_attempts,
                 ) from None
             retry_reasons.append(reason)
+            if reason.startswith("citation_validation"):
+                payload["messages"] = [
+                    *payload["messages"][:2],
+                    {
+                        "role": "user",
+                        "content": self._citation_retry_prompt(reason, context),
+                    },
+                ]
             time.sleep(min(2**attempt, 4))
         raise AssertionError("unreachable")
 
@@ -290,15 +311,26 @@ class SiliconFlowLLMProvider(LLMProvider):
     def _evidence_payload(context: list[ContextItem]) -> list[dict[str, Any]]:
         output = []
         for item in context:
+            block_ids = item.block_ids or [item.chunk_id]
+            block_page_map = (
+                item.block_page_map
+                if item.block_page_map
+                else {block_id: item.page_start for block_id in block_ids}
+            )
             output.append(
                 {
                     "paper_id": item.paper_id,
-                    "block_ids": item.block_ids or [item.chunk_id],
+                    "block_ids": block_ids,
                     "pages": list(range(item.page_start, item.page_end + 1)),
-                    "block_page_map": {
-                        block_id: item.page_start
-                        for block_id in (item.block_ids or [item.chunk_id])
-                    },
+                    "block_page_map": block_page_map,
+                    "allowed_citations": [
+                        {
+                            "paper_id": item.paper_id,
+                            "page": block_page_map[block_id],
+                            "block_id": block_id,
+                        }
+                        for block_id in block_ids
+                    ],
                     "text": item.evidence,
                 }
             )
@@ -306,12 +338,7 @@ class SiliconFlowLLMProvider(LLMProvider):
 
     @staticmethod
     def _validate_context_citations(answer: StructuredQA, context: list[ContextItem]) -> None:
-        allowed = {
-            (item.paper_id, page, block_id)
-            for item in context
-            for page in range(item.page_start, item.page_end + 1)
-            for block_id in (item.block_ids or [item.chunk_id])
-        }
+        allowed = SiliconFlowLLMProvider._allowed_citations(context)
         for claim in answer.claims:
             for citation in claim.citations:
                 if (citation.paper_id, citation.page, citation.block_id) not in allowed:
@@ -326,6 +353,42 @@ class SiliconFlowLLMProvider(LLMProvider):
                     if not block_items:
                         raise CitationContextError("block_id")
                     raise CitationContextError("page")
+
+    @staticmethod
+    def _allowed_citations(context: list[ContextItem]) -> set[tuple[str, int, str]]:
+        allowed = set()
+        for item in context:
+            block_ids = item.block_ids or [item.chunk_id]
+            if item.block_page_map:
+                allowed.update(
+                    (item.paper_id, item.block_page_map[block_id], block_id)
+                    for block_id in block_ids
+                )
+            else:
+                allowed.update(
+                    (item.paper_id, item.page_start, block_id)
+                    for block_id in block_ids
+                )
+        return allowed
+
+    @classmethod
+    def _citation_retry_prompt(cls, reason: str, context: list[ContextItem]) -> str:
+        triples = [
+            {"paper_id": paper_id, "page": page, "block_id": block_id}
+            for paper_id, page, block_id in sorted(cls._allowed_citations(context))
+        ]
+        return (
+            "The previous JSON failed strict citation validation with reason "
+            f"{reason}. Return the complete corrected JSON object. Do not change or infer "
+            "citation identifiers. Every citation must exactly match one of these allowed "
+            f"triples: {json.dumps(triples, ensure_ascii=False)}"
+        )
+
+    @staticmethod
+    def _sanitize_model_output(content: Any) -> Any:
+        if isinstance(content, str):
+            return content[:20000]
+        return str(content)[:20000]
 
 
 class _RetryableLLMError(RuntimeError):

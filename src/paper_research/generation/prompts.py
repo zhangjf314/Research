@@ -18,10 +18,11 @@ def qa_system_prompt(prompt_version: str) -> str:
         "If answerable=true, split the answer into minimal atomic claims. Every claim "
         "must have a unique claim_id and at least one citation.\n"
         "Every citation must copy an exact paper_id, page, and block_id combination "
-        "present in the supplied evidence.\n"
+        "from an evidence object's allowed_citations array.\n"
         "The citation block_id must be copied verbatim from an evidence block_ids array.\n"
         "For the selected block_id, page must equal the integer value in that evidence "
-        "object's block_page_map. Never combine a block_id with a page from another object.\n"
+        "object's block_page_map. Never combine a block_id with a page from another object. "
+        "Treat allowed_citations as the authoritative list of valid triples.\n"
         "Never invent, transform, or infer citation identifiers. Keep the answer "
         "consistent with the atomic claims."
     )
