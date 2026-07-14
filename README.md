@@ -1,5 +1,34 @@
 # PaperResearch Agent
 
+## Release readiness status (Stage 12)
+
+The highest published version is `v0.9.0-rc2`. The current tree is a candidate for
+`v0.9.0-rc3` after the strict RC gate and human release review; it does **not** satisfy
+`v1.0.0` and is **not Production-ready**.
+Package metadata is staged as `0.9.0rc3`, but Stage 12 does not create a Tag or commit.
+
+- The real Embedding path uses `jina-embeddings-v5-text-small` on the versioned
+  34-document, 2,062-point corpus.
+- `RERANK_ENABLED=false` remains the required default because `jina-reranker-v3` did not
+  pass the quality/latency enablement gate.
+- Real QA with SiliconFlow `Qwen/Qwen3-8B` passed structured JSON/schema and identifier
+  validation, but answer and citation quality remain below the Production thresholds.
+- Deep Research has passed only the bounded engineering smoke, budget, isolation, checkpoint,
+  resume-idempotency, and failure-accounting checks. Its quality evaluation is blocked, and a
+  successful end-to-end completion after resume is not verified.
+
+Run the single auditable release check without making model calls:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\check_release_readiness_v1.py --target rc --strict
+.\.venv\Scripts\python.exe scripts\check_release_readiness_v1.py --target v1 --strict
+```
+
+The strict v1 command is expected to return nonzero while quality, resumed-completion, and
+operations gates remain open. See [`docs/v1-release-gates.md`](docs/v1-release-gates.md),
+[`docs/known-issues-v1.md`](docs/known-issues-v1.md), and
+[`docs/v1-gap-closure-plan.md`](docs/v1-gap-closure-plan.md).
+
 ## Stage 11A — real Embedding retrieval evaluation
 
 Work on branch `eval/real-embedding-v1` adds a Jina
