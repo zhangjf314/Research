@@ -1,0 +1,277 @@
+{
+  "status": "ENGINEERING_ONLY_EXPLICIT_SUMMARY",
+  "quality_gate": "NOT_EVALUATED",
+  "selection_policy": "latest-successful",
+  "explicit_run_id": null,
+  "selected_run_ids": [
+    "live-q003-798ac68288e0",
+    "live-q005-03f669606bb7",
+    "live-q049-4c11db9a2c1d"
+  ],
+  "results": [
+    {
+      "run_id": "live-q003-798ac68288e0",
+      "question_id": "q003",
+      "graph_status": "completed",
+      "nodes_visited": [
+        "plan",
+        "retrieve",
+        "assess_evidence",
+        "synthesize",
+        "validate_citations",
+        "persist_trace"
+      ],
+      "iteration_count": 1,
+      "retrieval_calls": 1,
+      "llm_request_count": 1,
+      "request_attempt_count": 1,
+      "provider_completed_request_count": 1,
+      "usage_record_count": 1,
+      "request_ids": [
+        "live-q003-798ac68288e0:synthesize:1:17ad6f7fa79f"
+      ],
+      "input_tokens": 9087,
+      "output_tokens": 263,
+      "total_tokens": 9350,
+      "reserved_input_tokens": 0,
+      "reserved_output_tokens": 0,
+      "reserved_total_tokens": 0,
+      "budget_accounting_status": "settled",
+      "usage_source": [
+        "provider_reported"
+      ],
+      "billing_mode": "free",
+      "monetary_cost_usd": "0",
+      "cost_basis": "explicit_free_provider",
+      "elapsed_seconds": 8.301317,
+      "checkpoint_ids": [
+        "live-q003-798ac68288e0"
+      ],
+      "resume_count": 0,
+      "final_answerable_state": true,
+      "claim_count": 1,
+      "citation_count": 4,
+      "citation_validation": "passed",
+      "refusal_reason": null,
+      "errors": [],
+      "budget_stop_reason": null,
+      "reranker_called": false,
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prompt_versions": [
+        "qa-production-v1"
+      ]
+    },
+    {
+      "run_id": "live-q005-03f669606bb7",
+      "question_id": "q005",
+      "graph_status": "refused",
+      "nodes_visited": [
+        "plan",
+        "retrieve",
+        "assess_evidence",
+        "optional_refine",
+        "synthesize",
+        "validate_citations",
+        "persist_trace"
+      ],
+      "iteration_count": 2,
+      "retrieval_calls": 2,
+      "llm_request_count": 1,
+      "request_attempt_count": 1,
+      "provider_completed_request_count": 1,
+      "usage_record_count": 1,
+      "request_ids": [
+        "live-q005-03f669606bb7:synthesize:1:4ed1d8302737"
+      ],
+      "input_tokens": 302,
+      "output_tokens": 35,
+      "total_tokens": 337,
+      "reserved_input_tokens": 0,
+      "reserved_output_tokens": 0,
+      "reserved_total_tokens": 0,
+      "budget_accounting_status": "settled",
+      "usage_source": [
+        "provider_reported"
+      ],
+      "billing_mode": "free",
+      "monetary_cost_usd": "0",
+      "cost_basis": "explicit_free_provider",
+      "elapsed_seconds": 2.261039,
+      "checkpoint_ids": [
+        "live-q005-03f669606bb7"
+      ],
+      "resume_count": 0,
+      "final_answerable_state": false,
+      "claim_count": 0,
+      "citation_count": 0,
+      "citation_validation": "passed",
+      "refusal_reason": "No evidence provided to answer the question.",
+      "errors": [],
+      "budget_stop_reason": null,
+      "reranker_called": false,
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prompt_versions": [
+        "qa-production-v1"
+      ]
+    },
+    {
+      "run_id": "live-q049-4c11db9a2c1d",
+      "question_id": "q049",
+      "graph_status": "completed",
+      "nodes_visited": [
+        "plan",
+        "retrieve",
+        "assess_evidence",
+        "synthesize",
+        "validate_citations",
+        "persist_trace"
+      ],
+      "iteration_count": 1,
+      "retrieval_calls": 1,
+      "llm_request_count": 1,
+      "request_attempt_count": 1,
+      "provider_completed_request_count": 1,
+      "usage_record_count": 1,
+      "request_ids": [
+        "live-q049-4c11db9a2c1d:synthesize:1:ef71de611757"
+      ],
+      "input_tokens": 8959,
+      "output_tokens": 1010,
+      "total_tokens": 9969,
+      "reserved_input_tokens": 0,
+      "reserved_output_tokens": 0,
+      "reserved_total_tokens": 0,
+      "budget_accounting_status": "settled",
+      "usage_source": [
+        "provider_reported"
+      ],
+      "billing_mode": "free",
+      "monetary_cost_usd": "0",
+      "cost_basis": "explicit_free_provider",
+      "elapsed_seconds": 47.425539,
+      "checkpoint_ids": [
+        "live-q049-4c11db9a2c1d"
+      ],
+      "resume_count": 0,
+      "final_answerable_state": true,
+      "claim_count": 10,
+      "citation_count": 10,
+      "citation_validation": "passed",
+      "refusal_reason": null,
+      "errors": [],
+      "budget_stop_reason": null,
+      "reranker_called": false,
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prompt_versions": [
+        "qa-production-v1"
+      ]
+    }
+  ],
+  "attempts": [
+    {
+      "run_id": "live-q003-798ac68288e0",
+      "question_id": "q003",
+      "status": "completed",
+      "attempt_number": 1,
+      "parent_run_id": null,
+      "ended_at": "2026-07-14T13:42:46.603182+00:00",
+      "selected": true,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q003-798ac68288e0"
+    },
+    {
+      "run_id": "live-q049-1d47dc6a1ab8",
+      "question_id": "q049",
+      "status": "completed",
+      "attempt_number": 1,
+      "parent_run_id": null,
+      "ended_at": "2026-07-14T13:45:46.542010+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-1d47dc6a1ab8"
+    },
+    {
+      "run_id": "live-q049-24a797337315",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 2,
+      "parent_run_id": "live-q049-1d47dc6a1ab8",
+      "ended_at": "2026-07-14T13:46:50.975693+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-24a797337315"
+    },
+    {
+      "run_id": "live-q049-4c11db9a2c1d",
+      "question_id": "q049",
+      "status": "completed",
+      "attempt_number": 3,
+      "parent_run_id": "live-q049-24a797337315",
+      "ended_at": "2026-07-14T14:04:57.070853+00:00",
+      "selected": true,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d"
+    },
+    {
+      "run_id": "live-q005-03f669606bb7",
+      "question_id": "q005",
+      "status": "refused",
+      "attempt_number": 1,
+      "parent_run_id": null,
+      "ended_at": "2026-07-14T14:08:20.497232+00:00",
+      "selected": true,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q005-03f669606bb7"
+    },
+    {
+      "run_id": "live-q049-03b2d6b68ca3",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 4,
+      "parent_run_id": "live-q049-4c11db9a2c1d",
+      "ended_at": "2026-07-14T14:19:37.728549+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-03b2d6b68ca3"
+    },
+    {
+      "run_id": "live-q049-2e5704e44d91",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 5,
+      "parent_run_id": "live-q049-03b2d6b68ca3",
+      "ended_at": "2026-07-14T14:23:45.056921+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-2e5704e44d91"
+    }
+  ],
+  "failed_attempts": [
+    {
+      "run_id": "live-q049-24a797337315",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 2,
+      "parent_run_id": "live-q049-1d47dc6a1ab8",
+      "ended_at": "2026-07-14T13:46:50.975693+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-24a797337315"
+    },
+    {
+      "run_id": "live-q049-03b2d6b68ca3",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 4,
+      "parent_run_id": "live-q049-4c11db9a2c1d",
+      "ended_at": "2026-07-14T14:19:37.728549+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-03b2d6b68ca3"
+    },
+    {
+      "run_id": "live-q049-2e5704e44d91",
+      "question_id": "q049",
+      "status": "provider_failed",
+      "attempt_number": 5,
+      "parent_run_id": "live-q049-03b2d6b68ca3",
+      "ended_at": "2026-07-14T14:23:45.056921+00:00",
+      "selected": false,
+      "run_directory": "data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-2e5704e44d91"
+    }
+  ]
+}

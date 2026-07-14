@@ -1,0 +1,7 @@
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:plan", "node": "plan", "status": "completed", "elapsed_ms": 0.003}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:retrieve", "node": "retrieve", "status": "completed", "elapsed_ms": 0.011}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:assess_evidence", "node": "assess_evidence", "status": "completed", "elapsed_ms": 0.005}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:optional_refine", "node": "optional_refine", "status": "completed", "elapsed_ms": 0.008}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:synthesize", "node": "synthesize", "status": "completed", "elapsed_ms": 2233.596}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:validate_citations", "node": "validate_citations", "status": "completed", "elapsed_ms": 0.059}
+{"run_id": "live-q005-03f669606bb7", "event_id": "live-q005-03f669606bb7:persist_trace", "node": "persist_trace", "status": "completed", "elapsed_ms": 0.004}

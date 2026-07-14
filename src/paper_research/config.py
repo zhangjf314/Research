@@ -1,3 +1,4 @@
+from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
 
@@ -55,6 +56,9 @@ class Settings(BaseSettings):
     llm_max_retries: int = Field(default=2, ge=0, le=2)
     llm_input_cost_per_million: float | None = Field(default=None, ge=0)
     llm_output_cost_per_million: float | None = Field(default=None, ge=0)
+    llm_billing_mode: str | None = None
+    llm_input_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
+    llm_output_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
     qa_context_token_budget: int = Field(default=12000, ge=512, le=100000)
     prompt_version: str = "claim-qa-v1"
     index_version: str = "hash-v1"
@@ -74,6 +78,18 @@ class Settings(BaseSettings):
     api_rate_limit_per_minute: int = 120
     checkpoint_provider: str = "memory"
     checkpoint_database_url: str | None = None
+    deep_research_mode: str = "disabled"
+    deep_research_max_queries: int = Field(default=3, ge=1, le=3)
+    deep_research_max_iterations_per_query: int = Field(default=2, ge=1, le=2)
+    deep_research_max_llm_requests_per_query: int = Field(default=4, ge=1, le=4)
+    deep_research_max_llm_requests_total: int = Field(default=12, ge=1, le=12)
+    deep_research_max_tokens_per_query: int = Field(default=40000, ge=1, le=40000)
+    deep_research_max_tokens_total: int = Field(default=120000, ge=1, le=120000)
+    deep_research_max_cost_usd: Decimal | None = Field(default=None, ge=0)
+    deep_research_max_elapsed_seconds_per_query: int = Field(default=300, ge=1, le=300)
+    deep_research_max_elapsed_seconds_total: int = Field(default=900, ge=1, le=900)
+    deep_research_require_usage: bool = True
+    deep_research_checkpoint_path: Path = Path("data/checkpoints/deep-research-smoke-v1.sqlite3")
 
     @model_validator(mode="after")
     def validate_profile(self) -> "Settings":

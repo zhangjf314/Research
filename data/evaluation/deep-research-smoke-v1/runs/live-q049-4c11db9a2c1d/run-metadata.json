@@ -1,0 +1,24 @@
+{
+  "run_id": "live-q049-4c11db9a2c1d",
+  "question_id": "q049",
+  "mode": "live",
+  "attempt_number": 3,
+  "parent_run_id": "live-q049-24a797337315",
+  "started_at": "2026-07-14T14:04:09.645314+00:00",
+  "ended_at": "2026-07-14T14:04:57.070853+00:00",
+  "status": "completed",
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "billing_mode": "free",
+  "code_revision": "6df2d3c99443e83ea3934447e3cf0312ca38cfce",
+  "config_fingerprint": "df32c659105f2dda84aa213eb783ab7bf373d42ff827d18a0ee31b5a4c0b2ee9",
+  "historical_role": null,
+  "output_paths": {
+    "result.json": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\result.json",
+    "result.csv": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\result.csv",
+    "trace.jsonl": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\trace.jsonl",
+    "request-ledger.jsonl": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\request-ledger.jsonl",
+    "checkpoint-summary.json": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\checkpoint-summary.json",
+    "run-metadata.json": "D:\\Agents\\Codex\\research\\data\\evaluation\\deep-research-smoke-v1\\runs\\live-q049-4c11db9a2c1d\\run-metadata.json"
+  }
+}

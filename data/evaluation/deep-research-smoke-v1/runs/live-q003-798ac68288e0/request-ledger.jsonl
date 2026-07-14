@@ -1,0 +1,1 @@
+{"event": "migrated_request", "request_id": "live-q003-798ac68288e0:synthesize:1:17ad6f7fa79f", "node": "synthesize", "request_status": "completed", "usage_status": "provider_reported", "reservation_status": "not_retained", "actual_input_tokens": 9087, "actual_output_tokens": 263, "actual_total_tokens": 9350, "historical_migration": true}

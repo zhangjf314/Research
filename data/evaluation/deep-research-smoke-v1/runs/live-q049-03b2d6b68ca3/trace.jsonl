@@ -1,0 +1,4 @@
+{"run_id": "live-q049-03b2d6b68ca3", "elapsed_ms": 0.003, "event_id": "live-q049-03b2d6b68ca3:plan", "node": "plan", "status": "completed"}
+{"run_id": "live-q049-03b2d6b68ca3", "elapsed_ms": 0.053, "event_id": "live-q049-03b2d6b68ca3:retrieve", "node": "retrieve", "status": "completed"}
+{"run_id": "live-q049-03b2d6b68ca3", "elapsed_ms": 0.004, "event_id": "live-q049-03b2d6b68ca3:assess_evidence", "node": "assess_evidence", "status": "completed"}
+{"run_id": "live-q049-03b2d6b68ca3", "event_id": "live-q049-03b2d6b68ca3:synthesize:provider_failed", "node": "synthesize", "status": "provider_failed", "elapsed_ms": 31.97}

@@ -1,0 +1,29 @@
+{
+  "run_id": "live-q049-03b2d6b68ca3",
+  "status": "provider_failed",
+  "current_node": "synthesize",
+  "request_records": [
+    {
+      "request_id": "live-q049-03b2d6b68ca3:synthesize:1:118a314851a8",
+      "node": "synthesize",
+      "request_status": "failed_after_send_unknown",
+      "usage_status": "unavailable_after_send_attempt",
+      "prompt_token_estimate": 6029,
+      "maximum_output_tokens": 2048,
+      "reserved_input_tokens": 6029,
+      "reserved_output_tokens": 2048,
+      "reserved_total_tokens": 8077,
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prepared_at": 1784038777.698189,
+      "started_at": 1784038777.7039447,
+      "completed_at": 1784038777.7245505,
+      "failure_type": "ConnectError",
+      "failure_message": "SiliconFlow QA failed after 1 request(s): ConnectError"
+    }
+  ],
+  "usage_records": [],
+  "reserved_total_tokens": 8077,
+  "budget_accounting_status": "indeterminate_conservative_reserved",
+  "state_sha256": "ce36fcd999973cb09203bef5055e0a53ce93f19dc889b3402432d1c7715ac5b5"
+}
