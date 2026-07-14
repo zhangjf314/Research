@@ -60,6 +60,16 @@ not production answer quality; see
 [`docs/qa-production-v1.md`](docs/qa-production-v1.md) and
 [`docs/stage11c-qa-audit.md`](docs/stage11c-qa-audit.md).
 
+Stage 11C.5 isolates retrieval, context distraction, and Gold-citation strictness without
+changing the frozen model or retrieval protocol. Exact Gold evidence was present in 43.8%
+of retrieved contexts; a Gold-only Oracle raised answerable accuracy from 87.5% to 95.8%
+and required-claim coverage from 38.9% to 54.2%. Adding distractors reduced exact citation
+precision from 95.8% to 81.5%, while simply appending missing Gold recovered 5/6 prior
+answerable refusals but left a 56.1% strict unsupported rate. Oracle rows are diagnostic,
+not Production metrics. The evidence supports improving retrieval/context selection before
+Deep Research or a larger model; see
+[`docs/qa-context-diagnostics-v1.md`](docs/qa-context-diagnostics-v1.md).
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.
