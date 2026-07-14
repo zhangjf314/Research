@@ -1,0 +1,172 @@
+{
+  "schema_version": "project-stage-status-v1",
+  "generated_on": "2026-07-14",
+  "source_commit": "e027c3a",
+  "allowed_statuses": ["passed", "partially_passed", "failed", "blocked", "not_run", "not_applicable"],
+  "stages": [
+    {
+      "stage_id": "stage-01",
+      "title": "PDF ingestion and parsing baseline",
+      "engineering_status": "passed",
+      "evaluation_status": "passed",
+      "production_gate": "passed",
+      "evidence_files": ["docs/release-candidate-audit.md", "docs/ocr-audit-v1.md"],
+      "key_metrics": {"text_pdf_pipeline": "passed", "structured_json": "passed"},
+      "blockers": [], "external_dependencies": [], "accepted_negative_result": false,
+      "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-02",
+      "title": "Parser adapters, OCR fallback, page assets and paper audit",
+      "engineering_status": "partially_passed",
+      "evaluation_status": "passed",
+      "production_gate": "partially_passed",
+      "evidence_files": ["docs/ocr-audit-v1.md", "data/evaluation/paper_audit_manifest.json"],
+      "key_metrics": {"host_ocr_types": 3, "docker_tesseract": "degraded_optional"},
+      "blockers": ["Optional Docker OCR engines are not all available"],
+      "external_dependencies": ["Tesseract", "Docling", "GROBID"],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-03",
+      "title": "Sparse, dense, hybrid retrieval, RRF and trace",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "passed",
+      "evidence_files": ["docs/retrieval-ablation-v1.md", "data/evaluation/retrieval-ablation-v1.json"],
+      "key_metrics": {"retrieval_variants": 6, "trace": "implemented"},
+      "blockers": [], "external_dependencies": ["Qdrant"], "accepted_negative_result": false,
+      "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-04", "title": "Paper analysis MVP",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "passed",
+      "evidence_files": ["docs/demo-cases.md", "tests/test_paper_analysis.py"],
+      "key_metrics": {"analysis_fields": "contributions, methods, experiments, limitations"},
+      "blockers": [], "external_dependencies": [], "accepted_negative_result": false,
+      "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-05", "title": "External paper search and import",
+      "engineering_status": "passed", "evaluation_status": "partially_passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/end-to-end-run-v1.md", "tests/test_external_search.py"],
+      "key_metrics": {"arxiv": "passed", "semantic_scholar": "controlled fallback"},
+      "blockers": ["Semantic Scholar anonymous calls can be rate limited"],
+      "external_dependencies": ["arXiv", "Semantic Scholar", "Crossref"],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-06", "title": "ResearchState and bounded research workflow",
+      "engineering_status": "passed", "evaluation_status": "partially_passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/langgraph-workflow.md", "docs/end-to-end-run-v1.md"],
+      "key_metrics": {"graph": "implemented", "budget_stop": "implemented"},
+      "blockers": ["Quality evaluation is not complete"], "external_dependencies": ["LangGraph"],
+      "accepted_negative_result": false, "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-07", "title": "Evaluation, traces and ablations",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/evaluation-report-v1.md", "data/evaluation/results-v1.json"],
+      "key_metrics": {"initial_items": 50, "initial_status": "provisional"},
+      "blockers": ["Early metrics were generated before human approval and are not Production evidence"],
+      "external_dependencies": [], "accepted_negative_result": true,
+      "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-08", "title": "Deployment and portfolio packaging",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "passed",
+      "evidence_files": ["docs/deployment-runbook.md", "docs/architecture.md", "docs/interview-guide.md"],
+      "key_metrics": {"one_click_start": "available", "documentation": "available"},
+      "blockers": [], "external_dependencies": ["Docker Desktop"], "accepted_negative_result": false,
+      "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-09", "title": "Release Candidate real acceptance",
+      "engineering_status": "passed", "evaluation_status": "partially_passed", "production_gate": "passed",
+      "evidence_files": ["docs/release-candidate-audit.md", "docs/stability-report-v1.md", "docs/backup-restore-audit.md"],
+      "key_metrics": {"release_candidate": "v0.9.0-rc1", "papers_in_stability_run": 30},
+      "blockers": ["Production model quality was not evaluated"], "external_dependencies": ["Docker", "Qdrant", "PostgreSQL"],
+      "accepted_negative_result": false, "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc1"
+    },
+    {
+      "stage_id": "stage-10", "title": "Production profiles and human gold support",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/gold-set-review-progress.md", "data/evaluation/gold-set-v1.jsonl", "docs/release-checklist.md"],
+      "key_metrics": {"gold_approved": 50, "gold_total": 50, "profiles": ["baseline", "production"]},
+      "blockers": ["Production quality gates remained open"], "external_dependencies": [],
+      "accepted_negative_result": false, "date": "2026-07-13", "git_commit_or_tag": "v0.9.0-rc2"
+    },
+    {
+      "stage_id": "stage-11a", "title": "Real Jina Embedding evaluation",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/stage11a-real-embedding.md", "data/evaluation/retrieval-ablation-v1.json"],
+      "key_metrics": {"model": "jina-embeddings-v5-text-small", "dimension": 1024},
+      "blockers": ["Initial evaluation protocol was not independently identifiable"],
+      "external_dependencies": ["Jina AI"], "accepted_negative_result": true,
+      "date": "2026-07-13", "git_commit_or_tag": "main history before 182019e"
+    },
+    {
+      "stage_id": "stage-11a.5", "title": "Retrieval protocol correction",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/retrieval-gold-v2-audit.md", "data/evaluation/retrieval-gold-v2.jsonl", "data/evaluation/retrieval-ablation-v2.json"],
+      "key_metrics": {"corpus_documents": 34, "points": 2062, "signed_items": 50},
+      "blockers": ["Exact evidence recall remains insufficient"], "external_dependencies": ["Qdrant", "Jina AI"],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "main history before 182019e"
+    },
+    {
+      "stage_id": "stage-11b", "title": "Real Jina Reranker ablation",
+      "engineering_status": "passed", "evaluation_status": "failed", "production_gate": "failed",
+      "evidence_files": ["docs/stage11b-real-reranker.md", "data/evaluation/reranker-ablation-v1.json"],
+      "key_metrics": {"model": "jina-reranker-v3", "default_enabled": false},
+      "blockers": ["Quality and latency acceptance thresholds were not met"], "external_dependencies": ["Jina AI"],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "main history before 182019e"
+    },
+    {
+      "stage_id": "stage-11c", "title": "Real SiliconFlow QA and citations",
+      "engineering_status": "passed", "evaluation_status": "failed", "production_gate": "failed",
+      "evidence_files": ["docs/qa-production-v1.md", "data/evaluation/qa-production-v1.json"],
+      "key_metrics": {"model": "Qwen/Qwen3-8B", "schema_success_rate": 1.0, "required_claim_coverage": 0.388889, "citation_precision": 0.103009},
+      "blockers": ["Answer and citation quality are below Production thresholds"], "external_dependencies": ["SiliconFlow"],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "main history before 4d6ecf8"
+    },
+    {
+      "stage_id": "stage-11c.5", "title": "QA context and citation diagnostics",
+      "engineering_status": "passed", "evaluation_status": "passed", "production_gate": "partially_passed",
+      "evidence_files": ["docs/qa-context-diagnostics-v1.md", "data/evaluation/qa-context-diagnostics-v1.json"],
+      "key_metrics": {"oracle_is_production": false, "semantic_signal": "token_set_recall"},
+      "blockers": ["Diagnostic semantic signal is not citation correctness"], "external_dependencies": [],
+      "accepted_negative_result": true, "date": "2026-07-13", "git_commit_or_tag": "4d6ecf8"
+    },
+    {
+      "stage_id": "stage-11c.6", "title": "Retrieval and context optimization",
+      "engineering_status": "passed", "evaluation_status": "failed", "production_gate": "failed",
+      "evidence_files": ["docs/retrieval-context-optimization-v1.md", "data/evaluation/retrieval-context-optimization-v1.json"],
+      "key_metrics": {"exact_gold_block_available": 0.416667, "gold_page_available": 0.645833},
+      "blockers": ["Context optimization did not improve end-to-end QA quality"], "external_dependencies": ["SiliconFlow", "Qdrant"],
+      "accepted_negative_result": true, "date": "2026-07-14", "git_commit_or_tag": "182019e"
+    },
+    {
+      "stage_id": "stage-11c.7", "title": "AI-assisted citation audit and deterministic failures",
+      "engineering_status": "passed", "evaluation_status": "failed", "production_gate": "failed",
+      "evidence_files": ["docs/stage11c7-citation-audit-v1.md", "data/evaluation/citation-human-audit-summary-v1.json"],
+      "key_metrics": {"sample_count": 30, "strict_support_rate": 0.166667, "lenient_support_rate": 0.233333},
+      "blockers": ["Citation support is below Production quality threshold"], "external_dependencies": [],
+      "accepted_negative_result": true, "date": "2026-07-14", "git_commit_or_tag": "6df2d3c"
+    },
+    {
+      "stage_id": "stage-11d", "title": "Bounded Deep Research engineering smoke",
+      "engineering_status": "passed", "evaluation_status": "not_run", "production_gate": "partially_passed",
+      "evidence_files": ["docs/stage11d-engineering-smoke-v1.md", "data/evaluation/stage11d-final-audit-v1.json"],
+      "key_metrics": {"selected_runs": 3, "total_tokens": 19656, "monetary_cost_usd": 0},
+      "blockers": ["Deep Research quality evaluation was not run"], "external_dependencies": ["SiliconFlow"],
+      "accepted_negative_result": false, "date": "2026-07-14", "git_commit_or_tag": "e027c3a"
+    },
+    {
+      "stage_id": "stage-11d.1", "title": "Live run reliability and attempt isolation",
+      "engineering_status": "partially_passed", "evaluation_status": "not_run", "production_gate": "blocked",
+      "evidence_files": ["docs/stage11d1-live-run-reliability-audit.md", "data/evaluation/stage11d-final-audit-v1.json"],
+      "key_metrics": {"resume_idempotency": "passed", "successful_resumed_completion": "not_verified", "failed_attempts": 3},
+      "blockers": ["Successful end-to-end live resume was not verified after repeated SiliconFlow ConnectError"],
+      "external_dependencies": ["SiliconFlow"], "accepted_negative_result": true,
+      "date": "2026-07-14", "git_commit_or_tag": "e027c3a"
+    }
+  ]
+}

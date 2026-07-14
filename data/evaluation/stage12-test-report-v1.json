@@ -1,0 +1,14 @@
+{
+  "schema_version": "stage12-test-report-v1",
+  "executed_on": "2026-07-14",
+  "python": "3.12.1",
+  "commands": [
+    {"command": ".\\.venv\\Scripts\\python.exe -m pytest", "exit_code": 0, "status": "passed", "result": "148 passed, 1 third-party deprecation warning in 7.47s"},
+    {"command": ".\\.venv\\Scripts\\python.exe -m ruff check .", "exit_code": 0, "status": "passed", "result": "All checks passed"},
+    {"command": ".\\.venv\\Scripts\\python.exe -m compileall -q src scripts", "exit_code": 0, "status": "passed", "result": "completed without output"},
+    {"command": "git diff --check", "exit_code": 0, "status": "passed", "result": "completed without output"}
+  ],
+  "pytest": {"collected": 148, "passed": 148, "failed": 0, "warnings": 1},
+  "all_passed": true,
+  "model_requests_made": false
+}
