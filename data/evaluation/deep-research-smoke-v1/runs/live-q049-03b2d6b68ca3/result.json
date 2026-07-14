@@ -1,0 +1,52 @@
+{
+  "run_id": "live-q049-03b2d6b68ca3",
+  "question_id": "q049",
+  "graph_status": "provider_failed",
+  "nodes_visited": [
+    "plan",
+    "retrieve",
+    "assess_evidence"
+  ],
+  "iteration_count": 1,
+  "retrieval_calls": 1,
+  "llm_request_count": 1,
+  "request_attempt_count": 1,
+  "provider_completed_request_count": 0,
+  "usage_record_count": 0,
+  "request_ids": [
+    "live-q049-03b2d6b68ca3:synthesize:1:118a314851a8"
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "total_tokens": 0,
+  "reserved_input_tokens": 6029,
+  "reserved_output_tokens": 2048,
+  "reserved_total_tokens": 8077,
+  "budget_accounting_status": "indeterminate_conservative_reserved",
+  "usage_source": [
+    "unavailable_after_send_attempt"
+  ],
+  "billing_mode": "free",
+  "monetary_cost_usd": "0",
+  "cost_basis": "explicit_free_provider",
+  "elapsed_seconds": 103.340446,
+  "checkpoint_ids": [
+    "live-q049-03b2d6b68ca3"
+  ],
+  "resume_count": 1,
+  "final_answerable_state": null,
+  "claim_count": 0,
+  "citation_count": 0,
+  "citation_validation": "not_run",
+  "refusal_reason": null,
+  "errors": [
+    "provider_failure:SiliconFlow QA failed after 1 request(s): ConnectError"
+  ],
+  "budget_stop_reason": null,
+  "reranker_called": false,
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "prompt_versions": [
+    "qa-production-v1"
+  ]
+}

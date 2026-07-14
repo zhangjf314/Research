@@ -1,0 +1,23 @@
+{
+  "run_id": "live-q049-24a797337315",
+  "status": "provider_failed",
+  "current_node": "synthesize",
+  "request_records": [
+    {
+      "request_id": null,
+      "request_id_status": "not_retained",
+      "node": "synthesize",
+      "request_status": "failed_after_send_unknown",
+      "usage_status": "unavailable_after_send_attempt",
+      "reservation_status": "not_retained",
+      "conservative_reservation_tokens": 40000,
+      "reservation_basis": "historical_per_query_budget_ceiling",
+      "failure_type": "ConnectError",
+      "historical_migration": true
+    }
+  ],
+  "usage_records": [],
+  "reserved_total_tokens": 40000,
+  "budget_accounting_status": "historical_unknown_usage_conservative_reserved",
+  "state_sha256": "fb308b7d1ef37b044a0e5082f3b2cc9ccca217c538925d8c0884e1cc658d0b6b"
+}

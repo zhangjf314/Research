@@ -1,0 +1,53 @@
+{
+  "run_id": "live-q049-4c11db9a2c1d",
+  "question_id": "q049",
+  "graph_status": "completed",
+  "nodes_visited": [
+    "plan",
+    "retrieve",
+    "assess_evidence",
+    "synthesize",
+    "validate_citations",
+    "persist_trace"
+  ],
+  "iteration_count": 1,
+  "retrieval_calls": 1,
+  "llm_request_count": 1,
+  "request_attempt_count": 1,
+  "provider_completed_request_count": 1,
+  "usage_record_count": 1,
+  "request_ids": [
+    "live-q049-4c11db9a2c1d:synthesize:1:ef71de611757"
+  ],
+  "input_tokens": 8959,
+  "output_tokens": 1010,
+  "total_tokens": 9969,
+  "reserved_input_tokens": 0,
+  "reserved_output_tokens": 0,
+  "reserved_total_tokens": 0,
+  "budget_accounting_status": "settled",
+  "usage_source": [
+    "provider_reported"
+  ],
+  "billing_mode": "free",
+  "monetary_cost_usd": "0",
+  "cost_basis": "explicit_free_provider",
+  "elapsed_seconds": 47.425539,
+  "checkpoint_ids": [
+    "live-q049-4c11db9a2c1d"
+  ],
+  "resume_count": 0,
+  "final_answerable_state": true,
+  "claim_count": 10,
+  "citation_count": 10,
+  "citation_validation": "passed",
+  "refusal_reason": null,
+  "errors": [],
+  "budget_stop_reason": null,
+  "reranker_called": false,
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "prompt_versions": [
+    "qa-production-v1"
+  ]
+}

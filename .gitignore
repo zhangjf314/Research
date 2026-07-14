@@ -26,6 +26,7 @@ env/
 
 # Runtime data and caches
 data/search_cache/
+data/checkpoints/
 data/raw/*
 !data/raw/.gitkeep
 data/parsed/*

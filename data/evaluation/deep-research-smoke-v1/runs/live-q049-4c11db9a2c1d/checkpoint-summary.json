@@ -1,0 +1,43 @@
+{
+  "run_id": "live-q049-4c11db9a2c1d",
+  "status": "completed",
+  "current_node": "END",
+  "request_records": [
+    {
+      "request_id": "live-q049-4c11db9a2c1d:synthesize:1:ef71de611757",
+      "node": "synthesize",
+      "request_status": "completed",
+      "usage_status": "provider_reported",
+      "prompt_token_estimate": 6029,
+      "maximum_output_tokens": 2048,
+      "reserved_input_tokens": 6029,
+      "reserved_output_tokens": 2048,
+      "reserved_total_tokens": 8077,
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prepared_at": 1784037849.6561935,
+      "started_at": 1784037849.6601527,
+      "completed_at": 1784037897.05687,
+      "failure_type": null,
+      "failure_message": null,
+      "actual_input_tokens": 8959,
+      "actual_output_tokens": 1010,
+      "actual_total_tokens": 9969,
+      "monetary_cost_usd": "0"
+    }
+  ],
+  "usage_records": [
+    {
+      "request_id": "live-q049-4c11db9a2c1d:synthesize:1:ef71de611757",
+      "input_tokens": 8959,
+      "output_tokens": 1010,
+      "total_tokens": 9969,
+      "usage_source": "provider_reported",
+      "monetary_cost_usd": "0",
+      "cost_basis": "explicit_free_provider"
+    }
+  ],
+  "reserved_total_tokens": 0,
+  "budget_accounting_status": "settled",
+  "state_sha256": "89707a0ca4c2e1219933d5594a3c37dfc4f719e200b77879bb1021a2fa577caa"
+}

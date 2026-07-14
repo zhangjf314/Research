@@ -1,0 +1,32 @@
+{
+  "run_id": "live-q049-1d47dc6a1ab8",
+  "status": "completed",
+  "current_node": "END",
+  "request_records": [
+    {
+      "request_id": "live-q049-1d47dc6a1ab8:synthesize:1:aaa9b29ef0bb",
+      "node": "synthesize",
+      "request_status": "completed",
+      "usage_status": "provider_reported",
+      "reservation_status": "not_retained",
+      "actual_input_tokens": 8959,
+      "actual_output_tokens": 1067,
+      "actual_total_tokens": 10026,
+      "historical_migration": true
+    }
+  ],
+  "usage_records": [
+    {
+      "cost_basis": "explicit_free_provider",
+      "input_tokens": 8959,
+      "monetary_cost_usd": "0",
+      "output_tokens": 1067,
+      "request_id": "live-q049-1d47dc6a1ab8:synthesize:1:aaa9b29ef0bb",
+      "total_tokens": 10026,
+      "usage_source": "provider_reported"
+    }
+  ],
+  "reserved_total_tokens": 0,
+  "budget_accounting_status": "settled",
+  "state_sha256": "b547b871a1ca6cf7f35b315d899ee32e100f17684bdfd0f7a57c81c528590d68"
+}
