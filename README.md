@@ -70,6 +70,17 @@ not Production metrics. The evidence supports improving retrieval/context select
 Deep Research or a larger model; see
 [`docs/qa-context-diagnostics-v1.md`](docs/qa-context-diagnostics-v1.md).
 
+Stage 11C.6 evaluates bounded retrieval/context changes while keeping Jina Embedding,
+SiliconFlow `Qwen/Qwen3-8B`, `qa-production-v1`, chunks, queries, filters, and Gold frozen;
+the Reranker remains disabled. The best pure-retrieval candidate uses no structural expansion,
+caps each page at two structural chunks, and weights Dense/Lexical RRF at 0.7/0.3. It reached
+52.1% exact-Gold availability and 75.0% Gold-page availability, but the 46 completed QA rows
+only raised exact citation precision from 10.3% to 11.0%, reduced citation recall to 5.9%, and
+increased unsupported rate to 87.7%; q033 and q044 repeatedly failed strict page-citation
+validation. The 30-item human citation audit is still pending. Stage 11C.6 therefore does not
+authorize Stage 11D smoke; see
+[`docs/retrieval-context-optimization-v1.md`](docs/retrieval-context-optimization-v1.md).
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.

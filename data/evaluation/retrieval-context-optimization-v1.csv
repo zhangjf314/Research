@@ -1,0 +1,17 @@
+stage,experiment_id,retrieval_k,context_k,neighbor_window,page_expansion,max_blocks_per_page,max_blocks_per_section,max_context_characters,max_context_tokens,dense_weight,lexical_weight,query_count,exact_gold_block_available,gold_page_available,any_gold_evidence_available,context_duplication_rate,deduplicated_candidate_count,mean_context_items,mean_max_items_per_page,mean_max_items_per_section,mean_tokens,p95_tokens,truncation_rate
+top_k,retrieval20_context5,20,5,0,False,,,12000,12000,0.5,0.5,48,0.416667,0.645833,0.645833,0.0,0,5.0,1.5625,2.5625,1781.312,2227,0.0
+top_k,retrieval20_context8,20,8,0,False,,,12000,12000,0.5,0.5,48,0.479167,0.708333,0.708333,0.0,0,7.9375,2.145833,3.604167,2776.021,3004,0.458333
+top_k,retrieval20_context10,20,10,0,False,,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.708333,2.291667,3.770833,2951,3004,0.916667
+top_k,retrieval30_context8,30,8,0,False,,,12000,12000,0.5,0.5,48,0.479167,0.708333,0.708333,0.0,0,7.9375,2.145833,3.604167,2776.021,3004,0.458333
+top_k,retrieval30_context10,30,10,0,False,,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.708333,2.291667,3.770833,2951,3004,0.916667
+expansion,no_expansion,20,10,0,False,,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.708333,2.291667,3.770833,2951,3004,0.916667
+expansion,neighbor_window_1,20,10,1,False,,,12000,12000,0.5,0.5,48,0.4375,0.583333,0.583333,0.0,42,9.145833,3.041667,4.520833,3003.417,3005,1.0
+expansion,same_page_expansion,20,10,0,True,,,12000,12000,0.5,0.5,48,0.4375,0.5625,0.5625,0.0,145,9.0625,3.916667,4.895833,3003.271,3005,1.0
+expansion,neighbor_window_1_plus_page_cap,20,10,1,False,2,,12000,12000,0.5,0.5,48,0.520833,0.6875,0.6875,0.0,65,9.0625,2.0,4.166667,3003.354,3005,1.0
+diversity,no_cap,20,10,0,False,,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.708333,2.291667,3.770833,2951,3004,0.916667
+diversity,max_2_blocks_per_page,20,10,0,False,2,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.520833,1.979167,3.625,2918.354,3004,0.833333
+diversity,max_3_blocks_per_section,20,10,0,False,,3,12000,12000,0.5,0.5,48,0.479167,0.75,0.75,0.0,0,7.854167,2.083333,2.645833,2652.688,3004,0.604167
+diversity,page_and_section_cap,20,10,0,False,2,3,12000,12000,0.5,0.5,48,0.479167,0.75,0.75,0.0,0,7.645833,1.791667,2.583333,2605.854,3004,0.520833
+hybrid_weight,dense_0.7_lexical_0.3,20,10,0,False,2,,12000,12000,0.7,0.3,48,0.520833,0.75,0.75,0.0,0,8.541667,1.916667,3.708333,2928.104,3004,0.833333
+hybrid_weight,dense_0.5_lexical_0.5,20,10,0,False,2,,12000,12000,0.5,0.5,48,0.5,0.75,0.75,0.0,0,8.520833,1.979167,3.625,2918.354,3004,0.833333
+hybrid_weight,dense_0.3_lexical_0.7,20,10,0,False,2,,12000,12000,0.3,0.7,48,0.479167,0.708333,0.708333,0.0,0,8.458333,1.958333,3.625,2932.646,3004,0.854167

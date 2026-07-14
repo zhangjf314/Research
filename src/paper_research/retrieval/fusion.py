@@ -13,16 +13,26 @@ class FusedResult:
 
 
 def reciprocal_rank_fusion(
-    dense: list[RetrievalResult], sparse: list[RetrievalResult], k: int = 60
+    dense: list[RetrievalResult],
+    sparse: list[RetrievalResult],
+    k: int = 60,
+    *,
+    dense_weight: float = 1.0,
+    lexical_weight: float = 1.0,
 ) -> list[FusedResult]:
+    if dense_weight < 0 or lexical_weight < 0 or dense_weight + lexical_weight <= 0:
+        raise ValueError("RRF weights must be non-negative and have a positive sum")
     combined: dict[str, dict[str, object]] = {}
-    for source, results in (("dense", dense), ("sparse", sparse)):
+    for source, results, weight in (
+        ("dense", dense, dense_weight),
+        ("sparse", sparse, lexical_weight),
+    ):
         for rank, result in enumerate(results, start=1):
             entry = combined.setdefault(
                 result.chunk.chunk_id,
                 {"chunk": result.chunk, "score": 0.0, "dense_rank": None, "sparse_rank": None},
             )
-            entry["score"] = float(entry["score"]) + 1 / (k + rank)
+            entry["score"] = float(entry["score"]) + weight / (k + rank)
             entry[f"{source}_rank"] = rank
     fused = [
         FusedResult(
