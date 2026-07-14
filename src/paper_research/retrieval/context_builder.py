@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from paper_research.retrieval.fusion import FusedResult
 
@@ -7,11 +7,25 @@ class ContextItem(BaseModel):
     chunk_id: str
     paper_id: str
     block_ids: list[str] = Field(default_factory=list)
+    block_page_map: dict[str, int] = Field(default_factory=dict)
     section_path: list[str]
     page_start: int
     page_end: int
     evidence: str
     score: float
+
+    @model_validator(mode="after")
+    def validate_block_page_map(self) -> "ContextItem":
+        if self.block_page_map:
+            expected = set(self.block_ids or [self.chunk_id])
+            if set(self.block_page_map) != expected:
+                raise ValueError("block_page_map must contain every and only context block ID")
+            if any(
+                page < self.page_start or page > self.page_end
+                for page in self.block_page_map.values()
+            ):
+                raise ValueError("block_page_map page is outside the context page range")
+        return self
 
 
 class ContextBuildTrace(BaseModel):

@@ -1,0 +1,1050 @@
+{
+  "status": "COMPLETED",
+  "generated_at": "2026-07-14T12:52:24.954147+00:00",
+  "question_id": "q044",
+  "question": "How are the target paper's experiments designed and evaluated?",
+  "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+  "target_paper": [
+    "2210.11416"
+  ],
+  "retrieval_filter": {
+    "paper_ids": [
+      "2210.11416"
+    ]
+  },
+  "context_block_list": [
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001238",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001239",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001240",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001241",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001242",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001243",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001244",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 1,
+      "chunk_id": "22075a60-04ad-4df3-b1a9-bf35dd68b42d",
+      "block_id": "b001245",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 2,
+      "chunk_id": "2e4021af-8b5a-4125-b9e6-65f4b9b89020",
+      "block_id": "b000301",
+      "real_page": 15,
+      "prompt_page": 15
+    },
+    {
+      "context_rank": 3,
+      "chunk_id": "e67e8c49-3715-4805-b1ea-57a5507aa340",
+      "block_id": "b000112",
+      "real_page": 5,
+      "prompt_page": 5
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000733",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000734",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000735",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000736",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000737",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000738",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000739",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000740",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000741",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000742",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000743",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000744",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000745",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000746",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 4,
+      "chunk_id": "2377c237-3990-47e0-b578-72f9b40be426",
+      "block_id": "b000747",
+      "real_page": 35,
+      "prompt_page": 35
+    },
+    {
+      "context_rank": 5,
+      "chunk_id": "21b58e32-9b81-4156-a18b-256db6a18da4",
+      "block_id": "b001010",
+      "real_page": 46,
+      "prompt_page": 46
+    },
+    {
+      "context_rank": 5,
+      "chunk_id": "21b58e32-9b81-4156-a18b-256db6a18da4",
+      "block_id": "b001011",
+      "real_page": 46,
+      "prompt_page": 46
+    },
+    {
+      "context_rank": 5,
+      "chunk_id": "21b58e32-9b81-4156-a18b-256db6a18da4",
+      "block_id": "b001012",
+      "real_page": 46,
+      "prompt_page": 46
+    },
+    {
+      "context_rank": 6,
+      "chunk_id": "b0749fc1-ba6d-478c-a89a-5d9433f6f1c3",
+      "block_id": "b000243",
+      "real_page": 11,
+      "prompt_page": 11
+    },
+    {
+      "context_rank": 6,
+      "chunk_id": "b0749fc1-ba6d-478c-a89a-5d9433f6f1c3",
+      "block_id": "b000244",
+      "real_page": 11,
+      "prompt_page": 11
+    },
+    {
+      "context_rank": 6,
+      "chunk_id": "b0749fc1-ba6d-478c-a89a-5d9433f6f1c3",
+      "block_id": "b000245",
+      "real_page": 11,
+      "prompt_page": 11
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000246",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000247",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000248",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000249",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000250",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000251",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000252",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000253",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000254",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000255",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000256",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000257",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000258",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 7,
+      "chunk_id": "8a8c877b-59ff-41da-a156-3d8148985ed4",
+      "block_id": "b000259",
+      "real_page": 12,
+      "prompt_page": 12
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000057",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000058",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000059",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000060",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000061",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000062",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000063",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000064",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000065",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000066",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000067",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000068",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 8,
+      "chunk_id": "1af2c409-b6ee-4af4-a602-4a79802ec468",
+      "block_id": "b000069",
+      "real_page": 3,
+      "prompt_page": 3
+    },
+    {
+      "context_rank": 9,
+      "chunk_id": "e498fb0c-480a-441d-8c79-bd79dfb13927",
+      "block_id": "b001247",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 9,
+      "chunk_id": "e498fb0c-480a-441d-8c79-bd79dfb13927",
+      "block_id": "b001248",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 9,
+      "chunk_id": "e498fb0c-480a-441d-8c79-bd79dfb13927",
+      "block_id": "b001249",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 9,
+      "chunk_id": "e498fb0c-480a-441d-8c79-bd79dfb13927",
+      "block_id": "b001250",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 9,
+      "chunk_id": "e498fb0c-480a-441d-8c79-bd79dfb13927",
+      "block_id": "b001251",
+      "real_page": 54,
+      "prompt_page": 54
+    },
+    {
+      "context_rank": 10,
+      "chunk_id": "5df1214b-1650-47c6-90b7-76d8961e06dc",
+      "block_id": "b000291",
+      "real_page": 14,
+      "prompt_page": 14
+    }
+  ],
+  "block_page_map": {
+    "22075a60-04ad-4df3-b1a9-bf35dd68b42d": {
+      "b001238": 54,
+      "b001239": 54,
+      "b001240": 54,
+      "b001241": 54,
+      "b001242": 54,
+      "b001243": 54,
+      "b001244": 54,
+      "b001245": 54
+    },
+    "2e4021af-8b5a-4125-b9e6-65f4b9b89020": {
+      "b000301": 15
+    },
+    "e67e8c49-3715-4805-b1ea-57a5507aa340": {
+      "b000112": 5
+    },
+    "2377c237-3990-47e0-b578-72f9b40be426": {
+      "b000733": 35,
+      "b000734": 35,
+      "b000735": 35,
+      "b000736": 35,
+      "b000737": 35,
+      "b000738": 35,
+      "b000739": 35,
+      "b000740": 35,
+      "b000741": 35,
+      "b000742": 35,
+      "b000743": 35,
+      "b000744": 35,
+      "b000745": 35,
+      "b000746": 35,
+      "b000747": 35
+    },
+    "21b58e32-9b81-4156-a18b-256db6a18da4": {
+      "b001010": 46,
+      "b001011": 46,
+      "b001012": 46
+    },
+    "b0749fc1-ba6d-478c-a89a-5d9433f6f1c3": {
+      "b000243": 11,
+      "b000244": 11,
+      "b000245": 11
+    },
+    "8a8c877b-59ff-41da-a156-3d8148985ed4": {
+      "b000246": 12,
+      "b000247": 12,
+      "b000248": 12,
+      "b000249": 12,
+      "b000250": 12,
+      "b000251": 12,
+      "b000252": 12,
+      "b000253": 12,
+      "b000254": 12,
+      "b000255": 12,
+      "b000256": 12,
+      "b000257": 12,
+      "b000258": 12,
+      "b000259": 12
+    },
+    "1af2c409-b6ee-4af4-a602-4a79802ec468": {
+      "b000057": 3,
+      "b000058": 3,
+      "b000059": 3,
+      "b000060": 3,
+      "b000061": 3,
+      "b000062": 3,
+      "b000063": 3,
+      "b000064": 3,
+      "b000065": 3,
+      "b000066": 3,
+      "b000067": 3,
+      "b000068": 3,
+      "b000069": 3
+    },
+    "e498fb0c-480a-441d-8c79-bd79dfb13927": {
+      "b001247": 54,
+      "b001248": 54,
+      "b001249": 54,
+      "b001250": 54,
+      "b001251": 54
+    },
+    "5df1214b-1650-47c6-90b7-76d8961e06dc": {
+      "b000291": 14
+    }
+  },
+  "legal_page_set": [
+    3,
+    5,
+    11,
+    12,
+    14,
+    15,
+    35,
+    46,
+    54
+  ],
+  "legal_citation_triples": [
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000057"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000058"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000059"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000060"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000061"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000062"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000063"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000064"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000065"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000066"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000067"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000068"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 3,
+      "block_id": "b000069"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 5,
+      "block_id": "b000112"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 11,
+      "block_id": "b000243"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 11,
+      "block_id": "b000244"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 11,
+      "block_id": "b000245"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000246"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000247"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000248"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000249"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000250"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000251"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000252"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000253"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000254"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000255"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000256"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000257"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000258"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 12,
+      "block_id": "b000259"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 14,
+      "block_id": "b000291"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 15,
+      "block_id": "b000301"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000733"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000734"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000735"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000736"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000737"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000738"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000739"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000740"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000741"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000742"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000743"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000744"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000745"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000746"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 35,
+      "block_id": "b000747"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 46,
+      "block_id": "b001010"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 46,
+      "block_id": "b001011"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 46,
+      "block_id": "b001012"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001238"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001239"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001240"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001241"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001242"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001243"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001244"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001245"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001247"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001248"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001249"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001250"
+    },
+    {
+      "paper_id": "2210.11416",
+      "page": 54,
+      "block_id": "b001251"
+    }
+  ],
+  "historical_failure": {
+    "failure_reason": "SiliconFlow QA failed after 3 request(s): citation_validation:page",
+    "api_request_count_in_latest_row": 3,
+    "retry_count_in_latest_row": 3,
+    "three_execution_rounds": true,
+    "estimated_requests_for_this_question": 9
+  },
+  "historical_raw_outputs": {
+    "status": "NOT_RETAINED_BY_STAGE_11C6",
+    "outputs": [],
+    "reason": "The provider stored only citation_validation:page and discarded invalid response bodies."
+  },
+  "mapping_audit": {
+    "duplicate_block_ids": [],
+    "block_page_conflicts": {},
+    "prompt_ambiguity_before_fix": true,
+    "old_multi_page_map_used_page_start_for_every_block": false,
+    "old_validator_used_chunk_page_block_cartesian_product": true
+  },
+  "retry_prompt_content": "The previous JSON failed strict citation validation with reason citation_validation:page. Return the complete corrected JSON object. Do not change or infer citation identifiers. Every citation must exactly match one of these allowed triples: [{\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000057\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000058\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000059\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000060\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000061\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000062\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000063\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000064\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000065\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000066\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000067\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000068\"}, {\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000069\"}, {\"paper_id\": \"2210.11416\", \"page\": 5, \"block_id\": \"b000112\"}, {\"paper_id\": \"2210.11416\", \"page\": 11, \"block_id\": \"b000243\"}, {\"paper_id\": \"2210.11416\", \"page\": 11, \"block_id\": \"b000244\"}, {\"paper_id\": \"2210.11416\", \"page\": 11, \"block_id\": \"b000245\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000246\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000247\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000248\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000249\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000250\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000251\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000252\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000253\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000254\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000255\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000256\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000257\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000258\"}, {\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000259\"}, {\"paper_id\": \"2210.11416\", \"page\": 14, \"block_id\": \"b000291\"}, {\"paper_id\": \"2210.11416\", \"page\": 15, \"block_id\": \"b000301\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000733\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000734\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000735\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000736\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000737\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000738\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000739\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000740\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000741\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000742\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000743\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000744\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000745\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000746\"}, {\"paper_id\": \"2210.11416\", \"page\": 35, \"block_id\": \"b000747\"}, {\"paper_id\": \"2210.11416\", \"page\": 46, \"block_id\": \"b001010\"}, {\"paper_id\": \"2210.11416\", \"page\": 46, \"block_id\": \"b001011\"}, {\"paper_id\": \"2210.11416\", \"page\": 46, \"block_id\": \"b001012\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001238\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001239\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001240\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001241\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001242\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001243\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001244\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001245\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001247\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001248\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001249\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001250\"}, {\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001251\"}]",
+  "replay": {
+    "executed": true,
+    "status": "COMPLETED",
+    "api_request_count": 2,
+    "retry_count": 1,
+    "retry_reasons": [
+      "citation_validation:page"
+    ],
+    "sanitized_model_outputs": [
+      {
+        "attempt": 1,
+        "model": "Qwen/Qwen3-8B",
+        "sanitized_output": "{\n  \"answerable\": true,\n  \"answer\": \"The target paper's experiments are designed and evaluated using a combination of benchmarks and manual assessments. The experiments focus on performance on held-out tasks not included in the fine-tuning data, utilizing benchmarks such as MMLU, BBH, TyDiQA, and MGSM. These benchmarks assess the model's capabilities in world knowledge, reasoning, and multilingual tasks. Additionally, the paper includes a manual evaluation of open-ended responses to challenging inputs, where 190 examples are tested across five categories: creativity, reasoning over contexts, complex reasoning, planning, and explanation. For these examples, the models generate responses and are ranked by log probability scores. Human raters then evaluate the responses based on desirability, with Flan-PaLM showing a 79% preference rate over PaLM. The evaluation also includes testing few-shot capabilities, where 30 inputs are used to assess the models' performance.\",\n  \"claims\": [\n    {\n      \"claim_id\": \"c1\",\n      \"text\": \"The experiments focus on performance on held-out tasks not included in the fine-tuning data.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 5,\n          \"block_id\": \"b000243\"\n        }\n      ]\n    },\n    {\n      \"claim_id\": \"c2\",\n      \"text\": \"The experiments use benchmarks such as MMLU, BBH, TyDiQA, and MGSM to evaluate the model's capabilities in world knowledge, reasoning, and multilingual tasks.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 5,\n          \"block_id\": \"b000243\"\n        }\n      ]\n    },\n    {\n      \"claim_id\": \"c3\",\n      \"text\": \"The manual evaluation includes 190 examples tested across five categories: creativity, reasoning over contexts, complex reasoning, planning, and explanation.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 11,\n          \"block_id\": \"b000243\"\n        }\n      ]\n    },\n    {\n      \"claim_id\": \"c4\",\n      \"text\": \"The models generate responses using temperature sampling with τ = 0.7 and are ranked by log probability score without length normalization.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 12,\n          \"block_id\": \"b000246\"\n        }\n      ]\n    },\n    {\n      \"claim_id\": \"c5\",\n      \"text\": \"Human raters evaluate the responses based on desirability, with Flan-PaLM showing a 79% preference rate over PaLM across 190 examples.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 12,\n          \"block_id\": \"b000246\"\n        }\n      ]\n    },\n    {\n      \"claim_id\": \"c6\",\n      \"text\": \"The evaluation includes testing few-shot capabilities with 30 inputs, where the models perform well without instruction fine-tuning.\",\n      \"citations\": [\n        {\n          \"paper_id\": \"2210.11416\",\n          \"page\": 12,\n          \"block_id\": \"b000246\"\n        }\n      ]\n    }\n  ],\n  \"refusal_reason\": null\n}"
+      },
+      {
+        "attempt": 2,
+        "model": "Qwen/Qwen3-8B",
+        "sanitized_output": "{\"answerable\": true, \"answer\": \"The target paper's experiments are designed and evaluated using a combination of benchmarks and manual assessments. The experiments focus on evaluating the model's performance on held-out tasks not included in the fine-tuning data, utilizing benchmarks such as MMLU, BBH, TyDiQA, and MGSM. For the MMLU benchmark, the model's performance is measured on the validation set, with some results reported on the test set. The evaluation also includes a manual assessment of open-ended responses to challenging inputs, where human raters are used to rank the model's outputs based on desirability. The experiments involve generating multiple responses and filtering out undesirable ones based on log probability scores. Additionally, the paper discusses the use of different mixture proportions for scaling and ablation experiments, with the final model being fine-tuned using Proportion B.\", \"claims\": [{\"claim_id\": \"c1\", \"text\": \"The experiments focus on evaluating the model's performance on held-out tasks not included in the fine-tuning data.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 54, \"block_id\": \"b001238\"}]}, {\"claim_id\": \"c2\", \"text\": \"The evaluation includes benchmarks such as MMLU, BBH, TyDiQA, and MGSM.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 3, \"block_id\": \"b000057\"}]}, {\"claim_id\": \"c3\", \"text\": \"For the MMLU benchmark, the model's performance is measured on the validation set, with some results reported on the test set.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 11, \"block_id\": \"b000243\"}]}, {\"claim_id\": \"c4\", \"text\": \"The evaluation also includes a manual assessment of open-ended responses to challenging inputs, where human raters are used to rank the model's outputs based on desirability.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000246\"}]}, {\"claim_id\": \"c5\", \"text\": \"The experiments involve generating multiple responses and filtering out undesirable ones based on log probability scores.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 12, \"block_id\": \"b000247\"}]}, {\"claim_id\": \"c6\", \"text\": \"The paper discusses the use of different mixture proportions for scaling and ablation experiments, with the final model being fine-tuned using Proportion B.\", \"citations\": [{\"paper_id\": \"2210.11416\", \"page\": 46, \"block_id\": \"b001010\"}]}], \"refusal_reason\": null}"
+      }
+    ],
+    "generated_citations": [
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 5,
+        "block_id": "b000243"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 5,
+        "block_id": "b000243"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 11,
+        "block_id": "b000243"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 12,
+        "block_id": "b000246"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 12,
+        "block_id": "b000246"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 12,
+        "block_id": "b000246"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 54,
+        "block_id": "b001238"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 3,
+        "block_id": "b000057"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 11,
+        "block_id": "b000243"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 12,
+        "block_id": "b000246"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 12,
+        "block_id": "b000247"
+      },
+      {
+        "attempt": 2,
+        "paper_id": "2210.11416",
+        "page": 46,
+        "block_id": "b001010"
+      }
+    ],
+    "invalid_citations": [
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 5,
+        "block_id": "b000243"
+      },
+      {
+        "attempt": 1,
+        "paper_id": "2210.11416",
+        "page": 5,
+        "block_id": "b000243"
+      }
+    ],
+    "failure_reason": null,
+    "model_usage": {
+      "input_tokens": 9321,
+      "output_tokens": 654,
+      "total_tokens": 9975,
+      "estimated_cost_usd": null
+    }
+  },
+  "model_generated_page_set": [
+    3,
+    5,
+    11,
+    12,
+    46,
+    54
+  ],
+  "root_cause": {
+    "summary": "The old serialization and validator expressed different block/page rules, and citation retries repeated the same request without an explicit legal-triple correction. The repaired protocol supplies real block pages and an authoritative allowed_citations list while retaining exact triple validation.",
+    "deterministic_protocol_defect": true,
+    "context_serialization_mapping_error": false,
+    "retry_prompt_missing_legal_pages_before_fix": true,
+    "model_ignored_mapping_after_fix": false,
+    "provider_model_citation_mapping_limitation": false,
+    "strict_validation_retained": true,
+    "illegal_page_auto_corrected": false
+  },
+  "security": {
+    "authorization_header_persisted": false,
+    "api_key_persisted": false,
+    "complete_request_headers_persisted": false
+  },
+  "frozen_configuration": {
+    "rerank_enabled": false,
+    "embedding": "jina-embeddings-v5-text-small",
+    "llm": "SiliconFlow Qwen/Qwen3-8B",
+    "prompt_version": "qa-production-v1",
+    "deep_research_called": false
+  }
+}

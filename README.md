@@ -81,6 +81,18 @@ validation. The 30-item human citation audit is still pending. Stage 11C.6 there
 authorize Stage 11D smoke; see
 [`docs/retrieval-context-optimization-v1.md`](docs/retrieval-context-optimization-v1.md).
 
+Stage 11C.7 accepts a completed **AI-assisted manual citation audit, 30-sample
+stratified review**; it is not an independent blind review or a full-dataset human
+precision estimate. Strict human support is 5/30 (16.7%) and lenient support is 7/30
+(23.3%). Token-set semantic support has only 30% strict and 40% lenient precision in
+this failure-enriched sample, so the earlier 81.6% value remains a lexical diagnostic,
+not citation correctness. The q033/q044 failures were traced to inconsistent block/page
+serialization and uninformative retries; exact block-page maps plus bounded legal-triple
+retry guidance fixed both in one retry while strict validation continued rejecting the
+first illegal outputs. At most three engineering-only Stage 11D smoke cases may proceed
+under explicit request/token/cost/round limits; Stage 11D quality evaluation remains
+blocked. See [`docs/stage11c7-citation-audit-v1.md`](docs/stage11c7-citation-audit-v1.md).
+
 > Stage 10 acceptance status (2026-07-13): the repository remains `v0.9.0-rc1`,
 > not `v1.0.0`. Baseline is reproducible; Production is intentionally blocked until
 > real model credentials and 50/50 human-approved gold records are available.

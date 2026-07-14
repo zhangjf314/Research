@@ -1,0 +1,6 @@
+automated_label,sample_count,strict_precision,lenient_precision,strict_false_positive_count,lenient_false_positive_count,strict_false_negative_count,lenient_false_negative_count,human_unsupported_count,unsupported_precision
+exact_gold_block,0,,,0,0,0,0,0,
+same_gold_page,10,0.2,0.2,8,8,0,0,6,0.6
+semantic_support_non_gold,10,0.3,0.4,7,6,0,0,2,0.2
+weakly_related,8,0.0,0.125,0,0,0,1,6,0.75
+unsupported,2,0.0,0.0,0,0,0,0,2,1.0

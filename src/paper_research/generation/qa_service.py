@@ -68,12 +68,19 @@ class ClaimValidationError(ValueError):
 
 class ClaimEvidenceValidator:
     def validate(self, claims: list, context: list[ContextItem]) -> list[AnswerClaim]:
-        allowed = {
-            (item.paper_id, page, block_id)
-            for item in context
-            for page in range(item.page_start, item.page_end + 1)
-            for block_id in (item.block_ids or [item.chunk_id])
-        }
+        allowed = set()
+        for item in context:
+            block_ids = item.block_ids or [item.chunk_id]
+            if item.block_page_map:
+                allowed.update(
+                    (item.paper_id, item.block_page_map[block_id], block_id)
+                    for block_id in block_ids
+                )
+            else:
+                allowed.update(
+                    (item.paper_id, item.page_start, block_id)
+                    for block_id in block_ids
+                )
         accepted = []
         for claim in claims:
             if not claim.citations:
