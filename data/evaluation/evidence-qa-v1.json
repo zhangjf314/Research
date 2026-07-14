@@ -1,0 +1,37 @@
+{
+  "status": "BLOCKED_BY_OFFLINE_RETRIEVAL_GATE",
+  "phase_requested": "dev",
+  "dev_run": false,
+  "full_run": false,
+  "llm_called": false,
+  "deep_research_called": false,
+  "rerank_enabled": false,
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "baseline_prompt_version": "qa-production-v1",
+  "experimental_prompt_version": "qa-evidence-centric-v1",
+  "collection": "papers_jina_eval34_v2__20260713152149",
+  "blocking_gates": [
+    "exact_block_at_least_0_65"
+  ],
+  "metrics": {
+    "answerable_accuracy": null,
+    "refusal_accuracy": null,
+    "required_claim_coverage": null,
+    "claim_omitted_due_to_missing_evidence": null,
+    "unsupported_before_generation": null,
+    "unsupported_after_generation": null,
+    "exact_citation_precision": null,
+    "citation_recall": null,
+    "claim_citation_binding": null,
+    "citation_allocated_to_correct_claim_rate": null,
+    "invalid_citation_rate": null,
+    "extra_claim_count": null,
+    "json_schema_success": null,
+    "retries": 0,
+    "latency": null,
+    "tokens": 0,
+    "monetary_cost_usd": "0"
+  },
+  "reason": "Dev QA is forbidden because the offline exact-block candidate gate did not pass."
+}
