@@ -233,6 +233,66 @@ def parse_and_validate_required_claim_response(
     return output
 
 
+def parse_and_validate_required_claim_response_v31(
+    raw_content: str,
+    *,
+    expected_question_id: str,
+    expected_claim_ids: list[str],
+    registry: CitationRegistry,
+    allowed_by_claim: dict[str, set[str]],
+    expected_registry_hash: str,
+) -> RequiredClaimsQAResponseV31:
+    """Validate raw Dev v3.1 output without normalization or correction."""
+    import json
+
+    try:
+        raw = json.loads(raw_content)
+    except json.JSONDecodeError as exc:
+        raise RequiredClaimValidationError("malformed_json", str(exc)) from exc
+    if not isinstance(raw, dict):
+        raise RequiredClaimValidationError("valid_json_wrong_schema", "top level is not an object")
+    if set(raw) == {expected_question_id} and isinstance(raw[expected_question_id], dict):
+        raise RequiredClaimValidationError("question_wrapper_rejected", expected_question_id)
+    if "claims" in raw:
+        raise RequiredClaimValidationError("legacy_schema_rejected", "legacy claims field")
+    if "required_claim_results" not in raw and set(raw) & set(expected_claim_ids):
+        raise RequiredClaimValidationError("claim_map_rejected", "claim IDs used as top-level keys")
+    try:
+        validate_no_free_triples(raw)
+    except RequiredClaimValidationError as exc:
+        raise RequiredClaimValidationError("valid_json_wrong_schema", str(exc)) from exc
+    try:
+        output = RequiredClaimsQAResponseV31.model_validate(raw)
+    except Exception as exc:
+        raise RequiredClaimValidationError("valid_json_wrong_schema", str(exc)) from exc
+    if output.question_id != expected_question_id:
+        raise RequiredClaimValidationError(
+            "answerability_protocol_failure",
+            f"expected question_id {expected_question_id}, got {output.question_id}",
+        )
+    validate_registry_hash(registry, expected_registry_hash)
+    try:
+        validate_required_claim_slots(output, expected_claim_ids, registry, allowed_by_claim)
+    except RequiredClaimValidationError as exc:
+        mapping = {
+            "missing_required_claim_id": "missing_slot",
+            "duplicate_required_claim_id": "duplicate_slot",
+            "extra_required_claim_id": "extra_slot",
+            "answered_missing_content_or_citation": "status_citation_inconsistency",
+            "answered_has_omission_reason": "status_citation_inconsistency",
+            "unsupported_or_na_has_citation": "status_citation_inconsistency",
+            "missing_omission_reason": "status_citation_inconsistency",
+            "unanswerable_has_answer_or_citation": "answerability_protocol_failure",
+            "unanswerable_missing_refusal_reason": "answerability_protocol_failure",
+            "answerable_has_refusal_reason": "answerability_protocol_failure",
+        }
+        mapped = mapping.get(exc.code)
+        if mapped:
+            raise RequiredClaimValidationError(mapped, str(exc)) from exc
+        raise
+    return output
+
+
 def required_claim_output_token_budget(
     required_claim_count: int,
     *,
