@@ -11,6 +11,11 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from paper_research.evaluation.canonical_hash import (
+    SOURCE_HASH_SCHEMA_VERSION,
+    hash_with_metadata,
+    verify_legacy_raw_hash,
+)
 from paper_research.generation.citation_registry import CitationRegistry
 
 try:
@@ -46,7 +51,7 @@ def validate(rows: list[dict[str, Any]]) -> None:
         raise RuntimeError("expected 57 unique audit samples")
     evidence_rows = read_jsonl(EVIDENCE)
     evidence = {(row["paper_id"], int(row["page"]), row["block_id"]): row for row in evidence_rows}
-    source_hash = sha256(EVIDENCE)
+    source_metadata = hash_with_metadata(EVIDENCE, "canonical_jsonl_v1")
     registries: dict[str, CitationRegistry] = {}
     for row in rows:
         if row["human_review_status"] not in {"pending", "approved"}:
@@ -55,7 +60,19 @@ def validate(rows: list[dict[str, Any]]) -> None:
             raise RuntimeError(f"incomplete approved review: {row['sample_id']}")
         triple = (row["citation_triple"]["paper_id"], int(row["citation_triple"]["page"]), row["citation_triple"]["block_id"])
         unit = evidence.get(triple)
-        if unit is None or row["source_hash"] != source_hash or row["source_record_hash"] != canonical_hash(unit):
+        if row.get("source_hash_schema_version") != SOURCE_HASH_SCHEMA_VERSION:
+            raise RuntimeError(f"unsupported source hash schema: {row['sample_id']}")
+        if row.get("source_hash_mode") != "canonical_jsonl_v1":
+            raise RuntimeError(f"unsupported source hash mode: {row['sample_id']}")
+        if row.get("source_canonical_sha256") != source_metadata["value"]:
+            raise RuntimeError(f"canonical source changed: {row['sample_id']}")
+        if row.get("source_raw_sha256_at_review") != row.get("source_hash"):
+            raise RuntimeError(f"legacy source hash metadata changed: {row['sample_id']}")
+        operation = verify_legacy_raw_hash(EVIDENCE, row["source_hash"])
+        migrated = row.get("source_legacy_raw_hash_verified_via_newline_normalization")
+        if bool(migrated) != (operation != "raw"):
+            raise RuntimeError(f"legacy source migration evidence invalid: {row['sample_id']}")
+        if unit is None or row["source_record_hash"] != canonical_hash(unit):
             raise RuntimeError(f"source changed: {row['sample_id']}")
         immutable = {key: value for key, value in row.items() if key not in HUMAN_FIELDS | {"immutable_record_hash"}}
         if row["immutable_record_hash"] != canonical_hash(immutable):

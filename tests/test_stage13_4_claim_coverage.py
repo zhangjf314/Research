@@ -1,12 +1,12 @@
 # ruff: noqa: E501
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 
 import pytest
 
+from paper_research.evaluation.canonical_hash import sha256_canonical_jsonl_file
 from paper_research.generation.citation_registry import CitationRegistry
 from paper_research.generation.prompts import QA_REQUIRED_CLAIMS_CITATION_ID_V3, qa_system_prompt
 from paper_research.generation.required_claim_output import (
@@ -32,7 +32,8 @@ def test_dev_v2_citation_audit_is_frozen_approved_and_source_valid() -> None:
     validate(rows)
     assert len(rows) == len({row["sample_id"] for row in rows}) == 57
     assert all(row["human_review_status"] == "approved" and row["human_label"] in LABELS for row in rows)
-    assert all(row["source_hash"] == hashlib.sha256(EVIDENCE.read_bytes()).hexdigest() for row in rows)
+    assert all(row["source_hash"] == row["source_raw_sha256_at_review"] for row in rows)
+    assert all(row["source_canonical_sha256"] == sha256_canonical_jsonl_file(EVIDENCE) for row in rows)
     required = {"question", "answerable", "required_claim_match", "citation_id", "citation_triple", "cited_evidence_context", "evidence_source", "block_type", "registry_hash", "source_record_hash", "immutable_record_hash"}
     assert all(required.issubset(row) for row in rows)
 

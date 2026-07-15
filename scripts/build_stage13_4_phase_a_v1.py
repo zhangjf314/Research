@@ -12,6 +12,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from paper_research.evaluation.canonical_hash import hash_with_metadata
 from paper_research.generation.citation_registry import CitationRegistry
 
 try:
@@ -81,7 +82,7 @@ def enrich_audit(runs: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     claims = defaultdict(list)
     for row in read_jsonl(DATA / "claim-units-v1.jsonl"):
         claims[row["question_id"]].append(row)
-    corpus_hash = sha256(EVIDENCE_PATH)
+    corpus_metadata = hash_with_metadata(EVIDENCE_PATH, "canonical_jsonl_v1")
     enriched = []
     for old in rows:
         row = json.loads(json.dumps(old))
@@ -98,7 +99,7 @@ def enrich_audit(runs: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
         following = by_block.get((unit["paper_id"], unit.get("next_block_id")))
         adjacent = {item["block_id"] for item in run["context"].get("adjacent_completion_blocks", [])}
         matches = sorted(({"required_claim_id": item["claim_id"], "required_claim_text": item["claim_text"], "token_overlap": overlap(item["claim_text"], row["claim_text"])} for item in claims[qid]), key=lambda item: item["token_overlap"], reverse=True)
-        row.update({"variant": "citation_id_v2_adjacent_same_page_completion", "question": gold[qid]["question"], "answerable": gold[qid]["answerable"], "required_claim_match": {"best": matches[0] if matches else None, "all": matches}, "citation_id": entry.citation_id, "citation_triple": {"paper_id": triple[0], "page": triple[1], "block_id": triple[2]}, "cited_evidence_context": {"previous": {"block_id": previous["block_id"], "text": previous["text"]} if previous else None, "current": {"block_id": unit["block_id"], "text": unit["text"]}, "next": {"block_id": following["block_id"], "text": following["text"]} if following else None}, "evidence_source": "adjacent_completion" if unit["block_id"] in adjacent else "original_selected", "block_type": unit["block_type"], "semantic_token_signal": round(len(terms(row["claim_text"]) & terms(unit["text"])) / max(1, len(terms(row["claim_text"]))), 6), "registry_hash": run["registry"].registry_hash, "source_hash": corpus_hash, "source_record_hash": canonical_hash(unit)})
+        row.update({"variant": "citation_id_v2_adjacent_same_page_completion", "question": gold[qid]["question"], "answerable": gold[qid]["answerable"], "required_claim_match": {"best": matches[0] if matches else None, "all": matches}, "citation_id": entry.citation_id, "citation_triple": {"paper_id": triple[0], "page": triple[1], "block_id": triple[2]}, "cited_evidence_context": {"previous": {"block_id": previous["block_id"], "text": previous["text"]} if previous else None, "current": {"block_id": unit["block_id"], "text": unit["text"]}, "next": {"block_id": following["block_id"], "text": following["text"]} if following else None}, "evidence_source": "adjacent_completion" if unit["block_id"] in adjacent else "original_selected", "block_type": unit["block_type"], "semantic_token_signal": round(len(terms(row["claim_text"]) & terms(unit["text"])) / max(1, len(terms(row["claim_text"]))), 6), "registry_hash": run["registry"].registry_hash, "source_hash": corpus_metadata["raw_value_at_review"], "source_canonical_sha256": corpus_metadata["value"], "source_hash_mode": corpus_metadata["mode"], "source_hash_schema_version": corpus_metadata["schema_version"], "source_raw_sha256_at_review": corpus_metadata["raw_value_at_review"], "source_legacy_raw_hash_verified_via_newline_normalization": False, "source_record_hash": canonical_hash(unit)})
         immutable = {key: value for key, value in row.items() if key not in HUMAN_FIELDS | {"immutable_record_hash"}}
         row["immutable_record_hash"] = canonical_hash(immutable)
         enriched.append(row)
