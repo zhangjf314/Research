@@ -43,6 +43,23 @@ artifacts/*.dump
 *.tmp
 *.temp
 
+# Local evaluation backups
+*.pre-human-import.*.bak
+*.pending.*.bak
+*.bak
+
+# Local review/import packages and duplicate exports
+artifacts/imports/
+artifacts/*review-pack*.zip
+artifacts/*human-review*.zip
+artifacts/stage13-*-human-review/
+artifacts/stage13-*-human-review-results/
+artifacts/*citation*review-export*.md
+artifacts/evidence-qa-dev-citation-human-audit-*
+
+# Local evaluation run evidence; canonical summaries and hash freezes are tracked
+data/evaluation/evidence-qa-dev-v*/runs/
+
 # OS files
 .DS_Store
 Thumbs.db
