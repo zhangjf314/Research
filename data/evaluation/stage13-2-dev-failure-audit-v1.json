@@ -1,0 +1,90 @@
+{
+  "schema_version": "stage13-2-dev-failure-audit-v1",
+  "stage13_2_history_modified": false,
+  "historical_reservations_released": false,
+  "failures": {
+    "q001": {
+      "classification": "client_post_processing_failure",
+      "provider_raw_json_persisted": false,
+      "provider_usage_persisted": false,
+      "root_cause": "The adapter renamed generated claim text to claim_text before the evaluator still reading text. The response and usage were held only in process memory.",
+      "replay": {
+        "historical_raw_response_available": false,
+        "historical_raw_fixture_replay": "BLOCKED_ORIGINAL_RAW_NOT_PERSISTED",
+        "compatibility_fixture_results": {
+          "claim_text_only": "fixture claim",
+          "text_only": "fixture claim",
+          "both_equal": "fixture claim",
+          "both_missing": {
+            "status": "strict_failure",
+            "reason": "claim requires text or claim_text"
+          },
+          "both_conflicting": {
+            "status": "strict_failure",
+            "reason": "text and claim_text conflict"
+          }
+        },
+        "future_protocol_fixture": {
+          "event_order": [
+            "raw_response_received",
+            "provider_usage_recorded",
+            "raw_response_persisted",
+            "response_parsing_started",
+            "post_processing_failed"
+          ],
+          "usage": {
+            "input_tokens": 101,
+            "output_tokens": 19,
+            "total_tokens": 120,
+            "usage_source": "provider_reported",
+            "monetary_cost_usd": "0",
+            "cost_basis": "explicit_free_provider"
+          },
+          "parse_status": "post_processing_failed",
+          "reservation_released_after_known_usage": true
+        }
+      },
+      "prevention": "ProviderResponseEnvelopeStore now records raw_response_received, provider_usage_recorded, raw_response_persisted, response_parsing_started, then response_parsed or post_processing_failed."
+    },
+    "q008": {
+      "classification": "provider_read_timeout_after_send_unknown",
+      "configured_timeout_seconds": 120,
+      "timeout_components_separated": false,
+      "network_health_probe_previously_present": false,
+      "root_cause": "The request exceeded the undifferentiated HTTP read timeout; provider completion and usage remain unknown.",
+      "prevention": "A one-shot DNS/TCP/TLS/models endpoint health checker is implemented. It does not retry QA requests and Phase A does not execute it live."
+    },
+    "q019": {
+      "classification": "strict_citation_page_validation_failure",
+      "raw_model_response_persisted": false,
+      "root_cause": "The model was allowed to copy three free-form citation fields and emitted a page inconsistent with the selected block_page_map. Strict validation correctly rejected it; the exact emitted page was lost with the unpersisted response.",
+      "current_no_retry_policy_conformant": true,
+      "replay": {
+        "historical_raw_response_available": false,
+        "historical_invalid_page_value": "unknown_raw_response_not_persisted",
+        "historical_failure_code": "citation_validation:page",
+        "allowed_triple_count": 15,
+        "allowed_triples_were_present_in_prompt_payload": true,
+        "block_page_map_trace_complete": true,
+        "citation_id_v2_fixture": {
+          "registry_hash": "55db9851bf6205fd40d7187ad8d8dd580b41e1e7c36d5e2a2f39d903cc8928c4",
+          "registry_entry_count": 15,
+          "representative_invalid_free_form_triple": {
+            "paper_id": "2001.08361",
+            "page": 2,
+            "block_id": "b000033"
+          },
+          "free_form_page_blocked": true,
+          "unknown_id_blocked": true,
+          "valid_id_resolves_exact_triple": true
+        }
+      },
+      "prevention": "citation-id-v2 exposes only immutable short IDs; local deterministic resolution restores exact triples and runs strict triple validation again."
+    }
+  },
+  "phase_a_status": "WAITING_FOR_DEV_CITATION_AUDIT",
+  "dev_v2_run": false,
+  "full_qa_run": false,
+  "deep_research_run": false,
+  "reranker_enabled": false
+}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "evidence-qa-dev-manifest-v1",
+  "selection_status": "frozen_before_live_stage13_2_results",
+  "selection_protocol": "deterministic_stratified_stage13_dev10_v1",
+  "question_count": 10,
+  "question_ids": [
+    "q001",
+    "q002",
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "questions": [
+    {
+      "question_id": "q001",
+      "category": "research_background",
+      "difficulty": "medium",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": true,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "baseline_already_hit_control"
+      ]
+    },
+    {
+      "question_id": "q002",
+      "category": "paper_contributions",
+      "difficulty": "easy",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "phase_b_exact_hit_gain"
+      ]
+    },
+    {
+      "question_id": "q004",
+      "category": "experiment_setup",
+      "difficulty": "hard",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": true,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "baseline_already_hit_control"
+      ]
+    },
+    {
+      "question_id": "q005",
+      "category": "unanswerable",
+      "difficulty": "easy",
+      "answerable": false,
+      "paper_scope": "unanswerable",
+      "multi_paper": false,
+      "baseline_retrieval_status": null,
+      "phase_b_retrieval_status": null,
+      "inclusion_reason": [
+        "unanswerable_refusal"
+      ]
+    },
+    {
+      "question_id": "q007",
+      "category": "paper_contributions",
+      "difficulty": "hard",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "phase_b_exact_hit_gain"
+      ]
+    },
+    {
+      "question_id": "q008",
+      "category": "algorithm_steps",
+      "difficulty": "easy",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": true,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "baseline_already_hit_control"
+      ]
+    },
+    {
+      "question_id": "q013",
+      "category": "method",
+      "difficulty": "easy",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "phase_b_exact_hit_gain"
+      ]
+    },
+    {
+      "question_id": "q015",
+      "category": "limitations",
+      "difficulty": "hard",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": false,
+      "inclusion_reason": [
+        "persistent_retrieval_miss"
+      ]
+    },
+    {
+      "question_id": "q019",
+      "category": "experiment_results",
+      "difficulty": "hard",
+      "answerable": true,
+      "paper_scope": "paper",
+      "multi_paper": false,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": false,
+      "inclusion_reason": [
+        "persistent_retrieval_miss"
+      ]
+    },
+    {
+      "question_id": "q050",
+      "category": "multi_paper_comparison",
+      "difficulty": "hard",
+      "answerable": true,
+      "paper_scope": "multi_paper",
+      "multi_paper": true,
+      "baseline_retrieval_status": false,
+      "phase_b_retrieval_status": true,
+      "inclusion_reason": [
+        "phase_b_exact_hit_gain",
+        "multi_paper_coverage"
+      ]
+    }
+  ],
+  "artifacts": {
+    "gold_set": "gold-set-v1",
+    "gold_set_sha256": "24b21d7ce5264d4f22230cfb6bc9ec788ef6b76dc0ad629a20ae682c5184599e",
+    "retrieval_gold": "retrieval-gold-v2",
+    "retrieval_gold_sha256": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+    "production_corpus": "production-corpus-v1",
+    "production_corpus_sha256": "e44542a3082ddec36c6ff7afe069e4d83a2973b51e476705e6a7f5dd18ee66ce",
+    "evidence_corpus_signature": "fb826cb8b1fe8e55d96b7aa1446cfb2e8d347efd74643a627706ad00e3792239",
+    "phase_b_ablation_sha256": "508b1f691c4dd83c61bc171e225200502b40eaedeed7d9c4c5916aaf773ecab7",
+    "claim_evidence_pilot_sha256": "749bd6fba9e3704aad86e42cfdc61184a8ce90c287206547643520b1833d274a"
+  },
+  "variants": {
+    "historical_stage11c": {
+      "source": "historical_stage11c",
+      "prompt_version": "qa-production-v1",
+      "live_requests": 0
+    },
+    "retrieval_only": {
+      "retrieval": "phase_b_adjacent_same_page_completion",
+      "prompt_version": "qa-production-v1",
+      "context_version": "phase-b-adjacent-same-page-v1"
+    },
+    "evidence_centric": {
+      "status": "blocked_by_known_selector_defect",
+      "reason": "Phase B did not repair the known per-claim minimal selector compression defect.",
+      "live_requests": 0
+    }
+  },
+  "budgets": {
+    "per_question_iterations": 1,
+    "per_question_primary_requests": 1,
+    "per_question_citation_retries": 1,
+    "per_question_total_attempts": 2,
+    "per_question_tokens": 20000,
+    "per_question_elapsed_seconds": 180,
+    "dev_request_attempts": 40,
+    "dev_tokens": 300000,
+    "dev_elapsed_seconds": 1800,
+    "monetary_cost_usd": "0"
+  },
+  "manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988"
+}

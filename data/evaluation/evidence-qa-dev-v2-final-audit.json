@@ -1,0 +1,27 @@
+{
+  "schema_version": "evidence-qa-dev-v2-final-audit-v1",
+  "checks": {
+    "fixed_manifest_questions": true,
+    "run_count_10": true,
+    "required_artifacts_complete": true,
+    "unique_request_ids": true,
+    "usage_at_most_once": true,
+    "request_ledger_closed": true,
+    "registry_hash_valid": true,
+    "raw_response_integrity": true,
+    "api_key_not_leaked": true,
+    "authorization_header_not_leaked": true,
+    "reranker_disabled": true,
+    "no_gold_leakage": true,
+    "no_oracle_leakage": true,
+    "no_pilot_injection": true,
+    "historical_reservations_retained": true,
+    "full_qa_not_run": true,
+    "deep_research_not_run": true
+  },
+  "dev_v2_engineering_gate": true,
+  "dev_v2_quality_candidate_gate": false,
+  "ready_for_full_qa": false,
+  "production_ready": false,
+  "v1_0_status": "not_satisfied"
+}
