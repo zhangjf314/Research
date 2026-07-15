@@ -1,0 +1,17 @@
+{
+  "schema_version": "stage13-7-review-integrity-audit-v1",
+  "records_checked": 81,
+  "human_labels_changed": 0,
+  "reviewer_fields_changed": 0,
+  "immutable_non_hash_fields_changed": 0,
+  "source_record_hashes_valid": true,
+  "canonical_source_hashes_valid": true,
+  "legacy_raw_hashes_retained": true,
+  "citation_review_statuses_retained": true,
+  "stage13_5_metrics_modified": false,
+  "stage13_6_readiness_modified": false,
+  "gold_modified": false,
+  "retrieval_gold_modified": false,
+  "pilot_modified": false,
+  "live_llm_calls": 0
+}

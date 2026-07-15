@@ -1,0 +1,31 @@
+{
+  "schema_version": "stage13-7-hash-root-cause-v1",
+  "target_file": "data/evaluation/evidence-qa-dev-v1.json",
+  "legacy_recorded_raw_sha256": "23126a87deb978216fe56bc8518e25d99fb8c9b2e461640ebe727c80ea73d170",
+  "current_raw_sha256": "c2df9e5aee765159ecaf03956923d2c652758a95086be22ac878b24eef2109bd",
+  "lf_sha256": "c2df9e5aee765159ecaf03956923d2c652758a95086be22ac878b24eef2109bd",
+  "crlf_sha256": "23126a87deb978216fe56bc8518e25d99fb8c9b2e461640ebe727c80ea73d170",
+  "bom_removed_sha256": "c2df9e5aee765159ecaf03956923d2c652758a95086be22ac878b24eef2109bd",
+  "single_terminal_lf_sha256": "ab56bbd3ffe8aea6fd1e84d1262d092e316ba4b5f1324bd80f5930fb68d4eb28",
+  "canonical_json_v1_sha256": "f1e8d8c3a5ab3a922a08cdef918c3ccc4b85d2465491dab72c3d3b1f5f4f7357",
+  "canonical_json_serialization_sha256": "f1e8d8c3a5ab3a922a08cdef918c3ccc4b85d2465491dab72c3d3b1f5f4f7357",
+  "legacy_hash_reproduced": true,
+  "legacy_match_operation": "crlf",
+  "semantic_json_equal_after_newline_conversion": true,
+  "current_encoding": "utf-8-no-bom",
+  "current_crlf_count": 0,
+  "current_lf_count": 1493,
+  "hash_generator": "scripts/review_evidence_qa_dev_citations_v1.py",
+  "hash_validator": "scripts/review_evidence_qa_dev_citations_v1.py",
+  "legacy_hash_mode": "binary read_bytes raw SHA-256",
+  "legacy_default_encoding_dependency": false,
+  "legacy_newline_dependency": true,
+  "legacy_json_canonical_serialization": false,
+  "git": {
+    "core_autocrlf": "false",
+    "core_eol": "unset",
+    "attributes": "\"data\\\\evaluation\\\\evidence-qa-dev-v1.json\": text: auto\n\"data\\\\evaluation\\\\evidence-qa-dev-v1.json\": eol: lf",
+    "ls_files_eol": "i/lf    w/lf    attr/text=auto eol=lf \tdata/evaluation/evidence-qa-dev-v1.json"
+  },
+  "root_cause": "The historical review captured CRLF raw bytes. The checkout uses LF bytes. JSON values are identical, but raw byte SHA-256 is platform-sensitive."
+}

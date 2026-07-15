@@ -12,6 +12,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from paper_research.evaluation.canonical_hash import (
+    SOURCE_HASH_SCHEMA_VERSION,
+    hash_with_metadata,
+    verify_legacy_raw_hash,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/evaluation"
 DOCS = ROOT / "docs"
@@ -36,6 +42,12 @@ HUMAN_FIELDS = {
     "review_notes",
     "human_reviewer",
     "human_reviewed_at",
+}
+SOURCE_SPECS = {
+    "evidence_corpus": (DATA / "evidence-corpus-v1.jsonl", "canonical_jsonl_v1"),
+    "gold_set": (DATA / "gold-set-v1.jsonl", "canonical_jsonl_v1"),
+    "retrieval_gold": (DATA / "retrieval-gold-v2.jsonl", "canonical_jsonl_v1"),
+    "dev_summary": (DATA / "evidence-qa-dev-v1.json", "canonical_json_v1"),
 }
 
 
@@ -69,6 +81,49 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def build_source_hashes() -> dict[str, Any]:
+    output: dict[str, Any] = {}
+    for name, (path, mode) in SOURCE_SPECS.items():
+        metadata = hash_with_metadata(path, mode)
+        output.update(
+            {
+                f"{name}_sha256": metadata["raw_value_at_review"],
+                f"{name}_canonical_sha256": metadata["value"],
+                f"{name}_hash_mode": metadata["mode"],
+                f"{name}_hash_schema_version": metadata["schema_version"],
+                f"{name}_raw_sha256_at_review": metadata["raw_value_at_review"],
+                f"{name}_legacy_raw_hash_verified_via_newline_normalization": False,
+            }
+        )
+    return output
+
+
+def validate_source_hashes(recorded: dict[str, Any]) -> None:
+    for name, (path, expected_mode) in SOURCE_SPECS.items():
+        legacy = recorded.get(f"{name}_sha256")
+        raw_at_review = recorded.get(f"{name}_raw_sha256_at_review")
+        mode = recorded.get(f"{name}_hash_mode")
+        schema = recorded.get(f"{name}_hash_schema_version")
+        canonical = recorded.get(f"{name}_canonical_sha256")
+        if not all((legacy, raw_at_review, mode, schema, canonical)):
+            raise RuntimeError(f"incomplete source hash metadata: {name}")
+        if schema != SOURCE_HASH_SCHEMA_VERSION:
+            raise RuntimeError(f"unsupported source hash schema: {schema}")
+        if mode != expected_mode:
+            raise RuntimeError(f"unsupported source hash mode for {name}: {mode}")
+        current = hash_with_metadata(path, mode)
+        if canonical != current["value"]:
+            raise RuntimeError(f"canonical source hash invalid: {name}")
+        if legacy != raw_at_review:
+            raise RuntimeError(f"legacy/raw-at-review hash mismatch: {name}")
+        operation = verify_legacy_raw_hash(path, legacy)
+        migrated = recorded.get(
+            f"{name}_legacy_raw_hash_verified_via_newline_normalization"
+        )
+        if bool(migrated) != (operation != "raw"):
+            raise RuntimeError(f"legacy source hash migration evidence invalid: {name}")
+
+
 def source_record_hash(row: dict[str, Any]) -> str:
     source = {
         key: value
@@ -100,12 +155,7 @@ def prepare() -> dict[str, Any]:
     }
     by_block = {(row["paper_id"], row["block_id"]): row for row in evidence_rows}
     run_by_q = _run_by_question()
-    source_hashes = {
-        "evidence_corpus_sha256": sha256(DATA / "evidence-corpus-v1.jsonl"),
-        "gold_set_sha256": sha256(DATA / "gold-set-v1.jsonl"),
-        "retrieval_gold_sha256": sha256(DATA / "retrieval-gold-v2.jsonl"),
-        "dev_summary_sha256": sha256(DATA / "evidence-qa-dev-v1.json"),
-    }
+    source_hashes = build_source_hashes()
     changed = False
     for row in rows:
         triple = (
@@ -194,14 +244,7 @@ def validate(rows: list[dict[str, Any]]) -> None:
             raise RuntimeError(f"citation not allowed in original run: {triple}")
         if source_record_hash(row) != row["source_record_hash"]:
             raise RuntimeError(f"source record hash invalid: {row['sample_id']}")
-        current_hashes = {
-            "evidence_corpus_sha256": sha256(DATA / "evidence-corpus-v1.jsonl"),
-            "gold_set_sha256": sha256(DATA / "gold-set-v1.jsonl"),
-            "retrieval_gold_sha256": sha256(DATA / "retrieval-gold-v2.jsonl"),
-            "dev_summary_sha256": sha256(DATA / "evidence-qa-dev-v1.json"),
-        }
-        if row["source_hashes"] != current_hashes:
-            raise RuntimeError(f"source hashes invalid: {row['sample_id']}")
+        validate_source_hashes(row["source_hashes"])
 
 
 def review(args: argparse.Namespace) -> None:

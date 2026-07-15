@@ -1,0 +1,30 @@
+{
+  "schema_version": "stage13-review-hash-migration-v1",
+  "canonicalization_version": "canonical-hash-v1",
+  "source_hash_schema_version": "source-hash-v2",
+  "affected_records": 81,
+  "layers": {
+    "dev_v1_citation_audit": 24,
+    "dev_v2_citation_audit": 57
+  },
+  "legacy_raw_hashes_preserved": true,
+  "v1_source_operations": {
+    "evidence_corpus": "raw",
+    "gold_set": "raw",
+    "retrieval_gold": "raw",
+    "dev_summary": "crlf"
+  },
+  "v2_source_operation": "raw",
+  "legacy_dev_summary_raw_hash": "23126a87deb978216fe56bc8518e25d99fb8c9b2e461640ebe727c80ea73d170",
+  "current_dev_summary_raw_hash": "c2df9e5aee765159ecaf03956923d2c652758a95086be22ac878b24eef2109bd",
+  "dev_summary_canonical_hash": "f1e8d8c3a5ab3a922a08cdef918c3ccc4b85d2465491dab72c3d3b1f5f4f7357",
+  "legacy_raw_hash_verified_via_newline_normalization": true,
+  "semantic_content_unchanged": true,
+  "label_field_changes": 0,
+  "reviewer_field_changes": 0,
+  "immutable_non_hash_field_changes": 0,
+  "backups": [
+    "data/evaluation/evidence-qa-dev-citation-audit-v1.jsonl.pre-canonical-hash-migration.20260715T144416859313Z.bak",
+    "data/evaluation/evidence-qa-dev-v2-citation-audit-v1.jsonl.pre-canonical-hash-migration.20260715T144416859313Z.bak"
+  ]
+}
