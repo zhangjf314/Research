@@ -1,0 +1,195 @@
+{
+  "schema_version": "evidence-gap-taxonomy-v1",
+  "categories": {
+    "candidate_recall_failure": {
+      "definition": "Gold evidence is absent from the frozen candidate pool.",
+      "criteria": "No Gold block appears within candidate_pool_k after generic scoring.",
+      "observable_evidence": "gold_candidate_rank is null or exceeds candidate_pool_k.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "dense_rank_failure": {
+      "definition": "Dense ranking suppresses supporting evidence.",
+      "criteria": "Gold dense score/rank is materially worse than non-supporting candidates.",
+      "observable_evidence": "Requires a source trace containing dense_score; unavailable in the frozen Stage 13 trace.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "lexical_rank_failure": {
+      "definition": "Lexical ranking suppresses supporting evidence.",
+      "criteria": "Gold lexical score/rank is materially worse despite relevant terminology.",
+      "observable_evidence": "Requires a source trace containing lexical_score; unavailable in the frozen Stage 13 trace.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "fusion_rank_failure": {
+      "definition": "Gold evidence reaches the candidate pool but not final Top-10.",
+      "criteria": "Gold rank is within candidate_pool_k and greater than final context k.",
+      "observable_evidence": "Candidate and selected ranks from the deterministic replay.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "evidence_role_mismatch": {
+      "definition": "A supporting block is assigned an incompatible evidence role.",
+      "criteria": "Gold evidence roles do not intersect the routed required roles.",
+      "observable_evidence": "Gold evidence_roles and router profile filters.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "block_type_filter_error": {
+      "definition": "A supporting block is rejected by generic block/evidence eligibility.",
+      "criteria": "A Gold block exists but eligible_for_final_context is false.",
+      "observable_evidence": "Block type, evidence roles, and rejection reasons.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "section_rule_error": {
+      "definition": "Section compatibility rules incorrectly suppress supporting evidence.",
+      "criteria": "Gold is eligible but section scoring/caps exclude it.",
+      "observable_evidence": "Section title, section score, candidate rank, packing trace.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "context_budget_truncation": {
+      "definition": "Selected support is removed by the final token budget.",
+      "criteria": "Gold is selected before packing and appears in a truncation trace.",
+      "observable_evidence": "Pre-pack selection and context packing trace.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "page_hit_block_miss": {
+      "definition": "The context reaches a Gold page but not an exact Gold block.",
+      "criteria": "gold_page_available=true and exact_gold_block_available=false.",
+      "observable_evidence": "Selected pages and Gold pages/blocks.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "multi_block_evidence_required": {
+      "definition": "A claim requires a set of blocks rather than one block.",
+      "criteria": "No individual block directly supports the complete claim.",
+      "observable_evidence": "Claim text, Gold blocks, neighbors, and human source inspection.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": true,
+      "affects_production_metric": true
+    },
+    "gold_granularity_too_narrow": {
+      "definition": "Gold omits equivalent directly supporting evidence.",
+      "criteria": "Human review confirms a non-Gold block is equally valid support.",
+      "observable_evidence": "Gold, candidate, neighbor, and source comparison.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": true,
+      "affects_production_metric": true
+    },
+    "gold_granularity_too_broad": {
+      "definition": "A Gold block contains materially broader content than needed.",
+      "criteria": "Human review finds only a smaller span directly supports the claim.",
+      "observable_evidence": "Gold block and sentence-level source inspection.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": true,
+      "affects_production_metric": true
+    },
+    "equivalent_non_gold_evidence": {
+      "definition": "Selected non-Gold evidence directly supports the same claim.",
+      "criteria": "Human review confirms semantic and factual equivalence.",
+      "observable_evidence": "Selected text versus Gold and source context.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": true,
+      "affects_production_metric": true
+    },
+    "parsing_boundary_error": {
+      "definition": "Parsing split or merged source text across incorrect block boundaries.",
+      "criteria": "Direct support is fragmented, missing, or attached to a wrong page/block.",
+      "observable_evidence": "PDF/source comparison, block neighbors, unusually short fragments.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": true,
+      "affects_production_metric": true
+    },
+    "claim_role_unknown": {
+      "definition": "The derived claim role is unknown and uses the safe generic route.",
+      "criteria": "claim_role=unknown for relevant ClaimUnits.",
+      "observable_evidence": "ClaimUnit role and routing decision.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "query_formulation_failure": {
+      "definition": "The retrieval query lacks terms needed to locate support.",
+      "criteria": "Human review confirms the query under-specifies the evidence need.",
+      "observable_evidence": "Retrieval query, required claims, and candidate scores.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "multi_paper_allocation_failure": {
+      "definition": "Candidate or context allocation fails to preserve all target papers.",
+      "criteria": "A multi-paper query omits at least one required paper.",
+      "observable_evidence": "Target papers, selected paper distribution, per-paper ranks.",
+      "retrieval_implementation_issue": true,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "metric_exact_match_limitation": {
+      "definition": "Strict block identity misses valid evidence at another granularity.",
+      "criteria": "Human review confirms support while exact Gold block identity is absent.",
+      "observable_evidence": "Strict metric result and approved alternative evidence mapping.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    },
+    "unknown": {
+      "definition": "Available automatic evidence cannot determine a cause.",
+      "criteria": "No deterministic category is justified.",
+      "observable_evidence": "Incomplete or conflicting diagnostic signals.",
+      "retrieval_implementation_issue": false,
+      "automatic_fix_allowed": false,
+      "human_review_required": true,
+      "affects_gold": false,
+      "affects_production_metric": true
+    }
+  }
+}

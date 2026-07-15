@@ -1,0 +1,538 @@
+{
+  "schema_version": "claim-first-failure-audit-v1",
+  "current_exact_availability": 0.125,
+  "routed_exact_availability": 0.645833,
+  "selector_configuration": {
+    "minimum_score": 0.18,
+    "max_per_claim": 2
+  },
+  "context_configuration": {
+    "max_tokens": 3000,
+    "max_units_per_section": 3
+  },
+  "allocation_rows": [
+    {
+      "question_id": "q001",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 183
+    },
+    {
+      "question_id": "q002",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 285
+    },
+    {
+      "question_id": "q003",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 183
+    },
+    {
+      "question_id": "q004",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 285
+    },
+    {
+      "question_id": "q005",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 0,
+      "evidence_complete": false,
+      "unsupported_before_generation": true,
+      "missing_evidence_reason": "unanswerable_requires_refusal",
+      "truncated": false,
+      "context_tokens": 0
+    },
+    {
+      "question_id": "q006",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 117
+    },
+    {
+      "question_id": "q007",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 106
+    },
+    {
+      "question_id": "q008",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 90
+    },
+    {
+      "question_id": "q009",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 106
+    },
+    {
+      "question_id": "q010",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 185
+    },
+    {
+      "question_id": "q011",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 153
+    },
+    {
+      "question_id": "q012",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 214
+    },
+    {
+      "question_id": "q013",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 85
+    },
+    {
+      "question_id": "q014",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 142
+    },
+    {
+      "question_id": "q015",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 235
+    },
+    {
+      "question_id": "q016",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 152
+    },
+    {
+      "question_id": "q017",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 379
+    },
+    {
+      "question_id": "q018",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 34
+    },
+    {
+      "question_id": "q019",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 92
+    },
+    {
+      "question_id": "q020",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 379
+    },
+    {
+      "question_id": "q021",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 163
+    },
+    {
+      "question_id": "q022",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 711
+    },
+    {
+      "question_id": "q023",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 397
+    },
+    {
+      "question_id": "q024",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 222
+    },
+    {
+      "question_id": "q025",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 152
+    },
+    {
+      "question_id": "q026",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 37
+    },
+    {
+      "question_id": "q027",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 170
+    },
+    {
+      "question_id": "q028",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 131
+    },
+    {
+      "question_id": "q029",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 122
+    },
+    {
+      "question_id": "q030",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 0,
+      "evidence_complete": false,
+      "unsupported_before_generation": true,
+      "missing_evidence_reason": "unanswerable_requires_refusal",
+      "truncated": false,
+      "context_tokens": 0
+    },
+    {
+      "question_id": "q031",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 64
+    },
+    {
+      "question_id": "q032",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 336
+    },
+    {
+      "question_id": "q033",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 62
+    },
+    {
+      "question_id": "q034",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 305
+    },
+    {
+      "question_id": "q035",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 184
+    },
+    {
+      "question_id": "q036",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 188
+    },
+    {
+      "question_id": "q037",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 188
+    },
+    {
+      "question_id": "q038",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 256
+    },
+    {
+      "question_id": "q039",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 119
+    },
+    {
+      "question_id": "q040",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 188
+    },
+    {
+      "question_id": "q041",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 192
+    },
+    {
+      "question_id": "q042",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 393
+    },
+    {
+      "question_id": "q043",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 281
+    },
+    {
+      "question_id": "q044",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 145
+    },
+    {
+      "question_id": "q045",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 60
+    },
+    {
+      "question_id": "q046",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 260
+    },
+    {
+      "question_id": "q047",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 92
+    },
+    {
+      "question_id": "q048",
+      "candidate_pool_size": 40,
+      "selected_evidence_count": 1,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 61
+    },
+    {
+      "question_id": "q049",
+      "candidate_pool_size": 60,
+      "selected_evidence_count": 2,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 376
+    },
+    {
+      "question_id": "q050",
+      "candidate_pool_size": 60,
+      "selected_evidence_count": 2,
+      "evidence_complete": true,
+      "unsupported_before_generation": false,
+      "missing_evidence_reason": null,
+      "truncated": false,
+      "context_tokens": 463
+    }
+  ],
+  "analysis": {
+    "candidate_pool_sizes": {
+      "40": 48,
+      "60": 2
+    },
+    "evidence_completeness_threshold": "minimum_score=0.18 plus role/paper constraints",
+    "minimum_evidence_set_size": "1 normally; 2 when multi_block_required; target-paper count for multi-paper",
+    "token_budget_too_small": false,
+    "truncated_question_count": 0,
+    "unknown_claim_role_total": 63,
+    "unknown_claim_role_pilot_coverage": 18,
+    "automatic_required_roles_risk": "Selection uses one query-derived ClaimUnit; automatically inferred roles may reject complete support.",
+    "gold_candidate_presence": "Audited separately in evidence-gap-cases-v1; Gold is evaluation-only.",
+    "selector_rejection_risk": "max_per_claim=2 and minimum_score can reduce Top-10 routed context to one or two units.",
+    "multi_claim_budget_fragmentation": "Not exercised by Stage 13 formal selection: it uses one query-derived selection claim per question.",
+    "primary_failure": "Aggressive selector compression: a maximum of two units from the routed pool lowered exact availability from 0.645833 to 0.125.",
+    "multi_paper_allocation_risk": "Per-paper quota can consume the two-unit maximum and leave no redundancy within a paper.",
+    "related_vs_complete_support_risk": "Score threshold establishes relevance, not human-validated complete support.",
+    "human_mapping_impact": "All 146 claim-evidence mappings are pending, so formal claim completeness cannot yet be measured."
+  },
+  "gold_used_for_selection": false,
+  "approved_pilot_count": 0,
+  "claim_level_metrics_status": "unavailable_until_pilot_review"
+}
