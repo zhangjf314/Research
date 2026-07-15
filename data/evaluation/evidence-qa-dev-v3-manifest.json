@@ -1,0 +1,71 @@
+{
+  "schema_version": "evidence-qa-dev-v3-manifest-v1",
+  "evaluation_version": "evidence-qa-dev-v3",
+  "manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "question_ids": [
+    "q001",
+    "q002",
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "question_count": 10,
+  "configuration": {
+    "retrieval": "adjacent_same_page_completion",
+    "prompt": "qa-required-claims-citation-id-v3",
+    "citation_protocol": "citation-id-v2",
+    "required_claim_protocol": "required-claim-slots-v1",
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "temperature": 0,
+    "reranker_enabled": false,
+    "retries": 0,
+    "citation_retries": 0,
+    "billing_mode": "free"
+  },
+  "selection": {
+    "same_fixed_stage13_dev_questions": true,
+    "questions_reselected": false,
+    "gold_used_for_evidence_selection": false,
+    "oracle_used_for_evidence_selection": false,
+    "human_pilot_used_for_evidence_selection": false
+  },
+  "engineering_gate_frozen": {
+    "run_directories": "10/10",
+    "schema_success_min": 0.9,
+    "provider_client_completion_min": 0.9,
+    "usage_persisted_before_parse": true,
+    "required_claim_slots_complete": true,
+    "silent_omission_rate": 0,
+    "strict_citation_validation": true
+  },
+  "quality_candidate_gate_frozen": {
+    "required_claim_coverage_strictly_greater_than": 0.592593,
+    "exact_citation_precision_min": 0.181731,
+    "citation_recall_min": 0.295833,
+    "unsupported_claim_rate_strictly_less_than": 0.8,
+    "refusal_accuracy": 1.0,
+    "unknown_citation_id_rate": 0,
+    "invalid_citation_rate": 0,
+    "silent_omission_rate": 0,
+    "non_regressed_questions_min": 6,
+    "improved_questions_greater_than_regressed": true,
+    "claim_coverage_improved_questions_min": 3,
+    "gain_focus_questions_improved_min": 2,
+    "gain_focus_questions": [
+      "q002",
+      "q007",
+      "q013",
+      "q050"
+    ],
+    "no_unsupported_label_gaming": true,
+    "latency_and_tokens_bounded": true,
+    "not_single_question_driven": true
+  },
+  "protocol_hash": "ba7a8d5a132ca6c201e835ed2f66583f91598a0d2c1c6c1c0920185714502552"
+}

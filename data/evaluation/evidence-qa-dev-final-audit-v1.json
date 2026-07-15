@@ -1,0 +1,29 @@
+{
+  "schema_version": "evidence-qa-dev-final-audit-v1",
+  "checks": {
+    "manifest_fixed_10": true,
+    "manifest_hash_valid": true,
+    "manifest_matches_summary": true,
+    "historical_baseline_reused": true,
+    "variant_c_blocked_known_defect": true,
+    "run_count_10": true,
+    "request_ledger_complete": true,
+    "usage_valid": true,
+    "active_reservations_zero": false,
+    "strict_citation_triples": true,
+    "reranker_disabled": true,
+    "no_gold_leakage": true,
+    "no_oracle_leakage": true,
+    "no_pilot_selection_injection": true,
+    "human_audit_pending": true,
+    "full_qa_not_run": true,
+    "deep_research_not_run": true
+  },
+  "dev_engineering_gate": false,
+  "dev_quality_candidate_gate": false,
+  "ready_for_full_qa": false,
+  "human_citation_quality_gate": "pending",
+  "full_qa_run": false,
+  "production_ready": false,
+  "v1_0_status": "not_satisfied"
+}

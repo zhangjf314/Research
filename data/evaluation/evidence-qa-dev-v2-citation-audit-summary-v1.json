@@ -1,0 +1,710 @@
+{
+  "schema_version": "evidence-qa-dev-v2-citation-audit-summary-v1",
+  "review_type": "AI-assisted manual audit",
+  "total": 57,
+  "reviewed": 57,
+  "n": 57,
+  "labels": {
+    "fully_supported": 35,
+    "partially_supported": 17,
+    "related_but_insufficient": 3,
+    "unsupported": 2,
+    "gold_annotation_too_narrow": 0,
+    "ambiguous_claim": 0,
+    "malformed_evidence": 0
+  },
+  "strict_support_rate": 0.614035,
+  "lenient_support_rate": 0.912281,
+  "strata": {
+    "exact_gold": {
+      "n": 9,
+      "labels": {
+        "fully_supported": 6,
+        "partially_supported": 3,
+        "related_but_insufficient": 0,
+        "unsupported": 0,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.666667,
+      "lenient_support_rate": 1.0
+    },
+    "same_page_non_exact": {
+      "n": 8,
+      "labels": {
+        "fully_supported": 2,
+        "partially_supported": 4,
+        "related_but_insufficient": 1,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.25,
+      "lenient_support_rate": 0.75
+    },
+    "semantic_support_signal": {
+      "n": 42,
+      "labels": {
+        "fully_supported": 34,
+        "partially_supported": 6,
+        "related_but_insufficient": 1,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.809524,
+      "lenient_support_rate": 0.952381
+    },
+    "automated_unsupported_signal": {
+      "n": 40,
+      "labels": {
+        "fully_supported": 27,
+        "partially_supported": 10,
+        "related_but_insufficient": 2,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.675,
+      "lenient_support_rate": 0.925
+    },
+    "evidence_source": {
+      "adjacent_completion": {
+        "n": 14,
+        "labels": {
+          "fully_supported": 5,
+          "partially_supported": 8,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.357143,
+        "lenient_support_rate": 0.928571
+      },
+      "original_selected": {
+        "n": 43,
+        "labels": {
+          "fully_supported": 30,
+          "partially_supported": 9,
+          "related_but_insufficient": 2,
+          "unsupported": 2,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.697674,
+        "lenient_support_rate": 0.906977
+      }
+    },
+    "question_id": {
+      "q001": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.4,
+        "lenient_support_rate": 1.0
+      },
+      "q002": {
+        "n": 13,
+        "labels": {
+          "fully_supported": 11,
+          "partially_supported": 2,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.846154,
+        "lenient_support_rate": 1.0
+      },
+      "q004": {
+        "n": 15,
+        "labels": {
+          "fully_supported": 15,
+          "partially_supported": 0,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "q007": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 3,
+          "partially_supported": 1,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.6,
+        "lenient_support_rate": 0.8
+      },
+      "q008": {
+        "n": 2,
+        "labels": {
+          "fully_supported": 0,
+          "partially_supported": 2,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "q013": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 0,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.666667,
+        "lenient_support_rate": 0.666667
+      },
+      "q015": {
+        "n": 4,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 0,
+          "related_but_insufficient": 1,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.5,
+        "lenient_support_rate": 0.5
+      },
+      "q019": {
+        "n": 10,
+        "labels": {
+          "fully_supported": 0,
+          "partially_supported": 9,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.9
+      }
+    },
+    "category": {
+      "algorithm_steps": {
+        "n": 2,
+        "labels": {
+          "fully_supported": 0,
+          "partially_supported": 2,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "experiment_results": {
+        "n": 10,
+        "labels": {
+          "fully_supported": 0,
+          "partially_supported": 9,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.9
+      },
+      "experiment_setup": {
+        "n": 15,
+        "labels": {
+          "fully_supported": 15,
+          "partially_supported": 0,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "limitations": {
+        "n": 4,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 0,
+          "related_but_insufficient": 1,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.5,
+        "lenient_support_rate": 0.5
+      },
+      "method": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 0,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.666667,
+        "lenient_support_rate": 0.666667
+      },
+      "paper_contributions": {
+        "n": 18,
+        "labels": {
+          "fully_supported": 14,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.777778,
+        "lenient_support_rate": 0.944444
+      },
+      "research_background": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.4,
+        "lenient_support_rate": 1.0
+      }
+    },
+    "difficulty": {
+      "easy": {
+        "n": 18,
+        "labels": {
+          "fully_supported": 13,
+          "partially_supported": 4,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.722222,
+        "lenient_support_rate": 0.944444
+      },
+      "hard": {
+        "n": 34,
+        "labels": {
+          "fully_supported": 20,
+          "partially_supported": 10,
+          "related_but_insufficient": 2,
+          "unsupported": 2,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.588235,
+        "lenient_support_rate": 0.882353
+      },
+      "medium": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.4,
+        "lenient_support_rate": 1.0
+      }
+    },
+    "block_type": {
+      "paragraph": {
+        "n": 57,
+        "labels": {
+          "fully_supported": 35,
+          "partially_supported": 17,
+          "related_but_insufficient": 3,
+          "unsupported": 2,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.614035,
+        "lenient_support_rate": 0.912281
+      }
+    },
+    "claim_role": {
+      "compare": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 0,
+          "related_but_insufficient": 1,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.333333,
+        "lenient_support_rate": 0.333333
+      },
+      "explain_method": {
+        "n": 18,
+        "labels": {
+          "fully_supported": 12,
+          "partially_supported": 5,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.666667,
+        "lenient_support_rate": 0.944444
+      },
+      "report_result": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 0,
+          "partially_supported": 1,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "unknown": {
+        "n": 35,
+        "labels": {
+          "fully_supported": 22,
+          "partially_supported": 11,
+          "related_but_insufficient": 2,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.628571,
+        "lenient_support_rate": 0.942857
+      }
+    },
+    "evidence_role": {
+      "assumption": {
+        "n": 2,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 0,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.5,
+        "lenient_support_rate": 0.5
+      },
+      "comparison": {
+        "n": 9,
+        "labels": {
+          "fully_supported": 4,
+          "partially_supported": 4,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.444444,
+        "lenient_support_rate": 0.888889
+      },
+      "conclusion": {
+        "n": 15,
+        "labels": {
+          "fully_supported": 14,
+          "partially_supported": 1,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.933333,
+        "lenient_support_rate": 1.0
+      },
+      "dataset": {
+        "n": 10,
+        "labels": {
+          "fully_supported": 7,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.7,
+        "lenient_support_rate": 1.0
+      },
+      "definition": {
+        "n": 6,
+        "labels": {
+          "fully_supported": 4,
+          "partially_supported": 1,
+          "related_but_insufficient": 1,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.666667,
+        "lenient_support_rate": 0.833333
+      },
+      "limitation": {
+        "n": 21,
+        "labels": {
+          "fully_supported": 17,
+          "partially_supported": 3,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.809524,
+        "lenient_support_rate": 0.952381
+      },
+      "mechanism": {
+        "n": 27,
+        "labels": {
+          "fully_supported": 21,
+          "partially_supported": 5,
+          "related_but_insufficient": 0,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.777778,
+        "lenient_support_rate": 0.962963
+      },
+      "method": {
+        "n": 30,
+        "labels": {
+          "fully_supported": 22,
+          "partially_supported": 6,
+          "related_but_insufficient": 1,
+          "unsupported": 1,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.733333,
+        "lenient_support_rate": 0.933333
+      },
+      "metric": {
+        "n": 15,
+        "labels": {
+          "fully_supported": 14,
+          "partially_supported": 1,
+          "related_but_insufficient": 0,
+          "unsupported": 0,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.933333,
+        "lenient_support_rate": 1.0
+      },
+      "result": {
+        "n": 29,
+        "labels": {
+          "fully_supported": 18,
+          "partially_supported": 8,
+          "related_but_insufficient": 1,
+          "unsupported": 2,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.62069,
+        "lenient_support_rate": 0.896552
+      },
+      "setup": {
+        "n": 33,
+        "labels": {
+          "fully_supported": 23,
+          "partially_supported": 6,
+          "related_but_insufficient": 2,
+          "unsupported": 2,
+          "gold_annotation_too_narrow": 0,
+          "ambiguous_claim": 0,
+          "malformed_evidence": 0
+        },
+        "strict_support_rate": 0.69697,
+        "lenient_support_rate": 0.878788
+      }
+    },
+    "improved_questions": {
+      "n": 35,
+      "labels": {
+        "fully_supported": 16,
+        "partially_supported": 17,
+        "related_but_insufficient": 1,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.457143,
+      "lenient_support_rate": 0.942857
+    },
+    "regressed_questions": {
+      "n": 22,
+      "labels": {
+        "fully_supported": 19,
+        "partially_supported": 0,
+        "related_but_insufficient": 2,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.863636,
+      "lenient_support_rate": 0.863636
+    }
+  },
+  "focus_questions": {
+    "q002": {
+      "n": 13,
+      "labels": {
+        "fully_supported": 11,
+        "partially_supported": 2,
+        "related_but_insufficient": 0,
+        "unsupported": 0,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.846154,
+      "lenient_support_rate": 1.0
+    },
+    "q007": {
+      "n": 5,
+      "labels": {
+        "fully_supported": 3,
+        "partially_supported": 1,
+        "related_but_insufficient": 0,
+        "unsupported": 1,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.6,
+      "lenient_support_rate": 0.8
+    },
+    "q013": {
+      "n": 3,
+      "labels": {
+        "fully_supported": 2,
+        "partially_supported": 0,
+        "related_but_insufficient": 1,
+        "unsupported": 0,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": 0.666667,
+      "lenient_support_rate": 0.666667
+    },
+    "q050": {
+      "n": 0,
+      "labels": {
+        "fully_supported": 0,
+        "partially_supported": 0,
+        "related_but_insufficient": 0,
+        "unsupported": 0,
+        "gold_annotation_too_narrow": 0,
+        "ambiguous_claim": 0,
+        "malformed_evidence": 0
+      },
+      "strict_support_rate": null,
+      "lenient_support_rate": null
+    }
+  },
+  "q019_compound_claim": {
+    "n": 10,
+    "labels": {
+      "fully_supported": 0,
+      "partially_supported": 9,
+      "related_but_insufficient": 1,
+      "unsupported": 0,
+      "gold_annotation_too_narrow": 0,
+      "ambiguous_claim": 0,
+      "malformed_evidence": 0
+    },
+    "strict_support_rate": 0.0,
+    "lenient_support_rate": 0.9,
+    "single_citation_partially_supports_compound_claim": 9,
+    "interpretation": "q019 uses one compound generated claim with ten citations; nine citations support only part of that compound claim and one is related but insufficient."
+  },
+  "gold_annotation_too_narrow_present": false,
+  "malformed_evidence_present": false,
+  "comparison_to_dev_v1_audit": {
+    "dev_v1_samples": 24,
+    "dev_v1_strict": 0.625,
+    "dev_v1_lenient": 0.708333,
+    "direct_ab_comparison_valid": false
+  },
+  "limitations": [
+    "AI-assisted manual audit, not an independent human double-blind review.",
+    "Fixed 10-question Dev batch with 57 claim-citation pairs.",
+    "Cannot be extrapolated to Full-50 or production citation precision.",
+    "Dev v1 and Dev v2 audits differ in sample scale and generation protocol."
+  ]
+}

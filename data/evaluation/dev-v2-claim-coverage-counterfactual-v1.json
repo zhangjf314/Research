@@ -1,0 +1,486 @@
+{
+  "schema_version": "dev-v2-claim-coverage-counterfactual-v1",
+  "live_llm_calls": 0,
+  "embedding_api_calls": 0,
+  "historical_runs_modified": false,
+  "parser_replay": {
+    "valid_raw_responses": 9,
+    "strict_failures": [
+      {
+        "question_id": "q050",
+        "error": "JSONDecodeError: Unterminated string starting at: line 1 column 9482 (char 9481)"
+      }
+    ],
+    "claims_preserved": 40,
+    "diagnostic_salvage_only": [
+      "q050"
+    ]
+  },
+  "matcher_replay": {
+    "required_claim_count": 27,
+    "original_coverage": 0.5185185185185185,
+    "exact_normalized_coverage": 0.0,
+    "token_overlap_0_35_coverage": 0.5185185185185185,
+    "lexical_entailment_0_25_candidate_coverage": 0.6666666666666666,
+    "one_generated_claim_to_multiple_required_claims_candidate_coverage": 0.6666666666666666,
+    "new_candidate_matches": 4,
+    "possible_false_positive_claim_ids": [
+      "cl-q001-c41ea3191cab92907d83",
+      "cl-q002-3cab1a55474dcd47a64a",
+      "cl-q004-ba317f113c67f72f7260",
+      "cl-q015-281a83daa0567f6ae7ac"
+    ],
+    "human_adjudication_required": true
+  },
+  "context_budget_replay": {
+    "q001": {
+      "current": {
+        "selected_blocks": 17,
+        "token_count": 1122,
+        "gold_blocks_available": 2,
+        "gold_block_recall": 0.6666666666666666,
+        "adjacent_blocks": 7
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 911,
+        "gold_blocks_available": 2,
+        "gold_block_recall": 0.6666666666666666,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 17,
+        "token_count": 1122,
+        "gold_blocks_available": 2,
+        "gold_block_recall": 0.6666666666666666,
+        "adjacent_blocks": 7
+      }
+    },
+    "q002": {
+      "current": {
+        "selected_blocks": 19,
+        "token_count": 1226,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 1.0,
+        "adjacent_blocks": 9
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 763,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 16,
+        "token_count": 1001,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 6
+      }
+    },
+    "q004": {
+      "current": {
+        "selected_blocks": 17,
+        "token_count": 1029,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.2,
+        "adjacent_blocks": 7
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 777,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.2,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 17,
+        "token_count": 1029,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.2,
+        "adjacent_blocks": 7
+      }
+    },
+    "q005": {
+      "current": {
+        "selected_blocks": 14,
+        "token_count": 866,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 4
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 794,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 14,
+        "token_count": 866,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 4
+      }
+    },
+    "q007": {
+      "current": {
+        "selected_blocks": 15,
+        "token_count": 1199,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 5
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 901,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 15,
+        "token_count": 1199,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 5
+      }
+    },
+    "q008": {
+      "current": {
+        "selected_blocks": 18,
+        "token_count": 1123,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 8
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 750,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 16,
+        "token_count": 980,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 6
+      }
+    },
+    "q013": {
+      "current": {
+        "selected_blocks": 20,
+        "token_count": 2029,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 10
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 1335,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 18,
+        "token_count": 1757,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.25,
+        "adjacent_blocks": 8
+      }
+    },
+    "q015": {
+      "current": {
+        "selected_blocks": 20,
+        "token_count": 1613,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 10
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 1382,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 20,
+        "token_count": 1613,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 10
+      }
+    },
+    "q019": {
+      "current": {
+        "selected_blocks": 15,
+        "token_count": 1237,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 5
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 946,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 15,
+        "token_count": 1237,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 5
+      }
+    },
+    "q050": {
+      "current": {
+        "selected_blocks": 17,
+        "token_count": 1236,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.2,
+        "adjacent_blocks": 7
+      },
+      "remove_weak_adjacent": {
+        "selected_blocks": 10,
+        "token_count": 814,
+        "gold_blocks_available": 0,
+        "gold_block_recall": 0.0,
+        "adjacent_blocks": 0
+      },
+      "cap_adjacent_25pct": {
+        "selected_blocks": 13,
+        "token_count": 1065,
+        "gold_blocks_available": 1,
+        "gold_block_recall": 0.2,
+        "adjacent_blocks": 3
+      }
+    }
+  },
+  "coverage_failure_stage_distribution": {
+    "covered": 14,
+    "malformed_json": 3,
+    "model_omitted_claim": 3,
+    "required_claim_matching_failure": 3,
+    "retrieval_ranked_out": 4
+  },
+  "per_question": {
+    "q001": {
+      "required": 3,
+      "covered": 1,
+      "omitted": 1,
+      "merged": 1
+    },
+    "q002": {
+      "required": 3,
+      "covered": 2,
+      "omitted": 0,
+      "merged": 1
+    },
+    "q004": {
+      "required": 3,
+      "covered": 2,
+      "omitted": 0,
+      "merged": 1
+    },
+    "q005": {
+      "required": 0,
+      "covered": 0,
+      "omitted": 0,
+      "merged": 0
+    },
+    "q007": {
+      "required": 3,
+      "covered": 3,
+      "omitted": 0,
+      "merged": 0
+    },
+    "q008": {
+      "required": 3,
+      "covered": 3,
+      "omitted": 0,
+      "merged": 0
+    },
+    "q013": {
+      "required": 3,
+      "covered": 1,
+      "omitted": 2,
+      "merged": 0
+    },
+    "q015": {
+      "required": 3,
+      "covered": 0,
+      "omitted": 3,
+      "merged": 0
+    },
+    "q019": {
+      "required": 3,
+      "covered": 2,
+      "omitted": 1,
+      "merged": 0
+    },
+    "q050": {
+      "required": 3,
+      "covered": 0,
+      "omitted": 3,
+      "merged": 0
+    }
+  },
+  "prompt_v2_audit": {
+    "required_claims_explicitly_enumerated": false,
+    "claim_evidence_one_to_one": false,
+    "model_infers_claims": true,
+    "silent_omission_risk": true,
+    "max_output_tokens": 2048,
+    "short_answer_bias_risk": true
+  },
+  "fix_candidates": [
+    {
+      "name": "required_claim_checklist_and_slots",
+      "hypothesis": "Explicit slots prevent silent omission.",
+      "observed_evidence": "v2 payload omits required claims; omitted claims exist despite available Gold blocks.",
+      "affected_questions": [
+        "q001",
+        "q013",
+        "q013",
+        "q015",
+        "q015",
+        "q015",
+        "q019",
+        "q050",
+        "q050",
+        "q050"
+      ],
+      "expected_benefit": "coverage omissions become explicit answered/unsupported outcomes",
+      "citation_risk": "low when IDs are claim-allocated",
+      "latency_token_impact": "moderate output increase proportional to required claim count",
+      "implementation_complexity": "medium",
+      "rollback": "retain citation-id-v2",
+      "whether_requires_new_llm_run": true
+    },
+    {
+      "name": "deterministic_matcher_adjudication",
+      "hypothesis": "Current 0.35 token threshold causes false negatives for paraphrases.",
+      "observed_evidence": [
+        "cl-q001-c41ea3191cab92907d83",
+        "cl-q002-3cab1a55474dcd47a64a",
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q015-281a83daa0567f6ae7ac"
+      ],
+      "affected_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q015"
+      ],
+      "expected_benefit": "recover diagnostic coverage without changing model output",
+      "citation_risk": "medium; requires human adjudication",
+      "latency_token_impact": "none",
+      "implementation_complexity": "low",
+      "rollback": "restore 0.35 matcher",
+      "whether_requires_new_llm_run": false
+    },
+    {
+      "name": "adjacent_token_cap_and_original_priority",
+      "hypothesis": "Cap weak adjacent evidence while retaining original evidence.",
+      "observed_evidence": "offline context token variants only; no model-quality claim",
+      "affected_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "expected_benefit": "lower context tokens with measured Gold availability",
+      "citation_risk": "must reject variants that reduce Gold recall",
+      "latency_token_impact": "reduced input tokens",
+      "implementation_complexity": "low",
+      "rollback": "current adjacent completion",
+      "whether_requires_new_llm_run": true
+    }
+  ],
+  "human_adjudication": {
+    "historical_formal_coverage": 0.5185185185185185,
+    "diagnostic_coverage": 0.5925925925925926,
+    "formal_metric_modified": false,
+    "failure_stage_after_review": {
+      "covered": 14,
+      "covered_after_human_matcher_adjudication": 2,
+      "false_positive": 1,
+      "malformed_json": 3,
+      "model_omitted_claim": 3,
+      "partial_match": 1,
+      "retrieval_ranked_out": 3
+    },
+    "matcher_candidates": {
+      "cl-q001-c41ea3191cab92907d83": {
+        "question_id": "q001",
+        "matcher_human_decision": "merged_claim_match",
+        "historical_formal_coverage_credit": 0,
+        "formal_coverage_credit": 1,
+        "diagnostic_partial_credit": 0.0,
+        "coverage_failure_stage_before_review": "required_claim_matching_failure",
+        "coverage_failure_stage_after_review": "covered_after_human_matcher_adjudication",
+        "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+        "reviewed_at": "2026-07-15T00:00:00Z",
+        "review_notes": "The generated claim's attention-only replacement of recurrent/convolutional models, together with its cited global-dependency evidence, substantively covers the required claim. Treat as a valid merged/paraphrased match rather than a lexical false negative."
+      },
+      "cl-q002-3cab1a55474dcd47a64a": {
+        "question_id": "q002",
+        "matcher_human_decision": "valid_match",
+        "historical_formal_coverage_credit": 0,
+        "formal_coverage_credit": 1,
+        "diagnostic_partial_credit": 0.0,
+        "coverage_failure_stage_before_review": "required_claim_matching_failure",
+        "coverage_failure_stage_after_review": "covered_after_human_matcher_adjudication",
+        "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+        "reviewed_at": "2026-07-15T00:00:00Z",
+        "review_notes": "The generated statement that the Transformer is based solely on attention is a direct semantic match for relying on attention to draw dependencies; the lower token overlap is a matcher false negative."
+      },
+      "cl-q004-ba317f113c67f72f7260": {
+        "question_id": "q004",
+        "matcher_human_decision": "partial_match",
+        "historical_formal_coverage_credit": 0,
+        "formal_coverage_credit": 0,
+        "diagnostic_partial_credit": 0.5,
+        "coverage_failure_stage_before_review": "required_claim_matching_failure",
+        "coverage_failure_stage_after_review": "partial_match",
+        "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+        "reviewed_at": "2026-07-15T00:00:00Z",
+        "review_notes": "The generated claim covers training on eight GPUs but omits the Adam schedule and warmup. It is not sufficient for formal full coverage of the conjunctive required claim."
+      },
+      "cl-q015-281a83daa0567f6ae7ac": {
+        "question_id": "q015",
+        "matcher_human_decision": "false_positive",
+        "historical_formal_coverage_credit": 0,
+        "formal_coverage_credit": 0,
+        "diagnostic_partial_credit": 0.0,
+        "coverage_failure_stage_before_review": "retrieval_ranked_out",
+        "coverage_failure_stage_after_review": "false_positive",
+        "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+        "reviewed_at": "2026-07-15T00:00:00Z",
+        "review_notes": "A claim about leaving architectural ablations to future work does not express that the paper is primarily a survey/exploration rather than a new-method proposal. The lexical candidate is a false positive."
+      }
+    },
+    "prompt_v3_implications": [
+      "Explicit required-claim slots are required to prevent silent omission.",
+      "Merged claims must still occupy each required-claim slot.",
+      "Partial matches cannot receive full coverage credit.",
+      "Matcher thresholds require auditable adjudication.",
+      "q050 malformed JSON remains an independent engineering failure.",
+      "Adjacent completion cannot be removed without evidence-loss checks."
+    ]
+  }
+}

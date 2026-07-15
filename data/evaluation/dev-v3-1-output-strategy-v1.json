@@ -1,0 +1,80 @@
+{
+  "schema_version": "dev-v3-1-output-strategy-v1",
+  "selected_strategy": "B",
+  "transport_constraint_mode": "provider_json_object_plus_strict_local_schema",
+  "response_format_mode": "json_object",
+  "formal_live_normalization_policy": "raw_schema_passed_only",
+  "diagnostic_normalization_policy": "single_exact_question_wrapper_unwrap_only; never formal",
+  "schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+  "prompt_hash": "071098990460a8fdffb9c9a168b13ebedcf3eced8bcea5ed3ac4bcd2db0f11bf",
+  "provider_capability_snapshot": {
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "supports_json_object": true,
+    "supports_json_schema": null,
+    "supports_tool_calling": null,
+    "supports_strict_schema": false,
+    "capability_source": "Stage 13.5 saved request configuration and 10/10 valid JSON responses; no official json_schema or tool-calling verification was performed",
+    "verified_at": "2026-07-15",
+    "verification_status": "verified",
+    "fallback_policy": "fail_closed"
+  },
+  "provider_capability_snapshot_hash": "000bf54a298e21db53f42419123a53f16a05c279f002d8336146175ac95e7a03",
+  "candidates": [
+    {
+      "id": "A",
+      "name": "prompt_only_strict_json",
+      "capability_prerequisite": "none",
+      "schema_guarantee": "none",
+      "citation_id_compatibility": true,
+      "required_claim_slot_guarantee": "none",
+      "provider_portability": "high",
+      "failure_modes": [
+        "wrapper",
+        "claim map",
+        "legacy fields"
+      ],
+      "token_overhead": "high examples",
+      "implementation_work": "prompt update",
+      "rollback": "use v3",
+      "selected": false,
+      "selection_reason": "Stage 13.5 showed prompt-only reliability is inadequate"
+    },
+    {
+      "id": "B",
+      "name": "provider_native_json_object",
+      "capability_prerequisite": "verified supports_json_object",
+      "schema_guarantee": "valid JSON only; strict local validator remains mandatory",
+      "citation_id_compatibility": true,
+      "required_claim_slot_guarantee": "local validator only",
+      "provider_portability": "medium",
+      "failure_modes": [
+        "valid JSON with wrong schema"
+      ],
+      "token_overhead": "moderate",
+      "implementation_work": "v3.1 prompt + persisted response_format snapshot",
+      "rollback": "disable v3.1 evaluation",
+      "selected": true,
+      "selection_reason": "json_object is the only transport capability evidenced by Stage 13.5; stronger modes are unverified"
+    },
+    {
+      "id": "C",
+      "name": "provider_native_json_schema_or_tool",
+      "capability_prerequisite": "verified json_schema or tool calling",
+      "schema_guarantee": "potentially strong",
+      "citation_id_compatibility": true,
+      "required_claim_slot_guarantee": "potentially strong",
+      "provider_portability": "low",
+      "failure_modes": [
+        "unsupported or ignored provider parameter"
+      ],
+      "token_overhead": "schema payload",
+      "implementation_work": "adapter capability verification",
+      "rollback": "B",
+      "selected": false,
+      "selection_reason": "not verified for current provider/model"
+    }
+  ],
+  "quality_gates_unchanged": true,
+  "dev_v3_1_live_authorized": false
+}

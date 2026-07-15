@@ -1,0 +1,3 @@
+# qa-required-claims-citation-id-v3 (offline draft)
+
+Each input required claim has `required_claim_id`, `claim_text`, `evidence_complete`, and claim-local `allowed_citation_ids`. Every answerable output must contain exactly one slot per required claim with `status=answered|unsupported|not_applicable`, `claim_text`, `citation_ids`, and `omission_reason`. Answered slots require claim-local citations; unsupported/not-applicable slots forbid citations and require a reason. Unknown IDs, cross-claim borrowing, missing slots, and malformed JSON fail strictly. Unanswerable output requires `answerable=false`, `claims=[]`, and a refusal reason. Output budget should scale deterministically with required-claim count; no live run is authorized in Stage 13.4 Phase A.

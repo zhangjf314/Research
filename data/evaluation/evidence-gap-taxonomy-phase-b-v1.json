@@ -1,0 +1,32 @@
+{
+  "schema_version": "evidence-gap-taxonomy-phase-b-v1",
+  "source": "human-reviewed evidence-gap-cases-v1",
+  "gap_count": 17,
+  "human_failure_categories": {
+    "page_hit_block_miss": 6,
+    "block_type_filter_error": 6,
+    "fusion_rank_failure": 4,
+    "parsing_boundary_error": 1
+  },
+  "initial_failure_categories": {
+    "fusion_rank_failure": 8,
+    "block_type_filter_error": 7,
+    "page_hit_block_miss": 2
+  },
+  "selected_support": {
+    "partially_supported": 14,
+    "unsupported": 3
+  },
+  "issue_classes": {
+    "retrieval_implementation": 16,
+    "mixed": 1
+  },
+  "gold_too_broad": 5,
+  "equivalent_non_gold": 11,
+  "phase_b_rule": {
+    "name": "adjacent_same_page_completion",
+    "rationale": "Human review found page-hit/block-miss, parsing-boundary, and partially supported selected evidence patterns. The rule keeps the frozen routed ranking and adds immediate same-page neighbors around high-ranked selected evidence without reading Gold labels.",
+    "uses_gold_for_selection": false,
+    "uses_human_pilot_for_selection": false
+  }
+}

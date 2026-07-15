@@ -1,0 +1,71 @@
+{
+  "schema_version": "dev-v2-claim-coverage-human-adjudication-v1",
+  "historical_formal_dev_v2": {
+    "covered": 14,
+    "required": 27,
+    "rate": 0.518519,
+    "historical_metric_modified": false
+  },
+  "human_adjudicated_diagnostic": {
+    "covered": 16,
+    "required": 27,
+    "rate": 0.592593,
+    "diagnostic_only": true
+  },
+  "matcher_candidates": {
+    "cl-q001-c41ea3191cab92907d83": {
+      "question_id": "q001",
+      "matcher_human_decision": "merged_claim_match",
+      "historical_formal_coverage_credit": 0,
+      "formal_coverage_credit": 1,
+      "diagnostic_partial_credit": 0.0,
+      "coverage_failure_stage_before_review": "required_claim_matching_failure",
+      "coverage_failure_stage_after_review": "covered_after_human_matcher_adjudication",
+      "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+      "reviewed_at": "2026-07-15T00:00:00Z",
+      "review_notes": "The generated claim's attention-only replacement of recurrent/convolutional models, together with its cited global-dependency evidence, substantively covers the required claim. Treat as a valid merged/paraphrased match rather than a lexical false negative."
+    },
+    "cl-q002-3cab1a55474dcd47a64a": {
+      "question_id": "q002",
+      "matcher_human_decision": "valid_match",
+      "historical_formal_coverage_credit": 0,
+      "formal_coverage_credit": 1,
+      "diagnostic_partial_credit": 0.0,
+      "coverage_failure_stage_before_review": "required_claim_matching_failure",
+      "coverage_failure_stage_after_review": "covered_after_human_matcher_adjudication",
+      "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+      "reviewed_at": "2026-07-15T00:00:00Z",
+      "review_notes": "The generated statement that the Transformer is based solely on attention is a direct semantic match for relying on attention to draw dependencies; the lower token overlap is a matcher false negative."
+    },
+    "cl-q004-ba317f113c67f72f7260": {
+      "question_id": "q004",
+      "matcher_human_decision": "partial_match",
+      "historical_formal_coverage_credit": 0,
+      "formal_coverage_credit": 0,
+      "diagnostic_partial_credit": 0.5,
+      "coverage_failure_stage_before_review": "required_claim_matching_failure",
+      "coverage_failure_stage_after_review": "partial_match",
+      "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+      "reviewed_at": "2026-07-15T00:00:00Z",
+      "review_notes": "The generated claim covers training on eight GPUs but omits the Adam schedule and warmup. It is not sufficient for formal full coverage of the conjunctive required claim."
+    },
+    "cl-q015-281a83daa0567f6ae7ac": {
+      "question_id": "q015",
+      "matcher_human_decision": "false_positive",
+      "historical_formal_coverage_credit": 0,
+      "formal_coverage_credit": 0,
+      "diagnostic_partial_credit": 0.0,
+      "coverage_failure_stage_before_review": "retrieval_ranked_out",
+      "coverage_failure_stage_after_review": "false_positive",
+      "reviewer": "OpenAI GPT-5.6 Thinking (AI-assisted manual citation audit)",
+      "reviewed_at": "2026-07-15T00:00:00Z",
+      "review_notes": "A claim about leaving architectural ablations to future work does not express that the paper is primarily a survey/exploration rather than a new-method proposal. The lexical candidate is a false positive."
+    }
+  },
+  "review_type": "AI-assisted manual audit",
+  "limitations": [
+    "The diagnostic rate does not replace the historical formal Dev v2 metric.",
+    "It does not show that prompt v2 solved silent claim omission.",
+    "It cannot be extrapolated to Full-50 or production."
+  ]
+}

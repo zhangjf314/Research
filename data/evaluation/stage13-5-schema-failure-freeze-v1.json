@@ -1,0 +1,300 @@
+{
+  "schema_version": "stage13-5-schema-failure-freeze-v1",
+  "freeze_signature": "23fc58893007109504253ffe0f4ded3d447ab8165154d9f32e713d1cba792ecd",
+  "record_count": 10,
+  "official_schema_success": 0,
+  "official_required_claim_coverage": {
+    "numerator": 0,
+    "denominator": 27
+  },
+  "records": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v3-q001-68e7f7e2981d",
+      "raw_response_hash": "c343522f4d9c2ef0d1408cd0106b74b7be9b35bcbc7fab15c28ad26ab3fe0956",
+      "provider_response_envelope_hash": "433e8ca96e87c4c01c4af2aca862bf8d0f5327e90a08e336219a5ff5c4442027",
+      "request_id": "live-dev-v3-q001-68e7f7e2981d:primary:1:8b1419cd36ac",
+      "usage": {
+        "input_tokens": 2276,
+        "output_tokens": 238,
+        "total_tokens": 2514,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "3e7eea6166aeb84390b826be6d915683dfcfc14738878be9319fadb84b39a6c9",
+      "required_claim_input_hash": "849bdce9003654c6d47d30ed4bf0e0d4128b737dce3a8eaac35ff6624f500d63",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq001\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q001-bc33bddd93356fc...E001', 'E003', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q001"
+      ],
+      "wrapper_shape": "q001",
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v3-q002-cc5a6ab58bc5",
+      "raw_response_hash": "9d053586de495632d87393cf6352f8f7601035b7c6de604232081ddb82ab3cf9",
+      "provider_response_envelope_hash": "8afe233dcf0cbcc8975a714e8e09ece11127fd9eca22233fcb76f1b2cd7713b3",
+      "request_id": "live-dev-v3-q002-cc5a6ab58bc5:primary:1:4342946da691",
+      "usage": {
+        "input_tokens": 2256,
+        "output_tokens": 196,
+        "total_tokens": 2452,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "3fe8aeecc4c77fc6cede5889b8a6c15df5d6e2ed306232b6f510ef96acfcce98",
+      "required_claim_input_hash": "58d6ede66e41904595f676b528231e5eb3fe0757f50286ca72d2b596bd8ee814",
+      "validation_error": "schema_validation_failure: 9 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncl-q002-023231b350a389faa754\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'answered', 'c...citation_ids': ['E001']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncl-q002-3cab1a55474dcd47a64a\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'unsupported',...ween input and output.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\ncl-q002-8a1d729edcaafb379a20\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'answered', 'c..._ids': ['E001', 'E005']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "cl-q002-023231b350a389faa754",
+        "cl-q002-3cab1a55474dcd47a64a",
+        "cl-q002-8a1d729edcaafb379a20"
+      ],
+      "wrapper_shape": null,
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v3-q004-2e3463912209",
+      "raw_response_hash": "a4ade99e36945da11c291d56a5587790ce40015c41bacff0e8d7bbb35365e517",
+      "provider_response_envelope_hash": "753b3a8cee43b5d8bdceb23952df30da3a2dfa539d5a893e425829bf719e478e",
+      "request_id": "live-dev-v3-q004-2e3463912209:primary:1:ff4da846ea3c",
+      "usage": {
+        "input_tokens": 2430,
+        "output_tokens": 268,
+        "total_tokens": 2698,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "b143d6200f6ace0b8b138e574c8140a2d43474ec563f8811297e43234ea6967d",
+      "required_claim_input_hash": "e1bc0cf836342f54ba403aff3acaccfa9cc3e623af8c055fa15f16eb980d72bc",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq004\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...], 'refusal_reason': ''}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q004"
+      ],
+      "wrapper_shape": "q004",
+      "contains_all_required_claim_ids": false,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v3-q005-2ffd240cc8bc",
+      "raw_response_hash": "ef920246943c85a579fa740489652f6fa57cd2ac99b7ab1df919f7b807b5311f",
+      "provider_response_envelope_hash": "1979fd90fdb29e7d2bcb09af0f86f9a773e3077ed2c63864eb6a1bb59e1679dd",
+      "request_id": "live-dev-v3-q005-2ffd240cc8bc:primary:1:cf579c219ecf",
+      "usage": {
+        "input_tokens": 320,
+        "output_tokens": 61,
+        "total_tokens": 381,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "b044ed612ffb2df766fe6a69b0fecac9377854d144a09b6c4eddb47734dcc388",
+      "required_claim_input_hash": "b6dc6d0dc1bc1481c8a9206c6658b6066852bcd689b7eab86cd8e44e9ea55d4a",
+      "validation_error": "schema_validation_failure: 4 validation errors for RequiredClaimsQAResponse\nrequired_claim_results\n  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nclaims\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "question_id",
+        "answerable",
+        "claims",
+        "refusal_reason"
+      ],
+      "wrapper_shape": null,
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": false,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v3-q007-67874fd91e94",
+      "raw_response_hash": "0b2ba9c9de0663ac88b5e92b2f9d4b416293575cdd2a69af7befb4fc55596256",
+      "provider_response_envelope_hash": "8fbef76960c0f6e3a8174bb6ad901d723c436252413223f5672237b51758a419",
+      "request_id": "live-dev-v3-q007-67874fd91e94:primary:1:66c200e05838",
+      "usage": {
+        "input_tokens": 2295,
+        "output_tokens": 239,
+        "total_tokens": 2534,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "dc28b601abb23e05b92cff0bf3cd34ac9ba8a0a5c551b368477b22a7ed4b3869",
+      "required_claim_input_hash": "d2a7333ac538589b15b9ae31744d4c725d1cef625d2e1543d4992eae4241c4fd",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq007\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q007-0dda2c31fef09b0...ids': ['E001', 'E003']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q007"
+      ],
+      "wrapper_shape": "q007",
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v3-q008-b5cf02e10d56",
+      "raw_response_hash": "20707192320dd059d4a12a8822bbe048361f22e28252c898ffaeac8023c6a181",
+      "provider_response_envelope_hash": "179a6deda3046a77b889b834cdca032a203aa2863e512cf5a17c953431acc439",
+      "request_id": "live-dev-v3-q008-b5cf02e10d56:primary:1:11048687df69",
+      "usage": {
+        "input_tokens": 2342,
+        "output_tokens": 212,
+        "total_tokens": 2554,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "c40cf4e22eaf564df3e966cc083f4595ea74b5469ffefa30b08927fe422b027e",
+      "required_claim_input_hash": "151f6fa67265cb807b4b5ad8168e761efc305550d6f493010335fd9531fef7a9",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq008\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q008-5fd8e23c8c06169...itation_ids': ['E012']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q008"
+      ],
+      "wrapper_shape": "q008",
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v3-q013-6a617b42645f",
+      "raw_response_hash": "e65e4c420ec8e0fa0356b2696fb8780cdb7e484c5c7e213b9cbdd99d467ab0d2",
+      "provider_response_envelope_hash": "692b3350fcb74e24141d12e4a542ab96c5bdb22b5633692ecfcf8d4cfb552d26",
+      "request_id": "live-dev-v3-q013-6a617b42645f:primary:1:bb2771fafed0",
+      "usage": {
+        "input_tokens": 2759,
+        "output_tokens": 258,
+        "total_tokens": 3017,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "a0273d7ce08bdb4fe54458e7f24a80f86e25ebef492d7140d1db0e659d996a8f",
+      "required_claim_input_hash": "c64a5ea8a5a8d1b4ebcba9b6eec79eafb44752eac48737eb13bb2c1f2c078a6b",
+      "validation_error": "schema_validation_failure: 5 validation errors for RequiredClaimsQAResponse\nrequired_claim_results\n  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nclaims\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'required_claim_id': 'c...itation_ids': ['E001']}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "question_id",
+        "claims",
+        "answerable"
+      ],
+      "wrapper_shape": null,
+      "contains_all_required_claim_ids": false,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v3-q015-db79b57d6a3d",
+      "raw_response_hash": "f478e2a4326dd1c6d5acc77b83ea5ada531789c4d354cb7b1ed981140fa9a575",
+      "provider_response_envelope_hash": "ba56a9a159ce6f5e0d30695665b144ef6c6ec82ce3aeb8221fbe6421f3aee79f",
+      "request_id": "live-dev-v3-q015-db79b57d6a3d:primary:1:ef9473fe6317",
+      "usage": {
+        "input_tokens": 2746,
+        "output_tokens": 270,
+        "total_tokens": 3016,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "ff4f89c3b81541fed10a76a872780f320a761a4a87d9d84262814e348307bc23",
+      "required_claim_input_hash": "5d5719e4a3293d33c205cda65f40f54a8f4cb8f801cb0a0bec3ec77af5e047f0",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq015\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...tation_ids': ['E006']}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q015"
+      ],
+      "wrapper_shape": "q015",
+      "contains_all_required_claim_ids": false,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v3-q019-c3ee95cba155",
+      "raw_response_hash": "26adf3d445309ec09f2c35e67bb251fcc6008f79bdffc7d1c0fe4ef23d3fdcb2",
+      "provider_response_envelope_hash": "47f54703fb27177c5a73f2e14c24b771f4eb25fa0fe8dd21742529e80cff9c63",
+      "request_id": "live-dev-v3-q019-c3ee95cba155:primary:1:7553f8c55771",
+      "usage": {
+        "input_tokens": 2208,
+        "output_tokens": 268,
+        "total_tokens": 2476,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "1658050303aa6d64d3e0bfffe003362662aa2b441d778e770661665c92862595",
+      "required_claim_input_hash": "1e479da1874fab2b6975ef0c37752c678f8490cf3f58aa153e76cb103d5a0079",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq019\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...], 'refusal_reason': ''}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q019"
+      ],
+      "wrapper_shape": "q019",
+      "contains_all_required_claim_ids": false,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v3-q050-95824e0fc594",
+      "raw_response_hash": "ee0e159ae791b34675044fb323e806a832310837879836dfe9fa0cd06945a60a",
+      "provider_response_envelope_hash": "32a43d2fe1f08ccca25baf67339ca650b6b86561aee562188098e29cee5338de",
+      "request_id": "live-dev-v3-q050-95824e0fc594:primary:1:638ceeeab75e",
+      "usage": {
+        "input_tokens": 2481,
+        "output_tokens": 246,
+        "total_tokens": 2727,
+        "usage_source": "provider_reported",
+        "monetary_cost_usd": "0",
+        "cost_basis": "explicit_free_provider"
+      },
+      "registry_hash": "e5b301cba81f398bfc7a6a638bb782327a77e23620b32078a7ea5ac63dbd4fe2",
+      "required_claim_input_hash": "046f83e3b809fd97b66c608d9ce9a1b40a2ebf2842717c257a474138cc59746c",
+      "validation_error": "schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse\nquestion_id\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nanswerable\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrequired_claim_results\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrefusal_reason\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nprompt_version\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncitation_protocol\n  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nq050\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q050-e6beec554909bcb...ids': ['E011', 'E016']}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",
+      "raw_json_valid": true,
+      "response_top_level_type": "dict",
+      "response_top_level_keys": [
+        "q050"
+      ],
+      "wrapper_shape": "q050",
+      "contains_all_required_claim_ids": true,
+      "contains_citation_ids": true,
+      "contains_free_triple": false,
+      "official_status": "validation_failed"
+    }
+  ],
+  "historical_results_modified": false
+}

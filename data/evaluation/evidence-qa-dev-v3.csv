@@ -1,0 +1,212 @@
+question_id,run_id,status,failure_reason,required_claim_denominator,covered_claims,answered_slots,unsupported_slots,not_applicable_slots,citation_count,exact_citations,page_citations,answerable_correct,refusal_correct,required_claim_coverage,exact_citation_precision,citation_recall,page_citation_precision,classification,dev_v2_required_claim_coverage
+q001,live-dev-v3-q001-68e7f7e2981d,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q001': {'cl-q001-bc33bd...001', 'E003', 'E005']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q001
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q001-bc33bddd93356fc...E001', 'E003', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.3333333333333333
+q002,live-dev-v3-q002-cc5a6ab58bc5,validation_failed,"schema_validation_failure: 9 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'cl-q002-023231b350a389f...ids': ['E001', 'E005']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+cl-q002-023231b350a389faa754
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'answered', 'c...citation_ids': ['E001']}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden
+cl-q002-3cab1a55474dcd47a64a
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'unsupported',...ween input and output.'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden
+cl-q002-8a1d729edcaafb379a20
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'status': 'answered', 'c..._ids': ['E001', 'E005']}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.6666666666666666
+q004,live-dev-v3-q004-2e3463912209,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q004': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q004
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...], 'refusal_reason': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.6666666666666666
+q005,live-dev-v3-q005-2ffd240cc8bc,validation_failed,"schema_validation_failure: 4 validation errors for RequiredClaimsQAResponse
+required_claim_results
+  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'question_id': 'q005', '...the supplied evidence.'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+claims
+  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",0,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.0
+q007,live-dev-v3-q007-67874fd91e94,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q007': {'cl-q007-0dda2c...ds': ['E001', 'E003']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q007
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q007-0dda2c31fef09b0...ids': ['E001', 'E003']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,1.0
+q008,live-dev-v3-q008-b5cf02e10d56,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q008': {'cl-q008-5fd8e2...tation_ids': ['E012']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q008
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q008-5fd8e23c8c06169...itation_ids': ['E012']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,1.0
+q013,live-dev-v3-q013-6a617b42645f,validation_failed,"schema_validation_failure: 5 validation errors for RequiredClaimsQAResponse
+required_claim_results
+  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'question_id': 'q013', '...]}], 'answerable': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+claims
+  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'required_claim_id': 'c...itation_ids': ['E001']}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.3333333333333333
+q015,live-dev-v3-q015-db79b57d6a3d,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q015': {'answerable': T...ation_ids': ['E006']}]}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q015
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...tation_ids': ['E006']}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.0
+q019,live-dev-v3-q019-c3ee95cba155,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q019': {'answerable': T..., 'refusal_reason': ''}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q019
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'answerable': True, 'cla...], 'refusal_reason': ''}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.6666666666666666
+q050,live-dev-v3-q050-95824e0fc594,validation_failed,"schema_validation_failure: 7 validation errors for RequiredClaimsQAResponse
+question_id
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+answerable
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+required_claim_results
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+refusal_reason
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+prompt_version
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+citation_protocol
+  Field required [type=missing, input_value={'q050': {'cl-q050-e6beec...ds': ['E011', 'E016']}}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/missing
+q050
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'cl-q050-e6beec554909bcb...ids': ['E011', 'E016']}}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden",3,0,0,0,0,0,0,0,False,False,0.0,0.0,0.0,0.0,regressed,0.0

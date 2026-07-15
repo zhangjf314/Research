@@ -1,0 +1,838 @@
+{
+  "schema_version": "evidence-qa-dev-v2-summary-v1",
+  "evaluation_version": "evidence-qa-dev-v2",
+  "selection_policy": "latest-successful",
+  "manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "selected_runs": [
+    "live-dev-v2-q001-47ce06a654cb",
+    "live-dev-v2-q002-264403fc1f3f",
+    "live-dev-v2-q004-a71a859576af",
+    "live-dev-v2-q005-9649f178d3e8",
+    "live-dev-v2-q007-e6f043a6a679",
+    "live-dev-v2-q008-6f72b6a2884e",
+    "live-dev-v2-q013-b14e75761bfa",
+    "live-dev-v2-q015-61616fed46da",
+    "live-dev-v2-q019-fad9fda10a25",
+    "live-dev-v2-q050-a1c03e680ded"
+  ],
+  "attempt_history": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v2-q001-47ce06a654cb",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q001-47ce06a654cb"
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v2-q002-264403fc1f3f",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q002-264403fc1f3f"
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v2-q004-a71a859576af",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q004-a71a859576af"
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v2-q005-9649f178d3e8",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q005-9649f178d3e8"
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v2-q007-e6f043a6a679",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q007-e6f043a6a679"
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v2-q008-6f72b6a2884e",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q008-6f72b6a2884e"
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v2-q013-b14e75761bfa",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q013-b14e75761bfa"
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v2-q015-61616fed46da",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q015-61616fed46da"
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v2-q019-fad9fda10a25",
+      "status": "completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q019-fad9fda10a25"
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v2-q050-a1c03e680ded",
+      "status": "validation_failed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v2\\runs\\live-dev-v2-q050-a1c03e680ded"
+    }
+  ],
+  "metrics": {
+    "all_manifest_conservative": {
+      "attempted": 10,
+      "completed": 9,
+      "provider_failures": 0,
+      "execution_failures": 1,
+      "json_schema_success": 0.9,
+      "answerable_accuracy": 0.888889,
+      "refusal_accuracy": 1.0,
+      "required_claim_coverage": 0.518519,
+      "omitted_required_claims": 11,
+      "unsupported_before_generation": 0,
+      "unsupported_after_generation": 32,
+      "unsupported_claim_rate": 0.8,
+      "extra_claims": 22,
+      "exact_citation_precision": 0.181731,
+      "citation_recall": 0.295833,
+      "page_citation_precision": 0.437179,
+      "claim_citation_binding_accuracy": 1.0,
+      "allocated_to_correct_claim_rate": null,
+      "invalid_citation_rate": 0.0,
+      "citation_retry_rate": 0.0,
+      "input_tokens": 37594,
+      "output_tokens": 5393,
+      "total_tokens": 42987,
+      "request_attempts": 10,
+      "provider_completed_requests": 10,
+      "provider_completion_unknown": 0,
+      "active_reserved_tokens": 0,
+      "elapsed": {
+        "mean_ms": 17042.572,
+        "p50_ms": 12791.39,
+        "p95_ms": 44910.666
+      },
+      "monetary_cost_usd": "0",
+      "manifest_denominator": 10,
+      "engineering_completion": 0.9,
+      "usage_records": 10,
+      "post_processing_failures": 1,
+      "client_failures": 0,
+      "total_elapsed_seconds": 237.094871,
+      "all_attempts_p95_elapsed_ms": 83711.721
+    },
+    "completed_only_diagnostic": {
+      "attempted": 10,
+      "completed": 9,
+      "provider_failures": 0,
+      "execution_failures": 1,
+      "json_schema_success": 0.9,
+      "answerable_accuracy": 1,
+      "refusal_accuracy": 1,
+      "required_claim_coverage": 0.583333,
+      "omitted_required_claims": 11,
+      "unsupported_before_generation": 0,
+      "unsupported_after_generation": 32,
+      "unsupported_claim_rate": 0.8,
+      "extra_claims": 22,
+      "exact_citation_precision": 0.181731,
+      "citation_recall": 0.295833,
+      "page_citation_precision": 0.437179,
+      "claim_citation_binding_accuracy": 1.0,
+      "allocated_to_correct_claim_rate": null,
+      "invalid_citation_rate": 0.0,
+      "citation_retry_rate": 0.0,
+      "input_tokens": 33771,
+      "output_tokens": 3345,
+      "total_tokens": 37116,
+      "request_attempts": 10,
+      "provider_completed_requests": 10,
+      "provider_completion_unknown": 0,
+      "active_reserved_tokens": 0,
+      "elapsed": {
+        "mean_ms": 17042.572,
+        "p50_ms": 12791.39,
+        "p95_ms": 44910.666
+      },
+      "monetary_cost_usd": "0"
+    },
+    "retrieval": {
+      "exact_block_availability": 0.7777777777777778,
+      "gold_page_availability": 0.7777777777777778,
+      "gold_block_recall": 0.31296296296296294,
+      "claim_evidence_recall": null,
+      "complete_evidence_set_recall": null,
+      "metadata_contamination": 0.0,
+      "adjacent_completion_contribution_queries": [
+        "q002",
+        "q007",
+        "q013",
+        "q050"
+      ],
+      "mean_context_tokens": 2063.0,
+      "p95_retrieval_latency_ms": 30.4089
+    }
+  },
+  "comparison": {
+    "historical_stage11c": {
+      "attempted": 10,
+      "completed": 10,
+      "provider_failures": 0,
+      "execution_failures": 0,
+      "json_schema_success": 1.0,
+      "answerable_accuracy": 1,
+      "refusal_accuracy": 1,
+      "required_claim_coverage": 0.555556,
+      "omitted_required_claims": 13,
+      "unsupported_before_generation": 0,
+      "unsupported_after_generation": 33,
+      "unsupported_claim_rate": 0.916667,
+      "extra_claims": 10,
+      "exact_citation_precision": 0.059524,
+      "citation_recall": 0.081481,
+      "page_citation_precision": null,
+      "claim_citation_binding_accuracy": 1.0,
+      "allocated_to_correct_claim_rate": null,
+      "invalid_citation_rate": 0.0,
+      "citation_retry_rate": 0.0,
+      "input_tokens": 60191,
+      "output_tokens": 4396,
+      "total_tokens": 64587,
+      "request_attempts": 10,
+      "provider_completed_requests": 10,
+      "provider_completion_unknown": 0,
+      "active_reserved_tokens": 0,
+      "elapsed": {
+        "mean_ms": 18819.512,
+        "p50_ms": 18843.593,
+        "p95_ms": 28361.635
+      },
+      "monetary_cost_usd": "0"
+    },
+    "stage13_2_retrieval_only": {
+      "attempted": 10,
+      "completed": 7,
+      "provider_failures": 2,
+      "execution_failures": 3,
+      "json_schema_success": 0.7,
+      "answerable_accuracy": 1,
+      "refusal_accuracy": 0,
+      "required_claim_coverage": 0.5,
+      "omitted_required_claims": 10,
+      "unsupported_before_generation": 0,
+      "unsupported_after_generation": 22,
+      "unsupported_claim_rate": 0.916667,
+      "extra_claims": 6,
+      "exact_citation_precision": 0.111111,
+      "citation_recall": 0.083333,
+      "page_citation_precision": 0.444444,
+      "claim_citation_binding_accuracy": 1.0,
+      "allocated_to_correct_claim_rate": null,
+      "invalid_citation_rate": 0.0,
+      "citation_retry_rate": 0.0,
+      "input_tokens": 27928,
+      "output_tokens": 2900,
+      "total_tokens": 30828,
+      "request_attempts": 10,
+      "provider_completed_requests": 7,
+      "provider_completion_unknown": 1,
+      "active_reserved_tokens": 60000,
+      "elapsed": {
+        "mean_ms": 36480.03,
+        "p50_ms": 25235.495,
+        "p95_ms": 85074.567
+      },
+      "monetary_cost_usd": "0"
+    },
+    "per_query": [
+      {
+        "question_id": "q001",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 3,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+              "best": 0.42857142857142855
+            },
+            {
+              "required_claim": "Sequential computation limits parallelization in training.",
+              "best": 0.0
+            },
+            {
+              "required_claim": "The paper targets long-range dependency modeling and proposes an attention-only alternative.",
+              "best": 0.2727272727272727
+            }
+          ],
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 0,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.4,
+          "citation_recall": 0.6666666666666666,
+          "page_citation_precision": 0.6,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0.0,
+          "exact_citation_precision": 0.4,
+          "citation_recall": 0.6666666666666666
+        },
+        "classification": "improved"
+      },
+      {
+        "question_id": "q002",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 4,
+          "extra_claims": 1,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "The Transformer eschews recurrence.",
+              "best": 0.75
+            },
+            {
+              "required_claim": "It relies on attention to draw dependencies between input and output.",
+              "best": 0.2727272727272727
+            },
+            {
+              "required_claim": "It improves parallelization and achieves strong translation quality.",
+              "best": 0.5
+            }
+          ],
+          "required_claim_coverage": 0.6666666666666666,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 8,
+          "extra_claims": 7,
+          "exact_citation_precision": 0.15384615384615385,
+          "citation_recall": 1.0,
+          "page_citation_precision": 0.23076923076923078,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0.3333333333333333,
+          "exact_citation_precision": 0.15384615384615385,
+          "citation_recall": 1.0
+        },
+        "classification": "improved"
+      },
+      {
+        "question_id": "q004",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 1.0,
+          "omitted_required_claims": 0,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 5,
+          "extra_claims": 4,
+          "exact_citation_precision": 0.2857142857142857,
+          "citation_recall": 0.4,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "Experiments use WMT 2014 English-German and English-French data.",
+              "best": 0.875
+            },
+            {
+              "required_claim": "Sentences are tokenized with BPE or word-piece vocabularies and batched by approximate sequence length.",
+              "best": 0.5
+            },
+            {
+              "required_claim": "Training uses eight P100 GPUs and an Adam schedule with warmup.",
+              "best": 0.2727272727272727
+            }
+          ],
+          "required_claim_coverage": 0.6666666666666666,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 12,
+          "extra_claims": 12,
+          "exact_citation_precision": 0.2,
+          "citation_recall": 0.2,
+          "page_citation_precision": 0.2,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": -0.33333333333333337,
+          "exact_citation_precision": -0.08571428571428569,
+          "citation_recall": -0.2
+        },
+        "classification": "regressed"
+      },
+      {
+        "question_id": "q005",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.0,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 0,
+          "extra_claims": 0,
+          "exact_citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "No exact total energy-consumption value is reported in the paper.",
+              "best": 0.0
+            }
+          ],
+          "required_claim_coverage": 0.0,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 0,
+          "extra_claims": 0,
+          "exact_citation_precision": 1.0,
+          "citation_recall": 1.0,
+          "page_citation_precision": 1.0,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0
+        },
+        "classification": "unchanged_or_mixed"
+      },
+      {
+        "question_id": "q007",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 1.0,
+          "omitted_required_claims": 0,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 3,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "BERT is a bidirectional Transformer-based language representation model.",
+              "best": 0.75
+            },
+            {
+              "required_claim": "Masked language modeling enables deep bidirectional pre-training.",
+              "best": 0.5714285714285714
+            },
+            {
+              "required_claim": "BERT reduces reliance on task-specific architectures and improves results on eleven NLP tasks.",
+              "best": 0.5
+            }
+          ],
+          "required_claim_coverage": 1.0,
+          "omitted_required_claims": 0,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 4,
+          "extra_claims": 2,
+          "exact_citation_precision": 0.2,
+          "citation_recall": 0.25,
+          "page_citation_precision": 0.8,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0.0,
+          "exact_citation_precision": 0.2,
+          "citation_recall": 0.25
+        },
+        "classification": "improved"
+      },
+      {
+        "question_id": "q008",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 2,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "BERT is based on a multi-layer bidirectional Transformer encoder.",
+              "best": 0.5555555555555556
+            },
+            {
+              "required_claim": "Pre-training uses masked language modeling and next-sentence prediction.",
+              "best": 0.625
+            },
+            {
+              "required_claim": "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks.",
+              "best": 0.46153846153846156
+            }
+          ],
+          "required_claim_coverage": 1.0,
+          "omitted_required_claims": 0,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 0,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.5,
+          "citation_recall": 0.25,
+          "page_citation_precision": 1.0,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0.6666666666666667,
+          "exact_citation_precision": 0.5,
+          "citation_recall": 0.25
+        },
+        "classification": "improved"
+      },
+      {
+        "question_id": "q013",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.6666666666666666,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 3,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "Every task is formulated as text input to text output.",
+              "best": 0.2222222222222222
+            },
+            {
+              "required_claim": "The same model/objective/training/decoding process is reused across tasks.",
+              "best": 0.125
+            },
+            {
+              "required_claim": "The framework is called T5, the Text-to-Text Transfer Transformer.",
+              "best": 0.5
+            }
+          ],
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 3,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": 0.6666666666666666,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": -0.3333333333333333,
+          "exact_citation_precision": 0,
+          "citation_recall": 0
+        },
+        "classification": "regressed"
+      },
+      {
+        "question_id": "q015",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.3333333333333333,
+          "omitted_required_claims": 2,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 3,
+          "extra_claims": 1,
+          "exact_citation_precision": 0.25,
+          "citation_recall": 0.3333333333333333,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "The work is primarily a survey/exploration rather than a new-method proposal.",
+              "best": 0.3
+            },
+            {
+              "required_claim": "The coordinate-ascent study can miss second-order effects among design choices.",
+              "best": 0.2
+            },
+            {
+              "required_claim": "Some automatic benchmark improvements may not correspond to better qualitative behavior.",
+              "best": 0.09090909090909091
+            }
+          ],
+          "required_claim_coverage": 0.0,
+          "omitted_required_claims": 3,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 4,
+          "extra_claims": 1,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": 0.0,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": -0.3333333333333333,
+          "exact_citation_precision": -0.25,
+          "citation_recall": -0.3333333333333333
+        },
+        "classification": "regressed"
+      },
+      {
+        "question_id": "q019",
+        "status": "completed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 0.0,
+          "omitted_required_claims": 3,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 6,
+          "extra_claims": 3,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "answerable_correct": true,
+          "required_claim_scores": [
+            {
+              "required_claim": "Model size is varied from 768 to 1.5B non-embedding parameters.",
+              "best": 0.4
+            },
+            {
+              "required_claim": "Dataset size is varied from 22M to 23B tokens.",
+              "best": 0.4444444444444444
+            },
+            {
+              "required_claim": "Model shape variables include depth, width, attention heads, and feed-forward dimension.",
+              "best": 0.18181818181818182
+            }
+          ],
+          "required_claim_coverage": 0.6666666666666666,
+          "omitted_required_claims": 1,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 1,
+          "extra_claims": 0,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": 0.0,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0,
+          "automated_semantic_support_signal": null,
+          "human_citation_support": null,
+          "unknown_citation_id_count": 0,
+          "duplicate_citation_ids": [],
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": 0.6666666666666666,
+          "exact_citation_precision": 0,
+          "citation_recall": 0
+        },
+        "classification": "improved"
+      },
+      {
+        "question_id": "q050",
+        "status": "validation_failed",
+        "historical_stage11c": {
+          "answerable_correct": true,
+          "required_claim_coverage": 1.0,
+          "omitted_required_claims": 0,
+          "unsupported_before_generation": 0,
+          "unsupported_after_generation": 4,
+          "extra_claims": 1,
+          "exact_citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "page_citation_precision": null,
+          "claim_citation_binding_accuracy": 1.0,
+          "allocated_to_correct_claim_rate": null,
+          "invalid_citation_rate": 0.0
+        },
+        "dev_v2": {
+          "unknown_citation_id_count": 0,
+          "unknown_citation_id_rate": 0.0
+        },
+        "deltas": {
+          "required_claim_coverage": -1.0,
+          "exact_citation_precision": 0,
+          "citation_recall": 0
+        },
+        "classification": "regressed"
+      }
+    ],
+    "change_counts": {
+      "improved": 5,
+      "regressed": 4,
+      "unchanged_or_mixed": 1,
+      "gain_queries_improved": 2
+    },
+    "denominator_warning": "Historical schemes have different execution denominators; no statistical superiority is claimed."
+  },
+  "engineering_checks": {
+    "ten_run_directories": true,
+    "schema_success_at_least_0_90": true,
+    "provider_client_completion_at_least_0_90": true,
+    "usage_before_parsing": true,
+    "registry_hash_valid": true,
+    "request_attempts_at_most_10": true,
+    "active_budget_within_global": true,
+    "elapsed_at_most_1800": true,
+    "strict_triples": true
+  },
+  "quality_checks": {
+    "claim_coverage_gt_0_50": true,
+    "claim_coverage_not_below_0_555556": false,
+    "exact_precision_gt_0_111111": true,
+    "citation_recall_gt_0_083333": true,
+    "unsupported_rate_lt_0_916667": true,
+    "refusal_accuracy_gt_0": true,
+    "unknown_id_rate_zero": true,
+    "invalid_rate_zero": true,
+    "at_least_3_improved": true,
+    "at_least_6_non_regressed": true,
+    "improved_gt_regressed": true,
+    "gain_queries_at_least_2": true,
+    "p95_elapsed_within_180s": true
+  },
+  "dev_v2_engineering_gate": true,
+  "dev_v2_quality_candidate_gate": false,
+  "ready_for_full_qa": false,
+  "citation_audit_pending_count": 57,
+  "historical_reservations_retained": 60000,
+  "reranker_enabled": false,
+  "gold_leakage": false,
+  "oracle_leakage": false,
+  "human_pilot_evidence_used_for_selection": false,
+  "full_qa_run": false,
+  "deep_research_run": false,
+  "production_ready": false,
+  "v1_0_status": "not_satisfied"
+}

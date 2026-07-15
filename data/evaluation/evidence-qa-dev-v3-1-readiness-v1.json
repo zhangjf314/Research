@@ -1,0 +1,183 @@
+{
+  "schema_version": "evidence-qa-dev-v3-1-readiness-v1",
+  "evaluation_version": "evidence-qa-dev-v3.1",
+  "source_manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "source_protocol_hash": "ba7a8d5a132ca6c201e835ed2f66583f91598a0d2c1c6c1c0920185714502552",
+  "schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+  "prompt_hash": "071098990460a8fdffb9c9a168b13ebedcf3eced8bcea5ed3ac4bcd2db0f11bf",
+  "transport_constraint_mode": "provider_json_object_plus_strict_local_schema",
+  "response_format_mode": "json_object",
+  "provider_capability_snapshot_hash": "000bf54a298e21db53f42419123a53f16a05c279f002d8336146175ac95e7a03",
+  "formal_live_normalization_policy": "raw_schema_passed_only",
+  "fixtures": [
+    {
+      "fixture": "question_id_wrapper",
+      "raw_schema_pass": false,
+      "normalization_accepted": true,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": true,
+      "passed": true
+    },
+    {
+      "fixture": "required_claim_id_top_level_map",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "legacy_claims_array",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "legacy_refusal",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "markdown_code_fence",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "prose_before_json",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "prose_after_json",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "extra_top_level_field",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "missing_prompt_version",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "missing_citation_protocol",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "valid_native_schema",
+      "raw_schema_pass": true,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": true,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "valid_json_object_but_wrong_schema",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "duplicate_claim_slot",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "missing_claim_slot",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "unknown_claim_id",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    },
+    {
+      "fixture": "cross_claim_citation",
+      "raw_schema_pass": false,
+      "normalization_accepted": false,
+      "expected_raw_schema_pass": false,
+      "expected_normalization_accepted": false,
+      "passed": true
+    }
+  ],
+  "checks": {
+    "ten_shape_audits": true,
+    "freeze_complete": true,
+    "prompt_delivery_audit": true,
+    "provider_capability_explicit": true,
+    "strategy_selected": true,
+    "prompt_v3_1_versioned": true,
+    "schema_hash_fixed": true,
+    "transport_fixed": true,
+    "fixtures_covered": true,
+    "wrapper_policy_explicit": true,
+    "claim_map_rejected": true,
+    "legacy_rejected": true,
+    "raw_normalized_metrics_separate": true,
+    "required_claim_semantics_strict": true,
+    "citation_id_v2_strict": true,
+    "q005_refusal_fixture": true,
+    "q019_multi_slot_fixture": true,
+    "q050_valid_wrong_schema_failed": true,
+    "reranker_disabled": true,
+    "no_gold_oracle_pilot_injection": true,
+    "stage13_5_still_failed": true,
+    "no_dev_v3_1_live_runs": true
+  },
+  "ready_for_dev_v3_1": true,
+  "dev_v3_1_authorized": false,
+  "dev_v3_1_live_run": false,
+  "quality_gates": {
+    "coverage_min": "17/27",
+    "exact_citation_precision_min": 0.181731,
+    "citation_recall_min": 0.295833,
+    "unsupported_rate_strictly_less_than": 0.8,
+    "refusal_accuracy": 1.0,
+    "invalid_unknown_cross_claim": 0,
+    "non_regressed_min": 6,
+    "improved_gt_regressed": true
+  },
+  "full_qa": "blocked",
+  "deep_research": "blocked",
+  "production_ready": false,
+  "v1_0_status": "not_satisfied"
+}

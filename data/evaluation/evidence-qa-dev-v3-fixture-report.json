@@ -1,0 +1,181 @@
+{
+  "schema_version": "evidence-qa-dev-v3-fixture-report-v1",
+  "selection_policy": "latest-successful",
+  "selected_runs": [
+    "fixture-dev-v3-q001-v1",
+    "fixture-dev-v3-q002-v1",
+    "fixture-dev-v3-q004-v1",
+    "fixture-dev-v3-q005-v1",
+    "fixture-dev-v3-q007-v1",
+    "fixture-dev-v3-q008-v1",
+    "fixture-dev-v3-q013-v1",
+    "fixture-dev-v3-q015-v1",
+    "fixture-dev-v3-q019-v1",
+    "fixture-dev-v3-q050-v1"
+  ],
+  "attempt_history": [
+    {
+      "question_id": "q001",
+      "run_id": "fixture-dev-v3-q001-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q001-v1"
+    },
+    {
+      "question_id": "q002",
+      "run_id": "fixture-dev-v3-q002-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q002-v1"
+    },
+    {
+      "question_id": "q004",
+      "run_id": "fixture-dev-v3-q004-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q004-v1"
+    },
+    {
+      "question_id": "q005",
+      "run_id": "fixture-dev-v3-q005-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q005-v1"
+    },
+    {
+      "question_id": "q007",
+      "run_id": "fixture-dev-v3-q007-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q007-v1"
+    },
+    {
+      "question_id": "q008",
+      "run_id": "fixture-dev-v3-q008-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q008-v1"
+    },
+    {
+      "question_id": "q013",
+      "run_id": "fixture-dev-v3-q013-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q013-v1"
+    },
+    {
+      "question_id": "q015",
+      "run_id": "fixture-dev-v3-q015-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q015-v1"
+    },
+    {
+      "question_id": "q019",
+      "run_id": "fixture-dev-v3-q019-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q019-v1"
+    },
+    {
+      "question_id": "q050",
+      "run_id": "fixture-dev-v3-q050-v1",
+      "status": "fixture_completed",
+      "selected": true,
+      "path": "D:\\Agents\\Codex\\research\\data\\evaluation\\evidence-qa-dev-v3\\runs\\fixture-dev-v3-q050-v1"
+    }
+  ],
+  "failed_attempts": [],
+  "fixture_summary": {
+    "status": "DEV_V3_FIXTURE_PASSED",
+    "question_input_count": 10,
+    "fixture_count": 15,
+    "fixture_passed": 15,
+    "required_claim_slot_completion_rate": 1.0,
+    "answered_rate": 1.0,
+    "unsupported_rate": 0.0,
+    "silent_omission_rate": 0.0,
+    "duplicate_slot_rate": 0.0,
+    "cross_claim_citation_rate": 0.0,
+    "unknown_citation_id_rate": 0.0,
+    "schema_success": 1.0,
+    "protocol_simulation_only": true,
+    "live_llm_called": false,
+    "fixtures": [
+      {
+        "fixture": "valid_all_claims_answered",
+        "passed": true
+      },
+      {
+        "fixture": "valid_partial_answer",
+        "passed": true
+      },
+      {
+        "fixture": "unsupported_claim",
+        "passed": true
+      },
+      {
+        "fixture": "duplicate_required_claim",
+        "passed": true,
+        "observed_error": "duplicate_required_claim_id"
+      },
+      {
+        "fixture": "missing_required_claim",
+        "passed": true,
+        "observed_error": "missing_required_claim_id"
+      },
+      {
+        "fixture": "extra_required_claim",
+        "passed": true,
+        "observed_error": "extra_required_claim_id"
+      },
+      {
+        "fixture": "cross_claim_citation",
+        "passed": true,
+        "observed_error": "cross_claim_citation"
+      },
+      {
+        "fixture": "unknown_citation_id",
+        "passed": true,
+        "observed_error": "unknown_citation_id"
+      },
+      {
+        "fixture": "free_triple_output",
+        "passed": true,
+        "observed_error": "free_triple_forbidden"
+      },
+      {
+        "fixture": "malformed_json",
+        "passed": true,
+        "observed_error": "malformed_json"
+      },
+      {
+        "fixture": "unanswerable_valid",
+        "passed": true
+      },
+      {
+        "fixture": "unanswerable_with_citation",
+        "passed": true,
+        "observed_error": "unanswerable_has_answer_or_citation"
+      },
+      {
+        "fixture": "q050_unclosed_json",
+        "passed": true,
+        "observed_error": "malformed_json"
+      },
+      {
+        "fixture": "compound_claim_split",
+        "passed": true
+      },
+      {
+        "fixture": "merged_claim_not_allowed_without_slots",
+        "passed": true,
+        "observed_error": "missing_required_claim_id"
+      }
+    ]
+  },
+  "live_runs": 0,
+  "live_llm_calls": 0,
+  "protocol_simulation_only": true,
+  "quality_improvement_claimed": false
+}
