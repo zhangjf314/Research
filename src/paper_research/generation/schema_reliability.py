@@ -17,6 +17,7 @@ SCHEMA_RELIABILITY_CANDIDATE = "schema-reliability-v1-candidate"
 DEV_V3_3_PROMPT_VERSION = "qa-required-claims-minimal-payload-v3.3"
 SCHEMA_RELIABILITY_V2_CANDIDATE = "schema-reliability-v2-candidate"
 DEV_V3_4_CANDIDATE_PROMPT_VERSION = "qa-required-claims-minimal-payload-v3.4-candidate"
+DEV_V3_4_PROMPT_VERSION = "qa-required-claims-minimal-payload-v3.4"
 REFUSAL_CANONICALIZATION_VERSION = "refusal-empty-to-null-canonicalization-v1"
 MODEL_PAYLOAD_SCHEMA_VERSION = "minimal-required-claim-payload-v1"
 LOCAL_ENVELOPE_SCHEMA_VERSION = "locally-bound-required-claim-envelope-v1"
@@ -87,6 +88,28 @@ class RequiredClaimFinalResultV2(BaseModel):
     citation_protocol: Literal["citation-id-v2"]
 
 
+class DevV34LocalEnvelope(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    question_id: str
+    answerable: bool
+    required_claim_results: list[MinimalRequiredClaimResult]
+    refusal_reason: str | None
+    prompt_version: Literal["qa-required-claims-minimal-payload-v3.4"]
+    citation_protocol: Literal["citation-id-v2"]
+
+
+class DevV34FinalResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    question_id: str
+    answerable: bool
+    required_claim_results: list[LocallyBoundRequiredClaimResult]
+    refusal_reason: str | None
+    prompt_version: Literal["qa-required-claims-minimal-payload-v3.4"]
+    citation_protocol: Literal["citation-id-v2"]
+
+
 class ModelPayloadCanonicalizationV2(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -145,6 +168,10 @@ def dev_v3_4_candidate_system_prompt() -> str:
         "non-empty string. Do not output citation IDs, protocol constants, internal IDs, "
         "or extra fields. No Markdown, surrounding prose, repair, or policy explanation."
     )
+
+
+def dev_v3_4_system_prompt() -> str:
+    return dev_v3_4_candidate_system_prompt()
 
 
 def _payload_hash(value: dict) -> str:
@@ -312,6 +339,21 @@ def bind_local_envelope_v2(
             "question_id": question_id,
             **payload.model_dump(mode="json"),
             "prompt_version": DEV_V3_4_CANDIDATE_PROMPT_VERSION,
+            "citation_protocol": "citation-id-v2",
+        }
+    )
+
+
+def bind_dev_v3_4_envelope(
+    payload: MinimalRequiredClaimsPayload,
+    *,
+    question_id: str,
+) -> DevV34LocalEnvelope:
+    return DevV34LocalEnvelope.model_validate(
+        {
+            "question_id": question_id,
+            **payload.model_dump(mode="json"),
+            "prompt_version": DEV_V3_4_PROMPT_VERSION,
             "citation_protocol": "citation-id-v2",
         }
     )

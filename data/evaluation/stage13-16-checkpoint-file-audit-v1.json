@@ -1,0 +1,289 @@
+{
+  "schema_version": "stage13-16-checkpoint-file-audit-v1",
+  "files": [
+    {
+      "path": "src/paper_research/generation/schema_reliability.py",
+      "git_status": "M",
+      "classification": "production_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "artifacts/stage13-10-human-claim-gold-review-results.zip",
+      "git_status": "??",
+      "classification": "review_zip_local_only",
+      "commit_candidate": false,
+      "local_only": true
+    },
+    {
+      "path": "artifacts/stage13-9-human-citation-review-results.zip",
+      "git_status": "??",
+      "classification": "review_zip_local_only",
+      "commit_candidate": false,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/dev-v3-4-visible-id-namespace-audit-v1.json",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4-citation-audit-v1.jsonl",
+      "git_status": "??",
+      "classification": "citation_audit",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4-final-audit.json",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4-protocol-freeze-v1.json",
+      "git_status": "??",
+      "classification": "protocol_freeze",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4.csv",
+      "git_status": "??",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4.json",
+      "git_status": "??",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/provider-health-dev-v3-4-v1.json",
+      "git_status": "??",
+      "classification": "provider_health",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/stage13-16-checkpoint-file-audit-v1.json",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/stage13-16-dev-v3-4-failure-freeze-v1.json",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "data/evaluation/stage13-16-historical-protection-v1.json",
+      "git_status": "??",
+      "classification": "historical_protection",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/dev-v3-4-visible-id-namespace-audit-v1.md",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-4-citation-audit-v1.md",
+      "git_status": "??",
+      "classification": "citation_audit",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-4-protocol-freeze-v1.md",
+      "git_status": "??",
+      "classification": "protocol_freeze",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-4.md",
+      "git_status": "??",
+      "classification": "canonical_report",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/stage13-16-checkpoint-file-audit-v1.md",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/stage13-16-dev-v3-4-failure-freeze-v1.md",
+      "git_status": "??",
+      "classification": "failure_evidence",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "docs/stage13-16-historical-protection-v1.md",
+      "git_status": "??",
+      "classification": "historical_protection",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/audit_evidence_qa_dev_v3_4.py",
+      "git_status": "??",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/audit_stage13_16_historical_protection_v1.py",
+      "git_status": "??",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/evidence_qa_dev_v3_4_lib.py",
+      "git_status": "??",
+      "classification": "runtime_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/freeze_stage13_16_checkpoint_v1.py",
+      "git_status": "??",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/run_evidence_qa_dev_v3_4.py",
+      "git_status": "??",
+      "classification": "runtime_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "scripts/summarize_evidence_qa_dev_v3_4.py",
+      "git_status": "??",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "local_only": false
+    },
+    {
+      "path": "tests/test_stage13_16_dev_v3_4.py",
+      "git_status": "??",
+      "classification": "test",
+      "commit_candidate": true,
+      "local_only": false
+    }
+  ],
+  "raw_runs": [
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q001-7ba5d554895c",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q002-62a5db4c0693",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q004-8f6b39b82469",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q005-6de3aefa6e9e",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q007-2097f58c6cef",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q008-839e61a44d1f",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q013-1d1cf09b1a28",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q015-bb3d4a50f19e",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q019-57e2829a5046",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-4/runs/live-dev-v3-4-q050-8885aa0da41e",
+      "classification": "raw_run_local_only",
+      "file_count": 28,
+      "git_ignored": true,
+      "local_only": true
+    }
+  ],
+  "classification_counts": {
+    "production_code": 1,
+    "review_zip_local_only": 2,
+    "failure_evidence": 7,
+    "citation_audit": 2,
+    "protocol_freeze": 2,
+    "canonical_evaluation_data": 2,
+    "provider_health": 1,
+    "historical_protection": 2,
+    "canonical_report": 1,
+    "evaluation_code": 4,
+    "runtime_code": 2,
+    "test": 1,
+    "raw_run_local_only": 10
+  },
+  "uncertain_count": 0,
+  "raw_run_count": 10,
+  "raw_runs_local_only": true,
+  "review_zip_local_only_count": 2,
+  "secret_hits": [],
+  "env_files_in_commit": [],
+  "backup_or_imports_in_commit": [],
+  "gate": "PASSED"
+}
