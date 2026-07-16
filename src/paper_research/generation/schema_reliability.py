@@ -13,6 +13,7 @@ from paper_research.generation.required_claim_output import (
 )
 
 SCHEMA_RELIABILITY_CANDIDATE = "schema-reliability-v1-candidate"
+DEV_V3_3_PROMPT_VERSION = "qa-required-claims-minimal-payload-v3.3"
 MODEL_PAYLOAD_SCHEMA_VERSION = "minimal-required-claim-payload-v1"
 LOCAL_ENVELOPE_SCHEMA_VERSION = "locally-bound-required-claim-envelope-v1"
 
@@ -49,6 +50,17 @@ class LocallyBoundRequiredClaimsEnvelope(BaseModel):
     citation_protocol: Literal["citation-id-v2"]
 
 
+class DevV33RequiredClaimsEnvelope(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    question_id: str
+    answerable: bool
+    required_claim_results: list[LocallyBoundRequiredClaimResult]
+    refusal_reason: str | None
+    prompt_version: Literal["qa-required-claims-minimal-payload-v3.3"]
+    citation_protocol: Literal["citation-id-v2"]
+
+
 def schema_reliability_system_prompt() -> str:
     return (
         "Return exactly one JSON object with only answerable, "
@@ -59,6 +71,23 @@ def schema_reliability_system_prompt() -> str:
         "not_applicable require no claim_text and a non-empty omission_reason. "
         "For an unanswerable question return answerable=false, an empty result list, "
         "and a non-empty refusal_reason. No Markdown, prose wrapper, or JSON repair."
+    )
+
+
+def dev_v3_3_system_prompt() -> str:
+    return (
+        "Return exactly one JSON object and nothing else. The object contains only "
+        "answerable, required_claim_results, and refusal_reason. Each supplied "
+        "required_claim_id must appear exactly once. Each result contains exactly "
+        "required_claim_id, status, claim_text, and omission_reason. status is answered, "
+        "unsupported, or not_applicable. answered requires a supported non-empty "
+        "claim_text and omission_reason=null. unsupported and not_applicable require "
+        "claim_text=null and a specific non-empty omission_reason. Do not output "
+        "question_id, protocol fields, citation IDs, evidence labels, policy traces, or "
+        "any other identifiers. Use evidence text only to draft claims; do not copy its "
+        "display label. For an unanswerable question return answerable=false, "
+        "required_claim_results=[], and a non-empty refusal_reason. No Markdown, no "
+        "surrounding prose, no repair instructions, and no policy explanation."
     )
 
 
@@ -127,3 +156,18 @@ def bind_local_envelope(
             "citation_protocol": "citation-id-v2",
         }
     )
+
+
+def bind_dev_v3_3_envelope(
+    payload: MinimalRequiredClaimsPayload,
+    *,
+    question_id: str,
+    citation_ids_by_claim: dict[str, list[str]],
+) -> DevV33RequiredClaimsEnvelope:
+    candidate = bind_local_envelope(
+        payload,
+        question_id=question_id,
+        citation_ids_by_claim=citation_ids_by_claim,
+    ).model_dump(mode="json")
+    candidate["prompt_version"] = DEV_V3_3_PROMPT_VERSION
+    return DevV33RequiredClaimsEnvelope.model_validate(candidate)

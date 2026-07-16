@@ -1,0 +1,9 @@
+{
+  "schema_version": "dev-v3-3-visible-id-namespace-audit-v1",
+  "questions_scanned": 10,
+  "copyable_internal_ids": 0,
+  "gold_ids": 0,
+  "human_label_fields": 0,
+  "findings": [],
+  "gate": "PASSED"
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": "stage13-14-dev-v3-3-failure-freeze-v1",
+  "evaluation_version": "evidence-qa-dev-v3.3",
+  "protocol_freeze_signature": "841005c4cbc7ff58f93a1dd9f44a2d3b58748b751e60274dacd50eec1e6aaa1f",
+  "prompt_hash": "25df134be56d9857b8e788b875f054a34b471562844418a18e83e841197dcfc3",
+  "model_payload_schema_hash": "597d4578d1ef2ba823cd4031842e52afacf2cebc8f6d32641368b235c4c539b5",
+  "local_envelope_schema_hash": "4edde8fd3a148bb113cfaadb37e0e349511353c263467d8e9efbf3fc48405643",
+  "delivered_request_hashes": [
+    "6db66fa33e277a7529ed5c393ab09445978150719fef45244c3f2a57ef39f975",
+    "522d2f6092321de5b8a998b6f881ce8f19a7b0e9488efe258f4824a26ccc8f6e",
+    "c688f9fffa089c41d6589792e8834d9e653e42b89114c9faeada18b907a5994f",
+    "91cf2decef40cb554c08014899d969eaddb4d05d7dabf63644d182ec7c725048",
+    "fefc0e795388b026943f5606ece8c8bd06c573ea67fb4185aeb9c27789b064c6",
+    "9c439dcfa2d3d54f23ef7cabf12f89b6e7c5df1c9653e560982e6b88591fd7b2",
+    "452dbfd7be17e9e76e231d437ecf76a9b1fbacfa05316342a22001213abc9692",
+    "52a27212a5bd671544f21ad0e2e335fd517d0dc5e097b16db24015c1b964dce5",
+    "9256277987f6d40c5902f16af20323205607a20a9bdfcc60c873a479f9db2775",
+    "b62ef898e549c40574611439954a8e494bb99f81da9434f90769271f7d1366bc"
+  ],
+  "runs": [
+    {
+      "run_id": "live-dev-v3-3-q001-3c95136865dd",
+      "question_id": "q001",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "dc67e63d6a44238d505ce06541d8f408c368217bea4f8391944571e3dfe82584",
+      "payload_validation_sha256": "9880aab31bf53565bff212933a4f28b7dae76d8bf0bc8c3289ddc2d287560fde",
+      "final_result_sha256": "a17d7faba8dd64f81554d277ad58ae6fe9de15cb030776f1a2e0d6352eab645d",
+      "usage": {
+        "input_tokens": 1870,
+        "output_tokens": 236,
+        "total_tokens": 2106,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "6db66fa33e277a7529ed5c393ab09445978150719fef45244c3f2a57ef39f975"
+    },
+    {
+      "run_id": "live-dev-v3-3-q002-0383fea3b5bd",
+      "question_id": "q002",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "dfffe5a26fd386f892e7a33051788964937640106f5ff1ce81518087034e994a",
+      "payload_validation_sha256": "fdd4c514759393deae6c3363eb12a8a5fa46d1a5e16ca12a249552b45680d4df",
+      "final_result_sha256": "0622a9c3b5b6902c30b096c0b0f1461d7e62282f7531cca06945df832b4058c9",
+      "usage": {
+        "input_tokens": 1852,
+        "output_tokens": 223,
+        "total_tokens": 2075,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "522d2f6092321de5b8a998b6f881ce8f19a7b0e9488efe258f4824a26ccc8f6e"
+    },
+    {
+      "run_id": "live-dev-v3-3-q004-0573a646cb2b",
+      "question_id": "q004",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "f49bd6729357c1bdee2b142b859902b1a4d9bbffdbea00c8f25c3123964c2bbb",
+      "payload_validation_sha256": "f744ec3b8ce3edf569b94a3a549e3bce89619b5569dde2d35a37f6d6789d4dc1",
+      "final_result_sha256": "a57134f85eee7ef79c5681cd618ab5362806685bbca17ea11ea4e313068e18f9",
+      "usage": {
+        "input_tokens": 2022,
+        "output_tokens": 251,
+        "total_tokens": 2273,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "c688f9fffa089c41d6589792e8834d9e653e42b89114c9faeada18b907a5994f"
+    },
+    {
+      "run_id": "live-dev-v3-3-q005-bb61dc16b8a3",
+      "question_id": "q005",
+      "status": "completed",
+      "failure_type": null,
+      "raw_response_sha256": "03e7ba16f4f3fd76ecdb5ccc79c40adc1d1c241b4f1d412dd7bc4a355c94dd85",
+      "payload_validation_sha256": "4df6f449a5f1f8db8c8524be4e8d4da88b19b3aacebf6a409d6e4fcafa7cd88e",
+      "final_result_sha256": "da04e7c13edb8bb8f9a8a4f1e154fc6f1b191ed77aab063cb0efb3dd844d31e9",
+      "usage": {
+        "input_tokens": 290,
+        "output_tokens": 54,
+        "total_tokens": 344,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "91cf2decef40cb554c08014899d969eaddb4d05d7dabf63644d182ec7c725048"
+    },
+    {
+      "run_id": "live-dev-v3-3-q007-55d899f3b78d",
+      "question_id": "q007",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "58a0818f4908aa50c5056c37f0153f7ba9991aee82da6ff020ebf95f14e375bf",
+      "payload_validation_sha256": "e72716d47be64cc2b6f1bab7398a63410d31c3e750a84a81b0b1a58e64523a42",
+      "final_result_sha256": "d05a93b0726d81342fdb3addba143e551b005f6399551cf102175a6d1d45dd7e",
+      "usage": {
+        "input_tokens": 1893,
+        "output_tokens": 231,
+        "total_tokens": 2124,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "fefc0e795388b026943f5606ece8c8bd06c573ea67fb4185aeb9c27789b064c6"
+    },
+    {
+      "run_id": "live-dev-v3-3-q008-8dc7b93566df",
+      "question_id": "q008",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "c273d2fa1e60ad7f7edfd53cd377d33618e792383d72df5bcd8a48c3c0a8717d",
+      "payload_validation_sha256": "fb97e6d788648f49494d0493aa909170fc6b643e421105f7b52c3a1127f4af15",
+      "final_result_sha256": "ace033f2a3d310e3585d12e5a0854ca76b37af0de023d94e4d16d53caaa54428",
+      "usage": {
+        "input_tokens": 1945,
+        "output_tokens": 234,
+        "total_tokens": 2179,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "9c439dcfa2d3d54f23ef7cabf12f89b6e7c5df1c9653e560982e6b88591fd7b2"
+    },
+    {
+      "run_id": "live-dev-v3-3-q013-bf814b2764d1",
+      "question_id": "q013",
+      "status": "completed",
+      "failure_type": null,
+      "raw_response_sha256": "bffb21d51b02308e1dc928d4e07cd880d0e2f5f9f43b2cc6b67996bf34e65e45",
+      "payload_validation_sha256": "5f6738a8902da18d2324a0a3643ae1eecdbd3cd82b81260c60e58c7c6d57a53c",
+      "final_result_sha256": "7b33837ca84415f7b4d133acdd848348b010e6576a7df073131ad88d11d30461",
+      "usage": {
+        "input_tokens": 2353,
+        "output_tokens": 210,
+        "total_tokens": 2563,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "452dbfd7be17e9e76e231d437ecf76a9b1fbacfa05316342a22001213abc9692"
+    },
+    {
+      "run_id": "live-dev-v3-3-q015-4a08d5b0511f",
+      "question_id": "q015",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "9a8a810adb1436820d089051ef776c8db6b276a1c2f82ce68f787b367f47f35f",
+      "payload_validation_sha256": "6e6ed08a3432688d50931479de6cd727c40df676e35116c686e4059da62f0aa4",
+      "final_result_sha256": "cd8277e17bf3acb987ffd0e54a6f15d9dbcea5d430dd0d4f95d111aa844f2421",
+      "usage": {
+        "input_tokens": 2346,
+        "output_tokens": 244,
+        "total_tokens": 2590,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "52a27212a5bd671544f21ad0e2e335fd517d0dc5e097b16db24015c1b964dce5"
+    },
+    {
+      "run_id": "live-dev-v3-3-q019-80d3dd8cffd1",
+      "question_id": "q019",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "3586ceb3c54d059b1a44354f75f911bac84ab5f4a3e517f1e202730f08f8311b",
+      "payload_validation_sha256": "43bd9ebbd91166da904075b86f37d5322a96e4a4e99571c61061764eb35ec9ad",
+      "final_result_sha256": "6fbafa2dc2572fcb577764e29abfd1231aaf4df8e674b33f7a470b78f1fdcb43",
+      "usage": {
+        "input_tokens": 1800,
+        "output_tokens": 270,
+        "total_tokens": 2070,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "9256277987f6d40c5902f16af20323205607a20a9bdfcc60c873a479f9db2775"
+    },
+    {
+      "run_id": "live-dev-v3-3-q050-2bdd3febc638",
+      "question_id": "q050",
+      "status": "validation_failed",
+      "failure_type": "answerable_has_refusal_reason",
+      "raw_response_sha256": "1844ca67efefc0fa26f092310bc92b10176b94fbb3266daf9537961044012d51",
+      "payload_validation_sha256": "354a7fec41d698fffadce82f0d60d6f5d460426aaae2a6fc6830097151b82986",
+      "final_result_sha256": "f505470f58911ad3e6fb63f4f2206213131ec773d92e97c2bfbdc766d909564d",
+      "usage": {
+        "input_tokens": 2078,
+        "output_tokens": 236,
+        "total_tokens": 2314,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal_state": "reservation_settled",
+      "effective_active_tokens": 0,
+      "delivered_request_body_hash": "b62ef898e549c40574611439954a8e494bb99f81da9434f90769271f7d1366bc"
+    }
+  ],
+  "summary_sha256": "2f2f37d1629d818cf6baf8a269439d891438923fc5c4fe6c53882250a676c9f7",
+  "final_audit_sha256": "fb2011a2f36bf9eda22ff105a05a0457ca38f8ba8e35f0051b0ed38c2cbdfd54",
+  "citation_audit_sha256": "f934294f4f544de55babde08241721923b041794b386de4a9a5a1c2cff00aea3",
+  "gate_results": {
+    "raw_payload": "FAILED",
+    "final_policy_engineering": "FAILED",
+    "engineering": "FAILED",
+    "automated_quality": "FAILED",
+    "human_support": "PENDING",
+    "quality_candidate": "FAILED",
+    "ready_for_full_qa": false
+  },
+  "failure_taxonomy": {
+    "answerable_has_refusal_reason": 8,
+    "completed": 2
+  },
+  "immutable": true,
+  "freeze_signature": "8bbc5c9e4b610be243b503e8595465ef7a8d37153a42188a0fb20af0e948331d",
+  "frozen_at": "2026-07-16T13:44:27.172577+00:00"
+}

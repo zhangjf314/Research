@@ -1,0 +1,182 @@
+{
+  "schema_version": "stage13-14-checkpoint-file-audit-v1",
+  "branch": "eval/dev-v3-3-schema-reliability-v1",
+  "head": "fac12001e8ca4beb85b603a0d4706f765389a2f4",
+  "entries": [
+    {
+      "path": "artifacts/stage13-10-human-claim-gold-review-results.zip",
+      "category": "raw_run_local_only",
+      "commit": false
+    },
+    {
+      "path": "artifacts/stage13-9-human-citation-review-results.zip",
+      "category": "raw_run_local_only",
+      "commit": false
+    },
+    {
+      "path": "data/evaluation/dev-v3-3-visible-id-namespace-audit-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-3-citation-audit-v1.jsonl",
+      "category": "citation_audit",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-3-final-audit.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-3-protocol-freeze-v1.json",
+      "category": "protocol_freeze",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-3.csv",
+      "category": "canonical_evaluation_data",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-3.json",
+      "category": "canonical_evaluation_data",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/provider-health-dev-v3-3-v1.json",
+      "category": "provider_health",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/stage13-14-checkpoint-file-audit-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/stage13-14-dev-v3-3-failure-freeze-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/stage13-14-historical-protection-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/dev-v3-3-visible-id-namespace-audit-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-3-citation-audit-v1.md",
+      "category": "citation_audit",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-3-protocol-freeze-v1.md",
+      "category": "protocol_freeze",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-3.md",
+      "category": "canonical_report",
+      "commit": true
+    },
+    {
+      "path": "docs/stage13-14-checkpoint-file-audit-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/stage13-14-dev-v3-3-failure-freeze-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/stage13-14-historical-protection-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "scripts/audit_evidence_qa_dev_v3_3.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/audit_stage13_14_historical_protection_v1.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/evidence_qa_dev_v3_3_lib.py",
+      "category": "runtime_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/finalize_evidence_qa_dev_v3_3_runs.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/freeze_stage13_14_checkpoint_v1.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/run_evidence_qa_dev_v3_3.py",
+      "category": "runtime_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/summarize_evidence_qa_dev_v3_3.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "src/paper_research/generation/schema_reliability.py",
+      "category": "production_code",
+      "commit": true
+    },
+    {
+      "path": "tests/test_stage13_14_dev_v3_3.py",
+      "category": "test",
+      "commit": true
+    }
+  ],
+  "counts": {
+    "production_code": 1,
+    "runtime_code": 2,
+    "evaluation_code": 5,
+    "test": 1,
+    "protocol_freeze": 2,
+    "manifest": 0,
+    "provider_health": 1,
+    "canonical_evaluation_data": 2,
+    "canonical_report": 1,
+    "citation_audit": 2,
+    "failure_evidence": 9,
+    "raw_run_local_only": 2,
+    "backup": 0,
+    "temporary": 0,
+    "uncertain": 0
+  },
+  "raw_run_directories": [
+    "live-dev-v3-3-q001-3c95136865dd",
+    "live-dev-v3-3-q002-0383fea3b5bd",
+    "live-dev-v3-3-q004-0573a646cb2b",
+    "live-dev-v3-3-q005-bb61dc16b8a3",
+    "live-dev-v3-3-q007-55d899f3b78d",
+    "live-dev-v3-3-q008-8dc7b93566df",
+    "live-dev-v3-3-q013-bf814b2764d1",
+    "live-dev-v3-3-q015-4a08d5b0511f",
+    "live-dev-v3-3-q019-80d3dd8cffd1",
+    "live-dev-v3-3-q050-2bdd3febc638"
+  ],
+  "raw_run_directory_count": 10,
+  "historical_review_zips_local_only": 2,
+  "uncertain_zero": true,
+  "env_committed": false,
+  "secret_committed": false,
+  "provider_header_committed": false
+}
