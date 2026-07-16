@@ -1,0 +1,38 @@
+{
+  "schema_version": "payload-contract-v4-protocol-v1",
+  "candidate": "schema-reliability-v4-candidate",
+  "model_payload_version": "required-claim-model-payload-v4",
+  "model_payload_schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+  "local_envelope_version": "required-claim-local-envelope-v4",
+  "local_envelope_schema_hash": "6e9064eed9f9b9dba6b52b6b293479bb17df243bb824057cc6fe6ba4fd933757",
+  "prompt_version": "qa-required-claims-discriminated-slots-v3.6-candidate",
+  "prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+  "status_derivation_version": "derive-slot-status-v2",
+  "placeholder_removal_version": "empty-placeholder-field-removal-v1",
+  "canonicalization": "none",
+  "answerable_top_level_fields": [
+    "answerable",
+    "required_claim_results"
+  ],
+  "unanswerable_top_level_fields": [
+    "answerable",
+    "required_claim_results",
+    "refusal_reason"
+  ],
+  "answered_slot_fields": [
+    "required_claim_id",
+    "claim_text"
+  ],
+  "unsupported_slot_fields": [
+    "required_claim_id",
+    "omission_reason"
+  ],
+  "model_outputs_status": false,
+  "model_outputs_citation": false,
+  "null_sentinel_required": false,
+  "empty_sentinel_required": false,
+  "provider_transport": "response_format=json_object",
+  "provider_json_schema_sent": false,
+  "next_live_authorized": false,
+  "protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+}
