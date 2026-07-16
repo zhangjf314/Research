@@ -1,0 +1,19 @@
+{
+  "schema_version": "refusal-canonicalization-safety-audit-v1",
+  "canonicalization_version": "refusal-empty-to-null-canonicalization-v1",
+  "changed_field": "$.refusal_reason",
+  "allowed_transition": "\"\" -> null",
+  "semantic_field_changes": 0,
+  "canonicalization_path_violations": 0,
+  "claim_text_changes": 0,
+  "status_changes": 0,
+  "omission_reason_changes": 0,
+  "slot_count_changes": 0,
+  "citation_changes_due_to_canonicalization": 0,
+  "answerability_changes": 0,
+  "q005_changed": false,
+  "idempotent": true,
+  "deterministic": true,
+  "gate": "PASSED",
+  "safety_hash": "ad53add5b92a5262f8a0f93625a014a5601444080e3079fe1bd05d79b50e3f52"
+}
