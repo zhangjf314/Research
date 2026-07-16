@@ -1,0 +1,17 @@
+{
+  "schema_version": "stage13-10-phase-b-readiness-v1",
+  "ready_for_dev_v3_2": true,
+  "dev_v3_2_authorized": false,
+  "dev_v3_2_executed": false,
+  "blocking_gold_ambiguity": false,
+  "reviewed_claims": 27,
+  "claim_gold_frozen": true,
+  "unified_recalculation_complete": true,
+  "non_metric_failure_claims": 21,
+  "generic_fix_evidence_claims": 18,
+  "gold_online_dependency": false,
+  "human_label_online_dependency": false,
+  "question_or_block_special_case": false,
+  "historical_gate_modified": false,
+  "decision": "READY_FOR_DEV_V3_2=true"
+}

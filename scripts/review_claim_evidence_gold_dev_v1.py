@@ -54,6 +54,23 @@ def _flatten(values: list[str]) -> list[str]:
     return [item.strip() for value in values for item in value.split(",") if item.strip()]
 
 
+def core_relation_ids(row: dict[str, Any]) -> set[str]:
+    relation_ids: set[str] = set()
+    for item in row["approved_core_relations"]:
+        if isinstance(item, str):
+            relation_ids.add(item)
+        elif isinstance(item, dict):
+            required = item.get("required_relations")
+            if not isinstance(required, list) or not required:
+                raise RuntimeError(f"invalid core set: {row['required_claim_id']}")
+            if item.get("minimum_complete_set") is not True:
+                raise RuntimeError(f"core set is not minimum-complete: {row['required_claim_id']}")
+            relation_ids.update(required)
+        else:
+            raise RuntimeError(f"invalid core relation entry: {row['required_claim_id']}")
+    return relation_ids
+
+
 def validate(rows: list[dict[str, Any]]) -> None:
     if len(rows) != 27 or len({row["required_claim_id"] for row in rows}) != 27:
         raise RuntimeError("expected 27 unique required claims")
@@ -88,11 +105,7 @@ def validate(rows: list[dict[str, Any]]) -> None:
             unit = evidence.get(triple)
             if unit is None or unit["text"] != relation["evidence_text"]:
                 raise RuntimeError(f"relation triple/text changed: {relation['relation_id']}")
-        core_ids = {
-            relation_id
-            for core_set in row["approved_core_relations"]
-            for relation_id in core_set["required_relations"]
-        }
+        core_ids = core_relation_ids(row)
         groups = [
             core_ids,
             set(row["approved_supporting_relations"]),
@@ -112,9 +125,13 @@ def validate(rows: list[dict[str, Any]]) -> None:
         if row["adjudication_status"] == "approved":
             if not row["reviewer"] or not row["reviewed_at"] or not row["review_notes"]:
                 raise RuntimeError(f"incomplete human metadata: {row['required_claim_id']}")
-            if not row["no_valid_gold_evidence"] and not core_ids:
+            if (
+                not row["no_valid_gold_evidence"]
+                and not core_ids
+                and not row["equivalent_non_gold_relations"]
+            ):
                 raise RuntimeError(
-                    "approved answerable claim requires a core set: "
+                    "approved answerable claim requires core or equivalent evidence: "
                     f"{row['required_claim_id']}"
                 )
 

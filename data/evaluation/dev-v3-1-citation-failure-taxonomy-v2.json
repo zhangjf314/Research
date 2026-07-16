@@ -1,0 +1,25 @@
+{
+  "schema_version": "dev-v3-1-citation-failure-taxonomy-v2",
+  "metric_status": "claim_gold_recalculated_diagnostic",
+  "records": 27,
+  "failure_type_counts": {
+    "citation_fully_supported": 15,
+    "citation_partially_supported": 10,
+    "citation_unsupported": 8,
+    "claim_too_broad": 3,
+    "comparison_side_missing": 4,
+    "core_gold_not_retrieved": 10,
+    "core_gold_selected_not_cited": 8,
+    "equivalent_valid_evidence_cited": 3,
+    "metric_only_legacy_gold_issue": 3,
+    "numeric_evidence_missing": 2,
+    "partial_evidence_cited": 17,
+    "wrong_evidence_cited": 4
+  },
+  "severity_counts": {
+    "low": 8,
+    "high": 19
+  },
+  "blocking_gold_ambiguity": false,
+  "historical_gate_modified": false
+}
