@@ -1,0 +1,31 @@
+{
+  "engineering_checks": {
+    "question_count": true,
+    "slot_count": true,
+    "q005_unchanged": true,
+    "citation_cap": true,
+    "provider_calls_zero": true,
+    "embedding_calls_zero": true,
+    "reranker_false": true
+  },
+  "quality_checks": {
+    "citation_dilution_non_increasing": true,
+    "wrong_evidence_decreased": true,
+    "numeric_non_regressed": true,
+    "comparison_non_regressed": true,
+    "obligation_non_regressed": true,
+    "any_valid_delta_ge_minus_002": true,
+    "exact_delta_ge_minus_002": true,
+    "strict_support_non_regressed": true,
+    "lenient_support_delta_ge_minus_003": true,
+    "average_citations_le_2": true,
+    "not_all_unsupported": true
+  },
+  "engineering_gate": "PASSED",
+  "quality_preflight": "PASSED",
+  "live_ready": true,
+  "dev_v3_2_authorized": false,
+  "deterministic_replay_hash": "db91b24c1452ac11311da60ecf44fad5ed0d4c85e16abde1aaf3328eb8a31c57",
+  "replay_runs_required": 2,
+  "replay_hashes_match": true
+}

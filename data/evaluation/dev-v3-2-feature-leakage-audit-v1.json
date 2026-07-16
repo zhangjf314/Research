@@ -1,0 +1,14 @@
+{
+  "schema_version": "dev-v3-2-feature-leakage-audit-v1",
+  "production_files_scanned": [
+    "src\\paper_research\\generation\\citation_selection.py"
+  ],
+  "forbidden_feature_findings": [],
+  "fixed_id_findings": [],
+  "gold_leakage": false,
+  "human_label_leakage": false,
+  "fixed_id_special_cases": false,
+  "evaluation_path_may_read_gold": true,
+  "production_path_may_read_gold": false,
+  "gate": "PASSED"
+}
