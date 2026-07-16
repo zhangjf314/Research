@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import subprocess
@@ -261,6 +262,21 @@ def write_freeze(body: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--freeze-only", action="store_true")
+    args = parser.parse_args()
+    if args.freeze_only:
+        freeze = write_freeze(build_freeze())
+        print(
+            json.dumps(
+                {
+                    "freeze_signature": freeze["freeze_signature"],
+                    "historical_gate": "FAILED_AND_PRESERVED",
+                },
+                ensure_ascii=False,
+            )
+        )
+        return
     audit = build_file_audit()
     if not audit["uncertain_zero"]:
         raise RuntimeError("STAGE13_12_CHECKPOINT_FILE_AUDIT_UNCERTAIN")

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import time
@@ -16,6 +17,10 @@ from typing import Any
 import httpx
 
 from paper_research.config import Settings
+from paper_research.evaluation.request_accounting import (
+    RequestTerminalState,
+    close_reservation_for_terminal_run,
+)
 from paper_research.generation.citation_selection import (
     FallbackAction,
     select_citations,
@@ -75,6 +80,13 @@ def parse_args() -> argparse.Namespace:
 
 def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def exact_delivered_messages_hash(messages: list[dict[str, str]]) -> str:
+    encoded = json.dumps(
+        messages, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def event(path: Path, name: str, **values: Any) -> None:
@@ -190,6 +202,11 @@ def persist_pre_request(
     schema = RequiredClaimsQAResponseV31.model_json_schema()
     system_prompt = qa_system_prompt(QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE)
     user_prompt = json.dumps(payload, ensure_ascii=False)
+    delivered_messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+    delivered_hash = exact_delivered_messages_hash(delivered_messages)
     candidates_by_claim = {}
     all_candidates = []
     for claim in payload["required_claims"]:
@@ -211,6 +228,7 @@ def persist_pre_request(
             "prompt_hash": PROMPT_HASH,
             "schema_hash": SCHEMA_HASH,
             "policy_hash": POLICY_HASH,
+            "exact_delivered_messages_hash": delivered_hash,
         },
         "provider-capability-snapshot.json": {
             "snapshot": siliconflow_qwen3_8b_stage13_5_snapshot().model_dump(mode="json"),
@@ -256,6 +274,7 @@ def persist_pre_request(
         "schema_hash": SCHEMA_HASH,
         "policy_hash": POLICY_HASH,
         "request_id": request_id,
+        "exact_delivered_messages_hash": delivered_hash,
         "collection": settings.qdrant_collection,
         "embedding_model": settings.embedding_model,
         "reranker_enabled": False,
@@ -363,16 +382,24 @@ def run_one(question_id: str, settings: Settings, client: httpx.Client) -> dict[
     raw_answer: dict[str, Any] = {}
     final_answer: dict[str, Any] = {}
     active_reserved_tokens = 24000
+    request_sent = False
     try:
+        messages = [
+            {"role": "system", "content": qa_system_prompt(QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE)},
+            {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
+        ]
+        expected_delivered_hash = json.loads(
+            (run_dir / "run-metadata.json").read_text(encoding="utf-8")
+        )["exact_delivered_messages_hash"]
+        if exact_delivered_messages_hash(messages) != expected_delivered_hash:
+            raise RuntimeError("EXACT_DELIVERED_PROMPT_HASH_MISMATCH")
+        request_sent = True
         response = client.post(
             f"{(settings.llm_base_url or '').rstrip('/')}/chat/completions",
             headers={"Authorization": f"Bearer {settings.llm_api_key}", "Content-Type": "application/json"},
             json={
                 "model": settings.llm_model,
-                "messages": [
-                    {"role": "system", "content": qa_system_prompt(QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE)},
-                    {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
-                ],
+                "messages": messages,
                 "temperature": 0,
                 "max_tokens": payload["output_budget"]["calculated_max_output_tokens"],
                 "stream": False,
@@ -451,6 +478,57 @@ def run_one(question_id: str, settings: Settings, client: httpx.Client) -> dict[
         event(ledger, "request_failed", failure_type=failure_type)
         write_json(run_dir / "raw-provider-response.json", {"response_received": False, "request_id": request_id, "failure_type": failure_type})
         write_json(run_dir / "provider-response-envelope.json", {"response_received": False, "request_id": request_id, "usage": None})
+    except Exception as exc:
+        status, failure_type, failure_reason = (
+            "policy_failed",
+            type(exc).__name__,
+            str(exc),
+        )
+        event(ledger, "policy_failed", failure_type=failure_type)
+        write_json(
+            run_dir / "raw-provider-response.json",
+            {
+                "response_received": False,
+                "request_id": request_id,
+                "failure_type": failure_type,
+            },
+        )
+        write_json(
+            run_dir / "provider-response-envelope.json",
+            {"response_received": False, "request_id": request_id, "usage": None},
+        )
+    terminal_mapping = {
+        "completed": RequestTerminalState.COMPLETED,
+        "provider_failed": RequestTerminalState.PROVIDER_FAILED,
+        "validation_failed": (
+            RequestTerminalState.MALFORMED_JSON
+            if failure_type == "malformed_json"
+            else RequestTerminalState.SCHEMA_FAILED
+        ),
+        "policy_failed": RequestTerminalState.POLICY_FAILED,
+    }
+    ledger_events = [
+        json.loads(line)
+        for line in ledger.read_text(encoding="utf-8").splitlines()
+        if line
+    ]
+    closed_events, accounting = close_reservation_for_terminal_run(
+        ledger_events,
+        reservation_id=request_id,
+        request_id=request_id,
+        reserved_tokens=24000,
+        terminal_state=terminal_mapping[status],
+        provider_usage=usage or None,
+        request_sent=request_sent,
+        billing_known_no_charge=False,
+    )
+    terminal_event = closed_events[-1]
+    event(
+        ledger,
+        terminal_event["event"],
+        **{key: value for key, value in terminal_event.items() if key != "event"},
+    )
+    active_reserved_tokens = accounting["effective_active_tokens"]
     elapsed = time.perf_counter() - started
     result = {
         "run_id": run_id,

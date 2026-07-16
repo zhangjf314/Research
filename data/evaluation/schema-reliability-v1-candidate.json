@@ -1,0 +1,68 @@
+{
+  "schema_version": "schema-reliability-v1-candidate-decision-v1",
+  "candidate_name": "schema-reliability-v1-candidate",
+  "options": [
+    {
+      "option": "A",
+      "design": "minimal model payload plus local immutable envelope",
+      "schema_reliability": "high",
+      "semantic_risk": "low",
+      "comparability": "new protocol version required",
+      "implementation_complexity": "medium",
+      "citation_quality_control": "unchanged",
+      "auditability": "high",
+      "provider_dependency": "lower",
+      "backward_compatibility": "explicit adapter required"
+    },
+    {
+      "option": "B",
+      "design": "model emits no citation IDs; local policy selects citations",
+      "schema_reliability": "high",
+      "semantic_risk": "medium",
+      "comparability": "new protocol version required",
+      "implementation_complexity": "medium",
+      "citation_quality_control": "deterministic and capped",
+      "auditability": "high",
+      "provider_dependency": "lower",
+      "backward_compatibility": "explicit adapter required"
+    },
+    {
+      "option": "C",
+      "design": "retain current schema with simpler prompt and one public namespace",
+      "schema_reliability": "medium",
+      "semantic_risk": "low",
+      "comparability": "closest to v3.2",
+      "implementation_complexity": "low",
+      "citation_quality_control": "model plus local policy",
+      "auditability": "medium",
+      "provider_dependency": "unchanged",
+      "backward_compatibility": "highest"
+    }
+  ],
+  "selected_option": "A+B",
+  "selection_reason": "A removes model copying of fixed protocol constants; B removes the internal/public citation identifier confusion. Malformed JSON remains a strict failure.",
+  "model_payload_schema": {
+    "answerable": "boolean",
+    "required_claim_results": [
+      {
+        "required_claim_id": "string",
+        "status": "answered|unsupported|not_applicable",
+        "claim_text": "string|null",
+        "omission_reason": "string|null"
+      }
+    ],
+    "refusal_reason": "string|null"
+  },
+  "locally_bound_envelope_schema": {
+    "question_id": "string",
+    "answerable": "boolean",
+    "required_claim_results": "model results plus deterministic citation_ids",
+    "refusal_reason": "string|null",
+    "prompt_version": "schema-reliability-v1-candidate",
+    "citation_protocol": "citation-id-v2"
+  },
+  "citation_id_responsibility": "local deterministic policy",
+  "model_visible_copyable_citation_namespaces": 0,
+  "historical_protocol_modified": false,
+  "next_live_authorized": false
+}

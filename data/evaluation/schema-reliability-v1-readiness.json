@@ -1,0 +1,25 @@
+{
+  "schema_version": "schema-reliability-v1-readiness-v1",
+  "checks": {
+    "exact_delivered_prompt_hash_verifiable": true,
+    "model_copyable_citation_namespaces_zero": true,
+    "protocol_constants_locally_bound": true,
+    "terminal_reservations_closed": true,
+    "historical_reconciliation_complete": true,
+    "idempotency": true,
+    "ten_question_fixtures": true,
+    "twenty_seven_slots": true,
+    "q005_refusal_expressible": true,
+    "malformed_json_strict": true,
+    "no_json_repair": true,
+    "no_gold_or_human_label_leakage": true,
+    "no_fixed_question_special_cases": true,
+    "all_fixtures_pass": true,
+    "replay_hash_stable": true
+  },
+  "schema_reliability_vnext_ready": true,
+  "next_live_authorized": false,
+  "ready_for_full_qa": false,
+  "historical_stage13_12_gate": "FAILED_AND_PRESERVED",
+  "readiness_hash": "22ff30c497044f14cfbe217bff87a2445ac9f4fe69bb95d90bbc7c1fe929ec3a"
+}

@@ -1,0 +1,168 @@
+{
+  "schema_version": "stage13-12-reservation-reconciliation-v1",
+  "historical_ledgers_modified": false,
+  "reconciliation_ledger_mode": "independent_append-only-compensation",
+  "historical_unclosed_reservations": 4,
+  "historical_reserved_tokens": 96000,
+  "reconciled_reservations": 4,
+  "provider_reported_tokens_settled": 10843,
+  "unused_reservation_capacity_closed": 85157,
+  "effective_active_reservations": 0,
+  "effective_active_reserved_tokens": 0,
+  "double_settlement_count": 0,
+  "records": [
+    {
+      "run_id": "live-dev-v3-2-q005-54831df6ea19",
+      "question_id": "q005",
+      "reservation_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+      "original_reserve_event": {
+        "event_id": "31db982224a64c0096a22121da5a7540",
+        "event": "budget_reserved",
+        "timestamp": "2026-07-16T12:40:59.356284+00:00",
+        "request_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+        "reserved_tokens": 24000
+      },
+      "provider_usage": {
+        "input_tokens": 563,
+        "output_tokens": 50,
+        "total_tokens": 613,
+        "usage_source": "provider_reported"
+      },
+      "historical_missing_terminal_event": true,
+      "proposed_terminal_event": {
+        "reservation_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+        "request_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+        "terminal_state": "schema_failed",
+        "idempotency_key": "request-accounting-v1:live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+        "reserved_tokens": 24000,
+        "remaining_active_tokens": 0,
+        "event": "reconciliation_settlement_v1",
+        "settled_tokens": 613,
+        "released_tokens": 0,
+        "usage_source": "provider_reported",
+        "billing_liability": "settled",
+        "underlying_terminal_event": "reservation_settled"
+      },
+      "reconciliation_reason": "Provider usage was reported before downstream validation failed.",
+      "amount_settled_tokens": 613,
+      "unused_reservation_capacity_tokens": 23387,
+      "remaining_active_tokens": 0,
+      "immutable_historical_ledger_sha256": "e1dac26d66dab73d123585335feca3ffdfd5fe7193a418cf10ba1ed0ebad84e2"
+    },
+    {
+      "run_id": "live-dev-v3-2-q007-86133230c0ea",
+      "question_id": "q007",
+      "reservation_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+      "original_reserve_event": {
+        "event_id": "6b71bc7859ce4f43906d6a2de14b8894",
+        "event": "budget_reserved",
+        "timestamp": "2026-07-16T12:41:02.313206+00:00",
+        "request_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+        "reserved_tokens": 24000
+      },
+      "provider_usage": {
+        "input_tokens": 2538,
+        "output_tokens": 832,
+        "total_tokens": 3370,
+        "usage_source": "provider_reported"
+      },
+      "historical_missing_terminal_event": true,
+      "proposed_terminal_event": {
+        "reservation_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+        "request_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+        "terminal_state": "malformed_json",
+        "idempotency_key": "request-accounting-v1:live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+        "reserved_tokens": 24000,
+        "remaining_active_tokens": 0,
+        "event": "reconciliation_settlement_v1",
+        "settled_tokens": 3370,
+        "released_tokens": 0,
+        "usage_source": "provider_reported",
+        "billing_liability": "settled",
+        "underlying_terminal_event": "reservation_settled"
+      },
+      "reconciliation_reason": "Provider usage was reported before downstream validation failed.",
+      "amount_settled_tokens": 3370,
+      "unused_reservation_capacity_tokens": 20630,
+      "remaining_active_tokens": 0,
+      "immutable_historical_ledger_sha256": "74d2cd6687f86e36126ae654050f3f81caa47e43144fe5b22320daf099d70727"
+    },
+    {
+      "run_id": "live-dev-v3-2-q013-68b8399a8c40",
+      "question_id": "q013",
+      "reservation_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+      "original_reserve_event": {
+        "event_id": "723a817067014985ae4bc83a04914a3a",
+        "event": "budget_reserved",
+        "timestamp": "2026-07-16T12:41:47.096519+00:00",
+        "request_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+        "reserved_tokens": 24000
+      },
+      "provider_usage": {
+        "input_tokens": 3002,
+        "output_tokens": 302,
+        "total_tokens": 3304,
+        "usage_source": "provider_reported"
+      },
+      "historical_missing_terminal_event": true,
+      "proposed_terminal_event": {
+        "reservation_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+        "request_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+        "terminal_state": "schema_failed",
+        "idempotency_key": "request-accounting-v1:live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+        "reserved_tokens": 24000,
+        "remaining_active_tokens": 0,
+        "event": "reconciliation_settlement_v1",
+        "settled_tokens": 3304,
+        "released_tokens": 0,
+        "usage_source": "provider_reported",
+        "billing_liability": "settled",
+        "underlying_terminal_event": "reservation_settled"
+      },
+      "reconciliation_reason": "Provider usage was reported before downstream validation failed.",
+      "amount_settled_tokens": 3304,
+      "unused_reservation_capacity_tokens": 20696,
+      "remaining_active_tokens": 0,
+      "immutable_historical_ledger_sha256": "b69ceb72710987c72bc47230dbea636371bf26ac181d4fd38c97545d1c19445a"
+    },
+    {
+      "run_id": "live-dev-v3-2-q050-35d1729bb6a8",
+      "question_id": "q050",
+      "reservation_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+      "original_reserve_event": {
+        "event_id": "536418f2702f45d8aee25b433040fb86",
+        "event": "budget_reserved",
+        "timestamp": "2026-07-16T12:42:23.706372+00:00",
+        "request_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+        "reserved_tokens": 24000
+      },
+      "provider_usage": {
+        "input_tokens": 2724,
+        "output_tokens": 832,
+        "total_tokens": 3556,
+        "usage_source": "provider_reported"
+      },
+      "historical_missing_terminal_event": true,
+      "proposed_terminal_event": {
+        "reservation_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+        "request_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+        "terminal_state": "malformed_json",
+        "idempotency_key": "request-accounting-v1:live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+        "reserved_tokens": 24000,
+        "remaining_active_tokens": 0,
+        "event": "reconciliation_settlement_v1",
+        "settled_tokens": 3556,
+        "released_tokens": 0,
+        "usage_source": "provider_reported",
+        "billing_liability": "settled",
+        "underlying_terminal_event": "reservation_settled"
+      },
+      "reconciliation_reason": "Provider usage was reported before downstream validation failed.",
+      "amount_settled_tokens": 3556,
+      "unused_reservation_capacity_tokens": 20444,
+      "remaining_active_tokens": 0,
+      "immutable_historical_ledger_sha256": "84b5290bd3130fe755da3c18b23fafe85e1bdfd07bd7a945a10577a27251a442"
+    }
+  ],
+  "reconciliation_signature": "4ae4920054876c2a10e2be593878c225d078e519ede3d064f5bf9c2e875cd6b8"
+}

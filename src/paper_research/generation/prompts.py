@@ -6,6 +6,7 @@ QA_REQUIRED_CLAIMS_CITATION_ID_V3_1 = "qa-required-claims-citation-id-v3.1"
 QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE = (
     "qa-required-claims-citation-id-v3.2-candidate"
 )
+SCHEMA_RELIABILITY_V1_CANDIDATE = "schema-reliability-v1-candidate"
 
 
 def qa_system_prompt(prompt_version: str) -> str:

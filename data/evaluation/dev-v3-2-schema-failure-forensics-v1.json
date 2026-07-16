@@ -1,0 +1,405 @@
+{
+  "schema_version": "dev-v3-2-schema-failure-forensics-v1",
+  "offline_only": true,
+  "historical_results_modified": false,
+  "runs": [
+    {
+      "run_id": "live-dev-v3-2-q005-54831df6ea19",
+      "question_id": "q005",
+      "request_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+      "required_claim_count": 0,
+      "rendered_system_prompt_sha256": "1797e64d7ae502cd13e3d7595f6125580662ed394eeb51628deece7e3eeba478",
+      "rendered_user_prompt_sha256": "a146489db22e386a694f105e6f4a5fefa8697c007b02795457be1b4cf4786b49",
+      "exact_delivered_messages_sha256": "81e8e0bef881ebb78b97c556f1f1659a38b8dc86fd7debfcf150dac020ab2025",
+      "expected_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "prompt_versions_actually_present": {
+        "v3_1_literal_count": 2,
+        "v3_2_literal_count": 1
+      },
+      "expected_schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+      "response_format": {
+        "type": "json_object"
+      },
+      "max_output_tokens": 256,
+      "raw_response_file_bytes": 877,
+      "raw_content_bytes": 206,
+      "raw_response_file_sha256": "eb722978338a1bdf75ec687d86a4af0a4b0d54c57fbd9e5e85d6fd97e51bbedd",
+      "raw_content_sha256": "6a37dd2938a04c340d5497a955b6a03bc0e397770acc97755d3dade30e1ebb1a",
+      "finish_reason": "stop",
+      "provider_usage": {
+        "prompt_tokens": 563,
+        "completion_tokens": 50,
+        "total_tokens": 613,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 179
+      },
+      "output_token_count": 50,
+      "response_envelope": {
+        "request_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+        "provider": "siliconflow",
+        "model": "Qwen/Qwen3-8B",
+        "usage": {
+          "input_tokens": 563,
+          "output_tokens": 50,
+          "total_tokens": 613,
+          "usage_source": "provider_reported"
+        },
+        "response_received": true,
+        "raw_response_persisted": true
+      },
+      "raw_response_prefix_safe_excerpt": "{\"question_id\":\"q005\",\"answerable\":false,\"required_claim_results\":[],\"refusal_reason\":\"Evidence is insufficient.\",\"prompt_version\":\"qa-required-claims-citation-id-v3.1\",\"citation_p",
+      "raw_response_suffix_safe_excerpt": "werable\":false,\"required_claim_results\":[],\"refusal_reason\":\"Evidence is insufficient.\",\"prompt_version\":\"qa-required-claims-citation-id-v3.1\",\"citation_protocol\":\"citation-id-v2\"}",
+      "failure_type": null,
+      "parse_error_position": null,
+      "truncated": false,
+      "schema_error_path": "valid_json_wrong_schema: 1 validation error for RequiredClaimsQAResponseV32\nprompt_version\n  Input should be 'qa-required-claims-citation-id-v3.2-candidate' [type=literal_error, input_value='qa-required-claims-citation-id-v3.1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+      "unknown_id_value": null,
+      "unknown_id_value_class": null,
+      "registry_legal_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014"
+      ],
+      "model_visible_id_namespaces": {
+        "public_citation_ids": false,
+        "evidence_ids": false,
+        "block_ids": false,
+        "paper_ids": false,
+        "required_claim_ids": false
+      },
+      "request_ledger_terminal_events": [
+        "validation_failed"
+      ],
+      "historical_request_ledger_sha256": "e1dac26d66dab73d123585335feca3ffdfd5fe7193a418cf10ba1ed0ebad84e2",
+      "reservation_id": "live-dev-v3-2-q005-54831df6ea19:primary:1:bedf2b447a67",
+      "reservation_amount": 24000,
+      "settlement_release_events": [],
+      "policy_executed": false,
+      "final_run_status": "validation_failed"
+    },
+    {
+      "run_id": "live-dev-v3-2-q007-86133230c0ea",
+      "question_id": "q007",
+      "request_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+      "required_claim_count": 3,
+      "rendered_system_prompt_sha256": "1797e64d7ae502cd13e3d7595f6125580662ed394eeb51628deece7e3eeba478",
+      "rendered_user_prompt_sha256": "c195b8e123fcf950472ef00e11fd983e92841eec855582fb9b524fbdc7fdab5c",
+      "exact_delivered_messages_sha256": "753cee9a59f4819cff2386c9350c0c2f9d299329f1081e940a199f79fd26970b",
+      "expected_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "prompt_versions_actually_present": {
+        "v3_1_literal_count": 2,
+        "v3_2_literal_count": 1
+      },
+      "expected_schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+      "response_format": {
+        "type": "json_object"
+      },
+      "max_output_tokens": 832,
+      "raw_response_file_bytes": 3907,
+      "raw_content_bytes": 2986,
+      "raw_response_file_sha256": "be6ce412ff8f0413699438215b7b6254fc655e644137ac691b4d47dc667a1965",
+      "raw_content_sha256": "7b3c7b63cffc0d1a66e2a74647ad9c254c051668478f9cdc0ee5aeb4d95f136d",
+      "finish_reason": "length",
+      "provider_usage": {
+        "prompt_tokens": 2538,
+        "completion_tokens": 832,
+        "total_tokens": 3370,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2538
+      },
+      "output_token_count": 832,
+      "response_envelope": {
+        "request_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+        "provider": "siliconflow",
+        "model": "Qwen/Qwen3-8B",
+        "usage": {
+          "input_tokens": 2538,
+          "output_tokens": 832,
+          "total_tokens": 3370,
+          "usage_source": "provider_reported"
+        },
+        "response_received": true,
+        "raw_response_persisted": true
+      },
+      "raw_response_prefix_safe_excerpt": "{\"question_id\":\"q007\",\"answerable\":true,\"required_claim_results\":[{\"required_claim_id\":\"cl-q007-0dda2c31fef09b05c68b\",\"status\":\"answered\",\"claim_text\":\"BERT is a bidirectional Tran",
+      "raw_response_suffix_safe_excerpt": "ation\" ,\"oracle_used_for_allocation\" ,\"human_pilot_used_for_allocation\" ,\"gold_evidence_used_for_allocation\" ,\"oracle_used_for_allocation\" ,\"human_pilot_used_for_allocation\"",
+      "failure_type": "truncated_json",
+      "parse_error": "Expecting ',' delimiter",
+      "parse_error_position": 2986,
+      "parse_error_line": 2,
+      "parse_error_column": 2231,
+      "truncated": true,
+      "schema_error_path": "malformed_json: Expecting ',' delimiter: line 2 column 2231 (char 2986)",
+      "unknown_id_value": null,
+      "unknown_id_value_class": null,
+      "registry_legal_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015"
+      ],
+      "model_visible_id_namespaces": {
+        "public_citation_ids": true,
+        "evidence_ids": true,
+        "block_ids": false,
+        "paper_ids": false,
+        "required_claim_ids": true
+      },
+      "request_ledger_terminal_events": [
+        "validation_failed"
+      ],
+      "historical_request_ledger_sha256": "74d2cd6687f86e36126ae654050f3f81caa47e43144fe5b22320daf099d70727",
+      "reservation_id": "live-dev-v3-2-q007-86133230c0ea:primary:1:7dec0c0346f6",
+      "reservation_amount": 24000,
+      "settlement_release_events": [],
+      "policy_executed": false,
+      "final_run_status": "validation_failed"
+    },
+    {
+      "run_id": "live-dev-v3-2-q013-68b8399a8c40",
+      "question_id": "q013",
+      "request_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+      "required_claim_count": 3,
+      "rendered_system_prompt_sha256": "1797e64d7ae502cd13e3d7595f6125580662ed394eeb51628deece7e3eeba478",
+      "rendered_user_prompt_sha256": "702013cbca75fbf6ace2d6a468bb367c814563f8da601835087236e5cb4e5879",
+      "exact_delivered_messages_sha256": "4af162467dfb99c8707d60f2ea6cec7a8e41798644a5838447d654a8d9841217",
+      "expected_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "prompt_versions_actually_present": {
+        "v3_1_literal_count": 2,
+        "v3_2_literal_count": 1
+      },
+      "expected_schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+      "response_format": {
+        "type": "json_object"
+      },
+      "max_output_tokens": 832,
+      "raw_response_file_bytes": 1589,
+      "raw_content_bytes": 862,
+      "raw_response_file_sha256": "31d144e079fac359eafa8a6a5c19294beb2285e3d78c3990c521a450977f084a",
+      "raw_content_sha256": "2256b021a80569b2b88295c8ba6b303176c30b7eb53d6284c657531a96f6fbc7",
+      "finish_reason": "stop",
+      "provider_usage": {
+        "prompt_tokens": 3002,
+        "completion_tokens": 302,
+        "total_tokens": 3304,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 2618
+      },
+      "output_token_count": 302,
+      "response_envelope": {
+        "request_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+        "provider": "siliconflow",
+        "model": "Qwen/Qwen3-8B",
+        "usage": {
+          "input_tokens": 3002,
+          "output_tokens": 302,
+          "total_tokens": 3304,
+          "usage_source": "provider_reported"
+        },
+        "response_received": true,
+        "raw_response_persisted": true
+      },
+      "raw_response_prefix_safe_excerpt": "{\"question_id\":\"q013\",\"answerable\":true,\"required_claim_results\":[{\"required_claim_id\":\"cl-q013-ed3f2a06305ea05d1b9e\",\"status\":\"answered\",\"claim_text\":\"Every task is formulated as",
+      "raw_response_suffix_safe_excerpt": "\"ev-ff3494a8a61d2ee3a752968a\"],\"omission_reason\":null}],\"refusal_reason\":null,\"prompt_version\":\"qa-required-claims-citation-id-v3.2-candidate\",\"citation_protocol\":\"citation-id-v2\"}",
+      "failure_type": null,
+      "parse_error_position": null,
+      "truncated": false,
+      "schema_error_path": "unknown_citation_id: ev-d50a1a7cff8f44a53f2fcef1",
+      "unknown_id_value": "ev-d50a1a7cff8f44a53f2fcef1",
+      "unknown_id_value_class": "internal_evidence_id",
+      "registry_legal_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015",
+        "E016",
+        "E017",
+        "E018",
+        "E019",
+        "E020"
+      ],
+      "model_visible_id_namespaces": {
+        "public_citation_ids": true,
+        "evidence_ids": true,
+        "block_ids": false,
+        "paper_ids": false,
+        "required_claim_ids": true
+      },
+      "request_ledger_terminal_events": [
+        "validation_failed"
+      ],
+      "historical_request_ledger_sha256": "b69ceb72710987c72bc47230dbea636371bf26ac181d4fd38c97545d1c19445a",
+      "reservation_id": "live-dev-v3-2-q013-68b8399a8c40:primary:1:c47616df22ce",
+      "reservation_amount": 24000,
+      "settlement_release_events": [],
+      "policy_executed": false,
+      "final_run_status": "validation_failed"
+    },
+    {
+      "run_id": "live-dev-v3-2-q050-35d1729bb6a8",
+      "question_id": "q050",
+      "request_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+      "required_claim_count": 3,
+      "rendered_system_prompt_sha256": "1797e64d7ae502cd13e3d7595f6125580662ed394eeb51628deece7e3eeba478",
+      "rendered_user_prompt_sha256": "8eef76fddd537f5e27956f91f3aa7c84dd23af99e49a14b66efcb3bf00a2b355",
+      "exact_delivered_messages_sha256": "5069c0bbf0c066975a5460c04a50a36b134c9cd6da23b55aad2c8e86c3354674",
+      "expected_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "prompt_versions_actually_present": {
+        "v3_1_literal_count": 2,
+        "v3_2_literal_count": 1
+      },
+      "expected_schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+      "response_format": {
+        "type": "json_object"
+      },
+      "max_output_tokens": 832,
+      "raw_response_file_bytes": 2747,
+      "raw_content_bytes": 1417,
+      "raw_response_file_sha256": "9e8dd04b9de0aa1feba34037528898b2b7a87a7c4ff3818c229f7bac9fd2f107",
+      "raw_content_sha256": "b3276f9c5a39b255228978a589c02e004685ef7176267dfc7972e3e2f9fc228b",
+      "finish_reason": "length",
+      "provider_usage": {
+        "prompt_tokens": 2724,
+        "completion_tokens": 832,
+        "total_tokens": 3556,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2724
+      },
+      "output_token_count": 832,
+      "response_envelope": {
+        "request_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+        "provider": "siliconflow",
+        "model": "Qwen/Qwen3-8B",
+        "usage": {
+          "input_tokens": 2724,
+          "output_tokens": 832,
+          "total_tokens": 3556,
+          "usage_source": "provider_reported"
+        },
+        "response_received": true,
+        "raw_response_persisted": true
+      },
+      "raw_response_prefix_safe_excerpt": "{\"question_id\":\"q050\",\"answerable\":true,\"required_claim_results\":[{\"required_claim_id\":\"cl-q050-e6beec554909bcb0e6ba\",\"status\":\"answered\",\"claim_text\":\"The first paper presents the",
+      "raw_response_suffix_safe_excerpt": "",
+      "failure_type": "truncated_json",
+      "parse_error": "Expecting ',' delimiter",
+      "parse_error_position": 1417,
+      "parse_error_line": 610,
+      "parse_error_column": 1,
+      "truncated": true,
+      "schema_error_path": "malformed_json: Expecting ',' delimiter: line 610 column 1 (char 1417)",
+      "unknown_id_value": null,
+      "unknown_id_value_class": null,
+      "registry_legal_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015",
+        "E016",
+        "E017"
+      ],
+      "model_visible_id_namespaces": {
+        "public_citation_ids": true,
+        "evidence_ids": true,
+        "block_ids": false,
+        "paper_ids": false,
+        "required_claim_ids": true
+      },
+      "request_ledger_terminal_events": [
+        "validation_failed"
+      ],
+      "historical_request_ledger_sha256": "84b5290bd3130fe755da3c18b23fafe85e1bdfd07bd7a945a10577a27251a442",
+      "reservation_id": "live-dev-v3-2-q050-35d1729bb6a8:primary:1:df688cb0c44b",
+      "reservation_amount": 24000,
+      "settlement_release_events": [],
+      "policy_executed": false,
+      "final_run_status": "validation_failed"
+    }
+  ],
+  "root_causes": {
+    "q005": {
+      "classification": "model_protocol_version_copy_failure",
+      "finding": "The exact delivered system prompt was constructed from the v3.1 prompt and contained two v3.1 literals and no v3.2 literal. The user payload contained v3.2, but the model copied the explicit v3.1 example."
+    },
+    "q007": {
+      "classification": "truncated_json",
+      "finding": "Provider returned finish_reason=length at the exact 832-token output budget. JSON ended mid-generation with repeated input-field prose."
+    },
+    "q013": {
+      "classification": "multiple_copyable_id_namespaces",
+      "finding": "The model copied an ev-* evidence_id because the user payload exposed evidence_id beside public E### citation IDs."
+    },
+    "q050": {
+      "classification": "truncated_json",
+      "finding": "Provider returned finish_reason=length at the exact 832-token output budget. The JSON object was incomplete and followed by padding newlines."
+    }
+  }
+}
