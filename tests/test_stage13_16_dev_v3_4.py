@@ -13,10 +13,7 @@ from paper_research.generation.schema_reliability import (
 from scripts.evidence_qa_dev_lib_v1 import DEV_IDS, canonical_hash
 from scripts.evidence_qa_dev_v3_3_lib import output_budget, safe_model_input
 from scripts.evidence_qa_dev_v3_4_lib import build_freeze, write_visible_id_audit
-from scripts.freeze_stage13_16_checkpoint_v1 import (
-    build_failure_freeze,
-    build_file_audit,
-)
+from scripts.freeze_stage13_16_checkpoint_v1 import build_failure_freeze
 from scripts.run_evidence_qa_dev_v3_4 import run_one, verify_request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -338,7 +335,11 @@ def test_stage13_16_historical_protection_passes() -> None:
 
 
 def test_stage13_16_checkpoint_audit_and_failure_freeze_are_stable() -> None:
-    file_audit = build_file_audit()
+    file_audit = json.loads(
+        (DATA / "stage13-16-checkpoint-file-audit-v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
     frozen = json.loads(
         (DATA / "stage13-16-dev-v3-4-failure-freeze-v1.json").read_text(
             encoding="utf-8"

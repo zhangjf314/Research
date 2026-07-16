@@ -1,0 +1,22 @@
+{
+  "schema_version": "slot-status-derivation-safety-audit-v1",
+  "prompt_version": "qa-required-claims-content-payload-v3.5-candidate",
+  "model_payload_status_field_count": 0,
+  "local_added_field": "status",
+  "claim_text_changes": 0,
+  "omission_reason_changes": 0,
+  "answerability_changes": 0,
+  "slot_count_changes": 0,
+  "claim_id_changes": 0,
+  "status_derivation_ambiguities": 0,
+  "semantic_field_changes": 0,
+  "derivation_idempotent": true,
+  "replay_deterministic": true,
+  "forbidden_prompt_tokens": [],
+  "gold_leakage": false,
+  "human_label_leakage": false,
+  "fixed_id_special_cases": false,
+  "internal_id_exposure": 0,
+  "status_enum_copy_requirement_removed": true,
+  "gate": "PASSED"
+}

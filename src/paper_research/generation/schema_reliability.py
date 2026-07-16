@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, field_validator
 
 from paper_research.generation.required_claim_output import (
     RequiredClaimStatus,
@@ -21,6 +21,11 @@ DEV_V3_4_PROMPT_VERSION = "qa-required-claims-minimal-payload-v3.4"
 REFUSAL_CANONICALIZATION_VERSION = "refusal-empty-to-null-canonicalization-v1"
 MODEL_PAYLOAD_SCHEMA_VERSION = "minimal-required-claim-payload-v1"
 LOCAL_ENVELOPE_SCHEMA_VERSION = "locally-bound-required-claim-envelope-v1"
+SCHEMA_RELIABILITY_V3_CANDIDATE = "schema-reliability-v3-candidate"
+MODEL_PAYLOAD_V3_VERSION = "required-claim-model-payload-v3"
+LOCAL_ENVELOPE_V3_VERSION = "required-claim-local-envelope-v3"
+DEV_V3_5_CANDIDATE_PROMPT_VERSION = "qa-required-claims-content-payload-v3.5-candidate"
+SLOT_STATUS_DERIVATION_VERSION = "derive-slot-status-v1"
 
 
 class MinimalRequiredClaimResult(BaseModel):
@@ -125,6 +130,108 @@ class ModelPayloadCanonicalizationV2(BaseModel):
     validation_after: str
 
 
+class AnsweredContentSlotV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    required_claim_id: str = Field(min_length=1)
+    claim_text: str
+    omission_reason: Literal[None]
+
+    @field_validator("claim_text")
+    @classmethod
+    def validate_claim_text(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("claim_text must be non-empty after trimming")
+        return value
+
+
+class UnsupportedContentSlotV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    required_claim_id: str = Field(min_length=1)
+    claim_text: Literal[None]
+    omission_reason: str
+
+    @field_validator("omission_reason")
+    @classmethod
+    def validate_omission_reason(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("omission_reason must be non-empty after trimming")
+        return value
+
+
+ContentSlotV3 = AnsweredContentSlotV3 | UnsupportedContentSlotV3
+
+
+class AnswerablePayloadV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    answerable: Literal[True]
+    required_claim_results: list[ContentSlotV3] = Field(min_length=1)
+
+
+class UnanswerablePayloadV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    answerable: Literal[False]
+    required_claim_results: list[ContentSlotV3] = Field(max_length=0)
+    refusal_reason: str
+
+    @field_validator("refusal_reason")
+    @classmethod
+    def validate_refusal_reason(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("refusal_reason must be non-empty after trimming")
+        return value
+
+
+DiscriminatedPayloadV3 = Annotated[
+    AnswerablePayloadV3 | UnanswerablePayloadV3,
+    Field(discriminator="answerable"),
+]
+PAYLOAD_V3_ADAPTER = TypeAdapter(DiscriminatedPayloadV3)
+
+
+class SlotStatusDerivationV1(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    source_payload_hash: str
+    required_claim_id: str
+    derived_status: Literal["answered", "unsupported"]
+    derivation_rule: Literal[
+        "nonempty_claim_and_null_omission",
+        "null_claim_and_nonempty_omission",
+    ]
+    changed_semantic_fields: Literal[0]
+    added_local_metadata_only: Literal[True]
+    validation_before: Literal["content_slot_v3_valid"]
+    validation_after: Literal["local_status_derived"]
+
+
+class DerivedContentSlotV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    required_claim_id: str
+    status: Literal["answered", "unsupported"]
+    claim_text: str | None
+    omission_reason: str | None
+    citation_ids: list[str]
+    policy_trace_reference: str | None
+
+
+class LocalEnvelopeV3(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    question_id: str
+    answerable: bool
+    required_claim_results: list[DerivedContentSlotV3]
+    refusal_reason: str | None
+    prompt_version: Literal["qa-required-claims-content-payload-v3.5-candidate"]
+    citation_protocol: Literal["citation-id-v2"]
+    payload_schema_version: Literal["required-claim-model-payload-v3"]
+    status_derivation_version: Literal["derive-slot-status-v1"]
+
+
 def schema_reliability_system_prompt() -> str:
     return (
         "Return exactly one JSON object with only answerable, "
@@ -174,11 +281,149 @@ def dev_v3_4_system_prompt() -> str:
     return dev_v3_4_candidate_system_prompt()
 
 
+def dev_v3_5_candidate_system_prompt() -> str:
+    return (
+        "Return exactly one JSON object and no Markdown or surrounding prose. "
+        "Use exactly one of two top-level shapes. When the question can be addressed, "
+        'return {"answerable":true,"required_claim_results":[{"required_claim_id":'
+        '"RC1","claim_text":"A claim fully grounded in the supplied evidence.",'
+        '"omission_reason":null}]}. Include every supplied required_claim_id exactly '
+        "once and do not include refusal_reason. When the question cannot be addressed, "
+        'return {"answerable":false,"required_claim_results":[],"refusal_reason":'
+        '"The supplied evidence does not address the question."}. For an individual '
+        "claim with insufficient evidence, use claim_text=null and a specific non-empty "
+        "omission_reason. Do not output identifiers other than the supplied "
+        "required_claim_id, and do not output protocol fields, policy traces, or extra "
+        "fields."
+    )
+
+
 def _payload_hash(value: dict) -> str:
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode(
         "utf-8"
     )
     return hashlib.sha256(encoded).hexdigest()
+
+
+def derive_slot_status_v1(slot: dict) -> SlotStatusDerivationV1:
+    """Derive local status from the unique valid content shape without repair."""
+    try:
+        validated = TypeAdapter(ContentSlotV3).validate_python(slot)
+    except Exception as exc:
+        raise RequiredClaimValidationError("slot_shape_failed", str(exc)) from exc
+    if isinstance(validated, AnsweredContentSlotV3):
+        status = "answered"
+        rule = "nonempty_claim_and_null_omission"
+    else:
+        status = "unsupported"
+        rule = "null_claim_and_nonempty_omission"
+    return SlotStatusDerivationV1(
+        source_payload_hash=_payload_hash(slot),
+        required_claim_id=validated.required_claim_id,
+        derived_status=status,
+        derivation_rule=rule,
+        changed_semantic_fields=0,
+        added_local_metadata_only=True,
+        validation_before="content_slot_v3_valid",
+        validation_after="local_status_derived",
+    )
+
+
+def validate_payload_v3(
+    raw_content: str,
+    *,
+    expected_claim_ids: list[str],
+) -> AnswerablePayloadV3 | UnanswerablePayloadV3:
+    try:
+        raw = json.loads(raw_content)
+    except json.JSONDecodeError as exc:
+        raise RequiredClaimValidationError("malformed_json", str(exc)) from exc
+    try:
+        payload = PAYLOAD_V3_ADAPTER.validate_python(raw)
+    except Exception as exc:
+        raise RequiredClaimValidationError("branch_schema_failed", str(exc)) from exc
+    actual = [row.required_claim_id for row in payload.required_claim_results]
+    if len(actual) != len(set(actual)):
+        raise RequiredClaimValidationError("duplicate_required_claim_id", str(actual))
+    missing = sorted(set(expected_claim_ids) - set(actual))
+    extra = sorted(set(actual) - set(expected_claim_ids))
+    if missing:
+        raise RequiredClaimValidationError("missing_required_claim_id", str(missing))
+    if extra:
+        raise RequiredClaimValidationError("extra_required_claim_id", str(extra))
+    if expected_claim_ids and not payload.answerable:
+        raise RequiredClaimValidationError(
+            "answerability_protocol_failure",
+            "answerable manifest item used unanswerable branch",
+        )
+    if not expected_claim_ids and payload.answerable:
+        raise RequiredClaimValidationError(
+            "answerability_protocol_failure",
+            "unanswerable manifest item used answerable branch",
+        )
+    return payload
+
+
+def bind_local_envelope_v3(
+    payload: AnswerablePayloadV3 | UnanswerablePayloadV3,
+    *,
+    question_id: str,
+    citation_ids_by_claim: dict[str, list[str]] | None = None,
+    policy_trace_reference: str | None = None,
+) -> LocalEnvelopeV3:
+    citations = citation_ids_by_claim or {}
+    slots = []
+    for row in payload.required_claim_results:
+        source = row.model_dump(mode="json")
+        derivation = derive_slot_status_v1(source)
+        slots.append(
+            {
+                **source,
+                "status": derivation.derived_status,
+                "citation_ids": list(citations.get(row.required_claim_id, []))
+                if derivation.derived_status == "answered"
+                else [],
+                "policy_trace_reference": policy_trace_reference,
+            }
+        )
+    return LocalEnvelopeV3.model_validate(
+        {
+            "question_id": question_id,
+            "answerable": payload.answerable,
+            "required_claim_results": slots,
+            "refusal_reason": (
+                payload.refusal_reason
+                if isinstance(payload, UnanswerablePayloadV3)
+                else None
+            ),
+            "prompt_version": DEV_V3_5_CANDIDATE_PROMPT_VERSION,
+            "citation_protocol": "citation-id-v2",
+            "payload_schema_version": MODEL_PAYLOAD_V3_VERSION,
+            "status_derivation_version": SLOT_STATUS_DERIVATION_VERSION,
+        }
+    )
+
+
+def payload_v3_as_minimal_payload(
+    payload: AnswerablePayloadV3 | UnanswerablePayloadV3,
+) -> MinimalRequiredClaimsPayload:
+    """Bind derived status for reuse by the frozen local citation policy."""
+    slots = []
+    for row in payload.required_claim_results:
+        source = row.model_dump(mode="json")
+        derivation = derive_slot_status_v1(source)
+        slots.append({**source, "status": derivation.derived_status})
+    return MinimalRequiredClaimsPayload.model_validate(
+        {
+            "answerable": payload.answerable,
+            "required_claim_results": slots,
+            "refusal_reason": (
+                payload.refusal_reason
+                if isinstance(payload, UnanswerablePayloadV3)
+                else None
+            ),
+        }
+    )
 
 
 def canonicalize_model_payload_v2(

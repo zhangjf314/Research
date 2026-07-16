@@ -1,0 +1,245 @@
+answerability_modified,claim_ids_modified,claim_text_modified,envelope_binding_success,failure_reason,failure_type,field_projection_completed,final_policy_success,final_slot_success,omission_reason_modified,projectable_under_v3,projected_schema_success,projection_operations,question_id,run_id,semantic_modifications,slot_count_modified,slot_derivation_success
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The prior state of the a...ce transduction models.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Sequential computation l...lelization in training.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The paper targets long-r...ntion-only alternative.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q001,live-dev-v3-4-q001-7ba5d554895c,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The Transformer eschews recurrence.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='It relies on attention t...tween input and output.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='It improves parallelizat...ng translation quality.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": null}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q002,live-dev-v3-4-q002-62a5db4c0693,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Experiments use WMT 2014...nd English-French data.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Sentences are tokenized ...ximate sequence length.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Training uses eight P100...m schedule with warmup.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": null}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q004,live-dev-v3-4-q004-8f6b39b82469,0,False,0
+False,False,False,True,,,True,True,0,False,True,True,[],q005,live-dev-v3-4-q005-6de3aefa6e9e,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='BERT is a bidirectional ...e representation model.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Masked language modeling...rectional pre-training.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='BERT reduces reliance on...ts on eleven NLP tasks.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": null}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q007,live-dev-v3-4-q007-2097f58c6cef,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='BERT is based on a multi...al Transformer encoder.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Pre-training uses masked...xt-sentence prediction.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Fine-tuning initializes ...rs to downstream tasks.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": null}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q008,live-dev-v3-4-q008-839e61a44d1f,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Every task is formulated...t input to text output.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The same model/objective...is reused across tasks.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The framework is called ...t Transfer Transformer.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": null}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""answerable""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""answerable""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""answerable""}]",q013,live-dev-v3-4-q013-1d1cf09b1a28,0,False,0
+False,False,False,False,"branch_schema_failed: 6 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='Claim is supported by th...s a survey/exploration.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The work is primarily a ... a new-method proposal.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='No evidence in the provi...g second-order effects.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The coordinate-ascent st...s among design choices.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='The text mentions that i...t qualitative behavior.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Some automatic benchmark...r qualitative behavior.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": """"}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""unsupported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q015,live-dev-v3-4-q015-bb3d4a50f19e,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Model size is varied fro...n-embedding parameters.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Dataset size is varied from 22M to 23B tokens.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='Model shape variables in...feed-forward dimension.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": """"}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q019,live-dev-v3-4-q019-57e2829a5046,0,False,0
+False,False,False,False,"branch_schema_failed: 9 validation errors for tagged-union[AnswerablePayloadV3,UnanswerablePayloadV3]
+1.required_claim_results.0.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The first paper presents... sequence transduction.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.0.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.1.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='The second paper uses a ...a representation model.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.1.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error
+1.required_claim_results.2.AnsweredContentSlotV3.omission_reason
+  Input should be None [type=literal_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.claim_text
+  Input should be None [type=literal_error, input_value='BERT adds pre-training a...ansformer architecture.', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+1.required_claim_results.2.UnsupportedContentSlotV3.omission_reason
+  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error",branch_schema_failed,True,False,0,False,False,False,"[{""operation"": ""remove_deprecated_field"", ""path"": ""$.refusal_reason"", ""old_value"": """"}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[0].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[1].status"", ""old_value"": ""supported""}, {""operation"": ""remove_deprecated_field"", ""path"": ""$.required_claim_results[2].status"", ""old_value"": ""supported""}]",q050,live-dev-v3-4-q050-8885aa0da41e,0,False,0
