@@ -17,13 +17,14 @@ from scripts.prepare_stage13_9_citation_recall_audit_v1 import (
 )
 
 
-def test_stage13_9_citation_audit_is_pending_and_valid() -> None:
+def test_stage13_9_citation_audit_is_reviewed_and_valid() -> None:
     rows = read_jsonl(DATA / "evidence-qa-dev-v3-1-citation-audit-v1.jsonl")
     validation = validate_citation_audit(rows)
     assert validation == {
         "records": 33,
         "unique_sample_ids": 33,
-        "pending": 33,
+        "pending": 0,
+        "approved": 33,
         "source_hash_valid": True,
         "source_record_hash_valid": True,
         "immutable_hash_valid": True,

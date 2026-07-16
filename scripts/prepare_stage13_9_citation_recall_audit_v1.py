@@ -71,10 +71,24 @@ def validate_citation_audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         }
         if not required <= set(row):
             raise RuntimeError(f"citation audit schema incomplete: {row['sample_id']}")
-        if row["human_review_status"] != "pending" or row["human_label"] is not None:
-            raise RuntimeError(f"citation audit was pre-labeled: {row['sample_id']}")
-        if any(row.get(field) is not None for field in {"reviewer", "reviewed_at", "review_notes"}):
+        status = row["human_review_status"]
+        if status not in {"pending", "approved"}:
+            raise RuntimeError(f"invalid review status: {row['sample_id']}")
+        if status == "pending" and (
+            row["human_label"] is not None
+            or any(
+                row.get(field) is not None
+                for field in {"reviewer", "reviewed_at", "review_notes"}
+            )
+        ):
             raise RuntimeError(f"pending review metadata populated: {row['sample_id']}")
+        if status == "approved" and (
+            row["human_label"] not in LABELS
+            or not row.get("reviewer")
+            or not row.get("reviewed_at")
+            or not row.get("review_notes")
+        ):
+            raise RuntimeError(f"approved review metadata incomplete: {row['sample_id']}")
         triple = row["citation_triple"]
         key = (triple["paper_id"], int(triple["page"]), triple["block_id"])
         unit = evidence.get(key)
@@ -98,7 +112,10 @@ def validate_citation_audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         if registry["registry_hash"] != row["registry_hash"]:
             raise RuntimeError(f"registry hash mismatch: {row['sample_id']}")
     return {
-        "records": len(rows), "unique_sample_ids": 33, "pending": 33,
+        "records": len(rows),
+        "unique_sample_ids": 33,
+        "pending": sum(row["human_review_status"] == "pending" for row in rows),
+        "approved": sum(row["human_review_status"] == "approved" for row in rows),
         "source_hash_valid": True, "source_record_hash_valid": True,
         "immutable_hash_valid": True, "registry_hash_valid": True,
         "citation_triples_valid": True,

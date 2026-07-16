@@ -142,9 +142,14 @@ def test_canonical_citation_audit_is_pending_and_hash_stable() -> None:
     source = hash_with_metadata(evidence_path, "canonical_jsonl_v1")
     assert len(audit) == len({row["sample_id"] for row in audit}) == 33
     for row in audit:
-        assert row["human_review_status"] == "pending"
-        assert row["human_label"] is None
-        assert row["reviewer"] is row["reviewed_at"] is row["review_notes"] is None
+        assert row["human_review_status"] == "approved"
+        assert row["human_label"] in {
+            "fully_supported",
+            "partially_supported",
+            "related_but_insufficient",
+            "unsupported",
+        }
+        assert row["reviewer"] and row["reviewed_at"] and row["review_notes"]
         assert row["source_canonical_sha256"] == source["value"]
         triple = row["citation_triple"]
         unit = evidence[(triple["paper_id"], int(triple["page"]), triple["block_id"])]

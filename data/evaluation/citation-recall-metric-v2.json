@@ -1,0 +1,61 @@
+{
+  "metric_id": "answerable_question_macro_exact_recall_v2",
+  "protocol": "citation-recall-v2",
+  "version": "2.0",
+  "selected_primary_metric": "answerable_question_macro_exact_recall_v2",
+  "rationale": "Fixed answerable question set, stable denominator, failures score zero, and unanswerable refusal is not mixed into citation recall.",
+  "formula": "mean over fixed 9 answerable questions of unique exact Gold triples hit / fixed question Gold triples",
+  "fixed_manifest": [
+    "q001",
+    "q002",
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "fixed_answerable_questions": [
+    "q001",
+    "q002",
+    "q004",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "fixed_denominator": 9,
+  "failure_handling": "zero",
+  "unanswerable_handling": "excluded",
+  "empty_gold_handling": "score zero and report; protocol blocked if unexpected",
+  "duplicate_relation_handling": "dedupe by full relation key",
+  "relation_key": [
+    "question_id",
+    "required_claim_id",
+    "paper_id",
+    "page",
+    "block_id"
+  ],
+  "question_relation_key": [
+    "question_id",
+    "paper_id",
+    "page",
+    "block_id"
+  ],
+  "gold_version": "gold-set-v1-human-reviewed-2026-07-13 / claim-units-v1",
+  "frozen_at": "2026-07-16",
+  "frozen_before_next_live_run": true,
+  "backward_gate_effect": false,
+  "stage13_8_historical_gate": "FAILED",
+  "dev_v3_1_comparable_recall_status": "RECALCULATED_DIAGNOSTIC",
+  "metrics": {
+    "question_macro_exact_recall": "fixed 10 questions; correct unanswerable refusal scores 1, failure scores 0",
+    "answerable_question_macro_exact_recall_v2": "primary; fixed 9 answerable questions",
+    "required_claim_macro_exact_recall": "fixed 27 claims; diagnostic while claim Gold mapping is ambiguous",
+    "micro_exact_gold_relation_recall": "full relation-key micro recall; diagnostic while claim Gold mapping is ambiguous"
+  }
+}

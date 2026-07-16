@@ -1,0 +1,295 @@
+{
+  "schema_version": "citation-recall-v2-comparison-v1",
+  "protocol": {
+    "metric_id": "answerable_question_macro_exact_recall_v2",
+    "protocol": "citation-recall-v2",
+    "version": "2.0",
+    "selected_primary_metric": "answerable_question_macro_exact_recall_v2",
+    "rationale": "Fixed answerable question set, stable denominator, failures score zero, and unanswerable refusal is not mixed into citation recall.",
+    "formula": "mean over fixed 9 answerable questions of unique exact Gold triples hit / fixed question Gold triples",
+    "fixed_manifest": [
+      "q001",
+      "q002",
+      "q004",
+      "q005",
+      "q007",
+      "q008",
+      "q013",
+      "q015",
+      "q019",
+      "q050"
+    ],
+    "fixed_answerable_questions": [
+      "q001",
+      "q002",
+      "q004",
+      "q007",
+      "q008",
+      "q013",
+      "q015",
+      "q019",
+      "q050"
+    ],
+    "fixed_denominator": 9,
+    "failure_handling": "zero",
+    "unanswerable_handling": "excluded",
+    "empty_gold_handling": "score zero and report; protocol blocked if unexpected",
+    "duplicate_relation_handling": "dedupe by full relation key",
+    "relation_key": [
+      "question_id",
+      "required_claim_id",
+      "paper_id",
+      "page",
+      "block_id"
+    ],
+    "question_relation_key": [
+      "question_id",
+      "paper_id",
+      "page",
+      "block_id"
+    ],
+    "gold_version": "gold-set-v1-human-reviewed-2026-07-13 / claim-units-v1",
+    "frozen_at": "2026-07-16",
+    "frozen_before_next_live_run": true,
+    "backward_gate_effect": false,
+    "stage13_8_historical_gate": "FAILED",
+    "dev_v3_1_comparable_recall_status": "RECALCULATED_DIAGNOSTIC",
+    "metrics": {
+      "question_macro_exact_recall": "fixed 10 questions; correct unanswerable refusal scores 1, failure scores 0",
+      "answerable_question_macro_exact_recall_v2": "primary; fixed 9 answerable questions",
+      "required_claim_macro_exact_recall": "fixed 27 claims; diagnostic while claim Gold mapping is ambiguous",
+      "micro_exact_gold_relation_recall": "full relation-key micro recall; diagnostic while claim Gold mapping is ambiguous"
+    }
+  },
+  "gold_relation_count": 99,
+  "gold_relation_ambiguity_count": 99,
+  "status": "CITATION_RECALL_V2_BLOCKED_BY_GOLD_RELATION_AMBIGUITY",
+  "experiments": [
+    {
+      "evaluation_version": "stage11c_a",
+      "available_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "missing_questions": [],
+      "provider_or_schema_failures": [],
+      "manifest_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "answerable_fixed_denominator": 9,
+      "question_macro_exact_recall": 0.15333333333333332,
+      "answerable_question_macro_exact_recall_v2": 0.05925925925925926,
+      "required_claim_macro_exact_recall": 0.014814814814814815,
+      "micro_exact_gold_relation_recall": 0.020202020202020204,
+      "micro_relation_numerator": 2,
+      "micro_relation_denominator": 99,
+      "per_question": {
+        "q001": 0.0,
+        "q002": 0.0,
+        "q004": 0.2,
+        "q005": 1.0,
+        "q007": 0.0,
+        "q008": 0.0,
+        "q013": 0.0,
+        "q015": 0.3333333333333333,
+        "q019": 0.0,
+        "q050": 0.0
+      },
+      "historical_reported_recall": 0.081481,
+      "historical_formula": "completed answerable macro in historical helper",
+      "directly_comparable_under_v2": true,
+      "limitations": [
+        "Required-claim and micro relation metrics use inherited question-level Gold candidates and are diagnostic because claim-level Gold mapping is ambiguous.",
+        "Legacy generated claims are mapped to required claims using the frozen lexical overlap threshold 0.35."
+      ]
+    },
+    {
+      "evaluation_version": "stage13_2_b",
+      "available_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "missing_questions": [],
+      "provider_or_schema_failures": [
+        "q001",
+        "q008",
+        "q019"
+      ],
+      "manifest_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "answerable_fixed_denominator": 9,
+      "question_macro_exact_recall": 0.05,
+      "answerable_question_macro_exact_recall_v2": 0.05555555555555555,
+      "required_claim_macro_exact_recall": 0.018518518518518517,
+      "micro_exact_gold_relation_recall": 0.020202020202020204,
+      "micro_relation_numerator": 2,
+      "micro_relation_denominator": 99,
+      "per_question": {
+        "q001": 0.0,
+        "q002": 0.0,
+        "q004": 0.0,
+        "q005": 0.0,
+        "q007": 0.25,
+        "q008": 0.0,
+        "q013": 0.25,
+        "q015": 0.0,
+        "q019": 0.0,
+        "q050": 0.0
+      },
+      "historical_reported_recall": 0.083333,
+      "historical_formula": "completed answerable macro; failures dynamically excluded",
+      "directly_comparable_under_v2": true,
+      "limitations": [
+        "Required-claim and micro relation metrics use inherited question-level Gold candidates and are diagnostic because claim-level Gold mapping is ambiguous.",
+        "Legacy generated claims are mapped to required claims using the frozen lexical overlap threshold 0.35."
+      ]
+    },
+    {
+      "evaluation_version": "stage13_3_dev_v2",
+      "available_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "missing_questions": [],
+      "provider_or_schema_failures": [
+        "q050"
+      ],
+      "manifest_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "answerable_fixed_denominator": 9,
+      "question_macro_exact_recall": 0.33666666666666667,
+      "answerable_question_macro_exact_recall_v2": 0.26296296296296295,
+      "required_claim_macro_exact_recall": 0.07654320987654321,
+      "micro_exact_gold_relation_recall": 0.08080808080808081,
+      "micro_relation_numerator": 8,
+      "micro_relation_denominator": 99,
+      "per_question": {
+        "q001": 0.6666666666666666,
+        "q002": 1.0,
+        "q004": 0.2,
+        "q005": 1.0,
+        "q007": 0.25,
+        "q008": 0.25,
+        "q013": 0.0,
+        "q015": 0.0,
+        "q019": 0.0,
+        "q050": 0.0
+      },
+      "historical_reported_recall": 0.295833,
+      "historical_formula": "completed answerable macro; q050 failure dynamically excluded",
+      "directly_comparable_under_v2": true,
+      "limitations": [
+        "Required-claim and micro relation metrics use inherited question-level Gold candidates and are diagnostic because claim-level Gold mapping is ambiguous.",
+        "Legacy generated claims are mapped to required claims using the frozen lexical overlap threshold 0.35."
+      ]
+    },
+    {
+      "evaluation_version": "stage13_8_dev_v3_1",
+      "available_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "missing_questions": [],
+      "provider_or_schema_failures": [],
+      "manifest_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q005",
+        "q007",
+        "q008",
+        "q013",
+        "q015",
+        "q019",
+        "q050"
+      ],
+      "answerable_fixed_denominator": 9,
+      "question_macro_exact_recall": 0.295,
+      "answerable_question_macro_exact_recall_v2": 0.21666666666666667,
+      "required_claim_macro_exact_recall": 0.13518518518518519,
+      "micro_exact_gold_relation_recall": 0.09090909090909091,
+      "micro_relation_numerator": 9,
+      "micro_relation_denominator": 99,
+      "per_question": {
+        "q001": 0.0,
+        "q002": 1.0,
+        "q004": 0.2,
+        "q005": 1.0,
+        "q007": 0.25,
+        "q008": 0.25,
+        "q013": 0.25,
+        "q015": 0.0,
+        "q019": 0.0,
+        "q050": 0.0
+      },
+      "historical_reported_recall": 0.295,
+      "historical_formula": "fixed ten-question macro with q005 refusal=1",
+      "directly_comparable_under_v2": true,
+      "limitations": [
+        "Required-claim and micro relation metrics use inherited question-level Gold candidates and are diagnostic because claim-level Gold mapping is ambiguous.",
+        "Legacy generated claims are mapped to required claims using the frozen lexical overlap threshold 0.35."
+      ]
+    }
+  ]
+}

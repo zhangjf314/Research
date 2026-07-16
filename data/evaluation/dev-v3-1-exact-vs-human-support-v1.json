@@ -1,0 +1,25 @@
+{
+  "schema_version": "dev-v3-1-exact-vs-human-support-v1",
+  "matrix": {
+    "exact_hit+fully_supported": 6,
+    "exact_hit+partially_supported": 2,
+    "exact_hit+related_but_insufficient": 1,
+    "exact_hit+unsupported": 0,
+    "exact_hit+gold_annotation_too_narrow": 0,
+    "exact_hit+ambiguous_claim": 0,
+    "exact_hit+malformed_evidence": 0,
+    "exact_miss+fully_supported": 10,
+    "exact_miss+partially_supported": 8,
+    "exact_miss+related_but_insufficient": 4,
+    "exact_miss+unsupported": 2,
+    "exact_miss+gold_annotation_too_narrow": 0,
+    "exact_miss+ambiguous_claim": 0,
+    "exact_miss+malformed_evidence": 0
+  },
+  "exact_miss_but_strict_supported_rate": 0.4166666666666667,
+  "exact_miss_but_lenient_supported_rate": 0.75,
+  "exact_hit_but_not_fully_supported_rate": 0.3333333333333333,
+  "exact_hit_but_unsupported_rate": 0.0,
+  "human_support_changes_exact_recall": false,
+  "exact_recall_changes_human_support": false
+}
