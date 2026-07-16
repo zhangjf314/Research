@@ -77,6 +77,19 @@ class RequiredClaimsQAResponseV31(BaseModel):
     citation_protocol: Literal["citation-id-v2"]
 
 
+class RequiredClaimsQAResponseV32(BaseModel):
+    """Dev v3.2 candidate response; top-level and slot cardinality stay at v1.1."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    question_id: str = Field(min_length=1)
+    answerable: bool
+    required_claim_results: list[RequiredClaimResult]
+    refusal_reason: str | None
+    prompt_version: Literal["qa-required-claims-citation-id-v3.2-candidate"]
+    citation_protocol: Literal["citation-id-v2"]
+
+
 # Backward-compatible names for Phase A fixtures; new code uses the explicit names.
 RequiredClaimSlot = RequiredClaimResult
 RequiredClaimsQA = RequiredClaimsQAResponse
@@ -290,6 +303,49 @@ def parse_and_validate_required_claim_response_v31(
         if mapped:
             raise RequiredClaimValidationError(mapped, str(exc)) from exc
         raise
+    return output
+
+
+def parse_and_validate_required_claim_response_v32(
+    raw_content: str,
+    *,
+    expected_question_id: str,
+    expected_claim_ids: list[str],
+    registry: CitationRegistry,
+    allowed_by_claim: dict[str, set[str]],
+    expected_registry_hash: str,
+) -> RequiredClaimsQAResponseV32:
+    """Validate raw/final Dev v3.2 output without normalization or correction."""
+    import json
+
+    try:
+        raw = json.loads(raw_content)
+    except json.JSONDecodeError as exc:
+        raise RequiredClaimValidationError("malformed_json", str(exc)) from exc
+    if not isinstance(raw, dict):
+        raise RequiredClaimValidationError("valid_json_wrong_schema", "top level is not an object")
+    if set(raw) == {expected_question_id} and isinstance(raw[expected_question_id], dict):
+        raise RequiredClaimValidationError("question_wrapper_rejected", expected_question_id)
+    if "claims" in raw:
+        raise RequiredClaimValidationError("legacy_schema_rejected", "legacy claims field")
+    if "required_claim_results" not in raw and set(raw) & set(expected_claim_ids):
+        raise RequiredClaimValidationError("claim_map_rejected", "claim IDs used as top-level keys")
+    try:
+        validate_no_free_triples(raw)
+        output = RequiredClaimsQAResponseV32.model_validate(raw)
+    except RequiredClaimValidationError:
+        raise
+    except Exception as exc:
+        raise RequiredClaimValidationError("valid_json_wrong_schema", str(exc)) from exc
+    if output.question_id != expected_question_id:
+        raise RequiredClaimValidationError(
+            "answerability_protocol_failure",
+            f"expected question_id {expected_question_id}, got {output.question_id}",
+        )
+    validate_registry_hash(registry, expected_registry_hash)
+    validate_required_claim_slots(output, expected_claim_ids, registry, allowed_by_claim)
+    if any(len(slot.citation_ids) > 3 for slot in output.required_claim_results):
+        raise RequiredClaimValidationError("citation_cap_exceeded", expected_question_id)
     return output
 
 

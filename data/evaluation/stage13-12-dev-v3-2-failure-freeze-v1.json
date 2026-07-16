@@ -1,0 +1,264 @@
+{
+  "schema_version": "stage13-12-dev-v3-2-failure-freeze-v1",
+  "evaluation_version": "evidence-qa-dev-v3.2",
+  "manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "prompt_hash": "73df617c1ae2943a6fcecb07f096fed480392951a0c9e271ff03624284bc992c",
+  "schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+  "policy_hash": "0a381a75ede9fbfc43d6d47fc2c6b392435cb37e28e285157187839fffa6cc1b",
+  "runs": [
+    {
+      "run_id": "live-dev-v3-2-q001-ecfd41f84a1b",
+      "question_id": "q001",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "30cc1a70bf43f808cebe796d2c227fe7d96f1e44fd174bf94133e6e57b6e8672",
+      "raw_content_sha256": "ec9f04ff0cd426aea6c5b0f281fbde35221e55bfbf439d8580cae182f567a879",
+      "result_file_sha256": "2bb5a319fe0cf75b5016624de5adeb36c4fbbd906c4ae6e6468cdf381dcecdd7",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2519,
+        "output_tokens": 240,
+        "total_tokens": 2759,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q002-0b25da8fd4ec",
+      "question_id": "q002",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "471ab25f91cc83fb055650e0f7e8e601067f41e9f890a8c071d1ea2fc8fd57a1",
+      "raw_content_sha256": "70f0cfa2ccab1a64b3dfc39ca861889bc53cb545a973078ec6ebf6b3ca8f4c44",
+      "result_file_sha256": "c3defc0ad50ee49ea2c9cda8499061ddc2ca0f4a301af847336c44b16a3da401",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2499,
+        "output_tokens": 232,
+        "total_tokens": 2731,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q004-22960d3f7c5f",
+      "question_id": "q004",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "b63cb74509e06587b9787ece497b9b2f7e11c638ae5f7d855a0c64880bca8f7f",
+      "raw_content_sha256": "0d3f9f70b02dd043406e2ccee8c20ca547fe1df816dc6ce00c7ed9d3245dfac9",
+      "result_file_sha256": "7fd337bc2b2f05e29c6c3b289642ca4c3fe2e0daac433b37ac85fd3a5c0792e0",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2673,
+        "output_tokens": 255,
+        "total_tokens": 2928,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q005-54831df6ea19",
+      "question_id": "q005",
+      "terminal_status": "validation_failed",
+      "raw_response_file_sha256": "eb722978338a1bdf75ec687d86a4af0a4b0d54c57fbd9e5e85d6fd97e51bbedd",
+      "raw_content_sha256": "6a37dd2938a04c340d5497a955b6a03bc0e397770acc97755d3dade30e1ebb1a",
+      "result_file_sha256": "316fa908571171e461cafe514f605f21a793bdf0d983fb9c2850fd45aceeb154",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.1",
+      "raw_schema_success": false,
+      "final_schema_success": false,
+      "validation_failure": "valid_json_wrong_schema",
+      "usage": {
+        "input_tokens": 563,
+        "output_tokens": 50,
+        "total_tokens": 613,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 24000,
+        "historical_terminal_accounting_event_present": false
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q007-86133230c0ea",
+      "question_id": "q007",
+      "terminal_status": "validation_failed",
+      "raw_response_file_sha256": "be6ce412ff8f0413699438215b7b6254fc655e644137ac691b4d47dc667a1965",
+      "raw_content_sha256": "7b3c7b63cffc0d1a66e2a74647ad9c254c051668478f9cdc0ee5aeb4d95f136d",
+      "result_file_sha256": "7e0c8e7e23182951cbbd184613590f9a1e40af2ef1e5795c5df9b442a610edb4",
+      "raw_json_valid": false,
+      "raw_prompt_version": null,
+      "raw_schema_success": false,
+      "final_schema_success": false,
+      "validation_failure": "malformed_json",
+      "usage": {
+        "input_tokens": 2538,
+        "output_tokens": 832,
+        "total_tokens": 3370,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 24000,
+        "historical_terminal_accounting_event_present": false
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q008-186fbe5dad14",
+      "question_id": "q008",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "66dca0adb35f216088ba91cc75ba3d88a0dfe1c4283ef171f0e01c2e864be754",
+      "raw_content_sha256": "4211b4943d955d8debc85230176caee61609cdf803858b1df30f6227529fd111",
+      "result_file_sha256": "a19da9bd60fd59703ac31611a1a5b0801af930d8926add1b44720b7c1344955f",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2585,
+        "output_tokens": 238,
+        "total_tokens": 2823,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q013-68b8399a8c40",
+      "question_id": "q013",
+      "terminal_status": "validation_failed",
+      "raw_response_file_sha256": "31d144e079fac359eafa8a6a5c19294beb2285e3d78c3990c521a450977f084a",
+      "raw_content_sha256": "2256b021a80569b2b88295c8ba6b303176c30b7eb53d6284c657531a96f6fbc7",
+      "result_file_sha256": "2af29284327fd11aacf3d1c1cf4b2254b04933b4d42606cb4509ad3a8de428b6",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": false,
+      "final_schema_success": false,
+      "validation_failure": "unknown_citation_id",
+      "usage": {
+        "input_tokens": 3002,
+        "output_tokens": 302,
+        "total_tokens": 3304,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 24000,
+        "historical_terminal_accounting_event_present": false
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q015-daea4cf852f7",
+      "question_id": "q015",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "1da91cd8db619298daff029dab784473bbd3daf21bda0b9ba06fdbc1979a2b39",
+      "raw_content_sha256": "cb368b735b5b9f9418b5f8ce0247882eb7f23142a0b4d591e97425cb100ea12a",
+      "result_file_sha256": "97a679f9edbccc9b1ec91cfc97167811ad427b4f371910f1de767e7e08a05d0c",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2989,
+        "output_tokens": 242,
+        "total_tokens": 3231,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q019-4cffdb0499bb",
+      "question_id": "q019",
+      "terminal_status": "completed",
+      "raw_response_file_sha256": "dac0054079037619ecc5a9776975b8a55eb096bce8ea347ddc2f6ec2f6d598ad",
+      "raw_content_sha256": "4fcf8a9fa7a26d7bb1bcf488c40e4d9f361c491567068c73b3e5720d917d8542",
+      "result_file_sha256": "07c20ec89a5bccd6a4011dce598f3ee39e8e7b466a566951d63856edad11e170",
+      "raw_json_valid": true,
+      "raw_prompt_version": "qa-required-claims-citation-id-v3.2-candidate",
+      "raw_schema_success": true,
+      "final_schema_success": true,
+      "validation_failure": null,
+      "usage": {
+        "input_tokens": 2451,
+        "output_tokens": 255,
+        "total_tokens": 2706,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 0,
+        "historical_terminal_accounting_event_present": true
+      }
+    },
+    {
+      "run_id": "live-dev-v3-2-q050-35d1729bb6a8",
+      "question_id": "q050",
+      "terminal_status": "validation_failed",
+      "raw_response_file_sha256": "9e8dd04b9de0aa1feba34037528898b2b7a87a7c4ff3818c229f7bac9fd2f107",
+      "raw_content_sha256": "b3276f9c5a39b255228978a589c02e004685ef7176267dfc7972e3e2f9fc228b",
+      "result_file_sha256": "1a5fcf45c3053c763d3b7ba79e704e2c1dc417e25f716f30eb4122f68d2d87b1",
+      "raw_json_valid": false,
+      "raw_prompt_version": null,
+      "raw_schema_success": false,
+      "final_schema_success": false,
+      "validation_failure": "malformed_json",
+      "usage": {
+        "input_tokens": 2724,
+        "output_tokens": 832,
+        "total_tokens": 3556,
+        "usage_source": "provider_reported"
+      },
+      "reservation": {
+        "reserved_tokens": 24000,
+        "active_reserved_tokens": 24000,
+        "historical_terminal_accounting_event_present": false
+      }
+    }
+  ],
+  "formal_summary_sha256": "aed66850600e4e664ba547fb38d19060c6b01dfbf0b91058cec86ffcdc975df0",
+  "final_audit_sha256": "0fc8623f33eeb33c1288558b0f3eb489da8ccb233d32d7c77daed2182aa06082",
+  "citation_audit_sha256": "c7c9e4771a0f146a289184750b631dd14206d91dd56c38cea9f413d5f4816ccc",
+  "historical_gate_status": {
+    "engineering": "FAILED",
+    "automated_quality": "FAILED",
+    "human_support": "PENDING",
+    "quality_candidate": "FAILED"
+  },
+  "historical_active_reservations": 4,
+  "historical_active_reserved_tokens": 96000,
+  "immutable": true,
+  "freeze_signature": "1b24de0ac01829477b5dbc1c00a5349116f099004dea911851095f5110a6ca2f",
+  "frozen_at": "2026-07-16T13:00:26.384582+00:00"
+}

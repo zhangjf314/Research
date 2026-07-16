@@ -1,0 +1,11 @@
+claim_scores,question_exact_relation_recall,question_id,status
+"[0.0, 0.5, 0.0]",0.16666666666666666,q001,completed
+"[0.0, 1.0, 1.0]",0.6666666666666666,q002,completed
+"[1.0, 0.0, 1.0]",0.6666666666666666,q004,completed
+[],,q005,validation_failed
+"[0.0, 0.0, 0.0]",0.0,q007,validation_failed
+"[0.0, 0.0, 0.0]",0.0,q008,completed
+"[0.0, 0.0, 0.0]",0.0,q013,validation_failed
+"[0.0, 0.0, 0.0]",0.0,q015,completed
+"[0.0, 0.0, 0.0]",0.0,q019,completed
+"[0.0, 0.0, 0.0]",0.0,q050,validation_failed
