@@ -3,9 +3,23 @@ QA_EVIDENCE_CENTRIC_PROMPT_VERSION = "qa-evidence-centric-v1"
 QA_PRODUCTION_CITATION_ID_V2 = "qa-production-citation-id-v2"
 QA_REQUIRED_CLAIMS_CITATION_ID_V3 = "qa-required-claims-citation-id-v3"
 QA_REQUIRED_CLAIMS_CITATION_ID_V3_1 = "qa-required-claims-citation-id-v3.1"
+QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE = (
+    "qa-required-claims-citation-id-v3.2-candidate"
+)
 
 
 def qa_system_prompt(prompt_version: str) -> str:
+    if prompt_version == QA_REQUIRED_CLAIMS_CITATION_ID_V3_2_CANDIDATE:
+        return (
+            qa_system_prompt(QA_REQUIRED_CLAIMS_CITATION_ID_V3_1)
+            + " Express only content fully supported by claim-local evidence. Numeric facts "
+            "must appear explicitly in cited blocks. Comparisons require evidence for both "
+            "sides. Prefer one primary citation; add at most two non-redundant supporting "
+            "citations only when they cover distinct obligations. Use no more than three "
+            "citations per claim. Adjacent evidence is supporting by default unless it is "
+            "demonstrably more complete than every original candidate. If evidence is "
+            "incomplete, narrow the claim without adding facts or return unsupported."
+        )
     if prompt_version == QA_REQUIRED_CLAIMS_CITATION_ID_V3_1:
         return (
             "Return exactly one JSON object and nothing else. Do not use Markdown. "
