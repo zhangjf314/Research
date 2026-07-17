@@ -1,0 +1,7 @@
+{
+  "schema_version": "set-completion-v2-wrong-evidence-delta-v1",
+  "stage13_25_aligned_wrong": 18,
+  "stage13_26_combined_aligned_wrong": 20,
+  "baseline_aligned_wrong": 16,
+  "wrong_evidence_delta": 2
+}
