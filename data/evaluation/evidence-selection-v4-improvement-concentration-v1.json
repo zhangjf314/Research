@@ -1,0 +1,16 @@
+{
+  "schema_version": "evidence-selection-v4-improvement-concentration-v1",
+  "improved_claims": 1,
+  "improved_questions": 1,
+  "regressions": 0,
+  "net_gains": 1,
+  "largest_single_question_contribution": {
+    "question_id": "q007",
+    "improved_claims": 1
+  },
+  "fraction_driven_by_largest_question": 1.0,
+  "addition_driven_gains": 1,
+  "replacement_driven_gains": 0,
+  "fallback_driven_gains": 0,
+  "single_question_or_claim_driven": true
+}
