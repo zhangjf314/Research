@@ -1,0 +1,135 @@
+{
+  "schema_version": "prompt-output-field-contamination-audit-v1",
+  "allowed_output_fields": [
+    "answerable",
+    "claim_text",
+    "omission_reason",
+    "refusal_reason",
+    "required_claim_id",
+    "required_claim_results"
+  ],
+  "system_prompt_hash": "489fd3a4131a2a8468cd2138d7f027e29cadbe9dde8deb08d9a211eb4a65ec2d",
+  "system_prompt_output_keys": [
+    "answerable",
+    "claim_text",
+    "omission_reason",
+    "refusal_reason",
+    "required_claim_id",
+    "required_claim_results"
+  ],
+  "system_prompt_extra_output_keys": [],
+  "visible_non_output_field_names": {},
+  "collision_risk_tokens": [
+    "evidence_label"
+  ],
+  "json_like_metadata_blocks": 0,
+  "key_value_metadata_blocks": 0,
+  "candidate_evidence_field_names": 0,
+  "examples_containing_extra_fields": 0,
+  "old_prompt_versions": 0,
+  "questions": [
+    {
+      "question_id": "q001",
+      "rendered_prompt_hash": "6388fd9b50ca6e3dfeda36fdc5d6cd344a2ca736d4197915dcd4bd6a79095b33",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q002",
+      "rendered_prompt_hash": "8f3183036517c3d1274e19f03e0e9f68122716b877f7af2501bec3e55f7142cf",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q004",
+      "rendered_prompt_hash": "71cf535f449b086be085c84c0595c230f47349a987fa4f40709f7e4b3561b29a",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q005",
+      "rendered_prompt_hash": "a3cd401582a9f44333aaf351b276b404dc3757e345b2b3c38ce95d58ccf69ee6",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q007",
+      "rendered_prompt_hash": "2da1886b1000aae24db06b29008d731a3f0560a1d23a4e207a917c44547bc98c",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q008",
+      "rendered_prompt_hash": "45ab682342004669e9b3385fa76efcc988437e623f62b00bf75cd646cca87d41",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q013",
+      "rendered_prompt_hash": "24aafe7c29e81afede9a1b430cbce996ecb0b498d8a56461904b46eac976c158",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q015",
+      "rendered_prompt_hash": "236df4192d9bc584fc870e0f79d189eb359c5e51419729a92d13f89cf91568e0",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q019",
+      "rendered_prompt_hash": "d0f3c19128c6f44f9ee469b8862058f2314a564393972c08d3e4b213b0c6d5ed",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    },
+    {
+      "question_id": "q050",
+      "rendered_prompt_hash": "0733b959085c1ca81bac59ff744e16a0f1e14778357d1ba1854de3552fc72612",
+      "visible_non_output_field_names": {},
+      "json_like_metadata_blocks": 0,
+      "key_value_metadata_blocks": 0,
+      "candidate_evidence_field_names": 0,
+      "examples_containing_extra_fields": 0
+    }
+  ],
+  "checks": {
+    "evidence_label_occurrences_zero": true,
+    "evidence_id_occurrences_zero": true,
+    "citation_id_occurrences_zero": true,
+    "block_id_occurrences_zero": true,
+    "retrieval_score_occurrences_zero": true,
+    "model_visible_candidate_metadata_keys_zero": true,
+    "examples_with_extra_fields_zero": true,
+    "prompt_output_fields_subset_payload_v4": true,
+    "old_prompt_versions_zero": true
+  },
+  "gate": "PASSED",
+  "audit_signature": "79d56855ac8725e90b068125e4271d96d18d59787b637da211bb6c73d3636167"
+}

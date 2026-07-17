@@ -1,0 +1,157 @@
+{
+  "schema_version": "dev-v3-5-evidence-label-forensics-v1",
+  "question_id": "q013",
+  "run_id": "live-dev-v3-5-q013-766869b875d7",
+  "slots": [
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-ed3f2a06305ea05d1b9e",
+      "raw_slot_keys": [
+        "claim_text",
+        "evidence_label",
+        "required_claim_id"
+      ],
+      "evidence_label_value": "Evidence A",
+      "evidence_label_type": "str",
+      "claim_text": "The method uses ...",
+      "other_slot_keys": [
+        "evidence_label"
+      ],
+      "required_claim_id_is_valid": true,
+      "claim_text_non_empty": true,
+      "would_otherwise_satisfy_answered_shape": true
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-938d2a4e18520c28a5d7",
+      "raw_slot_keys": [
+        "claim_text",
+        "evidence_label",
+        "required_claim_id"
+      ],
+      "evidence_label_value": "Evidence A",
+      "evidence_label_type": "str",
+      "claim_text": "The same model/objective/training/decoding process is reused across tasks.",
+      "other_slot_keys": [
+        "evidence_label"
+      ],
+      "required_claim_id_is_valid": true,
+      "claim_text_non_empty": true,
+      "would_otherwise_satisfy_answered_shape": true
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-4a5420c3371111d7f5f3",
+      "raw_slot_keys": [
+        "claim_text",
+        "evidence_label",
+        "required_claim_id"
+      ],
+      "evidence_label_value": "Evidence A",
+      "evidence_label_type": "str",
+      "claim_text": "The framework is called T5, the Text-to-Text Transfer Transformer.",
+      "other_slot_keys": [
+        "evidence_label"
+      ],
+      "required_claim_id_is_valid": true,
+      "claim_text_non_empty": true,
+      "would_otherwise_satisfy_answered_shape": true
+    }
+  ],
+  "raw_response_hash": "85bed56d8b4b9628d44bbcc1995c8d0d4d8af6b63cd628a8d7b25dc658cd04c7",
+  "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+  "delivered_user_prompt_hash": "ef4801cb204bfaa1162a23dcd4d3621e6c62e56c77ec5bed56fcf0da7e7c5a5f",
+  "candidate_evidence_hash": "21433d3c0b5106ca26fca43a7ff141d49cdf768ab9b8f3660e47e0f7bc461e6b",
+  "citation_registry_hash": "a0273d7ce08bdb4fe54458e7f24a80f86e25ebef492d7140d1db0e659d996a8f",
+  "finish_reason": "stop",
+  "output_tokens": 167,
+  "exact_schema_failure_path": "required_claim_results[*].evidence_label extra_forbidden",
+  "prompt_token_hits": {
+    "evidence_label": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "Evidence Label": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "evidence label": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "label": {
+      "system": 0,
+      "user": 9,
+      "total": 9
+    },
+    "evidence_id": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "citation_id": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "block_id": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "paper_id": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "page": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "source_id": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "metadata": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "title": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "source": {
+      "system": 0,
+      "user": 0,
+      "total": 0
+    },
+    "Evidence A": {
+      "system": 0,
+      "user": 3,
+      "total": 3
+    },
+    "Evidence B": {
+      "system": 0,
+      "user": 3,
+      "total": 3
+    },
+    "Evidence C": {
+      "system": 0,
+      "user": 3,
+      "total": 3
+    }
+  },
+  "evidence_label_exact_in_prompt": false,
+  "label_key_in_candidate_evidence": true,
+  "evidence_a_display_value_in_candidate_evidence": true,
+  "root_cause_classification": "copied_candidate_metadata_key",
+  "root_cause_detail": "The exact field evidence_label was absent from the prompt, but the candidate evidence JSON exposed the key label and values such as Evidence A; the model combined them into the extra output field evidence_label.",
+  "forensics_signature": "49be5fa790b72fbd0d66fe5c04f2a55363f7544a63b7581bf0e57fdce67fb228"
+}

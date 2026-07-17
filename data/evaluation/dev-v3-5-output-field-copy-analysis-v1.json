@@ -1,0 +1,181 @@
+{
+  "schema_version": "dev-v3-5-output-field-copy-analysis-v1",
+  "model_output_field_vocabulary": [
+    "answerable",
+    "claim_text",
+    "evidence_label",
+    "refusal_reason",
+    "required_claim_id",
+    "required_claim_results"
+  ],
+  "allowed_fields": [
+    "answerable",
+    "claim_text",
+    "omission_reason",
+    "refusal_reason",
+    "required_claim_id",
+    "required_claim_results"
+  ],
+  "extra_fields": [
+    "evidence_label"
+  ],
+  "exact_lexical_copy": {
+    "evidence_label": false
+  },
+  "normalized_lexical_copy": {
+    "label_plus_evidence_a_to_evidence_label": true
+  },
+  "only_q013_occurrence": true,
+  "likely_contamination_source": "candidate evidence JSON metadata key label and display value Evidence A",
+  "rows": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v3-5-q001-61c3f3268028",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v3-5-q002-5e33cbb6a6ee",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v3-5-q004-f350b2f92c97",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v3-5-q005-646fad3f5b1d",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "refusal_reason",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v3-5-q007-1c6abdb8030b",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v3-5-q008-478389ebf181",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v3-5-q013-766869b875d7",
+      "status": "validation_failed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "evidence_label",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [
+        "evidence_label"
+      ],
+      "extra_field_prompt_occurrence": {
+        "evidence_label": {
+          "system": 0,
+          "user": 0,
+          "total": 0
+        }
+      },
+      "only_q013_extra": true
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v3-5-q015-be4c00b405d8",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v3-5-q019-c9403e13e792",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v3-5-q050-4783910873ec",
+      "status": "completed",
+      "model_output_fields": [
+        "answerable",
+        "claim_text",
+        "required_claim_id",
+        "required_claim_results"
+      ],
+      "extra_fields": [],
+      "extra_field_prompt_occurrence": {},
+      "only_q013_extra": false
+    }
+  ],
+  "analysis_signature": "68ec47821fb5547f312f01c74953a54298e3651c4527bee2b7d2e8631f35537e"
+}

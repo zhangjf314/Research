@@ -1,0 +1,61 @@
+{
+  "schema_version": "evidence-presentation-v2-protocol-v1",
+  "version": "evidence-presentation-v2-candidate",
+  "selected_format": "uniform-unnumbered-delimiter",
+  "principles": [
+    "Separate control metadata from semantic passage text.",
+    "The model sees passage text and minimal reading boundaries only.",
+    "The model does not see copyable candidate evidence field names.",
+    "The local CitationRegistry keeps full mapping metadata.",
+    "The model never outputs evidence identifiers."
+  ],
+  "model_visible_candidate_metadata": [],
+  "retained_local_metadata": [
+    "passage_position",
+    "citation_registry_id",
+    "evidence_id",
+    "paper_id",
+    "page",
+    "block_id",
+    "original_or_adjacent",
+    "retrieval_score",
+    "source_hash"
+  ],
+  "format_candidates": {
+    "uniform_unnumbered_delimiter": {
+      "copyable_field_risk": "low",
+      "boundary_clarity": "high",
+      "token_overhead": "medium",
+      "auditability": "high",
+      "local_mapping": "position_only",
+      "requires_model_label_output": false,
+      "selected": true
+    },
+    "plain_paragraph_blank_lines": {
+      "copyable_field_risk": "low",
+      "boundary_clarity": "medium",
+      "token_overhead": "low",
+      "auditability": "medium",
+      "local_mapping": "position_only",
+      "requires_model_label_output": false,
+      "selected": false
+    },
+    "xml_passage_tags": {
+      "copyable_field_risk": "medium",
+      "boundary_clarity": "high",
+      "token_overhead": "medium",
+      "auditability": "high",
+      "local_mapping": "position_only",
+      "requires_model_label_output": false,
+      "selected": false
+    }
+  },
+  "payload_schema_version": "required-claim-model-payload-v4",
+  "payload_schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+  "local_envelope_version": "required-claim-local-envelope-v4",
+  "local_envelope_hash": "6e9064eed9f9b9dba6b52b6b293479bb17df243bb824057cc6fe6ba4fd933757",
+  "prompt_version": "qa-required-claims-discriminated-slots-v3.7-candidate",
+  "prompt_hash": "489fd3a4131a2a8468cd2138d7f027e29cadbe9dde8deb08d9a211eb4a65ec2d",
+  "next_live_authorized": false,
+  "protocol_signature": "1c0770278f4e2ece50e67fc6cecfd7a7e1ffcad6ef4a6a26a0937b03aec6fba7"
+}

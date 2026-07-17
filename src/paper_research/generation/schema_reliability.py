@@ -32,6 +32,9 @@ LOCAL_ENVELOPE_V4_VERSION = "required-claim-local-envelope-v4"
 DEV_V3_6_CANDIDATE_PROMPT_VERSION = (
     "qa-required-claims-discriminated-slots-v3.6-candidate"
 )
+DEV_V3_7_CANDIDATE_PROMPT_VERSION = (
+    "qa-required-claims-discriminated-slots-v3.7-candidate"
+)
 SLOT_STATUS_DERIVATION_V2_VERSION = "derive-slot-status-v2"
 
 
@@ -423,6 +426,23 @@ def dev_v3_6_candidate_system_prompt() -> str:
         'the required numerical range."}. Never include both content fields in one '
         "slot. Never output null, empty strings, placeholders, citations, state "
         "labels, protocol constants, question identifiers, or extra fields."
+    )
+
+
+def dev_v3_7_candidate_system_prompt() -> str:
+    return (
+        "Return exactly one JSON object and no Markdown or surrounding prose. "
+        "For a question that can be addressed, use a top-level object containing "
+        'only "answerable":true and required_claim_results. For a question that '
+        "cannot be addressed, use only "
+        '{"answerable":false,"required_claim_results":[],"refusal_reason":'
+        '"The supplied passages do not address the question."}. Output exactly one '
+        "slot for every supplied required_claim_id. When the supplied passages "
+        'establish the required content, use only {"required_claim_id":"RC1",'
+        '"claim_text":"The method uses ..."}. When the supplied passages are '
+        'insufficient, use only {"required_claim_id":"RC2","omission_reason":'
+        '"The supplied passages do not state the required numerical range."}. '
+        "Never include both content fields in one slot. Do not add any other keys."
     )
 
 
