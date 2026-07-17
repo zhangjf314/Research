@@ -1,0 +1,74 @@
+{
+  "schema_version": "evidence-qa-dev-v3-5-protocol-freeze-v1",
+  "evaluation_version": "evidence-qa-dev-v3.5",
+  "fixed_manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "question_ids": [
+    "q001",
+    "q002",
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "question_count": 10,
+  "answerable_questions": 9,
+  "required_claims": 27,
+  "q005_required_claims": 0,
+  "required_claim_input_hash": "1d54f6fd75d4e60254ec5f18fe9cfbcdcb81c494cc4c8df9177ade4474c1343d",
+  "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd",
+  "prompt_version": "qa-required-claims-discriminated-slots-v3.6-candidate",
+  "prompt_template_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+  "model_payload_schema_version": "required-claim-model-payload-v4",
+  "model_payload_schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+  "local_envelope_schema_version": "required-claim-local-envelope-v4",
+  "local_envelope_schema_hash": "6e9064eed9f9b9dba6b52b6b293479bb17df243bb824057cc6fe6ba4fd933757",
+  "transport": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "json_schema": false,
+    "tool_calling": false,
+    "stream": false
+  },
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "temperature": 0,
+  "retry_policy": {
+    "provider": 0,
+    "json": 0,
+    "citation": 0
+  },
+  "canonicalization": "none",
+  "normalization": "none",
+  "repair": "none",
+  "fallback": "none",
+  "reranker_enabled": false,
+  "gold_used_online": false,
+  "human_labels_used_online": false,
+  "policy_versions": {
+    "citation_selection": "citation-selection-v1",
+    "obligation_policy": "claim-obligation-coverage-v1",
+    "numeric_validator": "numeric-evidence-completeness-v1",
+    "comparison_validator": "comparison-evidence-completeness-v1",
+    "citation_budget": "citation-budget-v1",
+    "evidence_origin": "citation-evidence-origin-policy-v1"
+  },
+  "policy_hashes": {
+    "citation_selection": "d3406f8bae8fb0b12193e614325c98657fe77011a868ae34bd1b3518c49b0e13",
+    "obligation_policy": "f1d9af91ef8ba4a4964318f37dfc3439c21ef7e29b87ea6d0d05161a0f9c2fe1",
+    "numeric_validator": "4eee1dde8d6484b6504d0abc1b97e8f0fe07ad2c3d0b63e8c38959fa8f813104",
+    "comparison_validator": "e1179513efdcbfbe02fde54394e4b618f3de2b77132d64352aa5d11e9b780f2f",
+    "citation_budget": "9141152b187269269826f06eeaccc09f404434bf718f2c1183bf6edcaf9c1cce",
+    "evidence_origin": "e5dbb7a0c7c309e8952bc46fb326c37a4b5a494bee8beacf46dd39e0fb402681"
+  },
+  "provider_capability_snapshot_hash": "000bf54a298e21db53f42419123a53f16a05c279f002d8336146175ac95e7a03",
+  "billing": "explicit_free_provider",
+  "monetary_cost_usd": "0",
+  "frozen_before_live": true,
+  "next_live_authorized": false,
+  "protocol_freeze_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d"
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": "evidence-qa-dev-v3-5-prompt-delivery-freeze-v1",
+  "evaluation_version": "evidence-qa-dev-v3.5",
+  "prompt_version": "qa-required-claims-discriminated-slots-v3.6-candidate",
+  "prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+  "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+  "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+  "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd",
+  "question_count": 10,
+  "questions": [
+    {
+      "question_id": "q001",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "5a48904c80c3071c5db1739a55632710650a8ded210278d17397e0a3bed1fa8f",
+      "delivered_messages_hash": "d415fc3f825b94ff76cd330193ce27aa45e0c0e4c4989969bece667c276d8f7f",
+      "delivered_request_body_hash": "74f26297d1c053842759927b6a6b78ff21e30bca8b7838a8b7a13ea208c71919",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q002",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "4d87dbb7ba81bca029aaf2f3db9631ebe0cbb361b5eab94ca865b8dc1fd8379b",
+      "delivered_messages_hash": "6d8a533da73f23c9ceadb78aed869801d2c9b89514a36ce1774a61476f14d52a",
+      "delivered_request_body_hash": "4ee18435e065a38284d4413537826a1122cabe3b989f115d3eb09acd7af6c959",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q004",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "41ed9494db2eff1c03612b730771b76ff295480a3075b8348c828925e9d43456",
+      "delivered_messages_hash": "c61e93292d1d222ba58c2bf381cecd080208711d1a751ada6330efd9a8bf55b4",
+      "delivered_request_body_hash": "0151e7a8d4b440908f1c286869c4f3d57e33c69cbb5822702a3e563f90e8e419",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q005",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "62babd8357b9071454d0b7d00c94467b3a951d018496a9716885e5cc1db3ad39",
+      "delivered_messages_hash": "8fdf8a4bff2e403428720956d28f841e859d8022ddf8f6488c3931b79b40c798",
+      "delivered_request_body_hash": "7cc9f1d1efe098249c2b18a23520199fe1d8fdf9ddde61a28695b6eddfe180a3",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q007",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "1bbbd174c0aa6d90b90f2df04480fcca5eb5d6a2af41ab7b55d3be2eb01e6029",
+      "delivered_messages_hash": "8427cc5cbc57f8e8f1f0c6428c1d615b5560e7d3c8a545ef82e286ebc4ba0355",
+      "delivered_request_body_hash": "d0f9836c4535342f362635c1bee4fac17c4e95a8726b67c22b5573205290e6cb",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q008",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "19e71b3e1302fdd682baa95f197915afbcaaa334e22acfc9369b33ac8c3f53c8",
+      "delivered_messages_hash": "370f10b388f5d269d9715df834f4ccbc7a2301abf0feda7274c63be693fffe11",
+      "delivered_request_body_hash": "bbb1f1741b3d13f477c61654195749bd1313081dd50b459e49a64735a9950bfd",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q013",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "ef4801cb204bfaa1162a23dcd4d3621e6c62e56c77ec5bed56fcf0da7e7c5a5f",
+      "delivered_messages_hash": "232823c8c4cbea46915470e49a64b6b417b4381141f95d3edb00b52bd7689d3e",
+      "delivered_request_body_hash": "de8b2223a869300dee082469922c7d1a2a38d5bf3c7569a3d5b30fc84f04338a",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q015",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "c0169bbe13d3d929edbe2c2cedef16c540b4681d467b65992293446035a790c8",
+      "delivered_messages_hash": "2e535dae7063560827303c287b1daa4db6c2d1382d2cc2092eadccbbedc5bce7",
+      "delivered_request_body_hash": "cc4094557642c6b8c5d1c74ae3da913ebd96ec044785e4c3ae0d60c93ee5d144",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q019",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "00f041cc2692fec86eb8bf9cd3d2a8fb95693bc635a741db0f488a79439e8738",
+      "delivered_messages_hash": "418ba541e98ae1e96e8d648f6ec9b31dbf9115a53c5a9c0fc724ff3d65909f25",
+      "delivered_request_body_hash": "c504306ccd21a27758f277d8bdefbb6552115948871554b968c36dbdfc30c1d9",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    },
+    {
+      "question_id": "q050",
+      "delivered_system_prompt_hash": "84679d9c1e12eb73206bb5d7a753e0a9c66d41931c2ee2a4e243ff01a55e68d6",
+      "delivered_user_payload_hash": "a1417b7adaaf19ff478316ffaacb46e62fe0c9e66cd35e4de8f32ac0c4da260a",
+      "delivered_messages_hash": "e74e9aa0624ab7d62481fd3b745ccbe177b1dffe6b52fc4bce74aad7d853759f",
+      "delivered_request_body_hash": "a4cad4fd04b3dbf55b9e4e9e8c8c79bc959b6a36aba535b527d5c0171db9736d",
+      "schema_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+      "protocol_signature": "3cb6f9ab7c8265bc8979895dfd13b58194e3310ca93bf9bfd6d388c6ea51379d",
+      "payload_contract_v4_protocol_signature": "509d1d9b52bda3106fa2e2cfb80add35c6b3a478c035ca3f76a78081844f6ccd"
+    }
+  ],
+  "old_prompt_mixed_in": false,
+  "payload_schema_mismatch": false,
+  "prompt_delivery_signature": "739c38b90c8a7cb7c79f4cd04f926f40f30c31e4346cb881a1efaaacda15fa51"
+}
