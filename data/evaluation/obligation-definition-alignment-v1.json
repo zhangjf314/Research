@@ -1,0 +1,12 @@
+{
+  "schema_version": "obligation-definition-alignment-v1",
+  "canonical_obligation_version": "claim-obligation-set-v2-candidate",
+  "required_claims": 27,
+  "missing_mappings": 0,
+  "duplicate_mappings": 0,
+  "mapping_mismatches": 0,
+  "numeric_obligation_claims": 5,
+  "comparison_claims": 0,
+  "deterministic_hash": "0698d054f456b8a4e437a746a0484acc412bd8308d1bcff8892505e068eeba04",
+  "OBLIGATION_DEFINITION_ALIGNMENT": "PASSED"
+}

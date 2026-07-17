@@ -1,0 +1,21 @@
+{
+  "schema_version": "evidence-selection-v4-oracle-gap-v1",
+  "required_claims": 27,
+  "oracle_any_valid_hit_claims": 11,
+  "full_v4_hit_claims": 8,
+  "oracle_v4_gap_claims": 3,
+  "gap_question_distribution": {
+    "q001": 1,
+    "q002": 1,
+    "q050": 1
+  },
+  "gap_root_cause_distribution": {
+    "complementary_set_not_enumerated": 3,
+    "no_gap": 24
+  },
+  "unknown_gap_reasons": 0,
+  "citation_cap_blocked": 0,
+  "candidate_budget_blocked": 0,
+  "V4_ORACLE_GAP_ATTRIBUTION": "COMPLETE",
+  "PRIMARY_V4_ORACLE_GAP": "no_gap"
+}
