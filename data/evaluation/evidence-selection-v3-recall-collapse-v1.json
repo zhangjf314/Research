@@ -1,0 +1,141 @@
+{
+  "schema_version": "evidence-selection-v3-recall-collapse-v1",
+  "required_claims": 27,
+  "candidate_upper_bound_hit_claims": 11,
+  "v3_final_hit_claims": 6,
+  "recall_lost_claims": 5,
+  "root_cause_distribution": {
+    "baseline_removed_without_gain": 1,
+    "claim_fallback_regression": 1,
+    "complementary_candidate_rejected": 4,
+    "no_failure": 6,
+    "true_no_valid_candidate": 15
+  },
+  "unknown_reasons": 0,
+  "hard_veto_counts": {
+    "no_required_obligation_covered": 18,
+    "numeric_anchor_missing_or_conflicting": 4,
+    "result_setup_mismatch": 2,
+    "survey_vs_primary_source_confusion": 1
+  },
+  "baseline_replacements": [
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-8a1d729edcaafb379a20",
+      "baseline_ids": [
+        "E005"
+      ],
+      "selected_ids": [
+        "E001"
+      ],
+      "baseline_any_valid": true,
+      "final_any_valid": false,
+      "replacement_reason": "baseline_ineligible_or_missing",
+      "classification": "baseline_removed_without_gain"
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-938d2a4e18520c28a5d7",
+      "baseline_ids": [
+        "E005"
+      ],
+      "selected_ids": [],
+      "baseline_any_valid": false,
+      "final_any_valid": false,
+      "replacement_reason": "baseline_ineligible_or_missing",
+      "classification": "claim_fallback_regression"
+    }
+  ],
+  "q002_rule_path": [
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-023231b350a389faa754",
+      "baseline_citation_set": [
+        "E001"
+      ],
+      "candidate_evidence_set": [
+        "E001",
+        "E002",
+        "E005"
+      ],
+      "candidate_any_valid_upper_bound_status": true,
+      "candidate_exact_upper_bound_status": true,
+      "selection_v3_eligible_candidates": [
+        "E001",
+        "E002",
+        "E005"
+      ],
+      "candidates_rejected_by_hard_veto": {},
+      "selected_v3_citation_set": [
+        "E001"
+      ],
+      "baseline_retained": true,
+      "baseline_replaced": false,
+      "baseline_removed": false,
+      "supporting_evidence_accepted": [],
+      "supporting_evidence_rejected": [
+        "E005"
+      ],
+      "final_any_valid_status": false,
+      "recall_lost_relative_to_candidate_upper_bound": true,
+      "recall_lost_relative_to_baseline": false,
+      "exact_veto_or_replacement_rule": "hard_veto",
+      "single_candidate_eligibility": true,
+      "set_level_achievable_eligibility": true,
+      "complementary_rejected": true,
+      "baseline_remained_eligible": false,
+      "baseline_replaced_without_proven_net_gain": false,
+      "citation_slot_remained_available": true,
+      "primary_failure_category": "complementary_candidate_rejected"
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-8a1d729edcaafb379a20",
+      "baseline_citation_set": [
+        "E005"
+      ],
+      "candidate_evidence_set": [
+        "E001",
+        "E003",
+        "E005"
+      ],
+      "candidate_any_valid_upper_bound_status": true,
+      "candidate_exact_upper_bound_status": true,
+      "selection_v3_eligible_candidates": [
+        "E001"
+      ],
+      "candidates_rejected_by_hard_veto": {
+        "result_setup_mismatch": [
+          "E005",
+          "E003"
+        ]
+      },
+      "selected_v3_citation_set": [
+        "E001"
+      ],
+      "baseline_retained": false,
+      "baseline_replaced": true,
+      "baseline_removed": true,
+      "supporting_evidence_accepted": [
+        "E001"
+      ],
+      "supporting_evidence_rejected": [
+        "E005"
+      ],
+      "final_any_valid_status": false,
+      "recall_lost_relative_to_candidate_upper_bound": true,
+      "recall_lost_relative_to_baseline": true,
+      "exact_veto_or_replacement_rule": "baseline_ineligible_or_missing",
+      "single_candidate_eligibility": false,
+      "set_level_achievable_eligibility": true,
+      "complementary_rejected": true,
+      "baseline_remained_eligible": false,
+      "baseline_replaced_without_proven_net_gain": true,
+      "citation_slot_remained_available": true,
+      "primary_failure_category": "baseline_removed_without_gain"
+    }
+  ],
+  "SELECTION_V3_RECALL_COLLAPSE_ATTRIBUTION": "COMPLETE",
+  "PRIMARY_SELECTION_V3_FAILURE": "true_no_valid_candidate",
+  "rows_hash": "267aea3a41e3b760e2438751ed00978a6152da71762771c99917268b21efe835"
+}
