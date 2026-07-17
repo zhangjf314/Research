@@ -1,0 +1,21 @@
+{
+  "schema_version": "set-completion-v2-feature-leakage-audit-v1",
+  "sources": [
+    "src\\paper_research\\generation\\claim_obligations.py",
+    "src\\paper_research\\generation\\set_completion_v2.py"
+  ],
+  "gold_online_leakage": 0,
+  "human_label_online_leakage": 0,
+  "oracle_label_online_leakage": 0,
+  "attribution_label_online_leakage": 0,
+  "fixed_id_special_cases": 0,
+  "string_hits": {
+    "gold_online_leakage": [],
+    "human_label_online_leakage": [],
+    "oracle_label_online_leakage": [],
+    "attribution_label_online_leakage": [],
+    "fixed_id_special_cases": []
+  },
+  "arg_hits": [],
+  "gate": "PASSED"
+}
