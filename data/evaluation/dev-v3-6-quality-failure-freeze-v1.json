@@ -1,0 +1,173 @@
+{
+  "schema_version": "dev-v3-6-quality-failure-freeze-v1",
+  "created_at": "2026-07-17T13:12:26.105335+00:00",
+  "evaluation_version": "evidence-qa-dev-v3.6",
+  "branch": "eval/dev-v3-6-evidence-presentation-live-v1",
+  "baseline_head": "da91bbcab73ed64f9da354c2b71a7b6b44db738d",
+  "protocol_freeze_signature": "b481832e4757eef099f2019d839ac7e79080d766e88c44ae22988ade2c0043b6",
+  "prompt_version": "qa-required-claims-discriminated-slots-v3.7-candidate",
+  "prompt_hash": "489fd3a4131a2a8468cd2138d7f027e29cadbe9dde8deb08d9a211eb4a65ec2d",
+  "payload_v4_hash": "50f2afcbf384403ce62d806513ecd5055cd3a8d717062f097c66c6fd1e560641",
+  "envelope_v4_hash": "6e9064eed9f9b9dba6b52b6b293479bb17df243bb824057cc6fe6ba4fd933757",
+  "evidence_presentation_hash": "1c0770278f4e2ece50e67fc6cecfd7a7e1ffcad6ef4a6a26a0937b03aec6fba7",
+  "selected_run_ids": [
+    "live-dev-v3-6-q001-8b83cbf2d8a5",
+    "live-dev-v3-6-q002-62e0bf601e10",
+    "live-dev-v3-6-q004-f2147e9d8fb0",
+    "live-dev-v3-6-q005-c53866a43736",
+    "live-dev-v3-6-q007-599b4459422c",
+    "live-dev-v3-6-q008-bac7bff93546",
+    "live-dev-v3-6-q013-ea012a9765ed",
+    "live-dev-v3-6-q015-74dbc7cffb8a",
+    "live-dev-v3-6-q019-a1532c091f82",
+    "live-dev-v3-6-q050-bc1e928d07b3"
+  ],
+  "run_hashes": [
+    {
+      "run_id": "live-dev-v3-6-q001-8b83cbf2d8a5",
+      "raw_provider_response_hash": "46abaf32e8de39d64f7f90056fd202ace6dfd4a31409e96620600d9cba8dee0f",
+      "raw_model_payload_hash": "40ca00da7258c5fd3a50a7744898997acb8af3f12556463d1a84abcd0de89be9",
+      "payload_validation_hash": "709215076f7749b5286ac467479f7cc988ea8d6b587285c2edd126991fac6833",
+      "final_result_hash": "2b6e31da56bbe958bf0b716d0e726a7be7d86e8112ec0c6dcb0e95792ec4237d",
+      "request_ledger_hash": "f90a5f8fa05545b72d12e841e03d6aa806a0a29c768dfba88b5687d94e761c88"
+    },
+    {
+      "run_id": "live-dev-v3-6-q002-62e0bf601e10",
+      "raw_provider_response_hash": "694c0e216169cc77ad365abfc857c10fdc1a3d0c88974153813fadd249fbed89",
+      "raw_model_payload_hash": "672dd86d8599344f6fab831afb38caa9dd5a9a7d0703ba62d2669bd576243d3f",
+      "payload_validation_hash": "0b5931f7f450ca38e928622c0c3330c6c845c2dc004e4f5a4271f586794aeba1",
+      "final_result_hash": "b5f38ccd1052e644f38aa10d52bd5e1a3ba99892829b7c57ad9d24e9e72e9e07",
+      "request_ledger_hash": "5f2063cc65b6291dd8a05b0a829b1879e0d021dea705bd978c61861d8dc6111b"
+    },
+    {
+      "run_id": "live-dev-v3-6-q004-f2147e9d8fb0",
+      "raw_provider_response_hash": "8dabde30d816091e190fb04cc410c48100deaf66ea0d0604df23fddb6d8be761",
+      "raw_model_payload_hash": "7bd6bc042cdcfd7d53db2cfc2969c318e3019de4fee9501e66baee63720d8c57",
+      "payload_validation_hash": "3116094cfa31b5a3bfe78310afd9fd14ee62c16d874e0bfa9386fc39e028fb69",
+      "final_result_hash": "edf32e971e60937ddee114dd34b90b6ae970893207ccb314b8a7f469a2aaab44",
+      "request_ledger_hash": "b022a2d098db8809c530dfc594febc118661af199104f66f1cb343c23f707a8e"
+    },
+    {
+      "run_id": "live-dev-v3-6-q005-c53866a43736",
+      "raw_provider_response_hash": "ee3fa100b0cac07c09b2b517c81f271a1830e61b7fe7086a61052b22dd50c7ef",
+      "raw_model_payload_hash": "48ab2164bae599a888bafb76ec48a7ed7ad09ddd5d5788f1930d4d60abe9c069",
+      "payload_validation_hash": "4c46741b4b1e17a782db5956821e0c2b93495312dc78e8f575b247d8e209102c",
+      "final_result_hash": "358d06d1e43c151c284e08d64c72f3657bd77a22d8d656e063b15aa774e87c08",
+      "request_ledger_hash": "f52cf54202d0c597133cafb4708e250740b06d33e3c3e22b3a014347925791cf"
+    },
+    {
+      "run_id": "live-dev-v3-6-q007-599b4459422c",
+      "raw_provider_response_hash": "1113dccb5621cea7b1ee89e42d5c0729508323d670bd55c3f4a0f2a9826a6643",
+      "raw_model_payload_hash": "4489a59f0dcdf584e649b0dc0736451672090d8a7cda784d5c13c125f175468a",
+      "payload_validation_hash": "d47a3d44d485d5e385ec5e56ca080c5cfbd9e368fa69fb2ff555898ff3d7dc39",
+      "final_result_hash": "848cc7b39f9c7559617337f8d1198fa48767d18791efdd62cde088d25bfb07f5",
+      "request_ledger_hash": "cf6990364289ab3b4f365f9ceadaf5133a317e9b8cebd1bb1d2e044b73f274c3"
+    },
+    {
+      "run_id": "live-dev-v3-6-q008-bac7bff93546",
+      "raw_provider_response_hash": "aec316bc3a5d91f14e038b3838361c7772095bb16cb2a2e1a75bf4eb0aa1e24b",
+      "raw_model_payload_hash": "0e60e7d447408b64579ac48d074b41a6810c67fbb4c3de301eea88952ec290cf",
+      "payload_validation_hash": "e8e71c1f0b0abe4e450ba71b9e8bb4d8d707c86c367ee3906366029a434e4d89",
+      "final_result_hash": "aa0e4b5dde159ddf428283ca9a6dd0b629ccb6726ce00d6660d9783f3b5bbe04",
+      "request_ledger_hash": "6baedf6792c48b87e9666441ff69658205cb36b1f8bab7665da6f060f008743d"
+    },
+    {
+      "run_id": "live-dev-v3-6-q013-ea012a9765ed",
+      "raw_provider_response_hash": "8b3e8a6f8c8a0b99300fef3cec0834a9f6de89f0afc807fb11f314ac8c7f8abd",
+      "raw_model_payload_hash": "2e965ffcd9a595e4e67bd0e9c8c43e131f482c89eb543d05cde1619909ab015c",
+      "payload_validation_hash": "4835773aa45a3c2317d88c1bb1618478abafbcdefc4bd0174a6742bb3c517c2a",
+      "final_result_hash": "c90acbfe0912fb106254eae32ed57de5bbb3cb0c5ba5c6789c869f06144cd1f9",
+      "request_ledger_hash": "05c51b64500e0d74436bd69c57912f4b4ba00208a3d4fc8a73e013f9e3684f75"
+    },
+    {
+      "run_id": "live-dev-v3-6-q015-74dbc7cffb8a",
+      "raw_provider_response_hash": "c7960c151cff21b3f4a2592e4a6a0f687e09b99b5edf440deccb8428cf5a5ba4",
+      "raw_model_payload_hash": "d07abc6ec87862d5846f778aa9af6f95b7f4a26d4cdb5ebd4b8c2b1c5e4194c4",
+      "payload_validation_hash": "8c3dd3dba29330bb2cc7501ed47d5eea364e7efae495b6b786b770788cef5432",
+      "final_result_hash": "a34760f0f8adf960b4f0584677001e92262bc8b1f9444b70b5cd77ba0a084630",
+      "request_ledger_hash": "51d1e0bac370fd3c9943186cecc21dbbdc7653b425fd8cdd06cf4d2d292b6d6e"
+    },
+    {
+      "run_id": "live-dev-v3-6-q019-a1532c091f82",
+      "raw_provider_response_hash": "f8a931a0965a5abc84a63f0dcc3841b125b210f2faec5d8dcf1b779c220be1fe",
+      "raw_model_payload_hash": "9680ef2b43c28041aefb386f06c4e9017d2f89614ec8297c404155530adcd801",
+      "payload_validation_hash": "0a25185292acbfb83b11ebf4c394f76fe254c3c78a4768f54b2861a2e35d49e9",
+      "final_result_hash": "4bf83b7ea4abe90c03d58edb5068c68e53faf795097d57e0e2905c0e1e1ef53c",
+      "request_ledger_hash": "e6edb57f00695cc367e7a3b4b26828ebbb4d481fc10f725d81f5bcfbb7a43bb6"
+    },
+    {
+      "run_id": "live-dev-v3-6-q050-bc1e928d07b3",
+      "raw_provider_response_hash": "a5022e8d525edc408d3e1f45e494412897ed49f6cd9409711b36656e2e933765",
+      "raw_model_payload_hash": "3e02b38e7a90a37e4f5d4252d7e861464d43a16063f69bea67e85157f6bf2133",
+      "payload_validation_hash": "9a5dbc8f04b43584a579dabe9804c14e30c3e24c554bf5557555f889665ea3a8",
+      "final_result_hash": "1d9ccc154fc544e6ca29b952c07359d74a525e4d1a243a1e5f8987763310fc57",
+      "request_ledger_hash": "ca8cfd96c4bb300f962ccdef0f47c7521c2a0fe12bd93d6ca2a87fc70d95f297"
+    }
+  ],
+  "formal_summary_hash": "f944dffa6ff5ee7c8dcc5662a7fb82344e021c0579283a6c812c7d4c49752726",
+  "final_audit_hash": "040fa74bf0aca309da4201b2beb46fa5639850876ff76aa77909db53bb1d3a29",
+  "citation_audit_hash": "2fc856c44fd1c0bdf7626c55e06a41effc5420d5df7e479eca46c2f128aff60c",
+  "usage": {
+    "run_count": 10,
+    "request_attempts": 10,
+    "input_tokens": 17610,
+    "output_tokens": 1403,
+    "total_tokens": 19013,
+    "monetary_cost_usd": "0",
+    "elapsed_seconds_total": 66.387887,
+    "latency_p50_seconds": 6.991776,
+    "latency_p95_seconds": 8.32963435,
+    "usage_records": 10,
+    "reservation_count": 10,
+    "settled_reservations": 10,
+    "released_reservations": 0,
+    "billing_unknown_reservations": 0,
+    "effective_active_reservations": 0,
+    "double_settlement_count": 0,
+    "retries": 0,
+    "reranker_called": false,
+    "template_fallback": false,
+    "delivered_hash_matches": 10,
+    "silent_omissions": 0,
+    "refusal_accuracy": 1.0,
+    "improved_questions": 2,
+    "regressed_questions": 1,
+    "unchanged_questions": 7,
+    "unsupported_improvement_driver": false,
+    "citation_pairs_total": 23,
+    "inherited_reviewed_pairs": 12,
+    "pending_pairs": 11,
+    "inherited_strict": 0.6666666666666666,
+    "inherited_lenient": 0.8333333333333334
+  },
+  "latency": {
+    "elapsed_seconds_total": 66.387887,
+    "p50_seconds": 6.991776,
+    "p95_seconds": 8.32963435
+  },
+  "accounting_terminal": {
+    "effective_active_reservations": 0,
+    "double_settlement_count": 0,
+    "reservation_count": 10,
+    "settled_reservations": 10
+  },
+  "gates": {
+    "Engineering Gate": "PASSED",
+    "Automated Quality Gate": "FAILED",
+    "Human Support Gate": "PENDING",
+    "Quality Candidate Gate": "FAILED"
+  },
+  "quality_failure_metrics": {
+    "answerable_question_macro_exact_relation_recall": 0.16666666666666666,
+    "required_claim_macro_exact_recall": 0.16666666666666666,
+    "micro_core_relation_recall": 0.2,
+    "core_set_completion": 0.14814814814814814,
+    "any_valid_evidence_recall": 0.25925925925925924,
+    "wrong_evidence": 2
+  },
+  "immutable": true,
+  "historical_results_modified": false,
+  "raw_runs_modified": false,
+  "frozen_at": "2026-07-17T13:12:26.189984+00:00",
+  "freeze_signature": "fceb8d4ade7ce90eda48aeb63ab1235ff4978b0d8402e7c87d1c683b80736576"
+}
