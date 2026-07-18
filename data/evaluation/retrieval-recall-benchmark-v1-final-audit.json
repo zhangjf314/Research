@@ -1,0 +1,53 @@
+{
+  "schema_version": "retrieval-recall-benchmark-v1-results",
+  "selected_configuration": {
+    "mode": "full_hybrid_rrf",
+    "rrf_k": 60,
+    "dense_weight": 1.0,
+    "bm25_weight": 1.0,
+    "numeric_weight": 1.0,
+    "parameter_grid": {
+      "rrf_k": [
+        20,
+        40,
+        60
+      ],
+      "dense_weight": [
+        1.0
+      ],
+      "bm25_weight": [
+        0.5,
+        1.0
+      ],
+      "numeric_weight": [
+        0.5,
+        1.0,
+        1.5
+      ]
+    },
+    "parameters_changed_after_holdout": false
+  },
+  "LOCAL_LEXICAL_INDEX_VERSION": "local-lexical-index-v1",
+  "HYBRID_RRF_VERSION": "hybrid-rrf-v1-candidate",
+  "RETRIEVAL_BENCHMARK_V1_ENGINEERING_GATE": "PASSED",
+  "RETRIEVAL_BENCHMARK_SAMPLE_SIZE_SUFFICIENT": false,
+  "RETRIEVAL_SPLIT_LEAKAGE_GATE": "PASSED",
+  "HYBRID_RETRIEVAL_V1_ENGINEERING_GATE": "PASSED",
+  "HYBRID_RETRIEVAL_V1_DEV_GATE": "PASSED",
+  "HYBRID_RETRIEVAL_V1_VALIDATION_GATE": "FAILED",
+  "HYBRID_RETRIEVAL_V1_HOLDOUT_GATE": "FAILED",
+  "RETRIEVAL_GENERALIZATION_EVIDENCE": "INSUFFICIENT",
+  "END_TO_END_COMPATIBILITY_REPLAY": "NOT_AUTHORIZED",
+  "GENERAL_RETRIEVAL_EXPANSION_REQUIRED": false,
+  "TARGETED_OBLIGATION_RETRIEVAL_COMPLETION_REQUIRED": true,
+  "NEXT_LIVE_READY": false,
+  "NEXT_LIVE_AUTHORIZED": false,
+  "READY_FOR_FULL_QA": false,
+  "HUMAN_CITATION_REVIEW_DEFERRED": true,
+  "live_llm_executed": false,
+  "external_embedding_api_executed": false,
+  "external_reranker_executed": false,
+  "new_live_executed": false,
+  "full_qa_executed": false,
+  "deep_research_executed": false
+}
