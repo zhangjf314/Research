@@ -1,0 +1,18 @@
+{
+  "schema_version": "retrieval-recall-benchmark-v1-splits",
+  "split_strategy": "leave-one-paper-group-out",
+  "split_counts": {
+    "leave_one_paper_group_out": 27
+  },
+  "paper_splits": {
+    "1706.03762": "leave_one_paper_group_out",
+    "1810.04805": "leave_one_paper_group_out",
+    "1910.10683": "leave_one_paper_group_out",
+    "2001.08361": "leave_one_paper_group_out"
+  },
+  "split_leakage_count": 0,
+  "paraphrase_leakage_count": 0,
+  "relation_leakage_count": 0,
+  "blind_holdout_immutable": true,
+  "parameters_changed_after_holdout": false
+}
