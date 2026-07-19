@@ -9,13 +9,16 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import scripts.run_production_full_qa_v1 as v1
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+import scripts.run_production_full_qa_v1 as v1  # noqa: E402
+
 DATA = ROOT / "data" / "evaluation"
 DOCS = ROOT / "docs"
 ARTIFACTS = ROOT / "artifacts"

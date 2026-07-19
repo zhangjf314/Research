@@ -73,7 +73,8 @@ def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
         BM25Retriever(chunks),
         reranker,
         ContextBuilder(
-            include_neighbors=True,
+            include_neighbors=False,
+            max_characters=settings.qa_context_token_budget * 4,
             max_tokens=settings.qa_context_token_budget,
         ),
         JsonlTraceRepository(settings.retrieval_trace_path),

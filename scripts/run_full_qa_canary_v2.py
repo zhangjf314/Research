@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -12,7 +13,10 @@ from typing import Any
 
 import httpx
 
-from scripts.run_production_full_qa_v1 import (
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.run_production_full_qa_v1 import (  # noqa: E402
     GOLD,
     RETRIEVAL_GOLD,
     evaluate,
@@ -24,7 +28,6 @@ from scripts.run_production_full_qa_v1 import (
     write_json,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "evaluation"
 ARTIFACTS = ROOT / "artifacts"
 DOCS = ROOT / "docs"
