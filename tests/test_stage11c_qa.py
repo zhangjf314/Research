@@ -32,6 +32,19 @@ def context() -> list[ContextItem]:
 
 def valid_answer() -> dict:
     return {
+        "answer": "The model uses attention.",
+        "insufficient_evidence": False,
+        "claims": [
+            {
+                "text": "The model uses attention.",
+                "citation_keys": ["C1"],
+            }
+        ],
+    }
+
+
+def legacy_valid_answer() -> dict:
+    return {
         "answerable": True,
         "answer": "The model uses attention.",
         "claims": [
@@ -92,36 +105,37 @@ def test_siliconflow_request_and_structured_result() -> None:
     assert result.api_request_count == 1
 
 
-def test_malformed_json_retries_and_records_reason(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_malformed_json_does_not_retry_generation(monkeypatch: pytest.MonkeyPatch) -> None:
     calls = 0
 
     def handler(_request: httpx.Request) -> httpx.Response:
         nonlocal calls
         calls += 1
-        return response("not-json") if calls == 1 else response(valid_answer())
+        return response("not-json")
 
     monkeypatch.setattr("paper_research.providers.llm.time.sleep", lambda _seconds: None)
-    result = provider(handler).generate_claim_answer("method?", context(), "qa-production-v1")
-    assert result.api_request_count == 2
-    assert result.retry_count == 1
-    assert result.retry_reasons == ["malformed_json"]
+    with pytest.raises(LLMProviderError) as captured:
+        provider(handler).generate_claim_answer("method?", context(), "qa-production-v1")
+    assert calls == 1
+    assert captured.value.api_request_count == 1
+    assert captured.value.retry_reasons == ["malformed_json"]
 
 
 @pytest.mark.parametrize(
     "mutation, reason",
     [
-        (lambda body: body["claims"][0].update(citations=[]), "schema_validation"),
+        (lambda body: body["claims"][0].update(citations=[]), "malformed_json"),
         (
-            lambda body: body["claims"][0]["citations"][0].update(block_id="invented"),
-            "citation_validation:block_id",
+            lambda body: body["claims"][0].update(citation_keys=["C99"]),
+            "malformed_json",
         ),
         (
-            lambda body: body.update(answerable=False, answer=None, refusal_reason="none"),
-            "schema_validation",
+            lambda body: body.update(insufficient_evidence="false"),
+            "malformed_json",
         ),
     ],
 )
-def test_invalid_claim_outputs_fail_after_retry_limit(monkeypatch, mutation, reason) -> None:
+def test_invalid_claim_outputs_fail_without_generation_retry(monkeypatch, mutation, reason) -> None:
     body = valid_answer()
     mutation(body)
     monkeypatch.setattr("paper_research.providers.llm.time.sleep", lambda _seconds: None)
@@ -129,8 +143,27 @@ def test_invalid_claim_outputs_fail_after_retry_limit(monkeypatch, mutation, rea
         provider(lambda _request: response(body)).generate_claim_answer(
             "method?", context(), "qa-production-v1"
         )
-    assert captured.value.api_request_count == 3
-    assert all(item == reason for item in captured.value.retry_reasons)
+    assert captured.value.api_request_count == 1
+    assert captured.value.retry_reasons == [reason]
+
+
+def test_transport_timeout_retries_once(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = 0
+
+    def handler(_request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise httpx.ReadTimeout("timeout")
+        return response(valid_answer())
+
+    monkeypatch.setattr("paper_research.providers.llm.time.sleep", lambda _seconds: None)
+    result = provider(handler, retries=1).generate_claim_answer(
+        "method?", context(), "qa-production-v1"
+    )
+    assert result.api_request_count == 2
+    assert result.retry_count == 1
+    assert result.retry_reasons == ["ReadTimeout"]
 
 
 def test_provider_error_is_sanitized_and_never_falls_back() -> None:
@@ -169,7 +202,7 @@ def test_qa_service_rejects_citation_outside_context() -> None:
         def generate_claim_answer(self, *_args):
             from paper_research.providers.llm import GenerationResult
 
-            body = valid_answer()
+            body = legacy_valid_answer()
             body["claims"][0]["citations"][0]["block_id"] = "invented"
             return GenerationResult(**body, raw_model="unsafe")
 

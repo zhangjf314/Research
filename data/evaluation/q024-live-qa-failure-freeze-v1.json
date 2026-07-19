@@ -1,0 +1,149 @@
+{
+  "sample_id": "q024",
+  "stage": "Stage 13.32 q024 single live QA after deterministic retrieval/context and schema-output remediation",
+  "status": "PASSED",
+  "single_live_qa_executed": true,
+  "full_qa_rerun_executed": false,
+  "stop_reason": "q024 single live QA passed; full 50-item rerun was not started in this step.",
+  "command": ".\\.venv\\Scripts\\python.exe scripts\\run_production_qa_smoke_v1.py --sample-id q024 --single-attempt --no-json-repair --no-qa-retry",
+  "constraints": {
+    "reranker_enabled": false,
+    "json_repair_enabled": false,
+    "qa_retry_enabled": false,
+    "citation_repair_enabled": false,
+    "strict_citation_validation_preserved": true,
+    "deep_research_executed": false
+  },
+  "final_live_result": {
+    "status": "PASSED",
+    "real_model_called": true,
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "prompt_version": "qa-production-v1",
+    "answerable": true,
+    "claim_count": 3,
+    "citation_count": 3,
+    "citation_context_validity": 1.0,
+    "all_citations_in_retrieved_context": true,
+    "citation_pages": [
+      10,
+      10,
+      11
+    ],
+    "model_usage": {
+      "input_tokens": 4863,
+      "output_tokens": 324,
+      "total_tokens": 5187
+    },
+    "latency_ms": {
+      "retrieve_endpoint_ms": 1680.897,
+      "qa_endpoint_ms": 13354.186,
+      "api_reported_total_ms": 13346.678,
+      "wall_total_ms": 15291.113
+    }
+  },
+  "failure_history": [
+    {
+      "classification": "CLAIM_QA_SCHEMA_VALIDATION_ERROR",
+      "stage": "CLAIM_SCHEMA_VALIDATE",
+      "summary": "The first improved-observability q024 run reached the provider but failed strict structured QA schema validation."
+    },
+    {
+      "classification": "CLAIM_QA_UNEXPECTED_ERROR",
+      "stage": "API_QA_UNEXPECTED",
+      "summary": "A later q024 run exposed AttributeError: 'str' object has no attribute 'get'. API exception auditing located the root cause in pre-schema normalization when claims contained a non-object entry."
+    },
+    {
+      "classification": "CLAIM_QA_JSON_PARSE_ERROR",
+      "stage": "LLM_JSON_PARSE",
+      "summary": "After the normalizer guard, the provider returned HTTP 200 with finish_reason=length, 2048 output tokens, malformed/truncated JSON, and repeated closing think tags."
+    }
+  ],
+  "fixes": [
+    {
+      "type": "observability",
+      "summary": "Raw wrapped API error bodies and sanitized API exception audits are persisted for unexpected QA failures."
+    },
+    {
+      "type": "schema_fail_closed",
+      "summary": "normalize_structured_qa_content now rejects non-list claims, non-object claim entries, non-list citations, and non-object citation entries instead of raising AttributeError."
+    },
+    {
+      "type": "prompt_output_constraint",
+      "summary": "qa-production-v1 now explicitly forbids think tags/reasoning text and constrains output to compact JSON: answer <=80 words, at most 3 claims, claim text <=25 words, and at most 2 citations per claim."
+    }
+  ],
+  "runtime_observations": {
+    "capabilities_llm_status": "configured",
+    "capabilities_llm_detail": "siliconflow/Qwen/Qwen3-8B",
+    "llm_timeout_seconds": 120,
+    "llm_max_retries": 0,
+    "llm_max_output_tokens": 2048,
+    "prompt_version": "qa-production-v1",
+    "nginx_proxy_read_timeout": "300s",
+    "qdrant_warning_recorded_but_not_fixed": "qdrant-client 1.18.0 with server 1.12.5 compatibility warning"
+  },
+  "retrieval_context": {
+    "status": "passed",
+    "paper_id": "2005.14165",
+    "paper_uuid": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+    "retrieved_top_k": 3,
+    "retrieved_gold_blocks": [
+      "b000111",
+      "b000112",
+      "b000113",
+      "b000115"
+    ],
+    "final_context": [
+      {
+        "rank": 1,
+        "chunk_id": "f2f20543-bb18-4405-9efa-32ddaef845a1",
+        "section": "3 Results",
+        "page_start": 10,
+        "page_end": 10,
+        "block_ids": [
+          "b000111",
+          "b000112"
+        ],
+        "block_page_map": {
+          "b000111": 10,
+          "b000112": 10
+        }
+      },
+      {
+        "rank": 2,
+        "chunk_id": "8825e5ff-1a29-416c-96fd-8a90b8b6ad27",
+        "section": "3 Results",
+        "page_start": 10,
+        "page_end": 11,
+        "block_ids": [
+          "b000113",
+          "b000114",
+          "b000115",
+          "b000116",
+          "b000117",
+          "b000118",
+          "b000119"
+        ],
+        "block_page_map": {
+          "b000113": 10,
+          "b000114": 10,
+          "b000115": 11,
+          "b000116": 11,
+          "b000117": 11,
+          "b000118": 11,
+          "b000119": 11
+        }
+      }
+    ]
+  },
+  "root_cause_assessment": {
+    "json_output_failure_confirmed": true,
+    "schema_constraint_failure_confirmed": true,
+    "citation_page_error_confirmed": false,
+    "context_page_map_error_confirmed": false,
+    "api_returned_wrapper_error_confirmed": false,
+    "provider_timeout_confirmed": false,
+    "reason": "q024 retrieval/context and block_page_map were correct before the QA call. The failures were caused by model output contract violations: first schema-invalid claim shape, then a non-object claim entry causing an internal AttributeError before normalization guards, then a length-truncated JSON response with stray think closing tags. The final compact prompt and fail-closed normalization produced a valid strict-citation answer."
+  }
+}

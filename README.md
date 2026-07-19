@@ -1,5 +1,25 @@
 # PaperResearch Agent
 
+## Portfolio evaluation status
+
+The current Portfolio evaluation policy uses three dataset tiers:
+
+- `gold-dev-v1`: 50 human-approved records used as an internal development
+  evaluation set for retrieval, reranker, QA, and claim-citation evaluation.
+- `retrieval-diagnostic-v1`: 27 claim-level diagnostic records used for failure
+  analysis and regression checks. This data is not blind.
+- `shadow-holdout-pilot-v1`: optional 10-15-sample blind pilot; not required for
+  Portfolio Full QA and not yet created.
+
+Allowed public wording:
+
+> 基于 50 条人工审核的内部评测数据完成检索和问答评测
+
+The project does not claim strict generalization, production-grade
+generalization, or results on a large independent blind benchmark. Current
+retrieval evidence is `DIAGNOSTIC_ONLY`, with
+`STRONG_GENERALIZATION_CLAIM_ALLOWED=false`.
+
 ## Release readiness status (Stage 12)
 
 The highest published version is `v0.9.0-rc2`. The current tree is a candidate for

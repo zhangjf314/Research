@@ -1,0 +1,159 @@
+{
+  "schema_version": "q019-full-qa-failure-freeze-v1",
+  "generated_at": "2026-07-18T17:05:12.113335+00:00",
+  "question_id": "q019",
+  "full_qa_status": "COMPLETED_WITH_FAILURES",
+  "production_full_qa_gate": "COMPLETED_WITH_FAILURES",
+  "failed_item": {
+    "question_id": "q019",
+    "status": "FAILED",
+    "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2001.08361"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2001.08361"
+      ],
+      "gold_block_ids": [
+        "b000215",
+        "b000216",
+        "b000217",
+        "b000218"
+      ],
+      "gold_pages": [
+        7
+      ],
+      "required_claims": [
+        "Model size is varied from 768 to 1.5B non-embedding parameters.",
+        "Dataset size is varied from 22M to 23B tokens.",
+        "Model shape variables include depth, width, attention heads, and feed-forward dimension."
+      ]
+    },
+    "failure_reason": "{\"error\":{\"code\":\"HTTP_503\",\"message\":{\"code\":\"CLAIM_QA_CITATION_VALIDATION_ERROR\",\"message\":\"SiliconFlow QA failed after 1 request(s): citation_validation:page\",\"stage\":\"CLAIM_CITATION_VALIDATE\",\"api_request_count\":1,\"retry_reasons\":[\"citation_validation:page\"],\"rate_limit_events\":0,\"response_audit_path\":null},\"request_id\":\"03a7e352-e7e2-40e9-a04c-8931c7f2dd3f\"}}",
+    "api_request_count": 1,
+    "retry_count": 1,
+    "retry_reasons": [
+      "citation_validation:page"
+    ],
+    "rate_limit_events": 0,
+    "provider_error_code": "CLAIM_QA_CITATION_VALIDATION_ERROR",
+    "provider_error_stage": "CLAIM_CITATION_VALIDATE",
+    "wall_ms": 8071.997
+  },
+  "provider_response_audit": {
+    "path": "artifacts\\private\\qa-response-audits\\q019-full-qa-rerun-q019-1784391762.json",
+    "http_status": 200,
+    "finish_reason": "stop",
+    "content_present": true,
+    "content_sha256": "661a1e6efa754c0676f35955c77edfdd3aee1dfca67dc2a565e326a8b2219d27",
+    "parse_error_type": null,
+    "parse_error_message": null,
+    "usage": {
+      "input_tokens": 11655,
+      "output_tokens": 543,
+      "total_tokens": 12198
+    },
+    "store_full_payload": false,
+    "full_payload_available": false,
+    "visible_suffix_mentions": [
+      {
+        "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+        "page": 14,
+        "block_id": "b000518"
+      },
+      {
+        "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+        "page": 15,
+        "block_id": "b000541"
+      }
+    ]
+  },
+  "retrieval_reproduction": {
+    "api": "POST /api/v1/retrieve",
+    "query": "How are the target paper's experiments designed and evaluated?",
+    "paper_id_public": "2001.08361",
+    "paper_id_database": "d52a2824-279d-4f19-8118-a4d0ce423544",
+    "full_qa_recall_k": 20,
+    "full_qa_top_k": 10,
+    "final_context_count": 4,
+    "gold_blocks": [
+      "b000215",
+      "b000216",
+      "b000217",
+      "b000218"
+    ],
+    "gold_chunk_id": "42164200-162e-47c7-9dbc-d7b4a4a98291",
+    "gold_chunk_page_start": 7,
+    "gold_chunk_page_end": 8,
+    "gold_chunk_block_page_map": null,
+    "gold_found_in_full_qa_final_context": false,
+    "gold_rank_when_recall_k_100": {
+      "dense_rank": 45,
+      "sparse_rank": 41,
+      "fusion_rank": 47
+    },
+    "gold_found_in_recall_k_100_final_context": false,
+    "selected_context_summary": [
+      {
+        "rank": 1,
+        "chunk_id": "7c070517-75ed-4580-9c55-17e84da72b5c",
+        "page_start": 29,
+        "page_end": 29,
+        "section": "References",
+        "contains_gold": false
+      },
+      {
+        "rank": 2,
+        "chunk_id": "a4463f0a-ec46-41d1-bcca-c256e0aea15e",
+        "page_start": 20,
+        "page_end": 20,
+        "section": "A Summary of Power Laws",
+        "contains_gold": false
+      },
+      {
+        "rank": 3,
+        "chunk_id": "38277725-1b05-4e52-8e40-c4e34b9ce263",
+        "page_start": 14,
+        "page_end": 14,
+        "section": "5 Scaling Laws with Model Size and Training Time",
+        "contains_gold": false
+      },
+      {
+        "rank": 4,
+        "chunk_id": "92de0fb3-3f90-4d9b-8823-e8a2aafb7d1d",
+        "page_start": 15,
+        "page_end": 16,
+        "section": "6 Optimal Allocation of the Compute Budget",
+        "contains_gold": false,
+        "block_page_map": null
+      }
+    ]
+  },
+  "root_cause": {
+    "primary": "RETRIEVAL_CONTEXT_SELECTION_MISMATCH",
+    "secondary": "MODEL_CITED_EXISTING_CONTEXT_BLOCK_WITH_INVALID_PAGE_OR_CONTEXT_PAGE_MAP_AMBIGUITY",
+    "not_json_failure": true,
+    "not_api_wrapper_failure": true,
+    "not_gold_modification": true,
+    "evidence": "Gold page-7 chunk is fusion rank 47 under recall_k=100 and absent from Full QA recall_k=20/final context. The provider returned valid JSON and usage; local strict validator failed at citation_validation:page."
+  },
+  "limitations": [
+    "Full raw model payload was not persisted because QA_RESPONSE_AUDIT_STORE_FULL_PAYLOAD=false.",
+    "The exact hidden invalid citation cannot be reconstructed from prefix/suffix audit alone.",
+    "The validator error code proves the cited paper_id and block_id existed in supplied context, while page did not match allowed triples."
+  ],
+  "next_actions_recommended": [
+    "Do not treat this as a JSON/schema/API wrapper failure.",
+    "Investigate q019 retrieval/query routing and context selection for experiment-design questions.",
+    "Add precise block_page_map for multi-page chunks or remove ambiguous pages from model-visible citation fields.",
+    "If rerun is authorized later, persist full sanitized payload for failure cases only."
+  ],
+  "deep_research_executed": false,
+  "llm_called_during_analysis": false,
+  "reranker_enabled": false
+}

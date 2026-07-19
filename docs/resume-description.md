@@ -17,3 +17,20 @@
 
 上述指标来自 `silver` 评测候选，仅适合描述工程基线。完成领域专家人工复核前，不应写成
 “人工评测准确率”或对外宣称生产效果。
+# Portfolio-safe resume wording
+
+**PaperResearch Agent：论文 RAG 与证据化研究助手**
+
+- 构建基于 FastAPI、PostgreSQL、Qdrant、Redis 和 LangGraph 的论文 RAG
+  系统，覆盖 PDF 解析、结构化 Chunk、Hybrid Retrieval、证据绑定 QA、
+  citation validation 和可追溯评测报告。
+- 基于 50 条人工审核的内部评测数据完成检索和问答评测；另使用 27 条
+  claim-level diagnostic 数据进行失败分析和检索回归检查。
+- 接入真实 Jina Embedding、SiliconFlow `Qwen/Qwen3-8B` provider preflight
+  和可切换 Reranker 消融；默认关闭未通过质量/延迟门槛的 Reranker。
+
+Do not claim:
+
+- 严格盲测集证明泛化能力。
+- 生产级泛化。
+- 大规模独立 benchmark 通过。

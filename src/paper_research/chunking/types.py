@@ -11,6 +11,7 @@ class Chunk(BaseModel):
     block_type: str
     page_start: int
     page_end: int
+    block_page_map: dict[str, int] | None = None
     chunk_text: str
     parent_context: str | None = None
     previous_context: str | None = None

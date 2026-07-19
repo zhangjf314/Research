@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 import httpx
 
 from paper_research.config import Settings
+from paper_research.providers.factory import build_llm_provider
 
 OUTPUT = Path("data/evaluation/provider-health-v1.json")
 
@@ -23,6 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--offline-validate", action="store_true")
     parser.add_argument("--allow-minimal-completion", action="store_true")
+    parser.add_argument("--require-minimal-completion", action="store_true")
     parser.add_argument("--output", type=Path, default=OUTPUT)
     return parser.parse_args()
 
@@ -38,6 +40,12 @@ def _base_payload(base_url: str) -> dict:
         "tls_status": "not_run",
         "models_endpoint_status": "not_run",
         "minimal_completion_status": "not_run",
+        "minimal_completion_json_valid": None,
+        "minimal_completion_model": None,
+        "minimal_completion_usage": None,
+        "factory_provider": None,
+        "factory_model": None,
+        "template_fallback": None,
         "latency": {},
         "error_type": None,
         "safe_to_start_batch": False,
@@ -50,12 +58,28 @@ def check_health(
     settings: Settings,
     *,
     allow_minimal_completion: bool = False,
+    require_minimal_completion: bool = False,
 ) -> dict:
     base_url = settings.llm_base_url or ""
     result = _base_payload(base_url)
     if not result["base_url_valid"]:
         result["error_type"] = "invalid_base_url"
         return result
+    if settings.llm_configuration_issues:
+        result["factory_provider"] = settings.llm_provider
+        result["factory_model"] = settings.llm_model
+        result["template_fallback"] = settings.llm_provider == "template"
+        result["error_type"] = "configuration:" + ",".join(settings.llm_configuration_issues)
+    else:
+        try:
+            provider = build_llm_provider(settings)
+            result["factory_provider"] = provider.provider_name
+            result["factory_model"] = provider.model_name
+            result["template_fallback"] = provider.provider_name == "template"
+        except Exception as exc:
+            result["error_type"] = f"factory:{type(exc).__name__}"
+            result["template_fallback"] = None
+            return result
     host = result["base_url_host"]
     assert isinstance(host, str)
     try:
@@ -96,10 +120,11 @@ def check_health(
     except httpx.HTTPError as exc:
         result["models_endpoint_status"] = "failed"
         result["error_type"] = type(exc).__name__
-    if result["models_endpoint_status"] == "passed":
-        result["safe_to_start_batch"] = True
+    llm_configured = not settings.llm_configuration_issues and not result["template_fallback"]
+    if result["models_endpoint_status"] == "passed" and not require_minimal_completion:
+        result["safe_to_start_batch"] = llm_configured
         return result
-    if not allow_minimal_completion:
+    if not allow_minimal_completion and not require_minimal_completion:
         return result
     try:
         started = time.perf_counter()
@@ -117,7 +142,23 @@ def check_health(
         )
         result["latency"]["minimal_completion_ms"] = round((time.perf_counter() - started) * 1000, 3)
         result["minimal_completion_status"] = "passed" if response.status_code < 400 else f"http_{response.status_code}"
-        result["safe_to_start_batch"] = result["minimal_completion_status"] == "passed"
+        if response.status_code < 400:
+            payload = response.json()
+            result["minimal_completion_model"] = payload.get("model")
+            result["minimal_completion_usage"] = payload.get("usage")
+            content = (
+                payload.get("choices", [{}])[0]
+                .get("message", {})
+                .get("content", "")
+            )
+            try:
+                json.loads(content)
+                result["minimal_completion_json_valid"] = True
+            except json.JSONDecodeError:
+                result["minimal_completion_json_valid"] = False
+        result["safe_to_start_batch"] = (
+            result["minimal_completion_status"] == "passed" and llm_configured
+        )
     except httpx.HTTPError as exc:
         result["minimal_completion_status"] = "failed"
         result["error_type"] = type(exc).__name__
@@ -140,6 +181,7 @@ def main() -> int:
         result = check_health(
             settings,
             allow_minimal_completion=args.allow_minimal_completion,
+            require_minimal_completion=args.require_minimal_completion,
         )
         result["status"] = "PASSED" if result["safe_to_start_batch"] else "DEV_V2_BLOCKED_BY_PROVIDER_HEALTH"
     args.output.parent.mkdir(parents=True, exist_ok=True)

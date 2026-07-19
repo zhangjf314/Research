@@ -1,0 +1,242 @@
+{
+  "schema_version": "live-model-smoke-test-v1",
+  "status": "PASSED",
+  "sample_id": "q017",
+  "question": "What are the target paper's main contributions?",
+  "paper_id": "2001.08361",
+  "paper_uuid": "d52a2824-279d-4f19-8118-a4d0ce423544",
+  "real_model_called": true,
+  "model": "Qwen/Qwen3-8B",
+  "provider": "siliconflow",
+  "prompt_version": "qa-production-v1",
+  "answerable": true,
+  "claim_count": 7,
+  "retrieved_top_k": 4,
+  "retrieved_block_ids": [
+    "b000033",
+    "b000052",
+    "b000053",
+    "b000054",
+    "b000055",
+    "b000056",
+    "b000057",
+    "b000058",
+    "b000059",
+    "b000060",
+    "b000061",
+    "b000062",
+    "b000063",
+    "b000186",
+    "b000069",
+    "b000070",
+    "b000071",
+    "b000072",
+    "b000073",
+    "b000074",
+    "b000075",
+    "b000076",
+    "b000077",
+    "b000078",
+    "b000079",
+    "b000080",
+    "b000081",
+    "b000082",
+    "b000083",
+    "b000084",
+    "b000085",
+    "b000086",
+    "b000087",
+    "b000088",
+    "b000089",
+    "b000090",
+    "b000091",
+    "b000092",
+    "b000093",
+    "b000094",
+    "b000095",
+    "b000096",
+    "b000097",
+    "b000098",
+    "b000099"
+  ],
+  "retrieval_scores": [
+    0.020944692920257444,
+    0.02393162393162393,
+    0.02318454363757495,
+    0.023013078470824948
+  ],
+  "context_blocks": [
+    {
+      "rank": 1,
+      "chunk_id": "cabe1d24-ba08-42c9-8550-c746d06052df",
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "block_ids": [
+        "b000033"
+      ],
+      "page_start": 1,
+      "page_end": 1,
+      "score": 0.020944692920257444,
+      "section_path": [
+        "Abstract"
+      ],
+      "context_length": 1568,
+      "context_sha256": "49714a1755734b15bcbc63f2630c89175dc6ac8b2cb6b5765669a7d034d4f30f",
+      "snippet": "Jared Kaplan ∗\nSam McCandlish∗\nJohns Hopkins University, OpenAI\nOpenAI\njaredk@jhu.edu\nsam@openai.com\nTom Henighan\nTom B. Brown\nBenjamin Chess\nRewon Child\nOpenAI\nOpenAI\nOpenAI\nOpenAI\nhenighan@openai.com\ntom@openai.com\nbchess@openai.com\nrewon"
+    },
+    {
+      "rank": 2,
+      "chunk_id": "91735662-ad94-4101-83fc-09e07595eb4b",
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "block_ids": [
+        "b000052",
+        "b000053",
+        "b000054",
+        "b000055",
+        "b000056",
+        "b000057",
+        "b000058",
+        "b000059",
+        "b000060",
+        "b000061",
+        "b000062",
+        "b000063"
+      ],
+      "page_start": 2,
+      "page_end": 3,
+      "score": 0.02393162393162393,
+      "section_path": [
+        "1\nIntroduction"
+      ],
+      "context_length": 4178,
+      "context_sha256": "7a9faddf05f989cfbebfc9749b8c7ad3e7e915bf5d975f6eecaaa5fe268cd4e1",
+      "snippet": "1\nIntroduction\n2\n2\nBackground and Methods\n6\n3\nEmpirical Results and Basic Power Laws\n7\n4\nCharting the Inﬁnite Data Limit and Overﬁtting\n10\n5\nScaling Laws with Model Size and Training Time\n12\n6\nOptimal Allocation of the Compute Budget\n14\n7\nR"
+    },
+    {
+      "rank": 3,
+      "chunk_id": "791cbbee-51ad-46c3-a284-b51ece267a08",
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "block_ids": [
+        "b000186"
+      ],
+      "page_start": 6,
+      "page_end": 6,
+      "score": 0.02318454363757495,
+      "section_path": [
+        "1\nIntroduction"
+      ],
+      "context_length": 4150,
+      "context_sha256": "fe20e52eba68b5cf9ee8f5b83b85c4378cb2f4e4f7c3d6328be7d59f6a29c9c4",
+      "snippet": "min . As the\ncomputational budget C increases, it should be spent primarily on larger models, without dramatic increases\nin training time or dataset size (see Figure 3). This also implies that as models grow larger, they become\nincreasingly"
+    },
+    {
+      "rank": 4,
+      "chunk_id": "744b0701-25bd-4384-86f0-d0b08ba44834",
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "block_ids": [
+        "b000069",
+        "b000070",
+        "b000071",
+        "b000072",
+        "b000073",
+        "b000074",
+        "b000075",
+        "b000076",
+        "b000077",
+        "b000078",
+        "b000079",
+        "b000080",
+        "b000081",
+        "b000082",
+        "b000083",
+        "b000084",
+        "b000085",
+        "b000086",
+        "b000087",
+        "b000088",
+        "b000089",
+        "b000090",
+        "b000091",
+        "b000092",
+        "b000093",
+        "b000094",
+        "b000095",
+        "b000096",
+        "b000097",
+        "b000098",
+        "b000099"
+      ],
+      "page_start": 3,
+      "page_end": 4,
+      "score": 0.023013078470824948,
+      "section_path": [
+        "1\nIntroduction"
+      ],
+      "context_length": 2104,
+      "context_sha256": "a5d5456cbce97262bdb5535bbcf82e83a5d5c5e26fcca4f319fdc97dca17207a",
+      "snippet": "Performance depends strongly on scale, weakly on model shape:\nModel performance depends most\nstrongly on scale, which consists of three factors: the number of model parameters N (excluding embed-\ndings), the size of the dataset D, and the a"
+    }
+  ],
+  "citation_validation": {
+    "citation_count": 7,
+    "citation_context_validity": 1.0,
+    "all_citations_in_retrieved_context": true,
+    "citation_pages": [
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3
+    ]
+  },
+  "model_usage": {
+    "input_tokens": 7131,
+    "output_tokens": 999,
+    "total_tokens": 8130,
+    "estimated_cost_usd": null
+  },
+  "cost": {
+    "estimated_cost_usd": null,
+    "cost_type": "unknown",
+    "cost_status": "unknown"
+  },
+  "latency": {
+    "retrieve_endpoint_ms": 1387.036,
+    "qa_endpoint_ms": 41877.482,
+    "api_reported_total_ms": 41875.863,
+    "api_reported_first_token_ms": null,
+    "wall_total_ms": 43577.431
+  },
+  "capabilities_budget_status": {
+    "status": "FULL_QA_BUDGET_READY",
+    "live_model_calls_enabled": true,
+    "full_qa_budget_ready": true,
+    "missing_full_qa_budget_vars": [],
+    "full_qa_budget_vars_present": {
+      "LIVE_MODEL_CALLS_ENABLED": true,
+      "FULL_QA_MAX_ITEMS": true,
+      "FULL_QA_MAX_INPUT_TOKENS": true,
+      "FULL_QA_MAX_OUTPUT_TOKENS": true,
+      "FULL_QA_MAX_COST_USD": true,
+      "FULL_QA_MAX_TOTAL_SECONDS": true
+    },
+    "deep_research_budget_vars_present": {
+      "DEEP_RESEARCH_ENABLED": true,
+      "DEEP_RESEARCH_MAX_INPUT_TOKENS": false,
+      "DEEP_RESEARCH_MAX_OUTPUT_TOKENS": false,
+      "DEEP_RESEARCH_MAX_COST_USD": true,
+      "DEEP_RESEARCH_MAX_TOTAL_SECONDS": false,
+      "DEEP_RESEARCH_MAX_ITERATIONS": false,
+      "DEEP_RESEARCH_MAX_PAPERS": false
+    }
+  },
+  "failure_classification": null,
+  "created_at": "2026-07-18T15:49:31.970574+00:00",
+  "http_status": 200,
+  "api_request_count": 1,
+  "qa_model_call_count_delta": 1,
+  "json_repair_call_count": 0,
+  "qa_retry_count": 0,
+  "full_qa_status_after_retry": "COMPLETED_WITH_FAILURES"
+}

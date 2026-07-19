@@ -1,0 +1,88 @@
+{
+  "schema_version": "q017-retrieval-context-analysis-v1",
+  "generated_at": "2026-07-18T15:46:52.745935+00:00",
+  "q017": {
+    "question_id": "q017",
+    "category": "paper_contributions",
+    "difficulty": "easy",
+    "retrieval_scope": "paper",
+    "answerable": true,
+    "gold_block_ids": [
+      "b000033"
+    ],
+    "gold_in_context": true,
+    "context_count": 4,
+    "context_chunk_ids": [
+      "cabe1d24-ba08-42c9-8550-c746d06052df",
+      "91735662-ad94-4101-83fc-09e07595eb4b",
+      "791cbbee-51ad-46c3-a284-b51ece267a08",
+      "744b0701-25bd-4384-86f0-d0b08ba44834"
+    ],
+    "context_block_ids": [
+      "b000033",
+      "b000052",
+      "b000053",
+      "b000054",
+      "b000055",
+      "b000056",
+      "b000057",
+      "b000058",
+      "b000059",
+      "b000060",
+      "b000061",
+      "b000062",
+      "b000063",
+      "b000186",
+      "b000069",
+      "b000070",
+      "b000071",
+      "b000072",
+      "b000073",
+      "b000074",
+      "b000075",
+      "b000076",
+      "b000077",
+      "b000078",
+      "b000079",
+      "b000080",
+      "b000081",
+      "b000082",
+      "b000083",
+      "b000084",
+      "b000085",
+      "b000086",
+      "b000087",
+      "b000088",
+      "b000089",
+      "b000090",
+      "b000091",
+      "b000092",
+      "b000093",
+      "b000094",
+      "b000095",
+      "b000096",
+      "b000097",
+      "b000098",
+      "b000099"
+    ],
+    "context_estimated_tokens": 3001,
+    "latency_ms": 1643.408,
+    "trace_id": "1f39ba8f-562b-42b9-83c2-31d7301f6250",
+    "pre_rerank_candidate_count": 60
+  },
+  "root_cause": {
+    "classification": [
+      "RETRIEVAL_TRUE_MISS",
+      "CONTEXT_TOP_K_TOO_SMALL",
+      "QUERY_ROUTING_MISS"
+    ],
+    "gold_reasonable": true,
+    "human_review_required": false,
+    "explanation": "The gold abstract block directly supports all three required claims. Before Stage 13.32 it ranked below the shallow context cutoff; after the contribution-aware route it enters final context."
+  },
+  "dataset_hashes": {
+    "gold": "24b21d7ce5264d4f22230cfb6bc9ec788ef6b76dc0ad629a20ae682c5184599e",
+    "retrieval_gold": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+    "production_corpus": "e44542a3082ddec36c6ff7afe069e4d83a2973b51e476705e6a7f5dd18ee66ce"
+  }
+}

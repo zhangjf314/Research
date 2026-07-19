@@ -195,8 +195,12 @@ class _TLSContext:
 
 
 class _Response:
-    def __init__(self, status_code: int) -> None:
+    def __init__(self, status_code: int, payload: dict | None = None) -> None:
         self.status_code = status_code
+        self._payload = payload or {}
+
+    def json(self) -> dict:
+        return self._payload
 
 
 def _healthy_transport(monkeypatch: pytest.MonkeyPatch, health, *, tls_fail=False) -> None:
@@ -213,7 +217,7 @@ def _healthy_transport(monkeypatch: pytest.MonkeyPatch, health, *, tls_fail=Fals
     monkeypatch.setattr(
         health.ssl,
         "create_default_context",
-        lambda: _TLSContext(fail=tls_fail),
+        lambda *args, **kwargs: _TLSContext(fail=tls_fail),
     )
 
 
@@ -233,10 +237,61 @@ def test_health_check_models_success(monkeypatch: pytest.MonkeyPatch) -> None:
     _healthy_transport(monkeypatch, health)
     monkeypatch.setattr(health.httpx, "get", lambda *args, **kwargs: _Response(200))
     result = health.check_health(
-        Settings(llm_base_url="https://example.test", llm_api_key="secret")
+        Settings(
+            llm_provider="siliconflow",
+            llm_model="Qwen/Qwen3-8B",
+            llm_base_url="https://example.test",
+            llm_api_key="secret",
+        )
     )
     assert result["models_endpoint_status"] == "passed"
     assert result["minimal_completion_status"] == "not_run"
+    assert result["factory_provider"] == "siliconflow"
+    assert result["factory_model"] == "Qwen/Qwen3-8B"
+    assert result["template_fallback"] is False
+    assert result["safe_to_start_batch"] is True
+    assert "secret" not in json.dumps(result)
+
+
+def test_health_check_requires_minimal_completion_after_models_success(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import scripts.check_llm_provider_health_v1 as health
+
+    _healthy_transport(monkeypatch, health)
+    monkeypatch.setattr(health.httpx, "get", lambda *args, **kwargs: _Response(200))
+    monkeypatch.setattr(
+        health.httpx,
+        "post",
+        lambda *args, **kwargs: _Response(
+            200,
+            {
+                "model": "Qwen/Qwen3-8B",
+                "choices": [{"message": {"content": "{\"ok\": true}"}}],
+                "usage": {
+                    "prompt_tokens": 8,
+                    "completion_tokens": 3,
+                    "total_tokens": 11,
+                },
+            },
+        ),
+    )
+    result = health.check_health(
+        Settings(
+            llm_provider="siliconflow",
+            llm_model="Qwen/Qwen3-8B",
+            llm_base_url="https://example.test",
+            llm_api_key="secret",
+        ),
+        require_minimal_completion=True,
+    )
+    assert result["models_endpoint_status"] == "passed"
+    assert result["minimal_completion_status"] == "passed"
+    assert result["minimal_completion_json_valid"] is True
+    assert result["minimal_completion_model"] == "Qwen/Qwen3-8B"
+    assert result["minimal_completion_usage"]["total_tokens"] == 11
+    assert result["factory_provider"] == "siliconflow"
+    assert result["template_fallback"] is False
     assert result["safe_to_start_batch"] is True
     assert "secret" not in json.dumps(result)
 
@@ -254,9 +309,24 @@ def test_health_endpoint_timeout_and_minimal_completion_success(
             health.httpx.ReadTimeout("fixture")
         ),
     )
-    monkeypatch.setattr(health.httpx, "post", lambda *args, **kwargs: _Response(200))
+    monkeypatch.setattr(
+        health.httpx,
+        "post",
+        lambda *args, **kwargs: _Response(
+            200,
+            {
+                "choices": [{"message": {"content": "{\"ok\": true}"}}],
+                "usage": {"total_tokens": 4},
+            },
+        ),
+    )
     result = health.check_health(
-        Settings(llm_base_url="https://example.test", llm_api_key="secret"),
+        Settings(
+            llm_provider="siliconflow",
+            llm_model="Qwen/Qwen3-8B",
+            llm_base_url="https://example.test",
+            llm_api_key="secret",
+        ),
         allow_minimal_completion=True,
     )
     assert result["models_endpoint_status"] == "failed"

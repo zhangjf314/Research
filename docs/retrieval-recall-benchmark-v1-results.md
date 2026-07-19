@@ -2,5 +2,11 @@
 
 - Engineering Gate: `PASSED`
 - Sample size sufficient: `False`
-- Generalization evidence: `INSUFFICIENT`
-- Next live ready: `False`
+- Minimum generalization samples: `50`
+- Validation gate: `DIAGNOSTIC_NOT_HOLDOUT`
+- Holdout gate: `NOT_EVALUATED`
+- Generalization gate: `DIAGNOSTIC_ONLY`
+- Generalization evidence: `DIAGNOSTIC_ONLY`
+- Shadow holdout required for Full QA: `False`
+- Strong generalization claim allowed: `False`
+- Next live ready: `True`

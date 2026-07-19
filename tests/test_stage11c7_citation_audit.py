@@ -26,18 +26,16 @@ def response(body: dict) -> httpx.Response:
     )
 
 
-def answer(page: int) -> dict:
+def answer_with_key(key: str) -> dict:
     return {
-        "answerable": True,
         "answer": "A supported claim.",
+        "insufficient_evidence": False,
         "claims": [
             {
-                "claim_id": "c1",
                 "text": "A supported claim.",
-                "citations": [{"paper_id": "paper", "page": page, "block_id": "b1"}],
+                "citation_keys": [key],
             }
         ],
-        "refusal_reason": None,
     }
 
 
@@ -106,11 +104,10 @@ def test_exact_block_page_map_is_authoritative_and_never_auto_corrected() -> Non
     context = exact_context()
     payload = SiliconFlowLLMProvider._evidence_payload(context)
 
-    assert payload[0]["block_page_map"] == {"b1": 3, "b2": 4}
-    assert {tuple(item.values()) for item in payload[0]["allowed_citations"]} == {
-        ("paper", 3, "b1"),
-        ("paper", 4, "b2"),
-    }
+    assert payload[0]["citation_keys"] == [
+        {"key": "C1", "paper_id": "paper", "block_id": "b1", "page": 3},
+        {"key": "C2", "paper_id": "paper", "block_id": "b2", "page": 4},
+    ]
     generated = SiliconFlowLLMProvider._allowed_citations(context)
     assert ("paper", 4, "b1") not in generated
     with pytest.raises(ClaimValidationError):
@@ -136,12 +133,12 @@ def test_exact_block_page_map_is_authoritative_and_never_auto_corrected() -> Non
         )
 
 
-def test_citation_retry_lists_legal_triples_and_remains_bounded(monkeypatch) -> None:
+def test_unknown_citation_key_fails_without_generation_retry(monkeypatch) -> None:
     calls = []
 
     def handler(request: httpx.Request) -> httpx.Response:
         calls.append(json.loads(request.content))
-        return response(answer(4))
+        return response(answer_with_key("C99"))
 
     monkeypatch.setattr("paper_research.providers.llm.time.sleep", lambda _seconds: None)
     provider = SiliconFlowLLMProvider(
@@ -154,11 +151,10 @@ def test_citation_retry_lists_legal_triples_and_remains_bounded(monkeypatch) -> 
     with pytest.raises(LLMProviderError) as captured:
         provider.generate_claim_answer("question", exact_context(), "qa-production-v1")
 
-    assert captured.value.api_request_count == 2
-    assert len(calls) == 2
-    assert "allowed triples" in calls[1]["messages"][2]["content"]
-    assert '"page": 3, "block_id": "b1"' in calls[1]["messages"][2]["content"]
-    assert answer(4)["claims"][0]["citations"][0]["page"] == 4
+    assert captured.value.api_request_count == 1
+    assert captured.value.retry_reasons == ["malformed_json"]
+    assert len(calls) == 1
+    assert "citation_keys" in calls[0]["messages"][1]["content"]
 
 
 def test_failure_artifacts_are_sanitized_and_frozen() -> None:

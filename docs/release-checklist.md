@@ -1,5 +1,38 @@
 # Release Checklist
 
+## Portfolio v1.0 evaluation policy update
+
+- [x] `gold-dev-v1`: 50/50 records are human processed and approved. This is an
+  internal development evaluation set, not a blind holdout.
+- [x] Formal metrics must still count only `review_status=approved` records.
+- [x] `retrieval-diagnostic-v1`: 27 claim-level records remain diagnostic and
+  are not described as blind.
+- [x] Real Production Embedding and the Production collection are available for
+  the current retrieval path.
+- [x] Real LLM provider preflight passed for SiliconFlow `Qwen/Qwen3-8B`.
+- [x] Full QA is no longer blocked solely by the absence of a 50-record strict
+  blind shadow holdout.
+- [x] `shadow-holdout-pilot-v1` is optional/recommended: 10-15 new samples, not
+  a hard Portfolio gate.
+- [x] Strong generalization claims remain forbidden without a future independent
+  blind benchmark.
+
+Portfolio-safe wording:
+
+> 基于 50 条人工审核的内部评测数据完成检索和问答评测
+
+Forbidden wording:
+
+- 在严格盲测集上证明了泛化能力
+- 达到生产级泛化
+- 通过大规模独立 benchmark
+
+Current retrieval release state:
+
+- `READY_FOR_FULL_QA=true`
+- `RETRIEVAL_GENERALIZATION_EVIDENCE=DIAGNOSTIC_ONLY`
+- `STRONG_GENERALIZATION_CLAIM_ALLOWED=false`
+
 ## Stage 10 evidence
 
 - [x] Baseline and Production profiles with explicit provider configuration failure.

@@ -1,0 +1,51 @@
+question_id,status,gold_answerable,predicted_answerable,gold_block_present,claim_count,citation_count,citation_precision,citation_recall,total_tokens,total_latency_ms,failure_reason
+q001,COMPLETED,True,True,False,3,3,0.0,0.0,24473,7662.874,
+q002,COMPLETED,True,True,False,3,3,0.0,0.0,5644,15075.227,
+q003,COMPLETED,True,True,False,3,3,0.0,0.0,7977,15713.384,
+q004,COMPLETED,True,True,True,3,3,0.3333333333333333,0.2,6658,12992.211,
+q005,COMPLETED,False,False,False,0,0,1.0,1.0,5516,5389.269,
+q006,COMPLETED,True,True,True,3,3,0.3333333333333333,0.3333333333333333,6879,13826.232,
+q007,COMPLETED,True,True,True,3,3,0.3333333333333333,0.25,7543,15860.349,
+q008,COMPLETED,True,True,True,3,3,0.3333333333333333,0.25,7601,15956.326,
+q009,COMPLETED,True,True,False,3,3,0.0,0.0,6660,15654.505,
+q010,COMPLETED,True,True,False,2,2,0.0,0.0,7069,11940.623,
+q011,COMPLETED,True,True,False,3,3,0.0,0.0,5635,15676.049,
+q012,COMPLETED,True,True,False,3,3,0.0,0.0,6528,15546.513,
+q013,COMPLETED,True,True,False,3,3,0.0,0.0,6670,15752.461,
+q014,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_CITATION_VALIDATION_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): citation_validation:page"",""stage"":""CLAIM_CITATION_VALIDATE"",""api_request_count"":1,""retry_reasons"":[""citation_validation:page""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q014-full-qa-rerun-q014-1784458604.json""},""request_id"":""906cc7b1-d5aa-4e33-86c3-9fa0d44a974f""}}"
+q015,COMPLETED,True,True,False,2,2,0.0,0.0,5160,21838.498,
+q016,COMPLETED,True,True,False,3,3,0.0,0.0,9042,16205.14,
+q017,COMPLETED,True,True,True,3,3,1.0,1.0,7715,21486.628,
+q018,COMPLETED,True,True,False,3,3,0.0,0.0,8552,18418.729,
+q019,COMPLETED,True,True,True,3,3,0.6666666666666666,0.5,10279,13791.01,
+q020,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_JSON_PARSE_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): malformed_json"",""stage"":""LLM_JSON_PARSE"",""api_request_count"":1,""retry_reasons"":[""malformed_json""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q020-full-qa-rerun-q020-1784458716.json""},""request_id"":""451b2f7c-cb49-40ff-92f9-ecee561e5a4b""}}"
+q021,COMPLETED,True,True,False,3,3,0.0,0.0,4625,16219.96,
+q022,COMPLETED,True,True,True,3,3,0.3333333333333333,0.25,6300,15282.151,
+q023,COMPLETED,True,True,False,3,3,0.0,0.0,4449,15391.308,
+q024,COMPLETED,True,True,True,3,3,0.6666666666666666,0.5,5185,17543.399,
+q025,COMPLETED,True,True,True,3,3,0.3333333333333333,0.25,4068,13391.871,
+q026,COMPLETED,True,True,False,3,3,0.0,0.0,5996,12975.992,
+q027,COMPLETED,True,True,False,3,3,0.0,0.0,6099,16170.971,
+q028,COMPLETED,True,True,False,3,3,0.0,0.0,5017,17895.937,
+q029,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_CITATION_VALIDATION_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): citation_validation:page"",""stage"":""CLAIM_CITATION_VALIDATE"",""api_request_count"":1,""retry_reasons"":[""citation_validation:page""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q029-full-qa-rerun-q029-1784458934.json""},""request_id"":""212b88d4-ce4c-47eb-9151-654828658b5e""}}"
+q030,COMPLETED,False,False,False,0,0,1.0,1.0,6247,4425.742,
+q031,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_JSON_PARSE_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): malformed_json"",""stage"":""LLM_JSON_PARSE"",""api_request_count"":1,""retry_reasons"":[""malformed_json""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q031-full-qa-rerun-q031-1784458954.json""},""request_id"":""27c9407c-1a28-4254-bf95-dc5dc0b6215a""}}"
+q032,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_JSON_PARSE_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): malformed_json"",""stage"":""LLM_JSON_PARSE"",""api_request_count"":1,""retry_reasons"":[""malformed_json""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q032-full-qa-rerun-q032-1784459040.json""},""request_id"":""a05165c9-22fb-4f68-90d2-b97345bad4cb""}}"
+q033,COMPLETED,True,True,False,3,3,0.0,0.0,8630,14367.154,
+q034,COMPLETED,True,True,True,3,3,0.3333333333333333,0.3333333333333333,7608,20692.741,
+q035,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_PROVIDER_TIMEOUT"",""message"":""SiliconFlow QA failed after 1 request(s): ReadTimeout"",""stage"":""LLM_PROVIDER_TIMEOUT"",""api_request_count"":1,""retry_reasons"":[""ReadTimeout""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q035-full-qa-rerun-q035-1784459162-provider-failure.json""},""request_id"":""aea0e575-008b-432e-bbde-5e3bad9b6b43""}}"
+q036,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_JSON_PARSE_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): malformed_json"",""stage"":""LLM_JSON_PARSE"",""api_request_count"":1,""retry_reasons"":[""malformed_json""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q036-full-qa-rerun-q036-1784459283.json""},""request_id"":""bbca9d3b-5db4-4016-8805-4c1ca97e311d""}}"
+q037,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_JSON_PARSE_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): malformed_json"",""stage"":""LLM_JSON_PARSE"",""api_request_count"":1,""retry_reasons"":[""malformed_json""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q037-full-qa-rerun-q037-1784459396.json""},""request_id"":""11addb4c-d751-42f7-a3fe-e597664709df""}}"
+q038,COMPLETED,True,True,False,3,3,0.0,0.0,4480,16970.669,
+q039,COMPLETED,True,True,False,2,2,0.0,0.0,4800,13396.639,
+q040,COMPLETED,True,True,False,3,3,0.0,0.0,7838,15946.542,
+q041,COMPLETED,True,True,False,3,3,0.0,0.0,6775,13291.911,
+q042,COMPLETED,True,True,False,3,3,0.0,0.0,6813,19218.931,
+q043,COMPLETED,True,True,False,3,3,0.0,0.0,5821,13870.153,
+q044,FAILED,True,,,0,0,,,,,"{""error"":{""code"":""HTTP_503"",""message"":{""code"":""CLAIM_QA_SCHEMA_VALIDATION_ERROR"",""message"":""SiliconFlow QA failed after 1 request(s): schema_validation"",""stage"":""CLAIM_SCHEMA_VALIDATE"",""api_request_count"":1,""retry_reasons"":[""schema_validation""],""rate_limit_events"":0,""response_audit_path"":""/app/artifacts/private/qa-response-audits/q044-full-qa-rerun-q044-1784459569.json""},""request_id"":""88f605d6-e66c-49e5-b74d-917ac8d99506""}}"
+q045,COMPLETED,True,True,False,2,2,0.0,0.0,11887,17877.123,
+q046,COMPLETED,True,True,False,3,3,0.0,0.0,8990,13615.931,
+q047,COMPLETED,True,True,True,3,3,0.6666666666666666,0.6666666666666666,5534,15527.256,
+q048,COMPLETED,True,True,False,3,3,0.0,0.0,7542,16048.144,
+q049,COMPLETED,True,True,True,3,3,0.3333333333333333,0.2,5147,12466.347,
+q050,COMPLETED,True,True,True,3,3,0.3333333333333333,0.2,5180,16458.431,

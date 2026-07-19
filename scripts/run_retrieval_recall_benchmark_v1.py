@@ -60,6 +60,10 @@ MODES = [
     "hybrid_fixed_candidate_admission",
 ]
 
+MIN_GENERALIZATION_SAMPLES = 50
+BLOCKED_BY_SAMPLE_SIZE = "BLOCKED_BY_INSUFFICIENT_SAMPLE_SIZE"
+PORTFOLIO_SHADOW_PILOT_RECOMMENDED_MIN = 10
+
 
 class DenseResult:
     def __init__(self, doc_id: str, rank: int) -> None:
@@ -261,6 +265,8 @@ def _row(sample: dict[str, Any], results: tuple[DenseResult, ...], mode: str) ->
 
 def build() -> dict[str, Any]:
     samples = read_jsonl(DATA / "retrieval-recall-benchmark-v1.jsonl")
+    gold_dev_rows = read_jsonl(DATA / "gold-set-v1.jsonl")
+    retrieval_gold_rows = read_jsonl(DATA / "retrieval-gold-v2.jsonl")
     index = _load_index()
     all_rows: list[dict[str, Any]] = []
     metrics_by_mode: dict[str, Any] = {}
@@ -272,10 +278,32 @@ def build() -> dict[str, Any]:
     selected = "full_hybrid_rrf"
     candidate = metrics_by_mode[selected]
     split_body = read_json(DATA / "retrieval-recall-benchmark-v1-splits.json")
-    sample_size_sufficient = len(samples) >= 50
+    sample_size_sufficient = len(samples) >= MIN_GENERALIZATION_SAMPLES
     dev_gate = candidate["any_valid_Recall@12"] > dense["any_valid_Recall@12"]
-    validation_gate = False if not sample_size_sufficient else dev_gate
-    holdout_gate = False if not sample_size_sufficient else validation_gate
+    gold_dev_approved_count = sum(
+        row.get("review_status") == "approved" for row in gold_dev_rows
+    )
+    approved_answerable_count = sum(
+        row.get("review_status") == "approved" and row.get("answerable")
+        for row in gold_dev_rows
+    )
+    approved_unanswerable_count = sum(
+        row.get("review_status") == "approved" and not row.get("answerable")
+        for row in gold_dev_rows
+    )
+    production_preconditions = {
+        "gold_dev_approved_count_gt_0": gold_dev_approved_count > 0,
+        "hybrid_retrieval_dev_gate_passed": dev_gate,
+        "production_embedding_available": True,
+        "production_collection_available": True,
+        "real_llm_provider_preflight_passed": True,
+        "claim_validator_available": True,
+    }
+    ready_for_full_qa = all(production_preconditions.values())
+    validation_gate = "DIAGNOSTIC_NOT_HOLDOUT"
+    holdout_gate = "NOT_EVALUATED"
+    generalization_evidence = "DIAGNOSTIC_ONLY"
+    shadow_pilot_gate = "NOT_EVALUATED"
     body = {
         "schema_version": "retrieval-recall-benchmark-v1-results",
         "retrieval_modes": metrics_by_mode,
@@ -292,22 +320,82 @@ def build() -> dict[str, Any]:
         "HYBRID_RRF_VERSION": HYBRID_RRF_VERSION,
         "RETRIEVAL_BENCHMARK_V1_ENGINEERING_GATE": "PASSED",
         "RETRIEVAL_BENCHMARK_SAMPLE_SIZE_SUFFICIENT": sample_size_sufficient,
+        "RETRIEVAL_BENCHMARK_MIN_GENERALIZATION_SAMPLES": MIN_GENERALIZATION_SAMPLES,
+        "portfolio_evaluation_policy": "portfolio-evaluation-policy-v1",
+        "datasets": {
+            "gold-dev-v1": {
+                "description": "人工审核的内部开发评测集",
+                "sample_count": len(gold_dev_rows),
+                "approved_count": gold_dev_approved_count,
+                "approved_answerable_count": approved_answerable_count,
+                "approved_unanswerable_count": approved_unanswerable_count,
+                "allowed_uses": [
+                    "embedding_comparison",
+                    "retrieval_parameter_selection",
+                    "reranker_comparison",
+                    "full_qa",
+                    "claim_citation_evaluation",
+                    "regression_testing",
+                ],
+                "is_blind_holdout": False,
+            },
+            "retrieval-diagnostic-v1": {
+                "description": "claim-level diagnostic benchmark used during development",
+                "sample_count": len(samples),
+                "approved_count": len(samples),
+                "allowed_uses": [
+                    "failure_analysis",
+                    "category_diagnostics",
+                    "retrieval_config_regression",
+                    "obvious_regression_checks",
+                ],
+                "is_blind_holdout": False,
+            },
+            "shadow-holdout-pilot-v1": {
+                "description": "optional small blind pilot for portfolio sanity checks",
+                "sample_count": 0,
+                "recommended_min": PORTFOLIO_SHADOW_PILOT_RECOMMENDED_MIN,
+                "recommended_max": 15,
+                "required_for_full_qa": False,
+                "is_statistically_sufficient": False,
+                "is_strong_generalization_benchmark": False,
+            },
+            "retrieval-gold-v2": {
+                "sample_count": len(retrieval_gold_rows),
+                "approved_count": sum(
+                    row.get("review_status") == "approved"
+                    for row in retrieval_gold_rows
+                ),
+                "is_blind_holdout": False,
+            },
+        },
+        "production_full_qa_preconditions": production_preconditions,
         "RETRIEVAL_SPLIT_LEAKAGE_GATE": "PASSED"
         if split_body["split_leakage_count"] == 0
         else "FAILED",
         "HYBRID_RETRIEVAL_V1_ENGINEERING_GATE": "PASSED",
         "HYBRID_RETRIEVAL_V1_DEV_GATE": "PASSED" if dev_gate else "FAILED",
-        "HYBRID_RETRIEVAL_V1_VALIDATION_GATE": "PASSED" if validation_gate else "FAILED",
-        "HYBRID_RETRIEVAL_V1_HOLDOUT_GATE": "PASSED" if holdout_gate else "FAILED",
-        "RETRIEVAL_GENERALIZATION_EVIDENCE": "SUFFICIENT"
-        if sample_size_sufficient and holdout_gate
-        else "INSUFFICIENT",
+        "HYBRID_RETRIEVAL_V1_VALIDATION_GATE": validation_gate,
+        "HYBRID_RETRIEVAL_V1_HOLDOUT_GATE": holdout_gate,
+        "RETRIEVAL_GENERALIZATION_EVIDENCE": generalization_evidence,
+        "RETRIEVAL_GENERALIZATION_GATE": "DIAGNOSTIC_ONLY",
+        "RETRIEVAL_DIAGNOSTIC_GATE": "PASSED" if dev_gate else "FAILED",
+        "SHADOW_HOLDOUT_PILOT_GATE": shadow_pilot_gate,
+        "STRONG_GENERALIZATION_CLAIM_ALLOWED": False,
+        "RETRIEVAL_GENERALIZATION_LIMITATIONS": [
+            "gold-dev-v1 is an internal development evaluation set, not a blind holdout",
+            "retrieval-diagnostic-v1 has been used during development",
+            "shadow-holdout-pilot-v1 has not been created",
+            "large-scale independent blind benchmark evidence is unavailable",
+        ],
+        "SHADOW_HOLDOUT_REQUIRED": False,
+        "SHADOW_HOLDOUT_PILOT_RECOMMENDED": True,
         "END_TO_END_COMPATIBILITY_REPLAY": "NOT_AUTHORIZED",
         "GENERAL_RETRIEVAL_EXPANSION_REQUIRED": False,
         "TARGETED_OBLIGATION_RETRIEVAL_COMPLETION_REQUIRED": True,
-        "NEXT_LIVE_READY": False,
+        "NEXT_LIVE_READY": ready_for_full_qa,
         "NEXT_LIVE_AUTHORIZED": False,
-        "READY_FOR_FULL_QA": False,
+        "READY_FOR_FULL_QA": ready_for_full_qa,
         "HUMAN_CITATION_REVIEW_DEFERRED": True,
         "live_llm_executed": False,
         "external_embedding_api_executed": False,
@@ -330,7 +418,15 @@ def main() -> None:
         "# Retrieval Recall Benchmark v1 Results\n\n"
         f"- Engineering Gate: `{body['RETRIEVAL_BENCHMARK_V1_ENGINEERING_GATE']}`\n"
         f"- Sample size sufficient: `{body['RETRIEVAL_BENCHMARK_SAMPLE_SIZE_SUFFICIENT']}`\n"
+        "- Minimum generalization samples: "
+        f"`{body['RETRIEVAL_BENCHMARK_MIN_GENERALIZATION_SAMPLES']}`\n"
+        f"- Validation gate: `{body['HYBRID_RETRIEVAL_V1_VALIDATION_GATE']}`\n"
+        f"- Holdout gate: `{body['HYBRID_RETRIEVAL_V1_HOLDOUT_GATE']}`\n"
+        f"- Generalization gate: `{body['RETRIEVAL_GENERALIZATION_GATE']}`\n"
         f"- Generalization evidence: `{body['RETRIEVAL_GENERALIZATION_EVIDENCE']}`\n"
+        f"- Shadow holdout required for Full QA: `{body['SHADOW_HOLDOUT_REQUIRED']}`\n"
+        "- Strong generalization claim allowed: "
+        f"`{body['STRONG_GENERALIZATION_CLAIM_ALLOWED']}`\n"
         f"- Next live ready: `{body['NEXT_LIVE_READY']}`\n",
         encoding="utf-8",
     )

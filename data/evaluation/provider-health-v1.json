@@ -1,17 +1,36 @@
 {
-  "checked_at": "2026-07-17T10:08:56.406128+00:00",
+  "checked_at": "2026-07-18T13:40:22.028226+00:00",
   "base_url_host": "api.siliconflow.cn",
   "base_url_valid": true,
   "dns_status": "passed",
   "tcp_status": "passed",
   "tls_status": "passed",
   "models_endpoint_status": "passed",
-  "minimal_completion_status": "not_run",
+  "minimal_completion_status": "passed",
+  "minimal_completion_json_valid": false,
+  "minimal_completion_model": "Qwen/Qwen3-8B",
+  "minimal_completion_usage": {
+    "prompt_tokens": 16,
+    "completion_tokens": 355,
+    "total_tokens": 371,
+    "completion_tokens_details": {
+      "reasoning_tokens": 347
+    },
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 16
+  },
+  "factory_provider": "siliconflow",
+  "factory_model": "Qwen/Qwen3-8B",
+  "template_fallback": false,
   "latency": {
-    "dns_ms": 7.562,
-    "tcp_ms": 19.317,
-    "tls_ms": 199.215,
-    "models_ms": 512.306
+    "dns_ms": 8.174,
+    "tcp_ms": 13.006,
+    "tls_ms": 17.865,
+    "models_ms": 428.613,
+    "minimal_completion_ms": 14477.457
   },
   "error_type": null,
   "safe_to_start_batch": true,

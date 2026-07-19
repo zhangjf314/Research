@@ -1,0 +1,378 @@
+{
+  "schema_version": "full-qa-production-rerun-comparison-v2",
+  "generated_at": "2026-07-19T09:08:06.723360+00:00",
+  "previous_backup": "artifacts/full-qa-rerun-backups/pre-q019-validated-rerun-20260719-164745",
+  "previous_status": "COMPLETED_WITH_FAILURES",
+  "current_status": "COMPLETED_WITH_FAILURES",
+  "previous_failed": [
+    "q019"
+  ],
+  "current_failed": [
+    "q024"
+  ],
+  "metric_delta": {
+    "answerable_accuracy": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "answerable_items_completed": {
+      "previous": 47,
+      "current": 47,
+      "delta": 0
+    },
+    "api_requests": {
+      "previous": 50,
+      "current": 50,
+      "delta": 0
+    },
+    "attempted": {
+      "previous": 50,
+      "current": 50,
+      "delta": 0
+    },
+    "citation_id_validity": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "citation_precision": {
+      "previous": 0.101917,
+      "current": 0.117908,
+      "delta": 0.015991000000000005
+    },
+    "citation_recall": {
+      "previous": 0.126241,
+      "current": 0.153901,
+      "delta": 0.027660000000000018
+    },
+    "claim_citation_binding_rate": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "completed": {
+      "previous": 49,
+      "current": 49,
+      "delta": 0
+    },
+    "cost_is_configured": {
+      "previous": false,
+      "current": false,
+      "delta": 0
+    },
+    "estimated_cost_usd": {
+      "previous": null,
+      "current": null,
+      "delta": null
+    },
+    "failed": {
+      "previous": 1,
+      "current": 1,
+      "delta": 0
+    },
+    "gold_block_retrieved_rate": {
+      "previous": 0.234043,
+      "current": 0.276596,
+      "delta": 0.04255300000000001
+    },
+    "input_tokens": {
+      "previous": 317789,
+      "current": 327669,
+      "delta": 9880
+    },
+    "latency_ms": {
+      "previous": {
+        "mean": 25502.632,
+        "p50": 23382.382,
+        "p95": 47913.255
+      },
+      "current": {
+        "mean": 23373.859,
+        "p50": 22314.21,
+        "p95": 46452.421
+      },
+      "delta": null
+    },
+    "output_tokens": {
+      "previous": 26938,
+      "current": 28709,
+      "delta": 1771
+    },
+    "rate_limit_events": {
+      "previous": 0,
+      "current": 0,
+      "delta": 0
+    },
+    "refusal_accuracy": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "required_claim_coverage": {
+      "previous": 0.432624,
+      "current": 0.425532,
+      "delta": -0.007091999999999987
+    },
+    "retry_count": {
+      "previous": 1,
+      "current": 1,
+      "delta": 0
+    },
+    "total_tokens": {
+      "previous": 344727,
+      "current": 356378,
+      "delta": 11651
+    },
+    "unanswerable_items_completed": {
+      "previous": 2,
+      "current": 2,
+      "delta": 0
+    },
+    "unsupported_claim_count": {
+      "previous": 166,
+      "current": 173,
+      "delta": 7
+    }
+  },
+  "q019_current": {
+    "question_id": "q019",
+    "status": "COMPLETED",
+    "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2001.08361"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2001.08361"
+      ],
+      "gold_block_ids": [
+        "b000215",
+        "b000216",
+        "b000217",
+        "b000218"
+      ],
+      "gold_pages": [
+        7
+      ],
+      "required_claims": [
+        "Model size is varied from 768 to 1.5B non-embedding parameters.",
+        "Dataset size is varied from 22M to 23B tokens.",
+        "Model shape variables include depth, width, attention heads, and feed-forward dimension."
+      ]
+    },
+    "answer": {
+      "answerable": true,
+      "answer": "The target paper's experiments are designed by training a wide variety of models with varying factors such as model size, dataset size, shape, context length, and batch size. The models are evaluated based on test loss, with results displayed in figures and empirically-motivated fits. The experiments also investigate the relationship between model size, dataset size, and training compute budget, showing that performance scales with power laws and that the critical batch size roughly obeys a power law in loss.",
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The experiments are designed by training a wide variety of models with varying factors such as model size, dataset size, shape, context length, and batch size.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 7,
+              "block_id": "b000215"
+            }
+          ],
+          "block_ids": [
+            "b000215"
+          ],
+          "pages": [
+            7
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c2",
+          "text": "The models are evaluated based on test loss, with results displayed in figures and empirically-motivated fits.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 7,
+              "block_id": "b000216"
+            }
+          ],
+          "block_ids": [
+            "b000216"
+          ],
+          "pages": [
+            7
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c3",
+          "text": "The experiments investigate the relationship between model size, dataset size, and training compute budget, showing that performance scales with power laws.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 5,
+              "block_id": "b000120"
+            }
+          ],
+          "block_ids": [
+            "b000120"
+          ],
+          "pages": [
+            5
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c4",
+          "text": "The critical batch size roughly obeys a power law in loss.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 5,
+              "block_id": "b000148"
+            }
+          ],
+          "block_ids": [
+            "b000148"
+          ],
+          "pages": [
+            5
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        }
+      ],
+      "refusal_reason": null,
+      "refused": false,
+      "citations": [
+        {
+          "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+          "section": "3\nEmpirical Results and Basic Power Laws",
+          "page_start": 7,
+          "page_end": 8,
+          "quote": "We train our models on an extended version of the WebText dataset described in [RWC+19]. The original\nWebText dataset was a web scrape of outbound links from Reddit through December 2017 which received at\nleast 3 karma. In the second version, WebText2, we added outbound Reddit links from the period of January\nto October 2018, also with a minimum of 3 karma. The karma threshold served as a heuristic for whether\npeople found the link interesting or useful. The text of the new links was extracted w",
+          "score": 0.019516,
+          "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=7",
+          "block_ids": [
+            "b000215",
+            "b000216"
+          ]
+        },
+        {
+          "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+          "section": "1\nIntroduction",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Figure 3\nAs more compute becomes available, we can choose how much to allocate towards training larger\nmodels, using larger batches, and training for more steps. We illustrate this for a billion-fold increase in\ncompute. For optimally compute-efﬁcient training, most of the increase should go towards increased model\nsize. A relatively small increase in data is needed to avoid reuse. Of the increase in data, most can be used to\nincrease parallelism through larger batch sizes, with only a very smal",
+          "score": 0.017767,
+          "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=5",
+          "block_ids": [
+            "b000120",
+            "b000148"
+          ]
+        }
+      ],
+      "uncertainty": null,
+      "insufficient_evidence": false,
+      "model_usage": {
+        "input_tokens": 9812,
+        "output_tokens": 584,
+        "total_tokens": 10396,
+        "estimated_cost_usd": null
+      },
+      "latency": {
+        "retrieval_latency_ms": 1641.999,
+        "rerank_latency_ms": 0.0,
+        "context_build_latency_ms": 1.185,
+        "llm_first_token_latency_ms": null,
+        "llm_total_latency_ms": 20534.021,
+        "total_latency_ms": 22207.481
+      },
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prompt_version": "qa-production-v1",
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0
+    },
+    "metrics": {
+      "answerable_correct": true,
+      "required_claim_coverage": 0.0,
+      "citation_id_validity": 1.0,
+      "citation_precision": 0.5,
+      "citation_recall": 0.5,
+      "claim_citation_binding_rate": 1.0,
+      "unsupported_claim_count": 2,
+      "claim_scores": [
+        {
+          "required_claim": "Model size is varied from 768 to 1.5B non-embedding parameters.",
+          "best": 0.2
+        },
+        {
+          "required_claim": "Dataset size is varied from 22M to 23B tokens.",
+          "best": 0.2222222222222222
+        },
+        {
+          "required_claim": "Model shape variables include depth, width, attention heads, and feed-forward dimension.",
+          "best": 0.2727272727272727
+        }
+      ]
+    },
+    "gold_block_present": true,
+    "api_request_count": 1,
+    "retry_count": 0,
+    "retry_reasons": [],
+    "rate_limit_events": 0,
+    "wall_ms": 22212.314
+  },
+  "q024_current_failure": {
+    "question_id": "q024",
+    "status": "FAILED",
+    "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2005.14165"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2005.14165"
+      ],
+      "gold_block_ids": [
+        "b000111",
+        "b000112",
+        "b000113",
+        "b000115"
+      ],
+      "gold_pages": [
+        10,
+        11
+      ],
+      "required_claims": [
+        "The evaluation compares GPT-3 with seven smaller models.",
+        "Datasets are grouped into multiple task categories.",
+        "Performance is analyzed through scaling curves and task-specific evaluations."
+      ]
+    },
+    "failure_reason": "{\"error\":{\"code\":\"HTTP_503\",\"message\":{\"code\":\"CLAIM_QA_CITATION_VALIDATION_ERROR\",\"message\":\"SiliconFlow QA failed after 1 request(s): citation_validation:page\",\"stage\":\"CLAIM_CITATION_VALIDATE\",\"api_request_count\":1,\"retry_reasons\":[\"citation_validation:page\"],\"rate_limit_events\":0,\"response_audit_path\":null},\"request_id\":\"fff74853-e656-43a2-a2b6-7c8baa28934c\"}}",
+    "api_request_count": 1,
+    "retry_count": 1,
+    "retry_reasons": [
+      "citation_validation:page"
+    ],
+    "rate_limit_events": 0,
+    "provider_error_code": "CLAIM_QA_CITATION_VALIDATION_ERROR",
+    "provider_error_stage": "CLAIM_CITATION_VALIDATE",
+    "wall_ms": 20814.644
+  },
+  "full_qa_rerun_executed": true,
+  "deep_research_executed": false,
+  "production_full_qa_gate": "COMPLETED_WITH_FAILURES"
+}

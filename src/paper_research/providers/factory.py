@@ -106,6 +106,14 @@ def build_llm_provider(settings: Settings) -> LLMProvider:
             max_retries=settings.llm_max_retries,
             input_cost_per_million=settings.llm_input_cost_per_million,
             output_cost_per_million=settings.llm_output_cost_per_million,
+            response_audit_enabled=settings.qa_response_audit_enabled,
+            response_audit_dir=settings.qa_response_audit_dir,
+            response_audit_max_prefix_chars=settings.qa_response_audit_max_prefix_chars,
+            response_audit_max_suffix_chars=settings.qa_response_audit_max_suffix_chars,
+            response_audit_max_error_window_chars=(
+                settings.qa_response_audit_max_error_window_chars
+            ),
+            response_audit_store_full_payload=settings.qa_response_audit_store_full_payload,
         )
     if settings.llm_provider == "openai_compatible":
         return OpenAICompatibleLLMProvider(

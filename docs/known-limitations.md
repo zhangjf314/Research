@@ -1,5 +1,20 @@
 # Known Limitations
 
+## Portfolio evaluation limitations
+
+- The main evaluation set, `gold-dev-v1`, contains 50 human-approved records and
+  is an internal development evaluation set. It is not a blind holdout, public
+  benchmark, or strict generalization benchmark.
+- `retrieval-diagnostic-v1` contains 27 claim-level records used for diagnostic
+  failure analysis and regression checks. It has been inspected during
+  development and must not be described as blind.
+- `shadow-holdout-pilot-v1` has not been created. It is recommended as a
+  10-15-sample small blind pilot, but it is not required for Portfolio Full QA.
+- `RETRIEVAL_GENERALIZATION_EVIDENCE=DIAGNOSTIC_ONLY`; strong generalization
+  claims are not allowed.
+- README, demo, and resume wording must disclose that there is no large-scale
+  independent blind benchmark result.
+
 ## Stage 10 current blockers (2026-07-13)
 
 - Human gold remains **0/50 approved**. All pending records are excluded from formal

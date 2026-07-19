@@ -1,0 +1,49 @@
+{
+  "schema_version": "shadow-holdout-requirements-v1",
+  "status": "OPTIONAL_RECOMMENDED",
+  "reason": "portfolio_sanity_check_not_full_qa_blocker",
+  "recommended_min_samples": 10,
+  "recommended_max_samples": 15,
+  "current_samples": 0,
+  "additional_samples_needed_for_recommended_min": 10,
+  "required_for_full_qa": false,
+  "required_for_portfolio_v1_0": false,
+  "statistically_sufficient": false,
+  "strong_generalization_claim_allowed": false,
+  "must_be_blind_until_configuration_frozen": true,
+  "paper_requirements": {
+    "minimum_new_papers": 5,
+    "maximum_samples_per_paper": 3,
+    "minimum_unanswerable_questions": 2,
+    "mark_revealed_after_first_formal_run": true
+  },
+  "allowed_sources": [
+    "new manually reviewed claim-level evidence labels",
+    "new question-level labels only if converted to claim/evidence relations before scoring"
+  ],
+  "prohibited_sources": [
+    "LLM auto-approved labels",
+    "labels inferred from retrieval hits",
+    "samples previously inspected during retrieval tuning"
+  ],
+  "required_fields": [
+    "question_id",
+    "required_claim_id",
+    "claim_text",
+    "target_papers",
+    "positive_core_relations",
+    "positive_equivalent_relations",
+    "split",
+    "review_status",
+    "reviewer",
+    "reviewed_at",
+    "source_hashes"
+  ],
+  "release_effect": {
+    "READY_FOR_FULL_QA": true,
+    "NEXT_LIVE_READY": true,
+    "v1_0_portfolio_allowed": false,
+    "generalization_evidence_if_not_run": "DIAGNOSTIC_ONLY",
+    "generalization_evidence_if_passed": "LIMITED_BUT_ACCEPTABLE_FOR_PORTFOLIO"
+  }
+}

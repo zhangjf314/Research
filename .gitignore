@@ -37,6 +37,7 @@ data/reports/*
 # Database backups
 artifacts/*.dump
 *.dump
+artifacts/private/qa-response-audits/
 
 # Logs and temporary files
 *.log
@@ -52,6 +53,8 @@ artifacts/*.dump
 artifacts/imports/
 artifacts/*review-pack*.zip
 artifacts/*human-review*.zip
+artifacts/stage13-9-human-citation-review-results.zip
+artifacts/stage13-10-human-claim-gold-review-results.zip
 artifacts/stage13-*-human-review/
 artifacts/stage13-*-human-review-results/
 artifacts/*citation*review-export*.md

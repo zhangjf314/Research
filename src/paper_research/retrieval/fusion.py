@@ -32,6 +32,8 @@ def reciprocal_rank_fusion(
                 result.chunk.chunk_id,
                 {"chunk": result.chunk, "score": 0.0, "dense_rank": None, "sparse_rank": None},
             )
+            if source == "sparse":
+                entry["chunk"] = result.chunk
             entry["score"] = float(entry["score"]) + weight / (k + rank)
             entry[f"{source}_rank"] = rank
     fused = [

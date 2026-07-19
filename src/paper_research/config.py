@@ -2,7 +2,7 @@ from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -59,8 +59,14 @@ class Settings(BaseSettings):
     llm_billing_mode: str | None = None
     llm_input_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
     llm_output_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
+    qa_response_audit_enabled: bool = False
+    qa_response_audit_max_prefix_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_max_suffix_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_max_error_window_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_store_full_payload: bool = False
+    qa_response_audit_dir: Path = Path("artifacts/private/qa-response-audits")
     qa_context_token_budget: int = Field(default=12000, ge=512, le=100000)
-    prompt_version: str = "claim-qa-v1"
+    prompt_version: str = "qa-production-v1"
     index_version: str = "hash-v1"
     dataset_version: str = "gold-set-v1-pending-review"
     chunk_max_tokens: int = 400
@@ -90,6 +96,20 @@ class Settings(BaseSettings):
     deep_research_max_elapsed_seconds_total: int = Field(default=900, ge=1, le=900)
     deep_research_require_usage: bool = True
     deep_research_checkpoint_path: Path = Path("data/checkpoints/deep-research-smoke-v1.sqlite3")
+
+    @field_validator(
+        "llm_input_cost_per_million",
+        "llm_output_cost_per_million",
+        "llm_input_price_per_million_tokens",
+        "llm_output_price_per_million_tokens",
+        "deep_research_max_cost_usd",
+        mode="before",
+    )
+    @classmethod
+    def empty_string_optional_number(cls, value: object) -> object:
+        if value == "":
+            return None
+        return value
 
     @model_validator(mode="after")
     def validate_profile(self) -> "Settings":

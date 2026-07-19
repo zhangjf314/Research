@@ -91,3 +91,73 @@ def test_split_builder_has_no_leakage() -> None:
         for relation in row["positive_core_relations"] + row["positive_equivalent_relations"]:
             previous = by_relation.setdefault(relation, row["split"])
             assert previous == row["split"]
+
+
+def test_portfolio_policy_allows_full_qa_without_shadow_pilot() -> None:
+    path = Path("scripts/run_retrieval_recall_benchmark_v1.py")
+    spec = importlib.util.spec_from_file_location("retrieval_benchmark_runner", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    body = module.build()
+    assert body["RETRIEVAL_BENCHMARK_SAMPLE_SIZE_SUFFICIENT"] is False
+    assert body["HYBRID_RETRIEVAL_V1_DEV_GATE"] == "PASSED"
+    assert body["HYBRID_RETRIEVAL_V1_VALIDATION_GATE"] == "DIAGNOSTIC_NOT_HOLDOUT"
+    assert body["HYBRID_RETRIEVAL_V1_HOLDOUT_GATE"] == "NOT_EVALUATED"
+    assert body["RETRIEVAL_GENERALIZATION_GATE"] == "DIAGNOSTIC_ONLY"
+    assert body["RETRIEVAL_GENERALIZATION_EVIDENCE"] == "DIAGNOSTIC_ONLY"
+    assert body["SHADOW_HOLDOUT_PILOT_GATE"] == "NOT_EVALUATED"
+    assert body["SHADOW_HOLDOUT_REQUIRED"] is False
+    assert body["READY_FOR_FULL_QA"] is True
+    assert body["NEXT_LIVE_READY"] is True
+    assert body["retrieval_modes"]["full_hybrid_rrf"]["any_valid_Recall@12"] == (
+        0.9629629629629629
+    )
+    assert body["retrieval_modes"]["dense_baseline"]["any_valid_Recall@12"] == (
+        0.25925925925925924
+    )
+
+
+def test_portfolio_policy_forbids_strong_generalization_claims() -> None:
+    path = Path("scripts/run_retrieval_recall_benchmark_v1.py")
+    spec = importlib.util.spec_from_file_location("retrieval_benchmark_runner_claims", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    body = module.build()
+    assert body["STRONG_GENERALIZATION_CLAIM_ALLOWED"] is False
+    assert body["datasets"]["retrieval-diagnostic-v1"]["is_blind_holdout"] is False
+    assert body["datasets"]["gold-dev-v1"]["is_blind_holdout"] is False
+
+
+def test_shadow_holdout_pilot_is_optional_and_not_statistically_sufficient() -> None:
+    path = Path("scripts/analyze_retrieval_generalization_v1.py")
+    spec = importlib.util.spec_from_file_location("retrieval_generalization", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    _failures, body = module.build()
+    assert body["READY_FOR_FULL_QA"] is True
+    assert body["gates"]["READY_FOR_FULL_QA"] is True
+    assert body["NEXT_LIVE_READY"] is True
+    assert body["gates"]["NEXT_LIVE_READY"] is True
+    shadow = module._shadow_holdout_requirements(body)
+    assert shadow["status"] == "OPTIONAL_RECOMMENDED"
+    assert shadow["recommended_min_samples"] == 10
+    assert shadow["recommended_max_samples"] == 15
+    assert shadow["required_for_full_qa"] is False
+    assert shadow["statistically_sufficient"] is False
+    assert shadow["strong_generalization_claim_allowed"] is False
+    assert shadow["must_be_blind_until_configuration_frozen"] is True
+    assert "LLM auto-approved labels" in shadow["prohibited_sources"]
+    assert shadow["release_effect"]["READY_FOR_FULL_QA"] is True
+
+
+def test_public_docs_distinguish_portfolio_evidence_levels() -> None:
+    readme = Path("README.md").read_text(encoding="utf-8")
+    policy = Path("docs/portfolio-evaluation-policy-v1.md").read_text(encoding="utf-8")
+    assert "gold-dev-v1" in readme
+    assert "retrieval-diagnostic-v1" in readme
+    assert "STRONG_GENERALIZATION_CLAIM_ALLOWED=false" in readme
+    assert "在严格盲测集上证明了泛化能力" in policy
+    assert "Do not call it a blind holdout" in policy

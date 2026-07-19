@@ -31,6 +31,8 @@ class RerankTraceCandidate(BaseModel):
 class RetrievalTrace(BaseModel):
     trace_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     query: str
+    routed_query: str | None = None
+    query_routing_signals: list[str] = Field(default_factory=list)
     filters: dict[str, object]
     dense_results: list[TraceResult]
     sparse_results: list[TraceResult]
