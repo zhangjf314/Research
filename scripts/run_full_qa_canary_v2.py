@@ -70,6 +70,8 @@ def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         if row.get("answer", {}).get("latency")
     ]
     usage = [row["answer"]["model_usage"] for row in completed if row.get("answer")]
+    cost_values = [item.get("estimated_cost_usd") for item in usage]
+    cost_configured = bool(cost_values) and all(value is not None for value in cost_values)
     summary = {
         "attempted": len(rows),
         "completed": len(completed),
@@ -83,6 +85,9 @@ def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "unclassified_exception_count": sum(
             code == "CLAIM_QA_UNEXPECTED_ERROR" for code in error_codes
         ),
+        "finish_reason_length_count": sum(
+            "finish_reason:length" in str(row.get("failure_reason") or "") for row in failed
+        ),
         "core_unsupported_claim_count": unsupported_claim_count,
         "required_claim_coverage": avg("required_claim_coverage"),
         "citation_precision": avg("citation_precision"),
@@ -90,6 +95,12 @@ def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "input_tokens": sum(int(item.get("input_tokens") or 0) for item in usage),
         "output_tokens": sum(int(item.get("output_tokens") or 0) for item in usage),
         "total_tokens": sum(int(item.get("total_tokens") or 0) for item in usage),
+        "estimated_cost_usd": (
+            round(sum(float(value) for value in cost_values if value is not None), 8)
+            if cost_configured
+            else None
+        ),
+        "cost_type": "provider_price_configured" if cost_configured else "unknown",
         "latency_ms": {
             "mean": mean(latencies),
             "p50": percentile(latencies, 0.5),
@@ -108,6 +119,7 @@ def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         and summary["page_accuracy"] == 1.0
         and summary["template_fallback_count"] == 0
         and summary["unclassified_exception_count"] == 0
+        and summary["finish_reason_length_count"] == 0
         and summary["core_unsupported_claim_count"] == 0
         else "FAILED"
     )
@@ -118,14 +130,48 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--api-base", default="http://localhost/api/v1")
     parser.add_argument("--max-requests", type=int, default=20)
+    parser.add_argument("--output-json", type=Path, default=OUT_JSON)
+    parser.add_argument("--output-csv", type=Path, default=OUT_CSV)
+    parser.add_argument("--output-trace", type=Path, default=OUT_TRACE)
+    parser.add_argument("--output-doc", type=Path, default=OUT_DOC)
+    parser.add_argument("--run-label", default="full-qa-canary-v2")
+    parser.add_argument("--expected-provider")
+    parser.add_argument("--expected-model")
+    parser.add_argument("--max-input-tokens", type=int)
+    parser.add_argument("--max-output-tokens", type=int)
+    parser.add_argument("--max-total-tokens", type=int)
+    parser.add_argument("--max-cost-usd", type=float)
+    parser.add_argument("--max-total-seconds", type=float)
+    parser.add_argument("--require-budget", action="store_true")
     args = parser.parse_args()
+    if args.require_budget and any(
+        value is None
+        for value in (
+            args.max_input_tokens,
+            args.max_output_tokens,
+            args.max_total_tokens,
+            args.max_cost_usd,
+            args.max_total_seconds,
+        )
+    ):
+        raise RuntimeError("Canary budget limits are required before running the batch")
     api_base = args.api_base.rstrip("/")
     gold_by_id = {row["question_id"]: row for row in read_jsonl(GOLD)}
     retrieval_by_id = {row["question_id"]: row for row in read_jsonl(RETRIEVAL_GOLD)}
     rows: list[dict[str, Any]] = []
     started = time.perf_counter()
+    llm_status: dict[str, Any] = {}
     with httpx.Client(timeout=180) as client:
         capabilities = client.get(f"{api_base}/capabilities").json()
+        llm_status = (capabilities.get("capabilities") or {}).get("llm", {})
+        if args.expected_provider and llm_status.get("provider") != args.expected_provider:
+            raise RuntimeError(
+                f"expected provider {args.expected_provider}, got {llm_status.get('provider')}"
+            )
+        if args.expected_model and llm_status.get("model") != args.expected_model:
+            raise RuntimeError(
+                f"expected model {args.expected_model}, got {llm_status.get('model')}"
+            )
         reranker_status = (
             (capabilities.get("capabilities") or {}).get("reranker", {}).get("status")
         )
@@ -149,7 +195,7 @@ def main() -> int:
                 else None,
                 "top_k": 10,
                 "sample_id": question_id,
-                "run_id": f"full-qa-canary-v2-{question_id}-{int(time.time())}",
+                "run_id": f"{args.run_label}-{question_id}-{int(time.time())}",
             }
             item_started = time.perf_counter()
             try:
@@ -216,12 +262,37 @@ def main() -> int:
                     "api_request_count": 0,
                 }
             rows.append(row)
-            OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-            OUT_JSON.write_text(
+            args.output_json.parent.mkdir(parents=True, exist_ok=True)
+            args.output_json.write_text(
                 json.dumps({"rows": rows}, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
             )
     summary = _summarize(rows)
+    elapsed_seconds = time.perf_counter() - started
+    budget_violations = []
+    if args.max_input_tokens is None:
+        budget_violations.append("missing_max_input_tokens")
+    elif summary["input_tokens"] > args.max_input_tokens:
+        budget_violations.append("input_tokens")
+    if args.max_output_tokens is None:
+        budget_violations.append("missing_max_output_tokens")
+    elif summary["output_tokens"] > args.max_output_tokens:
+        budget_violations.append("output_tokens")
+    if args.max_total_tokens is None:
+        budget_violations.append("missing_max_total_tokens")
+    elif summary["total_tokens"] > args.max_total_tokens:
+        budget_violations.append("total_tokens")
+    if args.max_cost_usd is None:
+        budget_violations.append("missing_max_cost_usd")
+    elif summary["estimated_cost_usd"] is None or summary["estimated_cost_usd"] > args.max_cost_usd:
+        budget_violations.append("cost_usd")
+    if args.max_total_seconds is None:
+        budget_violations.append("missing_max_total_seconds")
+    elif elapsed_seconds > args.max_total_seconds:
+        budget_violations.append("total_seconds")
+    summary["budget_violations"] = budget_violations
+    if budget_violations:
+        summary["production_qa_canary_gate"] = "FAILED"
     payload = {
         "schema_version": "full-qa-canary-results-v2",
         "generated_at": datetime.now(UTC).isoformat(),
@@ -232,13 +303,27 @@ def main() -> int:
         "json_repair_enabled": False,
         "citation_repair_enabled": False,
         "transport_retry_count": 1,
-        "elapsed_wall_ms": round((time.perf_counter() - started) * 1000, 3),
+        "elapsed_wall_ms": round(elapsed_seconds * 1000, 3),
+        "budget": {
+            "max_input_tokens": args.max_input_tokens,
+            "max_output_tokens": args.max_output_tokens,
+            "max_total_tokens": args.max_total_tokens,
+            "max_cost_usd": args.max_cost_usd,
+            "max_total_seconds": args.max_total_seconds,
+        },
+        "llm": {
+            "provider": llm_status.get("provider"),
+            "model": llm_status.get("model"),
+            "thinking": llm_status.get("thinking"),
+            "response_format": llm_status.get("response_format"),
+            "stream": llm_status.get("stream"),
+        },
         "summary": summary,
         "rows": rows,
     }
-    write_json(OUT_JSON, payload)
-    write_json(OUT_TRACE, payload)
-    with OUT_CSV.open("w", encoding="utf-8", newline="") as stream:
+    write_json(args.output_json, payload)
+    write_json(args.output_trace, payload)
+    with args.output_csv.open("w", encoding="utf-8", newline="") as stream:
         fieldnames = [
             "question_id",
             "status",
@@ -251,11 +336,12 @@ def main() -> int:
         writer.writeheader()
         for row in rows:
             writer.writerow({name: row.get(name) for name in fieldnames})
-    OUT_DOC.write_text(
+    args.output_doc.write_text(
         "\n".join(
             [
-                "# Full QA Canary Audit v2",
+                f"# {args.run_label} Audit",
                 "",
+                f"- Provider/model: `{llm_status.get('provider')}` / `{llm_status.get('model')}`",
                 f"- Gate: `{summary['production_qa_canary_gate']}`",
                 "- Attempted/completed/failed: "
                 f"`{summary['attempted']}` / `{summary['completed']}` / "
@@ -266,6 +352,9 @@ def main() -> int:
                 f"`{summary['invalid_citation_count']}`",
                 f"- Citation context validity: `{summary['citation_context_validity']}`",
                 f"- Core unsupported claim count: `{summary['core_unsupported_claim_count']}`",
+                f"- Finish reason length count: `{summary['finish_reason_length_count']}`",
+                f"- Estimated cost USD: `{summary['estimated_cost_usd']}`",
+                f"- Budget violations: `{summary['budget_violations']}`",
                 "",
                 "This canary is an internal development gate, not a blind benchmark.",
             ]

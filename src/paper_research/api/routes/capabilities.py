@@ -1,6 +1,8 @@
+import hashlib
 import importlib.util
 import os
 import shutil
+from urllib.parse import urlparse
 
 import fitz
 import httpx
@@ -20,6 +22,17 @@ class Capability(BaseModel):
     configured: bool
     verified: bool
     detail: str | None = None
+    provider: str | None = None
+    model: str | None = None
+    thinking: str | None = None
+    response_format: str | None = None
+    stream: bool | None = None
+    template_fallback: bool | None = None
+    base_url_hostname: str | None = None
+    api_key_present: bool | None = None
+    api_key_fingerprint: str | None = None
+    temperature: float | None = None
+    max_tokens: int | None = None
 
 
 class CapabilitiesResponse(BaseModel):
@@ -73,6 +86,12 @@ def _budget_presence() -> dict[str, object]:
         "full_qa_budget_vars_present": full_present,
         "deep_research_budget_vars_present": deep_present,
     }
+
+
+def _api_key_fingerprint(value: str | None) -> str | None:
+    if not value:
+        return None
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()[:12]
 
 
 @router.get("/capabilities", response_model=CapabilitiesResponse)
@@ -159,6 +178,19 @@ def capabilities() -> CapabilitiesResponse:
             configured=not settings.llm_configuration_issues,
             verified=settings.llm_provider == "template",
             detail=f"{settings.llm_provider}/{settings.llm_model}",
+            provider=settings.llm_provider_name or settings.llm_provider,
+            model=settings.llm_model,
+            thinking="enabled" if settings.llm_thinking_enabled else "disabled",
+            response_format=settings.llm_response_format,
+            stream=settings.llm_stream,
+            template_fallback=settings.llm_provider == "template",
+            base_url_hostname=(
+                urlparse(settings.llm_base_url).hostname if settings.llm_base_url else None
+            ),
+            api_key_present=bool(settings.llm_api_key),
+            api_key_fingerprint=_api_key_fingerprint(settings.llm_api_key),
+            temperature=settings.llm_temperature,
+            max_tokens=settings.llm_max_output_tokens,
         ),
         "redis": Capability(
             status="available" if redis_up else "degraded",

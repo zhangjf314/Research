@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-07-19T13:38:41.427090+00:00",
+  "base_url_host": "api.deepseek.com",
+  "base_url_valid": true,
+  "dns_status": "passed",
+  "tcp_status": "failed",
+  "tls_status": "not_run",
+  "models_endpoint_status": "not_run",
+  "minimal_completion_status": "not_run",
+  "minimal_completion_json_valid": null,
+  "minimal_completion_model": null,
+  "minimal_completion_usage": null,
+  "minimal_completion_finish_reason": null,
+  "minimal_completion_reasoning_content_present": null,
+  "factory_provider": "deepseek",
+  "factory_model": "deepseek-v4-flash",
+  "provider_name": "deepseek",
+  "model": "deepseek-v4-flash",
+  "thinking_mode": "disabled",
+  "response_format": "json_object",
+  "stream": false,
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "api_key_present": true,
+  "api_key_fingerprint": "4bdd6538e7fa",
+  "request_contract": {
+    "model": "deepseek-v4-flash",
+    "response_format.type": "json_object",
+    "thinking.type": "disabled",
+    "stream": false
+  },
+  "template_fallback": false,
+  "latency": {
+    "dns_ms": 9.802
+  },
+  "error_type": "PermissionError",
+  "safe_to_start_batch": false,
+  "api_key_recorded": false,
+  "authorization_header_recorded": false,
+  "status": "DEV_V2_BLOCKED_BY_PROVIDER_HEALTH"
+}

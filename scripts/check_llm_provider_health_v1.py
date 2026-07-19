@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import socket
 import ssl
@@ -43,8 +44,20 @@ def _base_payload(base_url: str) -> dict:
         "minimal_completion_json_valid": None,
         "minimal_completion_model": None,
         "minimal_completion_usage": None,
+        "minimal_completion_finish_reason": None,
+        "minimal_completion_reasoning_content_present": None,
         "factory_provider": None,
         "factory_model": None,
+        "provider_name": None,
+        "model": None,
+        "thinking_mode": None,
+        "response_format": None,
+        "stream": None,
+        "temperature": None,
+        "max_tokens": None,
+        "api_key_present": False,
+        "api_key_fingerprint": None,
+        "request_contract": {},
         "template_fallback": None,
         "latency": {},
         "error_type": None,
@@ -52,6 +65,30 @@ def _base_payload(base_url: str) -> dict:
         "api_key_recorded": False,
         "authorization_header_recorded": False,
     }
+
+
+def _fingerprint(value: str | None) -> str | None:
+    if not value:
+        return None
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()[:12]
+
+
+def _minimal_completion_payload(settings: Settings) -> dict:
+    payload = {
+        "model": settings.llm_model,
+        "messages": [{"role": "user", "content": "Return exactly this JSON: {\"status\":\"ok\"}"}],
+        "temperature": settings.llm_temperature,
+        "max_tokens": min(settings.llm_max_output_tokens, 32),
+        "stream": settings.llm_stream,
+        "response_format": {"type": settings.llm_response_format},
+    }
+    if (settings.llm_provider_name or settings.llm_provider).lower() == "deepseek":
+        payload["thinking"] = {
+            "type": "enabled" if settings.llm_thinking_enabled else "disabled",
+        }
+    else:
+        payload["enable_thinking"] = settings.llm_thinking_enabled
+    return payload
 
 
 def check_health(
@@ -62,6 +99,28 @@ def check_health(
 ) -> dict:
     base_url = settings.llm_base_url or ""
     result = _base_payload(base_url)
+    provider_name = settings.llm_provider_name or settings.llm_provider
+    result.update(
+        {
+            "provider_name": provider_name,
+            "model": settings.llm_model,
+            "thinking_mode": "enabled" if settings.llm_thinking_enabled else "disabled",
+            "response_format": settings.llm_response_format,
+            "stream": settings.llm_stream,
+            "temperature": settings.llm_temperature,
+            "max_tokens": settings.llm_max_output_tokens,
+            "api_key_present": bool(settings.llm_api_key),
+            "api_key_fingerprint": _fingerprint(settings.llm_api_key),
+            "request_contract": {
+                "model": settings.llm_model,
+                "response_format.type": settings.llm_response_format,
+                "thinking.type": (
+                    "enabled" if settings.llm_thinking_enabled else "disabled"
+                ),
+                "stream": settings.llm_stream,
+            },
+        }
+    )
     if not result["base_url_valid"]:
         result["error_type"] = "invalid_base_url"
         return result
@@ -131,13 +190,7 @@ def check_health(
         response = httpx.post(
             f"{base_url.rstrip('/')}/chat/completions",
             headers={"Authorization": f"Bearer {settings.llm_api_key}"},
-            json={
-                "model": settings.llm_model,
-                "messages": [{"role": "user", "content": "Return JSON: {\"ok\":true}"}],
-                "temperature": 0,
-                "max_tokens": 8,
-                "stream": False,
-            },
+            json=_minimal_completion_payload(settings),
             timeout=15,
         )
         result["latency"]["minimal_completion_ms"] = round((time.perf_counter() - started) * 1000, 3)
@@ -146,10 +199,12 @@ def check_health(
             payload = response.json()
             result["minimal_completion_model"] = payload.get("model")
             result["minimal_completion_usage"] = payload.get("usage")
+            choice = (payload.get("choices") or [{}])[0]
+            message = choice.get("message") or {}
+            result["minimal_completion_finish_reason"] = choice.get("finish_reason")
+            result["minimal_completion_reasoning_content_present"] = "reasoning_content" in message
             content = (
-                payload.get("choices", [{}])[0]
-                .get("message", {})
-                .get("content", "")
+                message.get("content", "")
             )
             try:
                 json.loads(content)
@@ -157,7 +212,11 @@ def check_health(
             except json.JSONDecodeError:
                 result["minimal_completion_json_valid"] = False
         result["safe_to_start_batch"] = (
-            result["minimal_completion_status"] == "passed" and llm_configured
+            result["minimal_completion_status"] == "passed"
+            and result["minimal_completion_json_valid"] is True
+            and result["minimal_completion_finish_reason"] == "stop"
+            and not result["minimal_completion_reasoning_content_present"]
+            and llm_configured
         )
     except httpx.HTTPError as exc:
         result["minimal_completion_status"] = "failed"

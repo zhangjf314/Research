@@ -186,18 +186,31 @@ class SiliconFlowLLMProvider(LLMProvider):
         response_audit_max_suffix_chars: int = 500,
         response_audit_max_error_window_chars: int = 500,
         response_audit_store_full_payload: bool = False,
+        response_format: str = "json_object",
+        thinking_enabled: bool = False,
+        stream: bool = False,
+        provider_name: str | None = None,
     ) -> None:
         if not api_key:
-            raise ValueError("SiliconFlow API key is required")
+            raise ValueError("LLM API key is required")
         if not model:
-            raise ValueError("SiliconFlow model is required")
+            raise ValueError("LLM model is required")
+        if response_format != "json_object":
+            raise ValueError("LLM response_format must be json_object")
+        if stream:
+            raise ValueError("LLM stream must be false for structured QA")
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.model_name = model
+        if provider_name:
+            self.provider_name = provider_name
         self.temperature = temperature
         self.timeout_seconds = timeout_seconds
         self.max_output_tokens = max_output_tokens
         self.max_retries = max_retries
+        self.response_format = response_format
+        self.thinking_enabled = thinking_enabled
+        self.stream = stream
         self.input_cost_per_million = input_cost_per_million
         self.output_cost_per_million = output_cost_per_million
         self.client = client or httpx.Client()
@@ -243,10 +256,10 @@ class SiliconFlowLLMProvider(LLMProvider):
             ],
             "temperature": self.temperature,
             "max_tokens": self.max_output_tokens,
-            "stream": False,
-            "enable_thinking": False,
+            "stream": self.stream,
             "response_format": {"type": "json_object"},
         }
+        payload.update(self._provider_payload_overrides())
         requests = 0
         rate_limits = 0
         retry_reasons: list[str] = []
@@ -276,6 +289,9 @@ class SiliconFlowLLMProvider(LLMProvider):
                     raise LLMProviderError(reason, api_request_count=requests)
                 body = response.json()
                 choice = body["choices"][0]
+                finish_reason = choice.get("finish_reason")
+                if finish_reason == "length":
+                    raise _ProviderResponseWithAudit("finish_reason:length", None)
                 message = choice["message"]
                 content = message["content"]
                 response_audit = self._response_audit(response, body, content)
@@ -331,7 +347,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                     {
                         "attempt": requests,
                         "model": str(body.get("model") or self.model_name),
-                        "finish_reason": choice.get("finish_reason"),
+                        "finish_reason": finish_reason,
                         "normalization_events": normalization_events,
                         "response_audit": response_audit,
                         "sanitized_output": self._sanitize_model_output(content),
@@ -441,7 +457,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 )
             if attempt >= self.max_retries or not _is_transport_retry_reason(reason):
                 raise LLMProviderError(
-                    f"SiliconFlow QA failed after {requests} request(s): {reason}",
+                    f"{self.provider_name} QA failed after {requests} request(s): {reason}",
                     error_code=error_code,
                     stage=stage,
                     api_request_count=requests,
@@ -474,6 +490,15 @@ class SiliconFlowLLMProvider(LLMProvider):
             total_tokens=total_tokens,
             estimated_cost_usd=cost,
         )
+
+    def _provider_payload_overrides(self) -> dict[str, Any]:
+        if self.provider_name == "deepseek":
+            return {
+                "thinking": {
+                    "type": "enabled" if self.thinking_enabled else "disabled",
+                }
+            }
+        return {"enable_thinking": bool(self.thinking_enabled)}
 
     @staticmethod
     def _citation_key_map(context: list[ContextItem]) -> dict[str, dict[str, Any]]:
@@ -803,7 +828,28 @@ class OpenAICompatibleLLMProvider(SiliconFlowLLMProvider):
     provider_name = "openai_compatible"
 
     def __init__(
-        self, base_url: str, api_key: str, model: str, temperature: float = 0, timeout: float = 120
+        self,
+        base_url: str,
+        api_key: str,
+        model: str,
+        temperature: float = 0,
+        timeout: float = 120,
+        *,
+        max_output_tokens: int = 2048,
+        max_retries: int = 2,
+        input_cost_per_million: float | None = None,
+        output_cost_per_million: float | None = None,
+        provider_name: str | None = None,
+        response_format: str = "json_object",
+        thinking_enabled: bool = False,
+        stream: bool = False,
+        client: httpx.Client | None = None,
+        response_audit_enabled: bool = False,
+        response_audit_dir: Path | str = Path("artifacts/private/qa-response-audits"),
+        response_audit_max_prefix_chars: int = 500,
+        response_audit_max_suffix_chars: int = 500,
+        response_audit_max_error_window_chars: int = 500,
+        response_audit_store_full_payload: bool = False,
     ) -> None:
         super().__init__(
             base_url,
@@ -811,6 +857,21 @@ class OpenAICompatibleLLMProvider(SiliconFlowLLMProvider):
             model,
             temperature=temperature,
             timeout_seconds=timeout,
+            max_output_tokens=max_output_tokens,
+            max_retries=max_retries,
+            input_cost_per_million=input_cost_per_million,
+            output_cost_per_million=output_cost_per_million,
+            client=client,
+            response_audit_enabled=response_audit_enabled,
+            response_audit_dir=response_audit_dir,
+            response_audit_max_prefix_chars=response_audit_max_prefix_chars,
+            response_audit_max_suffix_chars=response_audit_max_suffix_chars,
+            response_audit_max_error_window_chars=response_audit_max_error_window_chars,
+            response_audit_store_full_payload=response_audit_store_full_payload,
+            response_format=response_format,
+            thinking_enabled=thinking_enabled,
+            stream=stream,
+            provider_name=provider_name,
         )
 
 

@@ -267,7 +267,9 @@ def test_health_check_requires_minimal_completion_after_models_success(
             200,
             {
                 "model": "Qwen/Qwen3-8B",
-                "choices": [{"message": {"content": "{\"ok\": true}"}}],
+                "choices": [
+                    {"finish_reason": "stop", "message": {"content": "{\"ok\": true}"}}
+                ],
                 "usage": {
                     "prompt_tokens": 8,
                     "completion_tokens": 3,
@@ -315,7 +317,9 @@ def test_health_endpoint_timeout_and_minimal_completion_success(
         lambda *args, **kwargs: _Response(
             200,
             {
-                "choices": [{"message": {"content": "{\"ok\": true}"}}],
+                "choices": [
+                    {"finish_reason": "stop", "message": {"content": "{\"ok\": true}"}}
+                ],
                 "usage": {"total_tokens": 4},
             },
         ),

@@ -120,8 +120,24 @@ def build_llm_provider(settings: Settings) -> LLMProvider:
             settings.llm_base_url,
             settings.llm_api_key,
             settings.llm_model,
-            settings.llm_temperature,
-            settings.llm_timeout_seconds,
+            temperature=settings.llm_temperature,
+            timeout=settings.llm_timeout_seconds,
+            max_output_tokens=settings.llm_max_output_tokens,
+            max_retries=settings.llm_max_retries,
+            input_cost_per_million=settings.llm_input_cost_per_million,
+            output_cost_per_million=settings.llm_output_cost_per_million,
+            provider_name=settings.llm_provider_name,
+            response_format=settings.llm_response_format,
+            thinking_enabled=settings.llm_thinking_enabled,
+            stream=settings.llm_stream,
+            response_audit_enabled=settings.qa_response_audit_enabled,
+            response_audit_dir=settings.qa_response_audit_dir,
+            response_audit_max_prefix_chars=settings.qa_response_audit_max_prefix_chars,
+            response_audit_max_suffix_chars=settings.qa_response_audit_max_suffix_chars,
+            response_audit_max_error_window_chars=(
+                settings.qa_response_audit_max_error_window_chars
+            ),
+            response_audit_store_full_payload=settings.qa_response_audit_store_full_payload,
         )
     raise ProviderConfigurationError(f"unsupported LLM provider: {settings.llm_provider}")
 

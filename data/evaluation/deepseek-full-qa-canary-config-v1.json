@@ -1,0 +1,64 @@
+{
+  "schema_version": "deepseek-full-qa-canary-config-v1",
+  "generated_at": "2026-07-19T13:38:29.367692+00:00",
+  "git_commit": "3a2b6d45e27ac8690ff33a994bfd5ed117f59da6",
+  "dataset": "gold-dev-v1",
+  "dataset_hash": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+  "sample_ids": [
+    "q014",
+    "q020",
+    "q029",
+    "q031",
+    "q032",
+    "q035",
+    "q036",
+    "q037",
+    "q044",
+    "q001",
+    "q008",
+    "q015",
+    "q024",
+    "q049",
+    "q005"
+  ],
+  "retrieval": {
+    "recall_k": 20,
+    "top_k": 10,
+    "context_token_budget": 12000,
+    "index_version": "jina-embeddings-v5-text-small-v1",
+    "collection": "papers_jina_eval34_v2__20260713152149"
+  },
+  "embedding": {
+    "provider": "jina",
+    "model": "jina-embeddings-v5-text-small",
+    "dimension": 1024
+  },
+  "reranker": {
+    "enabled": false
+  },
+  "llm": {
+    "provider": "deepseek",
+    "adapter": "openai_compatible",
+    "model": "deepseek-v4-flash",
+    "base_url_host": "api.deepseek.com",
+    "thinking": "disabled",
+    "response_format": "json_object",
+    "stream": false,
+    "temperature": 0.0,
+    "max_tokens": 1024,
+    "api_key_present": true,
+    "api_key_recorded": false
+  },
+  "prompt_version": "qa-production-v1",
+  "normalizer_version": "citation-key-minimal-contract-v1",
+  "claim_schema_version": "StructuredQA",
+  "budget": {
+    "max_input_tokens": null,
+    "max_output_tokens": null,
+    "max_total_tokens": null,
+    "max_cost_usd": null,
+    "max_total_seconds": null
+  },
+  "not_blind_holdout": true,
+  "configuration_sha256": "077e996502585da6c08a6f29745358572994389c797df4136556a8a414f4827e"
+}
