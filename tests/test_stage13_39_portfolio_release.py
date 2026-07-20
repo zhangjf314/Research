@@ -59,6 +59,25 @@ def test_security_policy_keeps_sensitive_artifacts_local_only() -> None:
     assert "Keep local-only" in artifact_audit
 
 
+def test_git_history_secret_review_has_no_real_or_unresolved_secret() -> None:
+    review = _read_json("data/evaluation/git-history-secret-review-v1.json")
+
+    assert review["gate"] == "PASSED"
+    assert review["public_release_allowed"] is True
+    assert review["confirmed_real_secret"] == 0
+    assert review["unresolved"] == 0
+    assert review["classification_counts"].get("UNRESOLVED", 0) == 0
+    assert review["classification_counts"].get("CONFIRMED_REAL_SECRET", 0) == 0
+    allowed = {
+        "PLACEHOLDER",
+        "EMPTY_VALUE",
+        "DOCUMENTATION_EXAMPLE",
+        "HASH_OR_FINGERPRINT",
+        "FALSE_POSITIVE",
+    }
+    assert {record["classification"] for record in review["records"]} <= allowed
+
+
 def test_dockerfile_oci_label_matches_pyproject_version() -> None:
     dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
     match = re.search(r"ARG APP_VERSION=([^\s]+)", dockerfile)
