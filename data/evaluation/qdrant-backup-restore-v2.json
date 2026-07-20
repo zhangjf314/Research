@@ -1,14 +1,203 @@
 {
   "schema_version": "qdrant-backup-restore-v2",
-  "generated_at": "2026-07-20T14:00:00Z",
-  "status": "NOT_EXECUTED",
-  "reason_not_passed": "No Stage 13.39 Qdrant snapshot restore into a new collection and Top-K equivalence check was executed in this turn.",
-  "required_verifications": [
-    "snapshot created",
-    "snapshot restored to new collection",
-    "fixed queries Top-K compared before and after restore",
-    "point count compared",
-    "vector size compared"
+  "started_at": "2026-07-20T15:08:45.996996+00:00",
+  "finished_at": "2026-07-20T15:08:49.184765+00:00",
+  "gate": "PASSED",
+  "source_collection": "papers_jina_eval34_v2__20260713152149",
+  "restore_collection": "papers_jina_eval34_v2__20260713152149__restore_v2_20260720150845",
+  "snapshot_created": true,
+  "snapshot_name": "papers_jina_eval34_v2__20260713152149-5000117906798098-2026-07-20-15-08-46.snapshot",
+  "snapshot_location": "http://localhost:6333/collections/papers_jina_eval34_v2__20260713152149/snapshots/papers_jina_eval34_v2__20260713152149-5000117906798098-2026-07-20-15-08-46.snapshot",
+  "restore_collection_created": true,
+  "source_point_count_before": 2062,
+  "source_point_count_after": 2062,
+  "restored_point_count": 2062,
+  "point_count_match": true,
+  "source_dimension": 1024,
+  "restored_dimension": 1024,
+  "vector_dimension_match": true,
+  "source_distance": "Cosine",
+  "restored_distance": "Cosine",
+  "distance_metric_match": true,
+  "source_payload_schema": {
+    "block_ids": "list",
+    "block_type": "str",
+    "chunk_id": "str",
+    "chunk_text": "str",
+    "next_context": "str",
+    "page_end": "int",
+    "page_start": "int",
+    "paper_id": "str",
+    "parent_context": "str",
+    "previous_context": "str",
+    "section_path": "list",
+    "token_count": "int"
+  },
+  "restored_payload_schema": {
+    "block_ids": "list",
+    "block_type": "str",
+    "chunk_id": "str",
+    "chunk_text": "str",
+    "next_context": "str",
+    "page_end": "int",
+    "page_start": "int",
+    "paper_id": "str",
+    "parent_context": "str",
+    "previous_context": "str",
+    "section_path": "list",
+    "token_count": "int"
+  },
+  "payload_schema_match": true,
+  "top_k": 10,
+  "query_vector_count": 5,
+  "topk_comparisons": [
+    {
+      "same_order": true,
+      "same_set": true,
+      "score_close": true,
+      "source_ids": [
+        "0035b674-5cbf-59a4-831c-9de5244708c4",
+        "8d5c99b6-feda-53db-ab63-61384bcc6b95",
+        "06d1839e-6af9-5bf5-bd77-5b331aac54f1",
+        "bb1bf31b-39f8-5d5f-8980-43125af7ee16",
+        "e0f7a589-907c-5c0c-ac1f-71db7aa09de2",
+        "cd354802-8547-545a-a8e9-1666fb60c899",
+        "e6028b3a-64ab-590a-a9f1-eb5a106c8a7a",
+        "4b626c4f-a4d8-566a-aab1-3fe9b237436c",
+        "7cc4a5df-9ced-52a4-8ca3-3bb2ccb88b24",
+        "cea1dd52-b0a5-537e-9deb-a9603d9e8500"
+      ],
+      "restored_ids": [
+        "0035b674-5cbf-59a4-831c-9de5244708c4",
+        "8d5c99b6-feda-53db-ab63-61384bcc6b95",
+        "06d1839e-6af9-5bf5-bd77-5b331aac54f1",
+        "bb1bf31b-39f8-5d5f-8980-43125af7ee16",
+        "e0f7a589-907c-5c0c-ac1f-71db7aa09de2",
+        "cd354802-8547-545a-a8e9-1666fb60c899",
+        "e6028b3a-64ab-590a-a9f1-eb5a106c8a7a",
+        "4b626c4f-a4d8-566a-aab1-3fe9b237436c",
+        "7cc4a5df-9ced-52a4-8ca3-3bb2ccb88b24",
+        "cea1dd52-b0a5-537e-9deb-a9603d9e8500"
+      ]
+    },
+    {
+      "same_order": true,
+      "same_set": true,
+      "score_close": true,
+      "source_ids": [
+        "00627cda-b279-50f5-a018-894e0a7f3f8b",
+        "8e7ac2c6-b064-5f05-b89f-108ac60da09a",
+        "641b54e2-1d5d-5f0f-bf70-f21588ec3bf6",
+        "68ba9a9f-a249-5b70-abb0-306dc6ea369c",
+        "678da5e0-a922-56e2-903d-3a80240c365b",
+        "64829e64-fdb4-5ee6-a868-9129cc6d6860",
+        "6443f51b-c40f-5e3b-948c-d6b64e8ed6e7",
+        "c64b3445-97e9-5972-84ed-32c5277c02dc",
+        "7541bcbb-4542-5501-ba49-42fecd308063",
+        "87b25d72-36f1-5d2d-bd15-adf805d9c2a2"
+      ],
+      "restored_ids": [
+        "00627cda-b279-50f5-a018-894e0a7f3f8b",
+        "8e7ac2c6-b064-5f05-b89f-108ac60da09a",
+        "641b54e2-1d5d-5f0f-bf70-f21588ec3bf6",
+        "68ba9a9f-a249-5b70-abb0-306dc6ea369c",
+        "678da5e0-a922-56e2-903d-3a80240c365b",
+        "64829e64-fdb4-5ee6-a868-9129cc6d6860",
+        "6443f51b-c40f-5e3b-948c-d6b64e8ed6e7",
+        "c64b3445-97e9-5972-84ed-32c5277c02dc",
+        "7541bcbb-4542-5501-ba49-42fecd308063",
+        "87b25d72-36f1-5d2d-bd15-adf805d9c2a2"
+      ]
+    },
+    {
+      "same_order": true,
+      "same_set": true,
+      "score_close": true,
+      "source_ids": [
+        "00cad2b4-db3d-5d83-8b91-bd5a1af566c7",
+        "344e5692-d922-5573-b48c-a196e69b4a46",
+        "4826ddee-e377-5781-92b2-def78f5e6bf2",
+        "ca180a0f-f6a9-5ea8-be9e-a225e0ef25a6",
+        "6c13c009-afe1-54d5-9f38-bbdb47c64a6e",
+        "14377427-2ff3-50ea-af1e-7ab74ff492fe",
+        "1a01cb1b-f5ac-5794-aa3b-67cb15f0f842",
+        "e1673b3a-4d7d-5a8a-b14e-72e12a8aafd1",
+        "4031e75c-1984-57a6-9eef-b234dd6068fe",
+        "570bd769-ba83-5252-997e-4eee1b450c1e"
+      ],
+      "restored_ids": [
+        "00cad2b4-db3d-5d83-8b91-bd5a1af566c7",
+        "344e5692-d922-5573-b48c-a196e69b4a46",
+        "4826ddee-e377-5781-92b2-def78f5e6bf2",
+        "ca180a0f-f6a9-5ea8-be9e-a225e0ef25a6",
+        "6c13c009-afe1-54d5-9f38-bbdb47c64a6e",
+        "14377427-2ff3-50ea-af1e-7ab74ff492fe",
+        "1a01cb1b-f5ac-5794-aa3b-67cb15f0f842",
+        "e1673b3a-4d7d-5a8a-b14e-72e12a8aafd1",
+        "4031e75c-1984-57a6-9eef-b234dd6068fe",
+        "570bd769-ba83-5252-997e-4eee1b450c1e"
+      ]
+    },
+    {
+      "same_order": true,
+      "same_set": true,
+      "score_close": true,
+      "source_ids": [
+        "00d86eb8-0305-5b9e-a7ea-80b729d1084c",
+        "3e8b2ba8-1744-58c3-bbcc-3b5a81a045c4",
+        "ef46e4f1-e68b-559c-ac1e-da81932d6998",
+        "19c219b6-cf68-5ca8-bd07-cab040d9a36c",
+        "0af18488-814a-51e2-81f0-a625b0e758c5",
+        "041a4f20-7410-514f-a89b-90dc8e3f15e7",
+        "7f67a87c-6357-594e-ab14-6e1c098e9d2d",
+        "74e4044e-3546-5940-b98f-9c1178ee4a8f",
+        "47439269-38c1-5e56-8d7a-b22488f16277",
+        "e325dd88-5ad5-5797-ba29-51de34944f43"
+      ],
+      "restored_ids": [
+        "00d86eb8-0305-5b9e-a7ea-80b729d1084c",
+        "3e8b2ba8-1744-58c3-bbcc-3b5a81a045c4",
+        "ef46e4f1-e68b-559c-ac1e-da81932d6998",
+        "19c219b6-cf68-5ca8-bd07-cab040d9a36c",
+        "0af18488-814a-51e2-81f0-a625b0e758c5",
+        "041a4f20-7410-514f-a89b-90dc8e3f15e7",
+        "7f67a87c-6357-594e-ab14-6e1c098e9d2d",
+        "74e4044e-3546-5940-b98f-9c1178ee4a8f",
+        "47439269-38c1-5e56-8d7a-b22488f16277",
+        "e325dd88-5ad5-5797-ba29-51de34944f43"
+      ]
+    },
+    {
+      "same_order": true,
+      "same_set": true,
+      "score_close": true,
+      "source_ids": [
+        "00e27438-af44-5ac0-a0ed-2c29a0e1f2a9",
+        "24c8ba44-6e20-5f1b-8445-2e4c93d25de2",
+        "57971d08-c57d-5e03-bdbb-acc77a5de0da",
+        "813a3955-e797-573e-a04e-55ce264f9d84",
+        "f75cb5d6-22fa-554c-a3e1-ef7257790aba",
+        "6c4452e9-dde9-5911-90aa-6d78df404220",
+        "521a31a2-36ab-592a-bad0-5afb214ee822",
+        "ca0653d3-6578-5477-bbf2-a457ac2f81da",
+        "eac6f6d3-30a6-5a7d-8e43-afa57c5564ad",
+        "2aafced3-cd8b-5dd5-a4d4-0a4d93365d18"
+      ],
+      "restored_ids": [
+        "00e27438-af44-5ac0-a0ed-2c29a0e1f2a9",
+        "24c8ba44-6e20-5f1b-8445-2e4c93d25de2",
+        "57971d08-c57d-5e03-bdbb-acc77a5de0da",
+        "813a3955-e797-573e-a04e-55ce264f9d84",
+        "f75cb5d6-22fa-554c-a3e1-ef7257790aba",
+        "6c4452e9-dde9-5911-90aa-6d78df404220",
+        "521a31a2-36ab-592a-bad0-5afb214ee822",
+        "ca0653d3-6578-5477-bbf2-a457ac2f81da",
+        "eac6f6d3-30a6-5a7d-8e43-afa57c5564ad",
+        "2aafced3-cd8b-5dd5-a4d4-0a4d93365d18"
+      ]
+    }
   ],
-  "publication_policy": "Qdrant snapshots are local-only and must not be committed"
+  "retrieval_topk_equivalence": "passed",
+  "production_collection_unchanged": true,
+  "restore_collection_retained_for_audit": true
 }

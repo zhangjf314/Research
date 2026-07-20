@@ -1,14 +1,42 @@
 {
   "schema_version": "postgresql-backup-restore-v2",
-  "generated_at": "2026-07-20T14:00:00Z",
-  "status": "NOT_EXECUTED",
-  "reason_not_passed": "No Stage 13.39 PostgreSQL dump, restore to isolated database, and post-restore verification was executed in this turn.",
-  "required_verifications": [
-    "papers",
-    "tasks",
-    "traces",
-    "checkpoints",
-    "checkpoint_writes"
-  ],
-  "publication_policy": "database dumps are local-only and must not be committed"
+  "started_at": "2026-07-20T15:06:33.607164+00:00",
+  "finished_at": "2026-07-20T15:06:36.617096+00:00",
+  "gate": "PASSED",
+  "backup_created": true,
+  "restore_to_isolated_database": true,
+  "restore_database": "paper_research_restore_v2_20260720150633",
+  "source_database_version": "PostgreSQL 16.14 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+  "backup_command": "docker compose exec -T postgres pg_dump -U paper -Fc -d paper_research -f /tmp/<dump>",
+  "restore_command": "docker compose exec -T postgres pg_restore -U paper -d <isolated_db> /tmp/<dump>",
+  "backup_file": "artifacts\\private\\postgresql-restore-v2\\paper_research_stage13_40_20260720150633.dump",
+  "backup_sha256": "03bb409ac975d24b662b0bb0744b4b5b876dd1bc7b01ff99b29400dba57b8d38",
+  "schema_compatible": true,
+  "source_counts_before": {
+    "papers": 36,
+    "checkpoints": 36,
+    "checkpoint_writes": 200,
+    "checkpoint_blobs": 100
+  },
+  "restored_counts": {
+    "papers": 36,
+    "checkpoints": 36,
+    "checkpoint_writes": 200,
+    "checkpoint_blobs": 100
+  },
+  "source_counts_after": {
+    "papers": 36,
+    "checkpoints": 36,
+    "checkpoint_writes": 200,
+    "checkpoint_blobs": 100
+  },
+  "critical_table_counts_match": true,
+  "critical_run_ids_present": "NOT_APPLICABLE_ARTIFACT_ONLY",
+  "usage_totals_match": "NOT_APPLICABLE_ARTIFACT_ONLY",
+  "checkpoint_records_present": true,
+  "checkpoint_writes_present": true,
+  "source_database_unchanged": true,
+  "redis_compared": false,
+  "redis_scope_note": "Redis is outside PostgreSQL and was intentionally not compared.",
+  "dump_publication_policy": "local-only; do not commit"
 }

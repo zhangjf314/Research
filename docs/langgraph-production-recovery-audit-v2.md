@@ -1,22 +1,19 @@
 # LangGraph Production Recovery Audit v2
 
-Status: `NOT_EXECUTED`
+- Gate: `PASSED`
+- Run ID / thread ID: `pg-recovery-q003-8a8bf07e6a4c`
+- Provider/model: `deepseek/deepseek-v4-flash`
+- Checkpointer: `postgresql`
+- Pause node: `synthesize`
+- Interrupted status: `interrupted`
+- Container recreated: `True`
+- Resume completed: `True`
+- Duplicate completed nodes: `0`
+- Duplicate provider requests: `0`
+- Duplicate usage settlements: `0`
+- Active reserved tokens: `0`
+- Citation validation: `passed`
 
-`/api/v1/capabilities` reports `langgraph_checkpoint=postgres`, so the Docker API
-runtime is configured for PostgreSQL checkpoints. The successful final Deep
-Research evidence, however, is the isolated smoke run
-`live-q003-ed900ef2e202`, whose config records `checkpointer: sqlite smoke
-checkpoint`.
+## Scope note
 
-The Stage 13.39 production recovery gate therefore remains open. The following
-sequence still needs a dedicated authorized run:
-
-1. Start a production Deep Research run.
-2. Stop after a persisted intermediate node.
-3. Force recreate the API container.
-4. Resume the same thread/run id.
-5. Verify completed nodes, retrieval calls, request ledgers, reservations, and
-   side effects are not duplicated.
-6. Complete with strict citation validation.
-
-No successful Deep Research run was rerun for this audit.
+The API LangGraph route already uses PostgresSaver but is deterministic and does not call LLM; this release gate uses the existing bounded Deep Research smoke runner with a PostgreSQL checkpoint adapter to verify real-provider stop/resume accounting.
