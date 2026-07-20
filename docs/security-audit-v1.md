@@ -1,14 +1,14 @@
 # Security Audit v1
 
-Status: `PASSED_WITH_HISTORY_REVIEW_REQUIRED`
+Status: `PASSED`
 
 ## What was checked
 
 - Tracked text files were scanned for API-key-like values, authorization headers,
   cookie headers, private keys, and database URLs containing inline credentials.
 - Current ignored/local-only artifacts were reviewed for publication risk.
-- Git history was queried for broad secret-related strings without printing any
-  credential value.
+- Git history was queried for broad secret-related strings and every hit was
+  reviewed without printing any credential value.
 
 ## Findings
 
@@ -23,12 +23,23 @@ Status: `PASSED_WITH_HISTORY_REVIEW_REQUIRED`
 - `.env` is ignored and was not committed.
 - Human review ZIP files remain ignored and local-only.
 
-## Git history boundary
+## Git history review
 
-`git log -G` returned matching commits for secret-related words. These are not
-automatically credential leaks; the repository intentionally contains security
-tests and configuration-key names. A line-level history audit should be done
-before any public release. No key contents were printed during this audit.
+Stage 13.40 completed a line-level git-history review:
+
+- Total hits: `36`
+- Confirmed real secrets: `0`
+- Unresolved hits: `0`
+- Classification counts:
+  - `DOCUMENTATION_EXAMPLE`: `10`
+  - `EMPTY_VALUE`: `24`
+  - `FALSE_POSITIVE`: `1`
+  - `PLACEHOLDER`: `1`
+
+Gate: `GIT_HISTORY_SECRET_GATE=PASSED`.
+
+No key contents were printed or written during this audit. The review report is
+[`docs/git-history-secret-review-v1.md`](git-history-secret-review-v1.md).
 
 ## Public demo handling
 

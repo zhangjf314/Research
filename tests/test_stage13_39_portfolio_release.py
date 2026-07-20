@@ -5,6 +5,8 @@ import re
 import tomllib
 from pathlib import Path
 
+from paper_research.version import display_version
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -17,11 +19,14 @@ def _pyproject_version() -> str:
     return str(data["project"]["version"])
 
 
-def test_portfolio_manifest_preserves_real_model_evidence_and_release_blockers() -> None:
+def test_portfolio_manifest_preserves_real_model_evidence_and_release_gates() -> None:
     manifest = _read_json("data/evaluation/portfolio-evidence-manifest-v1.json")
 
     assert manifest["package_version"] == _pyproject_version()
-    assert manifest["release_decision"] == "BLOCKED_BY_OPERATIONS_GATES"
+    assert (
+        manifest["release_decision"]
+        == "LOCAL_RELEASE_PREPARED_AWAITING_USER_MERGE_TAG_PUSH_AUTHORIZATION"
+    )
     assert manifest["strong_generalization_claim_allowed"] is False
     assert manifest["semantic_claim_support_audit"] == "NOT_FORMALLY_VALIDATED"
     assert manifest["llm"] == {
@@ -35,11 +40,13 @@ def test_portfolio_manifest_preserves_real_model_evidence_and_release_blockers()
     assert manifest["deep_research"]["run_id"] == "live-q003-ed900ef2e202"
     assert manifest["deep_research"]["citation_validation"] == "passed"
 
-    blockers = manifest["operations_gates"]
-    assert blockers["postgresql_checkpoint_recovery_v2"] == "NOT_EXECUTED"
-    assert blockers["postgresql_backup_restore_v2"] == "NOT_EXECUTED"
-    assert blockers["qdrant_snapshot_restore_v2"] == "NOT_EXECUTED"
-    assert blockers["portfolio_30_minute_stability_test"] == "BLOCKED"
+    gates = manifest["operations_gates"]
+    assert gates["postgresql_checkpoint_recovery_v2"] == "PASSED"
+    assert gates["postgresql_backup_restore_v2"] == "PASSED"
+    assert gates["qdrant_snapshot_restore_v2"] == "PASSED"
+    assert gates["docker_ocr_production_v2"] == "PASSED"
+    assert gates["portfolio_30_minute_stability_test"] == "PASSED"
+    assert manifest["stage13_40_gates"]["git_history_secret_review"]["confirmed_real_secret"] == 0
 
 
 def test_security_policy_keeps_sensitive_artifacts_local_only() -> None:
@@ -82,38 +89,38 @@ def test_dockerfile_oci_label_matches_pyproject_version() -> None:
     dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
     match = re.search(r"ARG APP_VERSION=([^\s]+)", dockerfile)
     assert match
-    assert match.group(1) == _pyproject_version()
+    assert match.group(1) == display_version(_pyproject_version())
     assert "org.opencontainers.image.version=$APP_VERSION" in dockerfile
 
 
-def test_content_claims_forbid_strong_generalization_and_v1_release() -> None:
+def test_content_claims_forbid_strong_generalization_and_remote_release() -> None:
     release_audit = (ROOT / "docs/portfolio-release-audit-v1.md").read_text(
         encoding="utf-8"
     )
     claims_audit = (ROOT / "docs/content-claims-audit-v1.md").read_text(encoding="utf-8")
 
-    assert (
-        "B. Core QA/Deep Research passed, but safety/restore/stability blockers remain"
-        in release_audit
-    )
+    assert "All v1.0.0-portfolio hard gates passed" in release_audit
+    assert "awaiting explicit user authorization for merge/tag/push" in release_audit
     assert "STRONG_GENERALIZATION_CLAIM_ALLOWED=false" in claims_audit
     assert "production-grade generalization" in claims_audit
-    assert "v1.0.0-portfolio" in claims_audit
+    assert "production-ready commercial v1.0" in claims_audit
 
 
 def test_portfolio_stability_gate_is_thirty_minutes_not_extended_soak() -> None:
     soak = _read_json("artifacts/soak-test-portfolio-v1.json")
 
     assert soak["gate_name"] == "Portfolio 30-minute stability test"
-    assert soak["required_duration_seconds"] == 1800
+    assert soak["status"] == "PASSED"
+    assert soak["actual_duration_seconds"] >= 1800
     assert soak["configuration"]["SOAK_DURATION_SECONDS"] == 1800
     assert soak["configuration"]["SOAK_MAX_LLM_REQUESTS"] == 8
     assert soak["configuration"]["SOAK_MAX_TOTAL_TOKENS"] == 80000
     assert soak["configuration"]["SOAK_MAX_COST_USD"] == 0.05
     assert soak["configuration"]["SOAK_LLM_SAMPLE_INTERVAL_SECONDS"] == 300
-    assert soak["pass_gate"]["qa_success_rate_gte"] == 0.95
-    assert soak["pass_gate"]["deep_research_success_count_gte"] == 1
-    assert soak["pass_gate"]["ocr_roundtrip"] == "passed"
+    assert soak["qa_success_rate"] >= 0.95
+    assert soak["deep_research_success_count"] >= 1
+    assert soak["ocr_roundtrip"] == "passed"
+    assert soak["budget_violations"] == []
 
     policy_files = [
         "README.md",

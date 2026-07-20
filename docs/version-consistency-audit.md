@@ -13,10 +13,15 @@ The source tree now uses `pyproject.toml` as the runtime version source for the 
 - package version: `0.9.0rc3`
 - runtime `paper_research.__version__`: `0.9.0-rc1`
 
-The current source-tree runtime version is now expected to be:
+After Stage 13.40 hard gates passed, the local release-preparation tree now uses:
 
-- internal version: `0.9.0rc3`
-- display version: `0.9.0-rc3`
+- internal package version: `1.0.0+portfolio`
+- display version: `1.0.0-portfolio`
+
+The internal package version uses the PEP 440 local-version form because Python
+package metadata does not accept `1.0.0-portfolio` as a canonical distribution
+version. User-facing docs, health/capabilities display fields, and the Docker OCI
+label use `1.0.0-portfolio`.
 
 The project is **not** upgraded to `1.0.0-portfolio`.
 
@@ -50,12 +55,13 @@ This is stale installed metadata and should be refreshed only by a normal packag
 
 ## Docker/OpenAPI impact
 
-The API image was rebuilt after the version-source fix. The Docker build produced `paper-research-agent-0.9.0rc3`, and the API container was force-recreated successfully after the optional-numeric-env parsing fix.
+The API image was rebuilt after the Stage 13.40 release-preparation version
+update, and the API container was force-recreated.
 
 Runtime checks:
 
-- `GET /api/v1/health`: `version=0.9.0rc3`, `display_version=0.9.0-rc3`
-- `GET /api/v1/capabilities`: `version=0.9.0rc3`, `display_version=0.9.0-rc3`
+- `GET /api/v1/health`: `version=1.0.0+portfolio`, `display_version=1.0.0-portfolio`
+- `GET /api/v1/capabilities`: `version=1.0.0+portfolio`, `display_version=1.0.0-portfolio`
 - `docker compose ps`: API healthy after rebuild/recreate
 
 ## Tests
@@ -74,4 +80,6 @@ Coverage:
 
 ## Release decision
 
-Version consistency is now verified for the rebuilt API container. This does not authorize `1.0.0-portfolio`; the version remains RC (`0.9.0rc3` / `0.9.0-rc3`).
+Version consistency is now verified for the local release-preparation tree.
+This does not authorize merge, tag, push, or remote release; those actions still
+require explicit user authorization.

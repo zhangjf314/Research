@@ -1,6 +1,6 @@
 FROM python:3.12-slim AS runtime
 
-ARG APP_VERSION=0.9.0rc3
+ARG APP_VERSION=1.0.0-portfolio
 LABEL org.opencontainers.image.version=$APP_VERSION
 LABEL org.opencontainers.image.title="paper-research-agent"
 

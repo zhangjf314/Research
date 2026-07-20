@@ -34,10 +34,11 @@ def package_version() -> str:
 
 
 def display_version(version: str | None = None) -> str:
-    """Return a human-facing PEP 440 RC version such as ``0.9.0-rc3``."""
+    """Return a human-facing version such as ``0.9.0-rc3`` or ``1.0.0-portfolio``."""
 
     raw = version or package_version()
-    return re.sub(r"(?<=\d)rc(?=\d)", "-rc", raw)
+    display = re.sub(r"(?<=\d)rc(?=\d)", "-rc", raw)
+    return display.replace("+portfolio", "-portfolio")
 
 
 __version__ = package_version()
