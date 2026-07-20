@@ -1,0 +1,73 @@
+{
+  "schema_version": "deepseek-full-qa-final-config-v1",
+  "generated_at": "2026-07-20T12:29:44.864294+00:00",
+  "branch": "eval/retrieval-recall-benchmark-v1",
+  "commit": "a1ac66c19d83d4831f950fc58f3b5f764858ff10",
+  "dataset": "gold-dev-v1",
+  "approved_only": true,
+  "expected_total": 50,
+  "expected_answerable": 48,
+  "expected_unanswerable": 2,
+  "dataset_hash": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+  "retrieval": {
+    "recall_k": 20,
+    "top_k": 10,
+    "context_selector": "production-api-context-builder",
+    "context_token_budget": 12000,
+    "index_version": "jina-embeddings-v5-text-small-v1",
+    "collection": "papers_jina_eval34_v2__20260713152149",
+    "score_threshold": 0.12
+  },
+  "embedding": {
+    "provider": "jina",
+    "model": "jina-embeddings-v5-text-small",
+    "dimension": 1024
+  },
+  "qdrant": {
+    "collection": "papers_jina_eval34_v2__20260713152149"
+  },
+  "llm": {
+    "provider": "deepseek",
+    "adapter": "openai_compatible",
+    "model": "deepseek-v4-flash",
+    "base_url_host": "api.deepseek.com",
+    "temperature": 0.0,
+    "max_tokens": 2048,
+    "response_format": "json_object",
+    "thinking": "disabled",
+    "stream": false,
+    "api_key_present": true,
+    "api_key_recorded": false
+  },
+  "prompt": "qa-production-v1",
+  "normalizer": "citation-key-minimal-contract-v1",
+  "claim_schema": "StructuredQA",
+  "citation_validator": "strict_context_paper_page_block_triple",
+  "reranker": {
+    "enabled": false
+  },
+  "retry_policy": {
+    "qa_generation_retry_count": 0,
+    "json_repair": false,
+    "citation_repair": false,
+    "transport_retry_count": 0
+  },
+  "budget": {
+    "source": "/api/v1/capabilities stage13_30_budget",
+    "deepseek_canary_max_input_tokens": 250000,
+    "deepseek_canary_max_output_tokens": 10000,
+    "deepseek_canary_max_total_tokens": 260000,
+    "deepseek_canary_max_cost_usd": "0.10",
+    "deepseek_canary_max_total_seconds": 1800
+  },
+  "metric_semantics": {
+    "required_claim_exact_match_coverage": "diagnostic_non_blocking",
+    "gold_citation_exact_match_precision": "diagnostic_non_blocking",
+    "gold_block_exact_recall": "diagnostic_non_blocking",
+    "exact_gold_mismatch_claim_count": "diagnostic_non_blocking",
+    "semantic_claim_support_audit": "NOT_FORMALLY_VALIDATED",
+    "strong_grounding_claim_allowed": false
+  },
+  "not_blind_holdout": true,
+  "config_hash": "6c0a713078f4112659d4f4c95a864498335584d5de3e259c2ad6b3b63fc0baac"
+}

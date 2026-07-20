@@ -1,17 +1,26 @@
 {
-  "checked_at": "2026-07-19T13:38:41.427090+00:00",
+  "checked_at": "2026-07-20T10:10:58.310859+00:00",
   "base_url_host": "api.deepseek.com",
   "base_url_valid": true,
   "dns_status": "passed",
-  "tcp_status": "failed",
-  "tls_status": "not_run",
-  "models_endpoint_status": "not_run",
-  "minimal_completion_status": "not_run",
-  "minimal_completion_json_valid": null,
-  "minimal_completion_model": null,
-  "minimal_completion_usage": null,
-  "minimal_completion_finish_reason": null,
-  "minimal_completion_reasoning_content_present": null,
+  "tcp_status": "passed",
+  "tls_status": "passed",
+  "models_endpoint_status": "passed",
+  "minimal_completion_status": "passed",
+  "minimal_completion_json_valid": true,
+  "minimal_completion_model": "deepseek-v4-flash",
+  "minimal_completion_usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 5,
+    "total_tokens": 39,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 34
+  },
+  "minimal_completion_finish_reason": "stop",
+  "minimal_completion_reasoning_content_present": false,
   "factory_provider": "deepseek",
   "factory_model": "deepseek-v4-flash",
   "provider_name": "deepseek",
@@ -20,9 +29,9 @@
   "response_format": "json_object",
   "stream": false,
   "temperature": 0.0,
-  "max_tokens": 1024,
+  "max_tokens": 2048,
   "api_key_present": true,
-  "api_key_fingerprint": "4bdd6538e7fa",
+  "api_key_fingerprint": "23e1f83b0ee2",
   "request_contract": {
     "model": "deepseek-v4-flash",
     "response_format.type": "json_object",
@@ -31,11 +40,15 @@
   },
   "template_fallback": false,
   "latency": {
-    "dns_ms": 9.802
+    "dns_ms": 6.911,
+    "tcp_ms": 22.447,
+    "tls_ms": 17.932,
+    "models_ms": 321.286,
+    "minimal_completion_ms": 1124.59
   },
-  "error_type": "PermissionError",
-  "safe_to_start_batch": false,
+  "error_type": null,
+  "safe_to_start_batch": true,
   "api_key_recorded": false,
   "authorization_header_recorded": false,
-  "status": "DEV_V2_BLOCKED_BY_PROVIDER_HEALTH"
+  "status": "PASSED"
 }

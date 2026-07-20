@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import uuid
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -244,7 +245,10 @@ def main() -> int:
         raise SmokeConfigurationError("first attempt cannot have --parent-run-id")
     rows = load_jsonl(MANIFEST)
     validate_manifest(rows)
-    settings = Settings()
+    settings_updates: dict[str, Any] = {}
+    if args.max_cost_usd is not None:
+        settings_updates["deep_research_max_cost_usd"] = Decimal(args.max_cost_usd)
+    settings = Settings(**settings_updates)
     validate_corpus_and_index(settings)
     selected = rows if args.all else [row for row in rows if row["question_id"] == args.question_id]
     if not selected:

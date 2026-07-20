@@ -6,12 +6,12 @@
   "paper_id": "2005.14165",
   "paper_uuid": "930bea6f-5263-4012-8451-c2d19c38d4e4",
   "real_model_called": true,
-  "model": "Qwen/Qwen3-8B",
-  "provider": "siliconflow",
+  "model": "deepseek-v4-flash",
+  "provider": "deepseek",
   "prompt_version": "qa-production-v1",
   "answerable": true,
   "claim_count": 3,
-  "retrieved_top_k": 3,
+  "retrieved_top_k": 10,
   "retrieved_block_ids": [
     "b000111",
     "b000112",
@@ -24,12 +24,61 @@
     "b000119",
     "b000083",
     "b000084",
-    "b000085"
+    "b000085",
+    "b000071",
+    "b000072",
+    "b000073",
+    "b000074",
+    "b000075",
+    "b000076",
+    "b000077",
+    "b000078",
+    "b000079",
+    "b000080",
+    "b000081",
+    "b000082",
+    "b000086",
+    "b000087",
+    "b000088",
+    "b000089",
+    "b000090",
+    "b000091",
+    "b000092",
+    "b000093",
+    "b000094",
+    "b000095",
+    "b000096",
+    "b000061",
+    "b000062",
+    "b000097",
+    "b000098",
+    "b000099",
+    "b000100",
+    "b000101",
+    "b000102",
+    "b000103",
+    "b000104",
+    "b000105",
+    "b000106",
+    "b000067",
+    "b000068",
+    "b000069",
+    "b000070",
+    "b000107",
+    "b000108",
+    "b000109"
   ],
   "retrieval_scores": [
     0.03278688524590164,
     0.03200204813108039,
-    0.026709401709401708
+    0.026709401709401708,
+    0.026132699813337858,
+    0.025833333333333333,
+    0.025503573749187783,
+    0.024451318309029312,
+    0.022073984232868403,
+    0.019433962264150943,
+    0.013513513513513514
   ],
   "context_blocks": [
     {
@@ -50,9 +99,9 @@
       "section_path": [
         "3\nResults"
       ],
-      "context_length": 3630,
-      "context_sha256": "d8b5b77def3bafbaec2ee0161805eda45073875ab62f60063992747328fa6ff9",
-      "snippet": "is done by [RSR+19] (see Appendix G) for details.\nOn tasks with free-form completion, we use beam search with the same parameters as [RSR+19]: a beam width of 4\nand a length penalty of α = 0.6. We score the model using F1 similarity score, "
+      "context_length": 951,
+      "context_sha256": "7eab7ffce60afcd5fa4816c921de42643cddba7cfffca7a89e15b60068edf8d7",
+      "snippet": "In Figure 3.1 we display training curves for the 8 models described in Section 2. For this graph we also include 6\nadditional extra-small models with as few as 100,000 parameters. As observed in [KMH+20], language modeling\nperformance follo"
     },
     {
       "rank": 2,
@@ -82,9 +131,9 @@
       "section_path": [
         "3\nResults"
       ],
-      "context_length": 4477,
-      "context_sha256": "02c210ce0d969ef058916002e87acf52e81e95e4a8aa2c8f406e13f1187e1e79",
-      "snippet": "In Figure 3.1 we display training curves for the 8 models described in Section 2. For this graph we also include 6\nadditional extra-small models with as few as 100,000 parameters. As observed in [KMH+20], language modeling\nperformance follo"
+      "context_length": 1855,
+      "context_sha256": "f616f40368f1c9b32ef6a4f77007fa6026203649c8f90d519a3d7807c43d104e",
+      "snippet": "In Section 3.1 we evaluate on traditional language modeling tasks and tasks that are similar to language modeling,\nsuch as Cloze tasks and sentence/paragraph completion tasks. In Section 3.2 we evaluate on “closed book” question\nanswering t"
     },
     {
       "rank": 3,
@@ -106,9 +155,219 @@
       "section_path": [
         "2\nApproach"
       ],
-      "context_length": 3893,
-      "context_sha256": "3fd9eb65a1b941f612efce3b9db504773491ad543d0f4cfbfa4b64e4dc68cfec",
+      "context_length": 1770,
+      "context_sha256": "f69502785f01b16c8c76fdaa82a6748f8064ac6276d962b735549f50f64311eb",
+      "snippet": "Table 2.1 shows the sizes and architectures of our 8 models. Here nparams is the total number of trainable parameters,\nnlayers is the total number of layers, dmodel is the number of units in each bottleneck layer (we always have the\nfeedfor"
+    },
+    {
+      "rank": 4,
+      "chunk_id": "73c5bc1a-a822-490c-9594-b00c6c886a20",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000071",
+        "b000072",
+        "b000073",
+        "b000074",
+        "b000075",
+        "b000076",
+        "b000077",
+        "b000078",
+        "b000079",
+        "b000080",
+        "b000081",
+        "b000082"
+      ],
+      "page_start": 8,
+      "page_end": 8,
+      "block_page_map": {
+        "b000071": 8,
+        "b000072": 8,
+        "b000073": 8,
+        "b000074": 8,
+        "b000075": 8,
+        "b000076": 8,
+        "b000077": 8,
+        "b000078": 8,
+        "b000079": 8,
+        "b000080": 8,
+        "b000081": 8,
+        "b000082": 8
+      },
+      "score": 0.026132699813337858,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1531,
+      "context_sha256": "ade8227f937e320061e5e08108af6fa34578236c22f48aa2bf6aa87492c8b0af",
       "snippet": "Model Name\nnparams\nnlayers\ndmodel\nnheads\ndhead\nBatch Size\nLearning Rate\nGPT-3 Small\n125M\n12\n768\n12\n64\n0.5M\n6.0 × 10−4\nGPT-3 Medium\n350M\n24\n1024\n16\n64\n0.5M\n3.0 × 10−4\nGPT-3 Large\n760M\n24\n1536\n16\n96\n0.5M\n2.5 × 10−4\nGPT-3 XL\n1.3B\n24\n2048\n24\n12"
+    },
+    {
+      "rank": 5,
+      "chunk_id": "f016ab58-c13a-460d-bb65-052c03fbae20",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000086",
+        "b000087",
+        "b000088",
+        "b000089",
+        "b000090",
+        "b000091",
+        "b000092",
+        "b000093",
+        "b000094",
+        "b000095",
+        "b000096"
+      ],
+      "page_start": 8,
+      "page_end": 9,
+      "block_page_map": {
+        "b000086": 8,
+        "b000087": 8,
+        "b000088": 8,
+        "b000089": 8,
+        "b000090": 9,
+        "b000091": 9,
+        "b000092": 9,
+        "b000093": 9,
+        "b000094": 9,
+        "b000095": 9,
+        "b000096": 9
+      },
+      "score": 0.025833333333333333,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1787,
+      "context_sha256": "b591d6d11bc2ea7230e718eb2cb805fbafc661bd5fb47d6e04164a293780c422",
+      "snippet": "Details of the ﬁrst two points (processing of Common Crawl) are described in Appendix A. For the third, we added\nseveral curated high-quality datasets, including an expanded version of the WebText dataset [RWC+19], collected\nby scraping lin"
+    },
+    {
+      "rank": 6,
+      "chunk_id": "bd0abb2c-353d-4db7-b82c-99db117d5b8e",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000061",
+        "b000062"
+      ],
+      "page_start": 6,
+      "page_end": 6,
+      "block_page_map": {
+        "b000061": 6,
+        "b000062": 6
+      },
+      "score": 0.025503573749187783,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1584,
+      "context_sha256": "f7a15c34a29d799b6d3d8e61cd35d472c86274bc3932b28aaf0fbadfd6c0c848",
+      "snippet": "Our basic pre-training approach, including model, data, and training, is similar to the process described in [RWC+19],\nwith relatively straightforward scaling up of the model size, dataset size and diversity, and length of training. Our use"
+    },
+    {
+      "rank": 7,
+      "chunk_id": "6f59e068-f2f2-4fd0-9276-60d6961fb30a",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000097",
+        "b000098",
+        "b000099",
+        "b000100",
+        "b000101",
+        "b000102"
+      ],
+      "page_start": 9,
+      "page_end": 10,
+      "block_page_map": {
+        "b000097": 9,
+        "b000098": 9,
+        "b000099": 9,
+        "b000100": 9,
+        "b000101": 9,
+        "b000102": 10
+      },
+      "score": 0.024451318309029312,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1811,
+      "context_sha256": "d2059fb006109841a4dc66720ddfd942d81c0edba5c523d315b1034999960723",
+      "snippet": "Table 2.2: Datasets used to train GPT-3. “Weight in training mix” refers to the fraction of examples during training\nthat are drawn from a given dataset, which we intentionally do not make proportional to the size of the dataset. As a\nresul"
+    },
+    {
+      "rank": 8,
+      "chunk_id": "a59eb8ae-18dd-47df-b4ae-265d1069c3fc",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000103",
+        "b000104",
+        "b000105",
+        "b000106"
+      ],
+      "page_start": 10,
+      "page_end": 10,
+      "block_page_map": {
+        "b000103": 10,
+        "b000104": 10,
+        "b000105": 10,
+        "b000106": 10
+      },
+      "score": 0.022073984232868403,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1960,
+      "context_sha256": "e22b482bf0002d169baa4a2106e4219887fbcd5e388c7e78ea215ff34f42bf6e",
+      "snippet": "For few-shot learning, we evaluate each example in the evaluation set by randomly drawing K examples from that\ntask’s training set as conditioning, delimited by 1 or 2 newlines depending on the task. For LAMBADA and Storycloze\nthere is no s"
+    },
+    {
+      "rank": 9,
+      "chunk_id": "71e420d5-d8a6-4e2a-923e-6e3474b38845",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000067",
+        "b000068",
+        "b000069",
+        "b000070"
+      ],
+      "page_start": 7,
+      "page_end": 7,
+      "block_page_map": {
+        "b000067": 7,
+        "b000068": 7,
+        "b000069": 7,
+        "b000070": 7
+      },
+      "score": 0.019433962264150943,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 1887,
+      "context_sha256": "de0055ac5e61189fc42a50f0220fdce782579033e7a41504103f8220cd1c9071",
+      "snippet": "• Zero-Shot (0S) is the same as one-shot except that no demonstrations are allowed, and the model is only given\na natural language instruction describing the task. This method provides maximum convenience, potential for\nrobustness, and avoi"
+    },
+    {
+      "rank": 10,
+      "chunk_id": "da50d3a1-2c47-4412-85b2-a6ea0614af38",
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "block_ids": [
+        "b000107",
+        "b000108",
+        "b000109"
+      ],
+      "page_start": 10,
+      "page_end": 10,
+      "block_page_map": {
+        "b000107": 10,
+        "b000108": 10,
+        "b000109": 10
+      },
+      "score": 0.013513513513513514,
+      "section_path": [
+        "2\nApproach"
+      ],
+      "context_length": 820,
+      "context_sha256": "86857f0f5d577ecc2179dbe4c8dcaa7a36d2f3010b2e979e7f73d7453deef581",
+      "snippet": "is done by [RSR+19] (see Appendix G) for details.\nOn tasks with free-form completion, we use beam search with the same parameters as [RSR+19]: a beam width of 4\nand a length penalty of α = 0.6. We score the model using F1 similarity score, "
     }
   ],
   "citation_validation": {
@@ -116,28 +375,28 @@
     "citation_context_validity": 1.0,
     "all_citations_in_retrieved_context": true,
     "citation_pages": [
-      10,
-      10,
-      11
+      8,
+      8,
+      10
     ]
   },
   "model_usage": {
-    "input_tokens": 4863,
-    "output_tokens": 324,
-    "total_tokens": 5187,
-    "estimated_cost_usd": null
+    "input_tokens": 7559,
+    "output_tokens": 198,
+    "total_tokens": 7757,
+    "estimated_cost_usd": 0.0011137
   },
   "cost": {
-    "estimated_cost_usd": null,
-    "cost_type": "unknown",
-    "cost_status": "unknown"
+    "estimated_cost_usd": 0.0011137,
+    "cost_type": "estimated_upper_bound_from_configured_prices",
+    "cost_status": "known"
   },
   "latency": {
-    "retrieve_endpoint_ms": 1680.897,
-    "qa_endpoint_ms": 13354.186,
-    "api_reported_total_ms": 13346.678,
+    "retrieve_endpoint_ms": 2257.814,
+    "qa_endpoint_ms": 4173.262,
+    "api_reported_total_ms": 4165.624,
     "api_reported_first_token_ms": null,
-    "wall_total_ms": 15291.113
+    "wall_total_ms": 6741.46
   },
   "capabilities_budget_status": {
     "status": "FULL_QA_BUDGET_READY",
@@ -163,5 +422,5 @@
     }
   },
   "failure_classification": null,
-  "created_at": "2026-07-19T10:31:48.132273+00:00"
+  "created_at": "2026-07-20T10:13:31.792264+00:00"
 }

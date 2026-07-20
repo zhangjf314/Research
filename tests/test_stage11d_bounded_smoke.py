@@ -116,6 +116,17 @@ def test_billing_modes_are_explicit(mode):
     assert policy.mode == mode
 
 
+def test_deepseek_v4_flash_is_allowed_for_portfolio_smoke():
+    policy, _ = smoke_configuration(
+        settings(
+            llm_provider="openai_compatible",
+            llm_provider_name="deepseek",
+            llm_model="deepseek-v4-flash",
+        )
+    )
+    assert policy.cost_basis == "explicit_free_provider"
+
+
 @pytest.mark.parametrize("mode", ["invalid", "", None])
 def test_invalid_billing_mode_fails(mode):
     with pytest.raises(SmokeConfigurationError, match="LLM_BILLING_MODE"):

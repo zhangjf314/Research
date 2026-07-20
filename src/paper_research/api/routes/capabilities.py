@@ -33,6 +33,7 @@ class Capability(BaseModel):
     api_key_fingerprint: str | None = None
     temperature: float | None = None
     max_tokens: int | None = None
+    billing_configured: bool | None = None
 
 
 class CapabilitiesResponse(BaseModel):
@@ -121,6 +122,16 @@ def capabilities() -> CapabilitiesResponse:
             checkpoint_detail = f"postgres: {type(exc).__name__}"
     embedding_ready = not settings.embedding_configuration_issues
     reranker_ready = not settings.rerank_configuration_issues
+    llm_billing_configured = (
+        (
+            settings.llm_input_cost_per_million is not None
+            or settings.llm_input_price_per_million_tokens is not None
+        )
+        and (
+            settings.llm_output_cost_per_million is not None
+            or settings.llm_output_price_per_million_tokens is not None
+        )
+    )
     items = {
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
@@ -191,6 +202,7 @@ def capabilities() -> CapabilitiesResponse:
             api_key_fingerprint=_api_key_fingerprint(settings.llm_api_key),
             temperature=settings.llm_temperature,
             max_tokens=settings.llm_max_output_tokens,
+            billing_configured=llm_billing_configured,
         ),
         "redis": Capability(
             status="available" if redis_up else "degraded",

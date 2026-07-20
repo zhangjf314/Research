@@ -117,8 +117,16 @@ def smoke_configuration(settings: Settings) -> tuple[BillingPolicy, SmokeLimits]
         "jina-embeddings-v5-text-small"
     ):
         raise SmokeConfigurationError("fixed Jina embedding configuration is required")
-    if settings.llm_provider != "siliconflow" or settings.llm_model != "Qwen/Qwen3-8B":
-        raise SmokeConfigurationError("fixed SiliconFlow Qwen/Qwen3-8B is required")
+    provider = settings.llm_provider.strip().lower()
+    provider_name = (settings.llm_provider_name or settings.llm_provider).strip().lower()
+    allowed_live_models = {
+        ("siliconflow", "siliconflow", "Qwen/Qwen3-8B"),
+        ("openai_compatible", "deepseek", "deepseek-v4-flash"),
+    }
+    if (provider, provider_name, settings.llm_model) not in allowed_live_models:
+        raise SmokeConfigurationError(
+            "fixed SiliconFlow Qwen/Qwen3-8B or DeepSeek deepseek-v4-flash is required"
+        )
     mode = settings.llm_billing_mode
     if mode not in {"paid", "free", "local"}:
         raise SmokeConfigurationError("LLM_BILLING_MODE must be paid, free, or local")
