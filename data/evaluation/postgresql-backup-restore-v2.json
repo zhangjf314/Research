@@ -1,0 +1,14 @@
+{
+  "schema_version": "postgresql-backup-restore-v2",
+  "generated_at": "2026-07-20T14:00:00Z",
+  "status": "NOT_EXECUTED",
+  "reason_not_passed": "No Stage 13.39 PostgreSQL dump, restore to isolated database, and post-restore verification was executed in this turn.",
+  "required_verifications": [
+    "papers",
+    "tasks",
+    "traces",
+    "checkpoints",
+    "checkpoint_writes"
+  ],
+  "publication_policy": "database dumps are local-only and must not be committed"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "qdrant-backup-restore-v2",
+  "generated_at": "2026-07-20T14:00:00Z",
+  "status": "NOT_EXECUTED",
+  "reason_not_passed": "No Stage 13.39 Qdrant snapshot restore into a new collection and Top-K equivalence check was executed in this turn.",
+  "required_verifications": [
+    "snapshot created",
+    "snapshot restored to new collection",
+    "fixed queries Top-K compared before and after restore",
+    "point count compared",
+    "vector size compared"
+  ],
+  "publication_policy": "Qdrant snapshots are local-only and must not be committed"
+}

@@ -1,5 +1,27 @@
 # Known Limitations
 
+## Stage 13.39 portfolio blockers
+
+- The project has not been tagged or released as `v1.0.0-portfolio`.
+- DeepSeek Full QA and a bounded q003 Deep Research smoke passed, but
+  PostgreSQL production checkpoint recovery v2 has not been executed.
+- PostgreSQL backup/restore v2 has not been executed against the current
+  `0.9.0rc3` runtime.
+- Qdrant snapshot restore v2 and fixed-query Top-K comparison have not been
+  executed.
+- Docker reports Tesseract/OCR capability as available, but the Stage 13.39
+  Docker text/mixed/scanned end-to-end OCR roundtrip has not been executed.
+- The required Portfolio 30-minute stability test has not been executed.
+- The stability test window is intentionally bounded for a personal portfolio.
+  Passing it may only support this statement: "Within this 30-minute test
+  window, no obvious sustained abnormal memory growth was observed." It must
+  not be described as proof of long-term stability or a production-grade
+  endurance test.
+- Broad git-history secret matching still requires manual line-level review
+  before any public release.
+- `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED` and
+  `STRONG_GROUNDING_CLAIM_ALLOWED=false` remain in force.
+
 ## Portfolio evaluation limitations
 
 - The main evaluation set, `gold-dev-v1`, contains 50 human-approved records and

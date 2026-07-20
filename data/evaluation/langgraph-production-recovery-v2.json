@@ -1,0 +1,17 @@
+{
+  "schema_version": "langgraph-production-recovery-v2",
+  "generated_at": "2026-07-20T14:00:00Z",
+  "status": "NOT_EXECUTED",
+  "capabilities_checkpointer": "postgres",
+  "existing_deep_research_run": "live-q003-ed900ef2e202",
+  "existing_deep_research_checkpoint_type": "sqlite smoke checkpoint artifact",
+  "required_test": [
+    "start production Deep Research",
+    "stop after a persisted intermediate node",
+    "force recreate API",
+    "resume the same thread/run id",
+    "verify committed side effects are not duplicated",
+    "finish with citation validation passed"
+  ],
+  "reason_not_passed": "Stage 13.39 did not execute the PostgreSQL stop/resume recovery sequence; rerunning successful Deep Research was prohibited."
+}

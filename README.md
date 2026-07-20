@@ -1,5 +1,26 @@
 # PaperResearch Agent
 
+## Stage 13.39 portfolio release status
+
+Current conclusion: **B. Core QA/Deep Research passed, but safety/restore/stability
+blockers remain.**
+
+- Current version remains `0.9.0rc3` / display `0.9.0-rc3`; do not describe the
+  project as `v1.0.0-portfolio` yet.
+- DeepSeek `deepseek-v4-flash` completed the 50-record internal Full QA
+  engineering gate with 50/50 completed, 0 failures, no template fallback, and
+  strict citation identifier/context/page validation.
+- One bounded Deep Research run completed with strict citation validation.
+- Strong semantic grounding and strong generalization claims are still disabled:
+  `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED` and
+  `STRONG_GENERALIZATION_CLAIM_ALLOWED=false`.
+- Remaining blockers are operational: PostgreSQL production checkpoint recovery,
+  PostgreSQL restore, Qdrant snapshot restore, Docker OCR full roundtrip, and
+  the Portfolio 30-minute stability test.
+
+See [`docs/portfolio-release-audit-v1.md`](docs/portfolio-release-audit-v1.md)
+and [`docs/release-checklist-v1.0.0-portfolio.md`](docs/release-checklist-v1.0.0-portfolio.md).
+
 ## Portfolio evaluation status
 
 The current Portfolio evaluation policy uses three dataset tiers:

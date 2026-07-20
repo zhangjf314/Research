@@ -51,3 +51,17 @@ Use this framing in interviews:
   50 human-reviewed internal records.
 - It must not claim strict blind generalization, production-grade
   generalization, or large-scale independent benchmark success.
+# Interview Guide
+
+## Stage 13.39 current talking point
+
+The clean interview framing is: the project has passed real-model Portfolio QA
+engineering and a bounded Deep Research smoke with DeepSeek, but final
+operations gates are still open. Do not call it Production-ready or
+`v1.0.0-portfolio` until PostgreSQL recovery, PostgreSQL restore, Qdrant
+snapshot restore, Docker OCR roundtrip, and the Portfolio 30-minute stability
+test have been executed.
+
+The evaluation set is 50 human-reviewed internal development records; it is not
+a blind benchmark. Strong generalization and strong semantic grounding claims
+are explicitly disabled.

@@ -1,0 +1,47 @@
+{
+  "schema_version": "soak-test-portfolio-v1",
+  "generated_at": "2026-07-20T14:00:00Z",
+  "status": "BLOCKED",
+  "gate_name": "Portfolio 30-minute stability test",
+  "required_duration_seconds": 1800,
+  "actual_duration_seconds": 0,
+  "reason_not_passed": "The required Portfolio 30-minute stability test was not executed in this turn.",
+  "configuration": {
+    "SOAK_DURATION_SECONDS": 1800,
+    "SOAK_MAX_LLM_REQUESTS": 8,
+    "SOAK_MAX_TOTAL_TOKENS": 80000,
+    "SOAK_MAX_COST_USD": 0.05,
+    "SOAK_LLM_SAMPLE_INTERVAL_SECONDS": 300
+  },
+  "required_workload": [
+    "periodic_retrieval",
+    "redis_cache_hit_miss",
+    "postgresql_query",
+    "qdrant_query",
+    "3_to_5_short_real_qa",
+    "1_short_deep_research",
+    "1_docker_ocr_roundtrip",
+    "1_api_container_recreate",
+    "post_restart_health_capabilities_checkpoint_reservation_checks"
+  ],
+  "pass_gate": {
+    "duration_seconds_gte": 1800,
+    "fatal_error_count": 0,
+    "unclassified_exception_count": 0,
+    "api_restart_count": 1,
+    "api_restart_recovery": "passed",
+    "postgres_available": true,
+    "qdrant_available": true,
+    "redis_available_and_used": true,
+    "active_reserved_tokens": 0,
+    "checkpoint_consistency": "passed",
+    "qa_success_rate_gte": 0.95,
+    "deep_research_success_count_gte": 1,
+    "ocr_roundtrip": "passed"
+  },
+  "allowed_memory_interpretation": "Within this 30-minute test window, no obvious sustained abnormal memory growth was observed.",
+  "full_qa_rerun_executed": false,
+  "deep_research_rerun_executed": false,
+  "reranker_enabled": false,
+  "template_fallback": false
+}

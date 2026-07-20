@@ -34,3 +34,12 @@ Dense Hit@1 为 0.80，固定切分为 0.30；Hybrid Recall@10 为 0.90。
 
 旁白：项目支持容器化部署、统一错误请求 ID、自动测试和可重复评测。当前 50 条数据仍是
 银标，必须人工复核后才能作为正式指标；生产环境还应替换 BGE-M3 和 Cross-Encoder。
+# Demo Video Script
+
+## Stage 13.39 recording boundary
+
+For a public demo, say that the system completed a real DeepSeek 50-item
+internal Full QA engineering evaluation and one bounded Deep Research smoke.
+Also say that final release is still blocked by restore/recovery/OCR/soak
+operations evidence. Do not show `.env`, raw provider payloads, human review
+ZIPs, long traces, database dumps, or private PDF content.
