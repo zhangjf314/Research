@@ -50,7 +50,10 @@ def unsupported_response(question_id: str = "q001") -> dict:
     }
 
 
-def test_manifest_and_preflight_are_frozen() -> None:
+def test_manifest_and_preflight_are_frozen(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("LLM_PROVIDER", "siliconflow")
+    monkeypatch.setenv("LLM_MODEL", "Qwen/Qwen3-8B")
+    monkeypatch.setenv("LLM_BILLING_MODE", "free")
     body = build_manifest()
     assert body["manifest_hash"] == SOURCE_MANIFEST_HASH
     assert body["question_count"] == 10

@@ -238,6 +238,7 @@ def test_health_check_models_success(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(health.httpx, "get", lambda *args, **kwargs: _Response(200))
     result = health.check_health(
         Settings(
+            _env_file=None,
             llm_provider="siliconflow",
             llm_model="Qwen/Qwen3-8B",
             llm_base_url="https://example.test",
@@ -280,6 +281,7 @@ def test_health_check_requires_minimal_completion_after_models_success(
     )
     result = health.check_health(
         Settings(
+            _env_file=None,
             llm_provider="siliconflow",
             llm_model="Qwen/Qwen3-8B",
             llm_base_url="https://example.test",
@@ -326,6 +328,7 @@ def test_health_endpoint_timeout_and_minimal_completion_success(
     )
     result = health.check_health(
         Settings(
+            _env_file=None,
             llm_provider="siliconflow",
             llm_model="Qwen/Qwen3-8B",
             llm_base_url="https://example.test",

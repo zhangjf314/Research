@@ -1,0 +1,22 @@
+# Qwen vs DeepSeek Canary Comparison v1
+
+- Same 15 samples: `True`
+- Same retrieval/context/prompt/reranker state: `true`
+- Dataset status: internal development canary, not a blind holdout.
+
+| Metric | Qwen | DeepSeek |
+| --- | ---: | ---: |
+| completed | `15` | `15` |
+| terminal_failure_count | `0` | `0` |
+| malformed_json_count | `0` | `0` |
+| schema_failure_count | `0` | `0` |
+| required_claim_coverage | `0.238095` | `0.357143` |
+| citation_precision | `0.244048` | `0.202381` |
+| citation_recall | `0.119048` | `0.139286` |
+| core_unsupported_claim_count | `30` | `30` |
+| citation_context_validity | `1.0` | `1.0` |
+| page_accuracy | `1.0` | `1.0` |
+| input_tokens | `182393` | `154876` |
+| output_tokens | `2048` | `2259` |
+| total_tokens | `184441` | `157135` |
+| estimated_cost_usd | `None` | `0.02231516` |

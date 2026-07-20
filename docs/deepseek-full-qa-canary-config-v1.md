@@ -6,6 +6,6 @@
 - Reranker enabled: `False`
 - Thinking: `disabled`
 - Response format: `json_object`
-- Configuration SHA-256: `077e996502585da6c08a6f29745358572994389c797df4136556a8a414f4827e`
+- Configuration SHA-256: `deb373b2e1ee5fbc3df5032beec1383047f7055b8fed4b551d68cd47ea5b3693`
 
 This canary reuses the same internal development samples as Qwen v2; it is not a blind benchmark.

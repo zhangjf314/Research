@@ -1,0 +1,72 @@
+{
+  "schema_version": "qwen-vs-deepseek-canary-comparison-v1",
+  "generated_at": "2026-07-20T10:16:41.009827+00:00",
+  "same_15_samples": true,
+  "same_retrieval": true,
+  "same_context": true,
+  "same_prompt_contract": true,
+  "same_reranker_state": true,
+  "not_blind_holdout": true,
+  "qwen": {
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "summary": {
+      "attempted": 15,
+      "completed": 15,
+      "terminal_failure_count": 0,
+      "malformed_json_count": 0,
+      "schema_failure_count": 0,
+      "invalid_citation_count": 0,
+      "citation_context_validity": 1.0,
+      "page_accuracy": 1.0,
+      "template_fallback_count": 0,
+      "unclassified_exception_count": 0,
+      "core_unsupported_claim_count": 30,
+      "required_claim_coverage": 0.238095,
+      "citation_precision": 0.244048,
+      "citation_recall": 0.119048,
+      "input_tokens": 182393,
+      "output_tokens": 2048,
+      "total_tokens": 184441,
+      "latency_ms": {
+        "mean": 7961.037,
+        "p50": 7241.984,
+        "p95": 14975.37
+      },
+      "production_qa_canary_gate": "FAILED"
+    }
+  },
+  "deepseek": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "summary": {
+      "attempted": 15,
+      "completed": 15,
+      "terminal_failure_count": 0,
+      "malformed_json_count": 0,
+      "schema_failure_count": 0,
+      "invalid_citation_count": 0,
+      "citation_context_validity": 1.0,
+      "page_accuracy": 1.0,
+      "template_fallback_count": 0,
+      "unclassified_exception_count": 0,
+      "finish_reason_length_count": 0,
+      "core_unsupported_claim_count": 30,
+      "required_claim_coverage": 0.357143,
+      "citation_precision": 0.202381,
+      "citation_recall": 0.139286,
+      "input_tokens": 154876,
+      "output_tokens": 2259,
+      "total_tokens": 157135,
+      "estimated_cost_usd": 0.02231516,
+      "cost_type": "estimated_upper_bound_from_configured_prices",
+      "latency_ms": {
+        "mean": 4193.985,
+        "p50": 3806.344,
+        "p95": 10384.573
+      },
+      "production_qa_canary_gate": "FAILED",
+      "budget_violations": []
+    }
+  }
+}
