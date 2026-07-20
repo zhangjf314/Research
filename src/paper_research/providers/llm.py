@@ -1,6 +1,8 @@
 import json
 import math
 import re
+import socket
+import ssl
 import time
 import uuid
 from abc import ABC, abstractmethod
@@ -88,8 +90,9 @@ class LLMProviderError(RuntimeError):
         api_request_count: int = 0,
         retry_reasons: list[str] | None = None,
         rate_limit_events: int = 0,
-    diagnostic_attempts: list[dict[str, Any]] | None = None,
+        diagnostic_attempts: list[dict[str, Any]] | None = None,
         response_audit_path: str | None = None,
+        error_details: dict[str, Any] | None = None,
     ) -> None:
         super().__init__(message)
         self.error_code = error_code
@@ -99,6 +102,7 @@ class LLMProviderError(RuntimeError):
         self.rate_limit_events = rate_limit_events
         self.diagnostic_attempts = list(diagnostic_attempts or [])
         self.response_audit_path = response_audit_path
+        self.error_details = dict(error_details or {})
 
 
 class LLMProvider(ABC):
@@ -224,6 +228,9 @@ class SiliconFlowLLMProvider(LLMProvider):
     @property
     def endpoint(self) -> str:
         return f"{self.base_url}/chat/completions"
+
+    def _endpoint_hostname(self) -> str:
+        return self.base_url.split("://", 1)[-1].split("/", 1)[0].split(":", 1)[0]
 
     def generate_claim_answer(
         self,
@@ -373,6 +380,9 @@ class SiliconFlowLLMProvider(LLMProvider):
                 raise
             except httpx.TimeoutException as exc:
                 reason = type(exc).__name__
+                error_details = classify_provider_exception(
+                    exc, hostname=self._endpoint_hostname()
+                )
                 error_code = "CLAIM_QA_PROVIDER_TIMEOUT"
                 stage = "LLM_PROVIDER_TIMEOUT"
                 response_audit_path = str(
@@ -386,6 +396,9 @@ class SiliconFlowLLMProvider(LLMProvider):
                 )
             except httpx.NetworkError as exc:
                 reason = type(exc).__name__
+                error_details = classify_provider_exception(
+                    exc, hostname=self._endpoint_hostname()
+                )
                 error_code = "CLAIM_QA_PROVIDER_NETWORK_ERROR"
                 stage = "LLM_PROVIDER_NETWORK"
                 response_audit_path = str(
@@ -467,6 +480,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                     response_audit_path=response_audit_path
                     if "response_audit_path" in locals()
                     else None,
+                    error_details=locals().get("error_details"),
                 ) from None
             retry_reasons.append(reason)
             time.sleep(min(2**attempt, 4))
@@ -772,6 +786,9 @@ class SiliconFlowLLMProvider(LLMProvider):
             "elapsed_ms": elapsed_ms,
             "exception_type": type(exception).__name__,
             "exception_message_sanitized": redact_sensitive_text(str(exception)),
+            "exception_classification": classify_provider_exception(
+                exception, hostname=self._endpoint_hostname()
+            ),
             "captured_at": datetime.now(UTC).isoformat(),
             "api_key_persisted": False,
             "authorization_header_persisted": False,
@@ -1123,6 +1140,74 @@ def redact_sensitive_text(value: str) -> str:
     )
     redacted = re.sub(r"[A-Za-z]:\\[^\s'\"]+", "[REDACTED_PATH]", redacted)
     return redacted
+
+
+def classify_provider_exception(
+    exception: BaseException,
+    *,
+    hostname: str | None = None,
+    port: int = 443,
+) -> dict[str, Any]:
+    chain = _exception_chain(exception)
+    classes = {str(item.get("class")).lower() for item in chain}
+    messages = " ".join(str(item.get("repr_sanitized") or "") for item in chain).lower()
+    winerrors = {item.get("winerror") for item in chain if item.get("winerror") is not None}
+    errnos = {item.get("errno") for item in chain if item.get("errno") is not None}
+    classification = "DEEP_RESEARCH_UNKNOWN_CONNECT_ERROR"
+    if isinstance(exception, httpx.ConnectTimeout) or "connecttimeout" in classes:
+        classification = "DEEP_RESEARCH_CONNECT_TIMEOUT"
+    elif any(item.get("is_ssl_error") for item in chain) or "certificate" in messages:
+        classification = "DEEP_RESEARCH_TLS_ERROR"
+    elif isinstance(exception, httpx.ProxyError) or "proxy" in messages:
+        classification = "DEEP_RESEARCH_PROXY_ERROR"
+    elif 10013 in winerrors or "permissionerror" in classes or "winerror 10013" in messages:
+        classification = "DEEP_RESEARCH_SOCKET_PERMISSION_ERROR"
+    elif any(item.get("is_gaierror") for item in chain) or "name or service" in messages:
+        classification = "DEEP_RESEARCH_DNS_ERROR"
+    elif isinstance(exception, httpx.ConnectError):
+        classification = "DEEP_RESEARCH_TCP_CONNECT_ERROR"
+    elif isinstance(exception, httpx.TimeoutException):
+        classification = "DEEP_RESEARCH_CONNECT_TIMEOUT"
+    elif isinstance(exception, httpx.HTTPStatusError):
+        status = exception.response.status_code
+        if status in {401, 403}:
+            classification = "DEEP_RESEARCH_PROVIDER_AUTH_ERROR"
+        elif status == 429:
+            classification = "DEEP_RESEARCH_PROVIDER_RATE_LIMIT"
+        else:
+            classification = "DEEP_RESEARCH_PROVIDER_HTTP_ERROR"
+    elif errnos:
+        classification = "DEEP_RESEARCH_TCP_CONNECT_ERROR"
+    return {
+        "classification": classification,
+        "exception_class": type(exception).__name__,
+        "exception_repr_sanitized": redact_sensitive_text(repr(exception)),
+        "cause_chain": chain,
+        "errno": next(iter(errnos), None),
+        "winerror": next(iter(winerrors), None),
+        "hostname": hostname,
+        "port": port,
+    }
+
+
+def _exception_chain(exception: BaseException) -> list[dict[str, Any]]:
+    chain: list[dict[str, Any]] = []
+    seen: set[int] = set()
+    current: BaseException | None = exception
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        chain.append(
+            {
+                "class": type(current).__name__,
+                "repr_sanitized": redact_sensitive_text(repr(current)),
+                "errno": getattr(current, "errno", None),
+                "winerror": getattr(current, "winerror", None),
+                "is_gaierror": isinstance(current, socket.gaierror),
+                "is_ssl_error": isinstance(current, ssl.SSLError),
+            }
+        )
+        current = current.__cause__ or current.__context__
+    return chain
 
 
 def _looks_like_multiple_json_objects(text: str) -> bool:

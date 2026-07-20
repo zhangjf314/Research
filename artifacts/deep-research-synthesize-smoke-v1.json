@@ -1,0 +1,71 @@
+{
+  "schema_version": "deep-research-synthesize-smoke-v1",
+  "mode": "provider-smoke",
+  "checked_at": "2026-07-20T13:08:26.671359+00:00",
+  "run_id": "live-q003-cbc99df5b041",
+  "provider_config": {
+    "app_profile": "production",
+    "llm_provider": "openai_compatible",
+    "llm_provider_name": "deepseek",
+    "llm_model": "deepseek-v4-flash",
+    "base_url_host": "api.deepseek.com",
+    "api_key_present": true,
+    "api_key_length": 35,
+    "api_key_sha256_8": "23e1f83b",
+    "temperature": 0.0,
+    "max_output_tokens": 128,
+    "timeout_seconds": 120.0,
+    "max_retries": 0,
+    "response_format": "json_object",
+    "thinking_enabled": false,
+    "stream": false,
+    "factory_provider": "deepseek",
+    "factory_model": "deepseek-v4-flash",
+    "client_class": "Client",
+    "sync_async": "sync",
+    "trust_env": "httpx_default",
+    "ssl_verify": "httpx_default"
+  },
+  "request_count": 1,
+  "raw_payload_persisted": false,
+  "api_key_persisted": false,
+  "authorization_header_persisted": false,
+  "status": "FAILED",
+  "elapsed_ms": 10.225,
+  "error": {
+    "classification": "DEEP_RESEARCH_SOCKET_PERMISSION_ERROR",
+    "exception_class": "ConnectError",
+    "exception_repr_sanitized": "ConnectError('[WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。')",
+    "cause_chain": [
+      {
+        "class": "ConnectError",
+        "repr_sanitized": "ConnectError('[WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。')",
+        "errno": null,
+        "winerror": null,
+        "is_gaierror": false,
+        "is_ssl_error": false
+      },
+      {
+        "class": "ConnectError",
+        "repr_sanitized": "ConnectError(PermissionError(13, '以一种访问权限不允许的方式做了一个访问套接字的尝试。', None, 10013, None))",
+        "errno": null,
+        "winerror": null,
+        "is_gaierror": false,
+        "is_ssl_error": false
+      },
+      {
+        "class": "PermissionError",
+        "repr_sanitized": "PermissionError(13, '以一种访问权限不允许的方式做了一个访问套接字的尝试。', None, 10013, None)",
+        "errno": 13,
+        "winerror": 10013,
+        "is_gaierror": false,
+        "is_ssl_error": false
+      }
+    ],
+    "errno": 13,
+    "winerror": 10013,
+    "hostname": "api.deepseek.com",
+    "port": 443
+  },
+  "message_sanitized": "[WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。"
+}

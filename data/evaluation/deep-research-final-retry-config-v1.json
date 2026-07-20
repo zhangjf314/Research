@@ -1,0 +1,28 @@
+{
+  "schema_version": "deep-research-final-retry-config-v1",
+  "created_at": "2026-07-20T13:11:15Z",
+  "question_id": "q003",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "reranker": false,
+  "attempt_number": 2,
+  "output_root": "artifacts/deepseek-production-deep-research-v2",
+  "max_cost_usd": "0.20",
+  "max_total_tokens": 40000,
+  "max_total_requests": 4,
+  "max_total_seconds": 300,
+  "git_commit": "391187f4bee93ff8b90b72d35d1f463d3efb54bd",
+  "provider_config_hash": "4d5995c928147b6cbc19e30dab04d74197bd08f1930ad2e7452e62f98bf17c87",
+  "prompt_versions": [
+    "qa-production-v1"
+  ],
+  "graph_version": "bounded-smoke-v1",
+  "checkpointer": "sqlite smoke checkpoint",
+  "redis": "available",
+  "retry_policy": {
+    "provider_max_retries": 0,
+    "qa_retry": false,
+    "json_repair": false
+  },
+  "no_summary_flag_decision": "Do not use --no-summary for the final retry if it suppresses formal summary generation; use only when it disables console summary without changing artifacts."
+}

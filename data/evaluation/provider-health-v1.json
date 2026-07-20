@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-20T12:29:37.032868+00:00",
+  "checked_at": "2026-07-20T13:11:14.980200+00:00",
   "base_url_host": "api.deepseek.com",
   "base_url_valid": true,
   "dns_status": "passed",
@@ -31,10 +31,10 @@
   },
   "template_fallback": false,
   "latency": {
-    "dns_ms": 9.709,
-    "tcp_ms": 13.808,
-    "tls_ms": 61.112,
-    "models_ms": 589.606
+    "dns_ms": 4.868,
+    "tcp_ms": 0.672,
+    "tls_ms": 13.373,
+    "models_ms": 555.395
   },
   "error_type": null,
   "safe_to_start_batch": true,

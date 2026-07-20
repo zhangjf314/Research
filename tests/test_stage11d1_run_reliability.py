@@ -52,16 +52,19 @@ class ConnectFailureLLM:
         self.calls = 0
         self.pre_call_state = None
 
-    def generate_claim_answer(self, question, contexts, prompt_version):
-        del question, contexts, prompt_version
+    def generate_claim_answer(self, question, contexts, prompt_version, audit_metadata=None):
+        del question, contexts, prompt_version, audit_metadata
         self.calls += 1
         self.pre_call_state = self.checkpoint.load("run-new")
         raise LLMProviderError(
-            "connect failed", api_request_count=1, retry_reasons=["ConnectError"]
+            "connect failed",
+            api_request_count=1,
+            retry_reasons=["ConnectError"],
+            error_details={"classification": "DEEP_RESEARCH_TCP_CONNECT_ERROR"},
         )
 
 
-def test_connect_error_has_pre_persisted_id_and_conservative_reservation(tmp_path):
+def test_connect_error_has_pre_persisted_id_and_releases_reservation(tmp_path):
     checkpoint = SQLiteSmokeCheckpoint(tmp_path / "checkpoint.sqlite")
     llm = ConnectFailureLLM(checkpoint)
     ledger = []
@@ -84,18 +87,21 @@ def test_connect_error_has_pre_persisted_id_and_conservative_reservation(tmp_pat
     assert state.usage_record_count == 0
     assert state.usage_records == []
     assert state.request_records[0]["request_status"] == "failed_after_send_unknown"
-    assert state.request_records[0]["usage_status"] == "unavailable_after_send_attempt"
-    assert state.reserved_total_tokens > 0
-    assert state.budget_accounting_status == "indeterminate_conservative_reserved"
+    assert state.request_records[0]["usage_status"] == "released_after_provider_failure"
+    assert state.request_records[0]["failure_type"] == "DEEP_RESEARCH_TCP_CONNECT_ERROR"
+    assert state.reserved_total_tokens == 0
+    assert state.budget_accounting_status == "settled"
     assert [event["event"] for event in ledger] == [
         "request_prepared",
+        "TOKEN_BUDGET_RESERVED",
         "request_started",
+        "TOKEN_BUDGET_RELEASED",
         "request_failed",
     ]
 
     resumed = runner.run(sample(), run_id="run-new", resume=True)
     assert resumed.request_attempt_count == 1
-    assert resumed.reserved_total_tokens == state.reserved_total_tokens
+    assert resumed.reserved_total_tokens == 0
     assert llm.calls == 1
 
 

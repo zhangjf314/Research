@@ -66,7 +66,11 @@ class SmokeLLM(Protocol):
     model_name: str
 
     def generate_claim_answer(
-        self, question: str, context: list[ContextItem], prompt_version: str
+        self,
+        question: str,
+        context: list[ContextItem],
+        prompt_version: str,
+        audit_metadata: dict[str, Any] | None = None,
     ) -> GenerationResult: ...
 
 
@@ -307,11 +311,23 @@ class BudgetGuard:
         self.global_reserved_tokens += total
 
     def release_reservation(self, state: SmokeState, request: dict[str, Any]) -> None:
+        if request.get("usage_status") in {
+            "provider_reported",
+            "released_after_provider_failure",
+            "released_after_missing_usage",
+        }:
+            return
         total = int(request["reserved_total_tokens"])
+        if total <= 0:
+            return
         state.reserved_input_tokens -= int(request["reserved_input_tokens"])
         state.reserved_output_tokens -= int(request["reserved_output_tokens"])
         state.reserved_total_tokens -= total
         self.global_reserved_tokens -= total
+        state.reserved_input_tokens = max(0, state.reserved_input_tokens)
+        state.reserved_output_tokens = max(0, state.reserved_output_tokens)
+        state.reserved_total_tokens = max(0, state.reserved_total_tokens)
+        self.global_reserved_tokens = max(0, self.global_reserved_tokens)
         if state.reserved_total_tokens == 0:
             state.budget_accounting_status = "settled"
 
@@ -494,6 +510,7 @@ class BoundedSmokeRunner:
         )
         request = {
             "request_id": request_id,
+            "reservation_id": f"{request_id}:reservation",
             "node": "synthesize",
             "request_status": "prepared",
             "usage_status": "reserved_conservative",
@@ -522,6 +539,20 @@ class BoundedSmokeRunner:
             self.checkpoint.save(state)
             self.request_event({"event": "request_failed_before_send", **request})
             raise
+        self.request_event(
+            {
+                "event": "TOKEN_BUDGET_RESERVED",
+                "run_id": state.run_id,
+                "request_id": request_id,
+                "reservation_id": request["reservation_id"],
+                "reserved_input_tokens": estimated_input,
+                "reserved_output_tokens": self.max_output_tokens,
+                "reserved_total_tokens": estimated_input + self.max_output_tokens,
+                "settled_tokens": 0,
+                "released_tokens": 0,
+                "timestamp": time.time(),
+            }
+        )
         request["request_status"] = "started"
         request["started_at"] = time.time()
         state.request_attempt_count += 1
@@ -531,28 +562,69 @@ class BoundedSmokeRunner:
         self.request_event({"event": "request_started", **request})
         try:
             result = self.llm.generate_claim_answer(
-                state.question, contexts, self.prompt_version
+                state.question,
+                contexts,
+                self.prompt_version,
+                audit_metadata={
+                    "request_id": request_id,
+                    "run_id": state.run_id,
+                    "sample_id": state.question_id,
+                    "thread_id": state.run_id,
+                },
             )
         except LLMProviderError as exc:
             request["request_status"] = "failed_after_send_unknown"
-            request["usage_status"] = "unavailable_after_send_attempt"
             request["failure_type"] = (
-                exc.retry_reasons[-1] if exc.retry_reasons else type(exc).__name__
+                exc.error_details.get("classification")
+                or (exc.retry_reasons[-1] if exc.retry_reasons else type(exc).__name__)
             )
             request["failure_message"] = str(exc)
+            request["error_code"] = exc.error_code
+            request["error_stage"] = exc.stage
+            request["error_details"] = exc.error_details
+            request["response_audit_path"] = exc.response_audit_path
             request["completed_at"] = time.time()
-            state.budget_accounting_status = "indeterminate_conservative_reserved"
+            self.guard.release_reservation(state, request)
+            request["usage_status"] = "released_after_provider_failure"
+            self.request_event(
+                {
+                    "event": "TOKEN_BUDGET_RELEASED",
+                    "run_id": state.run_id,
+                    "request_id": request_id,
+                    "reservation_id": request["reservation_id"],
+                    "reserved_input_tokens": request["reserved_input_tokens"],
+                    "reserved_output_tokens": request["reserved_output_tokens"],
+                    "reserved_total_tokens": request["reserved_total_tokens"],
+                    "settled_tokens": 0,
+                    "released_tokens": request["reserved_total_tokens"],
+                    "timestamp": time.time(),
+                }
+            )
             self.checkpoint.save(state)
             self.request_event({"event": "request_failed", **request})
             raise ProviderFailed(f"provider_failure:{exc}") from exc
         usage = result.usage
         if usage.total_tokens <= 0:
             request["request_status"] = "failed_after_send_unknown"
-            request["usage_status"] = "unavailable_after_send_attempt"
             request["failure_type"] = "missing_provider_usage"
             request["failure_message"] = "provider response omitted reliable usage"
             request["completed_at"] = time.time()
-            state.budget_accounting_status = "indeterminate_conservative_reserved"
+            self.guard.release_reservation(state, request)
+            request["usage_status"] = "released_after_missing_usage"
+            self.request_event(
+                {
+                    "event": "TOKEN_BUDGET_RELEASED",
+                    "run_id": state.run_id,
+                    "request_id": request_id,
+                    "reservation_id": request["reservation_id"],
+                    "reserved_input_tokens": request["reserved_input_tokens"],
+                    "reserved_output_tokens": request["reserved_output_tokens"],
+                    "reserved_total_tokens": request["reserved_total_tokens"],
+                    "settled_tokens": 0,
+                    "released_tokens": request["reserved_total_tokens"],
+                    "timestamp": time.time(),
+                }
+            )
             self.checkpoint.save(state)
             self.request_event({"event": "request_failed", **request})
             raise ProviderFailed("provider_failure:missing_provider_usage")
@@ -576,6 +648,20 @@ class BoundedSmokeRunner:
         request["actual_output_tokens"] = usage.output_tokens
         request["actual_total_tokens"] = usage.total_tokens
         request["monetary_cost_usd"] = record.monetary_cost_usd
+        self.request_event(
+            {
+                "event": "TOKEN_BUDGET_SETTLED",
+                "run_id": state.run_id,
+                "request_id": request_id,
+                "reservation_id": request["reservation_id"],
+                "reserved_input_tokens": request["reserved_input_tokens"],
+                "reserved_output_tokens": request["reserved_output_tokens"],
+                "reserved_total_tokens": request["reserved_total_tokens"],
+                "settled_tokens": usage.total_tokens,
+                "released_tokens": request["reserved_total_tokens"],
+                "timestamp": time.time(),
+            }
+        )
         self.checkpoint.save(state)
         self.request_event({"event": "request_completed", **request})
         state.answer = result.model_dump(mode="json")

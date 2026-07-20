@@ -1,0 +1,57 @@
+{
+  "schema_version": "deep-research-connect-error-freeze-v1",
+  "frozen_at": "2026-07-20T13:11:15Z",
+  "historical_run_is_immutable": true,
+  "run_id": "live-q003-cbc99df5b041",
+  "question_id": "q003",
+  "thread_id": "live-q003-cbc99df5b041",
+  "git_commit": "391187f4bee93ff8b90b72d35d1f463d3efb54bd",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "base_url_host": "api.deepseek.com",
+  "current_node": "synthesize",
+  "nodes_visited": [
+    "plan",
+    "retrieve",
+    "assess_evidence"
+  ],
+  "retrieval_calls": 1,
+  "request_attempt_count": 1,
+  "provider_completed_request_count": 0,
+  "settled_tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "reserved_tokens": {
+    "input": 6033,
+    "output": 2048,
+    "total": 8081
+  },
+  "monetary_cost_usd": "0",
+  "exception_type": "ConnectError",
+  "sanitized_exception_message": "provider_failure:deepseek QA failed after 1 request(s): ConnectError",
+  "original_cause_chain_available": false,
+  "original_raw_provider_response_available": false,
+  "checkpoint_id": "live-q003-cbc99df5b041",
+  "checkpoint_state": "provider_failed at synthesize with indeterminate_conservative_reserved",
+  "redis_status": "available",
+  "postgresql_checkpointer_status": "available",
+  "stage13_38_reproduction": {
+    "host_provider_smoke_without_escalation": {
+      "status": "FAILED",
+      "classification": "DEEP_RESEARCH_SOCKET_PERMISSION_ERROR",
+      "winerror": 10013,
+      "hostname": "api.deepseek.com",
+      "port": 443,
+      "raw_payload_persisted": false,
+      "api_key_persisted": false
+    },
+    "host_provider_smoke_with_escalation": {
+      "status": "PROVIDER_RESPONSE_OBTAINED_BUT_LOCAL_POST_PROCESSING_FAILED",
+      "local_error": "AttributeError: OpenAICompatibleLLMProvider object has no attribute _estimated_cost",
+      "raw_payload_persisted": false,
+      "api_key_persisted": false
+    }
+  }
+}
