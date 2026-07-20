@@ -6,6 +6,9 @@
   "model": "deepseek-v4-flash",
   "reranker": false,
   "attempt_number": 2,
+  "parent_run_id": "live-q003-cbc99df5b041",
+  "final_run_id": "live-q003-ed900ef2e202",
+  "final_run_status": "completed",
   "output_root": "artifacts/deepseek-production-deep-research-v2",
   "max_cost_usd": "0.20",
   "max_total_tokens": 40000,
@@ -24,5 +27,15 @@
     "qa_retry": false,
     "json_repair": false
   },
-  "no_summary_flag_decision": "Do not use --no-summary for the final retry if it suppresses formal summary generation; use only when it disables console summary without changing artifacts."
+  "no_summary_flag_decision": "Final retry did not use --no-summary. The run emitted isolated run artifacts and did not update top-level smoke summaries.",
+  "final_result": {
+    "provider_completed_request_count": 1,
+    "input_tokens": 6714,
+    "output_tokens": 82,
+    "total_tokens": 6796,
+    "monetary_cost_usd": "0.00096292",
+    "elapsed_seconds": 1.337596,
+    "citation_validation": "passed",
+    "active_reserved_tokens": 0
+  }
 }

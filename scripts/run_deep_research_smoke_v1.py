@@ -43,6 +43,10 @@ PRODUCTION_CORPUS = Path("data/evaluation/production-corpus-v1.json")
 INDEX_MANIFEST = Path("data/evaluation/retrieval-index-v2.json")
 CONTEXT_SOURCE = Path("data/evaluation/retrieval-context-optimization-v1.json")
 BLOCK_ROOT = Path("data/reports/parsing-audit")
+LEGACY_PARENT_RUN_ROOTS = (
+    DEFAULT_RUN_ROOT,
+    Path("artifacts/deepseek-production-deep-research-v1"),
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -229,6 +233,19 @@ def limits_with_overrides(
     return policy, limits
 
 
+def load_parent_candidates(output_root: Path) -> list[dict[str, Any]]:
+    roots = [output_root, *(root for root in LEGACY_PARENT_RUN_ROOTS if root != output_root)]
+    runs: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for root in roots:
+        for run in load_runs(root):
+            run_id = run["metadata"]["run_id"]
+            if run_id not in seen:
+                runs.append(run)
+                seen.add(run_id)
+    return [run for run in runs if run["metadata"]["mode"] == "live"]
+
+
 def main() -> int:
     args = parse_args()
     if args.mode == "live" and not (args.all or args.question_id):
@@ -271,6 +288,7 @@ def main() -> int:
     live_runs = [
         run for run in load_runs(args.output_root) if run["metadata"]["mode"] == "live"
     ]
+    parent_candidates = load_parent_candidates(args.output_root)
     effective_attempt_number = args.attempt_number
     effective_parent_run_id = args.parent_run_id
     if args.resume:
@@ -287,11 +305,13 @@ def main() -> int:
         effective_attempt_number = int(resume_metadata["attempt_number"])
         effective_parent_run_id = resume_metadata["parent_run_id"]
     prior_ids = [run["metadata"]["run_id"] for run in live_runs]
-    if args.parent_run_id and args.parent_run_id not in prior_ids:
+    parent = None
+    parent_ids = [run["metadata"]["run_id"] for run in parent_candidates]
+    if args.parent_run_id and args.parent_run_id not in parent_ids:
         raise SmokeConfigurationError("--parent-run-id does not identify an isolated live run")
     if args.parent_run_id:
         parent = next(
-            run for run in live_runs if run["metadata"]["run_id"] == args.parent_run_id
+            run for run in parent_candidates if run["metadata"]["run_id"] == args.parent_run_id
         )
         if len(selected) != 1 or parent["metadata"]["question_id"] != selected[0]["question_id"]:
             raise SmokeConfigurationError("parent run belongs to a different question")
@@ -301,7 +321,11 @@ def main() -> int:
             for run in live_runs
             if run["metadata"]["question_id"] == selected[0]["question_id"]
         ]
-        expected_attempt = max(question_attempts, default=0) + 1
+        expected_attempt = (
+            int(parent["metadata"]["attempt_number"]) + 1
+            if parent is not None
+            else max(question_attempts, default=0) + 1
+        )
         if args.attempt_number != expected_attempt:
             raise SmokeConfigurationError(
                 f"--attempt-number must be {expected_attempt} for this question"

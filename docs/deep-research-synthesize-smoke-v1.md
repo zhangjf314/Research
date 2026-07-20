@@ -18,4 +18,14 @@ The first normal host provider-smoke failed before completion with:
 
 An elevated host provider-smoke obtained a provider response but failed during local audit post-processing because the debug script tried to call a non-existent `_estimated_cost` helper. The script has been corrected to reuse provider `_usage()`.
 
-Because the corrected provider-smoke has not yet been re-run after this local script fix, the complete Deep Research retry is not authorized in this turn without an additional explicit short-smoke authorization.
+After explicit authorization, the corrected provider-smoke was run once and passed:
+
+- Status: `PASSED`
+- HTTP status: `200`
+- Request count: `1`
+- JSON valid: `true`
+- Input/output/total tokens: `53` / `20` / `73`
+- Estimated cost: `$0.00001302`
+- Raw payload persisted: `false`
+- API key persisted: `false`
+- Authorization header persisted: `false`

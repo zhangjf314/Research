@@ -7,6 +7,7 @@ The single allowed final retry is fixed as:
   --mode live `
   --question-id q003 `
   --attempt-number 2 `
+  --parent-run-id live-q003-cbc99df5b041 `
   --output-root artifacts\deepseek-production-deep-research-v2 `
   --max-cost-usd 0.2 `
   --max-total-tokens 40000 `
@@ -25,3 +26,14 @@ Fixed configuration:
 - Output root: `artifacts/deepseek-production-deep-research-v2`
 
 This retry must not reuse `live-q003-cbc99df5b041`.
+
+Actual final retry:
+
+- Run ID: `live-q003-ed900ef2e202`
+- Status: `completed`
+- Request attempts: `1`
+- Provider completed requests: `1`
+- Total tokens: `6796`
+- Cost: `$0.00096292`
+- Active reserved tokens: `0`
+- Citation validation: `passed`

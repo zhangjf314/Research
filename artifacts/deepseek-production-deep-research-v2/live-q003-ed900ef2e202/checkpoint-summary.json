@@ -1,0 +1,44 @@
+{
+  "run_id": "live-q003-ed900ef2e202",
+  "status": "completed",
+  "current_node": "END",
+  "request_records": [
+    {
+      "request_id": "live-q003-ed900ef2e202:synthesize:1:61db864b75e9",
+      "reservation_id": "live-q003-ed900ef2e202:synthesize:1:61db864b75e9:reservation",
+      "node": "synthesize",
+      "request_status": "completed",
+      "usage_status": "provider_reported",
+      "prompt_token_estimate": 6033,
+      "maximum_output_tokens": 2048,
+      "reserved_input_tokens": 6033,
+      "reserved_output_tokens": 2048,
+      "reserved_total_tokens": 8081,
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "prepared_at": 1784554181.2410166,
+      "started_at": 1784554181.2489197,
+      "completed_at": 1784554182.5420628,
+      "failure_type": null,
+      "failure_message": null,
+      "actual_input_tokens": 6714,
+      "actual_output_tokens": 82,
+      "actual_total_tokens": 6796,
+      "monetary_cost_usd": "0.00096292"
+    }
+  ],
+  "usage_records": [
+    {
+      "request_id": "live-q003-ed900ef2e202:synthesize:1:61db864b75e9",
+      "input_tokens": 6714,
+      "output_tokens": 82,
+      "total_tokens": 6796,
+      "usage_source": "provider_reported",
+      "monetary_cost_usd": "0.00096292",
+      "cost_basis": "configured_token_prices"
+    }
+  ],
+  "reserved_total_tokens": 0,
+  "budget_accounting_status": "settled",
+  "state_sha256": "076cfcf585465e1197627415b6ee1aebdb3fb7e480bac598967c03f5f34209ac"
+}
