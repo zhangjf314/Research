@@ -1,0 +1,119 @@
+{
+  "schema_version": "docker-ocr-production-v2",
+  "started_at": "2026-07-20T15:22:44.653308+00:00",
+  "finished_at": "2026-07-20T15:23:08.701407+00:00",
+  "gate": "PASSED",
+  "api_base_url": "http://localhost/api/v1",
+  "docker_tesseract_path": "/usr/bin/tesseract",
+  "docker_tesseract_called_for_scanned": true,
+  "text_pdf_roundtrip": "passed",
+  "mixed_pdf_roundtrip": "passed",
+  "scanned_pdf_roundtrip": "passed",
+  "indexed": true,
+  "retrievable": true,
+  "citation_page_accuracy": 1.0,
+  "temporary_files_cleaned": false,
+  "temporary_files_policy": "synthetic fixture PDFs retained for audit under artifacts/",
+  "cases": [
+    {
+      "pdf_type": "TEXT_PDF",
+      "path": "artifacts\\docker-ocr-production-v2\\text-native-20260720152244.pdf",
+      "expected_page": 1,
+      "paper_id": "ae049aac-21de-4fa3-b678-adea35a01fdf",
+      "upload": "passed",
+      "duplicate": false,
+      "index_response": {
+        "paper_id": "ae049aac-21de-4fa3-b678-adea35a01fdf",
+        "status": "READY",
+        "chunk_count": 1
+      },
+      "indexed": true,
+      "blocks_path_exists": true,
+      "chunks_path_exists": true,
+      "block_count": 2,
+      "chunk_count": 1,
+      "parser_names": [],
+      "ocr_block_count": 0,
+      "source_pages": [
+        1
+      ],
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "normalized_blocks": true,
+      "retrievable": true,
+      "citation_page": 1,
+      "citation_page_end": 1,
+      "citation_page_accuracy": true,
+      "retrieval_trace_id": "de4a1073-a2ae-4cbb-9d77-009c875d74a7",
+      "error": null,
+      "elapsed_seconds": 5.778
+    },
+    {
+      "pdf_type": "MIXED_PDF",
+      "path": "artifacts\\docker-ocr-production-v2\\mixed-native-scanned-20260720152244.pdf",
+      "expected_page": 2,
+      "paper_id": "daf570e7-21b3-478d-8b93-789c3d77ad22",
+      "upload": "passed",
+      "duplicate": false,
+      "index_response": {
+        "paper_id": "daf570e7-21b3-478d-8b93-789c3d77ad22",
+        "status": "READY",
+        "chunk_count": 1
+      },
+      "indexed": true,
+      "blocks_path_exists": true,
+      "chunks_path_exists": true,
+      "block_count": 4,
+      "chunk_count": 1,
+      "parser_names": [],
+      "ocr_block_count": 4,
+      "source_pages": [
+        1,
+        2
+      ],
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "normalized_blocks": true,
+      "retrievable": true,
+      "citation_page": 1,
+      "citation_page_end": 2,
+      "citation_page_accuracy": true,
+      "retrieval_trace_id": "4f3021b1-2e12-4eb2-b81d-f2f231c18bdb",
+      "error": null,
+      "elapsed_seconds": 6.039
+    },
+    {
+      "pdf_type": "SCANNED_PDF",
+      "path": "artifacts\\docker-ocr-production-v2\\fully-scanned-20260720152244.pdf",
+      "expected_page": 1,
+      "paper_id": "0ebb06a5-5754-40f0-840c-6e911421eede",
+      "upload": "passed",
+      "duplicate": false,
+      "index_response": {
+        "paper_id": "0ebb06a5-5754-40f0-840c-6e911421eede",
+        "status": "READY",
+        "chunk_count": 1
+      },
+      "indexed": true,
+      "blocks_path_exists": true,
+      "chunks_path_exists": true,
+      "block_count": 2,
+      "chunk_count": 1,
+      "parser_names": [],
+      "ocr_block_count": 2,
+      "source_pages": [
+        1
+      ],
+      "text_recovered": true,
+      "reading_order_preserved": true,
+      "normalized_blocks": true,
+      "retrievable": true,
+      "citation_page": 1,
+      "citation_page_end": 1,
+      "citation_page_accuracy": true,
+      "retrieval_trace_id": "7ac147fa-f3f6-4685-9696-27135756f59a",
+      "error": null,
+      "elapsed_seconds": 11.71
+    }
+  ]
+}

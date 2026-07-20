@@ -61,6 +61,10 @@ artifacts/*citation*review-export*.md
 artifacts/evidence-qa-dev-citation-human-audit-*
 artifacts/deepseek-full-qa-final-trace-v1.json
 artifacts/deepseek-production-deep-research-v1/
+artifacts/docker-ocr-production-v2/
+artifacts/langgraph-production-recovery-v2/
+artifacts/portfolio-stability-deep-research-v1/
+artifacts/soak-test-portfolio-v1.progress.json
 artifacts/evidence-first-canary-trace-v1.json
 artifacts/full-qa-canary-deepseek-trace-v1.json
 artifacts/full-qa-canary-trace-v2.json
