@@ -1,0 +1,106 @@
+{
+  "schema_version": "stage13-21-checkpoint-file-audit-v1",
+  "created_at": "2026-07-17T13:12:25.649343+00:00",
+  "branch": "eval/dev-v3-6-evidence-presentation-live-v1",
+  "head": "da91bbcab73ed64f9da354c2b71a7b6b44db738d",
+  "tracked_diff_stat": "",
+  "tracked_diff_name_status": "",
+  "git_diff_check": "",
+  "categories": {
+    "runtime_code": [
+      "scripts/run_evidence_qa_dev_v3_6.py"
+    ],
+    "evaluation_code": [
+      "scripts/audit_evidence_qa_dev_v3_6.py",
+      "scripts/evidence_qa_dev_v3_6_lib.py",
+      "scripts/freeze_dev_v3_6_quality_failure_v1.py",
+      "scripts/summarize_evidence_qa_dev_v3_6.py"
+    ],
+    "tests": [
+      "tests/test_stage13_21_dev_v3_6_live.py"
+    ],
+    "protocol_freeze": [
+      "data/evaluation/evidence-qa-dev-v3-6-protocol-freeze-v1.json",
+      "docs/evidence-qa-dev-v3-6-protocol-freeze-v1.md"
+    ],
+    "provider_health": [
+      "data/evaluation/provider-health-dev-v3-6-v1.json"
+    ],
+    "formal_result": [
+      "data/evaluation/evidence-qa-dev-v3-6.csv",
+      "data/evaluation/evidence-qa-dev-v3-6.json"
+    ],
+    "formal_report": [
+      "docs/evidence-qa-dev-v3-6.md"
+    ],
+    "final_audit": [
+      "data/evaluation/evidence-qa-dev-v3-6-final-audit.json"
+    ],
+    "citation_audit": [
+      "data/evaluation/evidence-qa-dev-v3-6-citation-audit-v1.jsonl",
+      "docs/evidence-qa-dev-v3-6-citation-audit-v1.md"
+    ],
+    "failure_evidence": [
+      "data/evaluation/dev-v3-6-quality-failure-freeze-v1.json",
+      "data/evaluation/stage13-21-checkpoint-file-audit-v1.json",
+      "docs/dev-v3-6-quality-failure-freeze-v1.md",
+      "docs/stage13-21-checkpoint-file-audit-v1.md"
+    ],
+    "raw_run_local_only": [
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q001-8b83cbf2d8a5/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q002-62e0bf601e10/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q004-f2147e9d8fb0/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q005-c53866a43736/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q007-599b4459422c/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q008-bac7bff93546/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q013-ea012a9765ed/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q015-74dbc7cffb8a/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q019-a1532c091f82/",
+      "data/evaluation/evidence-qa-dev-v3-6/runs/live-dev-v3-6-q050-bc1e928d07b3/"
+    ],
+    "review_zip_local_only": [
+      "artifacts/stage13-10-human-claim-gold-review-results.zip",
+      "artifacts/stage13-9-human-citation-review-results.zip"
+    ],
+    "backup": [],
+    "imports": [],
+    "temporary": [],
+    "uncertain": []
+  },
+  "category_counts": {
+    "runtime_code": 1,
+    "evaluation_code": 4,
+    "tests": 1,
+    "protocol_freeze": 2,
+    "provider_health": 1,
+    "formal_result": 2,
+    "formal_report": 1,
+    "final_audit": 1,
+    "citation_audit": 2,
+    "failure_evidence": 4,
+    "raw_run_local_only": 10,
+    "review_zip_local_only": 2,
+    "backup": 0,
+    "imports": 0,
+    "temporary": 0,
+    "uncertain": 0
+  },
+  "uncertain_count": 0,
+  "raw_run_directory_count": 10,
+  "raw_run_directories_local_only": true,
+  "review_zip_local_only": [
+    "artifacts/stage13-10-human-claim-gold-review-results.zip",
+    "artifacts/stage13-9-human-citation-review-results.zip"
+  ],
+  "forbidden_commit_patterns": [
+    ".env",
+    "authorization",
+    "bearer",
+    "cookie",
+    "api_key"
+  ],
+  "secret_scan_hits": [],
+  "env_files_in_untracked": [],
+  "backup_or_import_files_in_untracked": [],
+  "audit_signature": "a80b87752ea8db95b948c001cfa68f34a63686c9af4c2c06e99c9398bffa3279"
+}

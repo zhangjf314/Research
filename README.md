@@ -1,5 +1,47 @@
 # PaperResearch Agent
 
+## Stage 13.40 portfolio release status
+
+Current conclusion: **A. All local `v1.0.0-portfolio` hard gates passed; merge,
+tag, push, and remote release still require explicit user authorization.**
+
+- Current package/runtime version is `1.0.0+portfolio` / display
+  `1.0.0-portfolio` in the local release-preparation tree. Merge, tag, push,
+  and remote release still require explicit user authorization.
+- DeepSeek `deepseek-v4-flash` completed the 50-record internal Full QA
+  engineering gate with 50/50 completed, 0 failures, no template fallback, and
+  strict citation identifier/context/page validation.
+- One bounded Deep Research run completed with strict citation validation.
+- Git-history secret review, PostgreSQL checkpoint recovery, PostgreSQL
+  backup/restore, Qdrant snapshot/restore, Docker OCR roundtrip, and the
+  Portfolio 30-minute stability test all passed in Stage 13.40.
+- Strong semantic grounding and strong generalization claims are still disabled:
+  `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED` and
+  `STRONG_GENERALIZATION_CLAIM_ALLOWED=false`.
+
+See [`docs/portfolio-release-audit-v1.md`](docs/portfolio-release-audit-v1.md)
+and [`docs/release-checklist-v1.0.0-portfolio.md`](docs/release-checklist-v1.0.0-portfolio.md).
+
+## Portfolio evaluation status
+
+The current Portfolio evaluation policy uses three dataset tiers:
+
+- `gold-dev-v1`: 50 human-approved records used as an internal development
+  evaluation set for retrieval, reranker, QA, and claim-citation evaluation.
+- `retrieval-diagnostic-v1`: 27 claim-level diagnostic records used for failure
+  analysis and regression checks. This data is not blind.
+- `shadow-holdout-pilot-v1`: optional 10-15-sample blind pilot; not required for
+  Portfolio Full QA and not yet created.
+
+Allowed public wording:
+
+> 基于 50 条人工审核的内部评测数据完成检索和问答评测
+
+The project does not claim strict generalization, production-grade
+generalization, or results on a large independent blind benchmark. Current
+retrieval evidence is `DIAGNOSTIC_ONLY`, with
+`STRONG_GENERALIZATION_CLAIM_ALLOWED=false`.
+
 ## Release readiness status (Stage 12)
 
 The highest published version is `v0.9.0-rc2`. The current tree is a candidate for

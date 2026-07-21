@@ -1,0 +1,249 @@
+{
+  "schema_version": "q024-full-qa-failure-freeze-v1",
+  "generated_at": "2026-07-19T09:12:29.882663+00:00",
+  "question_id": "q024",
+  "failed_item": {
+    "question_id": "q024",
+    "status": "FAILED",
+    "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2005.14165"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2005.14165"
+      ],
+      "gold_block_ids": [
+        "b000111",
+        "b000112",
+        "b000113",
+        "b000115"
+      ],
+      "gold_pages": [
+        10,
+        11
+      ],
+      "required_claims": [
+        "The evaluation compares GPT-3 with seven smaller models.",
+        "Datasets are grouped into multiple task categories.",
+        "Performance is analyzed through scaling curves and task-specific evaluations."
+      ]
+    },
+    "failure_reason": "{\"error\":{\"code\":\"HTTP_503\",\"message\":{\"code\":\"CLAIM_QA_CITATION_VALIDATION_ERROR\",\"message\":\"SiliconFlow QA failed after 1 request(s): citation_validation:page\",\"stage\":\"CLAIM_CITATION_VALIDATE\",\"api_request_count\":1,\"retry_reasons\":[\"citation_validation:page\"],\"rate_limit_events\":0,\"response_audit_path\":null},\"request_id\":\"fff74853-e656-43a2-a2b6-7c8baa28934c\"}}",
+    "api_request_count": 1,
+    "retry_count": 1,
+    "retry_reasons": [
+      "citation_validation:page"
+    ],
+    "rate_limit_events": 0,
+    "provider_error_code": "CLAIM_QA_CITATION_VALIDATION_ERROR",
+    "provider_error_stage": "CLAIM_CITATION_VALIDATE",
+    "wall_ms": 20814.644
+  },
+  "provider_response_audit": {
+    "path": "artifacts/private/qa-response-audits/q024-full-qa-rerun-q024-1784391885.json",
+    "http_status": 200,
+    "finish_reason": "stop",
+    "content_present": true,
+    "content_sha256": "2a146087c0580cb7b1da86bd9a38caec3e4116c7bcdf5a837483e6bdf05be630",
+    "parse_error_type": null,
+    "parse_error_message": null,
+    "usage": {
+      "input_tokens": 4111,
+      "output_tokens": 525,
+      "total_tokens": 4636
+    },
+    "store_full_payload": false,
+    "full_payload_available": false,
+    "visible_suffix_mentions": [
+      {
+        "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+        "page": 42,
+        "block_id": "b000470"
+      },
+      {
+        "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+        "page": 42,
+        "block_id": "b000471"
+      }
+    ]
+  },
+  "retrieval_reproduction": {
+    "api": "POST /api/v1/retrieve",
+    "query": "How are the target paper's experiments designed and evaluated?",
+    "paper_id_public": "2005.14165",
+    "paper_id_database": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+    "diagnostic_recall_k": 100,
+    "top_k": 20,
+    "gold_blocks": [
+      "b000111",
+      "b000112",
+      "b000113",
+      "b000115"
+    ],
+    "gold_pages": [
+      10,
+      11
+    ],
+    "target_ranks": {
+      "gold_b000111_b000112": {
+        "dense_results": [],
+        "sparse_results": [],
+        "fusion_results": [],
+        "final_context": []
+      },
+      "gold_b000113_b000115": {
+        "dense_results": [
+          {
+            "position": 27,
+            "rank": 27,
+            "score": 0.23227523,
+            "dense_rank": null,
+            "sparse_rank": null
+          }
+        ],
+        "sparse_results": [
+          {
+            "position": 16,
+            "rank": 16,
+            "score": 6.272861691116916,
+            "dense_rank": null,
+            "sparse_rank": null
+          }
+        ],
+        "fusion_results": [
+          {
+            "position": 10,
+            "rank": 10,
+            "score": 0.024652147610405323,
+            "dense_rank": 27,
+            "sparse_rank": 16
+          }
+        ],
+        "final_context": []
+      },
+      "contrib_b000470_b000471": {
+        "dense_results": [
+          {
+            "position": 3,
+            "rank": 3,
+            "score": 0.32322937,
+            "dense_rank": null,
+            "sparse_rank": null
+          }
+        ],
+        "sparse_results": [
+          {
+            "position": 12,
+            "rank": 12,
+            "score": 7.1513911459505,
+            "dense_rank": null,
+            "sparse_rank": null
+          }
+        ],
+        "fusion_results": [
+          {
+            "position": 3,
+            "rank": 3,
+            "score": 0.02976190476190476,
+            "dense_rank": 3,
+            "sparse_rank": 12
+          }
+        ],
+        "final_context": []
+      }
+    },
+    "final_context": [
+      {
+        "rank": 1,
+        "chunk_id": "71e420d5-d8a6-4e2a-923e-6e3474b38845",
+        "page_start": 7,
+        "page_end": 7,
+        "section_path": [
+          "2\nApproach"
+        ],
+        "score": 0.023369565217391305,
+        "contains_gold": false,
+        "gold_blocks": [],
+        "contains_suffix_model_blocks": false,
+        "suffix_model_blocks": [],
+        "block_page_map_sample": {
+          "b000067": 7,
+          "b000068": 7,
+          "b000069": 7,
+          "b000070": 7
+        }
+      },
+      {
+        "rank": 2,
+        "chunk_id": "6f59e068-f2f2-4fd0-9276-60d6961fb30a",
+        "page_start": 9,
+        "page_end": 10,
+        "section_path": [
+          "2\nApproach"
+        ],
+        "score": 0.02075268817204301,
+        "contains_gold": false,
+        "gold_blocks": [],
+        "contains_suffix_model_blocks": false,
+        "suffix_model_blocks": [],
+        "block_page_map_sample": {
+          "b000097": 9,
+          "b000098": 9,
+          "b000099": 9,
+          "b000100": 9,
+          "b000101": 9,
+          "b000102": 9
+        }
+      },
+      {
+        "rank": 3,
+        "chunk_id": "a59eb8ae-18dd-47df-b4ae-265d1069c3fc",
+        "page_start": 10,
+        "page_end": 10,
+        "section_path": [
+          "2\nApproach"
+        ],
+        "score": 0.01968178055734388,
+        "contains_gold": false,
+        "gold_blocks": [],
+        "contains_suffix_model_blocks": false,
+        "suffix_model_blocks": [],
+        "block_page_map_sample": {
+          "b000103": 10,
+          "b000104": 10,
+          "b000105": 10,
+          "b000106": 10
+        }
+      }
+    ],
+    "gold_in_final_context": false
+  },
+  "root_cause": {
+    "primary": "RETRIEVAL_CONTEXT_SELECTION_MISMATCH",
+    "secondary": "MODEL_CITED_CONTEXT_BLOCK_WITH_INVALID_PAGE",
+    "same_as_q019": false,
+    "not_json_failure": true,
+    "not_api_wrapper_failure": true,
+    "context_page_map_ambiguity_observed": false,
+    "evidence": "Current reproduced context has deterministic single-page block_page_map entries, but no q024 gold blocks. One q024 gold chunk reaches fusion rank 10 under recall_k=100 yet is not selected into final context; the other q024 gold chunk is absent from dense/sparse top100. The provider returned valid JSON and usage; local strict validator failed at citation_validation:page."
+  },
+  "limitations": [
+    "Full raw model payload was not persisted because QA_RESPONSE_AUDIT_STORE_FULL_PAYLOAD=false.",
+    "The exact first invalid citation cannot be reconstructed from prefix/suffix audit windows alone.",
+    "The visible suffix cites page-42 Contributions blocks b000470/b000471, which are not q024 gold evidence."
+  ],
+  "next_actions_recommended": [
+    "Do not classify q024 as JSON/schema/API wrapper failure.",
+    "Investigate experiment-design retrieval for GPT-3 Results section queries; current route overselects Approach/data-description chunks.",
+    "Consider Results/evaluation section priority and task/category/scaling-curve query normalization.",
+    "If rerun is later authorized, persist full sanitized payload for failure cases only."
+  ],
+  "deep_research_executed": false,
+  "llm_called_during_analysis": false,
+  "reranker_enabled": false
+}

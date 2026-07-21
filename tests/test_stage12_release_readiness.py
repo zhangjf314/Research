@@ -46,18 +46,19 @@ def test_stage12_artifact_schema(relative_path: str, list_key: str, required: se
     assert all(required <= row.keys() for row in document[list_key])
 
 
-def test_rc_passes_and_v1_strict_fails() -> None:
+def test_portfolio_base_gates_pass_and_v1_strict_fails() -> None:
     rc, rc_code = evaluate(ROOT, "rc", strict=True)
     v1, v1_code = evaluate(ROOT, "v1", strict=True)
     assert rc_code == 0
     assert rc["status"] == "passed"
     assert rc["recommended_rc_version"] == "v0.9.0-rc3"
+    assert rc["highest_satisfied_version"] == "v1.0.0-portfolio"
     assert v1_code != 0
     assert v1["status"] == "failed"
-    assert v1["highest_satisfied_version"] == "v0.9.0-rc3"
+    assert v1["highest_satisfied_version"] == "v1.0.0-portfolio"
 
 
-def test_rc_package_version_matches_recommended_tag() -> None:
+def test_release_package_version_satisfies_rc_or_portfolio_gate() -> None:
     result, code = evaluate(ROOT, "rc", strict=True)
     gate = next(gate for gate in result["gates"] if gate["gate_id"] == "REL-01")
     assert code == 0

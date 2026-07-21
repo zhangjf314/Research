@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, model_validator
 
+from paper_research.chunking.types import Chunk
 from paper_research.retrieval.fusion import FusedResult
 
 
@@ -88,6 +89,7 @@ class ContextBuilder:
                     chunk_id=result.chunk.chunk_id,
                     paper_id=result.chunk.paper_id,
                     block_ids=result.chunk.block_ids,
+                    block_page_map=self._block_page_map(result.chunk),
                     section_path=result.chunk.section_path,
                     page_start=result.chunk.page_start,
                     page_end=result.chunk.page_end,
@@ -106,3 +108,11 @@ class ContextBuilder:
             truncated_chunk_id=truncated_chunk_id,
         )
         return items
+
+    @staticmethod
+    def _block_page_map(chunk: Chunk) -> dict[str, int]:
+        block_ids = list(chunk.block_ids or [chunk.chunk_id])
+        raw_map = chunk.block_page_map or {}
+        if raw_map:
+            return {block_id: int(raw_map[block_id]) for block_id in block_ids}
+        return {block_id: chunk.page_start for block_id in block_ids}

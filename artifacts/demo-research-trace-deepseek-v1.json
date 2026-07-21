@@ -1,0 +1,36 @@
+{
+  "schema_version": "deepseek-production-deep-research-trace-v1",
+  "status": "provider_failed",
+  "run_id": "live-q003-cbc99df5b041",
+  "question_id": "q003",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "nodes_visited": [
+    "plan",
+    "retrieve",
+    "assess_evidence"
+  ],
+  "current_node": "synthesize",
+  "retrieval_calls": 1,
+  "llm_request_count": 1,
+  "request_attempt_count": 1,
+  "provider_completed_request_count": 0,
+  "usage_record_count": 0,
+  "request_ids": [
+    "live-q003-cbc99df5b041:synthesize:1:becba5b0ec7a"
+  ],
+  "settled_tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "active_reserved_tokens": 8081,
+  "monetary_cost_usd": "0",
+  "cost_basis": "configured_token_prices",
+  "citation_validation": "not_run",
+  "reranker_called": false,
+  "template_fallback": false,
+  "failure_type": "ConnectError",
+  "failure_message": "deepseek QA failed after 1 request(s): ConnectError",
+  "run_directory": "artifacts/deepseek-production-deep-research-v1/live-q003-cbc99df5b041"
+}

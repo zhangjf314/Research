@@ -1,0 +1,20 @@
+{
+  "schema_version": "siliconflow-structured-output-compatibility-v1",
+  "status": "PARTIAL_NOT_RUN_AFTER_Q002_FAILURE",
+  "provider": "siliconflow",
+  "model": "Qwen/Qwen3-8B",
+  "minimal_completion_status": "PASSED",
+  "minimal_completion_json_valid": false,
+  "q002_claim_qa_reached_provider": true,
+  "q002_claim_qa_public_envelope_schema_valid": true,
+  "modes": {
+    "plain_json_prompt": "NOT_RUN_AFTER_Q002_FAILURE",
+    "response_format_json_object": "OBSERVED_IN_Q002_CLAIM_QA_PATH",
+    "json_schema": "NOT_RUN"
+  },
+  "safety": {
+    "api_key_persisted": false,
+    "authorization_header_persisted": false,
+    "full_raw_model_response_persisted": false
+  }
+}

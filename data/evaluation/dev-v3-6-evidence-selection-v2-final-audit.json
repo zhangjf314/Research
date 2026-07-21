@@ -1,0 +1,14 @@
+{
+  "schema_version": "dev-v3-6-evidence-selection-v2-final-audit-v1",
+  "selection_version": "evidence-selection-v2-candidate",
+  "replay_hash": "3c281220fbc279731449557cee7c5d465ffd1c2cf507edee589c15e51ff3a286",
+  "EVIDENCE_SELECTION_V2_ENGINEERING_GATE": "PASSED",
+  "EVIDENCE_SELECTION_V2_QUALITY_PREFLIGHT": "FAILED",
+  "RETRIEVAL_COMPLETION_V2_REQUIRED": false,
+  "NEXT_LIVE_READY": false,
+  "NEXT_LIVE_AUTHORIZED": false,
+  "READY_FOR_FULL_QA": false,
+  "gold_online_leakage": 0,
+  "human_label_online_leakage": 0,
+  "fixed_id_special_cases": 0
+}

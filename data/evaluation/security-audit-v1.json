@@ -1,0 +1,34 @@
+{
+  "schema_version": "security-audit-v1",
+  "generated_at": "2026-07-20T14:00:00Z",
+  "branch": "eval/retrieval-recall-benchmark-v1",
+  "head": "39173e426ab816da37b2b1253603dfa30f22e413",
+  "tracked_file_scan": {
+    "files_scanned": 1017,
+    "actual_secret_findings": 0,
+    "raw_hit_count": 14,
+    "classification": {
+      ".env.example": "placeholder/default local development values only",
+      "evidence-corpus-v1.jsonl": "false positive text match inside paper corpus",
+      "docs_and_scripts_authorization_mentions": "literal security-test wording, not credentials"
+    }
+  },
+  "git_history_scan": {
+    "status": "REVIEW_REQUIRED",
+    "matching_commits_count_first_50": 34,
+    "interpretation": "matches are expected to include security-test wording and configuration names; no credential values were printed in this audit"
+  },
+  "ignored_sensitive_files_present": [
+    ".env",
+    "artifacts/stage13-9-human-citation-review-results.zip",
+    "artifacts/stage13-10-human-claim-gold-review-results.zip"
+  ],
+  "publication_policy": {
+    "commit_env_files": false,
+    "commit_review_zip_files": false,
+    "commit_raw_provider_responses": false,
+    "commit_long_trace_files": false,
+    "commit_private_pdf_or_database_backups": false
+  },
+  "result": "PASSED_WITH_HISTORY_REVIEW_REQUIRED"
+}

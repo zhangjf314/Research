@@ -1,0 +1,95 @@
+{
+  "schema_version": "set-completion-v2-preflight-inputs-v1",
+  "stage": "13.25",
+  "baseline_head": "42d816fcf935e6e24b9fe1db375419dd0a88124e",
+  "frozen_files": {
+    "stage13_21_results": {
+      "path": "data\\evaluation\\evidence-qa-dev-v3-6.json",
+      "exists": true,
+      "sha256": "f944dffa6ff5ee7c8dcc5662a7fb82344e021c0579283a6c812c7d4c49752726"
+    },
+    "stage13_21_citation_sets": {
+      "path": "data\\evaluation\\evidence-qa-dev-v3-6-citation-audit-v1.jsonl",
+      "exists": true,
+      "sha256": "2fc856c44fd1c0bdf7626c55e06a41effc5420d5df7e479eca46c2f128aff60c"
+    },
+    "stage13_22_evidence_funnel": {
+      "path": "data\\evaluation\\dev-v3-6-evidence-funnel-v1.jsonl",
+      "exists": true,
+      "sha256": "49609c63634795a89871d557eb747f45bef9593baf1b8cbcec1cc14b81762223"
+    },
+    "stage13_22_attribution": {
+      "path": "data\\evaluation\\dev-v3-6-quality-failure-attribution-v1.json",
+      "exists": true,
+      "sha256": "02538139b8b4b2a3450ff3884717193ea6ef806a11889998bde968166966ec11"
+    },
+    "stage13_23_selection_v3_replay": {
+      "path": "data\\evaluation\\dev-v3-6-evidence-selection-v3-replay.json",
+      "exists": true,
+      "sha256": "28832e91ca00f3da0bad8dabc2a82949e5e51985d5d9dabfe5c1672336b7a1a3"
+    },
+    "stage13_24_selection_v4_replay": {
+      "path": "data\\evaluation\\dev-v3-6-evidence-selection-v4-replay.json",
+      "exists": true,
+      "sha256": "1f5356d4bdaf082c73255797d2f6dddd22b3cb64a08f56ccfb80aed62a357f6a"
+    },
+    "stage13_24_final_audit": {
+      "path": "data\\evaluation\\dev-v3-6-evidence-selection-v4-final-audit.json",
+      "exists": true,
+      "sha256": "18420322573b88cf8f24a032359438cc56fcc4e5093db341c2e379b8a6cc3b8e"
+    },
+    "stage13_24_recall_collapse": {
+      "path": "data\\evaluation\\evidence-selection-v3-recall-collapse-v1.json",
+      "exists": true,
+      "sha256": "d87f561675a7d88389b5b58b871fcd693a5e90749b6cf3c2b3e979d57374bd5d"
+    },
+    "stage13_24_improvement_concentration": {
+      "path": "data\\evaluation\\evidence-selection-v4-improvement-concentration-v1.json",
+      "exists": true,
+      "sha256": "baf20a698d4c5a5ecabea3d6e632be3e8c94208b38c46c8cef47523dde46ef42"
+    },
+    "stage13_24_feature_leakage": {
+      "path": "data\\evaluation\\evidence-selection-v4-feature-leakage-audit.json",
+      "exists": true,
+      "sha256": "33001ed91344407d60015bbaf00b3eba784eb700464ba088a17f65f74c6dcafc"
+    },
+    "claim_gold_freeze": {
+      "path": "data\\evaluation\\claim-evidence-gold-dev-v1-freeze.json",
+      "exists": true,
+      "sha256": "604d359526f61ca46c6a9a399f4b21f3eb945a4f992caa859ed7d4a1d6522bf8"
+    },
+    "payload_v4": {
+      "path": "data\\evaluation\\payload-contract-v4-protocol.json",
+      "exists": true,
+      "sha256": "02d80f90da7a4d7ecc2d1917b769b5b72c459ff0009caabda776ce3cce6559d0"
+    },
+    "evidence_presentation_v2": {
+      "path": "data\\evaluation\\evidence-presentation-v2-protocol.json",
+      "exists": true,
+      "sha256": "ef9d5213609f99b4bbba742f6f7b09c61b07f6d05e785a79a5577c6cbaf73f02"
+    },
+    "prompt_v3_7": {
+      "path": "data\\evaluation\\dev-v3-6-prompt-rendering-preflight-v1.json",
+      "exists": true,
+      "sha256": "31d8dc3dc1aa4435df62f2dc310be5107b780ef1e0b9fae9fb11d2e2297619e1"
+    },
+    "citation_budget": {
+      "path": "src\\paper_research\\generation\\citation_selection.py",
+      "exists": true,
+      "sha256": "f19d0aa70c54f1d4c4ea1814d8a1807ab57315f43ce7706055abf00caa70abd3"
+    }
+  },
+  "candidate_budget": 12,
+  "citation_budget": {
+    "max_total": 3
+  },
+  "gold_freeze_offline_scoring_only": true,
+  "live_llm_executed": false,
+  "embedding_api_executed": false,
+  "reranker_executed": false,
+  "new_live_executed": false,
+  "human_citation_review_deferred": true,
+  "full_qa_executed": false,
+  "deep_research_executed": false,
+  "preflight_signature": "b9c342c39cdb07f1ce9d658c38b27055af69ad07460e1cc0c16df2bd921fa1e1"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "dev-v3-4-visible-id-namespace-audit-v1",
+  "questions_scanned": 10,
+  "copyable_internal_ids": 0,
+  "evidence_id_exposure": 0,
+  "block_id_exposure": 0,
+  "gold_id_exposure": 0,
+  "human_label_exposure": 0,
+  "model_visible_citation_id_requirement": 0,
+  "old_prompt_version_examples": 0,
+  "findings": [],
+  "gate": "PASSED"
+}

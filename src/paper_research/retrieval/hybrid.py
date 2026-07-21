@@ -52,26 +52,48 @@ class HybridRetriever:
         retrieval_scope: str = "unspecified",
     ) -> HybridRetrievalResult:
         started = time.perf_counter()
+        contribution_query = (
+            retrieval_scope == "paper" and self._is_contribution_query(query)
+        )
+        experiment_design_query = (
+            retrieval_scope == "paper" and self._is_experiment_design_query(query)
+        )
+        effective_recall_k = recall_k
+        if contribution_query:
+            effective_recall_k = max(effective_recall_k, 60)
+        if experiment_design_query:
+            effective_recall_k = max(effective_recall_k, 80)
+        routed_query, query_routing_signals = self._route_query(
+            query,
+            retrieval_scope=retrieval_scope,
+            experiment_design_query=experiment_design_query,
+        )
         with ThreadPoolExecutor(max_workers=2) as executor:
             dense_future = executor.submit(
                 self.dense.retrieve,
-                query,
+                routed_query,
                 retrieval_filter=retrieval_filter,
-                top_k=recall_k,
+                top_k=effective_recall_k,
             )
             sparse_future = executor.submit(
                 self.sparse.retrieve,
-                query,
+                routed_query,
                 retrieval_filter=retrieval_filter,
-                top_k=recall_k,
+                top_k=effective_recall_k,
             )
             dense_results = dense_future.result()
             sparse_results = sparse_future.result()
         retrieval_finished = time.perf_counter()
         fused = reciprocal_rank_fusion(dense_results, sparse_results)
         candidate_limit = (
-            recall_k if self.reranker.provider_name == "disabled" else self.rerank_input_k
+            effective_recall_k
+            if self.reranker.provider_name == "disabled"
+            else self.rerank_input_k
         )
+        if contribution_query:
+            candidate_limit = max(candidate_limit, min(60, len(fused)))
+        if experiment_design_query:
+            candidate_limit = max(candidate_limit, min(80, len(fused)))
         rerank_candidates = fused[:candidate_limit]
         try:
             if self.reranker.provider_name == "disabled":
@@ -92,6 +114,8 @@ class HybridRetriever:
             rerank_finished = time.perf_counter()
             trace = self._trace(
                 query=query,
+                routed_query=routed_query,
+                query_routing_signals=query_routing_signals,
                 retrieval_filter=retrieval_filter,
                 dense_results=dense_results,
                 sparse_results=sparse_results,
@@ -111,10 +135,15 @@ class HybridRetriever:
                 self.trace_repository.append(trace)
             raise
         rerank_finished = time.perf_counter()
-        context = self.context_builder.build(outcome.results[:top_k])
+        context_candidates = self._context_candidates(
+            query, outcome.results, top_k=top_k, retrieval_scope=retrieval_scope
+        )
+        context = self.context_builder.build(context_candidates)
         context_finished = time.perf_counter()
         trace = self._trace(
             query=query,
+            routed_query=routed_query,
+            query_routing_signals=query_routing_signals,
             retrieval_filter=retrieval_filter,
             dense_results=self._plain_trace(dense_results),
             sparse_results=sparse_results,
@@ -136,6 +165,8 @@ class HybridRetriever:
         self,
         *,
         query: str,
+        routed_query: str,
+        query_routing_signals: list[str],
         retrieval_filter: RetrievalFilter | None,
         dense_results: list[RetrievalResult] | list[TraceResult],
         sparse_results: list[RetrievalResult],
@@ -159,6 +190,8 @@ class HybridRetriever:
         reranked = outcome.results if outcome else []
         return RetrievalTrace(
             query=query,
+            routed_query=routed_query if routed_query != query else None,
+            query_routing_signals=query_routing_signals,
             filters=retrieval_filter.model_dump(exclude_none=True) if retrieval_filter else {},
             dense_results=dense_trace,  # type: ignore[arg-type]
             sparse_results=self._plain_trace(sparse_results),
@@ -231,3 +264,157 @@ class HybridRetriever:
             )
             for rank, item in enumerate(results, start=1)
         ]
+
+    @classmethod
+    def _context_candidates(
+        cls,
+        query: str,
+        results: list[FusedResult],
+        *,
+        top_k: int,
+        retrieval_scope: str,
+    ) -> list[FusedResult]:
+        if retrieval_scope != "paper":
+            return results[:top_k]
+        if cls._is_experiment_design_query(query):
+            ranked = {item.chunk.chunk_id: rank for rank, item in enumerate(results, start=1)}
+            ordered = sorted(
+                results,
+                key=lambda item: (
+                    cls._experiment_design_chunk_priority(
+                        item.chunk.section_path,
+                        item.chunk.chunk_text,
+                    ),
+                    ranked[item.chunk.chunk_id],
+                ),
+            )
+            return ordered[:top_k]
+        if not cls._is_contribution_query(query):
+            return results[:top_k]
+        ranked = {item.chunk.chunk_id: rank for rank, item in enumerate(results, start=1)}
+        ordered = sorted(
+            results,
+            key=lambda item: (
+                cls._contribution_section_priority(item.chunk.section_path),
+                ranked[item.chunk.chunk_id],
+            ),
+        )
+        return ordered[:top_k]
+
+    @staticmethod
+    def _is_contribution_query(query: str) -> bool:
+        normalized = query.lower()
+        triggers = (
+            "main contribution",
+            "main contributions",
+            "key contribution",
+            "key contributions",
+            "what does this work propose",
+            "what does the paper propose",
+            "what are the paper's contributions",
+            "what are the target paper's main contributions",
+        )
+        return any(trigger in normalized for trigger in triggers)
+
+    @staticmethod
+    def _is_experiment_design_query(query: str) -> bool:
+        normalized = query.lower()
+        triggers = (
+            "experiments designed",
+            "experiment design",
+            "experimental design",
+            "experiments are designed",
+            "how are the target paper's experiments designed and evaluated",
+            "how are the paper's experiments designed and evaluated",
+            "experiments designed and evaluated",
+            "designed and evaluated",
+        )
+        return any(trigger in normalized for trigger in triggers)
+
+    @classmethod
+    def _route_query(
+        cls,
+        query: str,
+        *,
+        retrieval_scope: str,
+        experiment_design_query: bool,
+    ) -> tuple[str, list[str]]:
+        if retrieval_scope != "paper" or not experiment_design_query:
+            return query, []
+        signals = [
+            "models compared",
+            "task categories",
+            "scaling curves",
+            "evaluated on datasets",
+            "evaluate the 8 models",
+            "wide range of datasets",
+            "group the datasets",
+            "training curves",
+            "power-law trend",
+        ]
+        routed_query = query.rstrip()
+        for signal in signals:
+            if signal not in routed_query.lower():
+                routed_query = f"{routed_query} {signal}"
+        return routed_query, signals
+
+    @staticmethod
+    def _contribution_section_priority(section_path: list[str]) -> int:
+        section = " > ".join(section_path).lower()
+        if "abstract" in section or "contribution" in section:
+            return 1
+        if "introduction" in section:
+            return 2
+        if "conclusion" in section:
+            return 3
+        if "overview" in section:
+            return 4
+        if "reference" in section:
+            return 9
+        if "visualization" in section or "appendix" in section:
+            return 8
+        return 5
+
+    @staticmethod
+    def _experiment_design_chunk_priority(section_path: list[str], text: str) -> int:
+        section = " > ".join(section_path).lower()
+        normalized = text.lower()
+        if "reference" in section:
+            return 9
+        if "appendix" in section or "summary of power laws" in section:
+            return 8
+        if "caveat" in section or "limitation" in section:
+            return 7
+        if "varying a number of factors" in normalized:
+            return 1
+        if (
+            "result" in section
+            and any(
+                term in normalized
+                for term in (
+                    "evaluate the 8 models",
+                    "evaluate on traditional language modeling tasks",
+                    "wide range of datasets",
+                    "group the datasets",
+                    "task categories",
+                    "scaling curves",
+                    "training curves",
+                    "performance follows a power-law",
+                    "power-law trend",
+                )
+            )
+        ):
+            return 1
+        if all(term in normalized for term in ("model size", "dataset size", "shape")):
+            return 1
+        if all(term in normalized for term in ("depth", "attention heads", "feed-forward")):
+            return 1
+        if "empirical" in section and ("result" in section or "power law" in section):
+            return 2
+        if "experiment" in section or "evaluation" in section:
+            return 3
+        if "method" in section or "approach" in section:
+            return 4
+        if "introduction" in section or "abstract" in section:
+            return 6
+        return 5

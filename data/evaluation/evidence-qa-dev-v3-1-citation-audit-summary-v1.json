@@ -1,0 +1,683 @@
+{
+  "schema_version": "evidence-qa-dev-v3-1-citation-audit-summary-v1",
+  "audit_nature": "AI-assisted manual citation audit",
+  "scope_limitations": [
+    "Fixed 10-question Dev batch.",
+    "33 claim-citation pairs.",
+    "Not an independent human double-blind audit.",
+    "Must not be extrapolated to Full-50 or production citation precision."
+  ],
+  "total": 33,
+  "reviewed": 33,
+  "fully_supported": 16,
+  "partially_supported": 10,
+  "related_but_insufficient": 5,
+  "unsupported": 2,
+  "gold_annotation_too_narrow": 0,
+  "ambiguous_claim": 0,
+  "malformed_evidence": 0,
+  "strict_support_rate": 0.48484848484848486,
+  "lenient_support_rate": 0.7878787878787878,
+  "strata": {
+    "automated_signal": {
+      "exact_gold": {
+        "n": 9,
+        "labels": {
+          "fully_supported": 6,
+          "partially_supported": 2,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 0.8888888888888888
+      },
+      "same_page_non_exact": {
+        "n": 11,
+        "labels": {
+          "fully_supported": 5,
+          "partially_supported": 5,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.45454545454545453,
+        "lenient_support_rate": 0.9090909090909091
+      },
+      "semantic_support": {
+        "n": 13,
+        "labels": {
+          "fully_supported": 5,
+          "partially_supported": 3,
+          "related_but_insufficient": 3,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.38461538461538464,
+        "lenient_support_rate": 0.6153846153846154
+      }
+    },
+    "evidence_source": {
+      "adjacent_completion": {
+        "n": 6,
+        "labels": {
+          "fully_supported": 4,
+          "partially_supported": 2
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      },
+      "original_selected": {
+        "n": 27,
+        "labels": {
+          "fully_supported": 12,
+          "partially_supported": 8,
+          "related_but_insufficient": 5,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.4444444444444444,
+        "lenient_support_rate": 0.7407407407407407
+      }
+    },
+    "question_id": {
+      "q001": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      },
+      "q002": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 3
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "q004": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      },
+      "q007": {
+        "n": 9,
+        "labels": {
+          "fully_supported": 5,
+          "partially_supported": 3,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.5555555555555556,
+        "lenient_support_rate": 0.8888888888888888
+      },
+      "q008": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 1,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.3333333333333333,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "q013": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "q015": {
+        "n": 3,
+        "labels": {
+          "partially_supported": 1,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.3333333333333333
+      },
+      "q019": {
+        "n": 3,
+        "labels": {
+          "partially_supported": 1,
+          "related_but_insufficient": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.3333333333333333
+      },
+      "q050": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 2
+        },
+        "strict_support_rate": 0.3333333333333333,
+        "lenient_support_rate": 1.0
+      }
+    },
+    "category": {
+      "algorithm_steps": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 1,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.3333333333333333,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "experiment_results": {
+        "n": 3,
+        "labels": {
+          "partially_supported": 1,
+          "related_but_insufficient": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.3333333333333333
+      },
+      "experiment_setup": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      },
+      "limitations": {
+        "n": 3,
+        "labels": {
+          "partially_supported": 1,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.3333333333333333
+      },
+      "method": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "multi_paper_comparison": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 2
+        },
+        "strict_support_rate": 0.3333333333333333,
+        "lenient_support_rate": 1.0
+      },
+      "paper_contributions": {
+        "n": 12,
+        "labels": {
+          "fully_supported": 8,
+          "partially_supported": 3,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 0.9166666666666666
+      },
+      "research_background": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      }
+    },
+    "difficulty": {
+      "easy": {
+        "n": 9,
+        "labels": {
+          "fully_supported": 6,
+          "partially_supported": 1,
+          "related_but_insufficient": 2
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 0.7777777777777778
+      },
+      "hard": {
+        "n": 21,
+        "labels": {
+          "fully_supported": 8,
+          "partially_supported": 8,
+          "related_but_insufficient": 3,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.38095238095238093,
+        "lenient_support_rate": 0.7619047619047619
+      },
+      "medium": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      }
+    },
+    "claim_role": {
+      "compare": {
+        "n": 2,
+        "labels": {
+          "partially_supported": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "explain_method": {
+        "n": 17,
+        "labels": {
+          "fully_supported": 10,
+          "partially_supported": 6,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.5882352941176471,
+        "lenient_support_rate": 0.9411764705882353
+      },
+      "report_result": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 2,
+          "related_but_insufficient": 1,
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.2,
+        "lenient_support_rate": 0.6
+      },
+      "unknown": {
+        "n": 9,
+        "labels": {
+          "fully_supported": 5,
+          "related_but_insufficient": 3,
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.5555555555555556,
+        "lenient_support_rate": 0.5555555555555556
+      }
+    },
+    "evidence_role": {
+      "assumption": {
+        "n": 2,
+        "labels": {
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "comparison": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 1,
+          "partially_supported": 1,
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.3333333333333333,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "conclusion": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 2,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.4,
+        "lenient_support_rate": 0.8
+      },
+      "dataset": {
+        "n": 7,
+        "labels": {
+          "fully_supported": 3,
+          "partially_supported": 2,
+          "related_but_insufficient": 2
+        },
+        "strict_support_rate": 0.42857142857142855,
+        "lenient_support_rate": 0.7142857142857143
+      },
+      "definition": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 3,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.6,
+        "lenient_support_rate": 0.6
+      },
+      "limitation": {
+        "n": 13,
+        "labels": {
+          "fully_supported": 5,
+          "partially_supported": 5,
+          "related_but_insufficient": 1,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.38461538461538464,
+        "lenient_support_rate": 0.7692307692307693
+      },
+      "mechanism": {
+        "n": 13,
+        "labels": {
+          "fully_supported": 6,
+          "partially_supported": 5,
+          "related_but_insufficient": 1,
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.46153846153846156,
+        "lenient_support_rate": 0.8461538461538461
+      },
+      "method": {
+        "n": 22,
+        "labels": {
+          "fully_supported": 10,
+          "partially_supported": 7,
+          "related_but_insufficient": 4,
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.45454545454545453,
+        "lenient_support_rate": 0.7727272727272727
+      },
+      "metric": {
+        "n": 5,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 3
+        },
+        "strict_support_rate": 0.4,
+        "lenient_support_rate": 1.0
+      },
+      "result": {
+        "n": 16,
+        "labels": {
+          "fully_supported": 7,
+          "partially_supported": 6,
+          "related_but_insufficient": 3
+        },
+        "strict_support_rate": 0.4375,
+        "lenient_support_rate": 0.8125
+      },
+      "setup": {
+        "n": 23,
+        "labels": {
+          "fully_supported": 12,
+          "partially_supported": 7,
+          "related_but_insufficient": 4
+        },
+        "strict_support_rate": 0.5217391304347826,
+        "lenient_support_rate": 0.8260869565217391
+      }
+    },
+    "block_type": {
+      "paragraph": {
+        "n": 33,
+        "labels": {
+          "fully_supported": 16,
+          "partially_supported": 10,
+          "related_but_insufficient": 5,
+          "unsupported": 2
+        },
+        "strict_support_rate": 0.48484848484848486,
+        "lenient_support_rate": 0.7878787878787878
+      }
+    },
+    "required_claim_id": {
+      "cl-q001-b93fe64266ba6940d2a1": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q001-bc33bddd93356fce6273": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q001-c41ea3191cab92907d83": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q002-023231b350a389faa754": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q002-3cab1a55474dcd47a64a": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q002-8a1d729edcaafb379a20": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q004-a9fa27d46042c7d9ac2b": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q004-ba317f113c67f72f7260": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q004-fe7e6b540d1b2bf1d6cf": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q007-0dc4946bfe1085fe36ce": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 2,
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.6666666666666666,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q007-0dda2c31fef09b05c68b": {
+        "n": 3,
+        "labels": {
+          "fully_supported": 3
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q007-51d53fc4250379d38e16": {
+        "n": 3,
+        "labels": {
+          "partially_supported": 2,
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.6666666666666666
+      },
+      "cl-q008-3fcba63ce8d76f5cfc1d": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q008-5fd8e23c8c061690cde0": {
+        "n": 1,
+        "labels": {
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q008-d73bc3c128270add0359": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q013-4a5420c3371111d7f5f3": {
+        "n": 1,
+        "labels": {
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q013-938d2a4e18520c28a5d7": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q013-ed3f2a06305ea05d1b9e": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q015-281a83daa0567f6ae7ac": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q015-34d9467bd693a8e1f141": {
+        "n": 1,
+        "labels": {
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q015-fd7824b67e9a47f5aa88": {
+        "n": 1,
+        "labels": {
+          "unsupported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q019-2fef5549293d6f983f79": {
+        "n": 1,
+        "labels": {
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q019-409ecf7b2b8c09e348e6": {
+        "n": 1,
+        "labels": {
+          "related_but_insufficient": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 0.0
+      },
+      "cl-q019-9d65c5779788321a4283": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q050-96cfbcf597379dea6b6f": {
+        "n": 1,
+        "labels": {
+          "fully_supported": 1
+        },
+        "strict_support_rate": 1.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q050-e6beec554909bcb0e6ba": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      },
+      "cl-q050-fcbcedc602ad451d727a": {
+        "n": 1,
+        "labels": {
+          "partially_supported": 1
+        },
+        "strict_support_rate": 0.0,
+        "lenient_support_rate": 1.0
+      }
+    }
+  },
+  "exact_miss_but_supported": {
+    "exact_miss_total": 24,
+    "fully_supported": 10,
+    "partially_supported": 8,
+    "strict_rate": 0.4166666666666667,
+    "lenient_rate": 0.75,
+    "count": 18,
+    "external_narrative_claimed_count": 17,
+    "reviewed_records_recalculated_count": 18,
+    "external_narrative_discrepancy": true
+  },
+  "exact_hit_but_not_fully_supported": {
+    "exact_hit_total": 9,
+    "partially_supported": 2,
+    "related_but_insufficient": 1,
+    "unsupported": 0,
+    "count": 3,
+    "rate": 0.3333333333333333
+  },
+  "special_findings": {
+    "q001": "Compound claim behavior remains visible: one citation may support only part of a combined proposition.",
+    "q015": "Two limitation-oriented claims are misaligned with their cited evidence.",
+    "q019": "Citations discuss scaling variables but do not support every precise numeric range in the claims.",
+    "q050": "BERT architecture evidence is strong, while cross-paper positioning/comparison is only partially supported.",
+    "gold_annotation_too_narrow_present": false,
+    "malformed_evidence_present": false
+  },
+  "separation_rule": "Human citation support and Exact Gold Recall are parallel metrics and never overwrite each other."
+}

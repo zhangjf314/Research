@@ -1,0 +1,260 @@
+{
+  "schema_version": "evidence-qa-dev-v3-3-summary-v1",
+  "evaluation_version": "evidence-qa-dev-v3.3",
+  "selection_policy": "latest-successful-with-failures-visible",
+  "selected_runs": [
+    "live-dev-v3-3-q001-3c95136865dd",
+    "live-dev-v3-3-q002-0383fea3b5bd",
+    "live-dev-v3-3-q004-0573a646cb2b",
+    "live-dev-v3-3-q005-bb61dc16b8a3",
+    "live-dev-v3-3-q007-55d899f3b78d",
+    "live-dev-v3-3-q008-8dc7b93566df",
+    "live-dev-v3-3-q013-bf814b2764d1",
+    "live-dev-v3-3-q015-4a08d5b0511f",
+    "live-dev-v3-3-q019-80d3dd8cffd1",
+    "live-dev-v3-3-q050-2bdd3febc638"
+  ],
+  "attempt_history": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v3-3-q001-3c95136865dd",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v3-3-q002-0383fea3b5bd",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v3-3-q004-0573a646cb2b",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v3-3-q005-bb61dc16b8a3",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v3-3-q007-55d899f3b78d",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v3-3-q008-8dc7b93566df",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v3-3-q013-bf814b2764d1",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v3-3-q015-4a08d5b0511f",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v3-3-q019-80d3dd8cffd1",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v3-3-q050-2bdd3febc638",
+      "status": "validation_failed",
+      "selected": true
+    }
+  ],
+  "raw_model_layer": {
+    "provider_completed": 10,
+    "raw_json_valid": 10,
+    "structural_schema_success": 10,
+    "model_payload_schema_success": 2,
+    "structural_slot_count": 27,
+    "required_slot_success": 3,
+    "malformed_json": 0,
+    "internal_id_leakage": 0,
+    "model_protocol_fields_output": 0,
+    "model_citation_id_fields_output": 0
+  },
+  "final_policy_layer": {
+    "final_schema_success": 2,
+    "final_slot_success": 3,
+    "answered_original": 3,
+    "answered_narrowed": 0,
+    "unsupported_slots": 0,
+    "total_citations": 3,
+    "average_citations_per_answered": 1.0,
+    "obligation_completeness": 0.1111111111111111,
+    "numeric_completeness": 0.1111111111111111,
+    "comparison_completeness": 0.1111111111111111,
+    "answerable_question_macro_exact_relation_recall": 0.0,
+    "required_claim_macro_exact_recall": 0.0,
+    "micro_core_relation_recall": 0.0,
+    "core_set_completion": 0.0,
+    "any_valid_evidence_recall": 0.0,
+    "equivalent_evidence_hit_rate": 0.0,
+    "wrong_evidence": 0,
+    "citation_dilution": 0.0,
+    "unknown_citation_id": 0,
+    "invalid_citation_id": 0,
+    "cross_claim_citation": 0,
+    "citation_cap_violations": 0
+  },
+  "all_manifest_conservative": {
+    "run_count": 10,
+    "request_attempts": 10,
+    "provider_completed": 10,
+    "provider_failures": 0,
+    "validation_failures": {
+      "answerable_has_refusal_reason": 8
+    },
+    "input_tokens": 18449,
+    "output_tokens": 2189,
+    "total_tokens": 20638,
+    "monetary_cost_usd": "0",
+    "elapsed_seconds_total": 92.013267,
+    "latency_p50_seconds": 9.594935499999998,
+    "latency_p95_seconds": 11.13002525,
+    "usage_records": 10,
+    "reservation_count": 10,
+    "settled_reservations": 10,
+    "released_reservations": 0,
+    "billing_unknown_reservations": 0,
+    "effective_active_reservations": 0,
+    "double_settlement_count": 0,
+    "retries": 0,
+    "reranker_called": false,
+    "delivered_hash_matches": 10,
+    "silent_omissions": 24,
+    "refusal_accuracy": 1.0,
+    "improved_questions": 0,
+    "regressed_questions": 3,
+    "unchanged_questions": 7,
+    "citation_pairs_total": 3,
+    "inherited_reviewed_pairs": 2,
+    "pending_pairs": 1,
+    "existing_reviewed_strict": 0.5,
+    "existing_reviewed_lenient": 0.5
+  },
+  "per_question": [
+    {
+      "question_id": "q001",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q002",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "regressed"
+    },
+    {
+      "question_id": "q004",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "regressed"
+    },
+    {
+      "question_id": "q005",
+      "status": "completed",
+      "claim_scores": [],
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q007",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "regressed"
+    },
+    {
+      "question_id": "q008",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q013",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q015",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q019",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    },
+    {
+      "question_id": "q050",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0,
+      "comparison_to_dev_v3_1": "unchanged"
+    }
+  ],
+  "historical_stage13_12_gate": "FAILED_AND_PRESERVED",
+  "historical_results_modified": false
+}

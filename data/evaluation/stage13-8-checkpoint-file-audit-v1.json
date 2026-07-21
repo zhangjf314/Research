@@ -1,0 +1,145 @@
+{
+  "schema_version": "stage13-8-checkpoint-file-audit-v1",
+  "baseline_commit": "b657dcc2a9f7201b7674d6d4142f5817d818a639",
+  "branch": "eval/dev-v3-1-controlled-v1",
+  "initial_visible_change_count": 15,
+  "commit_candidate_count": 19,
+  "category_counts": {
+    "citation_audit": 2,
+    "canonical_evaluation_data": 5,
+    "manifest": 2,
+    "provider_health": 1,
+    "canonical_report": 2,
+    "evaluation_code": 5,
+    "production_code": 1,
+    "test": 1
+  },
+  "uncertain_count": 0,
+  "temporary_count": 0,
+  "backup_count": 0,
+  "raw_run_local_only": {
+    "path": "data/evaluation/evidence-qa-dev-v3-1/runs/",
+    "directory_count": 10,
+    "file_count": 160,
+    "commit_candidate": false
+  },
+  "secret_scan_safe": true,
+  "env_modified": false,
+  "records": [
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-1-citation-audit-v1.jsonl",
+      "classification": "citation_audit",
+      "commit_candidate": true,
+      "sha256": "d6c5dfee230e11f0284562182b9549fa5cc1ca06c7bc12fedf3acdb78d89f386"
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-1-final-audit.json",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "sha256": "eb4c377289440e68e8123056f36277ddcda5bab35193b29194c6eb6a2ed08de6"
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-1-manifest.json",
+      "classification": "manifest",
+      "commit_candidate": true,
+      "sha256": "bf3919a828c9e91eb7348cf689e8151e3ae6315f3c9c06d134c6e99844b898cd"
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-1.csv",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "sha256": "0c451b31432cd25daba226580a7a48031d08d7660a5bef60cfebe095c41c0666"
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-1.json",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "sha256": "2effd6cb6045789352e1a2592eb20a49bed45350eafb5b8086d02f7db6baec96"
+    },
+    {
+      "path": "data/evaluation/provider-health-dev-v3-1-v1.json",
+      "classification": "provider_health",
+      "commit_candidate": true,
+      "sha256": "b0fa10eef8f7d299b368f3e0ba4dfcfa16863544a9b324acffba1a4e6718c266"
+    },
+    {
+      "path": "data/evaluation/stage13-8-checkpoint-file-audit-v1.json",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "sha256": null,
+      "hash_note": "self-referential manifest hash intentionally not recorded"
+    },
+    {
+      "path": "data/evaluation/stage13-8-checkpoint-secret-scan-v1.json",
+      "classification": "canonical_evaluation_data",
+      "commit_candidate": true,
+      "sha256": "5b42474c11e287587672e37d007a7d36600e15c6b2e73060959bff042270fcaa"
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-1-citation-audit-v1.md",
+      "classification": "citation_audit",
+      "commit_candidate": true,
+      "sha256": "bde45c1d05a3f2f96aa5bc865c5b479ba597a7c0281b4c6524d5316d9b0e50a6"
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-1-manifest.md",
+      "classification": "manifest",
+      "commit_candidate": true,
+      "sha256": "830eb04931758e1504007747fd190d00e69e261d9f77af687ac3e5445032b7ab"
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-1.md",
+      "classification": "canonical_report",
+      "commit_candidate": true,
+      "sha256": "586f79668f42136d420560733491b7f072db3b486e6bd9e255436b223c6a8edd"
+    },
+    {
+      "path": "docs/stage13-8-checkpoint-file-audit-v1.md",
+      "classification": "canonical_report",
+      "commit_candidate": true,
+      "sha256": "796478f28fc41031919e579375b974a879decc41658090d10151510eaf6f9920"
+    },
+    {
+      "path": "scripts/audit_evidence_qa_dev_v3_1.py",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "sha256": "783383f0f05ba0b4905b5f027b51cfcb1a9ecbe394fec757b92dfd09f34ccaa4"
+    },
+    {
+      "path": "scripts/audit_stage13_8_checkpoint_v1.py",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "sha256": "ebbdc74608997495dcd71fc4279b27aa015eaa4f56fc59b668cb07b4ba981e8b"
+    },
+    {
+      "path": "scripts/evidence_qa_dev_v3_1_lib.py",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "sha256": "b025ce90110c468acaf98be68895c988b0df5a6e688159ad18480a5f879b5029"
+    },
+    {
+      "path": "scripts/run_evidence_qa_dev_v3_1.py",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "sha256": "3568974360a3b724f8fbbd5d8c55e54e95aada4a826b4a0587de72364c07b70d"
+    },
+    {
+      "path": "scripts/summarize_evidence_qa_dev_v3_1.py",
+      "classification": "evaluation_code",
+      "commit_candidate": true,
+      "sha256": "60ee10f6f5248998f62bf913f35094f55aa36dce6947d3d1eac28a244038788f"
+    },
+    {
+      "path": "src/paper_research/generation/required_claim_output.py",
+      "classification": "production_code",
+      "commit_candidate": true,
+      "sha256": "f2696ad2ea5d5b04dfc86f9e8a482faece5f844d16643a5ea077387f3e91f58d"
+    },
+    {
+      "path": "tests/test_evidence_qa_dev_v3_1.py",
+      "classification": "test",
+      "commit_candidate": true,
+      "sha256": "6be694d030cc050b073cb9198df597b579f1466ac5af722324a2246f990ba02a"
+    }
+  ]
+}

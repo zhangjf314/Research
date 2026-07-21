@@ -1,5 +1,41 @@
 # Known Limitations
 
+## Stage 13.40 portfolio release boundary
+
+- The project has not been merged, tagged, pushed, or remotely released as
+  `v1.0.0-portfolio`; those actions still require explicit user authorization.
+- The Stage 13.40 local hard gates passed: git-history secret review,
+  PostgreSQL checkpoint recovery, PostgreSQL backup/restore, Qdrant
+  snapshot/restore, Docker OCR roundtrip, and the Portfolio 30-minute stability
+  test.
+- The stability test window is intentionally bounded for a personal portfolio.
+  It supports only this statement: "Within this 30-minute test window, no
+  obvious sustained abnormal memory growth was observed." It must not be
+  described as proof of long-term stability or a production-grade endurance
+  test.
+- The PostgreSQL checkpoint recovery gate used the existing bounded Deep
+  Research smoke runner with a PostgreSQL checkpoint adapter because the API
+  LangGraph route uses PostgresSaver but is deterministic and does not call the
+  LLM. This verifies real-provider stop/resume accounting, but should not be
+  overstated as a full production workflow quality evaluation.
+- `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED` and
+  `STRONG_GROUNDING_CLAIM_ALLOWED=false` remain in force.
+
+## Portfolio evaluation limitations
+
+- The main evaluation set, `gold-dev-v1`, contains 50 human-approved records and
+  is an internal development evaluation set. It is not a blind holdout, public
+  benchmark, or strict generalization benchmark.
+- `retrieval-diagnostic-v1` contains 27 claim-level records used for diagnostic
+  failure analysis and regression checks. It has been inspected during
+  development and must not be described as blind.
+- `shadow-holdout-pilot-v1` has not been created. It is recommended as a
+  10-15-sample small blind pilot, but it is not required for Portfolio Full QA.
+- `RETRIEVAL_GENERALIZATION_EVIDENCE=DIAGNOSTIC_ONLY`; strong generalization
+  claims are not allowed.
+- README, demo, and resume wording must disclose that there is no large-scale
+  independent blind benchmark result.
+
 ## Stage 10 current blockers (2026-07-13)
 
 - Human gold remains **0/50 approved**. All pending records are excluded from formal

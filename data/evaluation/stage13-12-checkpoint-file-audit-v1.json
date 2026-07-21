@@ -1,0 +1,158 @@
+{
+  "schema_version": "stage13-12-checkpoint-file-audit-v1",
+  "branch": "eval/dev-v3-2-citation-quality-v1",
+  "head": "c1e4233a2475a78ec2000f143260083143eca177",
+  "entries": [
+    {
+      "path": "artifacts/stage13-10-human-claim-gold-review-results.zip",
+      "category": "raw_run_local_only",
+      "commit": false
+    },
+    {
+      "path": "artifacts/stage13-9-human-citation-review-results.zip",
+      "category": "raw_run_local_only",
+      "commit": false
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-2-citation-audit-v1.jsonl",
+      "category": "citation_audit",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-2-final-audit.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-2-manifest.json",
+      "category": "manifest",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-2.csv",
+      "category": "canonical_evaluation_data",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/evidence-qa-dev-v3-2.json",
+      "category": "canonical_evaluation_data",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/provider-health-dev-v3-2-v1.json",
+      "category": "provider_health",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/stage13-12-checkpoint-file-audit-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "data/evaluation/stage13-12-dev-v3-2-failure-freeze-v1.json",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-2-citation-audit-v1.md",
+      "category": "citation_audit",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-2-manifest.md",
+      "category": "canonical_report",
+      "commit": true
+    },
+    {
+      "path": "docs/evidence-qa-dev-v3-2.md",
+      "category": "canonical_report",
+      "commit": true
+    },
+    {
+      "path": "docs/stage13-12-checkpoint-file-audit-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "docs/stage13-12-dev-v3-2-failure-freeze-v1.md",
+      "category": "failure_evidence",
+      "commit": true
+    },
+    {
+      "path": "scripts/audit_evidence_qa_dev_v3_2.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/evidence_qa_dev_v3_2_lib.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/finalize_evidence_qa_dev_v3_2_runs.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/freeze_stage13_12_checkpoint_v1.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/run_evidence_qa_dev_v3_2.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "scripts/summarize_evidence_qa_dev_v3_2.py",
+      "category": "evaluation_code",
+      "commit": true
+    },
+    {
+      "path": "src/paper_research/generation/required_claim_output.py",
+      "category": "production_code",
+      "commit": true
+    },
+    {
+      "path": "tests/test_stage13_12_dev_v3_2_live.py",
+      "category": "test",
+      "commit": true
+    }
+  ],
+  "counts": {
+    "production_code": 1,
+    "evaluation_code": 6,
+    "test": 1,
+    "manifest": 1,
+    "canonical_evaluation_data": 2,
+    "canonical_report": 2,
+    "provider_health": 1,
+    "citation_audit": 2,
+    "failure_evidence": 5,
+    "raw_run_local_only": 2,
+    "temporary": 0,
+    "backup": 0,
+    "uncertain": 0
+  },
+  "raw_run_directories": [
+    "live-dev-v3-2-q001-ecfd41f84a1b",
+    "live-dev-v3-2-q002-0b25da8fd4ec",
+    "live-dev-v3-2-q004-22960d3f7c5f",
+    "live-dev-v3-2-q005-54831df6ea19",
+    "live-dev-v3-2-q007-86133230c0ea",
+    "live-dev-v3-2-q008-186fbe5dad14",
+    "live-dev-v3-2-q013-68b8399a8c40",
+    "live-dev-v3-2-q015-daea4cf852f7",
+    "live-dev-v3-2-q019-4cffdb0499bb",
+    "live-dev-v3-2-q050-35d1729bb6a8"
+  ],
+  "raw_run_directory_count": 10,
+  "historical_review_zips_local_only": [
+    "artifacts/stage13-10-human-claim-gold-review-results.zip",
+    "artifacts/stage13-9-human-citation-review-results.zip"
+  ],
+  "uncertain_zero": true,
+  "secrets_in_commit": false,
+  "env_in_commit": false,
+  "backup_in_commit": false
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": "dev-v3-1-citation-failure-taxonomy-summary-v1",
+  "total_required_claims": 27,
+  "by_type": {
+    "adjacent_partial_support": {
+      "count": 1,
+      "questions": [
+        "q007"
+      ],
+      "required_claims": [
+        "cl-q007-51d53fc4250379d38e16"
+      ],
+      "human_labels": {
+        "partially_supported": 2,
+        "related_but_insufficient": 1
+      },
+      "possible_generic_fix": "treat adjacent completion as supporting rather than automatically primary evidence"
+    },
+    "citation_fully_supported": {
+      "count": 12,
+      "questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q007",
+        "q008",
+        "q013",
+        "q050"
+      ],
+      "required_claims": [
+        "cl-q001-b93fe64266ba6940d2a1",
+        "cl-q001-bc33bddd93356fce6273",
+        "cl-q002-023231b350a389faa754",
+        "cl-q002-3cab1a55474dcd47a64a",
+        "cl-q002-8a1d729edcaafb379a20",
+        "cl-q004-a9fa27d46042c7d9ac2b",
+        "cl-q004-fe7e6b540d1b2bf1d6cf",
+        "cl-q007-0dda2c31fef09b05c68b",
+        "cl-q008-d73bc3c128270add0359",
+        "cl-q013-938d2a4e18520c28a5d7",
+        "cl-q013-ed3f2a06305ea05d1b9e",
+        "cl-q050-96cfbcf597379dea6b6f"
+      ],
+      "human_labels": {
+        "fully_supported": 14
+      },
+      "possible_generic_fix": "retain strict claim-local validation"
+    },
+    "citation_partially_supported": {
+      "count": 5,
+      "questions": [
+        "q008",
+        "q013",
+        "q019"
+      ],
+      "required_claims": [
+        "cl-q008-3fcba63ce8d76f5cfc1d",
+        "cl-q008-5fd8e23c8c061690cde0",
+        "cl-q013-4a5420c3371111d7f5f3",
+        "cl-q019-2fef5549293d6f983f79",
+        "cl-q019-409ecf7b2b8c09e348e6"
+      ],
+      "human_labels": {
+        "partially_supported": 1,
+        "related_but_insufficient": 4
+      },
+      "possible_generic_fix": "decompose compound claims and verify numeric/comparative completeness"
+    },
+    "citation_unsupported": {
+      "count": 2,
+      "questions": [
+        "q015"
+      ],
+      "required_claims": [
+        "cl-q015-34d9467bd693a8e1f141",
+        "cl-q015-fd7824b67e9a47f5aa88"
+      ],
+      "human_labels": {
+        "unsupported": 2
+      },
+      "possible_generic_fix": "require claim-local lexical/numeric/comparative evidence checks"
+    },
+    "equivalent_non_gold_cited": {
+      "count": 3,
+      "questions": [
+        "q004",
+        "q015",
+        "q019"
+      ],
+      "required_claims": [
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q015-281a83daa0567f6ae7ac",
+        "cl-q019-9d65c5779788321a4283"
+      ],
+      "human_labels": {
+        "partially_supported": 3
+      },
+      "possible_generic_fix": "preserve semantic support separately from exact-Gold diagnostics"
+    },
+    "same_page_boundary_miss": {
+      "count": 4,
+      "questions": [
+        "q001",
+        "q007",
+        "q050"
+      ],
+      "required_claims": [
+        "cl-q001-c41ea3191cab92907d83",
+        "cl-q007-0dc4946bfe1085fe36ce",
+        "cl-q050-e6beec554909bcb0e6ba",
+        "cl-q050-fcbcedc602ad451d727a"
+      ],
+      "human_labels": {
+        "fully_supported": 2,
+        "partially_supported": 4
+      },
+      "possible_generic_fix": "score claim-local completeness and prefer the primary block before adjacent support"
+    }
+  },
+  "generic_fix_candidates": [
+    {
+      "hypothesis": "Per-claim one-primary-citation-first selection with a small citation cap reduces dilution.",
+      "supporting_audit_evidence": "q007 produced nine citations; support quality varies across citations.",
+      "affected_questions": [
+        "q007"
+      ],
+      "expected_gain": "higher support concentration",
+      "precision_risk": "may omit necessary secondary evidence",
+      "token_impact": "lower",
+      "latency_impact": "neutral",
+      "implementation_complexity": "low",
+      "generic": true,
+      "requires_live_evaluation": true
+    },
+    {
+      "hypothesis": "Numeric and comparative completeness checks prevent citations that support only part of a claim.",
+      "supporting_audit_evidence": "q019 numeric ranges and q050 cross-paper comparisons are only partially supported.",
+      "affected_questions": [
+        "q019",
+        "q050"
+      ],
+      "expected_gain": "lower unsupported/partial claim rate",
+      "precision_risk": "may increase unsupported slots",
+      "token_impact": "small",
+      "latency_impact": "small",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "requires_live_evaluation": true
+    },
+    {
+      "hypothesis": "Compound claim decomposition improves citation completeness.",
+      "supporting_audit_evidence": "q001 compound propositions and q019 multi-part numeric statements.",
+      "affected_questions": [
+        "q001",
+        "q019"
+      ],
+      "expected_gain": "better atomic support binding",
+      "precision_risk": "more output slots",
+      "token_impact": "moderate",
+      "latency_impact": "small",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "requires_live_evaluation": true
+    }
+  ]
+}

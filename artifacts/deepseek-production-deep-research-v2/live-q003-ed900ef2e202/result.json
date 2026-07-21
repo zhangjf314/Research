@@ -1,0 +1,53 @@
+{
+  "run_id": "live-q003-ed900ef2e202",
+  "question_id": "q003",
+  "graph_status": "completed",
+  "nodes_visited": [
+    "plan",
+    "retrieve",
+    "assess_evidence",
+    "synthesize",
+    "validate_citations",
+    "persist_trace"
+  ],
+  "iteration_count": 1,
+  "retrieval_calls": 1,
+  "llm_request_count": 1,
+  "request_attempt_count": 1,
+  "provider_completed_request_count": 1,
+  "usage_record_count": 1,
+  "request_ids": [
+    "live-q003-ed900ef2e202:synthesize:1:61db864b75e9"
+  ],
+  "input_tokens": 6714,
+  "output_tokens": 82,
+  "total_tokens": 6796,
+  "reserved_input_tokens": 0,
+  "reserved_output_tokens": 0,
+  "reserved_total_tokens": 0,
+  "budget_accounting_status": "settled",
+  "usage_source": [
+    "provider_reported"
+  ],
+  "billing_mode": "paid",
+  "monetary_cost_usd": "0.00096292",
+  "cost_basis": "configured_token_prices",
+  "elapsed_seconds": 1.337596,
+  "checkpoint_ids": [
+    "live-q003-ed900ef2e202"
+  ],
+  "resume_count": 0,
+  "final_answerable_state": true,
+  "claim_count": 2,
+  "citation_count": 2,
+  "citation_validation": "passed",
+  "refusal_reason": null,
+  "errors": [],
+  "budget_stop_reason": null,
+  "reranker_called": false,
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "prompt_versions": [
+    "qa-production-v1"
+  ]
+}

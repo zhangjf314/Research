@@ -1,0 +1,108 @@
+{
+  "schema_version": "stage13-26-preflight-inputs-v1",
+  "baseline_head": "cb59dff2fad8d977ba89ff455fe1eb9ca08dad9e",
+  "frozen_files": {
+    "stage13_21_results": {
+      "path": "data/evaluation/evidence-qa-dev-v3-6.json",
+      "exists": true,
+      "sha256": "f944dffa6ff5ee7c8dcc5662a7fb82344e021c0579283a6c812c7d4c49752726"
+    },
+    "stage13_21_baseline_citation_sets": {
+      "path": "data/evaluation/evidence-qa-dev-v3-6-citation-audit-v1.jsonl",
+      "exists": true,
+      "sha256": "2fc856c44fd1c0bdf7626c55e06a41effc5420d5df7e479eca46c2f128aff60c"
+    },
+    "stage13_22_evidence_funnel": {
+      "path": "data/evaluation/dev-v3-6-evidence-funnel-v1.jsonl",
+      "exists": true,
+      "sha256": "49609c63634795a89871d557eb747f45bef9593baf1b8cbcec1cc14b81762223"
+    },
+    "stage13_23_selection_v3_replay": {
+      "path": "data/evaluation/dev-v3-6-evidence-selection-v3-replay.json",
+      "exists": true,
+      "sha256": "28832e91ca00f3da0bad8dabc2a82949e5e51985d5d9dabfe5c1672336b7a1a3"
+    },
+    "stage13_24_selection_v4_replay": {
+      "path": "data/evaluation/dev-v3-6-evidence-selection-v4-replay.json",
+      "exists": true,
+      "sha256": "1f5356d4bdaf082c73255797d2f6dddd22b3cb64a08f56ccfb80aed62a357f6a"
+    },
+    "stage13_25_set_completion_v2_replay": {
+      "path": "data/evaluation/dev-v3-6-set-completion-v2-replay.json",
+      "exists": true,
+      "sha256": "6b28ab1df2424749a5d4e113eab04d2c75d9abd26cc1f91a700f86684bcecf83"
+    },
+    "stage13_25_final_audit": {
+      "path": "data/evaluation/dev-v3-6-set-completion-v2-final-audit.json",
+      "exists": true,
+      "sha256": "9f7810a0b38adb6a1304e9a31a5c26ab07ed8f585b13aeee23054ace7a0dbde2"
+    },
+    "oracle_gap_audit": {
+      "path": "data/evaluation/evidence-selection-v4-oracle-gap-v1.json",
+      "exists": true,
+      "sha256": "ad47259f81a80102d745fcb2e4a7e0974813cd6850d4bebfc23f5a744e3addaa"
+    },
+    "obligation_alignment_audit": {
+      "path": "data/evaluation/obligation-definition-alignment-v1.json",
+      "exists": true,
+      "sha256": "c35853c19cd18ed879058cfd8724566184abcc1b1006de10cc2bbcefd39aad51"
+    },
+    "numeric_completeness_audit": {
+      "path": "data/evaluation/selection-v4-numeric-completeness-audit-v1.jsonl",
+      "exists": true,
+      "sha256": "093d7ea4e521b5e4eb4dbd2dec81b66237d8ec411721f6d8678255cffb37ce4d"
+    },
+    "comparison_completeness_audit": {
+      "path": "data/evaluation/selection-v4-comparison-completeness-audit-v1.jsonl",
+      "exists": true,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "claim_gold_freeze": {
+      "path": "data/evaluation/claim-evidence-gold-dev-v1-freeze.json",
+      "exists": true,
+      "sha256": "604d359526f61ca46c6a9a399f4b21f3eb945a4f992caa859ed7d4a1d6522bf8"
+    },
+    "payload_v4": {
+      "path": "data/evaluation/payload-contract-v4-protocol.json",
+      "exists": true,
+      "sha256": "02d80f90da7a4d7ecc2d1917b769b5b72c459ff0009caabda776ce3cce6559d0"
+    },
+    "evidence_presentation_v2": {
+      "path": "data/evaluation/evidence-presentation-v2-protocol.json",
+      "exists": true,
+      "sha256": "ef9d5213609f99b4bbba742f6f7b09c61b07f6d05e785a79a5577c6cbaf73f02"
+    },
+    "prompt_v3_7": {
+      "path": "data/evaluation/dev-v3-6-prompt-rendering-preflight-v1.json",
+      "exists": true,
+      "sha256": "31d8dc3dc1aa4435df62f2dc310be5107b780ef1e0b9fae9fb11d2e2297619e1"
+    },
+    "bounded_set_search": {
+      "path": "src/paper_research/generation/bounded_set_search.py",
+      "exists": true,
+      "sha256": "1542dbeb503839f2ec945abe1c65dd0d3bb3c84ff94db0609fcf7c07fcc4e122"
+    },
+    "obligation_query_builder": {
+      "path": "src/paper_research/retrieval/obligation_query_builder_v1.py",
+      "exists": true,
+      "sha256": "6812129862060dae12c46d9357e51bad7e156e4e9fb3a7911194aaf84ccf828a"
+    }
+  },
+  "collection_name": "papers_production_v1",
+  "embedding_model_identity": "jina-embeddings-v5-text-small",
+  "citation_budget": 3,
+  "candidate_budget": 12,
+  "bounded_set_search_version": "bounded-complementary-set-search-v1",
+  "set_sufficiency_version": "set-sufficiency-v3-candidate",
+  "minimal_gain_proof_version": "minimal-gain-proof-v3",
+  "targeted_query_builder_version": "obligation-query-builder-v1",
+  "gold_freeze_offline_scoring_only": true,
+  "live_llm_executed": false,
+  "embedding_api_executed": false,
+  "reranker_executed": false,
+  "new_live_executed": false,
+  "human_citation_review_deferred": true,
+  "full_qa_executed": false,
+  "deep_research_executed": false,
+  "preflight_signature": "7284e1ddd88c0f1467f6d4695ad77a0e9233c7a51b5f79bae0506f6678c15302"
+}

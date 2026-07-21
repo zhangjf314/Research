@@ -1,0 +1,2643 @@
+{
+  "schema_version": "full-qa-canary-results-v2",
+  "generated_at": "2026-07-20T10:14:54.392530+00:00",
+  "canary_ids": [
+    "q014",
+    "q020",
+    "q029",
+    "q031",
+    "q032",
+    "q035",
+    "q036",
+    "q037",
+    "q044",
+    "q001",
+    "q008",
+    "q015",
+    "q024",
+    "q049",
+    "q005"
+  ],
+  "concurrency": 1,
+  "reranker_enabled": false,
+  "qa_generation_retry_count": 0,
+  "json_repair_enabled": false,
+  "citation_repair_enabled": false,
+  "transport_retry_count": 1,
+  "elapsed_wall_ms": 63732.499,
+  "budget": {
+    "max_input_tokens": 250000,
+    "max_output_tokens": 10000,
+    "max_total_tokens": 260000,
+    "max_cost_usd": 0.1,
+    "max_total_seconds": 1800.0
+  },
+  "llm": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "thinking": "disabled",
+    "response_format": "json_object",
+    "stream": false
+  },
+  "summary": {
+    "attempted": 15,
+    "completed": 15,
+    "terminal_failure_count": 0,
+    "malformed_json_count": 0,
+    "schema_failure_count": 0,
+    "invalid_citation_count": 0,
+    "citation_context_validity": 1.0,
+    "page_accuracy": 1.0,
+    "template_fallback_count": 0,
+    "unclassified_exception_count": 0,
+    "finish_reason_length_count": 0,
+    "core_unsupported_claim_count": 30,
+    "required_claim_coverage": 0.357143,
+    "citation_precision": 0.202381,
+    "citation_recall": 0.139286,
+    "input_tokens": 154876,
+    "output_tokens": 2259,
+    "total_tokens": 157135,
+    "estimated_cost_usd": 0.02231516,
+    "cost_type": "estimated_upper_bound_from_configured_prices",
+    "latency_ms": {
+      "mean": 4193.985,
+      "p50": 3806.344,
+      "p95": 10384.573
+    },
+    "production_qa_canary_gate": "FAILED",
+    "budget_violations": []
+  },
+  "rows": [
+    {
+      "question_id": "q014",
+      "status": "COMPLETED",
+      "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1910.10683"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000053",
+          "b000094",
+          "b000107",
+          "b000108",
+          "b000110"
+        ],
+        "gold_pages": [
+          3,
+          7,
+          8
+        ],
+        "required_claims": [
+          "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+          "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+          "Training uses a consistent maximum-likelihood objective."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The experiments compare T5-Base to a baseline and baseline-1T on GLUE, CNNDM, SQuAD, SGLUE, and translation tasks, using validation sets. Final experiments scale up to 11B parameters and report test set results.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "T5-Base is compared to baseline and baseline-1T on multiple benchmarks.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 40,
+                "block_id": "b000521"
+              }
+            ],
+            "block_ids": [
+              "b000521"
+            ],
+            "pages": [
+              40
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Final experiments scale model size up to 11 billion parameters.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 38,
+                "block_id": "b000488"
+              }
+            ],
+            "block_ids": [
+              "b000488"
+            ],
+            "pages": [
+              38
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Results are reported on validation sets except final experiments use test sets.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 14,
+                "block_id": "b000178"
+              },
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 38,
+                "block_id": "b000488"
+              }
+            ],
+            "block_ids": [
+              "b000178",
+              "b000488"
+            ],
+            "pages": [
+              14,
+              38
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+            "section": "Encoder",
+            "page_start": 40,
+            "page_end": 41,
+            "quote": "To achieve its strong results, T5 combines insights from our experimental study with\nunprecedented scale. Note that in Section 3.6 we found that scaling up the pre-training\namount or size of our baseline model produced substantial gains. Given this, we were\ninterested to measure how much the “non-scaling” changes we introduced into T5 contributed\nto its strong performance. We therefore carried out a final experiment where we compared\nthe following three configurations: First, the standard baseli",
+            "score": 0.031498,
+            "pdf_url": "/api/v1/papers/64e62d6c-8b61-46ca-b57b-ab18f301f8ec/pdf#page=40",
+            "block_ids": [
+              "b000521"
+            ]
+          },
+          {
+            "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+            "section": "is grazing in a field.\"\nT5",
+            "page_start": 14,
+            "page_end": 14,
+            "quote": "training procedure. For comparison, we also report performance when training on\neach task from scratch (i.e. without any pre-training) for the same number of steps\nused to fine-tune the baseline model. All scores in this table (and every table in\nour paper except Table 14) are reported on the validation sets of each data set.\nnumber of experiments we run. As a cheaper alternative, we train our baseline model 10\ntimes from scratch (i.e. with different random initializations and data set shuffling",
+            "score": 0.030018,
+            "pdf_url": "/api/v1/papers/64e62d6c-8b61-46ca-b57b-ab18f301f8ec/pdf#page=14",
+            "block_ids": [
+              "b000178"
+            ]
+          },
+          {
+            "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+            "section": "Encoder",
+            "page_start": 38,
+            "page_end": 38,
+            "quote": "than the validation set. For CNN/Daily Mail, we use the standard test set distributed\nwith the data set. For the WMT tasks, this corresponds to using newstest2014 for\nEnglish-German, newstest2015 for English-French, and newstest2016 for English-\nRomanian. For GLUE and SuperGLUE, we used the benchmark evaluation servers to\ncompute official test set scores.15,16 For SQuAD, evaluating on the test set requires\nrunning inference on a benchmark server. Unfortunately, the computational resources\non thi",
+            "score": 0.02692,
+            "pdf_url": "/api/v1/papers/64e62d6c-8b61-46ca-b57b-ab18f301f8ec/pdf#page=38",
+            "block_ids": [
+              "b000488"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 7743,
+          "output_tokens": 177,
+          "total_tokens": 7920,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1788.875,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 2.028,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2419.122,
+          "total_latency_ms": 4308.86
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.0,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+            "best": 0.08333333333333333
+          },
+          {
+            "required_claim": "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+            "best": 0.125
+          },
+          {
+            "required_claim": "Training uses a consistent maximum-likelihood objective.",
+            "best": 0.0
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 4321.381
+    },
+    {
+      "question_id": "q020",
+      "status": "COMPLETED",
+      "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2001.08361"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000629",
+          "b000857"
+        ],
+        "gold_pages": [
+          19,
+          23
+        ],
+        "required_claims": [
+          "Generalization of the laws beyond natural language is uncertain.",
+          "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+          "The small-data regime, regularization, and data augmentation were not thoroughly studied."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The paper reports several limitations: low confidence in Bcrit predictions far outside explored loss range, poor fits for small data regimes, no experimentation with regularization or data augmentation, compute scaling may be confounded for large nctx, possible untuned hyperparameters, and sensitivity of learning rate to target loss. Additionally, scaling laws lack theoretical understanding and may break down at extreme scales.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Low confidence in Bcrit predictions far outside explored loss range.",
+            "citations": [
+              {
+                "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+                "page": 23,
+                "block_id": "b000857"
+              }
+            ],
+            "block_ids": [
+              "b000857"
+            ],
+            "pages": [
+              23
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Poor fits for small data regimes and no regularization or data augmentation experiments.",
+            "citations": [
+              {
+                "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+                "page": 23,
+                "block_id": "b000857"
+              }
+            ],
+            "block_ids": [
+              "b000857"
+            ],
+            "pages": [
+              23
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Scaling laws lack theoretical understanding and may break down at extreme scales.",
+            "citations": [
+              {
+                "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+                "page": 22,
+                "block_id": "b000831"
+              }
+            ],
+            "block_ids": [
+              "b000831"
+            ],
+            "pages": [
+              22
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+            "section": "C\nCaveats",
+            "page_start": 23,
+            "page_end": 23,
+            "quote": "• We are not especially conﬁdent in the prediction of Bcrit(L) for values of the loss far outside the\nrange we have explored. Changes in Bcrit could have a signiﬁcant impact on trade-offs between\ndata parallelism and the number of serial training steps required, which would have a major impact\non training time.\n• We did not thoroughly investigate the small data regime, and our ﬁts for L(N, D) were poor for\nthe smallest values of D (where an epoch corresponded to only 40 steps). Furthermore, we d",
+            "score": 0.032018,
+            "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=23",
+            "block_ids": [
+              "b000857"
+            ]
+          },
+          {
+            "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+            "section": "C\nCaveats",
+            "page_start": 22,
+            "page_end": 23,
+            "quote": "In this section we list some potential caveats to our analysis.\n• At present we do not have a solid theoretical understanding for any of our proposed scaling laws.\nThe scaling relations with model size and compute are especially mysterious. It may be possible to\nunderstand scaling at very large D holding model size ﬁxed [AS17], and also the shape of learning\ncurves late in training, by modeling the loss with a noisy quadratic. But the scaling with D at very\nlarge model size still remains mysteri",
+            "score": 0.031281,
+            "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=22",
+            "block_ids": [
+              "b000831"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 13095,
+          "output_tokens": 170,
+          "total_tokens": 13265,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1926.276,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.549,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 8325.211,
+          "total_latency_ms": 10384.573
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.6666666666666666,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.6666666666666666,
+        "citation_recall": 0.5,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 1,
+        "claim_scores": [
+          {
+            "required_claim": "Generalization of the laws beyond natural language is uncertain.",
+            "best": 0.1111111111111111
+          },
+          {
+            "required_claim": "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+            "best": 0.45454545454545453
+          },
+          {
+            "required_claim": "The small-data regime, regularization, and data augmentation were not thoroughly studied.",
+            "best": 0.36363636363636365
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 10395.973
+    },
+    {
+      "question_id": "q029",
+      "status": "COMPLETED",
+      "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2104.08691"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2104.08691"
+        ],
+        "gold_block_ids": [
+          "b000086",
+          "b000088",
+          "b000089",
+          "b000231"
+        ],
+        "gold_pages": [
+          4,
+          9
+        ],
+        "required_claims": [
+          "Experiments use T5 checkpoints from Small through XXL.",
+          "Baselines include model tuning and multi-task model tuning.",
+          "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "Experiments use GLUE and SuperGLUE benchmarks with specified metrics, evaluating prompt tuning vs. model tuning across model sizes and domain transfer (SQuAD to MRQA). Results show prompt tuning outperforms model tuning on out-of-domain datasets, especially with large domain shifts.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Experiments evaluate on GLUE and SuperGLUE benchmarks using specified metrics.",
+            "citations": [
+              {
+                "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+                "page": 13,
+                "block_id": "b000347"
+              }
+            ],
+            "block_ids": [
+              "b000347"
+            ],
+            "pages": [
+              13
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Prompt tuning is compared to model tuning across model sizes and domain transfer.",
+            "citations": [
+              {
+                "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+                "page": 8,
+                "block_id": "b000217"
+              }
+            ],
+            "block_ids": [
+              "b000217"
+            ],
+            "pages": [
+              8
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Prompt tuning outperforms model tuning on out-of-domain datasets, especially with large domain shifts.",
+            "citations": [
+              {
+                "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+                "page": 8,
+                "block_id": "b000218"
+              }
+            ],
+            "block_ids": [
+              "b000218"
+            ],
+            "pages": [
+              8
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+            "section": "A\nReproducibility",
+            "page_start": 13,
+            "page_end": 13,
+            "quote": "A.1\nExperimental Settings\nWe evaluate each GLUE and SuperGLUE dataset\nusing the metric speciﬁed in the benchmark. We\nreuse the evaluation code from the publicly avail-\nable T5 open-source release to compute metrics.12\nis hidden behind the line itself, such as “Model Tun-\ning (Multi-task)” in Figure 1 and the Base, Large,\nand XL prompts trained on the “Span Corruption”\npretraining objective in Figure 3(b). Figure 4 also\nshows mean and standard deviation for the num-\nber of parameters each method ",
+            "score": 0.032266,
+            "pdf_url": "/api/v1/papers/ae47f092-c498-4bdb-bd3f-565cb2345cdf/pdf#page=13",
+            "block_ids": [
+              "b000347"
+            ]
+          },
+          {
+            "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+            "section": "6\nPrompt Ensembling",
+            "page_start": 8,
+            "page_end": 8,
+            "quote": "We investigate zero-shot domain transfer on two\ntasks: question answering (QA) and paraphrase de-\ntection. For question answering, we use the MRQA\n2019 shared task on generalization (Fisch et al.,\n2019). This task collects extractive QA datasets\nin a uniﬁed format and tests how models trained\non “in-domain” datasets perform when evaluated\non “out-of-domain” datasets. For our experiments,\nwe train on SQuAD (Rajpurkar et al., 2016) and\nevaluate on each of the out-of-domain datasets.11\nEnsembles of",
+            "score": 0.029828,
+            "pdf_url": "/api/v1/papers/ae47f092-c498-4bdb-bd3f-565cb2345cdf/pdf#page=8",
+            "block_ids": [
+              "b000217",
+              "b000218"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 7452,
+          "output_tokens": 158,
+          "total_tokens": 7610,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1771.718,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.535,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1897.901,
+          "total_latency_ms": 3727.98
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "Experiments use T5 checkpoints from Small through XXL.",
+            "best": 0.125
+          },
+          {
+            "required_claim": "Baselines include model tuning and multi-task model tuning.",
+            "best": 0.5
+          },
+          {
+            "required_claim": "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations.",
+            "best": 0.18181818181818182
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3738.481
+    },
+    {
+      "question_id": "q031",
+      "status": "COMPLETED",
+      "retrieval_query": "What research problem does the target paper address?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2106.09685"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000004",
+          "b000023"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Full fine-tuning becomes less feasible as pre-trained models grow.",
+          "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+          "The paper seeks a parameter-efficient adaptation method."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper addresses the problem of efficiently adapting large pre-trained language models to downstream tasks without full fine-tuning, which is costly in storage and deployment.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Full fine-tuning of large models like GPT-3 is challenging due to storage and deployment costs.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 2,
+                "block_id": "b000031"
+              }
+            ],
+            "block_ids": [
+              "b000031"
+            ],
+            "pages": [
+              2
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "The paper proposes a parameter-efficient approach using low-rank adaptation (LoRA).",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 2,
+                "block_id": "b000031"
+              }
+            ],
+            "block_ids": [
+              "b000031"
+            ],
+            "pages": [
+              2
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Existing methods like adapter layers and prompt tuning have limitations in large-scale scenarios.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 3,
+                "block_id": "b000057"
+              }
+            ],
+            "block_ids": [
+              "b000057"
+            ],
+            "pages": [
+              3
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "2\nPROBLEM STATEMENT",
+            "page_start": 2,
+            "page_end": 3,
+            "quote": "While our proposal is agnostic to training objective, we focus on language modeling as our motivat-\ning use case. Below is a brief description of the language modeling problem and, in particular, the\nmaximization of conditional probabilities given a task-speciﬁc prompt.\nSuppose we are given a pre-trained autoregressive language model PΦ(y|x) parametrized by Φ.\nFor instance, PΦ(y|x) can be a generic multi-task learner such as GPT (Radford et al., b; Brown\net al., 2020) based on the Transformer ar",
+            "score": 0.031319,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=2",
+            "block_ids": [
+              "b000031"
+            ]
+          },
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "3\nAREN’T EXISTING SOLUTIONS GOOD ENOUGH?",
+            "page_start": 3,
+            "page_end": 3,
+            "quote": "The problem we set out to tackle is by no means new. Since the inception of transfer learning, dozens\nof works have sought to make model adaptation more parameter- and compute-efﬁcient. See Sec-\ntion 6 for a survey of some of the well-known works. Using language modeling as an example, there\nare two prominent strategies when it comes to efﬁcient adaptations: adding adapter layers (Houlsby\net al., 2019; Rebufﬁet al., 2017; Pfeiffer et al., 2021; R¨uckl´e et al., 2020) or optimizing some forms\nof ",
+            "score": 0.029324,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=3",
+            "block_ids": [
+              "b000057"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 11177,
+          "output_tokens": 136,
+          "total_tokens": 11313,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1599.694,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.257,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1694.958,
+          "total_latency_ms": 3396.566
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "Full fine-tuning becomes less feasible as pre-trained models grow.",
+            "best": 0.3333333333333333
+          },
+          {
+            "required_claim": "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+            "best": 0.3
+          },
+          {
+            "required_claim": "The paper seeks a parameter-efficient adaptation method.",
+            "best": 0.7142857142857143
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3406.216
+    },
+    {
+      "question_id": "q032",
+      "status": "COMPLETED",
+      "retrieval_query": "What are the target paper's main contributions?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2106.09685"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000004",
+          "b000026",
+          "b000027"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "LoRA freezes pre-trained weights and trains low-rank matrices.",
+          "It reduces trainable parameters and GPU memory requirements.",
+          "Its linear design can be merged at inference time with no added latency."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper proposes LoRA, a low-rank adaptation method that freezes pre-trained weights and injects trainable rank decomposition matrices, reducing trainable parameters by 10,000x and GPU memory by 3x for GPT-3 175B while maintaining or improving model quality.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "LoRA freezes pre-trained model weights and injects trainable rank decomposition matrices into Transformer layers.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 1,
+                "block_id": "b000004"
+              }
+            ],
+            "block_ids": [
+              "b000004"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "LoRA reduces trainable parameters by 10,000 times and GPU memory by 3 times for GPT-3 175B.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 1,
+                "block_id": "b000004"
+              }
+            ],
+            "block_ids": [
+              "b000004"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "LoRA performs on-par or better than fine-tuning on RoBERTa, DeBERTa, GPT-2, and GPT-3.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 1,
+                "block_id": "b000004"
+              }
+            ],
+            "block_ids": [
+              "b000004"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "ABSTRACT",
+            "page_start": 1,
+            "page_end": 1,
+            "quote": "An important paradigm of natural language processing consists of large-scale pre-\ntraining on general domain data and adaptation to particular tasks or domains. As\nwe pre-train larger models, full ﬁne-tuning, which retrains all model parameters,\nbecomes less feasible. Using GPT-3 175B as an example – deploying indepen-\ndent instances of ﬁne-tuned models, each with 175B parameters, is prohibitively\nexpensive. We propose Low-Rank Adaptation, or LoRA, which freezes the pre-\ntrained model weights an",
+            "score": 0.018693,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=1",
+            "block_ids": [
+              "b000004"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 8199,
+          "output_tokens": 210,
+          "total_tokens": 8409,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1912.845,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.16,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2096.681,
+          "total_latency_ms": 4061.758
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.6666666666666666,
+        "citation_id_validity": 1.0,
+        "citation_precision": 1.0,
+        "citation_recall": 0.3333333333333333,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 0,
+        "claim_scores": [
+          {
+            "required_claim": "LoRA freezes pre-trained weights and trains low-rank matrices.",
+            "best": 0.75
+          },
+          {
+            "required_claim": "It reduces trainable parameters and GPU memory requirements.",
+            "best": 0.75
+          },
+          {
+            "required_claim": "Its linear design can be merged at inference time with no added latency.",
+            "best": 0.0
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 4069.834
+    },
+    {
+      "question_id": "q035",
+      "status": "COMPLETED",
+      "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2106.09685"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000237",
+          "b000239"
+        ],
+        "gold_pages": [
+          12,
+          13
+        ],
+        "required_claims": [
+          "The mechanism behind fine-tuning and LoRA remains unclear.",
+          "Selecting which matrices to adapt currently depends largely on heuristics.",
+          "Combining LoRA with other efficient adaptation methods remains a future direction."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper reports that existing adapter layers introduce inference latency and prompt tuning reduces usable sequence length, while LoRA cannot batch inputs with different modules in a single forward pass when weights are merged.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Adapter layers introduce inference latency in large-scale production scenarios.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 3,
+                "block_id": "b000057"
+              }
+            ],
+            "block_ids": [
+              "b000057"
+            ],
+            "pages": [
+              3
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Prompt tuning reduces the usable sequence length for downstream tasks.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 3,
+                "block_id": "b000060"
+              }
+            ],
+            "block_ids": [
+              "b000060"
+            ],
+            "pages": [
+              3
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "LoRA cannot batch inputs with different A and B in a single forward pass when weights are merged.",
+            "citations": [
+              {
+                "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+                "page": 5,
+                "block_id": "b000081"
+              }
+            ],
+            "block_ids": [
+              "b000081"
+            ],
+            "pages": [
+              5
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "3\nAREN’T EXISTING SOLUTIONS GOOD ENOUGH?",
+            "page_start": 3,
+            "page_end": 3,
+            "quote": "The problem we set out to tackle is by no means new. Since the inception of transfer learning, dozens\nof works have sought to make model adaptation more parameter- and compute-efﬁcient. See Sec-\ntion 6 for a survey of some of the well-known works. Using language modeling as an example, there\nare two prominent strategies when it comes to efﬁcient adaptations: adding adapter layers (Houlsby\net al., 2019; Rebufﬁet al., 2017; Pfeiffer et al., 2021; R¨uckl´e et al., 2020) or optimizing some forms\nof ",
+            "score": 0.031319,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=3",
+            "block_ids": [
+              "b000057"
+            ]
+          },
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "4\nOUR METHOD",
+            "page_start": 5,
+            "page_end": 5,
+            "quote": "LoRA also has its limitations. For example, it is not straightforward to batch inputs to different tasks\nwith different A and B in a single forward pass, if one chooses to absorb A and B into W to eliminate\nadditional inference latency. Though it is possible to not merge the weights and dynamically choose\nthe LoRA modules to use for samples in a batch for scenarios where latency is not critical.",
+            "score": 0.03031,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=5",
+            "block_ids": [
+              "b000081"
+            ]
+          },
+          {
+            "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+            "section": "3\nAREN’T EXISTING SOLUTIONS GOOD ENOUGH?",
+            "page_start": 3,
+            "page_end": 4,
+            "quote": "Directly Optimizing the Prompt is Hard\nThe other direction, as exempliﬁed by preﬁx tuning (Li\n& Liang, 2021), faces a different challenge. We observe that preﬁx tuning is difﬁcult to optimize\nand that its performance changes non-monotonically in trainable parameters, conﬁrming similar\nobservations in the original paper. More fundamentally, reserving a part of the sequence length for\nadaptation necessarily reduces the sequence length available to process a downstream task, which\nwe suspect makes ",
+            "score": 0.026847,
+            "pdf_url": "/api/v1/papers/87a57444-8279-4f2b-8190-6ff0316ff6c9/pdf#page=3",
+            "block_ids": [
+              "b000060"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 10182,
+          "output_tokens": 128,
+          "total_tokens": 10310,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1687.562,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.12,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2018.226,
+          "total_latency_ms": 3788.667
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.0,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "The mechanism behind fine-tuning and LoRA remains unclear.",
+            "best": 0.25
+          },
+          {
+            "required_claim": "Selecting which matrices to adapt currently depends largely on heuristics.",
+            "best": 0.0
+          },
+          {
+            "required_claim": "Combining LoRA with other efficient adaptation methods remains a future direction.",
+            "best": 0.2727272727272727
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3797.677
+    },
+    {
+      "question_id": "q036",
+      "status": "COMPLETED",
+      "retrieval_query": "What research problem does the target paper address?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2203.02155"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000011",
+          "b000013"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "Bigger language models do not automatically follow user intent.",
+          "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+          "The paper studies fine-tuning with human feedback as an alignment method."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper addresses the problem of aligning large language models with human intentions using reinforcement learning from human feedback (RLHF).",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "The paper addresses aligning AI systems with human intentions.",
+            "citations": [
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 17,
+                "block_id": "b000303"
+              }
+            ],
+            "block_ids": [
+              "b000303"
+            ],
+            "pages": [
+              17
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "It focuses on improving alignment of current language models using RLHF.",
+            "citations": [
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 17,
+                "block_id": "b000303"
+              },
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 4,
+                "block_id": "b000049"
+              }
+            ],
+            "block_ids": [
+              "b000303",
+              "b000049"
+            ],
+            "pages": [
+              17,
+              4
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+            "section": "5\nDiscussion",
+            "page_start": 17,
+            "page_end": 17,
+            "quote": "5.1\nImplications for alignment research\nThis research is part of our broader research program to align AI systems with human intentions (Chris-\ntiano et al., 2017; Ziegler et al., 2019; Stiennon et al., 2020). Even though this work focuses on\nour current language model systems, we seek general and scalable methods that work for future AI\nsystems (Leike et al., 2018). The systems we work with here are still fairly limited, but they are\namong the largest language models today and we apply them on ",
+            "score": 0.032002,
+            "pdf_url": "/api/v1/papers/24d32ecf-b486-4570-81f5-73eb52890df7/pdf#page=17",
+            "block_ids": [
+              "b000303"
+            ]
+          },
+          {
+            "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+            "section": "2\nRelated work",
+            "page_start": 4,
+            "page_end": 5,
+            "quote": "Research on alignment and learning from human feedback.\nWe build on previous techniques\nto align models with human intentions, particularly reinforcement learning from human feed-\nback (RLHF). Originally developed for training simple robots in simulated environments and Atari\ngames (Christiano et al., 2017; Ibarz et al., 2018), it has recently been applied to ﬁne-tuning language\nmodels to summarize text (Ziegler et al., 2019; Stiennon et al., 2020; Böhm et al., 2019; Wu et al.,\n2021). This work ",
+            "score": 0.025658,
+            "pdf_url": "/api/v1/papers/24d32ecf-b486-4570-81f5-73eb52890df7/pdf#page=4",
+            "block_ids": [
+              "b000049"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 8786,
+          "output_tokens": 95,
+          "total_tokens": 8881,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 2060.098,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.123,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1706.096,
+          "total_latency_ms": 3881.877
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 2,
+        "claim_scores": [
+          {
+            "required_claim": "Bigger language models do not automatically follow user intent.",
+            "best": 0.2222222222222222
+          },
+          {
+            "required_claim": "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+            "best": 0.1111111111111111
+          },
+          {
+            "required_claim": "The paper studies fine-tuning with human feedback as an alignment method.",
+            "best": 0.36363636363636365
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3890.818
+    },
+    {
+      "question_id": "q037",
+      "status": "COMPLETED",
+      "retrieval_query": "What are the target paper's main contributions?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2203.02155"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000011",
+          "b000027",
+          "b000031",
+          "b000036",
+          "b000037",
+          "b000038"
+        ],
+        "gold_pages": [
+          1,
+          2,
+          3
+        ],
+        "required_claims": [
+          "The paper fine-tunes language models with human demonstrations and preferences.",
+          "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+          "The paper reports improvements in truthfulness and some toxicity measures."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper's main contributions are: (1) fine-tuning large language models using human preferences significantly improves their behavior on a wide range of tasks, and (2) InstructGPT models are preferred over GPT-3 outputs by labelers, with the 1.3B InstructGPT outperforming the 175B GPT-3.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Fine-tuning large language models using human preferences significantly improves their behavior on a wide range of tasks.",
+            "citations": [
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 4,
+                "block_id": "b000045"
+              }
+            ],
+            "block_ids": [
+              "b000045"
+            ],
+            "pages": [
+              4
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "InstructGPT models are preferred over GPT-3 outputs by labelers.",
+            "citations": [
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 3,
+                "block_id": "b000034"
+              }
+            ],
+            "block_ids": [
+              "b000034"
+            ],
+            "pages": [
+              3
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "The 1.3B InstructGPT outperforms the 175B GPT-3 despite having over 100x fewer parameters.",
+            "citations": [
+              {
+                "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+                "page": 3,
+                "block_id": "b000034"
+              }
+            ],
+            "block_ids": [
+              "b000034"
+            ],
+            "pages": [
+              3
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+            "section": "1\nIntroduction",
+            "page_start": 4,
+            "page_end": 4,
+            "quote": "InstructGPT still makes simple mistakes.\nFor example, InstructGPT can still fail to follow\ninstructions, make up facts, give long hedging answers to simple questions, or fail to detect instructions\nwith false premises.\nOverall, our results indicate that ﬁne-tuning large language models using human preferences signiﬁ-\ncantly improves their behavior on a wide range of tasks, though much work remains to be done to\nimprove their safety and reliability.\nThe rest of this paper is structured as follows",
+            "score": 0.025989,
+            "pdf_url": "/api/v1/papers/24d32ecf-b486-4570-81f5-73eb52890df7/pdf#page=4",
+            "block_ids": [
+              "b000045"
+            ]
+          },
+          {
+            "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+            "section": "1\nIntroduction",
+            "page_start": 3,
+            "page_end": 3,
+            "quote": "Figure 2: A diagram illustrating the three steps of our method: (1) supervised ﬁne-tuning (SFT), (2)\nreward model (RM) training, and (3) reinforcement learning via proximal policy optimization (PPO)\non this reward model. Blue arrows indicate that this data is used to train one of our models. In Step 2,\nboxes A-D are samples from our models that get ranked by labelers. See Section 3 for more details\non our method.\nsizes (1.3B, 6B, and 175B parameters), and all of our models use the GPT-3 architec",
+            "score": 0.013514,
+            "pdf_url": "/api/v1/papers/24d32ecf-b486-4570-81f5-73eb52890df7/pdf#page=3",
+            "block_ids": [
+              "b000034"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 12538,
+          "output_tokens": 183,
+          "total_tokens": 12721,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1921.262,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.188,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2189.527,
+          "total_latency_ms": 4188.77
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.6666666666666666,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "The paper fine-tunes language models with human demonstrations and preferences.",
+            "best": 0.4
+          },
+          {
+            "required_claim": "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+            "best": 0.6666666666666666
+          },
+          {
+            "required_claim": "The paper reports improvements in truthfulness and some toxicity measures.",
+            "best": 0.1
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 4197.905
+    },
+    {
+      "question_id": "q044",
+      "status": "COMPLETED",
+      "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2210.11416"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000112",
+          "b000113",
+          "b000114"
+        ],
+        "gold_pages": [
+          5
+        ],
+        "required_claims": [
+          "Held-out tasks are excluded from the fine-tuning data.",
+          "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+          "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The experiments evaluate Flan-PaLM on held-out benchmarks (MMLU, BBH, TyDiQA, MGSM) using direct and chain-of-thought prompting, plus a human evaluation on 190 open-ended examples. Scaling curves show improvements from larger models and more finetuning tasks.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Evaluation uses held-out benchmarks: MMLU, BBH, TyDiQA, MGSM.",
+            "citations": [
+              {
+                "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+                "page": 5,
+                "block_id": "b000112"
+              }
+            ],
+            "block_ids": [
+              "b000112"
+            ],
+            "pages": [
+              5
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Methods include direct and chain-of-thought prompting with few-shot exemplars.",
+            "citations": [
+              {
+                "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+                "page": 5,
+                "block_id": "b000113"
+              }
+            ],
+            "block_ids": [
+              "b000113"
+            ],
+            "pages": [
+              5
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Human evaluation on 190 open-ended examples shows Flan-PaLM preferred 79% of the time.",
+            "citations": [
+              {
+                "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+                "page": 11,
+                "block_id": "b000243"
+              },
+              {
+                "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+                "page": 12,
+                "block_id": "b000246"
+              }
+            ],
+            "block_ids": [
+              "b000243",
+              "b000246"
+            ],
+            "pages": [
+              11,
+              12
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+            "section": "2.3\nEvaluation protocol",
+            "page_start": 5,
+            "page_end": 5,
+            "quote": "Evaluation benchmarks. We focus on performance on held-out tasks which were not included as part of the\nﬁnetuning data. We are interested in Flan-PaLM’s overall capabilities on world knowledge and reasoning\ntasks. Thus, we evaluate the model on a range of diﬀerent benchmarks, including multilingual ones. We\ndo not use the evaluation set from Brown et al. (2020) since almost all of those tasks have training sets that\nare included in our ﬁnetuning mixture. Instead, we use the following challenging",
+            "score": 0.030622,
+            "pdf_url": "/api/v1/papers/964144d2-71dd-4011-8b1c-abbbe1fd1081/pdf#page=5",
+            "block_ids": [
+              "b000112"
+            ]
+          },
+          {
+            "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+            "section": "6\nUsability evaluation of open-ended generation",
+            "page_start": 11,
+            "page_end": 11,
+            "quote": "Beyond the NLP benchmarks, language models are also capable of generating long-form answers to open-\nended requests. Standard NLP benchmarks and the automatic metrics used to evaluate them are not suﬃcient\nto measure human preferences among these open-form responses (Ouyang et al., 2022). Hence, we conduct\na manual evaluation that investigates the eﬀect of instruction ﬁnetuning on the ability for models to give\nopen-ended responses to challenging inputs. To do this, we created an evaluation set ",
+            "score": 0.027638,
+            "pdf_url": "/api/v1/papers/964144d2-71dd-4011-8b1c-abbbe1fd1081/pdf#page=11",
+            "block_ids": [
+              "b000243"
+            ]
+          },
+          {
+            "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+            "section": "2.3\nEvaluation protocol",
+            "page_start": 5,
+            "page_end": 5,
+            "quote": "Evaluation methods and metrics. For MMLU and BBH, we evaluate both the ability to directly predict the\nanswer via direct prompting, where the model directly gives the answer (Brown et al., 2020; Srivastava et al.,\n2022), as well as via chain-of-thought (CoT) prompting, where the model must provide a reasoning chain\nbefore giving the ﬁnal answer (Wei et al., 2022b). For TyDiQA, we only measure direct prompting exact-match\nscore, since highlighting the portion of a passage with the correct answer ",
+            "score": 0.023214,
+            "pdf_url": "/api/v1/papers/964144d2-71dd-4011-8b1c-abbbe1fd1081/pdf#page=5",
+            "block_ids": [
+              "b000113"
+            ]
+          },
+          {
+            "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+            "section": "6\nUsability evaluation of open-ended generation",
+            "page_start": 12,
+            "page_end": 12,
+            "quote": "temperature sampling with τ = 0.7 to generate ﬁve responses randomly, and then rank them by log probability\nscore without length normalization. We choose the response with the best score, after a ﬁltering step of\nremoving any generations with scores that were better than half of the median score, which we found\nsuccessfully removed a large portion of generations with undesirable repetitions. For example, if the median\nlog probability score of ﬁve generations is -20, then a generation with a scor",
+            "score": 0.018214,
+            "pdf_url": "/api/v1/papers/964144d2-71dd-4011-8b1c-abbbe1fd1081/pdf#page=12",
+            "block_ids": [
+              "b000246"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 8096,
+          "output_tokens": 200,
+          "total_tokens": 8296,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1599.952,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.802,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2569.169,
+          "total_latency_ms": 4269.278
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.6666666666666666,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.5,
+        "citation_recall": 0.6666666666666666,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 1,
+        "claim_scores": [
+          {
+            "required_claim": "Held-out tasks are excluded from the fine-tuning data.",
+            "best": 0.125
+          },
+          {
+            "required_claim": "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+            "best": 0.5555555555555556
+          },
+          {
+            "required_claim": "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics.",
+            "best": 0.4444444444444444
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 4278.273
+    },
+    {
+      "question_id": "q001",
+      "status": "COMPLETED",
+      "retrieval_query": "What research problem does the target paper address?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1706.03762"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762"
+        ],
+        "gold_block_ids": [
+          "b000022",
+          "b000025",
+          "b000027"
+        ],
+        "gold_pages": [
+          2
+        ],
+        "required_claims": [
+          "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+          "Sequential computation limits parallelization in training.",
+          "The paper targets long-range dependency modeling and proposes an attention-only alternative."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The target paper addresses the problem of sequence transduction models relying on complex recurrent or convolutional neural networks, proposing a simpler architecture based solely on attention mechanisms.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Dominant sequence transduction models use complex recurrent or convolutional networks.",
+            "citations": [
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 1,
+                "block_id": "b000017"
+              }
+            ],
+            "block_ids": [
+              "b000017"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "The Transformer is a new architecture based solely on attention mechanisms.",
+            "citations": [
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 1,
+                "block_id": "b000017"
+              }
+            ],
+            "block_ids": [
+              "b000017"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "The Transformer dispenses with recurrence and convolutions entirely.",
+            "citations": [
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 1,
+                "block_id": "b000017"
+              }
+            ],
+            "block_ids": [
+              "b000017"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+            "section": "arXiv:1706.03762v7  [cs.CL]  2 Aug 2023",
+            "page_start": 1,
+            "page_end": 1,
+            "quote": "The dominant sequence transduction models are based on complex recurrent or\nconvolutional neural networks that include an encoder and a decoder. The best\nperforming models also connect the encoder and decoder through an attention\nmechanism. We propose a new simple network architecture, the Transformer,\nbased solely on attention mechanisms, dispensing with recurrence and convolutions\nentirely. Experiments on two machine translation tasks show these models to\nbe superior in quality while being mor",
+            "score": 0.030077,
+            "pdf_url": "/api/v1/papers/2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9/pdf#page=1",
+            "block_ids": [
+              "b000017"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 23268,
+          "output_tokens": 112,
+          "total_tokens": 23380,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1207.054,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.391,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1885.9,
+          "total_latency_ms": 3162.738
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+            "best": 0.35714285714285715
+          },
+          {
+            "required_claim": "Sequential computation limits parallelization in training.",
+            "best": 0.0
+          },
+          {
+            "required_claim": "The paper targets long-range dependency modeling and proposes an attention-only alternative.",
+            "best": 0.18181818181818182
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3170.747
+    },
+    {
+      "question_id": "q008",
+      "status": "COMPLETED",
+      "retrieval_query": "What method or technical approach does the target paper propose?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1810.04805"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000012",
+          "b000013",
+          "b000060",
+          "b000063"
+        ],
+        "gold_pages": [
+          1,
+          2,
+          3
+        ],
+        "required_claims": [
+          "BERT is based on a multi-layer bidirectional Transformer encoder.",
+          "Pre-training uses masked language modeling and next-sentence prediction.",
+          "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "BERT proposes a masked language model (MLM) pre-training objective to enable deep bidirectional representations from Transformers.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "BERT uses a masked language model (MLM) pre-training objective.",
+            "citations": [
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 1,
+                "block_id": "b000010"
+              },
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 1,
+                "block_id": "b000011"
+              }
+            ],
+            "block_ids": [
+              "b000010",
+              "b000011"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "The MLM objective enables deep bidirectional representations from Transformers.",
+            "citations": [
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 1,
+                "block_id": "b000003"
+              },
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 1,
+                "block_id": "b000004"
+              }
+            ],
+            "block_ids": [
+              "b000003",
+              "b000004"
+            ],
+            "pages": [
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+            "section": "arXiv:1810.04805v2  [cs.CL]  24 May 2019",
+            "page_start": 1,
+            "page_end": 1,
+            "quote": "We argue that current techniques restrict the\npower of the pre-trained representations, espe-\ncially for the ﬁne-tuning approaches.\nThe ma-\njor limitation is that standard language models are\nunidirectional, and this limits the choice of archi-\ntectures that can be used during pre-training. For\nexample, in OpenAI GPT, the authors use a left-to-\nright architecture, where every token can only at-\ntend to previous tokens in the self-attention layers\nof the Transformer (Vaswani et al., 2017). Such r",
+            "score": 0.027526,
+            "pdf_url": "/api/v1/papers/50ae59a6-368b-41ba-a527-fff27cac57d8/pdf#page=1",
+            "block_ids": [
+              "b000010",
+              "b000011"
+            ]
+          },
+          {
+            "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+            "section": "Language Understanding",
+            "page_start": 1,
+            "page_end": 1,
+            "quote": "Jacob Devlin\nMing-Wei Chang\nKenton Lee\nKristina Toutanova\nGoogle AI Language\n{jacobdevlin,mingweichang,kentonl,kristout}@google.com\nAbstract\nWe introduce a new language representa-\ntion model called BERT, which stands for\nBidirectional Encoder Representations from\nTransformers. Unlike recent language repre-\nsentation models (Peters et al., 2018a; Rad-\nford et al., 2018), BERT is designed to pre-\ntrain deep bidirectional representations from\nunlabeled text by jointly conditioning on both\nleft and",
+            "score": 0.027242,
+            "pdf_url": "/api/v1/papers/50ae59a6-368b-41ba-a527-fff27cac57d8/pdf#page=1",
+            "block_ids": [
+              "b000003",
+              "b000004"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 11206,
+          "output_tokens": 91,
+          "total_tokens": 11297,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1193.844,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.307,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1484.71,
+          "total_latency_ms": 2745.424
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 2,
+        "claim_scores": [
+          {
+            "required_claim": "BERT is based on a multi-layer bidirectional Transformer encoder.",
+            "best": 0.2222222222222222
+          },
+          {
+            "required_claim": "Pre-training uses masked language modeling and next-sentence prediction.",
+            "best": 0.5
+          },
+          {
+            "required_claim": "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks.",
+            "best": 0.15384615384615385
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 2752.528
+    },
+    {
+      "question_id": "q015",
+      "status": "COMPLETED",
+      "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1910.10683"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000052",
+          "b000130",
+          "b000520"
+        ],
+        "gold_pages": [
+          3,
+          10,
+          40
+        ],
+        "required_claims": [
+          "The work is primarily a survey/exploration rather than a new-method proposal.",
+          "The coordinate-ascent study can miss second-order effects among design choices.",
+          "Some automatic benchmark improvements may not correspond to better qualitative behavior."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The paper reports that English-only pre-training did not achieve state-of-the-art on translation tasks, and that scale and English-language pre-training may be insufficient to match sophisticated methods like backtranslation. Additionally, improvements to ROUGE scores do not necessarily correspond to more coherent summaries, and generative models trained with maximum likelihood are prone to repetitive summaries. The paper also notes that a more rigorous notion of task similarity would be useful for principled pre-training data selection.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "English-only pre-training did not achieve state-of-the-art on translation tasks.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 40,
+                "block_id": "b000519"
+              }
+            ],
+            "block_ids": [
+              "b000519"
+            ],
+            "pages": [
+              40
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Scale and English-language pre-training may be insufficient to match sophisticated methods like backtranslation.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 40,
+                "block_id": "b000519"
+              }
+            ],
+            "block_ids": [
+              "b000519"
+            ],
+            "pages": [
+              40
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Improvements to ROUGE scores do not necessarily correspond to more coherent summaries.",
+            "citations": [
+              {
+                "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+                "page": 40,
+                "block_id": "b000519"
+              }
+            ],
+            "block_ids": [
+              "b000519"
+            ],
+            "pages": [
+              40
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+            "section": "Encoder",
+            "page_start": 40,
+            "page_end": 40,
+            "quote": "We did not achieve state-of-the-art performance on any of the WMT translation tasks.\nThis may be in part due to our use of an English-only unlabeled data set. We also note that\nmost of the best results on these tasks use backtranslation (Edunov et al., 2018; Lample and\nConneau, 2019), which is a sophisticated data augmentation scheme. The state of the art on\nthe low-resource English to Romanian benchmark also uses additional forms of cross-lingual\nunsupervised training (Lample and Conneau, 2019)",
+            "score": 0.015873,
+            "pdf_url": "/api/v1/papers/64e62d6c-8b61-46ca-b57b-ab18f301f8ec/pdf#page=40",
+            "block_ids": [
+              "b000519"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 8056,
+          "output_tokens": 197,
+          "total_tokens": 8253,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1506.433,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.241,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 2203.539,
+          "total_latency_ms": 3806.344
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 3,
+        "claim_scores": [
+          {
+            "required_claim": "The work is primarily a survey/exploration rather than a new-method proposal.",
+            "best": 0.0
+          },
+          {
+            "required_claim": "The coordinate-ascent study can miss second-order effects among design choices.",
+            "best": 0.0
+          },
+          {
+            "required_claim": "Some automatic benchmark improvements may not correspond to better qualitative behavior.",
+            "best": 0.36363636363636365
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3814.155
+    },
+    {
+      "question_id": "q024",
+      "status": "COMPLETED",
+      "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+      "retrieval_scope": "paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "2005.14165"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000111",
+          "b000112",
+          "b000113",
+          "b000115"
+        ],
+        "gold_pages": [
+          10,
+          11
+        ],
+        "required_claims": [
+          "The evaluation compares GPT-3 with seven smaller models.",
+          "Datasets are grouped into multiple task categories.",
+          "Performance is analyzed through scaling curves and task-specific evaluations."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The experiments train 8 GPT-3 models (125M to 175B parameters) on a filtered Common Crawl and curated datasets, then evaluate on 9 task categories in zero-shot, one-shot, and few-shot settings using metrics like cross-entropy loss, accuracy, F1, BLEU, and exact match.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Eight GPT-3 models of sizes from 125M to 175B parameters were trained.",
+            "citations": [
+              {
+                "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+                "page": 8,
+                "block_id": "b000071"
+              }
+            ],
+            "block_ids": [
+              "b000071"
+            ],
+            "pages": [
+              8
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Training data includes filtered Common Crawl and curated datasets like WebText2 and Wikipedia.",
+            "citations": [
+              {
+                "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+                "page": 8,
+                "block_id": "b000086"
+              }
+            ],
+            "block_ids": [
+              "b000086"
+            ],
+            "pages": [
+              8
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "Evaluation covers 9 task categories in zero-shot, one-shot, and few-shot settings.",
+            "citations": [
+              {
+                "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+                "page": 10,
+                "block_id": "b000113"
+              }
+            ],
+            "block_ids": [
+              "b000113"
+            ],
+            "pages": [
+              10
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+            "section": "3\nResults",
+            "page_start": 10,
+            "page_end": 11,
+            "quote": "In Section 3.1 we evaluate on traditional language modeling tasks and tasks that are similar to language modeling,\nsuch as Cloze tasks and sentence/paragraph completion tasks. In Section 3.2 we evaluate on “closed book” question\nanswering tasks: tasks which require using the information stored in the model’s parameters to answer general\nknowledge questions. In Section 3.3 we evaluate the model’s ability to translate between languages (especially one-shot\nand few-shot). In Section 3.4 we evaluate",
+            "score": 0.032002,
+            "pdf_url": "/api/v1/papers/930bea6f-5263-4012-8451-c2d19c38d4e4/pdf#page=10",
+            "block_ids": [
+              "b000113"
+            ]
+          },
+          {
+            "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+            "section": "2\nApproach",
+            "page_start": 8,
+            "page_end": 8,
+            "quote": "Model Name\nnparams\nnlayers\ndmodel\nnheads\ndhead\nBatch Size\nLearning Rate\nGPT-3 Small\n125M\n12\n768\n12\n64\n0.5M\n6.0 × 10−4\nGPT-3 Medium\n350M\n24\n1024\n16\n64\n0.5M\n3.0 × 10−4\nGPT-3 Large\n760M\n24\n1536\n16\n96\n0.5M\n2.5 × 10−4\nGPT-3 XL\n1.3B\n24\n2048\n24\n128\n1M\n2.0 × 10−4\nGPT-3 2.7B\n2.7B\n32\n2560\n32\n80\n1M\n1.6 × 10−4\nGPT-3 6.7B\n6.7B\n32\n4096\n32\n128\n2M\n1.2 × 10−4\nGPT-3 13B\n13.0B\n40\n5140\n40\n128\n2M\n1.0 × 10−4\nGPT-3 175B or “GPT-3”\n175.0B\n96\n12288\n96\n128\n3.2M\n0.6 × 10−4\nTable 2.1: Sizes, architectures, and learning hyp",
+            "score": 0.026133,
+            "pdf_url": "/api/v1/papers/930bea6f-5263-4012-8451-c2d19c38d4e4/pdf#page=8",
+            "block_ids": [
+              "b000071"
+            ]
+          },
+          {
+            "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+            "section": "2\nApproach",
+            "page_start": 8,
+            "page_end": 9,
+            "quote": "Details of the ﬁrst two points (processing of Common Crawl) are described in Appendix A. For the third, we added\nseveral curated high-quality datasets, including an expanded version of the WebText dataset [RWC+19], collected\nby scraping links over a longer period of time, and ﬁrst described in [KMH+20], two internet-based books corpora\n(Books1 and Books2) and English-language Wikipedia.\nTable 2.2 shows the ﬁnal mixture of datasets that we used in training. The CommonCrawl data was downloaded fro",
+            "score": 0.025833,
+            "pdf_url": "/api/v1/papers/930bea6f-5263-4012-8451-c2d19c38d4e4/pdf#page=8",
+            "block_ids": [
+              "b000086"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 7559,
+          "output_tokens": 198,
+          "total_tokens": 7757,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1669.189,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 1.059,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1889.433,
+          "total_latency_ms": 3649.846
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.0,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.3333333333333333,
+        "citation_recall": 0.25,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 2,
+        "claim_scores": [
+          {
+            "required_claim": "The evaluation compares GPT-3 with seven smaller models.",
+            "best": 0.25
+          },
+          {
+            "required_claim": "Datasets are grouped into multiple task categories.",
+            "best": 0.2857142857142857
+          },
+          {
+            "required_claim": "Performance is analyzed through scaling curves and task-specific evaluations.",
+            "best": 0.1111111111111111
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3658.658
+    },
+    {
+      "question_id": "q049",
+      "status": "COMPLETED",
+      "retrieval_query": "Compare the main contributions of the two target papers.",
+      "retrieval_scope": "multi_paper",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1706.03762",
+          "1810.04805"
+        ]
+      },
+      "gold": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762",
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000025",
+          "b000005",
+          "b000015",
+          "b000016",
+          "b000017"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "The Transformer paper introduces an attention-only architecture without recurrence.",
+          "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+          "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture."
+        ]
+      },
+      "answer": {
+        "answerable": true,
+        "answer": "The Transformer introduces a novel architecture based solely on attention, replacing recurrence and convolutions, enabling greater parallelization and state-of-the-art translation quality. BERT demonstrates the importance of bidirectional pre-training using masked language models, achieving state-of-the-art on eleven NLP tasks.",
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Transformer is based solely on attention mechanisms, eschewing recurrence and convolutions.",
+            "citations": [
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 2,
+                "block_id": "b000022"
+              },
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 1,
+                "block_id": "b000017"
+              }
+            ],
+            "block_ids": [
+              "b000022",
+              "b000017"
+            ],
+            "pages": [
+              2,
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c2",
+            "text": "Transformer achieves state-of-the-art translation quality with greater parallelization.",
+            "citations": [
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 10,
+                "block_id": "b000164"
+              },
+              {
+                "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+                "page": 1,
+                "block_id": "b000017"
+              }
+            ],
+            "block_ids": [
+              "b000164",
+              "b000017"
+            ],
+            "pages": [
+              10,
+              1
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          },
+          {
+            "claim_id": "c3",
+            "text": "BERT uses masked language models for bidirectional pre-training, advancing state-of-the-art on eleven NLP tasks.",
+            "citations": [
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 2,
+                "block_id": "b000013"
+              },
+              {
+                "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+                "page": 2,
+                "block_id": "b000014"
+              }
+            ],
+            "block_ids": [
+              "b000013",
+              "b000014"
+            ],
+            "pages": [
+              2
+            ],
+            "supported": true,
+            "support_note": "citation identifiers validated against supplied context"
+          }
+        ],
+        "refusal_reason": null,
+        "refused": false,
+        "citations": [
+          {
+            "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+            "section": "1\nIntroduction",
+            "page_start": 2,
+            "page_end": 2,
+            "quote": "Recurrent neural networks, long short-term memory [13] and gated recurrent [7] neural networks\nin particular, have been firmly established as state of the art approaches in sequence modeling and\ntransduction problems such as language modeling and machine translation [35, 2, 5]. Numerous\nefforts have since continued to push the boundaries of recurrent language models and encoder-decoder\narchitectures [38, 24, 15].\nRecurrent models typically factor computation along the symbol positions of the inp",
+            "score": 0.020957,
+            "pdf_url": "/api/v1/papers/2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9/pdf#page=2",
+            "block_ids": [
+              "b000022"
+            ]
+          },
+          {
+            "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+            "section": "7\nConclusion",
+            "page_start": 10,
+            "page_end": 10,
+            "quote": "In this work, we presented the Transformer, the first sequence transduction model based entirely on\nattention, replacing the recurrent layers most commonly used in encoder-decoder architectures with\nmulti-headed self-attention.\nFor translation tasks, the Transformer can be trained significantly faster than architectures based\non recurrent or convolutional layers. On both WMT 2014 English-to-German and WMT 2014\nEnglish-to-French translation tasks, we achieve a new state of the art. In the former ",
+            "score": 0.021664,
+            "pdf_url": "/api/v1/papers/2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9/pdf#page=10",
+            "block_ids": [
+              "b000164"
+            ]
+          },
+          {
+            "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+            "section": "arXiv:1810.04805v2  [cs.CL]  24 May 2019",
+            "page_start": 2,
+            "page_end": 2,
+            "quote": "word based only on its context.\nUnlike left-to-\nright language model pre-training, the MLM ob-\njective enables the representation to fuse the left\nand the right context, which allows us to pre-\ntrain a deep bidirectional Transformer. In addi-\ntion to the masked language model, we also use\na “next sentence prediction” task that jointly pre-\ntrains text-pair representations. The contributions\nof our paper are as follows:\nThese approaches have been generalized to\ncoarser granularities, such as sent",
+            "score": 0.030077,
+            "pdf_url": "/api/v1/papers/50ae59a6-368b-41ba-a527-fff27cac57d8/pdf#page=2",
+            "block_ids": [
+              "b000013",
+              "b000014",
+              "b000017"
+            ]
+          },
+          {
+            "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+            "section": "arXiv:1706.03762v7  [cs.CL]  2 Aug 2023",
+            "page_start": 1,
+            "page_end": 1,
+            "quote": "The dominant sequence transduction models are based on complex recurrent or\nconvolutional neural networks that include an encoder and a decoder. The best\nperforming models also connect the encoder and decoder through an attention\nmechanism. We propose a new simple network architecture, the Transformer,\nbased solely on attention mechanisms, dispensing with recurrence and convolutions\nentirely. Experiments on two machine translation tasks show these models to\nbe superior in quality while being mor",
+            "score": 0.025575,
+            "pdf_url": "/api/v1/papers/2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9/pdf#page=1",
+            "block_ids": [
+              "b000017"
+            ]
+          }
+        ],
+        "uncertainty": null,
+        "insufficient_evidence": false,
+        "model_usage": {
+          "input_tokens": 9498,
+          "output_tokens": 159,
+          "total_tokens": 9657,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1590.307,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.281,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1988.708,
+          "total_latency_ms": 3654.439
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "citation_id_validity": 1.0,
+        "citation_precision": 0.3333333333333333,
+        "citation_recall": 0.2,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 1,
+        "claim_scores": [
+          {
+            "required_claim": "The Transformer paper introduces an attention-only architecture without recurrence.",
+            "best": 0.2222222222222222
+          },
+          {
+            "required_claim": "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+            "best": 0.45454545454545453
+          },
+          {
+            "required_claim": "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture.",
+            "best": 0.14285714285714285
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3665.233
+    },
+    {
+      "question_id": "q005",
+      "status": "COMPLETED",
+      "retrieval_query": "Within the attention-only Transformer sequence transduction paper, what exact total energy consumption is reported for all experiments?",
+      "retrieval_scope": "unanswerable",
+      "retrieval_filter": {
+        "paper_ids": [
+          "1706.03762"
+        ]
+      },
+      "gold": {
+        "answerable": false,
+        "gold_paper_ids": [],
+        "gold_block_ids": [],
+        "gold_pages": [],
+        "required_claims": [
+          "No exact total energy-consumption value is reported in the paper."
+        ]
+      },
+      "answer": {
+        "answerable": false,
+        "answer": null,
+        "claims": [],
+        "refusal_reason": "The paper does not report a total energy consumption for all experiments; it only mentions training costs in terms of time and GPU count for specific tasks.",
+        "refused": true,
+        "citations": [],
+        "uncertainty": null,
+        "insufficient_evidence": true,
+        "model_usage": {
+          "input_tokens": 8021,
+          "output_tokens": 45,
+          "total_tokens": 8066,
+          "estimated_cost_usd": null
+        },
+        "latency": {
+          "retrieval_latency_ms": 1905.211,
+          "rerank_latency_ms": 0.0,
+          "context_build_latency_ms": 0.181,
+          "llm_first_token_latency_ms": null,
+          "llm_total_latency_ms": 1923.5,
+          "total_latency_ms": 3882.649
+        },
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "prompt_version": "qa-production-v1",
+        "api_request_count": 1,
+        "retry_count": 0,
+        "retry_reasons": [],
+        "rate_limit_events": 0
+      },
+      "metrics": {
+        "answerable_correct": true,
+        "required_claim_coverage": 0.0,
+        "citation_id_validity": 1.0,
+        "citation_precision": 1.0,
+        "citation_recall": 1.0,
+        "claim_citation_binding_rate": 1.0,
+        "unsupported_claim_count": 0,
+        "claim_scores": [
+          {
+            "required_claim": "No exact total energy-consumption value is reported in the paper.",
+            "best": 0
+          }
+        ]
+      },
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0,
+      "wall_ms": 3894.097
+    }
+  ]
+}

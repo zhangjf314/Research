@@ -1,0 +1,31 @@
+{
+  "schema_version": "wrong-evidence-metric-alignment-v1",
+  "WRONG_EVIDENCE_METRIC_ALIGNMENT": "PASSED",
+  "formal_wrong_evidence": 2,
+  "formal_definition": {
+    "unit_of_analysis": "Stage 13.21 final policy claim-level formal validator output",
+    "denominator": "validated final answers",
+    "partial_relation_handling": "not relation-key based",
+    "equivalent_evidence_handling": "handled by formal policy layer",
+    "multi_citation_claim_handling": "aggregated by final policy",
+    "narrowed_claim_handling": "after final policy narrowing",
+    "inherited_human_label_handling": "not a direct scorer input",
+    "no_citation_handling": "not counted as wrong evidence"
+  },
+  "offline_wrong_evidence": {
+    "unit_of_analysis": "required-claim relation-key diagnostic",
+    "denominator": "27 answerable required claims",
+    "partial_relation_handling": "partial/rejected relation is not valid",
+    "equivalent_evidence_handling": "equivalent evidence is any-valid, not exact",
+    "multi_citation_claim_handling": "any invalid cited set without valid relation can count",
+    "narrowed_claim_handling": "diagnosed against final narrowed citation set",
+    "inherited_human_label_handling": "not used by selection; may be used by offline scorer",
+    "no_citation_handling": "not counted as wrong evidence"
+  },
+  "aligned_baseline_wrong_evidence": 16,
+  "aligned_selection_v2_wrong_evidence": 15,
+  "selection_v2_wrong_evidence_records": 15,
+  "definitions_identical": false,
+  "direct_2_vs_15_comparison_allowed": false,
+  "conclusion": "Formal wrong evidence=2 and offline relation-key wrong evidence=15 are not the same metric; v3 candidates must be non-worse under both corresponding baselines."
+}

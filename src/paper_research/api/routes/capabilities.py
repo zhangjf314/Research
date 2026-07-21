@@ -1,5 +1,8 @@
+import hashlib
 import importlib.util
+import os
 import shutil
+from urllib.parse import urlparse
 
 import fitz
 import httpx
@@ -9,6 +12,7 @@ from pydantic import BaseModel
 
 from paper_research.config import get_settings
 from paper_research.infrastructure.redis_service import get_redis_service
+from paper_research.version import __display_version__, __version__
 
 router = APIRouter()
 
@@ -18,13 +22,77 @@ class Capability(BaseModel):
     configured: bool
     verified: bool
     detail: str | None = None
+    provider: str | None = None
+    model: str | None = None
+    thinking: str | None = None
+    response_format: str | None = None
+    stream: bool | None = None
+    template_fallback: bool | None = None
+    base_url_hostname: str | None = None
+    api_key_present: bool | None = None
+    api_key_fingerprint: str | None = None
+    temperature: float | None = None
+    max_tokens: int | None = None
+    billing_configured: bool | None = None
 
 
 class CapabilitiesResponse(BaseModel):
     overall: str
+    version: str
+    display_version: str
     profile: str
     capabilities: dict[str, Capability]
     production_configuration_issues: list[str]
+    stage13_30_budget: dict[str, object]
+
+
+FULL_QA_BUDGET_VARS = [
+    "LIVE_MODEL_CALLS_ENABLED",
+    "FULL_QA_MAX_ITEMS",
+    "FULL_QA_MAX_INPUT_TOKENS",
+    "FULL_QA_MAX_OUTPUT_TOKENS",
+    "FULL_QA_MAX_COST_USD",
+    "FULL_QA_MAX_TOTAL_SECONDS",
+]
+
+
+DEEP_RESEARCH_BUDGET_VARS = [
+    "DEEP_RESEARCH_ENABLED",
+    "DEEP_RESEARCH_MAX_INPUT_TOKENS",
+    "DEEP_RESEARCH_MAX_OUTPUT_TOKENS",
+    "DEEP_RESEARCH_MAX_COST_USD",
+    "DEEP_RESEARCH_MAX_TOTAL_SECONDS",
+    "DEEP_RESEARCH_MAX_ITERATIONS",
+    "DEEP_RESEARCH_MAX_PAPERS",
+]
+
+
+def _budget_presence() -> dict[str, object]:
+    full_present = {name: bool(os.getenv(name)) for name in FULL_QA_BUDGET_VARS}
+    deep_present = {name: bool(os.getenv(name)) for name in DEEP_RESEARCH_BUDGET_VARS}
+    live_enabled = os.getenv("LIVE_MODEL_CALLS_ENABLED", "").lower() == "true"
+    missing_full = [name for name, present in full_present.items() if not present]
+    full_ready = live_enabled and not missing_full
+    if full_ready:
+        status = "FULL_QA_BUDGET_READY"
+    elif live_enabled:
+        status = "SMOKE_ONLY_BUDGET_INCOMPLETE"
+    else:
+        status = "BLOCKED_BY_LIVE_MODEL_CALLS_DISABLED"
+    return {
+        "status": status,
+        "live_model_calls_enabled": live_enabled,
+        "full_qa_budget_ready": full_ready,
+        "missing_full_qa_budget_vars": missing_full,
+        "full_qa_budget_vars_present": full_present,
+        "deep_research_budget_vars_present": deep_present,
+    }
+
+
+def _api_key_fingerprint(value: str | None) -> str | None:
+    if not value:
+        return None
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()[:12]
 
 
 @router.get("/capabilities", response_model=CapabilitiesResponse)
@@ -54,6 +122,16 @@ def capabilities() -> CapabilitiesResponse:
             checkpoint_detail = f"postgres: {type(exc).__name__}"
     embedding_ready = not settings.embedding_configuration_issues
     reranker_ready = not settings.rerank_configuration_issues
+    llm_billing_configured = (
+        (
+            settings.llm_input_cost_per_million is not None
+            or settings.llm_input_price_per_million_tokens is not None
+        )
+        and (
+            settings.llm_output_cost_per_million is not None
+            or settings.llm_output_price_per_million_tokens is not None
+        )
+    )
     items = {
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
@@ -111,6 +189,20 @@ def capabilities() -> CapabilitiesResponse:
             configured=not settings.llm_configuration_issues,
             verified=settings.llm_provider == "template",
             detail=f"{settings.llm_provider}/{settings.llm_model}",
+            provider=settings.llm_provider_name or settings.llm_provider,
+            model=settings.llm_model,
+            thinking="enabled" if settings.llm_thinking_enabled else "disabled",
+            response_format=settings.llm_response_format,
+            stream=settings.llm_stream,
+            template_fallback=settings.llm_provider == "template",
+            base_url_hostname=(
+                urlparse(settings.llm_base_url).hostname if settings.llm_base_url else None
+            ),
+            api_key_present=bool(settings.llm_api_key),
+            api_key_fingerprint=_api_key_fingerprint(settings.llm_api_key),
+            temperature=settings.llm_temperature,
+            max_tokens=settings.llm_max_output_tokens,
+            billing_configured=llm_billing_configured,
         ),
         "redis": Capability(
             status="available" if redis_up else "degraded",
@@ -128,7 +220,10 @@ def capabilities() -> CapabilitiesResponse:
     degraded = any(item.status in {"degraded", "unavailable"} for item in items.values())
     return CapabilitiesResponse(
         overall="degraded" if degraded else "available",
+        version=__version__,
+        display_version=__display_version__,
         profile=settings.app_profile,
         capabilities=items,
         production_configuration_issues=settings.production_configuration_issues,
+        stage13_30_budget=_budget_presence(),
     )

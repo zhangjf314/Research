@@ -1,0 +1,30 @@
+{
+  "schema_version": "dev-v3-3-payload-contract-v2-final-audit-v1",
+  "checks": {
+    "stage13_14_freeze_stable": true,
+    "historical_gate_failed": true,
+    "canonicalization_versioned": true,
+    "only_refusal_path": true,
+    "only_exact_empty_to_null": true,
+    "answerable_only": true,
+    "unanswerable_empty_rejected": true,
+    "nonempty_answerable_rejected": true,
+    "malformed_json_rejected": true,
+    "slot_failures_rejected": true,
+    "extra_fields_rejected": true,
+    "twenty_seven_slots": true,
+    "q005_unchanged": true,
+    "semantic_changes_zero": true,
+    "path_violations_zero": true,
+    "gold_leakage_zero": true,
+    "human_label_leakage_zero": true,
+    "fixed_id_special_cases_zero": true,
+    "active_reservations_zero": true
+  },
+  "payload_contract_v2_engineering_gate": "PASSED",
+  "payload_contract_v2_ready": true,
+  "next_live_authorized": false,
+  "ready_for_full_qa": false,
+  "stage13_14_historical_gate": "FAILED_AND_PRESERVED",
+  "audit_hash": "765b6ec38c598bef889b11630918c3156a7c4202748b5a8386bb27218ae81e84"
+}

@@ -1,0 +1,524 @@
+{
+  "schema_version": "claim-evidence-gold-dev-summary-v1",
+  "review_type": "AI-assisted manual claim-level Gold adjudication",
+  "gold_version": "claim-evidence-gold-dev-v1",
+  "total_required_claims": 27,
+  "approved_claims": 27,
+  "candidate_relations": 313,
+  "single_core_claims": 18,
+  "multi_relation_core_set_claims": 5,
+  "claims_with_supporting_relations": 0,
+  "claims_with_equivalent_evidence": 6,
+  "no_valid_evidence_claims": 0,
+  "ambiguous_claims": 0,
+  "inherited_question_gold_retained": 25,
+  "inherited_question_gold_rejected": 74,
+  "equivalent_non_historical_relations_approved": 8,
+  "label_counts": {
+    "core_gold": 25,
+    "equivalent_valid_evidence": 8,
+    "insufficient": 165,
+    "partially_relevant": 115
+  },
+  "core_set_size_distribution": {
+    "1": 22,
+    "2": 4,
+    "3": 1
+  },
+  "candidate_count_distribution": {
+    "8": 1,
+    "9": 1,
+    "10": 2,
+    "12": 23
+  },
+  "per_question": {
+    "q001": {
+      "claims": 3,
+      "core": 2,
+      "supporting": 0,
+      "equivalent": 3,
+      "rejected": 25
+    },
+    "q002": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 28
+    },
+    "q004": {
+      "claims": 3,
+      "core": 5,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 31
+    },
+    "q007": {
+      "claims": 3,
+      "core": 4,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 32
+    },
+    "q008": {
+      "claims": 3,
+      "core": 2,
+      "supporting": 0,
+      "equivalent": 1,
+      "rejected": 33
+    },
+    "q013": {
+      "claims": 3,
+      "core": 2,
+      "supporting": 0,
+      "equivalent": 1,
+      "rejected": 33
+    },
+    "q015": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 33
+    },
+    "q019": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 33
+    },
+    "q050": {
+      "claims": 3,
+      "core": 1,
+      "supporting": 0,
+      "equivalent": 3,
+      "rejected": 32
+    }
+  },
+  "per_paper": {
+    "1706.03762": {
+      "claims": 12,
+      "core": 11,
+      "supporting": 0,
+      "equivalent": 6
+    },
+    "1810.04805": {
+      "claims": 9,
+      "core": 7,
+      "supporting": 0,
+      "equivalent": 4
+    },
+    "1910.10683": {
+      "claims": 6,
+      "core": 5,
+      "supporting": 0,
+      "equivalent": 1
+    },
+    "2001.08361": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0
+    }
+  },
+  "per_claim_role": {
+    "compare": {
+      "claims": 2,
+      "core": 1,
+      "supporting": 0,
+      "equivalent": 2,
+      "rejected": 21
+    },
+    "explain_method": {
+      "claims": 13,
+      "core": 12,
+      "supporting": 0,
+      "equivalent": 5,
+      "rejected": 133
+    },
+    "report_result": {
+      "claims": 3,
+      "core": 4,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 29
+    },
+    "unknown": {
+      "claims": 9,
+      "core": 8,
+      "supporting": 0,
+      "equivalent": 1,
+      "rejected": 97
+    }
+  },
+  "focus_questions": {
+    "q001": {
+      "claims": 3,
+      "core": 2,
+      "supporting": 0,
+      "equivalent": 3,
+      "rejected": 25
+    },
+    "q004": {
+      "claims": 3,
+      "core": 5,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 31
+    },
+    "q015": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 33
+    },
+    "q019": {
+      "claims": 3,
+      "core": 3,
+      "supporting": 0,
+      "equivalent": 0,
+      "rejected": 33
+    },
+    "q050": {
+      "claims": 3,
+      "core": 1,
+      "supporting": 0,
+      "equivalent": 3,
+      "rejected": 32
+    }
+  },
+  "records": [
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-b93fe64266ba6940d2a1",
+      "claim_role": "explain_method",
+      "candidate_count": 8,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 1,
+      "rejected_count": 7,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-bc33bddd93356fce6273",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 2,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 10,
+      "minimum_complete_set_size": 2,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-c41ea3191cab92907d83",
+      "claim_role": "explain_method",
+      "candidate_count": 10,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 2,
+      "rejected_count": 8,
+      "minimum_complete_set_size": 2,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-023231b350a389faa754",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-3cab1a55474dcd47a64a",
+      "claim_role": "unknown",
+      "candidate_count": 10,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 9,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-8a1d729edcaafb379a20",
+      "claim_role": "report_result",
+      "candidate_count": 9,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 8,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-a9fa27d46042c7d9ac2b",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-ba317f113c67f72f7260",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 3,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 9,
+      "minimum_complete_set_size": 3,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-fe7e6b540d1b2bf1d6cf",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-0dc4946bfe1085fe36ce",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-0dda2c31fef09b05c68b",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-51d53fc4250379d38e16",
+      "claim_role": "report_result",
+      "candidate_count": 12,
+      "core_count": 2,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 10,
+      "minimum_complete_set_size": 2,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-3fcba63ce8d76f5cfc1d",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-5fd8e23c8c061690cde0",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 1,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-d73bc3c128270add0359",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-4a5420c3371111d7f5f3",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-938d2a4e18520c28a5d7",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 1,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-ed3f2a06305ea05d1b9e",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-281a83daa0567f6ae7ac",
+      "claim_role": "compare",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-34d9467bd693a8e1f141",
+      "claim_role": "report_result",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-fd7824b67e9a47f5aa88",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-2fef5549293d6f983f79",
+      "claim_role": "unknown",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-409ecf7b2b8c09e348e6",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-9d65c5779788321a4283",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-96cfbcf597379dea6b6f",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 1,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-e6beec554909bcb0e6ba",
+      "claim_role": "explain_method",
+      "candidate_count": 12,
+      "core_count": 1,
+      "supporting_count": 0,
+      "equivalent_count": 0,
+      "rejected_count": 11,
+      "minimum_complete_set_size": 1,
+      "no_valid_gold_evidence": false
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-fcbcedc602ad451d727a",
+      "claim_role": "compare",
+      "candidate_count": 12,
+      "core_count": 0,
+      "supporting_count": 0,
+      "equivalent_count": 2,
+      "rejected_count": 10,
+      "minimum_complete_set_size": 2,
+      "no_valid_gold_evidence": false
+    }
+  ],
+  "limitations": [
+    "Fixed Dev scope: 27 required claims across 9 answerable questions.",
+    "AI-assisted manual claim-level Gold adjudication, not independent double-blind review.",
+    "Not Full-50 Gold, Production Gold, or general-corpus Gold.",
+    "Equivalent valid evidence is separate from historical exact Gold."
+  ]
+}

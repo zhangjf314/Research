@@ -55,7 +55,7 @@ class Answer(BaseModel):
     latency: AnswerLatency = Field(default_factory=AnswerLatency)
     provider: str = "template"
     model: str = "template-v1"
-    prompt_version: str = "claim-qa-v1"
+    prompt_version: str = "qa-production-v1"
     api_request_count: int = 0
     retry_count: int = 0
     retry_reasons: list[str] = Field(default_factory=list)
@@ -112,7 +112,7 @@ class QAService:
         retriever: DenseRetriever | None = None,
         score_threshold: float = 0.12,
         llm: LLMProvider | None = None,
-        prompt_version: str = "claim-qa-v1",
+        prompt_version: str = "qa-production-v1",
     ) -> None:
         self.retriever = retriever
         self.score_threshold = score_threshold
@@ -120,7 +120,13 @@ class QAService:
         self.prompt_version = prompt_version
         self.validator = ClaimEvidenceValidator()
 
-    def answer(self, question: str, paper_ids: list[str] | None, top_k: int = 5) -> Answer:
+    def answer(
+        self,
+        question: str,
+        paper_ids: list[str] | None,
+        top_k: int = 5,
+        audit_metadata: dict | None = None,
+    ) -> Answer:
         if self.retriever is None:
             raise RuntimeError("dense retriever is not configured")
         started = time.perf_counter()
@@ -149,6 +155,7 @@ class QAService:
             context,
             retrieval_latency_ms=retrieval_ms,
             total_started=started,
+            audit_metadata=audit_metadata,
         )
 
     def answer_from_context(
@@ -160,9 +167,15 @@ class QAService:
         rerank_latency_ms: float = 0,
         context_build_latency_ms: float = 0,
         total_started: float | None = None,
+        audit_metadata: dict | None = None,
     ) -> Answer:
         started = total_started or time.perf_counter()
-        generation = self.llm.generate_claim_answer(question, context, self.prompt_version)
+        if audit_metadata is None:
+            generation = self.llm.generate_claim_answer(question, context, self.prompt_version)
+        else:
+            generation = self.llm.generate_claim_answer(
+                question, context, self.prompt_version, audit_metadata=audit_metadata
+            )
         accepted = self.validator.validate(generation.claims, context)
         if generation.answerable and not accepted:
             raise ClaimValidationError("answerable response has no validated claims")

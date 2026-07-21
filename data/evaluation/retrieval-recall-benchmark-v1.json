@@ -1,0 +1,14 @@
+{
+  "schema_version": "retrieval-recall-benchmark-v1",
+  "labeled_samples": 27,
+  "unique_claims": 27,
+  "unique_papers": 4,
+  "core_relations": 25,
+  "equivalent_relations": 8,
+  "numeric_claims": 5,
+  "comparison_claims": 2,
+  "limitation_claims": 2,
+  "BENCHMARK_SAMPLE_SIZE_LIMITED": true,
+  "RETRIEVAL_BENCHMARK_SAMPLE_SIZE_SUFFICIENT": false,
+  "benchmark_hash": "60f1b4533b5631a95ab8e2e296d7da0462d868d268b32433a9bd8ad29a5ceec6"
+}

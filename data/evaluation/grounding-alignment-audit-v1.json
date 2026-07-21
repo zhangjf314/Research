@@ -1,0 +1,4184 @@
+{
+  "schema_version": "grounding-alignment-audit-v1",
+  "generated_at": "2026-07-20T11:04:38.534744+00:00",
+  "git_commit": "f983d3432167edf49d18cff55f6cc89a1d2230e9",
+  "llm_called": false,
+  "historical_results_overwritten": false,
+  "baselines": {
+    "QWEN_CANARY_BASELINE": "D:\\Agents\\Codex\\research\\data\\evaluation\\full-qa-canary-results-v2.json",
+    "DEEPSEEK_CANARY_BASELINE": "D:\\Agents\\Codex\\research\\data\\evaluation\\full-qa-canary-deepseek-v1.json"
+  },
+  "metric_semantics": {
+    "citation_precision": "gold_citation_exact_match_precision",
+    "citation_recall": "gold_block_exact_recall",
+    "unsupported_claim_count": "exact_gold_mismatch_count",
+    "required_claim_coverage": "deterministic_token_overlap_best_claim_threshold_0.35"
+  },
+  "context_summary": {
+    "total": 50,
+    "answerable": 48,
+    "gold_block_context_coverage": 0.8125,
+    "gold_page_context_coverage": 0.916667,
+    "gold_or_equivalent_context_coverage": 0.8125,
+    "required_claim_evidence_coverage": 0.993056,
+    "context_block_count_mean": 228.92,
+    "context_tokens_mean": 7372.68,
+    "context_tokens_p95": 8411,
+    "retrieval_latency_ms_mean": 1499.475,
+    "retrieval_latency_ms_p95": 1971.79,
+    "by_category": {
+      "research_background": {
+        "count": 10,
+        "gold_block_context_coverage": 0.6,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "paper_contributions": {
+        "count": 10,
+        "gold_block_context_coverage": 1.0,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "method": {
+        "count": 5,
+        "gold_block_context_coverage": 0.6,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "experiment_setup": {
+        "count": 5,
+        "gold_block_context_coverage": 1.0,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "unanswerable": {
+        "count": 2,
+        "gold_block_context_coverage": null,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "algorithm_steps": {
+        "count": 5,
+        "gold_block_context_coverage": 0.8,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "experiment_results": {
+        "count": 4,
+        "gold_block_context_coverage": 0.75,
+        "required_claim_evidence_coverage": 1.0
+      },
+      "limitations": {
+        "count": 7,
+        "gold_block_context_coverage": 0.857143,
+        "required_claim_evidence_coverage": 0.952381
+      },
+      "multi_paper_comparison": {
+        "count": 2,
+        "gold_block_context_coverage": 1.0,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    "canary_status": "READY"
+  },
+  "baseline_summaries": [
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "summary": {
+        "attempted": 15,
+        "completed": 15,
+        "terminal_failure_count": 0,
+        "malformed_json_count": 0,
+        "schema_failure_count": 0,
+        "invalid_citation_count": 0,
+        "citation_context_validity": 1.0,
+        "page_accuracy": 1.0,
+        "template_fallback_count": 0,
+        "unclassified_exception_count": 0,
+        "core_unsupported_claim_count": 30,
+        "required_claim_coverage": 0.238095,
+        "citation_precision": 0.244048,
+        "citation_recall": 0.119048,
+        "input_tokens": 182393,
+        "output_tokens": 2048,
+        "total_tokens": 184441,
+        "latency_ms": {
+          "mean": 7961.037,
+          "p50": 7241.984,
+          "p95": 14975.37
+        },
+        "production_qa_canary_gate": "FAILED"
+      },
+      "claim_failure_classifications": {
+        "CLAIM_TRULY_OMITTED": 18,
+        "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING": 8,
+        "CLAIM_MATCHER_FALSE_NEGATIVE": 2,
+        "CLAIM_TOO_BROAD": 1
+      },
+      "unsupported_claim_classifications": {
+        "SUPPORTED_BY_NON_GOLD_BLOCK": 22,
+        "SUPPORTED_BY_EQUIVALENT_PAGE": 8
+      },
+      "citation_precision_failure_classifications": {
+        "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK": 33,
+        "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE": 16
+      },
+      "composite_claim_rate": 0.170732,
+      "atomic_claim_rate": 0.829268,
+      "partially_supported_composite_count": 4
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "summary": {
+        "attempted": 15,
+        "completed": 15,
+        "terminal_failure_count": 0,
+        "malformed_json_count": 0,
+        "schema_failure_count": 0,
+        "invalid_citation_count": 0,
+        "citation_context_validity": 1.0,
+        "page_accuracy": 1.0,
+        "template_fallback_count": 0,
+        "unclassified_exception_count": 0,
+        "finish_reason_length_count": 0,
+        "core_unsupported_claim_count": 30,
+        "required_claim_coverage": 0.357143,
+        "citation_precision": 0.202381,
+        "citation_recall": 0.139286,
+        "input_tokens": 154876,
+        "output_tokens": 2259,
+        "total_tokens": 157135,
+        "estimated_cost_usd": 0.02231516,
+        "cost_type": "estimated_upper_bound_from_configured_prices",
+        "latency_ms": {
+          "mean": 4193.985,
+          "p50": 3806.344,
+          "p95": 10384.573
+        },
+        "production_qa_canary_gate": "FAILED",
+        "budget_violations": []
+      },
+      "claim_failure_classifications": {
+        "CLAIM_TRULY_OMITTED": 16,
+        "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING": 7,
+        "CLAIM_MATCHER_FALSE_NEGATIVE": 4
+      },
+      "unsupported_claim_classifications": {
+        "SUPPORTED_BY_NON_GOLD_BLOCK": 20,
+        "SUPPORTED_BY_EQUIVALENT_PAGE": 10
+      },
+      "citation_precision_failure_classifications": {
+        "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK": 24,
+        "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE": 14
+      },
+      "composite_claim_rate": 0.3,
+      "atomic_claim_rate": 0.7,
+      "partially_supported_composite_count": 4
+    }
+  ],
+  "rows": [
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q014",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+        "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+        "Training uses a consistent maximum-likelihood objective."
+      ],
+      "generated_claims": [
+        "T5-Base was compared to a baseline trained on 1 trillion tokens.",
+        "T5-Base uses a span-corruption objective with a mean span length of 3 and 15% corruption.",
+        "Performance is evaluated on validation and test sets, including BLEU and F1 scores."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000521"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000521"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000521"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1910.10683",
+          "page": 36,
+          "block_id": "b000468"
+        }
+      ],
+      "resolved_blocks": [
+        "b000468",
+        "b000521"
+      ],
+      "resolved_pages": [
+        36,
+        40
+      ],
+      "gold_blocks": [
+        "b000053",
+        "b000094",
+        "b000107",
+        "b000108",
+        "b000110"
+      ],
+      "gold_pages": [
+        3,
+        7,
+        8
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+          "best_overlap": 0.166667,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Training uses a consistent maximum-likelihood objective.",
+          "best_overlap": 0.428571,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000521",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000521",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000521",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1910.10683",
+            "page": 36,
+            "block_id": "b000468",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q020",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Generalization of the laws beyond natural language is uncertain.",
+        "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+        "The small-data regime, regularization, and data augmentation were not thoroughly studied."
+      ],
+      "generated_claims": [
+        "Uncertainty in Bcrit(L) predictions for loss values far outside explored range.",
+        "Poor fits for L(N, D) in smallest D values and lack of regularization/data augmentation experiments.",
+        "Compute scaling may be confounded in very large nctx regimes where nctx ≳12dmodel."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2001.08361",
+          "page": 23,
+          "block_id": "b000857"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2001.08361",
+          "page": 23,
+          "block_id": "b000857"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2001.08361",
+          "page": 23,
+          "block_id": "b000857"
+        }
+      ],
+      "resolved_blocks": [
+        "b000857"
+      ],
+      "resolved_pages": [
+        23
+      ],
+      "gold_blocks": [
+        "b000629",
+        "b000857"
+      ],
+      "gold_pages": [
+        19,
+        23
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Generalization of the laws beyond natural language is uncertain.",
+          "best_overlap": 0.111111,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+          "best_overlap": 0.545455,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The small-data regime, regularization, and data augmentation were not thoroughly studied.",
+          "best_overlap": 0.363636,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2001.08361",
+            "page": 23,
+            "block_id": "b000857",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2001.08361",
+            "page": 23,
+            "block_id": "b000857",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2001.08361",
+            "page": 23,
+            "block_id": "b000857",
+            "gold_exact_match": true,
+            "failure_classification": null
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.5
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q029",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_results",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Experiments use T5 checkpoints from Small through XXL.",
+        "Baselines include model tuning and multi-task model tuning.",
+        "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations."
+      ],
+      "generated_claims": [
+        "Experiments evaluate model performance on out-of-domain datasets using F1 metrics.",
+        "The Small model outperforms larger models in some tasks.",
+        "Prompt tuning is more parameter-efficient than model tuning."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2104.08691",
+          "page": 6,
+          "block_id": "b000190"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2104.08691",
+          "page": 6,
+          "block_id": "b000190"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2104.08691",
+          "page": 6,
+          "block_id": "b000189"
+        }
+      ],
+      "resolved_blocks": [
+        "b000189",
+        "b000190"
+      ],
+      "resolved_pages": [
+        6
+      ],
+      "gold_blocks": [
+        "b000086",
+        "b000088",
+        "b000089",
+        "b000231"
+      ],
+      "gold_pages": [
+        4,
+        9
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Experiments use T5 checkpoints from Small through XXL.",
+          "best_overlap": 0.125,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Baselines include model tuning and multi-task model tuning.",
+          "best_overlap": 0.285714,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations.",
+          "best_overlap": 0.153846,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2104.08691",
+            "page": 6,
+            "block_id": "b000190",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2104.08691",
+            "page": 6,
+            "block_id": "b000190",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2104.08691",
+            "page": 6,
+            "block_id": "b000189",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q031",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Full fine-tuning becomes less feasible as pre-trained models grow.",
+        "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+        "The paper seeks a parameter-efficient adaptation method."
+      ],
+      "generated_claims": [
+        "The paper focuses on language modeling as a use case for adaptation.",
+        "It aims to optimize the conditional language modeling objective with fewer parameters.",
+        "The main issue is the high parameter count in full fine-tuning, which is inefficient for large models."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 2,
+          "block_id": "b000031"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 2,
+          "block_id": "b000032"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000040"
+        }
+      ],
+      "resolved_blocks": [
+        "b000031",
+        "b000032",
+        "b000040"
+      ],
+      "resolved_pages": [
+        2,
+        3
+      ],
+      "gold_blocks": [
+        "b000004",
+        "b000023"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Full fine-tuning becomes less feasible as pre-trained models grow.",
+          "best_overlap": 0.363636,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+          "best_overlap": 0.230769,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "The paper seeks a parameter-efficient adaptation method.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 2,
+            "block_id": "b000031",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 2,
+            "block_id": "b000032",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000040",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": false,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q032",
+      "question": "What are the target paper's main contributions?",
+      "category": "paper_contributions",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "LoRA freezes pre-trained weights and trains low-rank matrices.",
+        "It reduces trainable parameters and GPU memory requirements.",
+        "Its linear design can be merged at inference time with no added latency."
+      ],
+      "generated_claims": [
+        "LoRA reduces the number of trainable parameters by 10,000 times compared to full fine-tuning.",
+        "LoRA reduces GPU memory requirements by 3 times compared to full fine-tuning.",
+        "LoRA performs on-par or better than full fine-tuning in model quality on various tasks."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        }
+      ],
+      "resolved_blocks": [
+        "b000004"
+      ],
+      "resolved_pages": [
+        1
+      ],
+      "gold_blocks": [
+        "b000004",
+        "b000026",
+        "b000027"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "LoRA freezes pre-trained weights and trains low-rank matrices.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "It reduces trainable parameters and GPU memory requirements.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Its linear design can be merged at inference time with no added latency.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.3333333333333333
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q035",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "medium",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The mechanism behind fine-tuning and LoRA remains unclear.",
+        "Selecting which matrices to adapt currently depends largely on heuristics.",
+        "Combining LoRA with other efficient adaptation methods remains a future direction."
+      ],
+      "generated_claims": [
+        "Existing methods introduce inference latency.",
+        "Existing methods reduce usable sequence length.",
+        "Existing methods fail to match fine-tuning baselines."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000057"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000036"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000057"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000036"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000057"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000036"
+        }
+      ],
+      "resolved_blocks": [
+        "b000036",
+        "b000057"
+      ],
+      "resolved_pages": [
+        3
+      ],
+      "gold_blocks": [
+        "b000237",
+        "b000239"
+      ],
+      "gold_pages": [
+        12,
+        13
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The mechanism behind fine-tuning and LoRA remains unclear.",
+          "best_overlap": 0.222222,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Selecting which matrices to adapt currently depends largely on heuristics.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Combining LoRA with other efficient adaptation methods remains a future direction.",
+          "best_overlap": 0.090909,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000057",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000036",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000057",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000036",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000057",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000036",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": false,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q036",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Bigger language models do not automatically follow user intent.",
+        "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+        "The paper studies fine-tuning with human feedback as an alignment method."
+      ],
+      "generated_claims": [
+        "The paper aims to align AI systems with human intentions using reinforcement learning from human feedback (RLHF).",
+        "It explores methods to improve alignment on a broad range of language tasks.",
+        "The work applies RLHF to current language models to enhance their behavior and safety."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2203.02155",
+          "page": 17,
+          "block_id": "b000303"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000049"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 17,
+          "block_id": "b000303"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000049"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2203.02155",
+          "page": 17,
+          "block_id": "b000303"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000049"
+        }
+      ],
+      "resolved_blocks": [
+        "b000049",
+        "b000303"
+      ],
+      "resolved_pages": [
+        4,
+        17
+      ],
+      "gold_blocks": [
+        "b000011",
+        "b000013"
+      ],
+      "gold_pages": [
+        1
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Bigger language models do not automatically follow user intent.",
+          "best_overlap": 0.222222,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+          "best_overlap": 0.111111,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "The paper studies fine-tuning with human feedback as an alignment method.",
+          "best_overlap": 0.416667,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2203.02155",
+            "page": 17,
+            "block_id": "b000303",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000049",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 17,
+            "block_id": "b000303",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000049",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2203.02155",
+            "page": 17,
+            "block_id": "b000303",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000049",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q037",
+      "question": "What are the target paper's main contributions?",
+      "category": "paper_contributions",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The paper fine-tunes language models with human demonstrations and preferences.",
+        "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+        "The paper reports improvements in truthfulness and some toxicity measures."
+      ],
+      "generated_claims": [
+        "Fine-tuning large language models using human preferences improves their behavior on various tasks.",
+        "InstructGPT models outperform GPT-3 baselines in performance despite smaller size.",
+        "The paper discusses implications for alignment research and the importance of aligning with human intentions."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000045"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000046"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2203.02155",
+          "page": 2,
+          "block_id": "b000021"
+        }
+      ],
+      "resolved_blocks": [
+        "b000021",
+        "b000045",
+        "b000046"
+      ],
+      "resolved_pages": [
+        2,
+        4
+      ],
+      "gold_blocks": [
+        "b000011",
+        "b000027",
+        "b000031",
+        "b000036",
+        "b000037",
+        "b000038"
+      ],
+      "gold_pages": [
+        1,
+        2,
+        3
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The paper fine-tunes language models with human demonstrations and preferences.",
+          "best_overlap": 0.454545,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+          "best_overlap": 0.4,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The paper reports improvements in truthfulness and some toxicity measures.",
+          "best_overlap": 0.3,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000045",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000046",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2203.02155",
+            "page": 2,
+            "block_id": "b000021",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q044",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Held-out tasks are excluded from the fine-tuning data.",
+        "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+        "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics."
+      ],
+      "generated_claims": [
+        "Experiments evaluate Flan-PaLM on MMLU, BBH, TyDiQA, and MGSM benchmarks.",
+        "CoT prompting is used for some tasks, while direct prompting is used for others.",
+        "Human raters assess open-ended generation outputs."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2210.11416",
+          "page": 5,
+          "block_id": "b000112"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2210.11416",
+          "page": 5,
+          "block_id": "b000115"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2210.11416",
+          "page": 12,
+          "block_id": "b000256"
+        }
+      ],
+      "resolved_blocks": [
+        "b000112",
+        "b000115",
+        "b000256"
+      ],
+      "resolved_pages": [
+        5,
+        12
+      ],
+      "gold_blocks": [
+        "b000112",
+        "b000113",
+        "b000114"
+      ],
+      "gold_pages": [
+        5
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Held-out tasks are excluded from the fine-tuning data.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+          "best_overlap": 0.6,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics.",
+          "best_overlap": 0.153846,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.3333333333333333,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2210.11416",
+            "page": 5,
+            "block_id": "b000112",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2210.11416",
+            "page": 5,
+            "block_id": "b000115",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2210.11416",
+            "page": 12,
+            "block_id": "b000256",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.3333333333333333
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q001",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "medium",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+        "Sequential computation limits parallelization in training.",
+        "The paper targets long-range dependency modeling and proposes an attention-only alternative."
+      ],
+      "generated_claims": [
+        "The paper introduces the Transformer, a sequence transduction model based entirely on attention.",
+        "The Transformer replaces recurrent layers in encoder-decoder architectures with multi-headed self-attention.",
+        "The model is evaluated on machine translation tasks, achieving state-of-the-art results."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000004"
+        }
+      ],
+      "resolved_blocks": [
+        "b000004"
+      ],
+      "resolved_pages": [
+        1
+      ],
+      "gold_blocks": [
+        "b000022",
+        "b000025",
+        "b000027"
+      ],
+      "gold_pages": [
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+          "best_overlap": 0.3125,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        },
+        {
+          "required_claim": "Sequential computation limits parallelization in training.",
+          "best_overlap": 0.166667,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TOO_BROAD"
+        },
+        {
+          "required_claim": "The paper targets long-range dependency modeling and proposes an attention-only alternative.",
+          "best_overlap": 0.230769,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q008",
+      "question": "What method or technical approach does the target paper propose?",
+      "category": "algorithm_steps",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "BERT is based on a multi-layer bidirectional Transformer encoder.",
+        "Pre-training uses masked language modeling and next-sentence prediction.",
+        "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks."
+      ],
+      "generated_claims": [
+        "BERT uses a masked language model pre-training objective.",
+        "BERT concatenates the last 4 layers of BERT as features.",
+        "BERT applies fine-tuning with an additional output layer."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000010"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000011"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000012"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 9,
+          "block_id": "b000162"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 9,
+          "block_id": "b000163"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 9,
+          "block_id": "b000164"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 9,
+          "block_id": "b000165"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 9,
+          "block_id": "b000166"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000003"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000005"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000006"
+        }
+      ],
+      "resolved_blocks": [
+        "b000003",
+        "b000004",
+        "b000005",
+        "b000006",
+        "b000010",
+        "b000011",
+        "b000012",
+        "b000162",
+        "b000163",
+        "b000164",
+        "b000165",
+        "b000166"
+      ],
+      "resolved_pages": [
+        1,
+        9
+      ],
+      "gold_blocks": [
+        "b000012",
+        "b000013",
+        "b000060",
+        "b000063"
+      ],
+      "gold_pages": [
+        1,
+        2,
+        3
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "BERT is based on a multi-layer bidirectional Transformer encoder.",
+          "best_overlap": 0.2,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Pre-training uses masked language modeling and next-sentence prediction.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks.",
+          "best_overlap": 0.133333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.08333333333333333,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000010",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000011",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000012",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 9,
+            "block_id": "b000162",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 9,
+            "block_id": "b000163",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 9,
+            "block_id": "b000164",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 9,
+            "block_id": "b000165",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 9,
+            "block_id": "b000166",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000003",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000005",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000006",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.25
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q015",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 2,
+      "required_claims": [
+        "The work is primarily a survey/exploration rather than a new-method proposal.",
+        "The coordinate-ascent study can miss second-order effects among design choices.",
+        "Some automatic benchmark improvements may not correspond to better qualitative behavior."
+      ],
+      "generated_claims": [
+        "English-only pre-training does not achieve state-of-the-art results on translation tasks.",
+        "Additional exploration of objectives similar to those considered may not lead to significant gains."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1910.10683",
+          "page": 23,
+          "block_id": "b000307"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1910.10683",
+          "page": 23,
+          "block_id": "b000307"
+        }
+      ],
+      "resolved_blocks": [
+        "b000307"
+      ],
+      "resolved_pages": [
+        23
+      ],
+      "gold_blocks": [
+        "b000052",
+        "b000130",
+        "b000520"
+      ],
+      "gold_pages": [
+        3,
+        10,
+        40
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The work is primarily a survey/exploration rather than a new-method proposal.",
+          "best_overlap": 0.083333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "The coordinate-ascent study can miss second-order effects among design choices.",
+          "best_overlap": 0.083333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Some automatic benchmark improvements may not correspond to better qualitative behavior.",
+          "best_overlap": 0.272727,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1910.10683",
+            "page": 23,
+            "block_id": "b000307",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1910.10683",
+            "page": 23,
+            "block_id": "b000307",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q024",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The evaluation compares GPT-3 with seven smaller models.",
+        "Datasets are grouped into multiple task categories.",
+        "Performance is analyzed through scaling curves and task-specific evaluations."
+      ],
+      "generated_claims": [
+        "The experiments evaluate the 8 models on a wide range of datasets grouped into 9 categories.",
+        "Models are assessed in few-shot, one-shot, and zero-shot settings.",
+        "Cross-entropy loss improvements lead to consistent performance gains across tasks."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2005.14165",
+          "page": 10,
+          "block_id": "b000111"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2005.14165",
+          "page": 10,
+          "block_id": "b000111"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2005.14165",
+          "page": 10,
+          "block_id": "b000111"
+        }
+      ],
+      "resolved_blocks": [
+        "b000111"
+      ],
+      "resolved_pages": [
+        10
+      ],
+      "gold_blocks": [
+        "b000111",
+        "b000112",
+        "b000113",
+        "b000115"
+      ],
+      "gold_pages": [
+        10,
+        11
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The evaluation compares GPT-3 with seven smaller models.",
+          "best_overlap": 0.222222,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Datasets are grouped into multiple task categories.",
+          "best_overlap": 0.571429,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Performance is analyzed through scaling curves and task-specific evaluations.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2005.14165",
+            "page": 10,
+            "block_id": "b000111",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2005.14165",
+            "page": 10,
+            "block_id": "b000111",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2005.14165",
+            "page": 10,
+            "block_id": "b000111",
+            "gold_exact_match": true,
+            "failure_classification": null
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.25
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q049",
+      "question": "Compare the main contributions of the two target papers.",
+      "category": "multi_paper_comparison",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The Transformer paper introduces an attention-only architecture without recurrence.",
+        "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+        "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture."
+      ],
+      "generated_claims": [
+        "The Transformer replaces recurrence with attention, enabling parallelization and better performance.",
+        "BERT uses masked language models for bidirectional pre-training, improving task performance.",
+        "The Transformer achieves new state-of-the-art results in translation tasks."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 2,
+          "block_id": "b000022"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 2,
+          "block_id": "b000023"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 2,
+          "block_id": "b000013"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 2,
+          "block_id": "b000014"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1706.03762",
+          "page": 2,
+          "block_id": "b000022"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1706.03762",
+          "page": 2,
+          "block_id": "b000023"
+        }
+      ],
+      "resolved_blocks": [
+        "b000013",
+        "b000014",
+        "b000022",
+        "b000023"
+      ],
+      "resolved_pages": [
+        2
+      ],
+      "gold_blocks": [
+        "b000005",
+        "b000015",
+        "b000016",
+        "b000017",
+        "b000025"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The Transformer paper introduces an attention-only architecture without recurrence.",
+          "best_overlap": 0.4,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture.",
+          "best_overlap": 0.066667,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 2,
+            "block_id": "b000022",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 2,
+            "block_id": "b000023",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 2,
+            "block_id": "b000013",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 2,
+            "block_id": "b000014",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1706.03762",
+            "page": 2,
+            "block_id": "b000022",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1706.03762",
+            "page": 2,
+            "block_id": "b000023",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "QWEN_CANARY_BASELINE",
+      "sample_id": "q005",
+      "question": "For the target paper, what exact total energy consumption is reported for all experiments?",
+      "category": "unanswerable",
+      "difficulty": "easy",
+      "answerable": false,
+      "required_claim_count": 1,
+      "generated_claim_count": 0,
+      "required_claims": [
+        "No exact total energy-consumption value is reported in the paper."
+      ],
+      "generated_claims": [],
+      "generated_citation_keys": [],
+      "resolved_blocks": [],
+      "resolved_pages": [],
+      "gold_blocks": [],
+      "gold_pages": [],
+      "required_claim_matches": [
+        {
+          "required_claim": "No exact total energy-consumption value is reported in the paper.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": []
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 1.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": []
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": null,
+        "gold_page_context_hit": null,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q014",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+        "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+        "Training uses a consistent maximum-likelihood objective."
+      ],
+      "generated_claims": [
+        "T5-Base is compared to baseline and baseline-1T on multiple benchmarks.",
+        "Final experiments scale model size up to 11 billion parameters.",
+        "Results are reported on validation sets except final experiments use test sets."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000521"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1910.10683",
+          "page": 38,
+          "block_id": "b000488"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1910.10683",
+          "page": 14,
+          "block_id": "b000178"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1910.10683",
+          "page": 38,
+          "block_id": "b000488"
+        }
+      ],
+      "resolved_blocks": [
+        "b000178",
+        "b000488",
+        "b000521"
+      ],
+      "resolved_pages": [
+        14,
+        38,
+        40
+      ],
+      "gold_blocks": [
+        "b000053",
+        "b000094",
+        "b000107",
+        "b000108",
+        "b000110"
+      ],
+      "gold_pages": [
+        3,
+        7,
+        8
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+          "best_overlap": 0.083333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Training uses a consistent maximum-likelihood objective.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000521",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1910.10683",
+            "page": 38,
+            "block_id": "b000488",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1910.10683",
+            "page": 14,
+            "block_id": "b000178",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1910.10683",
+            "page": 38,
+            "block_id": "b000488",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q020",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Generalization of the laws beyond natural language is uncertain.",
+        "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+        "The small-data regime, regularization, and data augmentation were not thoroughly studied."
+      ],
+      "generated_claims": [
+        "Low confidence in Bcrit predictions far outside explored loss range.",
+        "Poor fits for small data regimes and no regularization or data augmentation experiments.",
+        "Scaling laws lack theoretical understanding and may break down at extreme scales."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2001.08361",
+          "page": 23,
+          "block_id": "b000857"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2001.08361",
+          "page": 23,
+          "block_id": "b000857"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2001.08361",
+          "page": 22,
+          "block_id": "b000831"
+        }
+      ],
+      "resolved_blocks": [
+        "b000831",
+        "b000857"
+      ],
+      "resolved_pages": [
+        22,
+        23
+      ],
+      "gold_blocks": [
+        "b000629",
+        "b000857"
+      ],
+      "gold_pages": [
+        19,
+        23
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Generalization of the laws beyond natural language is uncertain.",
+          "best_overlap": 0.111111,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+          "best_overlap": 0.454545,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The small-data regime, regularization, and data augmentation were not thoroughly studied.",
+          "best_overlap": 0.454545,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.6666666666666666,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2001.08361",
+            "page": 23,
+            "block_id": "b000857",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2001.08361",
+            "page": 23,
+            "block_id": "b000857",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2001.08361",
+            "page": 22,
+            "block_id": "b000831",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.5
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 1,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q029",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_results",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Experiments use T5 checkpoints from Small through XXL.",
+        "Baselines include model tuning and multi-task model tuning.",
+        "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations."
+      ],
+      "generated_claims": [
+        "Experiments evaluate on GLUE and SuperGLUE benchmarks using specified metrics.",
+        "Prompt tuning is compared to model tuning across model sizes and domain transfer.",
+        "Prompt tuning outperforms model tuning on out-of-domain datasets, especially with large domain shifts."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2104.08691",
+          "page": 13,
+          "block_id": "b000347"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2104.08691",
+          "page": 8,
+          "block_id": "b000217"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2104.08691",
+          "page": 8,
+          "block_id": "b000218"
+        }
+      ],
+      "resolved_blocks": [
+        "b000217",
+        "b000218",
+        "b000347"
+      ],
+      "resolved_pages": [
+        8,
+        13
+      ],
+      "gold_blocks": [
+        "b000086",
+        "b000088",
+        "b000089",
+        "b000231"
+      ],
+      "gold_pages": [
+        4,
+        9
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Experiments use T5 checkpoints from Small through XXL.",
+          "best_overlap": 0.125,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Baselines include model tuning and multi-task model tuning.",
+          "best_overlap": 0.428571,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations.",
+          "best_overlap": 0.384615,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2104.08691",
+            "page": 13,
+            "block_id": "b000347",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2104.08691",
+            "page": 8,
+            "block_id": "b000217",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2104.08691",
+            "page": 8,
+            "block_id": "b000218",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q031",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Full fine-tuning becomes less feasible as pre-trained models grow.",
+        "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+        "The paper seeks a parameter-efficient adaptation method."
+      ],
+      "generated_claims": [
+        "Full fine-tuning of large models like GPT-3 is challenging due to storage and deployment costs.",
+        "The paper proposes a parameter-efficient approach using low-rank adaptation (LoRA).",
+        "Existing methods like adapter layers and prompt tuning have limitations in large-scale scenarios."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 2,
+          "block_id": "b000031"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 2,
+          "block_id": "b000031"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000057"
+        }
+      ],
+      "resolved_blocks": [
+        "b000031",
+        "b000057"
+      ],
+      "resolved_pages": [
+        2,
+        3
+      ],
+      "gold_blocks": [
+        "b000004",
+        "b000023"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Full fine-tuning becomes less feasible as pre-trained models grow.",
+          "best_overlap": 0.363636,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+          "best_overlap": 0.461538,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The paper seeks a parameter-efficient adaptation method.",
+          "best_overlap": 0.75,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 2,
+            "block_id": "b000031",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 2,
+            "block_id": "b000031",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000057",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": false,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q032",
+      "question": "What are the target paper's main contributions?",
+      "category": "paper_contributions",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "LoRA freezes pre-trained weights and trains low-rank matrices.",
+        "It reduces trainable parameters and GPU memory requirements.",
+        "Its linear design can be merged at inference time with no added latency."
+      ],
+      "generated_claims": [
+        "LoRA freezes pre-trained model weights and injects trainable rank decomposition matrices into Transformer layers.",
+        "LoRA reduces trainable parameters by 10,000 times and GPU memory by 3 times for GPT-3 175B.",
+        "LoRA performs on-par or better than fine-tuning on RoBERTa, DeBERTa, GPT-2, and GPT-3."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 1,
+          "block_id": "b000004"
+        }
+      ],
+      "resolved_blocks": [
+        "b000004"
+      ],
+      "resolved_pages": [
+        1
+      ],
+      "gold_blocks": [
+        "b000004",
+        "b000026",
+        "b000027"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "LoRA freezes pre-trained weights and trains low-rank matrices.",
+          "best_overlap": 0.8,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "It reduces trainable parameters and GPU memory requirements.",
+          "best_overlap": 0.75,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Its linear design can be merged at inference time with no added latency.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": true,
+            "failure_classification": null
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.3333333333333333
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q035",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "medium",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The mechanism behind fine-tuning and LoRA remains unclear.",
+        "Selecting which matrices to adapt currently depends largely on heuristics.",
+        "Combining LoRA with other efficient adaptation methods remains a future direction."
+      ],
+      "generated_claims": [
+        "Adapter layers introduce inference latency in large-scale production scenarios.",
+        "Prompt tuning reduces the usable sequence length for downstream tasks.",
+        "LoRA cannot batch inputs with different A and B in a single forward pass when weights are merged."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000057"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2106.09685",
+          "page": 3,
+          "block_id": "b000060"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2106.09685",
+          "page": 5,
+          "block_id": "b000081"
+        }
+      ],
+      "resolved_blocks": [
+        "b000057",
+        "b000060",
+        "b000081"
+      ],
+      "resolved_pages": [
+        3,
+        5
+      ],
+      "gold_blocks": [
+        "b000237",
+        "b000239"
+      ],
+      "gold_pages": [
+        12,
+        13
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The mechanism behind fine-tuning and LoRA remains unclear.",
+          "best_overlap": 0.222222,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Selecting which matrices to adapt currently depends largely on heuristics.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Combining LoRA with other efficient adaptation methods remains a future direction.",
+          "best_overlap": 0.272727,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000057",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2106.09685",
+            "page": 3,
+            "block_id": "b000060",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2106.09685",
+            "page": 5,
+            "block_id": "b000081",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": false,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q036",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 2,
+      "required_claims": [
+        "Bigger language models do not automatically follow user intent.",
+        "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+        "The paper studies fine-tuning with human feedback as an alignment method."
+      ],
+      "generated_claims": [
+        "The paper addresses aligning AI systems with human intentions.",
+        "It focuses on improving alignment of current language models using RLHF."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2203.02155",
+          "page": 17,
+          "block_id": "b000303"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 17,
+          "block_id": "b000303"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000049"
+        }
+      ],
+      "resolved_blocks": [
+        "b000049",
+        "b000303"
+      ],
+      "resolved_pages": [
+        4,
+        17
+      ],
+      "gold_blocks": [
+        "b000011",
+        "b000013"
+      ],
+      "gold_pages": [
+        1
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Bigger language models do not automatically follow user intent.",
+          "best_overlap": 0.222222,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+          "best_overlap": 0.111111,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "The paper studies fine-tuning with human feedback as an alignment method.",
+          "best_overlap": 0.333333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2203.02155",
+            "page": 17,
+            "block_id": "b000303",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 17,
+            "block_id": "b000303",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000049",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q037",
+      "question": "What are the target paper's main contributions?",
+      "category": "paper_contributions",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The paper fine-tunes language models with human demonstrations and preferences.",
+        "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+        "The paper reports improvements in truthfulness and some toxicity measures."
+      ],
+      "generated_claims": [
+        "Fine-tuning large language models using human preferences significantly improves their behavior on a wide range of tasks.",
+        "InstructGPT models are preferred over GPT-3 outputs by labelers.",
+        "The 1.3B InstructGPT outperforms the 175B GPT-3 despite having over 100x fewer parameters."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2203.02155",
+          "page": 4,
+          "block_id": "b000045"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2203.02155",
+          "page": 3,
+          "block_id": "b000034"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2203.02155",
+          "page": 3,
+          "block_id": "b000034"
+        }
+      ],
+      "resolved_blocks": [
+        "b000034",
+        "b000045"
+      ],
+      "resolved_pages": [
+        3,
+        4
+      ],
+      "gold_blocks": [
+        "b000011",
+        "b000027",
+        "b000031",
+        "b000036",
+        "b000037",
+        "b000038"
+      ],
+      "gold_pages": [
+        1,
+        2,
+        3
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The paper fine-tunes language models with human demonstrations and preferences.",
+          "best_overlap": 0.454545,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+          "best_overlap": 0.7,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "The paper reports improvements in truthfulness and some toxicity measures.",
+          "best_overlap": 0.1,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2203.02155",
+            "page": 4,
+            "block_id": "b000045",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2203.02155",
+            "page": 3,
+            "block_id": "b000034",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2203.02155",
+            "page": 3,
+            "block_id": "b000034",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q044",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "Held-out tasks are excluded from the fine-tuning data.",
+        "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+        "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics."
+      ],
+      "generated_claims": [
+        "Evaluation uses held-out benchmarks: MMLU, BBH, TyDiQA, MGSM.",
+        "Methods include direct and chain-of-thought prompting with few-shot exemplars.",
+        "Human evaluation on 190 open-ended examples shows Flan-PaLM preferred 79% of the time."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2210.11416",
+          "page": 5,
+          "block_id": "b000112"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2210.11416",
+          "page": 5,
+          "block_id": "b000113"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2210.11416",
+          "page": 11,
+          "block_id": "b000243"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2210.11416",
+          "page": 12,
+          "block_id": "b000246"
+        }
+      ],
+      "resolved_blocks": [
+        "b000112",
+        "b000113",
+        "b000243",
+        "b000246"
+      ],
+      "resolved_pages": [
+        5,
+        11,
+        12
+      ],
+      "gold_blocks": [
+        "b000112",
+        "b000113",
+        "b000114"
+      ],
+      "gold_pages": [
+        5
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "Held-out tasks are excluded from the fine-tuning data.",
+          "best_overlap": 0.2,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics.",
+          "best_overlap": 0.461538,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.5,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2210.11416",
+            "page": 5,
+            "block_id": "b000112",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2210.11416",
+            "page": 5,
+            "block_id": "b000113",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2210.11416",
+            "page": 11,
+            "block_id": "b000243",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2210.11416",
+            "page": 12,
+            "block_id": "b000246",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.6666666666666666
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 1,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q001",
+      "question": "What research problem does the target paper address?",
+      "category": "research_background",
+      "difficulty": "medium",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+        "Sequential computation limits parallelization in training.",
+        "The paper targets long-range dependency modeling and proposes an attention-only alternative."
+      ],
+      "generated_claims": [
+        "Dominant sequence transduction models use complex recurrent or convolutional networks.",
+        "The Transformer is a new architecture based solely on attention mechanisms.",
+        "The Transformer dispenses with recurrence and convolutions entirely."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000017"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000017"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000017"
+        }
+      ],
+      "resolved_blocks": [
+        "b000017"
+      ],
+      "resolved_pages": [
+        1
+      ],
+      "gold_blocks": [
+        "b000022",
+        "b000025",
+        "b000027"
+      ],
+      "gold_pages": [
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+          "best_overlap": 0.3125,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        },
+        {
+          "required_claim": "Sequential computation limits parallelization in training.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "The paper targets long-range dependency modeling and proposes an attention-only alternative.",
+          "best_overlap": 0.153846,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000017",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000017",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000017",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q008",
+      "question": "What method or technical approach does the target paper propose?",
+      "category": "algorithm_steps",
+      "difficulty": "easy",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 2,
+      "required_claims": [
+        "BERT is based on a multi-layer bidirectional Transformer encoder.",
+        "Pre-training uses masked language modeling and next-sentence prediction.",
+        "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks."
+      ],
+      "generated_claims": [
+        "BERT uses a masked language model (MLM) pre-training objective.",
+        "The MLM objective enables deep bidirectional representations from Transformers."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000010"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000011"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000003"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1810.04805",
+          "page": 1,
+          "block_id": "b000004"
+        }
+      ],
+      "resolved_blocks": [
+        "b000003",
+        "b000004",
+        "b000010",
+        "b000011"
+      ],
+      "resolved_pages": [
+        1
+      ],
+      "gold_blocks": [
+        "b000012",
+        "b000013",
+        "b000060",
+        "b000063"
+      ],
+      "gold_pages": [
+        1,
+        2,
+        3
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "BERT is based on a multi-layer bidirectional Transformer encoder.",
+          "best_overlap": 0.2,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Pre-training uses masked language modeling and next-sentence prediction.",
+          "best_overlap": 0.5,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks.",
+          "best_overlap": 0.133333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000010",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000011",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000003",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1810.04805",
+            "page": 1,
+            "block_id": "b000004",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q015",
+      "question": "What limitations or unresolved issues are reported in the target paper?",
+      "category": "limitations",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The work is primarily a survey/exploration rather than a new-method proposal.",
+        "The coordinate-ascent study can miss second-order effects among design choices.",
+        "Some automatic benchmark improvements may not correspond to better qualitative behavior."
+      ],
+      "generated_claims": [
+        "English-only pre-training did not achieve state-of-the-art on translation tasks.",
+        "Scale and English-language pre-training may be insufficient to match sophisticated methods like backtranslation.",
+        "Improvements to ROUGE scores do not necessarily correspond to more coherent summaries."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000519"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000519"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1910.10683",
+          "page": 40,
+          "block_id": "b000519"
+        }
+      ],
+      "resolved_blocks": [
+        "b000519"
+      ],
+      "resolved_pages": [
+        40
+      ],
+      "gold_blocks": [
+        "b000052",
+        "b000130",
+        "b000520"
+      ],
+      "gold_pages": [
+        3,
+        10,
+        40
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The work is primarily a survey/exploration rather than a new-method proposal.",
+          "best_overlap": 0.083333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "The coordinate-ascent study can miss second-order effects among design choices.",
+          "best_overlap": 0.083333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        },
+        {
+          "required_claim": "Some automatic benchmark improvements may not correspond to better qualitative behavior.",
+          "best_overlap": 0.363636,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.0,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000519",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000519",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1910.10683",
+            "page": 40,
+            "block_id": "b000519",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 3,
+        "classifications": [
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q024",
+      "question": "How are the target paper's experiments designed and evaluated?",
+      "category": "experiment_setup",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The evaluation compares GPT-3 with seven smaller models.",
+        "Datasets are grouped into multiple task categories.",
+        "Performance is analyzed through scaling curves and task-specific evaluations."
+      ],
+      "generated_claims": [
+        "Eight GPT-3 models of sizes from 125M to 175B parameters were trained.",
+        "Training data includes filtered Common Crawl and curated datasets like WebText2 and Wikipedia.",
+        "Evaluation covers 9 task categories in zero-shot, one-shot, and few-shot settings."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "2005.14165",
+          "page": 8,
+          "block_id": "b000071"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "2005.14165",
+          "page": 8,
+          "block_id": "b000086"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "2005.14165",
+          "page": 10,
+          "block_id": "b000113"
+        }
+      ],
+      "resolved_blocks": [
+        "b000071",
+        "b000086",
+        "b000113"
+      ],
+      "resolved_pages": [
+        8,
+        10
+      ],
+      "gold_blocks": [
+        "b000111",
+        "b000112",
+        "b000113",
+        "b000115"
+      ],
+      "gold_pages": [
+        10,
+        11
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The evaluation compares GPT-3 with seven smaller models.",
+          "best_overlap": 0.333333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        },
+        {
+          "required_claim": "Datasets are grouped into multiple task categories.",
+          "best_overlap": 0.285714,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        },
+        {
+          "required_claim": "Performance is analyzed through scaling curves and task-specific evaluations.",
+          "best_overlap": 0.2,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.3333333333333333,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "2005.14165",
+            "page": 8,
+            "block_id": "b000071",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "2005.14165",
+            "page": 8,
+            "block_id": "b000086",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "2005.14165",
+            "page": 10,
+            "block_id": "b000113",
+            "gold_exact_match": true,
+            "failure_classification": null
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.25
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 2,
+        "classifications": [
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "SUPPORTED_BY_NON_GOLD_BLOCK",
+          "EVALUATOR_FALSE_POSITIVE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q049",
+      "question": "Compare the main contributions of the two target papers.",
+      "category": "multi_paper_comparison",
+      "difficulty": "hard",
+      "answerable": true,
+      "required_claim_count": 3,
+      "generated_claim_count": 3,
+      "required_claims": [
+        "The Transformer paper introduces an attention-only architecture without recurrence.",
+        "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+        "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture."
+      ],
+      "generated_claims": [
+        "Transformer is based solely on attention mechanisms, eschewing recurrence and convolutions.",
+        "Transformer achieves state-of-the-art translation quality with greater parallelization.",
+        "BERT uses masked language models for bidirectional pre-training, advancing state-of-the-art on eleven NLP tasks."
+      ],
+      "generated_citation_keys": [
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 2,
+          "block_id": "b000022"
+        },
+        {
+          "claim_id": "c1",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000017"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1706.03762",
+          "page": 10,
+          "block_id": "b000164"
+        },
+        {
+          "claim_id": "c2",
+          "paper_id": "1706.03762",
+          "page": 1,
+          "block_id": "b000017"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 2,
+          "block_id": "b000013"
+        },
+        {
+          "claim_id": "c3",
+          "paper_id": "1810.04805",
+          "page": 2,
+          "block_id": "b000014"
+        }
+      ],
+      "resolved_blocks": [
+        "b000013",
+        "b000014",
+        "b000017",
+        "b000022",
+        "b000164"
+      ],
+      "resolved_pages": [
+        1,
+        2,
+        10
+      ],
+      "gold_blocks": [
+        "b000005",
+        "b000015",
+        "b000016",
+        "b000017",
+        "b000025"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "required_claim_matches": [
+        {
+          "required_claim": "The Transformer paper introduces an attention-only architecture without recurrence.",
+          "best_overlap": 0.3,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_MATCHER_FALSE_NEGATIVE"
+        },
+        {
+          "required_claim": "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+          "best_overlap": 0.583333,
+          "matched_by_legacy_threshold": true,
+          "failure_classification": null
+        },
+        {
+          "required_claim": "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture.",
+          "best_overlap": 0.133333,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 0.3333333333333333,
+        "citation_results": [
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 2,
+            "block_id": "b000022",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c1",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000017",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1706.03762",
+            "page": 10,
+            "block_id": "b000164",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK"
+          },
+          {
+            "claim_id": "c2",
+            "paper_id": "1706.03762",
+            "page": 1,
+            "block_id": "b000017",
+            "gold_exact_match": true,
+            "failure_classification": null
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 2,
+            "block_id": "b000013",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          },
+          {
+            "claim_id": "c3",
+            "paper_id": "1810.04805",
+            "page": 2,
+            "block_id": "b000014",
+            "gold_exact_match": false,
+            "failure_classification": "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE"
+          }
+        ]
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 0.2
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 1,
+        "classifications": [
+          "EVALUATOR_FALSE_POSITIVE",
+          "EVALUATOR_FALSE_POSITIVE",
+          "SUPPORTED_BY_EQUIVALENT_PAGE"
+        ]
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": true,
+        "gold_page_context_hit": true,
+        "required_claim_evidence_coverage": 1.0
+      }
+    },
+    {
+      "baseline_label": "DEEPSEEK_CANARY_BASELINE",
+      "sample_id": "q005",
+      "question": "For the target paper, what exact total energy consumption is reported for all experiments?",
+      "category": "unanswerable",
+      "difficulty": "easy",
+      "answerable": false,
+      "required_claim_count": 1,
+      "generated_claim_count": 0,
+      "required_claims": [
+        "No exact total energy-consumption value is reported in the paper."
+      ],
+      "generated_claims": [],
+      "generated_citation_keys": [],
+      "resolved_blocks": [],
+      "resolved_pages": [],
+      "gold_blocks": [],
+      "gold_pages": [],
+      "required_claim_matches": [
+        {
+          "required_claim": "No exact total energy-consumption value is reported in the paper.",
+          "best_overlap": 0.0,
+          "matched_by_legacy_threshold": false,
+          "failure_classification": "CLAIM_TRULY_OMITTED"
+        }
+      ],
+      "citation_precision_result": {
+        "legacy_metric_name": "citation_precision",
+        "audited_metric_name": "gold_citation_exact_match_precision",
+        "value": 1.0,
+        "citation_results": []
+      },
+      "citation_recall_result": {
+        "legacy_metric_name": "citation_recall",
+        "audited_metric_name": "gold_block_exact_recall",
+        "value": 1.0
+      },
+      "unsupported_claim_result": {
+        "legacy_count": 0,
+        "classifications": []
+      },
+      "context_contains_required_evidence": {
+        "gold_block_context_hit": null,
+        "gold_page_context_hit": null,
+        "required_claim_evidence_coverage": 1.0
+      }
+    }
+  ],
+  "failure_category_vocabularies": {
+    "required_claim": [
+      "CLAIM_EXPRESSED_WITH_DIFFERENT_WORDING",
+      "CLAIM_MATCHER_FALSE_NEGATIVE",
+      "CLAIM_MERGED_INTO_COMPOSITE",
+      "CLAIM_TOO_BROAD",
+      "CLAIM_TOO_NARROW",
+      "CLAIM_TRULY_OMITTED",
+      "EVIDENCE_NOT_IN_CONTEXT",
+      "GOLD_CLAIM_AMBIGUOUS",
+      "UNKNOWN"
+    ],
+    "unsupported_claim": [
+      "CITATION_BINDING_WRONG",
+      "CLAIM_OVERSTATED",
+      "CLAIM_USES_EXTERNAL_KNOWLEDGE",
+      "EVALUATOR_FALSE_POSITIVE",
+      "NO_SUPPORTING_EVIDENCE",
+      "PARTIALLY_SUPPORTED_COMPOSITE",
+      "SUPPORTED_BY_EQUIVALENT_PAGE",
+      "SUPPORTED_BY_NON_GOLD_BLOCK",
+      "UNKNOWN"
+    ],
+    "citation_precision": [
+      "CITATION_DOES_NOT_SUPPORT_CLAIM",
+      "CITATION_MATCHER_TOO_STRICT",
+      "CITATION_PARTIALLY_SUPPORTS_CLAIM",
+      "CITATION_SUPPORTS_CLAIM_BUT_NOT_GOLD_BLOCK",
+      "CITATION_SUPPORTS_CLAIM_ON_EQUIVALENT_PAGE",
+      "CLAIM_TOO_COMPOSITE",
+      "UNKNOWN"
+    ]
+  },
+  "auditor_conclusion": "EVALUATOR_BASICALLY_VALID_BUT_EXACT_GOLD_METRIC_NAMES_ARE_TOO_BROAD"
+}

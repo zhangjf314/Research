@@ -1,0 +1,129 @@
+{
+  "schema_version": "portfolio-evidence-manifest-v1",
+  "generated_at": "2026-07-20T15:52:50Z",
+  "branch": "eval/retrieval-recall-benchmark-v1",
+  "head": "1879b4486dfd7a6bd49dc7aa4d907db0efc0088c",
+  "package_version": "1.0.0+portfolio",
+  "display_version": "1.0.0-portfolio",
+  "release_target": "v1.0.0-portfolio",
+  "release_decision": "LOCAL_RELEASE_PREPARED_AWAITING_USER_MERGE_TAG_PUSH_AUTHORIZATION",
+  "strong_generalization_claim_allowed": false,
+  "semantic_claim_support_audit": "NOT_FORMALLY_VALIDATED",
+  "llm": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "template_fallback": false
+  },
+  "retrieval": {
+    "reranker_enabled": false,
+    "generalization_evidence": "DIAGNOSTIC_ONLY",
+    "gold_dev_v1_records": 50,
+    "gold_dev_v1_approved": 50,
+    "retrieval_diagnostic_v1_records": 27,
+    "shadow_holdout_pilot_v1_records": 0
+  },
+  "full_qa": {
+    "source": "data/evaluation/deepseek-full-qa-final-v1.json",
+    "sha256": "d3b3687a8ef88c56b16e568a1bcc73198935ddff80b18b953dac584529c89a36",
+    "attempted": 50,
+    "completed": 50,
+    "failed": 0,
+    "completion_rate": 1.0,
+    "structured_output_success_rate": 1.0,
+    "citation_id_validity": 1.0,
+    "citation_context_validity": 1.0,
+    "page_accuracy": 1.0,
+    "template_fallback_count": 0,
+    "raw_attribute_error_count": 0,
+    "raw_value_error_exposed_count": 0,
+    "unclassified_exception_count": 0,
+    "input_tokens": 522507,
+    "output_tokens": 6903,
+    "total_tokens": 529410,
+    "estimated_cost_usd": 0.07508382,
+    "p95_latency_ms": 8216.745
+  },
+  "deep_research": {
+    "source": "artifacts/deepseek-production-deep-research-v2/live-q003-ed900ef2e202/result.json",
+    "sha256": "e10568808dfad1924bfe34b844d637ac920a01a3288ff77787d0b963ca8de0f5",
+    "run_id": "live-q003-ed900ef2e202",
+    "status": "completed",
+    "nodes": [
+      "plan",
+      "retrieve",
+      "assess_evidence",
+      "synthesize",
+      "validate_citations",
+      "persist_trace"
+    ],
+    "retrieval_calls": 1,
+    "provider_completed_request_count": 1,
+    "input_tokens": 6714,
+    "output_tokens": 82,
+    "total_tokens": 6796,
+    "monetary_cost_usd": "0.00096292",
+    "elapsed_seconds": 1.337596,
+    "claim_count": 2,
+    "citation_count": 2,
+    "citation_validation": "passed",
+    "active_reserved_tokens": 0,
+    "reranker_called": false,
+    "checkpoint_evidence": "formal Deep Research artifact uses sqlite smoke checkpoint; Stage 13.40 PostgreSQL checkpoint recovery v2 separately passed with run pg-recovery-q003-8a8bf07e6a4c"
+  },
+  "artifact_hashes": {
+    "deepseek_full_qa_json": "d3b3687a8ef88c56b16e568a1bcc73198935ddff80b18b953dac584529c89a36",
+    "deepseek_full_qa_csv": "c27feaa2bebeb49a4afcfe6807ac6100268985fd3b3536b15e9019fa77a8f8e8",
+    "deepseek_full_qa_summary": "b00cd3c74d41253cc845991b1210fbe89630e8facfb0b38ce218075264ecd897",
+    "deepseek_full_qa_audit": "a04d086d84232c0ccc71890d343f9a3c19d07e050b7ee8d822afdfb60af0420d",
+    "deep_research_report": "fb92101fbb35bcb8750f7b035add7db726b8ad81ad23e8e199ae2bdd185efe26",
+    "deep_research_result": "e10568808dfad1924bfe34b844d637ac920a01a3288ff77787d0b963ca8de0f5",
+    "full_qa_config": "e77c76007fcb983b0aaf4a645a4d4123dbd7958775e1b53d8dbfb2be26b5c45b",
+    "deep_research_config": "afd8e22191aa0ae54b5d0f972ad8f61c37bb376674b7434ed729ff2f8f6c646a",
+    "gold_set_v1": "24b21d7ce5264d4f22230cfb6bc9ec788ef6b76dc0ad629a20ae682c5184599e",
+    "retrieval_gold_v2": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+    "production_corpus_v1": "e44542a3082ddec36c6ff7afe069e4d83a2973b51e476705e6a7f5dd18ee66ce"
+  },
+  "operations_gates": {
+    "postgresql_checkpoint_recovery_v2": "PASSED",
+    "postgresql_backup_restore_v2": "PASSED",
+    "qdrant_snapshot_restore_v2": "PASSED",
+    "docker_ocr_production_v2": "PASSED",
+    "redis_production_v2": "RECHECKED",
+    "portfolio_30_minute_stability_test": "PASSED"
+  },
+  "stage13_40_gates": {
+    "git_history_secret_review": {
+      "gate": "PASSED",
+      "total_hits": 36,
+      "confirmed_real_secret": 0,
+      "unresolved": 0
+    },
+    "postgresql_checkpoint_recovery_v2": {
+      "gate": "PASSED",
+      "run_id": "pg-recovery-q003-8a8bf07e6a4c",
+      "total_tokens": 6796,
+      "monetary_cost_usd": "0.00096292"
+    },
+    "postgresql_backup_restore_v2": {
+      "gate": "PASSED",
+      "restore_database": "paper_research_restore_v2_20260720150633"
+    },
+    "qdrant_snapshot_restore_v2": {
+      "gate": "PASSED",
+      "source_collection": "papers_jina_eval34_v2__20260713152149",
+      "restore_collection": "papers_jina_eval34_v2__20260713152149__restore_v2_20260720150845"
+    },
+    "docker_ocr_production_v2": {
+      "gate": "PASSED",
+      "citation_page_accuracy": 1.0
+    },
+    "portfolio_30_minute_stability_test": {
+      "gate": "PASSED",
+      "actual_duration_seconds": 1802.453,
+      "request_count": 568,
+      "failure_count": 0,
+      "total_tokens": 2481,
+      "estimated_cost_usd": 0.00006328
+    }
+  }
+}

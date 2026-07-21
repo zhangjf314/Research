@@ -1,0 +1,237 @@
+{
+  "schema_version": "evidence-qa-dev-v3-2-summary-v1",
+  "evaluation_version": "evidence-qa-dev-v3.2",
+  "selection_policy": "latest-successful-with-failures-visible",
+  "selected_runs": [
+    "live-dev-v3-2-q001-ecfd41f84a1b",
+    "live-dev-v3-2-q002-0b25da8fd4ec",
+    "live-dev-v3-2-q004-22960d3f7c5f",
+    "live-dev-v3-2-q005-54831df6ea19",
+    "live-dev-v3-2-q007-86133230c0ea",
+    "live-dev-v3-2-q008-186fbe5dad14",
+    "live-dev-v3-2-q013-68b8399a8c40",
+    "live-dev-v3-2-q015-daea4cf852f7",
+    "live-dev-v3-2-q019-4cffdb0499bb",
+    "live-dev-v3-2-q050-35d1729bb6a8"
+  ],
+  "attempt_history": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v3-2-q001-ecfd41f84a1b",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v3-2-q002-0b25da8fd4ec",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v3-2-q004-22960d3f7c5f",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v3-2-q005-54831df6ea19",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v3-2-q007-86133230c0ea",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v3-2-q008-186fbe5dad14",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v3-2-q013-68b8399a8c40",
+      "status": "validation_failed",
+      "selected": true
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v3-2-q015-daea4cf852f7",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v3-2-q019-4cffdb0499bb",
+      "status": "completed",
+      "selected": true
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v3-2-q050-35d1729bb6a8",
+      "status": "validation_failed",
+      "selected": true
+    }
+  ],
+  "raw_model_layer": {
+    "provider_completed": 10,
+    "raw_json_valid": 8,
+    "raw_schema_success": 7,
+    "raw_slot_success": 21,
+    "raw_answered_slots": 18,
+    "raw_citations": 22,
+    "raw_unsupported": 0
+  },
+  "final_policy_layer": {
+    "final_schema_success": 6,
+    "final_slot_success": 18,
+    "answered_original": 10,
+    "answered_narrowed": 4,
+    "unsupported_slots": 4,
+    "total_citations": 14,
+    "average_citations_per_answered": 1.0,
+    "obligation_completeness": 0.6666666666666666,
+    "numeric_completeness": 0.6666666666666666,
+    "comparison_completeness": 0.6666666666666666,
+    "answerable_question_macro_exact_relation_recall": 0.16666666666666666,
+    "required_claim_macro_exact_recall": 0.16666666666666666,
+    "micro_core_relation_recall": 0.2,
+    "core_set_completion": 0.14814814814814814,
+    "any_valid_evidence_recall": 0.25925925925925924,
+    "equivalent_evidence_hit_rate": 0.25,
+    "wrong_evidence": 1,
+    "citation_dilution": 0.0
+  },
+  "all_manifest_conservative": {
+    "manifest_questions": 10,
+    "manifest_required_claims": 27,
+    "run_count": 10,
+    "request_attempts": 10,
+    "provider_completed": 10,
+    "provider_failures": 0,
+    "validation_failures": {
+      "valid_json_wrong_schema": 1,
+      "malformed_json": 2,
+      "unknown_citation_id": 1
+    },
+    "input_tokens": 24543,
+    "output_tokens": 3478,
+    "total_tokens": 28021,
+    "monetary_cost_usd": "0",
+    "elapsed_seconds_total": 148.42229,
+    "latency_p50_seconds": 11.9819295,
+    "latency_p95_seconds": 33.0430053,
+    "usage_records": 10,
+    "active_reserved_tokens": 96000,
+    "retries": 0,
+    "reranker_called": false,
+    "silent_omissions": 9,
+    "refusal_accuracy": 0.0,
+    "existing_reviewed_pairs": 7,
+    "new_pending_pairs": 7,
+    "human_strict_support_existing_reviewed": 0.8571428571428571,
+    "human_lenient_support_existing_reviewed": 0.8571428571428571
+  },
+  "per_question": [
+    {
+      "question_id": "q001",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.16666666666666666
+    },
+    {
+      "question_id": "q002",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "question_exact_relation_recall": 0.6666666666666666
+    },
+    {
+      "question_id": "q004",
+      "status": "completed",
+      "claim_scores": [
+        1.0,
+        0.0,
+        1.0
+      ],
+      "question_exact_relation_recall": 0.6666666666666666
+    },
+    {
+      "question_id": "q005",
+      "status": "validation_failed",
+      "claim_scores": []
+    },
+    {
+      "question_id": "q007",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    },
+    {
+      "question_id": "q008",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    },
+    {
+      "question_id": "q013",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    },
+    {
+      "question_id": "q015",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    },
+    {
+      "question_id": "q019",
+      "status": "completed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    },
+    {
+      "question_id": "q050",
+      "status": "validation_failed",
+      "claim_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "question_exact_relation_recall": 0.0
+    }
+  ],
+  "historical_gate_modified": false,
+  "stage13_8_historical_gate": "FAILED"
+}

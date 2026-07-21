@@ -1,0 +1,25 @@
+{
+  "schema_version": "payload-contract-v2-protocol-v1",
+  "candidate": "schema-reliability-v2-candidate",
+  "model_payload_schema": "required-claim-model-payload-v2",
+  "local_envelope_schema": "required-claim-local-envelope-v2",
+  "final_result_schema": "required-claim-final-result-v2",
+  "prompt_version": "qa-required-claims-minimal-payload-v3.4-candidate",
+  "prompt_hash": "fe0671bad993f2e71be9d496cbe7b3dcc51dd3d02b3133f81aff19144cd77e6b",
+  "canonicalization_version": "refusal-empty-to-null-canonicalization-v1",
+  "selected_option": "A",
+  "answerable_refusal_inputs": [
+    null,
+    ""
+  ],
+  "canonical_answerable_refusal": null,
+  "unanswerable_refusal": "trimmed non-empty string",
+  "allowed_changed_paths": [
+    "$.refusal_reason"
+  ],
+  "allowed_value_transition": "\"\" -> null",
+  "json_repair": false,
+  "semantic_repair": false,
+  "live_authorized": false,
+  "protocol_signature": "73d764b2ec79c96f7883583f5be3fa299215057e88fead6395749080a814d3ea"
+}

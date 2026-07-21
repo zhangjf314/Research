@@ -1,0 +1,11 @@
+{
+  "schema_version": "set-completion-v2-enumeration-failures-v1",
+  "complementary_gap_claims": 3,
+  "generic_reproducible_without_gold": 0,
+  "root_cause_distribution": {
+    "oracle_relation_not_reproducible_without_gold": 3
+  },
+  "unknown": 0,
+  "COMPLEMENTARY_ENUMERATION_FAILURE_ATTRIBUTION": "COMPLETE",
+  "PRIMARY_ENUMERATION_FAILURE": "oracle_relation_not_reproducible_without_gold"
+}

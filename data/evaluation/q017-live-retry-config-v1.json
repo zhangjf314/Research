@@ -1,0 +1,71 @@
+{
+  "schema_version": "q017-live-retry-config-v1",
+  "created_at": "2026-07-18T15:48:38.758489+00:00",
+  "git_commit": "98058ceef882b317afa9b6f2086b9da9ffdac3d0",
+  "git_status_short": "M .env.example\n M .gitignore\n M README.md\n M data/evaluation/provider-health-v1.json\n M data/evaluation/retrieval-recall-benchmark-v1-final-audit.json\n M data/evaluation/retrieval-recall-benchmark-v1-results.json\n M docker-compose.yml\n M docs/interview-guide.md\n M docs/known-limitations.md\n M docs/release-checklist.md\n M docs/resume-description.md\n M docs/retrieval-recall-benchmark-v1-results.md\n M scripts/check_llm_provider_health_v1.py\n M scripts/run_retrieval_recall_benchmark_v1.py\n M src/paper_research/__init__.py\n M src/paper_research/api/routes/capabilities.py\n M src/paper_research/api/routes/health.py\n M src/paper_research/api/routes/rag.py\n M src/paper_research/config.py\n M src/paper_research/generation/qa_service.py\n M src/paper_research/providers/factory.py\n M src/paper_research/providers/llm.py\n M src/paper_research/retrieval/hybrid.py\n M tests/test_stage10_profiles_and_review.py\n M tests/test_stage13_27_retrieval_benchmark.py\n M tests/test_stage13_3_reliability_recovery.py\n?? artifacts/full-qa-production-trace-v1.json\n?? artifacts/live-model-smoke-test-v1.json\n?? artifacts/siliconflow-structured-output-compatibility-v1.json\n?? artifacts/stage13-31-q002-provider-response-audit.json\n?? artifacts/stage13-31-q002-reproduction-input.json\n?? data/evaluation/context-selection-comparison-v1.csv\n?? data/evaluation/context-selection-comparison-v1.json\n?? data/evaluation/full-qa-production-config-v1.json\n?? data/evaluation/full-qa-production-items-v1.jsonl\n?? data/evaluation/full-qa-production-v1.csv\n?? data/evaluation/full-qa-production-v1.json\n?? data/evaluation/gold-dev-v1-run-manifest.json\n?? data/evaluation/q017-full-qa-failure-freeze-v1.json\n?? data/evaluation/q017-retrieval-context-analysis-v1.json\n?? data/evaluation/retrieval-failures-v1.jsonl\n?? data/evaluation/retrieval-generalization-v1.csv\n?? data/evaluation/retrieval-generalization-v1.json\n?? data/evaluation/shadow-holdout-requirements-v1.json\n?? docs/context-selection-comparison-v1.md\n?? docs/docker-access-audit.md\n?? docs/full-qa-production-audit-v1.md\n?? docs/full-qa-production-config-v1.md\n?? docs/full-qa-production-summary-v1.md\n?? docs/live-model-smoke-test-v1.md\n?? docs/portfolio-evaluation-policy-v1.md\n?? docs/production-full-qa-runtime-audit.md\n?? docs/production-runtime-config-audit.md\n?? docs/q017-full-qa-failure-freeze-v1.md\n?? docs/q017-retrieval-context-root-cause-v1.md\n?? docs/retrieval-failure-analysis-v1.md\n?? docs/retrieval-generalization-audit-v1.md\n?? docs/shadow-holdout-requirements-v1.md\n?? docs/siliconflow-structured-output-compatibility-v1.md\n?? docs/stage-13-27-audit.md\n?? docs/stage-13-31-root-cause-report.md\n?? docs/stage13-31-q002-context-audit.md\n?? docs/stage13-31-qa-call-chain-audit.md\n?? docs/version-consistency-audit.md\n?? scripts/analyze_q017_context_selection_v1.py\n?? scripts/analyze_retrieval_generalization_v1.py\n?? scripts/build_q017_live_retry_config_v1.py\n?? scripts/debug_claim_qa_pipeline_v1.py\n?? scripts/production_full_qa_gate_v1.py\n?? scripts/run_production_full_qa_v1.py\n?? scripts/run_production_qa_smoke_v1.py\n?? src/paper_research/version.py\n?? tests/test_stage13_30_production_full_qa_gate.py\n?? tests/test_stage13_31_claim_qa_pipeline.py\n?? tests/test_stage13_32_q017_observability.py\n?? tests/test_version_consistency.py",
+  "dataset_hashes": {
+    "gold_set_v1": "24b21d7ce5264d4f22230cfb6bc9ec788ef6b76dc0ad629a20ae682c5184599e",
+    "retrieval_gold_v2": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+    "production_corpus_v1": "e44542a3082ddec36c6ff7afe069e4d83a2973b51e476705e6a7f5dd18ee66ce"
+  },
+  "q017_gold_hash": "b6995e7b9a8c1e29f71ce2cdbaaac83ffb10080048dfd8767e615b5066cb4391",
+  "retrieval_record_hash": "f6b9e2ec7f782d72d18b0315a00240bae2ff155d9958f3bacd7f40b4e65c8ab5",
+  "retrieval_config": {
+    "query_routing_version": "stage13-32-contribution-effective-recall-v1",
+    "context_selector_version": "stage13-32-section-prior-v1",
+    "context_top_k": 10,
+    "context_token_budget": 12000,
+    "reranker_enabled": false,
+    "provider_detail": "jina/jina-embeddings-v5-text-small"
+  },
+  "model_config": {
+    "llm_provider": "siliconflow",
+    "llm_model": "Qwen/Qwen3-8B",
+    "prompt_version": "qa-production-v1",
+    "response_format_mode": "json_object",
+    "json_normalization_version": "normalize_structured_qa_content-v1",
+    "claim_schema_version": "StructuredQA",
+    "provider_retry_count": 0,
+    "json_repair_enabled": false,
+    "qa_retry_count": 0,
+    "provider_status": "configured"
+  },
+  "audit_config": {
+    "qa_response_audit_enabled": true,
+    "sanitized_response_audit_persistence_verified": true,
+    "store_full_payload": false,
+    "private_dir": "artifacts/private/qa-response-audits",
+    "public_sanitized_file": "artifacts/q017-live-retry-response-audit-sanitized-v1.json"
+  },
+  "budget_gate": {
+    "status": "FULL_QA_BUDGET_READY",
+    "live_model_calls_enabled": true,
+    "full_qa_budget_ready": true,
+    "missing_full_qa_budget_vars": [],
+    "full_qa_budget_vars_present": {
+      "LIVE_MODEL_CALLS_ENABLED": true,
+      "FULL_QA_MAX_ITEMS": true,
+      "FULL_QA_MAX_INPUT_TOKENS": true,
+      "FULL_QA_MAX_OUTPUT_TOKENS": true,
+      "FULL_QA_MAX_COST_USD": true,
+      "FULL_QA_MAX_TOTAL_SECONDS": true
+    },
+    "deep_research_budget_vars_present": {
+      "DEEP_RESEARCH_ENABLED": true,
+      "DEEP_RESEARCH_MAX_INPUT_TOKENS": false,
+      "DEEP_RESEARCH_MAX_OUTPUT_TOKENS": false,
+      "DEEP_RESEARCH_MAX_COST_USD": true,
+      "DEEP_RESEARCH_MAX_TOTAL_SECONDS": false,
+      "DEEP_RESEARCH_MAX_ITERATIONS": false,
+      "DEEP_RESEARCH_MAX_PAPERS": false
+    }
+  },
+  "live_retry_gate": {
+    "QA_RESPONSE_AUDIT_ENABLED": true,
+    "sanitized_response_audit_persistence": "verified_by_unit_test_and_container_config",
+    "q017_context_analysis_completed": true,
+    "retrieval_fix_regression_tests_passed": true,
+    "q017_gold_or_valid_equivalent_in_context": true,
+    "live_model_budget_ready": true
+  }
+}

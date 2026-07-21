@@ -1,0 +1,420 @@
+{
+  "schema_version": "dev-v3-5-model-visible-metadata-audit-v1",
+  "questions_scanned": 10,
+  "model_visible_internal_control_fields": 0,
+  "model_copyable_unneeded_field_names_minimized": true,
+  "local_mapping_metadata_preserved": true,
+  "fields": [
+    {
+      "field_or_token": "Evidence A",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": false,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "Evidence B",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": false,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "Evidence C",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": false,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "adjacent",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "block_id",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "citation_id",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": true
+    },
+    {
+      "field_or_token": "citation_ids",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "evidence_id",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "evidence_label",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": true
+    },
+    {
+      "field_or_token": "evidence_role",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "gold",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "human_label",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "label",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": false,
+      "output_schema_collision_risk": true
+    },
+    {
+      "field_or_token": "metadata",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "original",
+      "location": "source_content_only",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 12,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "page",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "paper_id",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "retrieval_score",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": true,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "score",
+      "location": "source_content_only",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 11,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "source",
+      "location": "source_content_only",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 4,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "source_id",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    },
+    {
+      "field_or_token": "title",
+      "location": "absent",
+      "question_count": 0,
+      "occurrence_count": 0,
+      "source_content_occurrences": 0,
+      "copyable": false,
+      "required_for_semantic_understanding": false,
+      "required_for_local_mapping": false,
+      "safe_to_remove_from_model_view": true,
+      "retained_only_in_local_metadata": true,
+      "output_schema_collision_risk": false
+    }
+  ],
+  "per_question": [
+    {
+      "question_id": "q001",
+      "rendered_prompt_hash": "6388fd9b50ca6e3dfeda36fdc5d6cd344a2ca736d4197915dcd4bd6a79095b33",
+      "visible_tokens": {
+        "score": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 3
+        }
+      },
+      "citation_registry_hash": "3e7eea6166aeb84390b826be6d915683dfcfc14738878be9319fadb84b39a6c9",
+      "prompt_length": 8079
+    },
+    {
+      "question_id": "q002",
+      "rendered_prompt_hash": "8f3183036517c3d1274e19f03e0e9f68122716b877f7af2501bec3e55f7142cf",
+      "visible_tokens": {
+        "original": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 1
+        },
+        "score": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 2
+        }
+      },
+      "citation_registry_hash": "3fe8aeecc4c77fc6cede5889b8a6c15df5d6e2ed306232b6f510ef96acfcce98",
+      "prompt_length": 8217
+    },
+    {
+      "question_id": "q004",
+      "rendered_prompt_hash": "71cf535f449b086be085c84c0595c230f47349a987fa4f40709f7e4b3561b29a",
+      "visible_tokens": {
+        "score": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 3
+        },
+        "source": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 4
+        }
+      },
+      "citation_registry_hash": "b143d6200f6ace0b8b138e574c8140a2d43474ec563f8811297e43234ea6967d",
+      "prompt_length": 8351
+    },
+    {
+      "question_id": "q005",
+      "rendered_prompt_hash": "a3cd401582a9f44333aaf351b276b404dc3757e345b2b3c38ce95d58ccf69ee6",
+      "visible_tokens": {},
+      "citation_registry_hash": "b044ed612ffb2df766fe6a69b0fecac9377854d144a09b6c4eddb47734dcc388",
+      "prompt_length": 1171
+    },
+    {
+      "question_id": "q007",
+      "rendered_prompt_hash": "2da1886b1000aae24db06b29008d731a3f0560a1d23a4e207a917c44547bc98c",
+      "visible_tokens": {
+        "original": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 2
+        },
+        "score": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 1
+        }
+      },
+      "citation_registry_hash": "dc28b601abb23e05b92cff0bf3cd34ac9ba8a0a5c551b368477b22a7ed4b3869",
+      "prompt_length": 7286
+    },
+    {
+      "question_id": "q008",
+      "rendered_prompt_hash": "45ab682342004669e9b3385fa76efcc988437e623f62b00bf75cd646cca87d41",
+      "visible_tokens": {
+        "original": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 2
+        }
+      },
+      "citation_registry_hash": "c40cf4e22eaf564df3e966cc083f4595ea74b5469ffefa30b08927fe422b027e",
+      "prompt_length": 7703
+    },
+    {
+      "question_id": "q013",
+      "rendered_prompt_hash": "24aafe7c29e81afede9a1b430cbce996ecb0b498d8a56461904b46eac976c158",
+      "visible_tokens": {},
+      "citation_registry_hash": "a0273d7ce08bdb4fe54458e7f24a80f86e25ebef492d7140d1db0e659d996a8f",
+      "prompt_length": 9977
+    },
+    {
+      "question_id": "q015",
+      "rendered_prompt_hash": "236df4192d9bc584fc870e0f79d189eb359c5e51419729a92d13f89cf91568e0",
+      "visible_tokens": {
+        "original": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 2
+        }
+      },
+      "citation_registry_hash": "ff4f89c3b81541fed10a76a872780f320a761a4a87d9d84262814e348307bc23",
+      "prompt_length": 10328
+    },
+    {
+      "question_id": "q019",
+      "rendered_prompt_hash": "d0f3c19128c6f44f9ee469b8862058f2314a564393972c08d3e4b213b0c6d5ed",
+      "visible_tokens": {},
+      "citation_registry_hash": "1658050303aa6d64d3e0bfffe003362662aa2b441d778e770661665c92862595",
+      "prompt_length": 7612
+    },
+    {
+      "question_id": "q050",
+      "rendered_prompt_hash": "0733b959085c1ca81bac59ff744e16a0f1e14778357d1ba1854de3552fc72612",
+      "visible_tokens": {
+        "original": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 5
+        },
+        "score": {
+          "control_occurrences": 0,
+          "source_content_occurrences": 2
+        }
+      },
+      "citation_registry_hash": "e5b301cba81f398bfc7a6a638bb782327a77e23620b32078a7ea5ac63dbd4fe2",
+      "prompt_length": 8603
+    }
+  ],
+  "gate": "PASSED",
+  "audit_signature": "228e662dc7de91e01078d73d6ba072f32f315f6c736d0f932dc4e7c950c54ef4"
+}

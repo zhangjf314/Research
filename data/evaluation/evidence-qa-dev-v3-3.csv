@@ -1,0 +1,11 @@
+claim_scores,comparison_to_dev_v3_1,question_exact_relation_recall,question_id,status
+"[0.0, 0.0, 0.0]",unchanged,0.0,q001,validation_failed
+"[0.0, 0.0, 0.0]",regressed,0.0,q002,validation_failed
+"[0.0, 0.0, 0.0]",regressed,0.0,q004,validation_failed
+[],unchanged,,q005,completed
+"[0.0, 0.0, 0.0]",regressed,0.0,q007,validation_failed
+"[0.0, 0.0, 0.0]",unchanged,0.0,q008,validation_failed
+"[0.0, 0.0, 0.0]",unchanged,0.0,q013,completed
+"[0.0, 0.0, 0.0]",unchanged,0.0,q015,validation_failed
+"[0.0, 0.0, 0.0]",unchanged,0.0,q019,validation_failed
+"[0.0, 0.0, 0.0]",unchanged,0.0,q050,validation_failed

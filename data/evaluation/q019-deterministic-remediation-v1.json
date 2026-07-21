@@ -1,0 +1,83 @@
+{
+  "schema_version": "q019-deterministic-remediation-v1",
+  "generated_at": "2026-07-19T08:32:29.257911+00:00",
+  "question_id": "q019",
+  "llm_called": false,
+  "deep_research_executed": false,
+  "reranker_enabled": false,
+  "fixes": [
+    "experiment-design paper-scoped retrieval route uses larger recall candidate pool and experiment-design context priority",
+    "ContextBuilder materializes deterministic block_page_map for legacy chunks",
+    "model-visible evidence payload exposes only allowed citation pages, not ambiguous page ranges"
+  ],
+  "verification": {
+    "api": "POST /api/v1/retrieve",
+    "payload": {
+      "query": "How are the target paper's experiments designed and evaluated?",
+      "filters": {
+        "paper_ids": [
+          "d52a2824-279d-4f19-8118-a4d0ce423544"
+        ]
+      },
+      "recall_k": 20,
+      "top_k": 10
+    },
+    "status": "PASSED",
+    "context_count": 3,
+    "pre_rerank_candidate_count": 66,
+    "gold_in_final_context": true,
+    "final_context": [
+      {
+        "rank": 1,
+        "chunk_id": "42164200-162e-47c7-9dbc-d7b4a4a98291",
+        "page_start": 7,
+        "page_end": 8,
+        "section_path": [
+          "3\nEmpirical Results and Basic Power Laws"
+        ],
+        "score": 0.019424799622819428,
+        "gold_blocks": [
+          "b000215",
+          "b000216",
+          "b000217",
+          "b000218"
+        ],
+        "block_page_map_gold": {
+          "b000215": 7,
+          "b000216": 7,
+          "b000217": 7,
+          "b000218": 7
+        }
+      },
+      {
+        "rank": 2,
+        "chunk_id": "9d989c7d-30c3-486d-8ce3-20a6acc6e819",
+        "page_start": 5,
+        "page_end": 5,
+        "section_path": [
+          "1\nIntroduction"
+        ],
+        "score": 0.017767295597484276,
+        "gold_blocks": [],
+        "block_page_map_gold": {}
+      },
+      {
+        "rank": 3,
+        "chunk_id": "16ce6e9e-714b-4dd9-8b0a-050a6e5b2646",
+        "page_start": 18,
+        "page_end": 18,
+        "section_path": [
+          "7\nRelated Work"
+        ],
+        "score": 0.017058652729384435,
+        "gold_blocks": [],
+        "block_page_map_gold": {}
+      }
+    ]
+  },
+  "remaining_limitations": [
+    "No q019 live QA rerun was executed in this remediation step.",
+    "Legacy chunks still lack true per-block page provenance when blocks span pages; deterministic fallback maps block IDs to page_start.",
+    "Full QA remains COMPLETED_WITH_FAILURES until an authorized rerun proves q019 passes strict citation validation."
+  ]
+}

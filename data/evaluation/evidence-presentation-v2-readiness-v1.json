@@ -1,0 +1,29 @@
+{
+  "schema_version": "evidence-presentation-v2-readiness-v1",
+  "checks": {
+    "stage13_19_failure_freeze_stable": true,
+    "payload_v4_unchanged": true,
+    "evidence_label_root_cause_clear": true,
+    "model_visible_evidence_label_control_zero": true,
+    "model_visible_internal_evidence_ids_zero": true,
+    "candidate_passage_hashes_unchanged": true,
+    "local_mapping_preserved_100_percent": true,
+    "prompt_contamination_passed": true,
+    "ten_question_prompt_render_passed": true,
+    "two_render_hashes_consistent": true,
+    "gold_leakage_zero": true,
+    "human_label_leakage_zero": true,
+    "active_reservations_zero": true,
+    "metadata_audit_passed": true
+  },
+  "PROMPT_DECONTAMINATION_ENGINEERING_GATE": "PASSED",
+  "EVIDENCE_PRESENTATION_V2_READY": true,
+  "NEXT_LIVE_READY": true,
+  "NEXT_LIVE_AUTHORIZED": false,
+  "READY_FOR_FULL_QA": false,
+  "HUMAN_CITATION_REVIEW_DEFERRED": true,
+  "PRODUCTION_READY": false,
+  "V1_0": false,
+  "current_release": "v0.9.0-rc3",
+  "readiness_signature": "1153618cee44a9e2482342bd5fe29a3509fd9e0f227bf5775822d935a0f6e770"
+}

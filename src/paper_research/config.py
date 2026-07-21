@@ -2,7 +2,7 @@ from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -47,6 +47,7 @@ class Settings(BaseSettings):
     rerank_max_retries: int = Field(default=2, ge=0, le=10)
     rerank_allow_fallback: bool = False
     llm_provider: str = "template"
+    llm_provider_name: str | None = None
     llm_model: str = "template-v1"
     llm_base_url: str | None = "https://api.siliconflow.cn/v1"
     llm_api_key: str | None = None
@@ -54,13 +55,22 @@ class Settings(BaseSettings):
     llm_timeout_seconds: float = Field(default=120.0, gt=0, le=600)
     llm_max_output_tokens: int = Field(default=2048, ge=128, le=65536)
     llm_max_retries: int = Field(default=2, ge=0, le=2)
+    llm_response_format: str = "json_object"
+    llm_thinking_enabled: bool = False
+    llm_stream: bool = False
     llm_input_cost_per_million: float | None = Field(default=None, ge=0)
     llm_output_cost_per_million: float | None = Field(default=None, ge=0)
     llm_billing_mode: str | None = None
     llm_input_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
     llm_output_price_per_million_tokens: Decimal | None = Field(default=None, ge=0)
+    qa_response_audit_enabled: bool = False
+    qa_response_audit_max_prefix_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_max_suffix_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_max_error_window_chars: int = Field(default=500, ge=0, le=5000)
+    qa_response_audit_store_full_payload: bool = False
+    qa_response_audit_dir: Path = Path("artifacts/private/qa-response-audits")
     qa_context_token_budget: int = Field(default=12000, ge=512, le=100000)
-    prompt_version: str = "claim-qa-v1"
+    prompt_version: str = "qa-production-v1"
     index_version: str = "hash-v1"
     dataset_version: str = "gold-set-v1-pending-review"
     chunk_max_tokens: int = 400
@@ -90,6 +100,30 @@ class Settings(BaseSettings):
     deep_research_max_elapsed_seconds_total: int = Field(default=900, ge=1, le=900)
     deep_research_require_usage: bool = True
     deep_research_checkpoint_path: Path = Path("data/checkpoints/deep-research-smoke-v1.sqlite3")
+    deepseek_canary_max_input_tokens: int | None = Field(default=None, ge=1)
+    deepseek_canary_max_output_tokens: int | None = Field(default=None, ge=1)
+    deepseek_canary_max_total_tokens: int | None = Field(default=None, ge=1)
+    deepseek_canary_max_cost_usd: Decimal | None = Field(default=None, ge=0)
+    deepseek_canary_max_total_seconds: int | None = Field(default=None, ge=1)
+
+    @field_validator(
+        "llm_input_cost_per_million",
+        "llm_output_cost_per_million",
+        "llm_input_price_per_million_tokens",
+        "llm_output_price_per_million_tokens",
+        "deep_research_max_cost_usd",
+        "deepseek_canary_max_cost_usd",
+        "deepseek_canary_max_input_tokens",
+        "deepseek_canary_max_output_tokens",
+        "deepseek_canary_max_total_tokens",
+        "deepseek_canary_max_total_seconds",
+        mode="before",
+    )
+    @classmethod
+    def empty_string_optional_number(cls, value: object) -> object:
+        if value == "":
+            return None
+        return value
 
     @model_validator(mode="after")
     def validate_profile(self) -> "Settings":
@@ -116,6 +150,18 @@ class Settings(BaseSettings):
         if provider == "template" or provider not in {"siliconflow", "openai_compatible"}:
             return ["LLM_PROVIDER"]
         missing: list[str] = []
+        provider_name = (self.llm_provider_name or self.llm_provider).strip().lower()
+        if provider_name == "deepseek":
+            if self.llm_base_url and "api.deepseek.com" not in self.llm_base_url:
+                missing.append("LLM_BASE_URL")
+            if self.llm_model in {"deepseek-chat", "deepseek-reasoner"}:
+                missing.append("LLM_MODEL")
+            if self.llm_response_format != "json_object":
+                missing.append("LLM_RESPONSE_FORMAT")
+            if self.llm_thinking_enabled:
+                missing.append("LLM_THINKING_ENABLED")
+            if self.llm_stream:
+                missing.append("LLM_STREAM")
         if (
             "llm_model" not in self.model_fields_set
             or not self.llm_model.strip()
@@ -213,10 +259,14 @@ class Settings(BaseSettings):
             "rerank_max_retries": self.rerank_max_retries,
             "rerank_allow_fallback": self.rerank_allow_fallback,
             "llm_provider": self.llm_provider,
+            "llm_provider_name": self.llm_provider_name or self.llm_provider,
             "llm_model": self.llm_model,
             "llm_timeout_seconds": self.llm_timeout_seconds,
             "llm_max_output_tokens": self.llm_max_output_tokens,
             "llm_max_retries": self.llm_max_retries,
+            "llm_response_format": self.llm_response_format,
+            "llm_thinking_enabled": self.llm_thinking_enabled,
+            "llm_stream": self.llm_stream,
             "qa_context_token_budget": self.qa_context_token_budget,
             "prompt_version": self.prompt_version,
             "index_version": self.index_version,

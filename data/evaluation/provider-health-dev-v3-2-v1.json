@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-07-16T12:40:00.589887+00:00",
+  "base_url_host": "api.siliconflow.cn",
+  "base_url_valid": true,
+  "dns_status": "passed",
+  "tcp_status": "passed",
+  "tls_status": "passed",
+  "models_endpoint_status": "passed",
+  "minimal_completion_status": "not_run",
+  "latency": {
+    "dns_ms": 5.6,
+    "tcp_ms": 13.138,
+    "tls_ms": 35.104,
+    "models_ms": 452.177
+  },
+  "error_type": null,
+  "safe_to_start_batch": true,
+  "api_key_recorded": false,
+  "authorization_header_recorded": false,
+  "status": "PASSED"
+}

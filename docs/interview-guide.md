@@ -37,3 +37,31 @@ ResearchState 中显式记录迭代、外部搜索、论文、证据、估算 To
 
 Embedding、Rerank 和综合报告仍使用本地确定性基线；50 条评测集尚未由领域标注者人工
 复核；Tesseract、GROBID 和真实 Docker 服务需在完整运行环境做端到端验收。
+# Portfolio evaluation talking points
+
+Use this framing in interviews:
+
+- The main evaluation set is `gold-dev-v1`: 50 human-approved internal
+  development records.
+- The 27-record `retrieval-diagnostic-v1` claim-level benchmark is used for
+  failure analysis and regression checks, not as blind evidence.
+- A 10-15-record `shadow-holdout-pilot-v1` is recommended for a future small
+  blind sanity check, but it is not required before Portfolio Full QA.
+- The project can truthfully say it completed retrieval and QA evaluation on
+  50 human-reviewed internal records.
+- It must not claim strict blind generalization, production-grade
+  generalization, or large-scale independent benchmark success.
+# Interview Guide
+
+## Stage 13.39 current talking point
+
+The clean interview framing is: the project has passed real-model Portfolio QA
+engineering and a bounded Deep Research smoke with DeepSeek, but final
+operations gates are still open. Do not call it Production-ready or
+`v1.0.0-portfolio` until PostgreSQL recovery, PostgreSQL restore, Qdrant
+snapshot restore, Docker OCR roundtrip, and the Portfolio 30-minute stability
+test have been executed.
+
+The evaluation set is 50 human-reviewed internal development records; it is not
+a blind benchmark. Strong generalization and strong semantic grounding claims
+are explicitly disabled.

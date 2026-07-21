@@ -1,0 +1,114 @@
+{
+  "schema_version": "stage13-16-historical-protection-v1",
+  "baseline_commit": "70b2401f29cfec0cb8b3764fc945bc75dcfda96f",
+  "files": [
+    {
+      "label": "stage13_5_formal",
+      "path": "data/evaluation/stage13-5-schema-failure-freeze-v1.json",
+      "baseline_raw_sha256": "7b6eee5c69edbba9428aeec71c7e9a827341d10da44f69686aa88ecb4e35a1cd",
+      "current_raw_sha256": "7b6eee5c69edbba9428aeec71c7e9a827341d10da44f69686aa88ecb4e35a1cd",
+      "baseline_canonical_sha256": "ab252a210e597489f5c6bd263c98d2e87fb39664f9b2a2bc6c4a835716cb918a",
+      "current_canonical_sha256": "ab252a210e597489f5c6bd263c98d2e87fb39664f9b2a2bc6c4a835716cb918a",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_6_readiness",
+      "path": "data/evaluation/evidence-qa-dev-v3-readiness-v1.json",
+      "baseline_raw_sha256": "6c0ffcde74ff8db78f7adb8cf60658f07d151b0b08d0165cb6b705d32a928ef6",
+      "current_raw_sha256": "6c0ffcde74ff8db78f7adb8cf60658f07d151b0b08d0165cb6b705d32a928ef6",
+      "baseline_canonical_sha256": "4080f09ea8c97a3ec69901e144cf2df3d03c423cbeeccffb81c04eee45acb76a",
+      "current_canonical_sha256": "4080f09ea8c97a3ec69901e144cf2df3d03c423cbeeccffb81c04eee45acb76a",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_7_migration",
+      "path": "data/evaluation/stage13-review-hash-migration-v1.json",
+      "baseline_raw_sha256": "4565f174e8b9090c7e37fc6cf7e2c3a62a3591d447495b5d65e3d571bab7e910",
+      "current_raw_sha256": "4565f174e8b9090c7e37fc6cf7e2c3a62a3591d447495b5d65e3d571bab7e910",
+      "baseline_canonical_sha256": "2829355a024caaf3a87d981df335ed650404ed815c27a49e74c9340687222b0a",
+      "current_canonical_sha256": "2829355a024caaf3a87d981df335ed650404ed815c27a49e74c9340687222b0a",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_8_dev_v3_1",
+      "path": "data/evaluation/evidence-qa-dev-v3-1.json",
+      "baseline_raw_sha256": "f350f68487b40371ff4c3250a10208d042eaee73b5aee556e703181cefdce0f0",
+      "current_raw_sha256": "2effd6cb6045789352e1a2592eb20a49bed45350eafb5b8086d02f7db6baec96",
+      "baseline_canonical_sha256": "d996837313a5d23287449cc83a6092f22d0031439303806604adb9280ef921ee",
+      "current_canonical_sha256": "d996837313a5d23287449cc83a6092f22d0031439303806604adb9280ef921ee",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_9_metric",
+      "path": "data/evaluation/citation-recall-metric-v2.json",
+      "baseline_raw_sha256": "992cb5e4042907a03b7bc93937658948bd3fb2ca64108951490fb86645d2d2f3",
+      "current_raw_sha256": "64eca96d55b58c26650701120dd19044ef8fe493e3051d834a91afb49d3ed2dd",
+      "baseline_canonical_sha256": "ebce82bdb2cfb4766d4c3ff1c7b63b851906f630d73281ea84e4b568d2c16ae0",
+      "current_canonical_sha256": "ebce82bdb2cfb4766d4c3ff1c7b63b851906f630d73281ea84e4b568d2c16ae0",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_10_claim_gold",
+      "path": "data/evaluation/claim-evidence-gold-dev-v1.jsonl",
+      "baseline_raw_sha256": "e1aadcae82fb8a7f867eb600ffb0b2836813fd70e38c70502992cc7e4faa4bcd",
+      "current_raw_sha256": "e1aadcae82fb8a7f867eb600ffb0b2836813fd70e38c70502992cc7e4faa4bcd",
+      "baseline_canonical_sha256": "36246f68f770a1280918ca5c36ee4e408d23cfaa2e9016fbb983a34fcc5bfd02",
+      "current_canonical_sha256": "36246f68f770a1280918ca5c36ee4e408d23cfaa2e9016fbb983a34fcc5bfd02",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_11_offline_replay",
+      "path": "data/evaluation/dev-v3-2-offline-replay-v1.json",
+      "baseline_raw_sha256": "4d61d681f8582d1b3d6a6c53a1db3a5cac9ac4e662b895ff91f85aae72c31148",
+      "current_raw_sha256": "e07104dd3fb6e696ae32a33f91e5f8da3c36478982478b4ee83e0550e462b965",
+      "baseline_canonical_sha256": "db91b24c1452ac11311da60ecf44fad5ed0d4c85e16abde1aaf3328eb8a31c57",
+      "current_canonical_sha256": "db91b24c1452ac11311da60ecf44fad5ed0d4c85e16abde1aaf3328eb8a31c57",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_12_failure_freeze",
+      "path": "data/evaluation/stage13-12-dev-v3-2-failure-freeze-v1.json",
+      "baseline_raw_sha256": "5484323b6b5d62354b220e41a4ef681bc45bbcb89b9c6af535b5ecc85bc75281",
+      "current_raw_sha256": "26d8a661132d627b44ac035f503dbb16879f4724356d8e910737b39d088eae13",
+      "baseline_canonical_sha256": "9ef6df5546f71afc88a2510e1b79c7f31ea4472de70ba5f0cc992fe6c81996e4",
+      "current_canonical_sha256": "9ef6df5546f71afc88a2510e1b79c7f31ea4472de70ba5f0cc992fe6c81996e4",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_13_reconciliation",
+      "path": "data/evaluation/stage13-12-reservation-reconciliation-v1.json",
+      "baseline_raw_sha256": "b851fdfe2b0b06e422a3829db1fb6e5b985475731b6f9d5092328cd91cbc5a91",
+      "current_raw_sha256": "53b1af45259f33ffac38f735dcb816749cb0359a3d03800ab2daa71384af30c1",
+      "baseline_canonical_sha256": "e4ecba84aaa2d223a6ea514b375d384fb513efcfda13893de0371416ba1380e3",
+      "current_canonical_sha256": "e4ecba84aaa2d223a6ea514b375d384fb513efcfda13893de0371416ba1380e3",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_14_failure_freeze",
+      "path": "data/evaluation/stage13-14-dev-v3-3-failure-freeze-v1.json",
+      "baseline_raw_sha256": "d7b6fe4916324103c4b7168be968967de59d7786443655f3d7e38c9a31d6dfcb",
+      "current_raw_sha256": "054f532739d4f17df995a0569719a66795d6339ce57a06029edf7523701c7247",
+      "baseline_canonical_sha256": "d7f374c30d0f44dfc3680c721e45e16e842023edac5a69a07eda3550ab891e62",
+      "current_canonical_sha256": "d7f374c30d0f44dfc3680c721e45e16e842023edac5a69a07eda3550ab891e62",
+      "unchanged": true
+    },
+    {
+      "label": "stage13_15_payload_replay",
+      "path": "data/evaluation/dev-v3-3-payload-contract-v2-replay.json",
+      "baseline_raw_sha256": "3370d1e29444c203c90293df13848dffc93165d92765c70a81f149a7e53c2472",
+      "current_raw_sha256": "00b765b2d1b3b49133ff8e593456d7b3d7175eae6c304a8a45ab619e85adc1f4",
+      "baseline_canonical_sha256": "5989dc6683bcd94dabb5532ae755e9643a36c73e5d630920ae2652974c068377",
+      "current_canonical_sha256": "5989dc6683bcd94dabb5532ae755e9643a36c73e5d630920ae2652974c068377",
+      "unchanged": true
+    }
+  ],
+  "changed_count": 0,
+  "stage13_14_gate": "FAILED_AND_PRESERVED",
+  "stage13_14_raw_runs_modified": false,
+  "stage13_14_pending_citation_records_modified": false,
+  "stage13_12_pending_citation_records_modified": false,
+  "historical_reservation_events_modified": false,
+  "gold_modified": false,
+  "human_labels_modified": false,
+  "gate": "PASSED"
+}

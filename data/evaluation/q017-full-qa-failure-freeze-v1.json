@@ -1,0 +1,117 @@
+{
+  "schema_version": "q017-full-qa-failure-freeze-v1",
+  "frozen_at": "2026-07-18T15:15:00+00:00",
+  "question_id": "q017",
+  "dataset": "gold-dev-v1",
+  "full_qa_status": "FAILED",
+  "production_full_qa_gate": "COMPLETED_WITH_FAILURES",
+  "model_runtime": {
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "prompt_version": "qa-production-v1",
+    "prompt_sha256": "ea315b0812d345faa19156abf6af075571919e55ef98791c65f3b4ad6b3ae96f",
+    "response_format": "json_object",
+    "json_schema_transport": false,
+    "template_fallback": false,
+    "reranker_enabled": false
+  },
+  "question": {
+    "retrieval_query": "What are the target paper's main contributions?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2001.08361"
+      ]
+    },
+    "answerable": true,
+    "gold_paper_ids": [
+      "2001.08361"
+    ],
+    "gold_pages": [
+      1
+    ],
+    "gold_block_ids": [
+      "b000033"
+    ],
+    "required_claims": [
+      "The paper identifies power-law scaling of loss with model size, data size, and compute.",
+      "It observes limited effects from some architectural details within the studied range.",
+      "It uses the relationships to guide fixed-budget compute allocation."
+    ]
+  },
+  "provider_failure": {
+    "http_status": 503,
+    "api_error_code": "HTTP_503",
+    "provider_error_code": "CLAIM_QA_JSON_PARSE_ERROR",
+    "stage": "LLM_JSON_PARSE",
+    "message": "SiliconFlow QA failed after 1 request(s): malformed_json",
+    "request_id": "d7be58fd-7b6e-4f55-aa03-1e4c74f57225",
+    "api_request_count_from_error_body": 1,
+    "retry_reasons": [
+      "malformed_json"
+    ],
+    "rate_limit_events": 0
+  },
+  "retrieval_context_audit": {
+    "gold_block_exists_in_container_parsed_artifacts": true,
+    "gold_chunk_id": "cabe1d24-ba08-42c9-8550-c746d06052df",
+    "gold_chunk_section": [
+      "Abstract"
+    ],
+    "gold_chunk_page_start": 1,
+    "gold_chunk_page_end": 1,
+    "dense_rank_at_recall_100": 43,
+    "sparse_rank_at_recall_100": 29,
+    "fusion_rank_at_recall_100": 40,
+    "final_context_count": 3,
+    "gold_block_in_final_context": false,
+    "final_context_pages": [
+      [
+        2,
+        3
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "interpretation": "The gold evidence was present in parsed artifacts and retrievable at larger recall, but did not enter the production QA context. This is an input/context mismatch for q017 quality evaluation, independent of the malformed JSON terminal failure."
+  },
+  "root_cause_assessment": {
+    "api_wrapper_anomaly": false,
+    "api_wrapper_assessment": "The API route caught LLMProviderError and returned a structured HTTP 503 with code, stage, api_request_count, retry_reasons, rate_limit_events, and request_id. No evidence indicates response wrapping caused the parse failure.",
+    "model_raw_json_failure_confirmed": true,
+    "model_raw_json_failure_assessment": "The provider reached LLM_JSON_PARSE after an API request and classified the response as malformed_json. Because raw malformed content is not persisted on the failure path, the exact malformed payload cannot be inspected from the frozen artifacts.",
+    "prompt_schema_contribution": true,
+    "prompt_schema_assessment": "qa-production-v1 relies on textual schema instructions plus response_format=json_object, not a strict JSON schema transport. With LLM_MAX_RETRIES=0, one malformed generation becomes terminal. Prior project runs also show Qwen malformed_json failures under stricter protocols, so provider adherence remains a known reliability risk.",
+    "retrieval_context_contribution": true,
+    "retrieval_context_assessment": "q017's gold abstract block ranked below the production context cutoff. The model was asked an answerable gold-dev question with non-gold context, increasing answer quality risk even if JSON had parsed.",
+    "one_off_vs_systematic": "INDETERMINATE_WITH_CURRENT_ARTIFACTS",
+    "reason_one_off_vs_systematic": "Only one q017 request was authorized and raw model output was not persisted on the malformed_json path. The failure may be one malformed completion, but similar historical Qwen malformed_json failures mean it should not be dismissed as purely random."
+  },
+  "evidence_files": {
+    "full_qa_items": {
+      "path": "data/evaluation/full-qa-production-items-v1.jsonl",
+      "sha256": "685C4487420F8F9AE47EAAA431F849BF4DF4499B15E1C8F01EB14A0E4207DC7C"
+    },
+    "full_qa_trace": {
+      "path": "artifacts/full-qa-production-trace-v1.json",
+      "sha256": "5B91367D0360724081CA3EE994097551934910BFFED101689D18F25E70B4F262"
+    },
+    "full_qa_summary": {
+      "path": "data/evaluation/full-qa-production-v1.json",
+      "sha256": "B11790088ED8D0429242401C5190E39AB085477C55B2FE146ED0D4C12543404F"
+    }
+  },
+  "recommended_next_actions": [
+    "Do not mark Production Full QA as passed.",
+    "Do not run Production Deep Research until q017 failure handling is resolved or an explicit retry policy is approved.",
+    "Persist sanitized raw model output and response audit on JSON parse failures before any future live retry.",
+    "Add a no-LLM retrieval/context regression for q017 to ensure the gold abstract block can enter context or document why paper_contributions queries need an abstract/contribution routing rule.",
+    "If live retry is authorized later, run q017 once with raw-response persistence and no automatic JSON repair."
+  ]
+}

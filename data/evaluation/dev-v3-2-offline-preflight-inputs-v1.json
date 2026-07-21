@@ -1,0 +1,144 @@
+{
+  "schema_version": "dev-v3-2-offline-preflight-inputs-v1",
+  "baseline_commit": "4b7389acfae72b17cd02e3f299033816247f4219",
+  "sources": [
+    {
+      "source_path": "data/evaluation/claim-evidence-gold-dev-v1.jsonl",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_jsonl_v1",
+        "value": "3cee289380c4b2ba861079d5f8470719a0d880f98812a5b55f28fb65693d37a6",
+        "raw_value_at_review": "e1aadcae82fb8a7f867eb600ffb0b2836813fd70e38c70502992cc7e4faa4bcd",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "claim-evidence-gold-dev-v1",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": false
+    },
+    {
+      "source_path": "data/evaluation/claim-evidence-gold-dev-v1-freeze.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "f712fa7b291a48472f82d14689e7a8a7e4e1e6de3c0927653cd3b4389c1a107c",
+        "raw_value_at_review": "604d359526f61ca46c6a9a399f4b21f3eb945a4f992caa859ed7d4a1d6522bf8",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": false
+    },
+    {
+      "source_path": "data/evaluation/evidence-qa-dev-v3-1.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "672f7b3bc5555d2851f2b13a87f8a3e4c7cf9b069fcaaf1dab6cd923ba025557",
+        "raw_value_at_review": "2effd6cb6045789352e1a2592eb20a49bed45350eafb5b8086d02f7db6baec96",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": "frozen_runtime_input"
+    },
+    {
+      "source_path": "data/evaluation/evidence-qa-dev-v3-1-final-audit.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "d70d018e6cb48158d0b46f6a3201dd10c972acd2cc0a0e9791d79a33e704cb2d",
+        "raw_value_at_review": "eb4c377289440e68e8123056f36277ddcda5bab35193b29194c6eb6a2ed08de6",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": "frozen_runtime_input"
+    },
+    {
+      "source_path": "data/evaluation/evidence-qa-dev-v3-1-citation-audit-v1.jsonl",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_jsonl_v1",
+        "value": "df3508c91cf1e1b0c2efbd4df01eb5c3b5e53270190deb8971245c4176ea5cdb",
+        "raw_value_at_review": "afe279a5b3fa71bf064240793a48e1c4bb8c04aa58c116d3613c5c7c6424e511",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": false
+    },
+    {
+      "source_path": "data/evaluation/dev-v3-1-citation-failure-taxonomy-v2.jsonl",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_jsonl_v1",
+        "value": "72ca338e671025a33e8e9d94559f9ff032545709d65001bcdb5fb1f9dbf3dd84",
+        "raw_value_at_review": "2820e788256a61d1022e183adf7c8d3bba641d015f3f21847034b1bc32f5ceec",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": true,
+      "allowed_online_feature": false
+    },
+    {
+      "source_path": "data/evaluation/dev-v3-2-citation-improvement-plan-v1.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "2bab3616c1c62af2f72f81b1e9636388eb669bcaf7f0ccd1a0fa60b3f10ca239",
+        "raw_value_at_review": "e4ecc7dd129e1fed23b243cfeffb457d1669ed1dae581289808f49dd0640018e",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": true,
+      "allowed_online_feature": "frozen_runtime_input"
+    },
+    {
+      "source_path": "data/evaluation/evidence-qa-dev-v3-1-manifest.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "0d0680498f17d5cf3f5704095e55530ab36e69e6eafdd37544e064f66a210a8d",
+        "raw_value_at_review": "bf3919a828c9e91eb7348cf689e8151e3ae6315f3c9c06d134c6e99844b898cd",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": "frozen_runtime_input"
+    },
+    {
+      "source_path": "data/evaluation/provider-health-dev-v3-1-v1.json",
+      "hash": {
+        "algorithm": "sha256",
+        "mode": "canonical_json_v1",
+        "value": "8d04f6c28d32688d9336ce4a562b3559ad028fa9515c827826b911b8ceadab9d",
+        "raw_value_at_review": "b0fa10eef8f7d299b368f3e0ba4dfcfa16863544a9b324acffba1a4e6718c266",
+        "schema_version": "source-hash-v2",
+        "canonicalization_version": "canonical-hash-v1"
+      },
+      "protocol_version": "frozen-dev-v3.1-input",
+      "immutable": true,
+      "used_for_development": false,
+      "allowed_online_feature": "frozen_runtime_input"
+    }
+  ],
+  "provider_calls_allowed": false,
+  "embedding_calls_allowed": false,
+  "live_run_allowed": false
+}

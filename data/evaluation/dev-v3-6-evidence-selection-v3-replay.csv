@@ -1,0 +1,9 @@
+mode,any_valid_recall,claim_macro_exact,aligned_wrong_evidence,avg_citations,improved,regressed,unchanged,baseline_retained,baseline_replaced
+baseline,0.25925925925925924,0.18518518518518517,16,1.0,0,0,27,0,0
+selection_v2,0.2962962962962963,0.25925925925925924,15,1.0,2,3,22,0,0
+selection_v3_eligibility_only,0.2222222222222222,0.14814814814814814,16,1.0,0,2,25,21,2
+selection_v3_protected,0.2222222222222222,0.14814814814814814,16,1.0,0,2,25,21,2
+full_v3_candidate,0.2222222222222222,0.14814814814814814,16,1.0,0,2,25,21,2
+full_candidate_without_baseline_protection,0.18518518518518517,0.14814814814814814,17,1.0,0,4,23,0,23
+full_candidate_without_hard_veto,0.25925925925925924,0.18518518518518517,16,1.0,0,0,27,0,0
+full_candidate_without_numeric_comparison,0.25925925925925924,0.18518518518518517,16,1.0,0,0,27,0,0

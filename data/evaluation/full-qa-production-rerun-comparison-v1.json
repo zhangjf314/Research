@@ -1,0 +1,444 @@
+{
+  "schema_version": "full-qa-production-rerun-comparison-v1",
+  "previous_backup": "artifacts/full-qa-rerun-backups/pre-stage13-32-rerun-20260719-001410",
+  "previous_status": "COMPLETED_WITH_FAILURES",
+  "current_status": "COMPLETED_WITH_FAILURES",
+  "previous_failed": [
+    "q017"
+  ],
+  "current_failed": [
+    "q019"
+  ],
+  "metric_delta": {
+    "answerable_accuracy": {
+      "previous": 0.978723,
+      "current": 1.0,
+      "delta": 0.02127699999999999
+    },
+    "answerable_items_completed": {
+      "previous": 47,
+      "current": 47,
+      "delta": 0
+    },
+    "api_requests": {
+      "previous": 50,
+      "current": 50,
+      "delta": 0
+    },
+    "attempted": {
+      "previous": 50,
+      "current": 50,
+      "delta": 0
+    },
+    "citation_id_validity": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "citation_precision": {
+      "previous": 0.072163,
+      "current": 0.101917,
+      "delta": 0.02975399999999999
+    },
+    "citation_recall": {
+      "previous": 0.089007,
+      "current": 0.126241,
+      "delta": 0.03723399999999999
+    },
+    "claim_citation_binding_rate": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "completed": {
+      "previous": 49,
+      "current": 49,
+      "delta": 0
+    },
+    "cost_is_configured": {
+      "previous": false,
+      "current": false,
+      "delta": 0
+    },
+    "estimated_cost_usd": {
+      "previous": null,
+      "current": null,
+      "delta": null
+    },
+    "failed": {
+      "previous": 1,
+      "current": 1,
+      "delta": 0
+    },
+    "gold_block_retrieved_rate": {
+      "previous": 0.191489,
+      "current": 0.234043,
+      "delta": 0.04255400000000001
+    },
+    "input_tokens": {
+      "previous": 329309,
+      "current": 317789,
+      "delta": -11520
+    },
+    "latency_ms": {
+      "previous": {
+        "mean": 26079.573,
+        "p50": 24665.719,
+        "p95": 48892.2
+      },
+      "current": {
+        "mean": 25502.632,
+        "p50": 23382.382,
+        "p95": 47913.255
+      },
+      "delta": null
+    },
+    "output_tokens": {
+      "previous": 26725,
+      "current": 26938,
+      "delta": 213
+    },
+    "rate_limit_events": {
+      "previous": 0,
+      "current": 0,
+      "delta": 0
+    },
+    "refusal_accuracy": {
+      "previous": 1.0,
+      "current": 1.0,
+      "delta": 0.0
+    },
+    "required_claim_coverage": {
+      "previous": 0.404255,
+      "current": 0.432624,
+      "delta": 0.028369000000000033
+    },
+    "retry_count": {
+      "previous": 1,
+      "current": 1,
+      "delta": 0
+    },
+    "total_tokens": {
+      "previous": 356034,
+      "current": 344727,
+      "delta": -11307
+    },
+    "unanswerable_items_completed": {
+      "previous": 2,
+      "current": 2,
+      "delta": 0
+    },
+    "unsupported_claim_count": {
+      "previous": 169,
+      "current": 166,
+      "delta": -3
+    }
+  },
+  "full_qa_rerun_executed": true,
+  "deep_research_executed": false,
+  "production_full_qa_gate": "COMPLETED_WITH_FAILURES",
+  "q017_current": {
+    "question_id": "q017",
+    "status": "COMPLETED",
+    "retrieval_query": "What are the target paper's main contributions?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2001.08361"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2001.08361"
+      ],
+      "gold_block_ids": [
+        "b000033"
+      ],
+      "gold_pages": [
+        1
+      ],
+      "required_claims": [
+        "The paper identifies power-law scaling of loss with model size, data size, and compute.",
+        "It observes limited effects from some architectural details within the studied range.",
+        "It uses the relationships to guide fixed-budget compute allocation."
+      ]
+    },
+    "answer": {
+      "answerable": true,
+      "answer": "The target paper's main contributions are the empirical study of scaling laws for language model performance, the observation of power-law relationships between model size, dataset size, and compute used for training, and the determination of optimal compute budget allocation for training large models. Additionally, the paper provides insights into the universality of overfitting and training, and the impact of transfer performance on different text distributions.",
+      "claims": [
+        {
+          "claim_id": "c1",
+          "text": "The paper studies empirical scaling laws for language model performance on the cross-entropy loss, showing that it scales as a power-law with model size, dataset size, and the amount of compute used for training.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 1,
+              "block_id": "b000033"
+            }
+          ],
+          "block_ids": [
+            "b000033"
+          ],
+          "pages": [
+            1
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c2",
+          "text": "The paper observes that performance has a power-law relationship with each of the three scale factors (model size, dataset size, compute) when not bottlenecked by the other two, with trends spanning more than six orders of magnitude.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 2,
+              "block_id": "b000052"
+            }
+          ],
+          "block_ids": [
+            "b000052"
+          ],
+          "pages": [
+            2
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c3",
+          "text": "The paper determines that optimal allocation of a fixed compute budget involves training very large models on a relatively modest amount of data and stopping significantly before convergence.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 2,
+              "block_id": "b000053"
+            }
+          ],
+          "block_ids": [
+            "b000053"
+          ],
+          "pages": [
+            2
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c4",
+          "text": "The paper finds that performance improves predictably as long as model size and dataset size are scaled up in tandem, but enters a regime of diminishing returns if either is held fixed while the other increases.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 2,
+              "block_id": "b000054"
+            }
+          ],
+          "block_ids": [
+            "b000054"
+          ],
+          "pages": [
+            2
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c5",
+          "text": "The paper shows that training curves follow predictable power-laws whose parameters are roughly independent of the model size, allowing for the extrapolation of loss values if training were to continue for much longer.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 2,
+              "block_id": "b000055"
+            }
+          ],
+          "block_ids": [
+            "b000055"
+          ],
+          "pages": [
+            2
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c6",
+          "text": "The paper demonstrates that transfer performance to a different text distribution incurs a constant penalty but otherwise improves roughly in line with performance on the training set.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 2,
+              "block_id": "b000056"
+            }
+          ],
+          "block_ids": [
+            "b000056"
+          ],
+          "pages": [
+            2
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        },
+        {
+          "claim_id": "c7",
+          "text": "The paper highlights that larger models are significantly more sample-efficient, requiring fewer data points and optimization steps to reach the same level of performance.",
+          "citations": [
+            {
+              "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+              "page": 3,
+              "block_id": "b000069"
+            }
+          ],
+          "block_ids": [
+            "b000069"
+          ],
+          "pages": [
+            3
+          ],
+          "supported": true,
+          "support_note": "citation identifiers validated against supplied context"
+        }
+      ],
+      "refusal_reason": null,
+      "refused": false,
+      "citations": [
+        {
+          "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+          "section": "Abstract",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Jared Kaplan ∗\nSam McCandlish∗\nJohns Hopkins University, OpenAI\nOpenAI\njaredk@jhu.edu\nsam@openai.com\nTom Henighan\nTom B. Brown\nBenjamin Chess\nRewon Child\nOpenAI\nOpenAI\nOpenAI\nOpenAI\nhenighan@openai.com\ntom@openai.com\nbchess@openai.com\nrewon@openai.com\nScott Gray\nAlec Radford\nJeffrey Wu\nDario Amodei\nOpenAI\nOpenAI\nOpenAI\nOpenAI\nscott@openai.com\nalec@openai.com\njeffwu@openai.com\ndamodei@openai.com\n\nWe study empirical scaling laws for language model performance on the cross-entropy loss.\nThe loss sc",
+          "score": 0.020945,
+          "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=1",
+          "block_ids": [
+            "b000033"
+          ]
+        },
+        {
+          "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+          "section": "1\nIntroduction",
+          "page_start": 2,
+          "page_end": 3,
+          "quote": "1\nIntroduction\n2\n2\nBackground and Methods\n6\n3\nEmpirical Results and Basic Power Laws\n7\n4\nCharting the Inﬁnite Data Limit and Overﬁtting\n10\n5\nScaling Laws with Model Size and Training Time\n12\n6\nOptimal Allocation of the Compute Budget\n14\n7\nRelated Work\n18\n8\nDiscussion\n18\nAppendices\n20\nA Summary of Power Laws\n20\nB\nEmpirical Model of Compute-Efﬁcient Frontier\n20\nC Caveats\n22\nD Supplemental Figures\n23\n\nLanguage provides a natural domain for the study of artiﬁcial intelligence, as the vast majority o",
+          "score": 0.023932,
+          "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=2",
+          "block_ids": [
+            "b000052",
+            "b000053",
+            "b000054",
+            "b000055",
+            "b000056"
+          ]
+        },
+        {
+          "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+          "section": "1\nIntroduction",
+          "page_start": 3,
+          "page_end": 4,
+          "quote": "Performance depends strongly on scale, weakly on model shape:\nModel performance depends most\nstrongly on scale, which consists of three factors: the number of model parameters N (excluding embed-\ndings), the size of the dataset D, and the amount of compute C used for training. Within reasonable limits,\nperformance depends very weakly on other architectural hyperparameters such as depth vs. width. (Section\n3)\nSmooth power laws:\nPerformance has a power-law relationship with each of the three scale",
+          "score": 0.023013,
+          "pdf_url": "/api/v1/papers/d52a2824-279d-4f19-8118-a4d0ce423544/pdf#page=3",
+          "block_ids": [
+            "b000069"
+          ]
+        }
+      ],
+      "uncertainty": null,
+      "insufficient_evidence": false,
+      "model_usage": {
+        "input_tokens": 7131,
+        "output_tokens": 999,
+        "total_tokens": 8130,
+        "estimated_cost_usd": null
+      },
+      "latency": {
+        "retrieval_latency_ms": 1720.84,
+        "rerank_latency_ms": 0.0,
+        "context_build_latency_ms": 0.101,
+        "llm_first_token_latency_ms": null,
+        "llm_total_latency_ms": 39927.023,
+        "total_latency_ms": 41681.768
+      },
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3-8B",
+      "prompt_version": "qa-production-v1",
+      "api_request_count": 1,
+      "retry_count": 0,
+      "retry_reasons": [],
+      "rate_limit_events": 0
+    },
+    "metrics": {
+      "answerable_correct": true,
+      "required_claim_coverage": 0.3333333333333333,
+      "citation_id_validity": 1.0,
+      "citation_precision": 0.14285714285714285,
+      "citation_recall": 1.0,
+      "claim_citation_binding_rate": 1.0,
+      "unsupported_claim_count": 6,
+      "claim_scores": [
+        {
+          "required_claim": "The paper identifies power-law scaling of loss with model size, data size, and compute.",
+          "best": 0.8461538461538461
+        },
+        {
+          "required_claim": "It observes limited effects from some architectural details within the studied range.",
+          "best": 0.16666666666666666
+        },
+        {
+          "required_claim": "It uses the relationships to guide fixed-budget compute allocation.",
+          "best": 0.3333333333333333
+        }
+      ]
+    },
+    "gold_block_present": true,
+    "api_request_count": 1,
+    "retry_count": 0,
+    "retry_reasons": [],
+    "rate_limit_events": 0,
+    "wall_ms": 41683.613
+  },
+  "q019_current_failure": {
+    "question_id": "q019",
+    "status": "FAILED",
+    "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+    "retrieval_scope": "paper",
+    "retrieval_filter": {
+      "paper_ids": [
+        "2001.08361"
+      ]
+    },
+    "gold": {
+      "answerable": true,
+      "gold_paper_ids": [
+        "2001.08361"
+      ],
+      "gold_block_ids": [
+        "b000215",
+        "b000216",
+        "b000217",
+        "b000218"
+      ],
+      "gold_pages": [
+        7
+      ],
+      "required_claims": [
+        "Model size is varied from 768 to 1.5B non-embedding parameters.",
+        "Dataset size is varied from 22M to 23B tokens.",
+        "Model shape variables include depth, width, attention heads, and feed-forward dimension."
+      ]
+    },
+    "failure_reason": "{\"error\":{\"code\":\"HTTP_503\",\"message\":{\"code\":\"CLAIM_QA_CITATION_VALIDATION_ERROR\",\"message\":\"SiliconFlow QA failed after 1 request(s): citation_validation:page\",\"stage\":\"CLAIM_CITATION_VALIDATE\",\"api_request_count\":1,\"retry_reasons\":[\"citation_validation:page\"],\"rate_limit_events\":0,\"response_audit_path\":null},\"request_id\":\"03a7e352-e7e2-40e9-a04c-8931c7f2dd3f\"}}",
+    "api_request_count": 1,
+    "retry_count": 1,
+    "retry_reasons": [
+      "citation_validation:page"
+    ],
+    "rate_limit_events": 0,
+    "provider_error_code": "CLAIM_QA_CITATION_VALIDATION_ERROR",
+    "provider_error_stage": "CLAIM_CITATION_VALIDATE",
+    "wall_ms": 8071.997
+  }
+}

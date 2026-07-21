@@ -1,0 +1,12 @@
+{
+  "schema_version": "true-numeric-retrieval-gaps-v1",
+  "numeric_claims": 5,
+  "true_numeric_gaps": 3,
+  "root_cause_distribution": {
+    "candidate_pruning_after_retrieval": 1,
+    "no_failure": 1,
+    "vector_retrieval_miss": 3
+  },
+  "unknown": 0,
+  "NUMERIC_RETRIEVAL_GAP_ATTRIBUTION": "COMPLETE"
+}

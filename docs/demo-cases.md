@@ -32,3 +32,11 @@
 4. 打开最终研究报告，抽查引用页码。
 
 验收重点：证据不足时进入外部搜索；预算触顶时停止；报告主要结论均有引用。
+# Demo Cases
+
+## Stage 13.39 safe demo scope
+
+Use curated summaries and sanitized API views only. The demo may show health,
+capabilities, retrieval traces, final QA summary metrics, and the successful
+bounded q003 Deep Research result. It must not claim strong generalization or
+show local-only raw traces/provider responses.

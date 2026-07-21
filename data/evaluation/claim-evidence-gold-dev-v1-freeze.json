@@ -1,0 +1,61 @@
+{
+  "schema_version": "claim-evidence-gold-freeze-v1",
+  "gold_version": "claim-evidence-gold-dev-v1",
+  "claim_gold_schema_version": "claim-evidence-gold-dev-schema-v1",
+  "review_type": "AI-assisted manual claim-level Gold adjudication",
+  "reviewed_record_count": 27,
+  "relation_count": 313,
+  "core_relation_count": 25,
+  "supporting_relation_count": 0,
+  "equivalent_relation_count": 8,
+  "partially_relevant_count": 115,
+  "insufficient_count": 165,
+  "rejected_relation_count": 280,
+  "core_set_count": 5,
+  "no_valid_evidence_count": 0,
+  "reviewed_file_hash": {
+    "algorithm": "sha256",
+    "mode": "canonical_jsonl_v1",
+    "value": "3cee289380c4b2ba861079d5f8470719a0d880f98812a5b55f28fb65693d37a6",
+    "raw_value_at_review": "e1aadcae82fb8a7f867eb600ffb0b2836813fd70e38c70502992cc7e4faa4bcd",
+    "schema_version": "source-hash-v2",
+    "canonicalization_version": "canonical-hash-v1"
+  },
+  "source_corpus_hash": {
+    "algorithm": "sha256",
+    "mode": "canonical_jsonl_v1",
+    "value": "7c00c3dc803d2dfe641006e7031eeb899e38fddfa923d942c1073946f87be783",
+    "raw_value_at_review": "febb69d010db4a20b3ca13c01c2b2b4d04523ca224c6f5c60810d04395e062c1",
+    "schema_version": "source-hash-v2",
+    "canonicalization_version": "canonical-hash-v1"
+  },
+  "claim_units_hash": {
+    "algorithm": "sha256",
+    "mode": "canonical_jsonl_v1",
+    "value": "922004fe81ea955b63a4a78cc2e52c5081062773804c5233202c7dac916e29c7",
+    "raw_value_at_review": "14f8ae19d4b6b86727265ec6b5b54ae873507f1c693e0da76b34f35fae13278d",
+    "schema_version": "source-hash-v2",
+    "canonicalization_version": "canonical-hash-v1"
+  },
+  "historical_gold_hash": {
+    "algorithm": "sha256",
+    "mode": "canonical_jsonl_v1",
+    "value": "01660d3dd734003bcf1bbedebfec30f224524a91190bb6295ea51069a416cffa",
+    "raw_value_at_review": "24b21d7ce5264d4f22230cfb6bc9ec788ef6b76dc0ad629a20ae682c5184599e",
+    "schema_version": "source-hash-v2",
+    "canonicalization_version": "canonical-hash-v1"
+  },
+  "retrieval_gold_hash": {
+    "algorithm": "sha256",
+    "mode": "canonical_jsonl_v1",
+    "value": "9a43bab1e9234a884256447e80afa3c2d0b4c6467b95604073f1355d63042f9f",
+    "raw_value_at_review": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+    "schema_version": "source-hash-v2",
+    "canonicalization_version": "canonical-hash-v1"
+  },
+  "frozen_at": "2026-07-16T10:19:49.567582+00:00",
+  "frozen_before_next_live_run": true,
+  "scope": "fixed_dev_27_required_claims",
+  "external_validity_limitation": "AI-assisted manual claim-level Gold adjudication; not independent double-blind, Full-50, Production, or general-corpus Gold.",
+  "automatic_overwrite_allowed": false
+}

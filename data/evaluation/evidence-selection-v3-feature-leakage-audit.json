@@ -1,0 +1,11 @@
+{
+  "schema_version": "evidence-selection-v3-feature-leakage-audit-v1",
+  "source": "src\\paper_research\\generation\\evidence_selection_v3.py",
+  "gold_online_leakage": 0,
+  "human_label_online_leakage": 0,
+  "attribution_label_online_leakage": 0,
+  "fixed_id_special_cases": 0,
+  "string_hits": [],
+  "arg_hits": [],
+  "gate": "PASSED"
+}

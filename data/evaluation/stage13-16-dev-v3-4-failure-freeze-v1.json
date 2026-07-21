@@ -1,0 +1,377 @@
+{
+  "schema_version": "stage13-16-dev-v3-4-failure-freeze-v1",
+  "evaluation_version": "evidence-qa-dev-v3.4",
+  "protocol_freeze_signature": "75d60ff9e1390af3833c8035d141f8a09acc6f093f030d7ca3dfc1b835be5195",
+  "prompt_version": "qa-required-claims-minimal-payload-v3.4",
+  "prompt_hash": "fe0671bad993f2e71be9d496cbe7b3dcc51dd3d02b3133f81aff19144cd77e6b",
+  "payload_schema_version": "required-claim-model-payload-v2",
+  "payload_schema_hash": "597d4578d1ef2ba823cd4031842e52afacf2cebc8f6d32641368b235c4c539b5",
+  "envelope_schema_version": "required-claim-local-envelope-v2",
+  "envelope_schema_hash": "0f41388dd4b7ffb52b969d015d135b81b14d193eed2c2ad39ae15c5a1548b587",
+  "canonicalization_version": "refusal-empty-to-null-canonicalization-v1",
+  "canonicalization_hash": "526452126a0e1727dcd002898537bc9cb3b0aff3a3392c458f53d5437ebc5010",
+  "runs": [
+    {
+      "question_id": "q001",
+      "run_id": "live-dev-v3-4-q001-7ba5d554895c",
+      "status": "validation_failed",
+      "delivered_messages_hash": "dbd8ce9e79b5da9dc5bf29043573fd3f81507de4521f241ff1b5385e77e2182d",
+      "raw_response_sha256": "fa4e0d5a039544fa7d45e20cd62f8018a69cee7f2dc898564925dc0025bb99e1",
+      "raw_model_payload_sha256": "b94af0ae6c3d0017aa6ab0a95c78defdd5671cbe09ca437749aa296683d26da4",
+      "structural_validation_sha256": "4fe5684a46a55b8bec4b2c14dd145bd3d6cae25c99d7adbbf07a8767edc0dab5",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "4 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrefusal_reason\n  Field required [type=missing, input_value={'answerable': True, 'req...'omission_reason': ''}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "9a5c1a5e392cfbbeffff58ab69bf24053bb2b9f739eb042091077029cde5dbe4",
+      "usage": {
+        "input_tokens": 1844,
+        "output_tokens": 174,
+        "total_tokens": 2018,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q002",
+      "run_id": "live-dev-v3-4-q002-62a5db4c0693",
+      "status": "validation_failed",
+      "delivered_messages_hash": "4d2ba72354e39d70f24cfc2e317025532011c8cce2e4c2cf12ec722b15504075",
+      "raw_response_sha256": "9b521cdb7026f7fafe0e5e2187c5eda2a1222f5faa7712e02360d1d2a32033f9",
+      "raw_model_payload_sha256": "cdfcb2207226f1ef09e31221a26a75eaa212fd1cb5e41327b1b0461e9b2481c8",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "7d9375ef25c7dc3f480ccfed86b593adc589a94e1eb9de48a6068bbf7df49629",
+      "usage": {
+        "input_tokens": 1826,
+        "output_tokens": 167,
+        "total_tokens": 1993,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q004",
+      "run_id": "live-dev-v3-4-q004-8f6b39b82469",
+      "status": "validation_failed",
+      "delivered_messages_hash": "52e8f7a686c8552cd32e46bce15ecd20cf80e42ef34900ed91efb6ad8614e245",
+      "raw_response_sha256": "cea3d17b40b8f779d5cffcfa8def78c820e5083f8343724e6a534b242550f405",
+      "raw_model_payload_sha256": "c46b90bb6f45503a7e902c83655bc9ec6412125f0cd06e16ff93bacef789e78b",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "1da6b035003d5cf823d29bb88b99d097b634a62335f5363bfc7d40faa2939db4",
+      "usage": {
+        "input_tokens": 1996,
+        "output_tokens": 195,
+        "total_tokens": 2191,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q005",
+      "run_id": "live-dev-v3-4-q005-6de3aefa6e9e",
+      "status": "completed",
+      "delivered_messages_hash": "9e7408bc081bae60c0ed5419a321dfd9bab376fa48bb1c27117a2cb16ee01b68",
+      "raw_response_sha256": "a96b032a408103802edafd2ede67b4796b18500793d8183d9d8968c462aeef30",
+      "raw_model_payload_sha256": "db20ff03da12be6e54374451b92232dcf3795237326bc457f6eb6b5a68796c72",
+      "structural_validation_sha256": "5826e597dae79ccc62f57f2e5292641879d726783ba3dc1bdc6b89ccf40bff84",
+      "structural_validation": {
+        "json_valid": true,
+        "structural_schema_valid": true,
+        "slot_count": 0,
+        "payload_hash": "ab8bb26071bc04499c6c556899fcebdba28c5917d9d9538cdb4db14ea2803ff9"
+      },
+      "slot_validation": {
+        "required_claim_count": 0,
+        "raw_slot_count": 0,
+        "strict_pass": true
+      },
+      "final_result_sha256": "74a23a5eeba68b47df454e5596c296f83e3f86d3bd063ee28262e6e6a1f594db",
+      "usage": {
+        "input_tokens": 264,
+        "output_tokens": 56,
+        "total_tokens": 320,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q007",
+      "run_id": "live-dev-v3-4-q007-2097f58c6cef",
+      "status": "validation_failed",
+      "delivered_messages_hash": "17222c6cb19ce525caeab94f525f7d9301dd0cb5640f7e9ba3cc03884510bf83",
+      "raw_response_sha256": "1c12ceb1aa7a94148045bc68e4cd401505b5859afeb9d27ce03fc0a04d7246ef",
+      "raw_model_payload_sha256": "9697cefd54e8d3fb8e09aefea4aa809b4f30506ab2c87b069edeb4649ee53808",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "f09ad0a7464f5258db6ede35ebfb5ff9cef38e03b9a402dcc3119f87ec379d12",
+      "usage": {
+        "input_tokens": 1867,
+        "output_tokens": 175,
+        "total_tokens": 2042,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q008",
+      "run_id": "live-dev-v3-4-q008-839e61a44d1f",
+      "status": "validation_failed",
+      "delivered_messages_hash": "3a4f9321370b4b560e9c73a8d0c36c23debf0d1a11081af8714a0e2b77eacc57",
+      "raw_response_sha256": "4269cbf5d23c1b0207127688602aeb8a04d59e52287507322d529b316c9927be",
+      "raw_model_payload_sha256": "32b909ab010bc8887f2d83bdb482e27ec4e2e7a9e84c8b37117835279f9ed9d5",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "8e7207fe937e36506c580233dfaef1039189c52fcb3b6f95b724fd23e5a0cee3",
+      "usage": {
+        "input_tokens": 1919,
+        "output_tokens": 178,
+        "total_tokens": 2097,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q013",
+      "run_id": "live-dev-v3-4-q013-1d1cf09b1a28",
+      "status": "validation_failed",
+      "delivered_messages_hash": "14290f224fbebe3734ca2af928a05018ce0ea9f2ec36db52573b285faa84a848",
+      "raw_response_sha256": "793a151e4fadb531d64caebd299bef6f8eb9f2149ff52e38e065295cbcd0b8bd",
+      "raw_model_payload_sha256": "1588f7ee17737be0d261e0e030f2ee872c4e78523084fabaca99640a9969c50d",
+      "structural_validation_sha256": "809292408b0b7a5985ec5abe09f2d029eb8778024af31cf3904ba90b241945c1",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='answerable', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='answerable', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='answerable', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "586ebf67ac63905a275d5e011167ede976ed44c55f285dd2040dd290a699d6bc",
+      "usage": {
+        "input_tokens": 2327,
+        "output_tokens": 213,
+        "total_tokens": 2540,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q015",
+      "run_id": "live-dev-v3-4-q015-bb3d4a50f19e",
+      "status": "validation_failed",
+      "delivered_messages_hash": "89499a44a8fba2e7d9ea01bb17bb11dab5a9ac8249c72fea1214013856ca48be",
+      "raw_response_sha256": "647a452dce16bbd933655aff828589ae8e9fa218497fb2ddb78b0a83efb24724",
+      "raw_model_payload_sha256": "ea115ede06a0fa6f5fc9ed1b5f0cdb2895c5866cc044a4ee0a8581b7b309c423",
+      "structural_validation_sha256": "ae9d32b558d2e77f2468333b036f79f37efe929bb8e46106a04d07f4b928ecc6",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "2 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "b0ab2c8d596775f6a010b910b490333b4ad1ccb891a01943d929cde8e2cb4e82",
+      "usage": {
+        "input_tokens": 2320,
+        "output_tokens": 278,
+        "total_tokens": 2598,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q019",
+      "run_id": "live-dev-v3-4-q019-57e2829a5046",
+      "status": "validation_failed",
+      "delivered_messages_hash": "a0524946091033396a14b7e4f4a6c011883d88ffddbea74cd18b41da82961e04",
+      "raw_response_sha256": "6cbcbf751678e2a67dc8b9ac127ecb4f109f56da5e5871f7415f27b680aba158",
+      "raw_model_payload_sha256": "17a415abeded81f21ba9847112258a725498aadcc2960b74727255c9c9bd28ee",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "937c29251ec7c9649cc59047aa4b7c322b86b11e0fc5b067b2fc57c68d06eabe",
+      "usage": {
+        "input_tokens": 1774,
+        "output_tokens": 220,
+        "total_tokens": 1994,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    },
+    {
+      "question_id": "q050",
+      "run_id": "live-dev-v3-4-q050-8885aa0da41e",
+      "status": "validation_failed",
+      "delivered_messages_hash": "dc24d9bfb9e17334f4ed7ec51e797d314ad2e5c07fe3e7ba8f3a186c799a470f",
+      "raw_response_sha256": "b839d04cd99aee414d6b227d953303dd134ceb550127b00d28c1fb553ac144cb",
+      "raw_model_payload_sha256": "153b530c375ae1b1860ea37315c7fcb0bbe6fd5dd73ece9144f05115f2720036",
+      "structural_validation_sha256": "f1aa87d5becf3f3f6bb416f4938b265d883375e5da6ab015a0df4cd0bce6fc2b",
+      "structural_validation": {
+        "status": "not_available_due_to_terminal_failure",
+        "failure_type": "ValidationError",
+        "failure_reason": "3 validation errors for MinimalRequiredClaimsPayload\nrequired_claim_results.0.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.1.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum\nrequired_claim_results.2.status\n  Input should be 'answered', 'unsupported' or 'not_applicable' [type=enum, input_value='supported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/enum",
+        "raw_response_modified": false
+      },
+      "slot_validation": {
+        "required_claim_count": 3,
+        "raw_slot_count": 3,
+        "strict_pass": false
+      },
+      "final_result_sha256": "d83686ea0e0869dcb1562225554f893d5cdb40f0c666e13b3195335de3a597bc",
+      "usage": {
+        "input_tokens": 2052,
+        "output_tokens": 233,
+        "total_tokens": 2285,
+        "usage_source": "provider_reported"
+      },
+      "accounting_terminal": {
+        "settled": 1,
+        "released": 0,
+        "billing_unknown": 0,
+        "active_reserved_tokens": 0
+      }
+    }
+  ],
+  "run_count": 10,
+  "summary_sha256": "08556fcea10d02c8ebd8d669ad2ed45abc0029c58bfa7e5a85b4d2058ed77993",
+  "final_audit_sha256": "0fc12e067a628d3ef1d25284de9de4bd9db2f665974d57a0f6574a7bcab06c77",
+  "citation_audit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "historical_protection_sha256": "5a7690b11ac322cdf55a1f10ba1dd88e4bac48636565c52a9f7e8895dba0ae58",
+  "failure_taxonomy": {
+    "raw_status_distribution": {
+      "answerable": 3,
+      "supported": 23,
+      "unsupported": 1
+    },
+    "missing_top_level_refusal_reason": 1,
+    "validation_failures": {
+      "ValidationError": 9
+    },
+    "completed": 1,
+    "strict_structural_pass": 1,
+    "final_slots": 0
+  },
+  "gate_results": {
+    "provider_health": "PASSED",
+    "raw_payload": "FAILED",
+    "final_policy_engineering": "FAILED",
+    "engineering": "FAILED",
+    "automated_quality": "FAILED",
+    "human_support": "FAILED",
+    "quality_candidate": "FAILED",
+    "ready_for_full_qa": false
+  },
+  "immutable": true,
+  "frozen_at": "2026-07-16T14:18:18.809142+00:00",
+  "failure_freeze_signature": "ab8ee1b771dbf2267fd2f066f3d2a81ea3ee022ea61f81adfbb41f809849b120"
+}

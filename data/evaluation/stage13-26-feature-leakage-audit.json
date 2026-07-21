@@ -1,0 +1,21 @@
+{
+  "schema_version": "stage13-26-feature-leakage-audit-v1",
+  "sources": [
+    "src\\paper_research\\generation\\bounded_set_search.py",
+    "src\\paper_research\\retrieval\\obligation_query_builder_v1.py"
+  ],
+  "gold_online_leakage": 0,
+  "human_label_online_leakage": 0,
+  "oracle_label_online_leakage": 0,
+  "attribution_label_online_leakage": 0,
+  "fixed_id_special_cases": 0,
+  "string_hits": {
+    "gold_online_leakage": [],
+    "human_label_online_leakage": [],
+    "oracle_label_online_leakage": [],
+    "attribution_label_online_leakage": [],
+    "fixed_id_special_cases": []
+  },
+  "arg_hits": [],
+  "gate": "PASSED"
+}

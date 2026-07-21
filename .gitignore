@@ -37,6 +37,7 @@ data/reports/*
 # Database backups
 artifacts/*.dump
 *.dump
+artifacts/private/qa-response-audits/
 
 # Logs and temporary files
 *.log
@@ -52,10 +53,31 @@ artifacts/*.dump
 artifacts/imports/
 artifacts/*review-pack*.zip
 artifacts/*human-review*.zip
+artifacts/stage13-9-human-citation-review-results.zip
+artifacts/stage13-10-human-claim-gold-review-results.zip
 artifacts/stage13-*-human-review/
 artifacts/stage13-*-human-review-results/
 artifacts/*citation*review-export*.md
 artifacts/evidence-qa-dev-citation-human-audit-*
+artifacts/deepseek-full-qa-final-trace-v1.json
+artifacts/deepseek-production-deep-research-v1/
+artifacts/docker-ocr-production-v2/
+artifacts/langgraph-production-recovery-v2/
+artifacts/portfolio-stability-deep-research-v1/
+artifacts/soak-test-portfolio-v1.progress.json
+artifacts/evidence-first-canary-trace-v1.json
+artifacts/full-qa-canary-deepseek-trace-v1.json
+artifacts/full-qa-canary-trace-v2.json
+artifacts/full-qa-rerun-backups/
+artifacts/q017-live-retry-response-audit-sanitized-v1.json
+artifacts/stage13-31-q002-provider-response-audit.json
+artifacts/stage13-31-q002-reproduction-input.json
+data/evaluation/deepseek-full-qa-final-items-v1.jsonl
+data/evaluation/evidence-first-canary-v1.csv
+data/evaluation/evidence-first-canary-v1.json
+data/evaluation/full-qa-canary-results-v2.csv
+data/evaluation/full-qa-canary-results-v2.json
+docs/full-qa-canary-audit-v2.md
 
 # Local evaluation run evidence; canonical summaries and hash freezes are tracked
 data/evaluation/evidence-qa-dev-v*/runs/

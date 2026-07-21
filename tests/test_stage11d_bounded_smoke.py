@@ -22,6 +22,7 @@ from paper_research.providers.llm import (
     GeneratedClaim,
     GenerationResult,
     ModelUsage,
+    classify_provider_exception,
 )
 from paper_research.retrieval.context_builder import ContextItem
 
@@ -66,8 +67,8 @@ class CountingLLM:
         self.invalid = invalid
         self.missing_usage = missing_usage
 
-    def generate_claim_answer(self, question, contexts, prompt_version):
-        del question, prompt_version
+    def generate_claim_answer(self, question, contexts, prompt_version, audit_metadata=None):
+        del question, prompt_version, audit_metadata
         self.calls += 1
         item = contexts[0]
         citation = GeneratedCitation(
@@ -114,6 +115,30 @@ def test_billing_modes_are_explicit(mode):
         }
     policy, _ = smoke_configuration(settings(llm_billing_mode=mode, **kwargs))
     assert policy.mode == mode
+
+
+def test_deepseek_v4_flash_is_allowed_for_portfolio_smoke():
+    policy, _ = smoke_configuration(
+        settings(
+            llm_provider="openai_compatible",
+            llm_provider_name="deepseek",
+            llm_model="deepseek-v4-flash",
+        )
+    )
+    assert policy.cost_basis == "explicit_free_provider"
+
+
+def test_provider_exception_classification_preserves_winerror_cause_chain():
+    permission = PermissionError(10013, "forbidden by socket policy")
+    connect = RuntimeError("outer connect")
+    connect.__cause__ = permission
+    details = classify_provider_exception(connect, hostname="api.deepseek.com")
+    assert details["classification"] == "DEEP_RESEARCH_SOCKET_PERMISSION_ERROR"
+    assert details["hostname"] == "api.deepseek.com"
+    assert [item["class"] for item in details["cause_chain"]] == [
+        "RuntimeError",
+        "PermissionError",
+    ]
 
 
 @pytest.mark.parametrize("mode", ["invalid", "", None])
@@ -172,7 +197,10 @@ def test_missing_usage_fails_and_is_not_zero(tmp_path):
     state = runner.run(sample(), run_id="missing")
     assert state.status == "provider_failed"
     assert state.budget_stop_reason is None
-    assert state.request_records[0]["usage_status"] == "unavailable_after_send_attempt"
+    assert state.request_records[0]["usage_status"] == "released_after_missing_usage"
+    assert state.reserved_total_tokens == 0
+    assert state.total_tokens == 0
+    assert state.monetary_cost_usd == "0"
 
 
 def sample() -> dict:

@@ -1,3 +1,5 @@
 """PaperResearch Agent backend."""
 
-__version__ = "0.9.0-rc1"
+from paper_research.version import __display_version__, __version__
+
+__all__ = ["__display_version__", "__version__"]

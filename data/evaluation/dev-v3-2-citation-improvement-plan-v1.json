@@ -1,0 +1,296 @@
+{
+  "schema_version": "dev-v3-2-citation-improvement-plan-v1",
+  "mode": "offline_design_only",
+  "candidates": [
+    {
+      "candidate": "primary citation first",
+      "hypothesis": "Prefer the strongest claim-local evidence before supplements.",
+      "audit_evidence": [
+        "citation_fully_supported",
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "comparison_side_missing",
+        "core_gold_not_retrieved",
+        "core_gold_selected_not_cited",
+        "partial_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q001-bc33bddd93356fce6273",
+        "cl-q002-023231b350a389faa754",
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q008-3fcba63ce8d76f5cfc1d",
+        "cl-q008-d73bc3c128270add0359",
+        "cl-q013-4a5420c3371111d7f5f3",
+        "cl-q015-281a83daa0567f6ae7ac",
+        "cl-q050-e6beec554909bcb0e6ba"
+      ],
+      "affected_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q008",
+        "q013",
+        "q015",
+        "q050"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "per-claim citation cap",
+      "hypothesis": "Limit dilution from weak extra citations.",
+      "audit_evidence": [
+        "citation_fully_supported",
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "comparison_side_missing",
+        "core_gold_not_retrieved",
+        "core_gold_selected_not_cited",
+        "partial_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q001-bc33bddd93356fce6273",
+        "cl-q002-023231b350a389faa754",
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q008-3fcba63ce8d76f5cfc1d",
+        "cl-q008-d73bc3c128270add0359",
+        "cl-q013-4a5420c3371111d7f5f3",
+        "cl-q015-281a83daa0567f6ae7ac",
+        "cl-q050-e6beec554909bcb0e6ba"
+      ],
+      "affected_questions": [
+        "q001",
+        "q002",
+        "q004",
+        "q008",
+        "q013",
+        "q015",
+        "q050"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "compound claim decomposition",
+      "hypothesis": "Split claims whose minimum evidence set spans subclaims.",
+      "audit_evidence": [
+        "citation_fully_supported",
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "core_gold_not_retrieved",
+        "core_gold_selected_not_cited",
+        "partial_evidence_cited",
+        "wrong_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q001-bc33bddd93356fce6273",
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q007-51d53fc4250379d38e16"
+      ],
+      "affected_questions": [
+        "q001",
+        "q004",
+        "q007"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "numeric evidence completeness validator",
+      "hypothesis": "Require cited text to contain required numeric facts.",
+      "audit_evidence": [
+        "citation_partially_supported",
+        "citation_unsupported",
+        "core_gold_not_retrieved",
+        "numeric_evidence_missing",
+        "partial_evidence_cited",
+        "wrong_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q019-409ecf7b2b8c09e348e6",
+        "cl-q019-9d65c5779788321a4283"
+      ],
+      "affected_questions": [
+        "q019"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "comparison-side completeness validator",
+      "hypothesis": "Require evidence for every comparison side.",
+      "audit_evidence": [
+        "citation_fully_supported",
+        "citation_partially_supported",
+        "comparison_side_missing",
+        "core_gold_selected_not_cited",
+        "equivalent_valid_evidence_cited",
+        "metric_only_legacy_gold_issue",
+        "partial_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q015-281a83daa0567f6ae7ac",
+        "cl-q050-96cfbcf597379dea6b6f",
+        "cl-q050-e6beec554909bcb0e6ba",
+        "cl-q050-fcbcedc602ad451d727a"
+      ],
+      "affected_questions": [
+        "q015",
+        "q050"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "core-set-aware evidence allocation",
+      "hypothesis": "Allocate all members of a minimum complete evidence set.",
+      "audit_evidence": [
+        "citation_fully_supported",
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "core_gold_not_retrieved",
+        "core_gold_selected_not_cited",
+        "numeric_evidence_missing",
+        "partial_evidence_cited",
+        "wrong_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q001-bc33bddd93356fce6273",
+        "cl-q004-ba317f113c67f72f7260",
+        "cl-q007-0dc4946bfe1085fe36ce",
+        "cl-q007-51d53fc4250379d38e16",
+        "cl-q013-ed3f2a06305ea05d1b9e",
+        "cl-q015-34d9467bd693a8e1f141",
+        "cl-q015-fd7824b67e9a47f5aa88",
+        "cl-q019-2fef5549293d6f983f79",
+        "cl-q019-409ecf7b2b8c09e348e6",
+        "cl-q019-9d65c5779788321a4283"
+      ],
+      "affected_questions": [
+        "q001",
+        "q004",
+        "q007",
+        "q013",
+        "q015",
+        "q019"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "original evidence first",
+      "hypothesis": "Use adjacent completion only as supporting context.",
+      "audit_evidence": [
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "core_gold_not_retrieved",
+        "numeric_evidence_missing",
+        "partial_evidence_cited",
+        "wrong_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q007-51d53fc4250379d38e16",
+        "cl-q015-34d9467bd693a8e1f141",
+        "cl-q015-fd7824b67e9a47f5aa88",
+        "cl-q019-409ecf7b2b8c09e348e6"
+      ],
+      "affected_questions": [
+        "q007",
+        "q015",
+        "q019"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    },
+    {
+      "candidate": "shrink claim or return unsupported",
+      "hypothesis": "Avoid unsupported breadth when evidence is incomplete.",
+      "audit_evidence": [
+        "citation_partially_supported",
+        "citation_unsupported",
+        "claim_too_broad",
+        "core_gold_not_retrieved",
+        "numeric_evidence_missing",
+        "partial_evidence_cited",
+        "wrong_evidence_cited"
+      ],
+      "affected_claims": [
+        "cl-q007-51d53fc4250379d38e16",
+        "cl-q015-34d9467bd693a8e1f141",
+        "cl-q015-fd7824b67e9a47f5aa88",
+        "cl-q019-409ecf7b2b8c09e348e6"
+      ],
+      "affected_questions": [
+        "q007",
+        "q015",
+        "q019"
+      ],
+      "expected_recall_impact": "positive if offline failure stage is addressed",
+      "expected_support_impact": "non-negative; requires live validation",
+      "precision_risk": "medium",
+      "token_impact": "low to moderate",
+      "latency_impact": "low; no new provider call",
+      "implementation_complexity": "medium",
+      "generic": true,
+      "no_gold_online_dependency": true,
+      "requires_live_validation": true
+    }
+  ],
+  "live_code_implemented": false,
+  "gold_online_dependency": false,
+  "human_label_online_dependency": false
+}

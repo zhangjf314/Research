@@ -1,5 +1,9 @@
 FROM python:3.12-slim AS runtime
 
+ARG APP_VERSION=1.0.0-portfolio
+LABEL org.opencontainers.image.version=$APP_VERSION
+LABEL org.opencontainers.image.title="paper-research-agent"
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1

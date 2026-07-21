@@ -264,7 +264,7 @@ def _apply_authoritative_checks(root: Path, gates: dict[str, dict[str, Any]]) ->
         pyproject = (root / "pyproject.toml").read_text(encoding="utf-8")
         version_match = re.search(r'^version\s*=\s*"([^"]+)"', pyproject, re.MULTILINE)
         package_version = version_match.group(1) if version_match else None
-        _set_gate(gates, "REL-01", package_version == "0.9.0rc3")
+        _set_gate(gates, "REL-01", package_version in {"0.9.0rc3", "1.0.0+portfolio"})
         _set_gate(gates, "REL-02", package_version == "1.0.0")
 
         summary = _load_json(root / "data/evaluation/deep-research-smoke-v1.json")
@@ -346,15 +346,25 @@ def evaluate(root: Path, target: str, strict: bool) -> tuple[dict[str, Any], int
         result_status = "passed"
 
     recommended_rc = documents.get("gates", {}).get("recommended_rc_version")
+    package_version = None
+    pyproject = root / "pyproject.toml"
+    if pyproject.exists():
+        version_match = re.search(
+            r'^version\s*=\s*"([^"]+)"',
+            pyproject.read_text(encoding="utf-8"),
+            re.MULTILINE,
+        )
+        package_version = version_match.group(1) if version_match else None
+    highest_satisfied = recommended_rc if not rc_unmet and not errors else "v0.9.0-rc2"
+    if package_version == "1.0.0+portfolio" and not rc_unmet and not errors:
+        highest_satisfied = "v1.0.0-portfolio"
     output = {
         "schema_version": "release-readiness-result-v1",
         "target": target,
         "strict": strict,
         "status": result_status,
         "recommended_rc_version": recommended_rc,
-        "highest_satisfied_version": (
-            recommended_rc if not rc_unmet and not errors else "v0.9.0-rc2"
-        ),
+        "highest_satisfied_version": highest_satisfied,
         "production_ready": target == "v1" and result_status == "passed",
         "required_gate_count": len(required),
         "passed_gate_count": len(required) - len(unmet),

@@ -1,0 +1,9 @@
+{
+  "schema_version": "dev-v3-6-evidence-selection-v3-final-audit-v1",
+  "EVIDENCE_SELECTION_V3_ENGINEERING_GATE": "PASSED",
+  "EVIDENCE_SELECTION_V3_QUALITY_PREFLIGHT": "FAILED",
+  "NEXT_LIVE_READY": false,
+  "NEXT_LIVE_AUTHORIZED": false,
+  "READY_FOR_FULL_QA": false,
+  "replay_hash": "f5563ca8f5fe8360a241703501dd692727da9d9b6e4f1eda284ba4fd59f9b5b2"
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": "evidence-qa-dev-v3-2-manifest-v1",
+  "evaluation_version": "evidence-qa-dev-v3.2",
+  "manifest_hash": "fcb59b71fc68549479c24f6475f7d18ad9e382aace93e70e93594ee355ffb988",
+  "question_ids": [
+    "q001",
+    "q002",
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q013",
+    "q015",
+    "q019",
+    "q050"
+  ],
+  "question_count": 10,
+  "required_claim_counts": {
+    "q001": 3,
+    "q002": 3,
+    "q004": 3,
+    "q005": 0,
+    "q007": 3,
+    "q008": 3,
+    "q013": 3,
+    "q015": 3,
+    "q019": 3,
+    "q050": 3
+  },
+  "total_required_claims": 27,
+  "configuration": {
+    "collection": "papers_jina_eval34_v2__20260713152149",
+    "embedding_model": "jina-embeddings-v5-text-small",
+    "embedding_dimensions": 1024,
+    "retrieval": "adjacent_same_page_completion",
+    "prompt": "qa-required-claims-citation-id-v3.2-candidate",
+    "prompt_hash": "73df617c1ae2943a6fcecb07f096fed480392951a0c9e271ff03624284bc992c",
+    "schema": "required-claim-slots-v1.1",
+    "schema_hash": "158504a7bd7e0fe7e32f53c81aa57e30240f3a07429447797c3ccd56d5c57a34",
+    "combined_policy_hash": "0a381a75ede9fbfc43d6d47fc2c6b392435cb37e28e285157187839fffa6cc1b",
+    "policy_versions": {
+      "citation_selection": "citation-selection-v1",
+      "claim_obligation_coverage": "claim-obligation-coverage-v1",
+      "numeric_validation": "numeric-evidence-completeness-v1",
+      "comparison_validation": "comparison-evidence-completeness-v1",
+      "citation_budget": {
+        "version": "citation-budget-v1",
+        "max_primary": 1,
+        "max_supporting": 2,
+        "max_total": 3,
+        "allow_zero_for_unsupported": true
+      },
+      "evidence_origin": "citation-evidence-origin-policy-v1"
+    },
+    "provider_capability_snapshot_hash": "000bf54a298e21db53f42419123a53f16a05c279f002d8336146175ac95e7a03",
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "temperature": 0,
+    "reranker_enabled": false,
+    "llm_max_retries": 0,
+    "json_correction_retries": 0,
+    "citation_correction_retries": 0,
+    "response_format": "json_object",
+    "json_schema_sent": false,
+    "tools_or_functions_sent": false,
+    "formal_normalization_policy": "raw_schema_passed_only",
+    "citation_budget": {
+      "version": "citation-budget-v1",
+      "max_primary": 1,
+      "max_supporting": 2,
+      "max_total": 3,
+      "allow_zero_for_unsupported": true
+    },
+    "billing_mode": "free",
+    "monetary_cost_usd": "0"
+  },
+  "claim_gold_freeze_hash_evaluation_only": "3cee289380c4b2ba861079d5f8470719a0d880f98812a5b55f28fb65693d37a6",
+  "created_before_live_results": true,
+  "live_authorized_for_one_batch": true,
+  "full_qa_authorized": false,
+  "deep_research_authorized": false
+}

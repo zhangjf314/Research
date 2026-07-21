@@ -1,0 +1,24 @@
+{
+  "run_id": "live-q003-ed900ef2e202",
+  "question_id": "q003",
+  "mode": "live",
+  "attempt_number": 2,
+  "parent_run_id": "live-q003-cbc99df5b041",
+  "started_at": "2026-07-20T13:29:41.225188+00:00",
+  "ended_at": "2026-07-20T13:29:42.562784+00:00",
+  "status": "completed",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "billing_mode": "paid",
+  "code_revision": "df2afa44720982145b69383308c04f3cd9241287",
+  "config_fingerprint": "4d5995c928147b6cbc19e30dab04d74197bd08f1930ad2e7452e62f98bf17c87",
+  "historical_role": null,
+  "output_paths": {
+    "result.json": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\result.json",
+    "result.csv": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\result.csv",
+    "trace.jsonl": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\trace.jsonl",
+    "request-ledger.jsonl": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\request-ledger.jsonl",
+    "checkpoint-summary.json": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\checkpoint-summary.json",
+    "run-metadata.json": "D:\\Agents\\Codex\\research\\artifacts\\deepseek-production-deep-research-v2\\live-q003-ed900ef2e202\\run-metadata.json"
+  }
+}

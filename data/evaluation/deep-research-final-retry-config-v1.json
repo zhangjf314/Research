@@ -1,0 +1,41 @@
+{
+  "schema_version": "deep-research-final-retry-config-v1",
+  "created_at": "2026-07-20T13:11:15Z",
+  "question_id": "q003",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "reranker": false,
+  "attempt_number": 2,
+  "parent_run_id": "live-q003-cbc99df5b041",
+  "final_run_id": "live-q003-ed900ef2e202",
+  "final_run_status": "completed",
+  "output_root": "artifacts/deepseek-production-deep-research-v2",
+  "max_cost_usd": "0.20",
+  "max_total_tokens": 40000,
+  "max_total_requests": 4,
+  "max_total_seconds": 300,
+  "git_commit": "391187f4bee93ff8b90b72d35d1f463d3efb54bd",
+  "provider_config_hash": "4d5995c928147b6cbc19e30dab04d74197bd08f1930ad2e7452e62f98bf17c87",
+  "prompt_versions": [
+    "qa-production-v1"
+  ],
+  "graph_version": "bounded-smoke-v1",
+  "checkpointer": "sqlite smoke checkpoint",
+  "redis": "available",
+  "retry_policy": {
+    "provider_max_retries": 0,
+    "qa_retry": false,
+    "json_repair": false
+  },
+  "no_summary_flag_decision": "Final retry did not use --no-summary. The run emitted isolated run artifacts and did not update top-level smoke summaries.",
+  "final_result": {
+    "provider_completed_request_count": 1,
+    "input_tokens": 6714,
+    "output_tokens": 82,
+    "total_tokens": 6796,
+    "monetary_cost_usd": "0.00096292",
+    "elapsed_seconds": 1.337596,
+    "citation_validation": "passed",
+    "active_reserved_tokens": 0
+  }
+}

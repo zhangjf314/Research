@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from paper_research.config import get_settings
 from paper_research.db import get_db
 from paper_research.infrastructure.redis_service import get_redis_service
+from paper_research.version import __display_version__, __version__
 
 router = APIRouter()
 DbSession = Annotated[Session, Depends(get_db)]
@@ -21,6 +22,8 @@ class ComponentHealth(BaseModel):
 
 class HealthResponse(BaseModel):
     status: Literal["healthy", "degraded"]
+    version: str
+    display_version: str
     components: dict[str, ComponentHealth]
 
 
@@ -55,4 +58,9 @@ def health(db: DbSession) -> HealthResponse:
     )
 
     overall = "healthy" if all(item.status == "up" for item in components.values()) else "degraded"
-    return HealthResponse(status=overall, components=components)
+    return HealthResponse(
+        status=overall,
+        version=__version__,
+        display_version=__display_version__,
+        components=components,
+    )

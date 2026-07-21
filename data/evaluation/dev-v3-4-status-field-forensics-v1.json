@@ -1,0 +1,1065 @@
+{
+  "schema_version": "dev-v3-4-status-field-forensics-v1",
+  "evaluation_version": "evidence-qa-dev-v3.4",
+  "slot_count": 27,
+  "status_distribution": {
+    "answerable": 3,
+    "supported": 23,
+    "unsupported": 1
+  },
+  "supported_count": 23,
+  "answerable_as_slot_status_count": 3,
+  "answered_count": 0,
+  "unsupported_count": 1,
+  "missing_status_count": 0,
+  "other_unknown_status_count": 0,
+  "status_excluded_structurally_valid_slots": 27,
+  "content_shape_v3_valid_slots": 0,
+  "supported_with_empty_claim_text": 0,
+  "supported_with_nonempty_omission_reason": 2,
+  "q001": {
+    "question_id": "q001",
+    "answerable": true,
+    "slot_count": 3,
+    "required_claim_ids_complete": true,
+    "all_other_fields_structurally_valid": true,
+    "all_content_shapes_v3_valid_without_status": false,
+    "refusal_reason_present": false,
+    "extra_top_level_fields": []
+  },
+  "q013": {
+    "question_id": "q013",
+    "answerable": true,
+    "slot_count": 3,
+    "required_claim_ids_complete": true,
+    "all_other_fields_structurally_valid": true,
+    "all_content_shapes_v3_valid_without_status": false,
+    "refusal_reason_present": true,
+    "extra_top_level_fields": []
+  },
+  "questions": [
+    {
+      "question_id": "q001",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": false,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q002",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q004",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q005",
+      "answerable": false,
+      "slot_count": 0,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": true,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q007",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q008",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q013",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q015",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q019",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    },
+    {
+      "question_id": "q050",
+      "answerable": true,
+      "slot_count": 3,
+      "required_claim_ids_complete": true,
+      "all_other_fields_structurally_valid": true,
+      "all_content_shapes_v3_valid_without_status": false,
+      "refusal_reason_present": true,
+      "extra_top_level_fields": []
+    }
+  ],
+  "slots": [
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-bc33bddd93356fce6273",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 104,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": false,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The prior state of the a...ce transduction models.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 174,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "refusal_reason",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-b93fe64266ba6940d2a1",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 58,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": false,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Sequential computation l...lelization in training.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 174,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "refusal_reason",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q001",
+      "required_claim_id": "cl-q001-c41ea3191cab92907d83",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 92,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": false,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The paper targets long-r...ntion-only alternative.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 174,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "refusal_reason",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-023231b350a389faa754",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 35,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The Transformer eschews recurrence.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 167,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-3cab1a55474dcd47a64a",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 69,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='It relies on attention t...tween input and output.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 167,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q002",
+      "required_claim_id": "cl-q002-8a1d729edcaafb379a20",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 68,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='It improves parallelizat...ng translation quality.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 167,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-fe7e6b540d1b2bf1d6cf",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 64,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Experiments use WMT 2014...nd English-French data.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 195,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-a9fa27d46042c7d9ac2b",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 103,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Sentences are tokenized ...ximate sequence length.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 195,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q004",
+      "required_claim_id": "cl-q004-ba317f113c67f72f7260",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 63,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Training uses eight P100...m schedule with warmup.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 195,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-0dda2c31fef09b05c68b",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 72,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='BERT is a bidirectional ...e representation model.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 175,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-0dc4946bfe1085fe36ce",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 65,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Masked language modeling...rectional pre-training.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 175,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q007",
+      "required_claim_id": "cl-q007-51d53fc4250379d38e16",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 94,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='BERT reduces reliance on...ts on eleven NLP tasks.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 175,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-5fd8e23c8c061690cde0",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 65,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='BERT is based on a multi...al Transformer encoder.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 178,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-3fcba63ce8d76f5cfc1d",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 72,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Pre-training uses masked...xt-sentence prediction.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 178,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q008",
+      "required_claim_id": "cl-q008-d73bc3c128270add0359",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 97,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Fine-tuning initializes ...rs to downstream tasks.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 178,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-ed3f2a06305ea05d1b9e",
+      "raw_status_value": "answerable",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 54,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Every task is formulated...t input to text output.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 213,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-938d2a4e18520c28a5d7",
+      "raw_status_value": "answerable",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 74,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The same model/objective...is reused across tasks.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 213,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q013",
+      "required_claim_id": "cl-q013-4a5420c3371111d7f5f3",
+      "raw_status_value": "answerable",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 66,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": null,
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The framework is called ...t Transfer Transformer.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 213,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-281a83daa0567f6ae7ac",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 77,
+      "omission_reason_value": "Claim is supported by the text which states the paper explores transfer learning techniques and introduces a unified framework, indicating it is a survey/exploration.",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 2 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='Claim is supported by th...s a survey/exploration.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The work is primarily a ... a new-method proposal.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 278,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-fd7824b67e9a47f5aa88",
+      "raw_status_value": "unsupported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 79,
+      "omission_reason_value": "No evidence in the provided text supports the claim about coordinate-ascent study missing second-order effects.",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 2 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='No evidence in the provi...g second-order effects.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The coordinate-ascent st...s among design choices.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 278,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q015",
+      "required_claim_id": "cl-q015-34d9467bd693a8e1f141",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 88,
+      "omission_reason_value": "The text mentions that improvements in data efficiency are not explicitly measured, implying that benchmark improvements may not reflect qualitative behavior.",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 2 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='The text mentions that i...t qualitative behavior.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Some automatic benchmark...r qualitative behavior.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 278,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-409ecf7b2b8c09e348e6",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 63,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Model size is varied fro...n-embedding parameters.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 220,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-2fef5549293d6f983f79",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 46,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Dataset size is varied from 22M to 23B tokens.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 220,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q019",
+      "required_claim_id": "cl-q019-9d65c5779788321a4283",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 88,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='Model shape variables in...feed-forward dimension.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 220,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-e6beec554909bcb0e6ba",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 102,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The first paper presents... sequence transduction.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 233,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-96cfbcf597379dea6b6f",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 84,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='The second paper uses a ...a representation model.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 233,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    },
+    {
+      "question_id": "q050",
+      "required_claim_id": "cl-q050-fcbcedc602ad451d727a",
+      "raw_status_value": "supported",
+      "raw_status_type": "str",
+      "claim_text_presence": true,
+      "claim_text_length": 112,
+      "omission_reason_value": "",
+      "omission_reason_type": "str",
+      "answerable": true,
+      "top_level_refusal_reason_presence": true,
+      "top_level_refusal_reason_value": "",
+      "other_slot_fields_structurally_valid": true,
+      "content_shape_v3_valid_without_status": false,
+      "content_shape_failure": {
+        "code": "slot_shape_failed",
+        "message": "slot_shape_failed: 3 validation errors for union[AnsweredContentSlotV3,UnsupportedContentSlotV3]\nAnsweredContentSlotV3.omission_reason\n  Input should be None [type=literal_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.claim_text\n  Input should be None [type=literal_error, input_value='BERT adds pre-training a...ansformer architecture.', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nUnsupportedContentSlotV3.omission_reason\n  Value error, omission_reason must be non-empty after trimming [type=value_error, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      },
+      "required_claim_id_valid": true,
+      "extra_fields": [],
+      "missing_fields": [],
+      "prompt_legal_status_values": [
+        "answered",
+        "unsupported",
+        "not_applicable"
+      ],
+      "prompt_example_status_values": [],
+      "raw_finish_reason": "stop",
+      "output_token_count": 233,
+      "exact_validation_failure_paths": [
+        "required_claim_results[].status",
+        "required_claim_results[].claim_text/omission_reason"
+      ]
+    }
+  ],
+  "finding": "All 27 slots retain the expected field names, types, and required-claim IDs apart from the semantic status enum. However, none already satisfies the new unique content-shape contract: most answered-looking slots use an exact empty omission_reason rather than null, while q015 contains claim/reason conflicts. Status removal alone therefore does not make the nine answerable historical payloads valid."
+}

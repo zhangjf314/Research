@@ -1,0 +1,19 @@
+{
+  "schema_version": "set-completion-v2-improvement-distribution-v1",
+  "improved_claims": 1,
+  "improved_questions": 1,
+  "regressed_claims": 0,
+  "regressed_questions": 0,
+  "largest_question_contribution": {
+    "question_id": "q007",
+    "claims": 1
+  },
+  "largest_question_fraction": 1.0,
+  "q007_contribution": 1,
+  "non_q007_contribution": 0,
+  "single_question_driven": true,
+  "addition_driven_gains": 1,
+  "replacement_driven_gains": 0,
+  "set_composition_driven_gains": 1,
+  "metric_alignment_driven_gains": 0
+}

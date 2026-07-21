@@ -1,0 +1,72 @@
+{
+  "schema_version": "evidence-presentation-v2-local-mapping-audit-v1",
+  "model_visible_metadata_removed": true,
+  "local_mapping_preserved": true,
+  "candidate_count_unchanged": true,
+  "passage_text_unchanged": true,
+  "registry_triple_unchanged": true,
+  "source_hashes_unchanged": true,
+  "questions": [
+    {
+      "question_id": "q001",
+      "passage_count": 9,
+      "citation_registry_hash": "3e7eea6166aeb84390b826be6d915683dfcfc14738878be9319fadb84b39a6c9",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q002",
+      "passage_count": 9,
+      "citation_registry_hash": "3fe8aeecc4c77fc6cede5889b8a6c15df5d6e2ed306232b6f510ef96acfcce98",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q004",
+      "passage_count": 9,
+      "citation_registry_hash": "b143d6200f6ace0b8b138e574c8140a2d43474ec563f8811297e43234ea6967d",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q005",
+      "passage_count": 0,
+      "citation_registry_hash": "b044ed612ffb2df766fe6a69b0fecac9377854d144a09b6c4eddb47734dcc388",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q007",
+      "passage_count": 9,
+      "citation_registry_hash": "dc28b601abb23e05b92cff0bf3cd34ac9ba8a0a5c551b368477b22a7ed4b3869",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q008",
+      "passage_count": 9,
+      "citation_registry_hash": "c40cf4e22eaf564df3e966cc083f4595ea74b5469ffefa30b08927fe422b027e",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q013",
+      "passage_count": 9,
+      "citation_registry_hash": "a0273d7ce08bdb4fe54458e7f24a80f86e25ebef492d7140d1db0e659d996a8f",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q015",
+      "passage_count": 9,
+      "citation_registry_hash": "ff4f89c3b81541fed10a76a872780f320a761a4a87d9d84262814e348307bc23",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q019",
+      "passage_count": 9,
+      "citation_registry_hash": "1658050303aa6d64d3e0bfffe003362662aa2b441d778e770661665c92862595",
+      "passage_text_hashes_unchanged": true
+    },
+    {
+      "question_id": "q050",
+      "passage_count": 9,
+      "citation_registry_hash": "e5b301cba81f398bfc7a6a638bb782327a77e23620b32078a7ea5ac63dbd4fe2",
+      "passage_text_hashes_unchanged": true
+    }
+  ],
+  "audit_signature": "d8640fb829fe03489d1a40e618d38c3c5b57ff700f29a71b6eacc1806b482a03"
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "payload-contract-v4-preflight-inputs-v1",
+  "immutable": true,
+  "stage13_17_head": "1cbeb094a4c3a2466cb4c9079fb328114e670d4f",
+  "inputs": {
+    "payload_contract_v3_protocol": {
+      "path": "data/evaluation/payload-contract-v3-protocol.json",
+      "sha256": "ec2a3bc9a297c05a3a2a28a982a6413433c78c32d968781659744d9b3bc53e1c",
+      "protocol_signature": "8e3f9dcc83d2338ff1ca3918493315933ed26ec675d4702e28cfcaa6e772824a"
+    },
+    "payload_v3_prompt": {
+      "version": "qa-required-claims-content-payload-v3.5-candidate",
+      "hash": "bfc520707c7fa86bd5b7145d519802df6a59628a140268bd1ace7405917a23ac"
+    },
+    "payload_v3_schema": {
+      "version": "required-claim-model-payload-v3",
+      "hash": "465567c9dc317a3e6dfce2d9824dcfb9db48d8f86c34e6e24a89926042ac24ec"
+    },
+    "local_envelope_v3": {
+      "version": "required-claim-local-envelope-v3",
+      "hash": "e41f7dad64ced528334c3feac6046282188cf7aa77e965824dd5af2a2bd65e04"
+    },
+    "status_derivation_v1": "derive-slot-status-v1",
+    "stage13_16_raw_response_hashes": {
+      "q001": "fa4e0d5a039544fa7d45e20cd62f8018a69cee7f2dc898564925dc0025bb99e1",
+      "q002": "9b521cdb7026f7fafe0e5e2187c5eda2a1222f5faa7712e02360d1d2a32033f9",
+      "q004": "cea3d17b40b8f779d5cffcfa8def78c820e5083f8343724e6a534b242550f405",
+      "q005": "a96b032a408103802edafd2ede67b4796b18500793d8183d9d8968c462aeef30",
+      "q007": "1c12ceb1aa7a94148045bc68e4cd401505b5859afeb9d27ce03fc0a04d7246ef",
+      "q008": "4269cbf5d23c1b0207127688602aeb8a04d59e52287507322d529b316c9927be",
+      "q013": "793a151e4fadb531d64caebd299bef6f8eb9f2149ff52e38e065295cbcd0b8bd",
+      "q015": "647a452dce16bbd933655aff828589ae8e9fa218497fb2ddb78b0a83efb24724",
+      "q019": "6cbcbf751678e2a67dc8b9ac127ecb4f109f56da5e5871f7415f27b680aba158",
+      "q050": "b839d04cd99aee414d6b227d953303dd134ceb550127b00d28c1fb553ac144cb"
+    },
+    "stage13_16_failure_freeze": {
+      "path": "data/evaluation/stage13-16-dev-v3-4-failure-freeze-v1.json",
+      "sha256": "66d7f96655ab0fc6b3b2003208c1017e78442e2ff58424cbf27e73a4067ce396",
+      "signature": "ab8ee1b771dbf2267fd2f066f3d2a81ea3ee022ea61f81adfbb41f809849b120"
+    },
+    "stage13_17_replay": {
+      "path": "data/evaluation/dev-v3-4-payload-contract-v3-replay.json",
+      "sha256": "ca1aa9b31f9cbd9e2b7420c78843cafbccf08e4105732750f0ed21357c4e61f0"
+    },
+    "stage13_17_safety": {
+      "path": "data/evaluation/slot-status-derivation-safety-audit-v1.json",
+      "sha256": "7ec444f55dbb4675396cec4d8ad45895674497ed2957f1293374a7ab39d7a727"
+    },
+    "policy_versions": {
+      "citation_selection": "citation-selection-v1",
+      "obligation": "claim-obligation-coverage-v1",
+      "numeric": "numeric-evidence-completeness-v1",
+      "comparison": "comparison-evidence-completeness-v1"
+    }
+  },
+  "preflight_signature": "c6f556bd995d7344e21a651af5966c47149bf404238f0c9bfd2adadb60af583b"
+}

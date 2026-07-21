@@ -1,0 +1,120 @@
+{
+  "sample_id": "q024",
+  "stage": "Stage 13.32 deterministic retrieval/context remediation",
+  "status": "implemented_and_retrieval_verified",
+  "live_qa_rerun_executed": false,
+  "full_qa_rerun_executed": false,
+  "reranker_called": false,
+  "citation_repair_enabled": false,
+  "strict_citation_validation_preserved": true,
+  "root_cause_summary": "The previous q024 failure was caused by production retrieval/context mismatch plus stale Qdrant chunk metadata for multi-page chunks. The relevant GPT-3 Results evidence was not reliably presented to the model, and dense/Qdrant payloads could carry an outdated block_page_map that mapped every block in a multi-page chunk to page_start.",
+  "deterministic_changes": [
+    {
+      "area": "query_routing",
+      "description": "For paper-scoped experiment-design questions, retrieval now appends deterministic routing signals for models compared, task categories, scaling curves, evaluated datasets, evaluate the 8 models, wide range of datasets, group the datasets, training curves, and power-law trend."
+    },
+    {
+      "area": "context_priority",
+      "description": "Experiment-design context selection prioritizes Results/evaluation chunks containing GPT-3 experiment-design signals before generic Approach/Introduction material."
+    },
+    {
+      "area": "metadata_freshness",
+      "description": "RRF preserves scores and ranks but uses the sparse/BM25 chunk payload as the fresh parsed-corpus metadata source when dense and sparse return the same chunk."
+    },
+    {
+      "area": "block_page_map",
+      "description": "The API chunk loader backfills or corrects block_page_map from paper_blocks.jsonl so strict paper/page/block citation validation can use per-block pages for multi-page chunks."
+    }
+  ],
+  "verification": {
+    "endpoint": "POST http://localhost/api/v1/retrieve",
+    "query": "How are the target paper's experiments designed and evaluated?",
+    "paper_filter_uuid": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+    "paper_id": "2005.14165",
+    "retrieval_scope": "paper",
+    "routed_query_recorded": true,
+    "query_routing_signals": [
+      "models compared",
+      "task categories",
+      "scaling curves",
+      "evaluated on datasets",
+      "evaluate the 8 models",
+      "wide range of datasets",
+      "group the datasets",
+      "training curves",
+      "power-law trend"
+    ],
+    "final_context_chunk_ids": [
+      "f2f20543-bb18-4405-9efa-32ddaef845a1",
+      "8825e5ff-1a29-416c-96fd-8a90b8b6ad27",
+      "30c5bac3-9fe8-46d2-8299-e29eab45421f"
+    ],
+    "gold_chunks_in_final_context": [
+      {
+        "chunk_id": "f2f20543-bb18-4405-9efa-32ddaef845a1",
+        "section": "3 Results",
+        "page_start": 10,
+        "page_end": 10,
+        "gold_blocks_present": [
+          "b000111",
+          "b000112"
+        ],
+        "block_page_map": {
+          "b000111": 10,
+          "b000112": 10
+        }
+      },
+      {
+        "chunk_id": "8825e5ff-1a29-416c-96fd-8a90b8b6ad27",
+        "section": "3 Results",
+        "page_start": 10,
+        "page_end": 11,
+        "gold_blocks_present": [
+          "b000113",
+          "b000115"
+        ],
+        "block_page_map": {
+          "b000113": 10,
+          "b000114": 10,
+          "b000115": 11,
+          "b000116": 11,
+          "b000117": 11,
+          "b000118": 11,
+          "b000119": 11
+        }
+      }
+    ],
+    "target_fusion_ranks": [
+      {
+        "chunk_id": "f2f20543-bb18-4405-9efa-32ddaef845a1",
+        "rank": 1,
+        "dense_rank": 1,
+        "sparse_rank": 1
+      },
+      {
+        "chunk_id": "8825e5ff-1a29-416c-96fd-8a90b8b6ad27",
+        "rank": 2,
+        "dense_rank": 3,
+        "sparse_rank": 2
+      }
+    ]
+  },
+  "q019_regression_check": {
+    "endpoint": "POST http://localhost/api/v1/retrieve",
+    "paper_filter_uuid": "d52a2824-279d-4f19-8118-a4d0ce423544",
+    "paper_id": "2001.08361",
+    "gold_chunk_in_final_context": true,
+    "gold_blocks_present": [
+      "b000215",
+      "b000216",
+      "b000217",
+      "b000218"
+    ],
+    "block_page_map_for_gold_blocks": {
+      "b000215": 7,
+      "b000216": 7,
+      "b000217": 7,
+      "b000218": 7
+    }
+  }
+}

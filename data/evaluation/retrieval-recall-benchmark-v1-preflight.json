@@ -1,0 +1,38 @@
+{
+  "schema_version": "retrieval-recall-benchmark-v1-preflight",
+  "corpus_identity": "d9379eb50c6604123f11aed73e6fdc13c5a2aaf2c1e3fa769d23614ec0e2aed3",
+  "physical_collection": "papers_production_v1",
+  "embedding_identity": "jina-embeddings-v5-text-small",
+  "dimensions": 1024,
+  "indexed_point_count": 2062,
+  "paper_inventory_hash": "89a658d9aaf416751251ec67f7ef9b06ca2f2faa5e439dd5e18e95db408ef6cd",
+  "chunk_block_inventory_hash": "febb69d010db4a20b3ca13c01c2b2b4d04523ca224c6f5c60810d04395e062c1",
+  "page_adjacency_identity": "fb826cb8b1fe8e55d96b7aa1446cfb2e8d347efd74643a627706ad00e3792239",
+  "claim_gold_freeze_hash": "604d359526f61ca46c6a9a399f4b21f3eb945a4f992caa859ed7d4a1d6522bf8",
+  "retrieval_gold_freeze_hash": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d",
+  "core_relation_labels": 25,
+  "equivalent_relation_labels": 8,
+  "stage13_21_retrieval_traces": "f944dffa6ff5ee7c8dcc5662a7fb82344e021c0579283a6c812c7d4c49752726",
+  "stage13_22_evidence_funnel": "49609c63634795a89871d557eb747f45bef9593baf1b8cbcec1cc14b81762223",
+  "stage13_26_numeric_gap_audit": "aa42a9c0f8be69b750520ad869e27cc893f54573c4c7080a694b06009464b954",
+  "lexical_index_identity": "local-lexical-index-v1",
+  "candidate_budget": 12,
+  "top_k_grids": [
+    1,
+    3,
+    5,
+    8,
+    12
+  ],
+  "split_seed": "stage13-27-paper-grouped-v1",
+  "split_algorithm": "paper-grouped-or-leave-one-paper-group-out",
+  "metric_definitions": "recall/mrr/ndcg/hard-negative/admission-loss-v1",
+  "prohibited_runtime_features": [
+    "real_llm",
+    "external_embedding_api",
+    "external_reranker",
+    "network",
+    "gold_runtime_features"
+  ],
+  "preflight_signature": "c9e08e9d6f260df4e06411fab52190e8041768f8e205ab625b29f503aea7b040"
+}
