@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from paper_research.evaluation.canonical_hash import legacy_text_hash_variants
 from paper_research.generation.citation_selection import (
     CITATION_SELECTION_VERSION,
     COMPARISON_VALIDATION_VERSION,
@@ -45,6 +46,8 @@ PLACEHOLDER_REMOVAL_VERSION = "empty-placeholder-field-removal-v1"
 
 
 def file_hash(path: Path) -> str:
+    if path.suffix in {".json", ".jsonl", ".csv", ".md"}:
+        return legacy_text_hash_variants(path)["crlf"]
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 

@@ -10,6 +10,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from paper_research.evaluation.canonical_hash import legacy_text_hash_variants
+
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/evaluation"
 DOCS = ROOT / "docs"
@@ -69,6 +71,8 @@ def digest_bytes(value: bytes) -> str:
 
 
 def file_hash(path: Path) -> str:
+    if path.suffix in {".json", ".jsonl", ".csv", ".md"}:
+        return legacy_text_hash_variants(path)["crlf"]
     return digest_bytes(path.read_bytes())
 
 

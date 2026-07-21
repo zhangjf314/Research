@@ -25,6 +25,7 @@ env/
 .vscode/
 
 # Runtime data and caches
+.runtime/
 data/search_cache/
 data/checkpoints/
 data/raw/*
@@ -72,6 +73,7 @@ artifacts/full-qa-rerun-backups/
 artifacts/q017-live-retry-response-audit-sanitized-v1.json
 artifacts/stage13-31-q002-provider-response-audit.json
 artifacts/stage13-31-q002-reproduction-input.json
+artifacts/post-merge-*.txt
 data/evaluation/deepseek-full-qa-final-items-v1.jsonl
 data/evaluation/evidence-first-canary-v1.csv
 data/evaluation/evidence-first-canary-v1.json

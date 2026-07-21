@@ -1,0 +1,44 @@
+{
+  "schema_version": "historical-freeze-hash-stability-v1",
+  "generated_at": "2026-07-21T00:00:00+08:00",
+  "starting_head": "87ac5aa91d9238563bb51bbb82b9d9a9cf4baaaf",
+  "release_branch_head": "3920aa96c26218493d3e14f4d07aa95cd8cae4ac",
+  "root_cause": "Windows checkout line-ending materialization changed raw working-tree bytes for frozen JSON/JSONL artifacts while canonical JSON/JSONL content and Git blobs remained unchanged.",
+  "fix_strategy": "Preserve canonical source-hash validation and classify raw_value_at_review differences as auditable newline drift; preserve legacy raw freeze hashes by verifying they are explained by text-normalization variants rather than replacing expected hashes.",
+  "expected_hashes_refreshed": false,
+  "gold_modified": false,
+  "freeze_files_overwritten": false,
+  "tests_deleted_or_xfailed": false,
+  "broad_renormalize_used": false,
+  "raw_source_hash_drift_sources": [
+    "gold_relation_audit",
+    "dev_v3_1_summary",
+    "dev_v3_1_citation_audit"
+  ],
+  "stage13_16_17_18_raw_text_hash_drift_fixed": true,
+  "pytest_historical_hash_failures_after_fix": 0,
+  "historical_raw_hash_failures": [
+    {
+      "path": "data/evaluation/stage13-12-dev-v3-2-failure-freeze-v1.json",
+      "expected_raw_hash": "26d8a661132d627b44ac035f503dbb16879f4724356d8e910737b39d088eae13",
+      "working_tree_raw_hash": "5484323b6b5d62354b220e41a4ef681bc45bbcb89b9c6af535b5ecc85bc75281",
+      "matching_legacy_variant": "crlf",
+      "canonical_json_hash": "c3d9f95556ffbe0c006d54f6180301ee633123d0630404844935ed63f61be374",
+      "git_blob_hash": "aeb91a466a5c101e2ebd72fb53562f46a4bc0705",
+      "release_branch_blob_hash": "aeb91a466a5c101e2ebd72fb53562f46a4bc0705",
+      "git_attributes": "text=auto eol=lf"
+    },
+    {
+      "path": "data/evaluation/stage13-12-reservation-reconciliation-v1.json",
+      "expected_raw_hash": "53b1af45259f33ffac38f735dcb816749cb0359a3d03800ab2daa71384af30c1",
+      "working_tree_raw_hash": "b851fdfe2b0b06e422a3829db1fb6e5b985475731b6f9d5092328cd91cbc5a91",
+      "matching_legacy_variant": "crlf",
+      "canonical_json_hash": "3505fb2722b52dd7a7a3b721fbe3974f66e6aa62fc05816c94078637cb05ff42",
+      "git_blob_hash": "47bde0c39e40510e993e1df0b8ac6529a564ccea",
+      "release_branch_blob_hash": "47bde0c39e40510e993e1df0b8ac6529a564ccea",
+      "git_attributes": "text=auto eol=lf"
+    }
+  ],
+  "semantic_integrity_gate": "PASSED",
+  "raw_newline_drift_explained": true
+}

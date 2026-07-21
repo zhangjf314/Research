@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 
 import pytest
 
+from paper_research.evaluation.canonical_hash import verify_legacy_raw_hash
 from paper_research.generation.required_claim_output import RequiredClaimValidationError
 from paper_research.generation.schema_reliability import (
     DEV_V3_3_PROMPT_VERSION,
@@ -253,10 +253,7 @@ def test_protocol_freeze_historical_hashes_still_match() -> None:
         "stage13_13_reconciliation": DATA / "stage13-12-reservation-reconciliation-v1.json",
     }
     for key, path in paths.items():
-        assert (
-            hashlib.sha256(path.read_bytes()).hexdigest()
-            == freeze["historical_protection_hashes"][key]
-        )
+        assert verify_legacy_raw_hash(path, freeze["historical_protection_hashes"][key])
 
 
 def test_stage13_14_failure_freeze_preserves_negative_gate() -> None:

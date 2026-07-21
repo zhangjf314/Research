@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from paper_research.evaluation.canonical_hash import verify_legacy_raw_hash
 from paper_research.evaluation.request_accounting import (
     RequestTerminalState,
     close_reservation_for_terminal_run,
@@ -451,21 +452,24 @@ def test_stage13_16_and_stage13_17_inputs_remain_immutable() -> None:
             encoding="utf-8"
         )
     )
-    assert hashlib.sha256(
-        (DATA / "evidence-qa-dev-v3-4.json").read_bytes()
-    ).hexdigest() == freeze["summary_sha256"]
-    assert hashlib.sha256(
-        (DATA / "evidence-qa-dev-v3-4-final-audit.json").read_bytes()
-    ).hexdigest() == freeze["final_audit_sha256"]
+    assert verify_legacy_raw_hash(
+        DATA / "evidence-qa-dev-v3-4.json", freeze["summary_sha256"]
+    )
+    assert verify_legacy_raw_hash(
+        DATA / "evidence-qa-dev-v3-4-final-audit.json",
+        freeze["final_audit_sha256"],
+    )
     assert freeze["gate_results"]["engineering"] == "FAILED"
     for row in freeze["runs"]:
         run_dir = RUN_ROOT / row["run_id"]
         assert hashlib.sha256(
             (run_dir / "raw-provider-response.json").read_bytes()
         ).hexdigest() == row["raw_response_sha256"]
-    assert preflight["inputs"]["stage13_17_replay"]["sha256"] == hashlib.sha256(
-        (DATA / "dev-v3-4-payload-contract-v3-replay.json").read_bytes()
-    ).hexdigest()
-    assert preflight["inputs"]["stage13_17_safety"]["sha256"] == hashlib.sha256(
-        (DATA / "slot-status-derivation-safety-audit-v1.json").read_bytes()
-    ).hexdigest()
+    assert verify_legacy_raw_hash(
+        DATA / "dev-v3-4-payload-contract-v3-replay.json",
+        preflight["inputs"]["stage13_17_replay"]["sha256"],
+    )
+    assert verify_legacy_raw_hash(
+        DATA / "slot-status-derivation-safety-audit-v1.json",
+        preflight["inputs"]["stage13_17_safety"]["sha256"],
+    )

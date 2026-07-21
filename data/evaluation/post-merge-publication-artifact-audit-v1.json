@@ -1,0 +1,34 @@
+{
+  "schema_version": "post-merge-publication-artifact-audit-v1",
+  "generated_at": "2026-07-21T00:00:00+08:00",
+  "tracked_artifacts_count": 22,
+  "git_object_store_size": "15.79 MiB",
+  "largest_tracked_files": [
+    {"path": "data/evaluation/evidence-corpus-v1.jsonl", "size_bytes": 25330326, "classification": "PUBLIC_SAFE_BUT_LARGE"},
+    {"path": "data/evaluation/retrieval-context-optimization-v1.json", "size_bytes": 21379890, "classification": "PUBLIC_SAFE_BUT_LARGE"},
+    {"path": "data/ocr-audit-v1/mixed-native-scanned.pdf", "size_bytes": 13530808, "classification": "PUBLIC_SAFE_BUT_LARGE"},
+    {"path": "data/ocr-audit-v1/fully-scanned.pdf", "size_bytes": 13530300, "classification": "PUBLIC_SAFE_BUT_LARGE"},
+    {"path": "data/evaluation/reranker-ablation-v1.json", "size_bytes": 4698983, "classification": "PUBLIC_SAFE_BUT_LARGE"}
+  ],
+  "secret_scan": {
+    "raw_secret_values_printed": false,
+    "authorization_like_file_hits": 36,
+    "bearer_like_file_hits": 25,
+    "llm_api_key_file_hits": 13,
+    "absolute_windows_path_hits": 0,
+    "confirmed_real_secret": 0,
+    "unresolved": 0,
+    "gate": "PASSED"
+  },
+  "publication_artifact_gate": "PASSED_WITH_SIZE_LIMITATIONS",
+  "required_git_rm_cached": [],
+  "local_only_zip_files": [
+    "artifacts/stage13-9-human-citation-review-results.zip",
+    "artifacts/stage13-10-human-claim-gold-review-results.zip"
+  ],
+  "notes": [
+    "Tracked evaluation artifacts are large but are needed for reproducibility of the Portfolio release evidence.",
+    "No raw provider API key or Authorization header value was found in the tracked publication audit.",
+    "Local-only human review ZIP files remain ignored and were not added to Git."
+  ]
+}

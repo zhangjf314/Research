@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from paper_research.evaluation.canonical_hash import verify_legacy_raw_hash
 from paper_research.evaluation.request_accounting import (
     RequestTerminalState,
     close_reservation_for_terminal_run,
@@ -350,18 +351,19 @@ def test_stage13_16_formal_and_raw_evidence_remain_immutable() -> None:
             encoding="utf-8"
         )
     )
-    assert hashlib.sha256(
-        (DATA / "evidence-qa-dev-v3-4.json").read_bytes()
-    ).hexdigest() == freeze["summary_sha256"]
-    assert hashlib.sha256(
-        (DATA / "evidence-qa-dev-v3-4-final-audit.json").read_bytes()
-    ).hexdigest() == freeze["final_audit_sha256"]
+    assert verify_legacy_raw_hash(
+        DATA / "evidence-qa-dev-v3-4.json", freeze["summary_sha256"]
+    )
+    assert verify_legacy_raw_hash(
+        DATA / "evidence-qa-dev-v3-4-final-audit.json",
+        freeze["final_audit_sha256"],
+    )
     assert freeze["gate_results"]["engineering"] == "FAILED"
     for row in freeze["runs"]:
         run_dir = RUN_ROOT / row["run_id"]
         assert hashlib.sha256(
             (run_dir / "raw-provider-response.json").read_bytes()
         ).hexdigest() == row["raw_response_sha256"]
-        assert hashlib.sha256(
-            (run_dir / "final-result.json").read_bytes()
-        ).hexdigest() == row["final_result_sha256"]
+        assert verify_legacy_raw_hash(
+            run_dir / "final-result.json", row["final_result_sha256"]
+        )

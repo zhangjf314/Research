@@ -127,6 +127,42 @@ def _expected_source_hashes() -> dict[str, dict[str, str]]:
     }
 
 
+def _compare_source_hashes(
+    claim_id: str,
+    reviewed_hashes: dict[str, dict[str, str]],
+    expected_hashes: dict[str, dict[str, str]],
+) -> list[dict[str, str]]:
+    """Validate canonical source identity and report raw newline drift separately."""
+    raw_drifts: list[dict[str, str]] = []
+    comparable_keys = {
+        "algorithm",
+        "mode",
+        "value",
+        "schema_version",
+        "canonicalization_version",
+    }
+    for name, expected in expected_hashes.items():
+        reviewed = reviewed_hashes.get(name)
+        if reviewed is None:
+            raise RuntimeError(f"missing source hash: {claim_id}:{name}")
+        for key in comparable_keys:
+            if reviewed.get(key) != expected.get(key):
+                raise RuntimeError(f"source hashes changed: {claim_id}:{name}:{key}")
+        if reviewed.get("raw_value_at_review") != expected.get("raw_value_at_review"):
+            raw_drifts.append(
+                {
+                    "source": name,
+                    "review_raw_sha256": reviewed.get("raw_value_at_review", ""),
+                    "current_raw_sha256": expected.get("raw_value_at_review", ""),
+                    "canonical_sha256": expected["value"],
+                }
+            )
+    extra = set(reviewed_hashes) - set(expected_hashes)
+    if extra:
+        raise RuntimeError(f"unexpected source hash entries: {claim_id}:{sorted(extra)}")
+    return raw_drifts
+
+
 def validate_review(
     pending: list[dict[str, Any]], reviewed: list[dict[str, Any]]
 ) -> dict[str, Any]:
@@ -153,6 +189,7 @@ def validate_review(
     label_counts: Counter[str] = Counter()
     core_count = supporting_count = equivalent_count = 0
     multi_sets = no_valid = 0
+    raw_source_hash_drifts: dict[str, dict[str, str]] = {}
     for claim_id, row in reviewed_by_id.items():
         original = pending_by_id[claim_id]
         if row["adjudication_status"] != "approved":
@@ -161,8 +198,8 @@ def validate_review(
             raise RuntimeError(f"incomplete review metadata: {claim_id}")
         if row["schema_version"] != SCHEMA_VERSION or row["gold_version"] != GOLD_VERSION:
             raise RuntimeError(f"schema/Gold version changed: {claim_id}")
-        if row["source_hashes"] != expected_hashes:
-            raise RuntimeError(f"source hashes changed: {claim_id}")
+        for drift in _compare_source_hashes(claim_id, row["source_hashes"], expected_hashes):
+            raw_source_hash_drifts[drift["source"]] = drift
         source_claim = claims.get(claim_id)
         if source_claim is None or canonical_hash(source_claim) != row["source_record_hash"]:
             raise RuntimeError(f"source claim changed: {claim_id}")
@@ -270,6 +307,8 @@ def validate_review(
         "multi_relation_minimum_sets": multi_sets,
         "no_valid_gold_evidence": no_valid,
         "immutable_changes": immutable_changes,
+        "raw_source_hash_drift_count": len(raw_source_hash_drifts),
+        "raw_source_hash_drifts": dict(sorted(raw_source_hash_drifts.items())),
         "label_counts": dict(sorted(label_counts.items())),
         "relation_triples_valid": True,
         "source_hashes_valid": True,
