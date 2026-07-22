@@ -6,15 +6,21 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from paper_research.analysis.types import PaperAnalysis
+from paper_research.api.markdown import render_markdown
 from paper_research.config import get_settings
 from paper_research.db import get_db
 from paper_research.repositories.paper import PaperRepository
 
 router = APIRouter()
 DbSession = Annotated[Session, Depends(get_db)]
+
+
+class MarkdownRenderRequest(BaseModel):
+    markdown: str = Field(max_length=500_000)
 
 
 def page(title: str, body: str) -> HTMLResponse:
@@ -26,6 +32,22 @@ def page(title: str, body: str) -> HTMLResponse:
         "padding:18px;margin:14px 0;background:#fff}.muted{color:#64748b}"
         "table{border-collapse:collapse;width:100%}td,th{border:1px solid #dbe3ee;padding:8px}"
         "pre{white-space:pre-wrap;background:#f5f7fa;padding:16px;border-radius:10px}"
+        ".report-card{padding:0;overflow:hidden}.report-toolbar{display:flex;"
+        "justify-content:space-between;align-items:center;gap:16px;padding:14px 18px;"
+        "border-bottom:1px solid #dbe3ee;background:#f8fafc}.report-toolbar div{display:flex;"
+        "gap:8px}.report-toolbar button{padding:7px 11px;font-size:.9rem}.markdown-body{"
+        "padding:22px;line-height:1.75;overflow-wrap:anywhere}.markdown-body h1{margin-top:0;"
+        "padding-bottom:.4rem;border-bottom:1px solid #dbe3ee}.markdown-body h2{margin-top:2rem;"
+        "padding-bottom:.25rem;border-bottom:1px solid #edf2f7}.markdown-body h3{margin-top:1.5rem}"
+        ".markdown-body p,.markdown-body li{line-height:1.75}"
+        ".markdown-body blockquote{margin:1rem 0;"
+        "padding:.5rem 1rem;color:#475569;border-left:4px solid #94a3b8;background:#f8fafc}"
+        ".markdown-body pre{overflow-x:auto;white-space:pre;background:#0f172a;color:#e2e8f0}"
+        ".markdown-body code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}"
+        ".markdown-body :not(pre)>code{padding:.15rem .35rem;border-radius:5px;background:#eef2f7;"
+        "color:#be123c}.markdown-body table{display:block;overflow-x:auto;width:max-content;"
+        "max-width:100%}.markdown-body a{text-decoration:underline}.report-raw{margin:0 18px 18px;"
+        "max-height:480px;overflow:auto}"
         "nav{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid #dbe3ee;"
         "margin-bottom:28px}a{color:#155eaa;text-decoration:none}"
         "input,textarea,button{font:inherit;padding:10px;border:1px solid #cbd5e1;"
@@ -39,6 +61,11 @@ def page(title: str, body: str) -> HTMLResponse:
         "<a href='/api/v1/ui/gold-review'>Gold Review</a><a href='/docs'>API Docs</a>"
         f"</nav>{body}</body></html>"
     )
+
+
+@router.post("/render-markdown", response_class=HTMLResponse)
+def render_markdown_fragment(payload: MarkdownRenderRequest) -> HTMLResponse:
+    return HTMLResponse(render_markdown(payload.markdown))
 
 
 @router.get("", response_class=HTMLResponse)
@@ -109,15 +136,87 @@ def research_page() -> HTMLResponse:
         <h1>Deep Research</h1><div class='card'>
         <textarea id='query' rows='4' style='width:95%'>
         RAG methods, results, and limitations</textarea><br>
-        <button onclick='runResearch()'>Run</button></div><pre id='report'>Waiting</pre>
+        <button id='run-research' type='button' onclick='runResearch()'>Run</button>
+        <p id='research-status' class='muted'></p></div>
+        <section class='card report-card'>
+          <div class='report-toolbar'>
+            <strong>Research Report</strong>
+            <div>
+              <button type='button' onclick='copyReport()'>Copy Markdown</button>
+              <button type='button' onclick='toggleRaw()'>View Raw</button>
+            </div>
+          </div>
+          <article id='report' class='markdown-body'><p class='muted'>Waiting</p></article>
+          <pre id='report-raw' class='report-raw' hidden></pre>
+        </section>
         <script>
-        async function runResearch(){document.getElementById('report').textContent='Running...';
-          const r=await fetch('/api/v1/research/deep',{method:'POST',
-           headers:{'Content-Type':'application/json'},body:JSON.stringify({
-           query:document.getElementById('query').value,allow_external_search:false})});
-          const d=await r.json();
-          document.getElementById('report').textContent=d.report||JSON.stringify(d,null,2);
-        }</script>""",
+        let currentReportMarkdown = "";
+        async function renderMarkdown(markdown) {
+          const response = await fetch('/api/v1/ui/render-markdown', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({markdown}),
+          });
+          if (!response.ok) {
+            throw new Error(`Markdown rendering failed: ${response.status}`);
+          }
+          return await response.text();
+        }
+        async function runResearch(){
+          const report = document.getElementById('report');
+          const raw = document.getElementById('report-raw');
+          const status = document.getElementById('research-status');
+          const button = document.getElementById('run-research');
+          button.disabled = true;
+          status.textContent = 'Running...';
+          report.innerHTML = "<p class='muted'>Generating report...</p>";
+          raw.hidden = true;
+          try {
+            const response = await fetch('/api/v1/research/deep',{method:'POST',
+              headers:{'Content-Type':'application/json'},body:JSON.stringify({
+              query:document.getElementById('query').value,allow_external_search:false})});
+            const data = await response.json();
+            if (!response.ok) {
+              const message = typeof data.detail === 'string'
+                ? data.detail : `Research failed: HTTP ${response.status}`;
+              throw new Error(message);
+            }
+            currentReportMarkdown = typeof data.report === 'string' ? data.report : '';
+            if (!currentReportMarkdown.trim()) {
+              throw new Error('Research completed without a report.');
+            }
+            const safeHtml = await renderMarkdown(currentReportMarkdown);
+            report.innerHTML = safeHtml;
+            raw.textContent = currentReportMarkdown;
+            status.textContent = `Completed · task ${data.task_id || 'unknown'} · `
+              + `${data.status || 'unknown'}`;
+          } catch (error) {
+            currentReportMarkdown = '';
+            report.textContent = error instanceof Error ? error.message : 'Research failed.';
+            raw.textContent = '';
+            status.textContent = 'Failed';
+          } finally {
+            button.disabled = false;
+          }
+        }
+        async function copyReport() {
+          const status = document.getElementById('research-status');
+          if (!currentReportMarkdown) {
+            status.textContent = 'No report to copy.';
+            return;
+          }
+          try {
+            await navigator.clipboard.writeText(currentReportMarkdown);
+            status.textContent = 'Markdown copied.';
+          } catch (error) {
+            status.textContent = 'Copy failed. Use View Raw and copy manually.';
+          }
+        }
+        function toggleRaw() {
+          const raw = document.getElementById('report-raw');
+          raw.hidden = !raw.hidden;
+        }
+        </script>""",
     )
 
 
