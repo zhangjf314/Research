@@ -6,7 +6,7 @@
 Evidence-grounded Paper RAG & Deep Research
 
 [![CI](https://github.com/zhangjf314/Research/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhangjf314/Research/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/tag/zhangjf314/Research?label=release)](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio)
+[![Release](https://img.shields.io/github/v/tag/zhangjf314/Research?label=release)](https://github.com/zhangjf314/Research/releases/tag/v1.0.1-portfolio)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
@@ -92,9 +92,9 @@ flowchart LR
 | Docker OCR | Text / Mixed / Scanned 全部通过 |
 | Stability Test | 30 分钟，568 请求，0 失败 |
 | API 重启恢复 | 2.113 s |
-| Automated Tests | 599 passed |
+| Automated Tests | 647 passed |
 
-以上结果来自 50 条人工审核的内部开发评测数据和受控工程验收，不是独立 blind benchmark。完整证据见 [Portfolio Release Audit](docs/portfolio-release-audit-v1.md) 和 [Release Checklist](docs/release-checklist-v1.0.0-portfolio.md)。
+以上结果来自 50 条人工审核的内部开发评测数据和受控工程验收，不是独立 blind benchmark。完整证据见 [Portfolio Release Audit](docs/portfolio-release-audit-v1.md)、[Release Checklist](docs/release-checklist-v1.0.0-portfolio.md) 和 [v1.0.1 Patch Notes](docs/releases/v1.0.1-portfolio.md)。
 
 ## 演示
 
@@ -225,6 +225,6 @@ powershell -ExecutionPolicy Bypass -File scripts\run_release_tests.ps1
 ```
 
 ## Release
-- Current release: [`v1.0.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio)
-- Package version: `1.0.0+portfolio`
-- Release evidence: [Release Checklist](docs/release-checklist-v1.0.0-portfolio.md); [Deep Research Report Correctness Audit](docs/deep-research-report-correctness-audit-v1.md)
+- Current recommended release: [`v1.0.1-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.1-portfolio)
+- Package version: `1.0.1+portfolio`
+- Patch evidence: [v1.0.1 Patch Notes](docs/releases/v1.0.1-portfolio.md); [Deep Research Report Correctness Audit](docs/deep-research-report-correctness-audit-v1.md); initial release retained: [`v1.0.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio)

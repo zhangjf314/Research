@@ -2,6 +2,9 @@
 
 ## Post-release Deep Research report boundary
 
+- `v1.0.1-portfolio` is the recommended demo release after the Deep Research
+  report correctness and Markdown rendering patches. The original
+  `v1.0.0-portfolio` tag remains unchanged as the initial portfolio release.
 - A post-release hotfix replaced the previous artifact-local BM25 evidence dump
   behavior for `/api/v1/research/deep` with section-specific retrieval,
   deduplicated evidence cataloging, deterministic Markdown generation, and report
@@ -24,10 +27,11 @@
   `STRONG_GROUNDING_CLAIM_ALLOWED=false`, and the internal-development
   evaluation boundary remain unchanged.
 
-## Stage 13.40 portfolio release boundary
+## Stage 13.40 initial portfolio release boundary
 
-- The project has not been merged, tagged, pushed, or remotely released as
-  `v1.0.0-portfolio`; those actions still require explicit user authorization.
+- The initial `v1.0.0-portfolio` tag was released and remains immutable. It does
+  not include the later Markdown UI and Deep Research structured-synthesis
+  patches; use `v1.0.1-portfolio` for current demos.
 - The Stage 13.40 local hard gates passed: git-history secret review,
   PostgreSQL checkpoint recovery, PostgreSQL backup/restore, Qdrant
   snapshot/restore, Docker OCR roundtrip, and the Portfolio 30-minute stability

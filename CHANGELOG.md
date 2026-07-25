@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.1-portfolio] - 2026-07-25
+
+### Fixed
+
+- Render Deep Research reports as sanitized Markdown in the repository UI.
+- Replace legacy evidence-dump reporting with structured DeepSeek synthesis.
+- Deduplicate evidence and references across report sections.
+- Enforce global and section-scoped citation allowlists.
+- Add replayable raw-response observability and failed-request usage accounting.
+- Add report duplication and cross-section similarity quality gates.
+
+### Validation
+
+- Production Deep Research hotfix live smoke completed successfully.
+- Raw response replay, schema validation, citation allowlist validation, and report
+  quality gates passed.
+- Release tests passed with 647 tests and 1 warning before tagging.
+
 ## [Unreleased] - Stage 10
 
 ### Added

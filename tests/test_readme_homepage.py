@@ -29,10 +29,10 @@ def is_external(target: str) -> bool:
 
 def test_readme_version_and_release_badges() -> None:
     text = readme_text()
-    assert "v1.0.0-portfolio" in text
-    assert "1.0.0+portfolio" in text
+    assert "v1.0.1-portfolio" in text
+    assert "1.0.1+portfolio" in text
     assert "actions/workflows/ci.yml/badge.svg?branch=main" in text
-    assert "releases/tag/v1.0.0-portfolio" in text
+    assert "releases/tag/v1.0.1-portfolio" in text
 
 
 def test_readme_removes_stale_release_status() -> None:
