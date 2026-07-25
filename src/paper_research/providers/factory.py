@@ -151,6 +151,21 @@ def build_llm_provider(settings: Settings) -> LLMProvider:
     raise ProviderConfigurationError(f"unsupported LLM provider: {settings.llm_provider}")
 
 
+def build_research_synthesis_provider(settings: Settings):
+    if settings.llm_provider == "template":
+        raise ProviderConfigurationError("production research synthesis requires a real LLM")
+    llm = build_llm_provider(settings)
+    if not hasattr(llm, "generate_structured_json"):
+        raise ProviderConfigurationError(
+            "configured LLM provider does not support structured JSON synthesis"
+        )
+    from paper_research.agents.research_synthesis_provider import (
+        DeepSeekResearchSynthesisProvider,
+    )
+
+    return DeepSeekResearchSynthesisProvider(llm)
+
+
 def build_reranker(settings: Settings) -> Reranker:
     if not settings.rerank_enabled:
         return DisabledReranker()

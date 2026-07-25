@@ -22,6 +22,35 @@ class ModelUsage(BaseModel):
     output_tokens: int = 0
     total_tokens: int = 0
     estimated_cost_usd: float | None = None
+    usage_source: str = "provider_reported"
+
+
+class ProviderUsageRecord(BaseModel):
+    attempt_number: int
+    provider_completed: bool = True
+    schema_valid: bool = False
+    billable: bool = True
+    error_category: str | None = None
+    usage: ModelUsage = Field(default_factory=ModelUsage)
+    provider_request_id: str | None = None
+    finish_reason: str | None = None
+    response_audit_path: str | None = None
+    raw_response_path: str | None = None
+
+
+class StructuredJSONResult(BaseModel):
+    payload: dict[str, Any]
+    provider: str
+    model: str
+    usage: ModelUsage = Field(default_factory=ModelUsage)
+    usage_records: list[ProviderUsageRecord] = Field(default_factory=list)
+    request_attempt_count: int = 0
+    retry_count: int = 0
+    retry_reasons: list[str] = Field(default_factory=list)
+    rate_limit_events: int = 0
+    total_latency_ms: float = 0
+    provider_request_id: str | None = None
+    normalization_events: list[str] = Field(default_factory=list)
 
 
 class GeneratedCitation(BaseModel):
@@ -93,6 +122,7 @@ class LLMProviderError(RuntimeError):
         diagnostic_attempts: list[dict[str, Any]] | None = None,
         response_audit_path: str | None = None,
         error_details: dict[str, Any] | None = None,
+        usage_records: list[ProviderUsageRecord | dict[str, Any]] | None = None,
     ) -> None:
         super().__init__(message)
         self.error_code = error_code
@@ -103,6 +133,12 @@ class LLMProviderError(RuntimeError):
         self.diagnostic_attempts = list(diagnostic_attempts or [])
         self.response_audit_path = response_audit_path
         self.error_details = dict(error_details or {})
+        self.usage_records = [
+            record
+            if isinstance(record, ProviderUsageRecord)
+            else ProviderUsageRecord.model_validate(record)
+            for record in usage_records or []
+        ]
 
 
 class LLMProvider(ABC):
@@ -486,10 +522,284 @@ class SiliconFlowLLMProvider(LLMProvider):
             time.sleep(min(2**attempt, 4))
         raise AssertionError("unreachable")
 
-    def _usage(self, body: dict[str, Any]) -> ModelUsage:
-        input_tokens = int(body.get("prompt_tokens", 0))
-        output_tokens = int(body.get("completion_tokens", 0))
-        total_tokens = int(body.get("total_tokens", input_tokens + output_tokens))
+    def generate_structured_json(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        schema_name: str,
+        request_context: dict[str, Any] | None = None,
+        max_output_tokens: int | None = None,
+    ) -> StructuredJSONResult:
+        """Generate one JSON object through the shared chat-completions transport."""
+        started = time.perf_counter()
+        payload: dict[str, Any] = {
+            "model": self.model_name,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            "temperature": self.temperature,
+            "max_tokens": max_output_tokens or self.max_output_tokens,
+            "stream": self.stream,
+            "response_format": {"type": "json_object"},
+        }
+        payload.update(self._provider_payload_overrides())
+        requests = 0
+        rate_limits = 0
+        retry_reasons: list[str] = []
+        context = request_context or {}
+        for attempt in range(self.max_retries + 1):
+            requests += 1
+            persisted_attempt_number = int(context.get("attempt_number") or requests)
+            request_started = time.perf_counter()
+            response_audit_path: str | None = None
+            error_details: dict[str, Any] | None = None
+            error_code = "STRUCTURED_JSON_PROVIDER_ERROR"
+            stage = "STRUCTURED_JSON_PROVIDER_CALL"
+            try:
+                response = self.client.post(
+                    self.endpoint,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json=payload,
+                    timeout=self.timeout_seconds,
+                )
+                if response.status_code == 429:
+                    rate_limits += 1
+                if response.status_code >= 400:
+                    reason = f"HTTP {response.status_code}"
+                    if response.status_code == 429 or response.status_code >= 500:
+                        raise _RetryableLLMError(reason)
+                    raise LLMProviderError(
+                        reason,
+                        error_code=error_code,
+                        stage=stage,
+                        api_request_count=requests,
+                    )
+                body = response.json()
+                choice = body["choices"][0]
+                finish_reason = choice.get("finish_reason")
+                message = choice["message"]
+                content = message["content"]
+                content_text = content if isinstance(content, str) else str(content)
+                usage = self._usage(
+                    body.get("usage") if isinstance(body.get("usage"), dict) else {},
+                    prompt_text=f"{system_prompt}\n{user_prompt}",
+                    content_text=content_text,
+                )
+                audit_payload = self._build_response_audit(
+                    response=response,
+                    body=body,
+                    content=content,
+                    prompt_version=schema_name,
+                    audit_metadata=context,
+                    normalization_events=[],
+                    parse_error=None,
+                )
+                audit_path = self._persist_response_audit(audit_payload)
+                usage_record = ProviderUsageRecord(
+                    attempt_number=persisted_attempt_number,
+                    provider_completed=True,
+                    schema_valid=False,
+                    billable=True,
+                    usage=usage,
+                    provider_request_id=response.headers.get("x-request-id"),
+                    finish_reason=finish_reason,
+                    response_audit_path=str(audit_path) if audit_path else None,
+                )
+                try:
+                    raw_response_path = self._persist_structured_raw_response(
+                        context=context,
+                        attempt_number=persisted_attempt_number,
+                        response=response,
+                        body=body,
+                        content=content_text,
+                        usage=usage,
+                        finish_reason=finish_reason,
+                        schema_name=schema_name,
+                    )
+                    usage_record.raw_response_path = str(raw_response_path)
+                except OSError as exc:
+                    usage_record.error_category = "OBSERVABILITY_FAILURE"
+                    raise LLMProviderError(
+                        "structured JSON raw response persistence failed",
+                        error_code="STRUCTURED_JSON_OBSERVABILITY_ERROR",
+                        stage="STRUCTURED_JSON_RAW_RESPONSE_PERSIST",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, type(exc).__name__],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=str(audit_path) if audit_path else None,
+                        error_details={"reason": str(exc)[:1000]},
+                        usage_records=[usage_record],
+                    ) from exc
+                if finish_reason == "length":
+                    raise LLMProviderError(
+                        "structured JSON response was truncated",
+                        error_code="STRUCTURED_JSON_RESPONSE_ERROR",
+                        stage="STRUCTURED_JSON_RESPONSE_EXTRACT",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, "finish_reason:length"],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=str(audit_path) if audit_path else None,
+                        error_details={"finish_reason": finish_reason},
+                        usage_records=[usage_record],
+                    )
+                if not isinstance(content, str):
+                    raise LLMProviderError(
+                        "structured JSON response content is not a string",
+                        error_code="STRUCTURED_JSON_RESPONSE_ERROR",
+                        stage="STRUCTURED_JSON_RESPONSE_EXTRACT",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, "non_string_content"],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=str(audit_path) if audit_path else None,
+                        usage_records=[usage_record],
+                    )
+                try:
+                    parsed, normalization_events = normalize_structured_json_content(content)
+                except json.JSONDecodeError as exc:
+                    audit_payload = self._build_response_audit(
+                        response=response,
+                        body=body,
+                        content=content,
+                        prompt_version=schema_name,
+                        audit_metadata=context,
+                        normalization_events=[],
+                        parse_error=exc,
+                    )
+                    response_audit_path = str(
+                        self._persist_response_audit(
+                            audit_payload,
+                            audit_path,
+                            force=True,
+                        )
+                    )
+                    usage_record.response_audit_path = response_audit_path
+                    usage_record.error_category = "PROVIDER_SCHEMA"
+                    raise LLMProviderError(
+                        "structured JSON parse failed",
+                        error_code="STRUCTURED_JSON_PARSE_ERROR",
+                        stage="STRUCTURED_JSON_PARSE",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, "json_parse"],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=response_audit_path,
+                        error_details={"parse_error": str(exc)[:1000]},
+                        usage_records=[usage_record],
+                    ) from exc
+                if not isinstance(parsed, dict):
+                    usage_record.error_category = "PROVIDER_SCHEMA"
+                    raise LLMProviderError(
+                        "structured JSON response must be an object",
+                        error_code="STRUCTURED_JSON_RESPONSE_ERROR",
+                        stage="STRUCTURED_JSON_RESPONSE_EXTRACT",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, "wrong_top_level_shape"],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=str(audit_path) if audit_path else None,
+                        usage_records=[usage_record],
+                    )
+                usage_record.schema_valid = True
+                return StructuredJSONResult(
+                    payload=parsed,
+                    provider=self.provider_name,
+                    model=str(body.get("model") or self.model_name),
+                    usage=usage,
+                    usage_records=[usage_record],
+                    request_attempt_count=requests,
+                    retry_count=len(retry_reasons),
+                    retry_reasons=retry_reasons,
+                    rate_limit_events=rate_limits,
+                    total_latency_ms=round((time.perf_counter() - started) * 1000, 3),
+                    provider_request_id=response.headers.get("x-request-id"),
+                    normalization_events=normalization_events,
+                )
+            except LLMProviderError:
+                raise
+            except httpx.TimeoutException as exc:
+                reason = type(exc).__name__
+                error_details = classify_provider_exception(
+                    exc, hostname=self._endpoint_hostname()
+                )
+                error_code = "STRUCTURED_JSON_PROVIDER_TIMEOUT"
+                stage = "STRUCTURED_JSON_PROVIDER_TIMEOUT"
+                response_audit_path = str(
+                    self._persist_provider_failure_audit(
+                        exception=exc,
+                        prompt_version=schema_name,
+                        audit_metadata=context,
+                        attempt=requests,
+                        elapsed_ms=round((time.perf_counter() - request_started) * 1000, 3),
+                    )
+                )
+            except httpx.NetworkError as exc:
+                reason = type(exc).__name__
+                error_details = classify_provider_exception(
+                    exc, hostname=self._endpoint_hostname()
+                )
+                error_code = "STRUCTURED_JSON_PROVIDER_NETWORK_ERROR"
+                stage = "STRUCTURED_JSON_PROVIDER_NETWORK"
+                response_audit_path = str(
+                    self._persist_provider_failure_audit(
+                        exception=exc,
+                        prompt_version=schema_name,
+                        audit_metadata=context,
+                        attempt=requests,
+                        elapsed_ms=round((time.perf_counter() - request_started) * 1000, 3),
+                    )
+                )
+            except _RetryableLLMError as exc:
+                reason = str(exc)
+            except _MalformedJSONWithAudit as exc:
+                reason = "malformed_json"
+                error_code = "STRUCTURED_JSON_PARSE_ERROR"
+                stage = "STRUCTURED_JSON_PARSE"
+                response_audit_path = str(exc.audit_path) if exc.audit_path else None
+            except (AttributeError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+                reason = type(exc).__name__
+                error_code = "STRUCTURED_JSON_RESPONSE_ERROR"
+                stage = "STRUCTURED_JSON_RESPONSE_EXTRACT"
+            except _ProviderResponseWithAudit as exc:
+                reason = exc.reason
+                error_code = "STRUCTURED_JSON_RESPONSE_ERROR"
+                stage = "STRUCTURED_JSON_RESPONSE_EXTRACT"
+                response_audit_path = str(exc.audit_path) if exc.audit_path else None
+            if attempt >= self.max_retries or not _is_transport_retry_reason(reason):
+                raise LLMProviderError(
+                    f"{self.provider_name} structured JSON failed after "
+                    f"{requests} request(s): {reason}",
+                    error_code=error_code,
+                    stage=stage,
+                    api_request_count=requests,
+                    retry_reasons=[*retry_reasons, reason],
+                    rate_limit_events=rate_limits,
+                    response_audit_path=response_audit_path,
+                    error_details=error_details,
+                ) from None
+            retry_reasons.append(reason)
+            time.sleep(min(2**attempt, 4))
+        raise AssertionError("unreachable")
+
+    def _usage(
+        self,
+        body: dict[str, Any],
+        *,
+        prompt_text: str = "",
+        content_text: str = "",
+    ) -> ModelUsage:
+        usage_source = "provider_reported"
+        if body:
+            input_tokens = int(body.get("prompt_tokens", 0))
+            output_tokens = int(body.get("completion_tokens", 0))
+            total_tokens = int(body.get("total_tokens", input_tokens + output_tokens))
+        else:
+            usage_source = "estimated"
+            input_tokens = max(1, math.ceil(len(prompt_text) / 4)) if prompt_text else 0
+            output_tokens = max(1, math.ceil(len(content_text) / 4)) if content_text else 0
+            total_tokens = input_tokens + output_tokens
         cost = None
         if self.input_cost_per_million is not None and self.output_cost_per_million is not None:
             cost = (
@@ -503,6 +813,7 @@ class SiliconFlowLLMProvider(LLMProvider):
             output_tokens=output_tokens,
             total_tokens=total_tokens,
             estimated_cost_usd=cost,
+            usage_source=usage_source,
         )
 
     def _provider_payload_overrides(self) -> dict[str, Any]:
@@ -513,6 +824,65 @@ class SiliconFlowLLMProvider(LLMProvider):
                 }
             }
         return {"enable_thinking": bool(self.thinking_enabled)}
+
+    def _persist_structured_raw_response(
+        self,
+        *,
+        context: dict[str, Any],
+        attempt_number: int,
+        response: httpx.Response,
+        body: dict[str, Any],
+        content: str,
+        usage: ModelUsage,
+        finish_reason: str | None,
+        schema_name: str,
+    ) -> Path:
+        task_id = str(
+            context.get("task_id")
+            or context.get("run_id")
+            or context.get("request_id")
+            or "unknown"
+        )
+        safe_task_id = re.sub(r"[^A-Za-z0-9_.-]+", "-", task_id).strip("-") or "unknown"
+        target_dir = Path(".runtime/research-synthesis-provider") / safe_task_id
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target = target_dir / f"attempt-{attempt_number:02d}.json"
+        tmp = target.with_suffix(".json.tmp")
+        choice = (body.get("choices") or [{}])[0] if isinstance(body.get("choices"), list) else {}
+        record = {
+            "schema_version": "research-synthesis-raw-response-v1",
+            "task_id": safe_task_id,
+            "run_id": context.get("run_id"),
+            "attempt_number": attempt_number,
+            "provider": self.provider_name,
+            "model": str(body.get("model") or self.model_name),
+            "http_status": response.status_code,
+            "provider_request_id": response.headers.get("x-request-id"),
+            "finish_reason": finish_reason,
+            "response_format": "json_object",
+            "raw_content": content,
+            "content": content,
+            "content_sha256": _sha256_text(content),
+            "usage": usage.model_dump(),
+            "received_at": datetime.now(UTC).isoformat(),
+            "json_parse_status": "not_run",
+            "schema_parse_status": "not_run",
+            "validation_errors": [],
+            "schema_name": schema_name,
+            "section_evidence_ids": context.get("section_evidence_ids") or {},
+            "allowed_citation_ids": context.get("allowed_citation_ids") or [],
+            "top_level_fields": sorted(str(key) for key in body),
+            "choice_finish_reason": choice.get("finish_reason"),
+            "api_key_persisted": False,
+            "authorization_header_persisted": False,
+            "cookie_persisted": False,
+            "request_headers_persisted": False,
+            "system_prompt_persisted": False,
+            "evidence_catalog_persisted": False,
+        }
+        tmp.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        tmp.replace(target)
+        return target
 
     @staticmethod
     def _citation_key_map(context: list[ContextItem]) -> dict[str, dict[str, Any]]:
@@ -960,6 +1330,78 @@ def normalize_structured_qa_content(
                 citation["page"] = int(page)
                 events.append("coerced_page_string_to_int")
     return parsed, events
+
+
+STRUCTURED_JSON_FIELD_ALIASES = {
+    "executiveSummary": "executive_summary",
+    "researchGaps": "research_gaps",
+    "gap": "text",
+    "description": "text",
+    "citations": "citation_ids",
+    "sectionId": "section_id",
+    "citationIds": "citation_ids",
+    "isInference": "is_inference",
+    "inferred": "is_inference",
+    "insufficientEvidence": "insufficient_evidence",
+    "evidenceGap": "evidence_gap",
+}
+
+
+def normalize_structured_json_content(content: str) -> tuple[dict[str, Any], list[str]]:
+    """Apply bounded normalization for generic structured JSON responses."""
+
+    events: list[str] = []
+    text = content.strip()
+    fenced = re.fullmatch(r"```(?:json)?\s*(.*?)\s*```", text, flags=re.DOTALL | re.IGNORECASE)
+    if fenced:
+        text = fenced.group(1).strip()
+        events.append("removed_markdown_fence")
+    else:
+        first = text.find("{")
+        last = text.rfind("}")
+        if (first > 0 or (last != -1 and last < len(text) - 1)) and first != -1 and last > first:
+            prefix = text[:first].strip()
+            suffix = text[last + 1 :].strip()
+            if not re.search(r"[{}\[\]]", prefix + suffix):
+                text = text[first : last + 1].strip()
+                events.append("extracted_single_top_level_json_object")
+    parsed = json.loads(text)
+    if not isinstance(parsed, dict):
+        raise ValueError("structured JSON response must be an object")
+    normalized = _normalize_structured_json_value(parsed, events)
+    if not isinstance(normalized, dict):  # pragma: no cover
+        raise ValueError("structured JSON response must be an object")
+    return normalized, events
+
+
+def _normalize_structured_json_value(value: Any, events: list[str]) -> Any:
+    if isinstance(value, list):
+        return [_normalize_structured_json_value(item, events) for item in value]
+    if not isinstance(value, dict):
+        return value
+    output: dict[str, Any] = {}
+    for key, raw_value in value.items():
+        canonical_key = STRUCTURED_JSON_FIELD_ALIASES.get(str(key), str(key))
+        if canonical_key != key:
+            events.append(f"mapped_field_alias:{key}->{canonical_key}")
+        normalized_value = _normalize_structured_json_value(raw_value, events)
+        if canonical_key == "section_id" and isinstance(normalized_value, str):
+            canonical_section = normalized_value.strip().lower().replace("-", "_").replace(" ", "_")
+            if canonical_section != normalized_value:
+                events.append("normalized_section_id")
+            normalized_value = canonical_section
+        if canonical_key == "citation_ids" and isinstance(normalized_value, list):
+            deduped: list[Any] = []
+            seen = set()
+            for item in normalized_value:
+                if item in seen:
+                    events.append("deduplicated_citation_ids")
+                    continue
+                seen.add(item)
+                deduped.append(item)
+            normalized_value = deduped
+        output[canonical_key] = normalized_value
+    return output
 
 
 def normalize_citation_key_qa_payload(

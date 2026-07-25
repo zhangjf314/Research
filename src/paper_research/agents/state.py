@@ -21,6 +21,18 @@ class ResearchState(TypedDict, total=False):
     research_plan: list[str]
     sub_questions: list[str]
     search_queries: list[str]
+    section_queries: dict[str, str]
+    section_evidence_ids: dict[str, list[str]]
+    evidence_catalog: dict[str, dict]
+    synthesis: dict
+    report_quality: dict | None
+    model_usage: dict
+    llm_provider: str | None
+    llm_model: str | None
+    request_attempt_count: int
+    provider_completed_request_count: int
+    usage_record_count: int
+    active_reserved_tokens: int
     requested_paper_ids: list[str]
     candidate_papers: list[dict]
     selected_papers: list[dict]
@@ -59,6 +71,18 @@ def initial_state(
         candidate_papers=[],
         selected_papers=[],
         evidence_gaps=[],
+        section_queries={},
+        section_evidence_ids={},
+        evidence_catalog={},
+        synthesis={},
+        report_quality=None,
+        model_usage={},
+        llm_provider=None,
+        llm_model=None,
+        request_attempt_count=0,
+        provider_completed_request_count=0,
+        usage_record_count=0,
+        active_reserved_tokens=0,
         contradictions=[],
         citation_results=[],
         node_history=[],

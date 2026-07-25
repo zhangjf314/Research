@@ -197,6 +197,7 @@ Invoke-RestMethod `
 
 - `gold-dev-v1` 的 50 条数据属于人工审核的内部开发评测集，不是独立 blind benchmark。
 - Citation ID、Context、Block 和 Page 使用确定性校验。
+- Deep Research synthesis hotfix 已通过一次生产 live smoke 与 raw replay；状态为 `AVAILABLE`。
 - Claim 与引用之间的完整语义蕴含未经过大规模人工审计。
 - `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED`。
 - `STRONG_GROUNDING_CLAIM_ALLOWED=false`，`STRONG_GENERALIZATION_CLAIM_ALLOWED=false`。
@@ -224,7 +225,6 @@ powershell -ExecutionPolicy Bypass -File scripts\run_release_tests.ps1
 ```
 
 ## Release
-
 - Current release: [`v1.0.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio)
 - Package version: `1.0.0+portfolio`
-- Release evidence: [Release Checklist](docs/release-checklist-v1.0.0-portfolio.md)
+- Release evidence: [Release Checklist](docs/release-checklist-v1.0.0-portfolio.md); [Deep Research Report Correctness Audit](docs/deep-research-report-correctness-audit-v1.md)

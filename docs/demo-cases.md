@@ -34,6 +34,21 @@
 验收重点：证据不足时进入外部搜索；预算触顶时停止；报告主要结论均有引用。
 # Demo Cases
 
+## Post-release Deep Research report demo note
+
+For the Deep Research UI, start from an empty query box or click the example
+button deliberately. Do not present the old pre-filled query as user input.
+When showing `/api/v1/research/deep`, describe the report as section-specific
+retrieval plus deduplicated structured synthesis with deterministic citation and
+report-quality checks. Do not describe these checks as a full semantic support
+audit or as an independent blind benchmark.
+
+Current hotfix status: the revised Deep Research synthesis contract passed one
+production live smoke and raw-response replay with `E01`-style citation IDs,
+object-shaped research gaps, and section-scoped citation allowlists. Demo claims
+may say production Deep Research is available, but must still disclose that
+semantic claim-support audit is not formally validated.
+
 ## Stage 13.39 safe demo scope
 
 Use curated summaries and sanitized API views only. The demo may show health,

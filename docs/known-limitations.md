@@ -1,5 +1,29 @@
 # Known Limitations
 
+## Post-release Deep Research report boundary
+
+- A post-release hotfix replaced the previous artifact-local BM25 evidence dump
+  behavior for `/api/v1/research/deep` with section-specific retrieval,
+  deduplicated evidence cataloging, deterministic Markdown generation, and report
+  quality gates.
+- The legacy artifact-local provider remains available for offline tests and
+  explicit fallback diagnostics, but production UI/API success must not silently
+  rely on it.
+- The new report quality gate validates duplicate text, duplicate references,
+  citation ID presence, and catalog consistency. It does not prove full semantic
+  claim support.
+- The revised Deep Research synthesis contract now uses object-shaped
+  `research_gaps`, `E01`-style model-visible citation IDs, and section-scoped
+  citation allowlists. A new one-shot production live smoke
+  (`hotfix-deep-research-20260725220952`) passed schema, citation, replay, and
+  report-quality gates, so production Deep Research is available again.
+- The older frozen task `ce25169e-7ab7-4d1b-92f2-fec77df06f0a` remains recorded
+  as `DIAGNOSTIC_ONLY` because it was generated under the previous prompt/schema
+  contract and must not be relabeled as validated.
+- `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED`,
+  `STRONG_GROUNDING_CLAIM_ALLOWED=false`, and the internal-development
+  evaluation boundary remain unchanged.
+
 ## Stage 13.40 portfolio release boundary
 
 - The project has not been merged, tagged, pushed, or remotely released as

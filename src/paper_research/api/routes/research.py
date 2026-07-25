@@ -1,4 +1,5 @@
 import json
+import uuid
 from pathlib import Path
 from typing import Annotated
 
@@ -10,11 +11,16 @@ from paper_research.agents.checkpointing import checkpoint_saver
 from paper_research.agents.deep_research_graph import DeepResearchGraph
 from paper_research.agents.providers import (
     ArtifactLocalResearchProvider,
+    HybridLocalResearchProvider,
     SearchServiceExternalProvider,
 )
 from paper_research.agents.state import ResearchBudget
 from paper_research.config import get_settings
 from paper_research.db import get_db
+from paper_research.providers.factory import (
+    ProviderConfigurationError,
+    build_research_synthesis_provider,
+)
 from paper_research.search.clients import ArxivClient, SemanticScholarClient
 from paper_research.search.http import CachedRetryClient
 from paper_research.search.import_service import PaperImportService
@@ -48,6 +54,14 @@ class DeepResearchResponse(BaseModel):
     node_history: list[str]
     report_path: str
     report: str
+    report_quality: dict | None = None
+    model_usage: dict | None = None
+    llm_provider: str | None = None
+    llm_model: str | None = None
+    request_attempt_count: int = 0
+    provider_completed_request_count: int = 0
+    usage_record_count: int = 0
+    active_reserved_tokens: int = 0
 
 
 def _providers(payload: DeepResearchRequest, db: Session):
@@ -97,18 +111,75 @@ def _response(state: dict) -> DeepResearchResponse:
         node_history=state.get("node_history", []),
         report_path=str(report_path),
         report=report,
+        report_quality=state.get("report_quality"),
+        model_usage=state.get("model_usage"),
+        llm_provider=state.get("llm_provider"),
+        llm_model=state.get("llm_model"),
+        request_attempt_count=state.get("request_attempt_count", 0),
+        provider_completed_request_count=state.get("provider_completed_request_count", 0),
+        usage_record_count=state.get("usage_record_count", 0),
+        active_reserved_tokens=state.get("active_reserved_tokens", 0),
     )
+
+
+def _failed_state(task_id: str | None, status: str, stop_reason: str) -> dict:
+    return {
+        "task_id": task_id or f"failed-{uuid.uuid4().hex[:12]}",
+        "status": status,
+        "stop_reason": stop_reason,
+        "research_plan": [],
+        "sub_questions": [],
+        "evidence_gaps": [stop_reason],
+        "candidate_papers": [],
+        "contradictions": [],
+        "citation_results": [],
+        "node_history": [status.lower()],
+        "draft_report": "",
+        "report_quality": None,
+        "model_usage": {},
+        "llm_provider": None,
+        "llm_model": None,
+        "request_attempt_count": 0,
+        "provider_completed_request_count": 0,
+        "usage_record_count": 0,
+        "active_reserved_tokens": 0,
+    }
 
 
 @router.post("/deep", response_model=DeepResearchResponse)
 def run_deep_research(payload: DeepResearchRequest, db: DbSession) -> DeepResearchResponse:
     try:
         settings, external, import_provider = _providers(payload, db)
+        try:
+            local_provider = HybridLocalResearchProvider(settings)
+        except Exception as exc:
+            if settings.app_profile == "production":
+                return _response(
+                    _failed_state(
+                        payload.task_id,
+                        "FAILED_RETRIEVAL",
+                        f"production hybrid retrieval unavailable: {type(exc).__name__}",
+                    )
+                )
+            local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
+        try:
+            synthesis_provider = build_research_synthesis_provider(settings)
+        except ProviderConfigurationError as exc:
+            if settings.app_profile == "production":
+                return _response(
+                    _failed_state(
+                        payload.task_id,
+                        "FAILED_PROVIDER_CONFIGURATION",
+                        str(exc),
+                    )
+                )
+            synthesis_provider = None
         with checkpoint_saver(settings) as saver:
             state = DeepResearchGraph(
-                ArtifactLocalResearchProvider(settings.parsed_papers_dir),
+                local_provider,
                 external,
                 import_provider,
+                synthesis_provider=synthesis_provider,
                 checkpointer=saver,
                 interrupt_after=[payload.pause_after_node] if payload.pause_after_node else None,
             ).run(
@@ -131,11 +202,14 @@ def resume_deep_research(
 ) -> DeepResearchResponse:
     try:
         settings, external, import_provider = _providers(payload, db)
+        local_provider = HybridLocalResearchProvider(settings)
+        synthesis_provider = build_research_synthesis_provider(settings)
         with checkpoint_saver(settings) as saver:
             state = DeepResearchGraph(
-                ArtifactLocalResearchProvider(settings.parsed_papers_dir),
+                local_provider,
                 external,
                 import_provider,
+                synthesis_provider=synthesis_provider,
                 checkpointer=saver,
             ).resume(task_id)
     except KeyError as exc:

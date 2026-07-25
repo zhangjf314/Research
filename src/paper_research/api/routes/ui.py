@@ -134,9 +134,10 @@ def research_page() -> HTMLResponse:
         "Deep Research",
         """
         <h1>Deep Research</h1><div class='card'>
-        <textarea id='query' rows='4' style='width:95%'>
-        RAG methods, results, and limitations</textarea><br>
+        <textarea id='query' rows='4' style='width:95%'
+          placeholder='例如：比较不同 RAG 方法的技术路线、实验结果与局限'></textarea><br>
         <button id='run-research' type='button' onclick='runResearch()'>Run</button>
+        <button type='button' onclick='fillExampleQuery()'>填入示例</button>
         <p id='research-status' class='muted'></p></div>
         <section class='card report-card'>
           <div class='report-toolbar'>
@@ -167,6 +168,11 @@ def research_page() -> HTMLResponse:
           const raw = document.getElementById('report-raw');
           const status = document.getElementById('research-status');
           const button = document.getElementById('run-research');
+          const query = document.getElementById('query').value.trim();
+          if (query.length < 3) {
+            status.textContent = '请输入至少 3 个字符的研究问题。';
+            return;
+          }
           button.disabled = true;
           status.textContent = 'Running...';
           report.innerHTML = "<p class='muted'>Generating report...</p>";
@@ -174,7 +180,7 @@ def research_page() -> HTMLResponse:
           try {
             const response = await fetch('/api/v1/research/deep',{method:'POST',
               headers:{'Content-Type':'application/json'},body:JSON.stringify({
-              query:document.getElementById('query').value,allow_external_search:false})});
+              query,allow_external_search:false})});
             const data = await response.json();
             if (!response.ok) {
               const message = typeof data.detail === 'string'
@@ -215,6 +221,10 @@ def research_page() -> HTMLResponse:
         function toggleRaw() {
           const raw = document.getElementById('report-raw');
           raw.hidden = !raw.hidden;
+        }
+        function fillExampleQuery() {
+          document.getElementById('query').value =
+            'RAG 方法的主要技术路线、实验结果和局限分别是什么？';
         }
         </script>""",
     )

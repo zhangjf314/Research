@@ -1,0 +1,37 @@
+{
+  "schema_version": "research-synthesis-current-contract-v1",
+  "created_at": "2026-07-25T14:01:04.578896+00:00",
+  "prompt_version": "deep-research-synthesis-v1",
+  "repair_prompt_version": "deep-research-synthesis-v1:repair",
+  "research_gap_shape": "object",
+  "required_section_ids": [
+    "background",
+    "methods",
+    "results",
+    "limitations"
+  ],
+  "citation_key_format": "E[0-9]{2,3}",
+  "section_allowlist_enabled": true,
+  "global_allowlist_enabled": true,
+  "max_attempts": 2,
+  "template_fallback": false,
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "response_format": "json_object",
+  "delivered_system_prompt_hash": "5c5677d0faec0115f868de09ac8e4070eb39ac89e3c363ccc04484fb8adf2c8b",
+  "delivered_user_payload_hash": "ebaeec9a02a5ce8efaad3f1aa7f35f658858de54c6ad8edf09a586820e926dc6",
+  "repair_prompt_hash": "3e37e526227bfd00003d1533c104986a0e9423ee4fdcdefe5c9a5905cb49da31",
+  "protocol_signature": "7ed08c1a7ce4278a62527c618bdff4905116c793ceb6d3dab974cef413ca0cb5",
+  "prompt_snapshot_tests": {
+    "user_prompt_contains_required_section_allowlists": true,
+    "repair_prompt_contains_required_section_allowlists": true,
+    "user_prompt_contains_research_gap_object_skeleton": true,
+    "repair_prompt_contains_research_gap_object_skeleton": true
+  },
+  "section_allowlist_preflight": {
+    "path": "data/evaluation/research-section-allowlist-preflight-v1.json",
+    "mapping_invariant_errors": [],
+    "unassigned_evidence_ids": [],
+    "global_evidence_count": 16
+  }
+}

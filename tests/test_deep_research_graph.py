@@ -17,9 +17,12 @@ class FakeLocalProvider(LocalResearchProvider):
                 "section_path": ["Method"],
                 "page_start": 3,
                 "page_end": 3,
-                "quote": f"Evidence answering {query}",
-                "score": 2.0,
-                "source": "local",
+                "text": (
+                    f"Evidence answering {query}. The paper reports a benchmark "
+                    "dataset, baseline, and 12.5% improvement for result-oriented queries."
+                ),
+                "retrieval_score": 2.0,
+                "retrieval_sources": ["fake"],
             }
         ]
 
@@ -42,9 +45,10 @@ def test_graph_generates_plan_report_and_valid_citations() -> None:
     result = DeepResearchGraph(FakeLocalProvider()).run("How do long-context models work?")
 
     assert result["status"] == "COMPLETED"
-    assert result["evidence_gaps"] == []
+    assert result["report_quality"]["passed"] is True
     assert len(result["sub_questions"]) == 4
     assert "# 深度研究报告" in result["draft_report"]
+    assert "## 9. 参考证据" in result["draft_report"]
     assert result["citation_results"]
     assert all(item["valid"] for item in result["citation_results"])
     assert result["node_history"] == [
@@ -53,8 +57,8 @@ def test_graph_generates_plan_report_and_valid_citations() -> None:
         "local_search",
         "assess",
         "synthesize",
-        "report",
-        "validate",
+        "render_report",
+        "validate_report_quality",
     ]
 
 
@@ -76,7 +80,7 @@ def test_budget_stops_before_external_search() -> None:
 
     assert result["stop_reason"] == "max_iterations"
     assert "external_search" not in result["node_history"]
-    assert result["status"] == "COMPLETED"
+    assert result["status"] == "FAILED_RETRIEVAL"
 
 
 def test_external_candidate_can_be_imported_and_researched_again() -> None:
@@ -93,5 +97,5 @@ def test_external_candidate_can_be_imported_and_researched_again() -> None:
 
     assert result["iteration_count"] == 2
     assert result["selected_papers"][0]["paper_id"] == "imported-paper"
-    assert result["evidence_gaps"] == []
+    assert result["evidence_catalog"]
     assert result["status"] == "COMPLETED"

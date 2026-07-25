@@ -204,6 +204,43 @@ def capabilities() -> CapabilitiesResponse:
             max_tokens=settings.llm_max_output_tokens,
             billing_configured=llm_billing_configured,
         ),
+        "research_synthesis": Capability(
+            status=(
+                "configured"
+                if not settings.llm_configuration_issues and settings.llm_provider != "template"
+                else "available"
+                if settings.app_profile == "baseline" and settings.llm_provider == "template"
+                else "degraded"
+            ),
+            configured=(
+                not settings.llm_configuration_issues
+                and settings.llm_provider != "template"
+            ),
+            verified=False,
+            detail=(
+                f"{settings.llm_provider_name or settings.llm_provider}/{settings.llm_model}"
+                if settings.llm_provider != "template"
+                else "deterministic offline diagnostic synthesis"
+            ),
+            provider=(
+                (settings.llm_provider_name or settings.llm_provider)
+                if settings.llm_provider != "template"
+                else "deterministic"
+            ),
+            model=settings.llm_model,
+            thinking="enabled" if settings.llm_thinking_enabled else "disabled",
+            response_format=settings.llm_response_format,
+            stream=settings.llm_stream,
+            template_fallback=settings.llm_provider == "template",
+            base_url_hostname=(
+                urlparse(settings.llm_base_url).hostname if settings.llm_base_url else None
+            ),
+            api_key_present=bool(settings.llm_api_key),
+            api_key_fingerprint=_api_key_fingerprint(settings.llm_api_key),
+            temperature=settings.llm_temperature,
+            max_tokens=settings.llm_max_output_tokens,
+            billing_configured=llm_billing_configured,
+        ),
         "redis": Capability(
             status="available" if redis_up else "degraded",
             configured=bool(settings.redis_url),
