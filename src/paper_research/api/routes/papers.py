@@ -3,7 +3,7 @@ import uuid
 from pathlib import Path
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, UploadFile, status
 from fastapi.responses import FileResponse
 from qdrant_client import QdrantClient
 from sqlalchemy.exc import IntegrityError
@@ -21,16 +21,25 @@ from paper_research.ingestion.upload_service import UploadService, UploadValidat
 from paper_research.models.paper import PaperStatus
 from paper_research.providers.factory import build_embedding_provider
 from paper_research.repositories.paper import PaperRepository
-from paper_research.schemas.paper import PaperCreate, PaperRead, PaperUploadResponse
+from paper_research.schemas.paper import (
+    PaperCreate,
+    PaperMetadataUpdate,
+    PaperRead,
+    PaperUploadResponse,
+)
 
 router = APIRouter()
 DbSession = Annotated[Session, Depends(get_db)]
 
 
 @router.post("/upload", response_model=PaperUploadResponse, status_code=status.HTTP_201_CREATED)
-def upload_paper(file: Annotated[UploadFile, File()], db: DbSession) -> PaperUploadResponse:
+def upload_paper(
+    file: Annotated[UploadFile, File()],
+    db: DbSession,
+    source_type: Annotated[str, Form()] = "upload",
+) -> PaperUploadResponse:
     try:
-        result = UploadService(db, get_settings()).ingest(file)
+        result = UploadService(db, get_settings()).ingest(file, source_type=source_type)
     except UploadValidationError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
@@ -137,8 +146,21 @@ def list_papers(
     db: DbSession,
     limit: Annotated[int, Query(ge=1, le=100)] = 50,
     offset: Annotated[int, Query(ge=0)] = 0,
+    include_fixtures: bool = False,
+    source_type: str | None = None,
+    q: str | None = None,
+    missing_metadata: bool = False,
+    not_indexed: bool = False,
 ) -> list[PaperRead]:
-    return PaperRepository(db).list(limit=limit, offset=offset)
+    return PaperRepository(db).list(
+        limit=limit,
+        offset=offset,
+        include_fixtures=include_fixtures,
+        source_type=source_type,
+        query=q,
+        missing_metadata=missing_metadata,
+        not_indexed=not_indexed,
+    )
 
 
 @router.get("/{paper_id}", response_model=PaperRead)
@@ -147,3 +169,27 @@ def get_paper(paper_id: uuid.UUID, db: DbSession) -> PaperRead:
     if paper is None:
         raise HTTPException(status_code=404, detail="paper not found")
     return paper
+
+
+@router.patch("/{paper_id}", response_model=PaperRead)
+def update_paper_metadata(
+    paper_id: uuid.UUID, payload: PaperMetadataUpdate, db: DbSession
+) -> PaperRead:
+    repository = PaperRepository(db)
+    paper = repository.get(paper_id)
+    if paper is None:
+        raise HTTPException(status_code=404, detail="paper not found")
+    updates = payload.model_dump(exclude_unset=True)
+    if "title" in updates and (updates["title"] is None or not updates["title"].strip()):
+        raise HTTPException(status_code=422, detail="title must not be empty")
+    if updates.get("doi"):
+        existing = db.query(type(paper)).filter(type(paper).doi == updates["doi"]).first()
+        if existing is not None and existing.id != paper.id:
+            raise HTTPException(status_code=409, detail="doi already exists")
+    if updates.get("arxiv_id"):
+        existing = db.query(type(paper)).filter(type(paper).arxiv_id == updates["arxiv_id"]).first()
+        if existing is not None and existing.id != paper.id:
+            raise HTTPException(status_code=409, detail="arxiv_id already exists")
+    for field, value in updates.items():
+        setattr(paper, field, value)
+    return repository.save(paper)

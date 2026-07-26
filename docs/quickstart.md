@@ -33,3 +33,40 @@ Invoke-RestMethod http://localhost/api/v1/capabilities
 - Qdrant: <http://localhost:6333>
 
 Default Compose credentials are for local development only.
+
+## Import a local PDF
+
+Use the browser UI:
+
+```text
+Library -> choose PDF -> Upload PDF -> optional auto-index
+```
+
+Equivalent API flow:
+
+```text
+POST /api/v1/papers/upload
+POST /api/v1/papers/{paper_id}/index
+```
+
+The upload form sends the PDF file only; it must not send the full local file
+path.
+
+## Import an external paper
+
+Use the browser UI:
+
+```text
+Search -> search arXiv/Semantic Scholar -> Import PDF -> optional Index
+```
+
+Equivalent API flow:
+
+```text
+POST /api/v1/search/papers
+POST /api/v1/search/import
+```
+
+The app intentionally does not provide arbitrary URL download. External imports
+must come from configured search providers and candidates with a validated
+downloadable PDF URL.

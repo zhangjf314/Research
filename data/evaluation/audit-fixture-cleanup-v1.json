@@ -1,0 +1,461 @@
+{
+  "schema_version": "audit-fixture-cleanup-v1",
+  "dry_run": false,
+  "library_before_count": 42,
+  "library_after_count": 33,
+  "confirmed_fixture_count": 9,
+  "fixture_ids_removed": [
+    "0ebb06a5-5754-40f0-840c-6e911421eede",
+    "daf570e7-21b3-478d-8b93-789c3d77ad22",
+    "ae049aac-21de-4fa3-b678-adea35a01fdf",
+    "ebd0e600-868f-430e-82ea-7c6fb5ada674",
+    "dcaf04b4-5a3b-45e1-a96f-be706d15281c",
+    "5482037d-3b41-43ec-98f1-003c8b0982c9",
+    "fbd2556c-fb5f-4088-8c8a-52223a32a1bd",
+    "9a9b40a4-1725-418d-8c82-8cad235a34c2",
+    "0228c3e3-8630-4f5c-b8dc-b83c13eabe5a"
+  ],
+  "records": [
+    {
+      "paper_id": "0ebb06a5-5754-40f0-840c-6e911421eede",
+      "title": "fully-scanned-20260720152244",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:22:57.331554+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "0ebb06a5-5754-40f0-840c-6e911421eede",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/e29f5674983c08d6009eb5fb29f4e9c3e7e748790402ffbcd6f705600e8346f2.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/0ebb06a5-5754-40f0-840c-6e911421eede",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "daf570e7-21b3-478d-8b93-789c3d77ad22",
+      "title": "mixed-native-scanned-20260720152244",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:22:51.380527+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "daf570e7-21b3-478d-8b93-789c3d77ad22",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/07730ae9865c0d9a88995783cb88ecf155dc1ab96f368fcfd60a6c0dd7fe4812.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/daf570e7-21b3-478d-8b93-789c3d77ad22",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "ae049aac-21de-4fa3-b678-adea35a01fdf",
+      "title": "text-native-20260720152244",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:22:45.447746+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "ae049aac-21de-4fa3-b678-adea35a01fdf",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/461c3c8fd7f05d9c10e9874d0de1ea2f22df2e4edcfa270fe721d705a34d8502.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/ae049aac-21de-4fa3-b678-adea35a01fdf",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "ebd0e600-868f-430e-82ea-7c6fb5ada674",
+      "title": "fully-scanned-20260720151309",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:13:28.389038+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "ebd0e600-868f-430e-82ea-7c6fb5ada674",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/ac7202908f6264b055bcc4b54f17666fef44ae4296279bc2e8183ba0bccd43f2.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/ebd0e600-868f-430e-82ea-7c6fb5ada674",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "dcaf04b4-5a3b-45e1-a96f-be706d15281c",
+      "title": "mixed-native-scanned-20260720151309",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:13:17.501674+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "dcaf04b4-5a3b-45e1-a96f-be706d15281c",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/082f6014074bcc5d694f811759ca60f6a27dd44680c4c68c253e5f3acfa70c93.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/dcaf04b4-5a3b-45e1-a96f-be706d15281c",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "5482037d-3b41-43ec-98f1-003c8b0982c9",
+      "title": "text-native-20260720151309",
+      "source_type": "upload",
+      "created_at": "2026-07-20T15:13:11.156296+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "5482037d-3b41-43ec-98f1-003c8b0982c9",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/85dcdf686136171d300d4e556887d2c7013cd4f2b9ed867963050cdc9e814c7a.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/5482037d-3b41-43ec-98f1-003c8b0982c9",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "fbd2556c-fb5f-4088-8c8a-52223a32a1bd",
+      "title": "fully-scanned",
+      "source_type": "upload",
+      "created_at": "2026-07-13T10:45:28.684389+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "fbd2556c-fb5f-4088-8c8a-52223a32a1bd",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/2fe15c945d2756df81af61d8136f546e2652807a83bdd33593075e19c136700d.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/fbd2556c-fb5f-4088-8c8a-52223a32a1bd",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "9a9b40a4-1725-418d-8c82-8cad235a34c2",
+      "title": "mixed-native-scanned",
+      "source_type": "upload",
+      "created_at": "2026-07-13T10:45:27.621998+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "9a9b40a4-1725-418d-8c82-8cad235a34c2",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/166fa405f876ebe0bd6049f51737c2b79f63e07054bde6343231d61bf89809e8.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/9a9b40a4-1725-418d-8c82-8cad235a34c2",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "paper_id": "0228c3e3-8630-4f5c-b8dc-b83c13eabe5a",
+      "title": "text-native",
+      "source_type": "upload",
+      "created_at": "2026-07-13T10:05:43.861205+00:00",
+      "raw_pdf_exists": false,
+      "parsed_directory_exists": false,
+      "formal_evaluation_reference_count": 0,
+      "classification": "CONFIRMED_AUDIT_FIXTURE",
+      "classification_reason": "title matches deterministic OCR fixture pattern",
+      "cleanup_result": {
+        "paper_id": "0228c3e3-8630-4f5c-b8dc-b83c13eabe5a",
+        "dry_run": false,
+        "deleted": true,
+        "steps": [
+          {
+            "name": "qdrant:papers_hash_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "qdrant:papers_production_v1",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          },
+          {
+            "name": "raw_pdf",
+            "status": "deleted",
+            "detail": "/app/data/raw/2c212d85a6f9a058394b135c353a5d6610ad21b42794a0d28f97ad994e376d1e.pdf",
+            "count": 0
+          },
+          {
+            "name": "parsed_directory",
+            "status": "deleted",
+            "detail": "/app/data/parsed/0228c3e3-8630-4f5c-b8dc-b83c13eabe5a",
+            "count": 0
+          },
+          {
+            "name": "database_record",
+            "status": "deleted",
+            "detail": "",
+            "count": 0
+          }
+        ],
+        "warnings": []
+      }
+    }
+  ]
+}

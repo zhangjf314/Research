@@ -4,12 +4,17 @@ from __future__ import annotations
 import json
 import subprocess
 import time
+import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import fitz
 import httpx
+
+from paper_research.config import get_settings
+from paper_research.db import SessionLocal
+from paper_research.ingestion.cleanup_service import PaperCleanupService
 
 API_BASE_URL = "http://localhost/api/v1"
 ARTIFACT_DIR = Path("artifacts/docker-ocr-production-v2")
@@ -112,6 +117,7 @@ def upload_pdf(path: Path) -> dict[str, Any]:
         response = httpx.post(
             f"{API_BASE_URL}/papers/upload",
             files={"file": (path.name, handle, "application/pdf")},
+            data={"source_type": "audit_fixture"},
             timeout=120,
         )
     response.raise_for_status()
@@ -143,6 +149,7 @@ def evaluate_case(kind: str, path: Path, expected_sentence: str, expected_page: 
         "path": str(path),
         "expected_page": expected_page,
     }
+    paper_id: str | None = None
     try:
         upload = upload_pdf(path)
         paper_id = upload["paper"]["id"]
@@ -168,6 +175,31 @@ def evaluate_case(kind: str, path: Path, expected_sentence: str, expected_page: 
         row["indexed"] = False
         row["retrievable"] = False
         row["citation_page_accuracy"] = False
+    finally:
+        if paper_id:
+            try:
+                with SessionLocal() as session:
+                    cleanup = PaperCleanupService(session, get_settings()).purge(
+                        uuid.UUID(paper_id), dry_run=False
+                    )
+                row["cleanup"] = {
+                    "temporary_files_cleaned": True,
+                    "database_records_cleaned": cleanup.deleted,
+                    "qdrant_points_cleaned": cleanup.qdrant_points_removed >= 0,
+                    "parsed_artifacts_cleaned": any(
+                        step.name == "parsed_directory"
+                        and step.status in {"deleted", "missing"}
+                        for step in cleanup.steps
+                    ),
+                }
+            except Exception as cleanup_exc:  # audit must surface cleanup failures
+                row["cleanup"] = {
+                    "temporary_files_cleaned": False,
+                    "database_records_cleaned": False,
+                    "qdrant_points_cleaned": False,
+                    "parsed_artifacts_cleaned": False,
+                    "error": f"{type(cleanup_exc).__name__}: {cleanup_exc}",
+                }
     row["elapsed_seconds"] = round(time.perf_counter() - started, 3)
     return row
 

@@ -18,6 +18,10 @@ COPY pyproject.toml README.md ./
 COPY src ./src
 COPY migrations ./migrations
 COPY alembic.ini ./
+COPY scripts ./scripts
+COPY docs ./docs
+COPY data/evaluation ./data/evaluation
+COPY artifacts/soak-test-portfolio-v1.json ./artifacts/soak-test-portfolio-v1.json
 
 RUN pip install --upgrade pip && pip install .
 

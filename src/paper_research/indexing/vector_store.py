@@ -34,6 +34,49 @@ class QdrantVectorStore:
             return 0
         return int(self.client.count(self.collection, exact=True).count)
 
+    def count_by_paper_id(self, paper_id: str) -> int:
+        if not self.client.collection_exists(self.collection):
+            return 0
+        query_filter = models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="paper_id",
+                    match=models.MatchValue(value=paper_id),
+                )
+            ]
+        )
+        return int(
+            self.client.count(
+                collection_name=self.collection,
+                count_filter=query_filter,
+                exact=True,
+            ).count
+        )
+
+    def delete_by_paper_id(self, paper_id: str) -> int:
+        before = self.count_by_paper_id(paper_id)
+        if before == 0:
+            return 0
+        query_filter = models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="paper_id",
+                    match=models.MatchValue(value=paper_id),
+                )
+            ]
+        )
+        self.client.delete(
+            collection_name=self.collection,
+            points_selector=models.FilterSelector(filter=query_filter),
+            wait=True,
+        )
+        after = self.count_by_paper_id(paper_id)
+        if after:
+            raise RuntimeError(
+                f"Qdrant cleanup incomplete for paper_id={paper_id}: {after} points remain"
+            )
+        return before
+
     def upsert(self, chunks: list[Chunk], vectors: list[list[float]]) -> None:
         if len(chunks) != len(vectors):
             raise ValueError("chunks and vectors must have the same length")

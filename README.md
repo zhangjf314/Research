@@ -100,9 +100,7 @@ flowchart LR
 
 ### 1. 论文入库
 
-```text
-上传 PDF → 页面解析/OCR → Chunk → Embedding → Qdrant
-```
+`上传 PDF → 页面解析/OCR → Chunk → Embedding → Qdrant`；也可以从 Search Provider 结果导入 PDF，不支持任意 URL 下载。
 
 ### 2. 证据化问答
 

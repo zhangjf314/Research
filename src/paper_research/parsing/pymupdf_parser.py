@@ -1,3 +1,5 @@
+import re
+from datetime import UTC, datetime
 from pathlib import Path
 
 import fitz
@@ -68,6 +70,14 @@ class PyMuPDFParser(PaperParser):
             authors = [
                 item.strip() for item in metadata.get("author", "").split(";") if item.strip()
             ]
+            year = self._extract_year(metadata, blocks)
+            sources = {}
+            if title:
+                sources["title"] = "pdf_metadata" if metadata.get("title") else "first_page"
+            if authors:
+                sources["authors"] = "pdf_metadata"
+            if year:
+                sources["year"] = "pdf_metadata_or_first_page"
             return ParsedPaper(
                 parser="pymupdf",
                 parser_name="pymupdf",
@@ -75,8 +85,10 @@ class PyMuPDFParser(PaperParser):
                 metadata=PaperMetadata(
                     title=title,
                     authors=authors,
+                    year=year,
                     page_count=document.page_count,
                     pdf_metadata=metadata,
+                    metadata_sources=sources,
                 ),
                 blocks=blocks,
                 warnings=warnings,
@@ -126,3 +138,27 @@ class PyMuPDFParser(PaperParser):
                 current_heading = block.block_id
             elif block.block_type == "paragraph":
                 block.parent_block_id = current_heading
+
+    @staticmethod
+    def _extract_year(metadata: dict[str, str], blocks: list[PaperBlock]) -> int | None:
+        current_year = datetime.now(UTC).year
+        allowed_min, allowed_max = 1900, current_year + 1
+        candidates: set[int] = set()
+        for key in ("creationDate", "modDate"):
+            # PDF creation/modification dates are deliberately ignored.
+            metadata.pop(key, None)
+        for key in ("subject", "keywords"):
+            for match in re.findall(r"\b(19\d{2}|20\d{2})\b", metadata.get(key, "")):
+                year = int(match)
+                if allowed_min <= year <= allowed_max:
+                    candidates.add(year)
+        first_page_text = "\n".join(
+            block.text
+            for block in blocks
+            if block.page_start == 1 and block.block_type != "reference"
+        )[:4000]
+        for match in re.findall(r"\b(19\d{2}|20\d{2})\b", first_page_text):
+            year = int(match)
+            if allowed_min <= year <= allowed_max:
+                candidates.add(year)
+        return candidates.pop() if len(candidates) == 1 else None

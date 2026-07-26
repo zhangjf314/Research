@@ -85,6 +85,8 @@ services:
         condition: service_healthy
     volumes:
       - app_data:/app/data
+      - ./data/evaluation:/app/data/evaluation
+      - ./docs:/app/docs
       - ./artifacts:/app/artifacts
     expose:
       - "8000"

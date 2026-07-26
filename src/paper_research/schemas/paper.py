@@ -30,6 +30,15 @@ class PaperRead(PaperCreate):
     updated_at: datetime
 
 
+class PaperMetadataUpdate(BaseModel):
+    title: str | None = Field(default=None, min_length=1, max_length=1000)
+    authors: list[str] | None = None
+    year: int | None = Field(default=None, ge=1900, le=2100)
+    venue: str | None = None
+    doi: str | None = None
+    arxiv_id: str | None = None
+
+
 class PaperUploadResponse(BaseModel):
     paper: PaperRead
     duplicate: bool

@@ -23,7 +23,9 @@ class PaperImportService:
             filename=f"{candidate.arxiv_id or candidate.source_id}.pdf",
             file=BytesIO(payload),
         )
-        result = UploadService(self.session, self.settings).ingest(upload)
+        result = UploadService(self.session, self.settings).ingest(
+            upload, source_type="external_search"
+        )
         paper = result.paper
         paper.title = candidate.title
         paper.authors = candidate.authors

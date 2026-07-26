@@ -13,8 +13,13 @@ class BoundingBox(BaseModel):
 class PaperMetadata(BaseModel):
     title: str | None = None
     authors: list[str] = Field(default_factory=list)
+    year: int | None = None
+    venue: str | None = None
+    doi: str | None = None
+    arxiv_id: str | None = None
     page_count: int
     pdf_metadata: dict[str, str] = Field(default_factory=dict)
+    metadata_sources: dict[str, str] = Field(default_factory=dict)
 
 
 class PaperBlock(BaseModel):

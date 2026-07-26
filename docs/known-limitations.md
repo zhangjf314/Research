@@ -27,6 +27,17 @@
   `STRONG_GROUNDING_CLAIM_ALLOWED=false`, and the internal-development
   evaluation boundary remain unchanged.
 
+## Library and import boundary
+
+- Local PDFs can be uploaded from the Library page or `POST /api/v1/papers/upload`.
+- External imports are limited to arXiv/Semantic Scholar search-provider
+  candidates with downloadable PDFs.
+- Arbitrary user-supplied PDF URLs are intentionally unsupported to avoid
+  expanding the SSRF and untrusted-download surface.
+- OCR and stability audit fixtures are hidden from normal Library listings and
+  must be cleaned from PostgreSQL, Qdrant, raw PDFs, and parsed artifacts rather
+  than only hidden in the UI.
+
 ## Stage 13.40 initial portfolio release boundary
 
 - The initial `v1.0.0-portfolio` tag was released and remains immutable. It does

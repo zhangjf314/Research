@@ -18,8 +18,29 @@ class PaperRepository:
         self.session.refresh(paper)
         return paper
 
-    def list(self, *, limit: int = 50, offset: int = 0) -> list[Paper]:
-        statement = select(Paper).order_by(Paper.created_at.desc()).limit(limit).offset(offset)
+    def list(
+        self,
+        *,
+        limit: int = 50,
+        offset: int = 0,
+        include_fixtures: bool = False,
+        source_type: str | None = None,
+        query: str | None = None,
+        missing_metadata: bool = False,
+        not_indexed: bool = False,
+    ) -> list[Paper]:
+        statement = select(Paper)
+        if not include_fixtures:
+            statement = statement.where(Paper.source_type != "audit_fixture")
+        if source_type:
+            statement = statement.where(Paper.source_type == source_type)
+        if query:
+            statement = statement.where(Paper.title.ilike(f"%{query}%"))
+        if missing_metadata:
+            statement = statement.where((Paper.year.is_(None)) | (Paper.authors == []))
+        if not_indexed:
+            statement = statement.where(Paper.index_status != "READY")
+        statement = statement.order_by(Paper.created_at.desc()).limit(limit).offset(offset)
         return list(self.session.scalars(statement))
 
     def get(self, paper_id: uuid.UUID) -> Paper | None:

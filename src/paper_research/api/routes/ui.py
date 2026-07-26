@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 import html
 import json
 import uuid
@@ -13,6 +14,7 @@ from paper_research.analysis.types import PaperAnalysis
 from paper_research.api.markdown import render_markdown
 from paper_research.config import get_settings
 from paper_research.db import get_db
+from paper_research.evaluation.report_catalog import REPORTS, report_by_id
 from paper_research.repositories.paper import PaperRepository
 
 router = APIRouter()
@@ -90,16 +92,105 @@ def dashboard() -> HTMLResponse:
 
 @router.get("/library", response_class=HTMLResponse)
 def library_page(db: DbSession) -> HTMLResponse:
-    rows = "".join(
-        f"<tr><td><a href='/api/v1/ui/papers/{paper.id}'>{html.escape(paper.title)}</a></td>"
-        f"<td>{paper.year or ''}</td><td>{paper.parse_status.value}</td>"
-        f"<td>{paper.index_status}</td></tr>"
-        for paper in PaperRepository(db).list(limit=100)
-    )
     return page(
         "Paper Library",
-        "<h1>Paper Library</h1><table><thead><tr><th>Title</th><th>Year</th>"
-        f"<th>Parse</th><th>Index</th></tr></thead><tbody>{rows}</tbody></table>",
+        """
+        <h1>Paper Library</h1>
+        <section class='card'>
+          <h2>Upload local PDF</h2>
+          <input id='paper-file' type='file' accept='application/pdf'>
+          <label><input id='auto-index' type='checkbox' checked> Auto-index after upload</label>
+          <button id='upload-paper' type='button' onclick='uploadPaper()'>Upload PDF</button>
+          <p id='upload-status' class='muted'></p>
+        </section>
+        <section class='card'>
+          <select id='paper-filter' onchange='loadLibrary()'>
+            <option value='all'>All</option><option value='ready'>Ready</option>
+            <option value='not-indexed'>Not indexed</option>
+            <option value='missing-metadata'>Missing metadata</option>
+            <option value='upload'>Upload</option><option value='external_search'>External search</option>
+          </select>
+          <input id='paper-query' placeholder='Search title' oninput='loadLibrary()'>
+          <button type='button' onclick='loadLibrary()'>Refresh</button>
+        </section>
+        <table><thead><tr><th>Title</th><th>Authors</th><th>Year</th><th>Source</th>
+        <th>Parse</th><th>Index</th><th>Created</th><th>Metadata</th><th>Actions</th>
+        </tr></thead><tbody id='library-rows'></tbody></table>
+        <section class='card' id='metadata-editor' hidden>
+          <h2>Edit Metadata</h2><input id='edit-id' hidden>
+          <label>Title <input id='edit-title' size='70'></label><br>
+          <label>Authors <input id='edit-authors' size='70' placeholder='Semicolon separated'></label><br>
+          <label>Year <input id='edit-year' type='number' min='1900' max='2100'></label><br>
+          <label>Venue <input id='edit-venue' size='50'></label><br>
+          <label>DOI <input id='edit-doi' size='50'></label><br>
+          <label>arXiv ID <input id='edit-arxiv' size='30'></label><br>
+          <button type='button' onclick='saveMetadata()'>Save</button>
+          <button type='button' onclick='hideMetadataEditor()'>Cancel</button>
+          <p id='edit-status' class='muted'></p>
+        </section>
+        <script>
+        const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        async function loadLibrary(){
+          const filter=document.getElementById('paper-filter').value;
+          const params=new URLSearchParams({limit:'100'});
+          const q=document.getElementById('paper-query').value.trim();
+          if(q) params.set('q', q);
+          if(filter==='not-indexed') params.set('not_indexed','true');
+          if(filter==='missing-metadata') params.set('missing_metadata','true');
+          if(filter==='upload'||filter==='external_search') params.set('source_type', filter);
+          const response=await fetch('/api/v1/papers?'+params.toString());
+          const papers=await response.json();
+          const rows=(papers||[]).filter(p=>filter!=='ready'||p.index_status==='READY').map(p=>{
+            const authors=(p.authors||[]).join('; ');
+            const meta=(p.year?'':'Missing year')+(authors?'':' Missing authors');
+            const payload=esc(JSON.stringify(p));
+            return `<tr><td>${esc(p.title)}</td><td>${esc(authors||'—')}</td><td>${esc(p.year||'Missing year')}</td>`+
+              `<td>${esc(p.source_type)}</td><td>${esc(p.parse_status)}</td><td>${esc(p.index_status)}</td>`+
+              `<td>${esc(p.created_at)}</td><td>${esc(meta||'OK')}</td>`+
+              `<td><a href='/api/v1/ui/papers/${esc(p.id)}'>Open</a> <a href='/api/v1/papers/${esc(p.id)}/pdf'>Open PDF</a> `+
+              `<button type='button' data-paper='${payload}' onclick='editMetadata(this.dataset.paper)'>Edit Metadata</button> `+
+              `<button type='button' onclick='indexPaper("${esc(p.id)}")'>Index/Reindex</button></td></tr>`;
+          }).join('');
+          document.getElementById('library-rows').innerHTML=rows||'<tr><td colspan="9">No papers match the current filter.</td></tr>';
+        }
+        async function uploadPaper(){
+          const file=document.getElementById('paper-file').files[0]; const status=document.getElementById('upload-status');
+          if(!file){status.textContent='Choose a PDF first.';return}
+          const form=new FormData(); form.append('file', file, file.name); status.textContent='Uploading...';
+          try{const response=await fetch('/api/v1/papers/upload',{method:'POST',body:form}); const data=await response.json();
+            if(!response.ok) throw new Error(data.detail||`HTTP ${response.status}`);
+            status.textContent=`Uploaded ${file.name}; duplicate=${data.duplicate}; paper=${data.paper.id}; parse=${data.paper.parse_status}`;
+            if(document.getElementById('auto-index').checked && !data.duplicate){await indexPaper(data.paper.id);}
+            await loadLibrary();
+          }catch(error){status.textContent='Upload failed: '+(error.message||error);}
+        }
+        async function indexPaper(id){
+          const response=await fetch(`/api/v1/papers/${id}/index`,{method:'POST'});
+          if(!response.ok){const data=await response.json(); alert(data.detail||`Index failed ${response.status}`);}
+          await loadLibrary();
+        }
+        function editMetadata(serialized){
+          const p=JSON.parse(serialized); document.getElementById('metadata-editor').hidden=false;
+          document.getElementById('edit-id').value=p.id; document.getElementById('edit-title').value=p.title||'';
+          document.getElementById('edit-authors').value=(p.authors||[]).join('; ');
+          document.getElementById('edit-year').value=p.year||''; document.getElementById('edit-venue').value=p.venue||'';
+          document.getElementById('edit-doi').value=p.doi||''; document.getElementById('edit-arxiv').value=p.arxiv_id||'';
+        }
+        function hideMetadataEditor(){document.getElementById('metadata-editor').hidden=true;}
+        async function saveMetadata(){
+          const id=document.getElementById('edit-id').value; const payload={};
+          const title=document.getElementById('edit-title').value.trim(); if(title) payload.title=title;
+          payload.authors=document.getElementById('edit-authors').value.split(';').map(x=>x.trim()).filter(Boolean);
+          const year=document.getElementById('edit-year').value; payload.year=year?Number(year):null;
+          payload.venue=document.getElementById('edit-venue').value.trim()||null;
+          payload.doi=document.getElementById('edit-doi').value.trim()||null;
+          payload.arxiv_id=document.getElementById('edit-arxiv').value.trim()||null;
+          const response=await fetch(`/api/v1/papers/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+          const data=await response.json(); document.getElementById('edit-status').textContent=response.ok?'Saved':(data.detail||`HTTP ${response.status}`);
+          if(response.ok){hideMetadataEditor(); await loadLibrary();}
+        }
+        loadLibrary();
+        </script>""",
     )
 
 
@@ -109,7 +200,7 @@ def search_page() -> HTMLResponse:
         "Paper Search",
         """
         <h1>External Paper Search</h1>
-        <div class='card'><input id='query' size='60' value='retrieval augmented generation'>
+        <div class='card'><input id='query' size='60' placeholder='Search arXiv and Semantic Scholar'>
         <button onclick='searchPapers()'>Search</button></div><div id='results'></div>
         <script>
         const esc=s=>String(s??'').replace(/[&<>"']/g,c=>
@@ -122,8 +213,22 @@ def search_page() -> HTMLResponse:
           const d=await r.json(); const items=d.candidates||[];
           document.getElementById('results').innerHTML=items.map(x=>
             `<section class="card"><h2>${esc(x.title)}</h2><p>${esc(x.abstract)}</p>`+
-            `<p class="muted">${esc(x.source)} | ${esc(x.year)} | score `+
-            `${esc(x.relevance_score)}</p></section>`).join('');
+            `<p class="muted">${esc((x.authors||[]).join('; '))}</p>`+
+            `<p>${esc(x.year)} | ${esc(x.venue)} | ${esc(x.source)} | `+
+            `${esc(x.doi||x.arxiv_id||'no identifier')}</p>`+
+            `<p>Open Access: ${esc(x.open_access)} | PDF: ${x.pdf_url?'available':'No downloadable PDF'}</p>`+
+            (x.pdf_url?`<button onclick='importPaper(this.dataset.candidate,false)' data-candidate='${esc(JSON.stringify(x))}'>Import PDF</button> `+
+            `<button onclick='importPaper(this.dataset.candidate,true)' data-candidate='${esc(JSON.stringify(x))}'>Import and Index</button>`:
+            `<button disabled>No downloadable PDF</button>`)+`</section>`).join('');
+        }
+        async function importPaper(serialized, autoIndex){
+          const candidate=JSON.parse(serialized);
+          const response=await fetch('/api/v1/search/import',{method:'POST',
+            headers:{'Content-Type':'application/json'},body:JSON.stringify(candidate)});
+          const paper=await response.json();
+          if(!response.ok){alert(paper.detail||`Import failed ${response.status}`);return;}
+          if(autoIndex){await fetch(`/api/v1/papers/${paper.id}/index`,{method:'POST'});}
+          alert(`Imported ${paper.title}`);
         }</script>""",
     )
 
@@ -266,7 +371,7 @@ def paper_detail_page(paper_id: uuid.UUID, db: DbSession) -> HTMLResponse:
     return page(paper.title, body)
 
 
-@router.get("/evaluation", response_class=HTMLResponse)
+@router.get("/evaluation-legacy", response_class=HTMLResponse)
 def evaluation_page() -> HTMLResponse:
     reports = [
         ("Release Candidate Audit", Path("docs/release-candidate-audit.md")),
@@ -288,6 +393,50 @@ def evaluation_page() -> HTMLResponse:
     )
 
 
+@router.get("/evaluation", response_class=HTMLResponse)
+def evaluation_catalog_page() -> HTMLResponse:
+    cards = []
+    for report in REPORTS:
+        exists = report.markdown_path.exists()
+        updated = report.markdown_path.stat().st_mtime if exists else 0
+        cards.append(
+            f"<section class='card'><h2>{html.escape(report.title)}</h2>"
+            f"<p><strong>{html.escape(report.category)}</strong> | "
+            f"{'Available' if exists else 'Missing'} | updated {updated:.0f}</p>"
+            f"<p>{html.escape(report.description)}</p>"
+            f"<a href='/api/v1/ui/evaluation/{report.report_id}'>Open report</a></section>"
+        )
+    return page(
+        "Evaluation",
+        "<h1>基础评测中心 / Evaluation Report Catalog</h1>"
+        "<p class='muted'>检索冒烟评测 is retained as legacy wording; "
+        "current reports are loaded from the public-safe catalog.</p>"
+        + "".join(cards),
+    )
+
+
+@router.get("/evaluation/{report_id}", response_class=HTMLResponse)
+def evaluation_report_page(report_id: str) -> HTMLResponse:
+    report = report_by_id(report_id)
+    if report is None:
+        raise HTTPException(status_code=404, detail="report not registered")
+    if not report.markdown_path.exists():
+        return page(
+            report.title,
+            f"<h1>{html.escape(report.title)}</h1><section class='card'>"
+            f"<p>Missing report: {html.escape(str(report.markdown_path))}</p></section>",
+        )
+    markdown = report.markdown_path.read_text(encoding="utf-8")
+    body = (
+        f"<h1>{html.escape(report.title)}</h1><p class='muted'>{html.escape(report.category)}</p>"
+        f"<article class='card markdown-body'>{render_markdown(markdown)}</article>"
+    )
+    if report.summary_json_path and report.summary_json_path.exists():
+        raw = html.escape(report.summary_json_path.read_text(encoding="utf-8")[:50_000])
+        body += f"<section class='card'><h2>Raw summary</h2><pre>{raw}</pre></section>"
+    return page(report.title, body)
+
+
 @router.get("/gold-review", response_class=HTMLResponse)
 def gold_review_page() -> HTMLResponse:
     return page(
@@ -296,11 +445,18 @@ def gold_review_page() -> HTMLResponse:
         <h1>Human Gold Review Workbench</h1>
         <div class='card'>
           <label>Reviewer <input id='reviewer'></label>
+          <label>Status <select id='status-filter' onchange='load()'>
+            <option value=''>all</option><option value='approved'>approved</option>
+            <option value='pending'>pending</option><option value='invalid'>invalid</option>
+          </select></label>
+          <label>Question ID <input id='question-filter' placeholder='q001'></label>
+          <button onclick='load()'>Load</button>
           <button onclick='previous()'>Previous</button>
           <button onclick='next()'>Next</button>
         </div>
-        <section class='card'><pre id='item'>Loading...</pre></section>
-        <section class='card'><h2>Evidence blocks</h2><pre id='evidence'></pre></section>
+        <p id='review-state' class='muted'>Loading</p>
+        <section class='card' id='item'></section>
+        <section class='card'><h2>Evidence blocks</h2><div id='evidence'></div></section>
         <section class='card'>
           <textarea id='notes' rows='4' style='width:95%' placeholder='Review notes'></textarea><br>
           <button onclick="act('approve')">Approve</button>
@@ -311,25 +467,71 @@ def gold_review_page() -> HTMLResponse:
         </section>
         <script>
         let items=[], index=0;
+        const state=document.getElementById('review-state');
+        const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
         async function load(){
-          const response=await fetch('/api/v1/evaluation/review?limit=100');
-          items=(await response.json()).items; await show();
+          state.textContent='Loading';
+          try{
+            const params=new URLSearchParams({limit:'100'});
+            const status=document.getElementById('status-filter').value;
+            if(status) params.set('status', status);
+            const response=await fetch('/api/v1/evaluation/review?'+params.toString());
+            if(!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data=await response.json(); items=data.items||[];
+            const q=document.getElementById('question-filter').value.trim();
+            if(q) items=items.filter(x=>String(x.question_id).includes(q));
+            index=0;
+            if(!items.length){
+              document.getElementById('item').textContent='No review items match the current filter.';
+              document.getElementById('evidence').textContent='';
+              state.textContent='Empty';
+              return;
+            }
+            await show();
+          }catch(error){
+            state.textContent='Failed: '+(error.message||error)+'. Retry with the Load button.';
+            document.getElementById('item').textContent='加载 Gold Review 失败';
+          }
         }
         async function show(){
-          if(!items.length)return;
-          const response=await fetch('/api/v1/evaluation/review/'+items[index].question_id);
-          const data=await response.json();
-          document.getElementById('item').textContent=JSON.stringify(data.item,null,2);
-          document.getElementById('evidence').textContent=JSON.stringify(data.evidence,null,2);
+          if(!items.length){state.textContent='Empty';return;}
+          state.textContent=`Loading item ${index+1}/${items.length}`;
+          try{
+            const response=await fetch('/api/v1/evaluation/review/'+items[index].question_id);
+            if(!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data=await response.json(); const item=data.item||{};
+            const claims=(item.required_claims||[]).map(x=>`<li>${esc(x)}</li>`).join('');
+            document.getElementById('item').innerHTML=
+              `<h2>${esc(item.question_id)} · ${esc(item.category)} · ${esc(item.difficulty)}</h2>`+
+              `<p><strong>Question:</strong> ${esc(item.question)}</p>`+
+              `<p><strong>Answerable:</strong> ${esc(item.answerable)}</p>`+
+              `<p><strong>Gold Answer:</strong> ${esc(item.gold_answer)}</p>`+
+              `<p><strong>Gold Papers:</strong> ${esc((item.gold_paper_ids||[]).join(', '))}</p>`+
+              `<p><strong>Gold Pages:</strong> ${esc((item.gold_pages||[]).join(', '))}</p>`+
+              `<p><strong>Review Status:</strong> ${esc(item.review_status)} · ${esc(item.reviewer)} · ${esc(item.reviewed_at)}</p>`+
+              `<p><strong>Review Notes:</strong> ${esc(item.review_notes)}</p>`+
+              `<h3>Required Claims</h3><ul>${claims}</ul>`;
+            const warningHtml=(data.warnings||[]).map(w=>`<p class='muted'>${esc(w.code)}: ${esc(w.paper_id)}</p>`).join('');
+            const evidenceHtml=(data.evidence||[]).map(b=>
+              `<section class='card'><p><strong>${esc(b.paper_id)}</strong> page ${esc(b.page_start)} block ${esc(b.block_id)}</p>`+
+              `<p>${esc(b.section_path||'')}</p><pre>${esc(b.text)}</pre></section>`).join('');
+            document.getElementById('evidence').innerHTML=evidenceHtml||warningHtml||'<p class="muted">No evidence blocks returned.</p>';
+            state.textContent=`Loaded ${index+1}/${items.length}`;
+          }catch(error){
+            state.textContent='Failed: '+(error.message||error)+'. Retry with the Load button.';
+          }
         }
         function previous(){index=Math.max(0,index-1);show()}
         function next(){index=Math.min(items.length-1,index+1);show()}
         async function act(action){
           const reviewer=document.getElementById('reviewer').value;
           if(!reviewer){alert('Reviewer is required');return}
-          await fetch('/api/v1/evaluation/review/'+items[index].question_id,{method:'POST',
+          state.textContent='Saving';
+          const response=await fetch('/api/v1/evaluation/review/'+items[index].question_id,{method:'POST',
             headers:{'Content-Type':'application/json'},body:JSON.stringify({action,reviewer,
             review_notes:document.getElementById('notes').value})});
+          if(!response.ok){state.textContent=`Save failed: HTTP ${response.status}`; return;}
+          state.textContent='Saved';
           await load();
         }
         load();

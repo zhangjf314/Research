@@ -10,9 +10,15 @@ from pathlib import Path
 class GoldReviewStore:
     _lock = threading.Lock()
 
-    def __init__(self, dataset_path: Path, project_root: Path = Path(".")) -> None:
+    def __init__(
+        self,
+        dataset_path: Path,
+        project_root: Path,
+        parsed_papers_dir: Path | None = None,
+    ) -> None:
         self.dataset_path = dataset_path
         self.project_root = project_root
+        self.parsed_papers_dir = parsed_papers_dir or project_root / "data" / "parsed"
 
     def list(self) -> list[dict]:
         return [
@@ -25,24 +31,40 @@ class GoldReviewStore:
         return next((item for item in self.list() if item["question_id"] == question_id), None)
 
     def evidence(self, item: dict) -> list[dict]:
+        return self.evidence_with_warnings(item)["evidence"]
+
+    def evidence_with_warnings(self, item: dict) -> dict:
         evidence = []
+        warnings = []
         wanted = set(item.get("gold_block_ids") or [])
         for paper_id in item.get("gold_paper_ids") or []:
-            path = (
-                self.project_root
-                / "data"
-                / "reports"
-                / "parsing-audit"
-                / paper_id
-                / "paper_blocks.jsonl"
-            )
+            path = self._blocks_path(str(paper_id))
             if not path.exists():
+                warnings.append({"code": "EVIDENCE_NOT_FOUND", "paper_id": str(paper_id)})
                 continue
             for line in path.read_text(encoding="utf-8").splitlines():
                 block = json.loads(line)
                 if not wanted or block["block_id"] in wanted:
                     evidence.append({"paper_id": paper_id, **block})
-        return evidence
+        return {"evidence": evidence, "warnings": warnings}
+
+    def _blocks_path(self, paper_id: str) -> Path:
+        uuid_like = len(paper_id) == 36 and paper_id.count("-") == 4
+        if uuid_like:
+            parsed = self.parsed_papers_dir / paper_id / "paper_blocks.jsonl"
+            if parsed.exists():
+                return parsed
+        legacy = (
+            self.project_root
+            / "data"
+            / "reports"
+            / "parsing-audit"
+            / paper_id
+            / "paper_blocks.jsonl"
+        )
+        if legacy.exists():
+            return legacy
+        return self.parsed_papers_dir / paper_id / "paper_blocks.jsonl"
 
     def review(
         self,

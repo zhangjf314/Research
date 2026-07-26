@@ -41,3 +41,26 @@ Invoke-RestMethod http://localhost/api/v1/capabilities
 ```
 
 Do not include API keys in requests, logs, screenshots, or committed files.
+
+## Search provider import
+
+```powershell
+$search = Invoke-RestMethod `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body (@{ query = "retrieval augmented generation"; limit = 5 } | ConvertTo-Json) `
+  "http://localhost/api/v1/search/papers"
+
+$candidate = $search.candidates |
+  Where-Object { $_.pdf_url } |
+  Select-Object -First 1
+
+$paper = Invoke-RestMethod `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body ($candidate | ConvertTo-Json -Depth 8) `
+  "http://localhost/api/v1/search/import"
+```
+
+The API does not accept arbitrary external PDF URLs. Import candidates must come
+from the configured search providers.

@@ -1,9 +1,8 @@
-from pathlib import Path
-
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
+from paper_research.config import get_settings
 from paper_research.evaluation.review_store import GoldReviewStore
 
 router = APIRouter()
@@ -17,7 +16,13 @@ class ReviewAction(BaseModel):
 
 
 def store() -> GoldReviewStore:
-    return GoldReviewStore(Path("data/evaluation/gold-set-v1.jsonl"))
+    settings = get_settings()
+    project_root = settings.data_dir.parent.resolve()
+    return GoldReviewStore(
+        (settings.data_dir / "evaluation" / "gold-set-v1.jsonl").resolve(),
+        project_root=project_root,
+        parsed_papers_dir=settings.parsed_papers_dir.resolve(),
+    )
 
 
 @router.get("/review")
@@ -36,7 +41,7 @@ def list_review_items(
 def review_pdf(paper_id: str) -> FileResponse:
     if not paper_id.replace(".", "").isdigit():
         raise HTTPException(status_code=404, detail="PDF not found")
-    path = Path("data/raw/audit") / f"{paper_id}.pdf"
+    path = get_settings().data_dir / "raw" / "audit" / f"{paper_id}.pdf"
     if not path.is_file():
         raise HTTPException(status_code=404, detail="PDF not found")
     return FileResponse(path, media_type="application/pdf", filename=path.name)
@@ -48,7 +53,8 @@ def get_review_item(question_id: str) -> dict:
     item = review_store.get(question_id)
     if item is None:
         raise HTTPException(status_code=404, detail="review item not found")
-    return {"item": item, "evidence": review_store.evidence(item)}
+    evidence = review_store.evidence_with_warnings(item)
+    return {"item": item, **evidence}
 
 
 @router.post("/review/{question_id}")

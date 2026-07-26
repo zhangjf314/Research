@@ -37,7 +37,9 @@ class UploadService:
         self.parser_router = parser_router or ParserRouter(settings=settings)
         self.repository = PaperRepository(session)
 
-    def ingest(self, upload: UploadFile) -> UploadResult:
+    def ingest(self, upload: UploadFile, *, source_type: str = "upload") -> UploadResult:
+        if source_type not in {"upload", "external_search", "audit_fixture", "demo"}:
+            raise UploadValidationError(f"unsupported source_type: {source_type}")
         self._validate_filename(upload.filename)
         raw_dir = self.settings.raw_papers_dir
         raw_dir.mkdir(parents=True, exist_ok=True)
@@ -57,6 +59,7 @@ class UploadService:
                 title=Path(upload.filename or "paper.pdf").stem,
                 authors=[],
                 keywords=[],
+                source_type=source_type,
                 file_hash=file_hash,
                 pdf_path=str(final_path),
                 parse_status=PaperStatus.parsing,
@@ -85,6 +88,10 @@ class UploadService:
                 paths["first_page"] = page_assets[0]
                 paper.title = parsed.metadata.title or paper.title
                 paper.authors = parsed.metadata.authors
+                paper.year = parsed.metadata.year
+                paper.venue = parsed.metadata.venue
+                paper.doi = parsed.metadata.doi
+                paper.arxiv_id = parsed.metadata.arxiv_id
                 paper.parse_status = PaperStatus.parsed
                 self.repository.save(paper)
                 return UploadResult(paper, False, paths)
