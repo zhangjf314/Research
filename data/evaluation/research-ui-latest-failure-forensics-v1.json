@@ -1,0 +1,71 @@
+{
+  "audit_version": "research-ui-latest-failure-forensics-v1",
+  "audited_at": "2026-07-26",
+  "task_id": "c88e94e6-a8b1-41d5-8c6f-b75cc90778db",
+  "observed_endpoint": "POST /api/v1/research/deep",
+  "http_status": 200,
+  "graph_status": "FAILED_PROVIDER_SCHEMA",
+  "stop_reason": "research synthesis schema validation failed",
+  "node_history": [
+    "understand",
+    "plan",
+    "local_search",
+    "assess",
+    "synthesize_llm",
+    "render_report",
+    "validate_report_quality"
+  ],
+  "evidence_gaps": [],
+  "global_evidence_count": 16,
+  "request_attempt_count": 2,
+  "provider_completed_request_count": 2,
+  "usage_record_count": 2,
+  "model_usage": {
+    "input_tokens": 9671,
+    "output_tokens": 3582,
+    "total_tokens": 13253,
+    "usage_source": "provider_reported",
+    "estimated_cost_usd": 0.0023569000000000003
+  },
+  "active_reserved_tokens": 0,
+  "report_length": 0,
+  "report_quality": null,
+  "container_report_json": "/app/data/reports/research/c88e94e6-a8b1-41d5-8c6f-b75cc90778db.json",
+  "container_report_markdown": "/app/data/reports/research/c88e94e6-a8b1-41d5-8c6f-b75cc90778db.md",
+  "host_replay_raw_response_dir": ".runtime/research-synthesis-provider/c88e94e6-a8b1-41d5-8c6f-b75cc90778db",
+  "replay_result": {
+    "attempt_1": {
+      "json_parse": "PASSED",
+      "schema_validation": "FAILED",
+      "failure_types": [
+        "CITATION_NOT_ALLOWED_FOR_SECTION"
+      ],
+      "offending_evidence_ids": [
+        "E02",
+        "E07",
+        "E15",
+        "E16"
+      ]
+    },
+    "attempt_2": {
+      "json_parse": "PASSED",
+      "schema_validation": "FAILED",
+      "failure_types": [
+        "CITATION_NOT_ALLOWED_FOR_SECTION"
+      ],
+      "offending_evidence_ids": [
+        "E02"
+      ]
+    }
+  },
+  "root_cause": "The live provider returned syntactically valid JSON, but section claims cited evidence IDs outside their section-scoped citation allowlists. The second full retry reduced but did not eliminate the allowlist violation.",
+  "ui_contract_issue": "The API returned HTTP 200 for a terminal failed task and wrote a zero-byte Markdown report. The UI treated response.ok plus an empty report as an ambiguous completed-without-report state instead of displaying FAILED_PROVIDER_SCHEMA.",
+  "fix_summary": [
+    "API response now exposes succeeded, terminal, error_code, and report_available.",
+    "Failed tasks no longer write blank Markdown report files.",
+    "Research UI treats status, succeeded, and report_available as the completion contract.",
+    "Provider retry path now supports component-level section repair for invalid sections only."
+  ],
+  "llm_called_by_hotfix": false,
+  "deep_research_rerun_by_hotfix": false
+}

@@ -276,3 +276,22 @@ def test_graph_fails_when_llm_synthesis_creates_duplicate_sections() -> None:
     assert result["status"] == "FAILED_REPORT_QUALITY"
     assert result["report_quality"]["duplicate_reference_count"] == 0
     assert result["report_quality"]["cross_section_similarity"] >= 0.80
+
+
+def test_research_gap_objects_render_without_python_dict_literal() -> None:
+    rendered = DeepResearchGraph._format_research_gap(
+        {
+            "text": "Need stronger deployment evidence.",
+            "citation_ids": ["E01"],
+            "is_inference": False,
+        }
+    )
+    assert rendered == "Need stronger deployment evidence. E01"
+    quality = evaluate_report_quality(
+        "- {'text': 'Need stronger deployment evidence.', 'citation_ids': ['E01']}",
+        sections={"background": "a", "methods": "b"},
+        evidence_catalog={"E01": {"text": "Evidence text long enough for quality checks." * 5}},
+        section_evidence_ids={"background": ["E01"]},
+    )
+    assert quality.passed is False
+    assert "python_dict_literal_leakage" in quality.failures

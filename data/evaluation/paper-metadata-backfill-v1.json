@@ -1,0 +1,1721 @@
+{
+  "schema_version": "paper-metadata-backfill-v1",
+  "dry_run": false,
+  "apply": true,
+  "total_papers": 33,
+  "before": {
+    "COMPLETE": 27,
+    "MISSING_AUTHORS_AND_YEAR": 6
+  },
+  "after": {
+    "COMPLETE": 28,
+    "MISSING_AUTHORS_AND_YEAR": 5
+  },
+  "limit": 100,
+  "external_timeout_seconds": 5.0,
+  "external_retries": 1,
+  "records": [
+    {
+      "paper_id": "e0b2608d-2b70-4a69-926b-b879d90cc070",
+      "before": {
+        "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
+        "authors": [
+          "Carlo Merola",
+          "Jaspinder Singh"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2504.19754",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "b20eb569-30a9-435c-a7ca-cda0b9dc44d9",
+      "before": {
+        "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
+        "authors": [
+          "Daeyong Kwon",
+          "SeungHeon Doh",
+          "Juhan Nam"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2507.23334",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "af71246d-2541-4866-aa3a-0cba1a4c0eca",
+      "before": {
+        "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
+        "authors": [
+          "Ali Naseh",
+          "Yuefeng Peng",
+          "Anshuman Suri",
+          "Harsh Chaudhari",
+          "Alina Oprea",
+          "Amir Houmansadr"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2502.00306",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "7687988e-0da8-4155-9c02-0bc36da9eda4",
+      "before": {
+        "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+        "authors": [
+          "Mohammad Aghajani Asl",
+          "Majid Asgari-Bidhendi",
+          "Behrooz Minaei-Bidgoli"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2510.22344",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "4016fde0-2999-4e02-a07a-45882432e0c7",
+      "before": {
+        "title": "How Do LLMs Cite? A Mechanistic Interpretation of Attribution in Retrieval-Augmented Generation",
+        "authors": [
+          "Ian van Dort",
+          "Maria Heuss"
+        ],
+        "year": 2026,
+        "venue": "Advances in Information Retrieval, ECIR 2026. Lecture Notes in Computer Science, vol. 16485, pp. 458-473. Springer, Cham (2026)",
+        "doi": "10.1007/978-3-032-21324-2_35",
+        "arxiv_id": "2606.28358",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "bb1bf7d1-03ca-492b-b7d1-740872e49a36",
+      "before": {
+        "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
+        "authors": [
+          "Xingliang Hou",
+          "Yuyan Liu",
+          "Qi Sun",
+          "haoxiu wang",
+          "Hao Hu",
+          "Shaoyi Du",
+          "Zhiqiang Tian"
+        ],
+        "year": 2026,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2602.07525",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "2c63d96e-7ec1-452f-a363-85a5f3906021",
+      "before": {
+        "title": "THaMES: An End-to-End Tool for Hallucination Mitigation and Evaluation in Large Language Models",
+        "authors": [
+          "Mengfei Liang",
+          "Archish Arun",
+          "Zekun Wu",
+          "Cristian Munoz",
+          "Jonathan Lutch",
+          "Emre Kazim",
+          "Adriano Koshiyama",
+          "Philip Treleaven"
+        ],
+        "year": 2024,
+        "venue": "NeurIPS Workshop on Socially Responsible Language Modelling Research 2024",
+        "doi": null,
+        "arxiv_id": "2409.11353",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "560749aa-79ed-4194-b914-dbaa1a66c2f3",
+      "before": {
+        "title": "VERA: Validation and Evaluation of Retrieval-Augmented Systems",
+        "authors": [
+          "Tianyu Ding",
+          "Adi Banerjee",
+          "Laurent Mombaerts",
+          "Yunhong Li",
+          "Tarik Borogovac",
+          "Juan Pablo De la Cruz Weinstein"
+        ],
+        "year": 2024,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2409.03759",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "c8237222-df36-412d-8c7f-dd7cacde7434",
+      "before": {
+        "title": "Investigating the Robustness of Retrieval-Augmented Generation at the Query Level",
+        "authors": [
+          "Sezen Perçin",
+          "Xin Su",
+          "Qutub Sha Syed",
+          "Phillip Howard",
+          "Aleksei Kuvshinov",
+          "Leo Schwinn",
+          "Kay-Ulrich Scholl"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2507.06956",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "78a312a3-9911-40d2-9b76-f29b1800d592",
+      "before": {
+        "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
+        "authors": [
+          "Raquib Bin Yousuf",
+          "Shengzhe Xu",
+          "Mandar Sharma",
+          "Andrew Neeser",
+          "Chris Latimer",
+          "Naren Ramakrishnan"
+        ],
+        "year": 2026,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2601.11863",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "57096016-befb-441d-b801-f4754922dc65",
+      "before": {
+        "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+        "authors": [
+          "Shahul Es",
+          "Jithin James",
+          "Luis Espinosa-Anke",
+          "Steven Schockaert"
+        ],
+        "year": 2023,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2309.15217",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "f3e54d1e-5bf8-4681-bc85-08dffe9e3af1",
+      "before": {
+        "title": "PersianRAG: A Retrieval-Augmented Generation System for Persian Language",
+        "authors": [
+          "Hossein Hosseini",
+          "Mohammad Sobhan Zare",
+          "Amir Hossein Mohammadi",
+          "Arefeh Kazemi",
+          "Zahra Zojaji",
+          "Mohammad Ali Nematbakhsh"
+        ],
+        "year": 2024,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2411.02832",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "514ce1f3-1e2a-4008-86ab-b2192c59b517",
+      "before": {
+        "title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use Cases, Requirements, Challenges, and Evaluation",
+        "authors": [
+          "Lorenz Brehme",
+          "Benedikt Dornauer",
+          "Thomas Ströhle",
+          "Maximilian Ehrhart",
+          "Ruth Breu"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": "10.5220/0013739500004000",
+        "arxiv_id": "2508.14066",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "77c96017-773f-4a30-b0cc-05164686c4da",
+      "before": {
+        "title": "LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation",
+        "authors": [
+          "Anu Pradhan",
+          "Alexandra Ortan",
+          "Apurv Verma",
+          "Madhavan Seshadri"
+        ],
+        "year": 2025,
+        "venue": "Proceedings of the 2nd Workshop on Evaluating and Applying Recommender Systems with Large Language Models (EARL), RecSys 2025",
+        "doi": null,
+        "arxiv_id": "2509.12382",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "b4c6ebe7-8901-4470-ae42-4d176e54533c",
+      "before": {
+        "title": "DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models",
+        "authors": [
+          "Weihang Su",
+          "Yichen Tang",
+          "Qingyao Ai",
+          "Zhijing Wu",
+          "Yiqun Liu"
+        ],
+        "year": 2024,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2403.10081",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "e7106539-de6f-4205-b98c-bc4a105c0749",
+      "before": {
+        "title": "Investigating Retrieval-Augmented Generation in Quranic Studies: A Study of 13 Open-Source Large Language Models",
+        "authors": [
+          "Zahra Khalila",
+          "Arbi Haza Nasution",
+          "Winda Monika",
+          "Aytug Onan",
+          "Yohei Murakami",
+          "Yasir Bin Ismail Radi",
+          "Noor Mohammad Osmani"
+        ],
+        "year": 2025,
+        "venue": "International Journal of Advanced Computer Science and Applications(IJACSA), 16(2), 2025",
+        "doi": "10.14569/IJACSA.2025.01602134",
+        "arxiv_id": "2503.16581",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "5bf81004-1c2b-4e6f-9649-f6a8434658f6",
+      "before": {
+        "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+        "authors": [
+          "Yizheng Huang",
+          "Jimmy Huang"
+        ],
+        "year": 2024,
+        "venue": "ACM Computing Surveys, Volume 58, Issue 12, Article No.: 300, Pages 1 - 38, 2026",
+        "doi": "10.1145/3805774",
+        "arxiv_id": "2404.10981",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "1ffef7f0-a179-4dd2-bc46-53e10869de40",
+      "before": {
+        "title": "Automated Evaluation of Retrieval-Augmented Language Models with Task-Specific Exam Generation",
+        "authors": [
+          "Gauthier Guinet",
+          "Behrooz Omidvar-Tehrani",
+          "Anoop Deoras",
+          "Laurent Callot"
+        ],
+        "year": 2024,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2405.13622",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "dedb0565-7aa4-4c84-a16f-ab5289940c17",
+      "before": {
+        "title": "A Systematic Evaluation of Retrieval-Augmented Generation and Language Models for Space Operations",
+        "authors": [
+          "Ruben Belo",
+          "Marta Guimarães",
+          "Cláudia Soares"
+        ],
+        "year": 2026,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2605.27444",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "2e5d1b2e-e518-4209-8ae6-f0c5180dbd1d",
+      "before": {
+        "title": "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey",
+        "authors": [
+          "Aoran Gan",
+          "Hao Yu",
+          "Kai Zhang",
+          "Qi Liu",
+          "Wenyu Yan",
+          "Zhenya Huang",
+          "Shiwei Tong",
+          "Guoping Hu"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2504.14891",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "66bdef13-b19a-447c-b36a-a238232e7635",
+      "before": {
+        "title": "LLaMA: Open and Efﬁcient Foundation Language Models",
+        "authors": [
+          "Hugo Touvron",
+          "Thibaut Lavril",
+          "Gautier Izacard",
+          "X. Martinet",
+          "M. Lachaux",
+          "Timothée Lacroix",
+          "Baptiste Rozière",
+          "Naman Goyal",
+          "Eric Hambro",
+          "Faisal Azhar",
+          "Aur'elien Rodriguez",
+          "Armand Joulin",
+          "Edouard Grave",
+          "Guillaume Lample"
+        ],
+        "year": 2023,
+        "venue": "arXiv.org",
+        "doi": null,
+        "arxiv_id": "2302.13971",
+        "source_type": "upload"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "964144d2-71dd-4011-8b1c-abbbe1fd1081",
+      "before": {
+        "title": "Scaling Instruction-Finetuned Language Models",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "771f758c1b711c2a63ca2439e80ab90751351d721632897a058c0205ba9e2a22",
+        "created_at": "2026-07-13T09:46:10.529868+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "2210.11416v5",
+          "title": "Scaling Instruction-Finetuned Language Models",
+          "authors": [
+            "Hyung Won Chung",
+            "Le Hou",
+            "Shayne Longpre",
+            "Barret Zoph",
+            "Yi Tay",
+            "William Fedus",
+            "Yunxuan Li",
+            "Xuezhi Wang",
+            "Mostafa Dehghani",
+            "Siddhartha Brahma",
+            "Albert Webson",
+            "Shixiang Shane Gu",
+            "Zhuyun Dai",
+            "Mirac Suzgun",
+            "Xinyun Chen",
+            "Aakanksha Chowdhery",
+            "Alex Castro-Ros",
+            "Marie Pellat",
+            "Kevin Robinson",
+            "Dasha Valter",
+            "Sharan Narang",
+            "Gaurav Mishra",
+            "Adams Yu",
+            "Vincent Zhao",
+            "Yanping Huang",
+            "Andrew Dai",
+            "Hongkun Yu",
+            "Slav Petrov",
+            "Ed H. Chi",
+            "Jeff Dean",
+            "Jacob Devlin",
+            "Adam Roberts",
+            "Denny Zhou",
+            "Quoc V. Le",
+            "Jason Wei"
+          ],
+          "year": 2022,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2210.11416"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2307.12114v3",
+          "title": "A Zero-shot and Few-shot Study of Instruction-Finetuned Large Language Models Applied to Clinical and Biomedical Tasks",
+          "authors": [
+            "Yanis Labrak",
+            "Mickael Rouvier",
+            "Richard Dufour"
+          ],
+          "year": 2023,
+          "venue": "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+          "doi": null,
+          "arxiv_id": "2307.12114"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2403.09832v1",
+          "title": "Scaling Behavior of Machine Translation with Large Language Models under Prompt Injection Attacks",
+          "authors": [
+            "Zhifan Sun",
+            "Antonio Valerio Miceli-Barone"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2403.09832"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2308.12219v3",
+          "title": "Diffusion Language Models Can Perform Many Tasks with Scaling and Instruction-Finetuning",
+          "authors": [
+            "Jiasheng Ye",
+            "Zaixiang Zheng",
+            "Yu Bao",
+            "Lihua Qian",
+            "Quanquan Gu"
+          ],
+          "year": 2023,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2308.12219"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2503.21676v2",
+          "title": "How do language models learn facts? Dynamics, curricula and hallucinations",
+          "authors": [
+            "Nicolas Zucchet",
+            "Jörg Bornschein",
+            "Stephanie Chan",
+            "Andrew Lampinen",
+            "Razvan Pascanu",
+            "Soham De"
+          ],
+          "year": 2025,
+          "venue": "Conference on Language Modeling (2025)",
+          "doi": null,
+          "arxiv_id": "2503.21676"
+        },
+        {
+          "source": "semantic_scholar",
+          "source_id": "cdbd4f9b6ab2e2fd1ddf5400d5ed2c18960635d1",
+          "title": "Scaling Instruction-Finetuned Language Models",
+          "authors": [
+            "Hyung Won Chung",
+            "Le Hou",
+            "S. Longpre",
+            "Barret Zoph",
+            "Yi Tay",
+            "W. Fedus",
+            "Eric Li",
+            "Xuezhi Wang",
+            "Mostafa Dehghani",
+            "Siddhartha Brahma",
+            "Albert Webson",
+            "S. Gu",
+            "Zhuyun Dai",
+            "Mirac Suzgun",
+            "Xinyun Chen",
+            "A. Chowdhery",
+            "Dasha Valter",
+            "Sharan Narang",
+            "Gaurav Mishra",
+            "Adams Wei Yu",
+            "Vincent Y. Zhao",
+            "Yanping Huang",
+            "Andrew M. Dai",
+            "Hongkun Yu",
+            "Slav Petrov",
+            "Ed H. Chi",
+            "J. Dean",
+            "Jacob Devlin",
+            "Adam Roberts",
+            "Denny Zhou",
+            "Quoc V. Le",
+            "Jason Wei"
+          ],
+          "year": 2022,
+          "venue": "Journal of machine learning research",
+          "doi": "10.48550/arXiv.2210.11416",
+          "arxiv_id": "2210.11416"
+        },
+        {
+          "source": "semantic_scholar",
+          "source_id": "520711a1e93e6c4221f2a7c97c27a508379e8e37",
+          "title": "Flan-MoE: Scaling Instruction-Finetuned Language Models with Sparse Mixture of Experts",
+          "authors": [
+            "Sheng Shen",
+            "Le Hou",
+            "Yanqi Zhou",
+            "Nan Du",
+            "S. Longpre",
+            "Jason Wei",
+            "Hyung Won Chung",
+            "Barret Zoph",
+            "W. Fedus",
+            "Xinyun Chen",
+            "Tu Vu",
+            "Yuexin Wu",
+            "Wuyang Chen",
+            "Albert Webson",
+            "Yunxuan Li",
+            "Vincent Y. Zhao",
+            "Hongkun Yu",
+            "K. Keutzer",
+            "Trevor Darrell",
+            "Denny Zhou"
+          ],
+          "year": 2023,
+          "venue": "arXiv.org",
+          "doi": "10.48550/arXiv.2305.14705",
+          "arxiv_id": null
+        },
+        {
+          "source": "semantic_scholar",
+          "source_id": "f4da79c8b9e708ff46ead6e35c7c6ca125218acb",
+          "title": "Vision-Flan: Scaling Human-Labeled Tasks in Visual Instruction Tuning",
+          "authors": [
+            "Zhiyang Xu",
+            "Chao Feng",
+            "Rulin Shao",
+            "Trevor Ashby",
+            "Ying Shen",
+            "dingnan jin",
+            "Yu Cheng",
+            "Qifan Wang",
+            "Lifu Huang"
+          ],
+          "year": 2024,
+          "venue": "Annual Meeting of the Association for Computational Linguistics",
+          "doi": "10.48550/arXiv.2402.11690",
+          "arxiv_id": "2402.11690"
+        },
+        {
+          "source": "semantic_scholar",
+          "source_id": "1f0db7a8be492886568c89d03742e7ed6e7182c2",
+          "title": "Instruction-tuned large language models misalign with natural language comprehension in humans",
+          "authors": [
+            "Changjiang Gao",
+            "Zhengwu Ma",
+            "Jiajun Chen",
+            "Ping Li",
+            "Shujian Huang",
+            "Jixing Li"
+          ],
+          "year": null,
+          "venue": "",
+          "doi": null,
+          "arxiv_id": null
+        },
+        {
+          "source": "semantic_scholar",
+          "source_id": "53657b9f7bc5c54f6dff119974f4881a4a8c6898",
+          "title": "Exploring Zero and Few-shot Techniques for Intent Classification",
+          "authors": [
+            "S. Parikh",
+            "Quaizar Vohra",
+            "Prashil Tumbade",
+            "Mitul Tiwari"
+          ],
+          "year": 2023,
+          "venue": "Annual Meeting of the Association for Computational Linguistics",
+          "doi": "10.48550/arXiv.2305.07157",
+          "arxiv_id": "2305.07157"
+        }
+      ],
+      "external_errors": [],
+      "selected_match": {
+        "source": "arxiv",
+        "source_id": "2210.11416v5",
+        "title": "Scaling Instruction-Finetuned Language Models",
+        "authors": [
+          "Hyung Won Chung",
+          "Le Hou",
+          "Shayne Longpre",
+          "Barret Zoph",
+          "Yi Tay",
+          "William Fedus",
+          "Yunxuan Li",
+          "Xuezhi Wang",
+          "Mostafa Dehghani",
+          "Siddhartha Brahma",
+          "Albert Webson",
+          "Shixiang Shane Gu",
+          "Zhuyun Dai",
+          "Mirac Suzgun",
+          "Xinyun Chen",
+          "Aakanksha Chowdhery",
+          "Alex Castro-Ros",
+          "Marie Pellat",
+          "Kevin Robinson",
+          "Dasha Valter",
+          "Sharan Narang",
+          "Gaurav Mishra",
+          "Adams Yu",
+          "Vincent Zhao",
+          "Yanping Huang",
+          "Andrew Dai",
+          "Hongkun Yu",
+          "Slav Petrov",
+          "Ed H. Chi",
+          "Jeff Dean",
+          "Jacob Devlin",
+          "Adam Roberts",
+          "Denny Zhou",
+          "Quoc V. Le",
+          "Jason Wei"
+        ],
+        "year": 2022,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2210.11416"
+      },
+      "confidence": 0.95,
+      "proposed_changes": [
+        {
+          "field": "authors",
+          "old_value": [],
+          "new_value": [
+            "Hyung Won Chung",
+            "Le Hou",
+            "Shayne Longpre",
+            "Barret Zoph",
+            "Yi Tay",
+            "William Fedus",
+            "Yunxuan Li",
+            "Xuezhi Wang",
+            "Mostafa Dehghani",
+            "Siddhartha Brahma",
+            "Albert Webson",
+            "Shixiang Shane Gu",
+            "Zhuyun Dai",
+            "Mirac Suzgun",
+            "Xinyun Chen",
+            "Aakanksha Chowdhery",
+            "Alex Castro-Ros",
+            "Marie Pellat",
+            "Kevin Robinson",
+            "Dasha Valter",
+            "Sharan Narang",
+            "Gaurav Mishra",
+            "Adams Yu",
+            "Vincent Zhao",
+            "Yanping Huang",
+            "Andrew Dai",
+            "Hongkun Yu",
+            "Slav Petrov",
+            "Ed H. Chi",
+            "Jeff Dean",
+            "Jacob Devlin",
+            "Adam Roberts",
+            "Denny Zhou",
+            "Quoc V. Le",
+            "Jason Wei"
+          ],
+          "source": "arxiv",
+          "confidence": 0.95,
+          "match_reason": "deduplicated_exact_normalized_title"
+        },
+        {
+          "field": "year",
+          "old_value": null,
+          "new_value": 2022,
+          "source": "arxiv",
+          "confidence": 0.95,
+          "match_reason": "deduplicated_exact_normalized_title"
+        },
+        {
+          "field": "arxiv_id",
+          "old_value": null,
+          "new_value": "2210.11416",
+          "source": "arxiv",
+          "confidence": 0.95,
+          "match_reason": "deduplicated_exact_normalized_title"
+        }
+      ],
+      "status": "UPDATED",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "24d32ecf-b486-4570-81f5-73eb52890df7",
+      "before": {
+        "title": "Training language models to follow instructions",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "c1984bb50a5b90fddb895fdc3a0f72e5bc977148c9f63ef6040cbe7a3e1f0d98",
+        "created_at": "2026-07-13T09:46:07.538316+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "2505.21439v1",
+          "title": "Towards Better Instruction Following Retrieval Models",
+          "authors": [
+            "Yuchen Zhuang",
+            "Aaron Trinh",
+            "Rushi Qiang",
+            "Haotian Sun",
+            "Chao Zhang",
+            "Hanjun Dai",
+            "Bo Dai"
+          ],
+          "year": 2025,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2505.21439"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2304.12244v3",
+          "title": "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+          "authors": [
+            "Can Xu",
+            "Qingfeng Sun",
+            "Kai Zheng",
+            "Xiubo Geng",
+            "Pu Zhao",
+            "Jiazhan Feng",
+            "Chongyang Tao",
+            "Qingwei Lin",
+            "Daxin Jiang"
+          ],
+          "year": 2023,
+          "venue": "The Twelfth International Conference on Learning Representations (ICLR 2024)",
+          "doi": null,
+          "arxiv_id": "2304.12244"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2503.13222v3",
+          "title": "Can Language Models Follow Multiple Turns of Entangled Instructions?",
+          "authors": [
+            "Chi Han",
+            "Xin Liu",
+            "Haodong Wang",
+            "Shiyang Li",
+            "Jingfeng Yang",
+            "Haoming Jiang",
+            "Zhengyang Wang",
+            "Qingyu Yin",
+            "Liang Qiu",
+            "Changlong Yu",
+            "Yifan Gao",
+            "Zheng Li",
+            "Bing Yin",
+            "Jingbo Shang",
+            "Heng Ji"
+          ],
+          "year": 2025,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2503.13222"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2306.08018v5",
+          "title": "Mol-Instructions: A Large-Scale Biomolecular Instruction Dataset for Large Language Models",
+          "authors": [
+            "Yin Fang",
+            "Xiaozhuan Liang",
+            "Ningyu Zhang",
+            "Kangwei Liu",
+            "Rui Huang",
+            "Zhuo Chen",
+            "Xiaohui Fan",
+            "Huajun Chen"
+          ],
+          "year": 2023,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2306.08018"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2202.09061v4",
+          "title": "VLP: A Survey on Vision-Language Pre-training",
+          "authors": [
+            "Feilong Chen",
+            "Duzhen Zhang",
+            "Minglun Han",
+            "Xiuyi Chen",
+            "Jing Shi",
+            "Shuang Xu",
+            "Bo Xu"
+          ],
+          "year": 2022,
+          "venue": "Machine Intelligence Research. 20(1), February 2023, 38-56",
+          "doi": "10.1007/s11633-022-1369-5",
+          "arxiv_id": "2202.09061"
+        }
+      ],
+      "external_errors": [
+        {
+          "source": "semantic_scholar",
+          "query": "Training language models to follow instructions",
+          "error_type": "HTTPStatusError",
+          "message": "Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=Training+language+models+to+follow+instructions&limit=5&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      ],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "NEEDS_REVIEW",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "MISSING_AUTHORS_AND_YEAR"
+    },
+    {
+      "paper_id": "87a57444-8279-4f2b-8190-6ff0316ff6c9",
+      "before": {
+        "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a",
+        "created_at": "2026-07-13T09:46:06.082423+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "2106.09685v2",
+          "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+          "authors": [
+            "Edward J. Hu",
+            "Yelong Shen",
+            "Phillip Wallis",
+            "Zeyuan Allen-Zhu",
+            "Yuanzhi Li",
+            "Shean Wang",
+            "Lu Wang",
+            "Weizhu Chen"
+          ],
+          "year": 2021,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2106.09685"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2408.04556v8",
+          "title": "BA-LoRA: Bias-Alleviating Low-Rank Adaptation to Mitigate Catastrophic Inheritance in Large Language Models",
+          "authors": [
+            "Yupeng Chang",
+            "Yi Chang",
+            "Yuan Wu"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2408.04556"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2412.09827v1",
+          "title": "Low-Rank Adaptation with Task-Relevant Feature Enhancement for Fine-tuning Language Models",
+          "authors": [
+            "Changqun Li",
+            "Chaofan Ding",
+            "Kexin Luan",
+            "Xinhan Di"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2412.09827"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2501.19406v2",
+          "title": "Low-Rank Adapting Models for Sparse Autoencoders",
+          "authors": [
+            "Matthew Chen",
+            "Joshua Engels",
+            "Max Tegmark"
+          ],
+          "year": 2025,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2501.19406"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2501.16372v1",
+          "title": "Low-Rank Adapters Meet Neural Architecture Search for LLM Compression",
+          "authors": [
+            "J. Pablo Muñoz",
+            "Jinjie Yuan",
+            "Nilesh Jain"
+          ],
+          "year": 2025,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2501.16372"
+        }
+      ],
+      "external_errors": [
+        {
+          "source": "semantic_scholar",
+          "query": "LORA: LOW-RANK ADAPTATION OF LARGE LAN- GUAGE MODELS",
+          "error_type": "HTTPStatusError",
+          "message": "Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=LORA%3A+LOW+RANK+ADAPTATION+OF+LARGE+LAN++GUAGE+MODELS&limit=5&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      ],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "NEEDS_REVIEW",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "MISSING_AUTHORS_AND_YEAR"
+    },
+    {
+      "paper_id": "ae47f092-c498-4bdb-bd3f-565cb2345cdf",
+      "before": {
+        "title": "The Power of Scale for Parameter-Efﬁcient Prompt Tuning",
+        "authors": [
+          "Brian Lester",
+          "Rami Al-Rfou",
+          "Noah Constant"
+        ],
+        "year": 2021,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2104.08691",
+        "source_type": "upload"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "930bea6f-5263-4012-8451-c2d19c38d4e4",
+      "before": {
+        "title": "Language Models are Few-Shot Learners",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "97fd272f1fdfc18677462d0292f5fbf26ca86b4d1b485c2dba03269b643a0e83",
+        "created_at": "2026-07-13T09:45:57.253635+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "2008.06239v2",
+          "title": "Language Models as Few-Shot Learner for Task-Oriented Dialogue Systems",
+          "authors": [
+            "Andrea Madotto",
+            "Zihan Liu",
+            "Zhaojiang Lin",
+            "Pascale Fung"
+          ],
+          "year": 2020,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2008.06239"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2308.10783v2",
+          "title": "Zero- and Few-Shot Prompting with LLMs: A Comparative Study with Fine-tuned Models for Bangla Sentiment Analysis",
+          "authors": [
+            "Md. Arid Hasan",
+            "Shudipta Das",
+            "Afiyat Anjum",
+            "Firoj Alam",
+            "Anika Anjum",
+            "Avijit Sarker",
+            "Sheak Rashed Haider Noori"
+          ],
+          "year": 2023,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2308.10783"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2112.07522v2",
+          "title": "LMTurk: Few-Shot Learners as Crowdsourcing Workers in a Language-Model-as-a-Service Framework",
+          "authors": [
+            "Mengjie Zhao",
+            "Fei Mi",
+            "Yasheng Wang",
+            "Minglei Li",
+            "Xin Jiang",
+            "Qun Liu",
+            "Hinrich Schütze"
+          ],
+          "year": 2021,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2112.07522"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2409.03868v1",
+          "title": "Few-shot Adaptation of Medical Vision-Language Models",
+          "authors": [
+            "Fereshteh Shakeri",
+            "Yunshi Huang",
+            "Julio Silva-Rodríguez",
+            "Houda Bahig",
+            "An Tang",
+            "Jose Dolz",
+            "Ismail Ben Ayed"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2409.03868"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2308.12060v3",
+          "title": "FlexKBQA: A Flexible LLM-Powered Framework for Few-Shot Knowledge Base Question Answering",
+          "authors": [
+            "Zhenyu Li",
+            "Sunqi Fan",
+            "Yu Gu",
+            "Xiuxing Li",
+            "Zhichao Duan",
+            "Bowen Dong",
+            "Ning Liu",
+            "Jianyong Wang"
+          ],
+          "year": 2023,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2308.12060"
+        }
+      ],
+      "external_errors": [
+        {
+          "source": "semantic_scholar",
+          "query": "Language Models are Few-Shot Learners",
+          "error_type": "HTTPStatusError",
+          "message": "Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=Language+Models+are+Few+Shot+Learners&limit=5&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      ],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "NEEDS_REVIEW",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "MISSING_AUTHORS_AND_YEAR"
+    },
+    {
+      "paper_id": "d52a2824-279d-4f19-8118-a4d0ce423544",
+      "before": {
+        "title": "Scaling Laws for Neural Language Models",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "a41bd7877fd1a6bcbba096b2619618bd2f90e02488f2365644903eb2f7c6a494",
+        "created_at": "2026-07-13T09:45:55.462522+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "2412.07942v1",
+          "title": "Neural Scaling Laws Rooted in the Data Distribution",
+          "authors": [
+            "Ari Brill"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2412.07942"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2502.03009v2",
+          "title": "Scaling Laws for Upcycling Mixture-of-Experts Language Models",
+          "authors": [
+            "Seng Pei Liew",
+            "Takuya Kato",
+            "Sho Takase"
+          ],
+          "year": 2025,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2502.03009"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2402.04177v3",
+          "title": "Scaling Laws for Downstream Task Performance of Large Language Models",
+          "authors": [
+            "Berivan Isik",
+            "Natalia Ponomareva",
+            "Hussein Hazimeh",
+            "Dimitris Paparas",
+            "Sergei Vassilvitskii",
+            "Sanmi Koyejo"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2402.04177"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2408.11029v2",
+          "title": "Scaling Law with Learning Rate Annealing",
+          "authors": [
+            "Howe Tissue",
+            "Venus Wang",
+            "Lu Wang"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2408.11029"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2403.09832v1",
+          "title": "Scaling Behavior of Machine Translation with Large Language Models under Prompt Injection Attacks",
+          "authors": [
+            "Zhifan Sun",
+            "Antonio Valerio Miceli-Barone"
+          ],
+          "year": 2024,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2403.09832"
+        }
+      ],
+      "external_errors": [
+        {
+          "source": "semantic_scholar",
+          "query": "Scaling Laws for Neural Language Models",
+          "error_type": "HTTPStatusError",
+          "message": "Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=Scaling+Laws+for+Neural+Language+Models&limit=5&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      ],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "NEEDS_REVIEW",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "MISSING_AUTHORS_AND_YEAR"
+    },
+    {
+      "paper_id": "64e62d6c-8b61-46ca-b57b-ab18f301f8ec",
+      "before": {
+        "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+        "authors": [
+          "Colin Raffel",
+          "Noam Shazeer",
+          "Adam Roberts",
+          "Katherine Lee",
+          "Sharan Narang",
+          "Michael Matena",
+          "Yanqi Zhou",
+          "Wei Li",
+          "Peter J. Liu"
+        ],
+        "year": 2019,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "1910.10683",
+        "source_type": "upload"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8",
+      "before": {
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers for",
+        "authors": [],
+        "year": null,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": null,
+        "source_type": "upload",
+        "filename_stem": "5692a5514787a8c6727b4ff3b726a3385798bc68e12138d1d4af83947e2acf6e",
+        "created_at": "2026-07-13T09:45:51.021039+00:00"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [
+        {
+          "source": "arxiv",
+          "source_id": "1810.04805v2",
+          "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+          "authors": [
+            "Jacob Devlin",
+            "Ming-Wei Chang",
+            "Kenton Lee",
+            "Kristina Toutanova"
+          ],
+          "year": 2018,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "1810.04805"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2106.08254v2",
+          "title": "BEiT: BERT Pre-Training of Image Transformers",
+          "authors": [
+            "Hangbo Bao",
+            "Li Dong",
+            "Songhao Piao",
+            "Furu Wei"
+          ],
+          "year": 2021,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2106.08254"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2210.12440v1",
+          "title": "Spectrum-BERT: Pre-training of Deep Bidirectional Transformers for Spectral Classification of Chinese Liquors",
+          "authors": [
+            "Yansong Wang",
+            "Yundong Sun",
+            "Yansheng Fu",
+            "Dongjie Zhu",
+            "Zhaoshuo Tian"
+          ],
+          "year": 2022,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2210.12440"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2205.10063v1",
+          "title": "Uniform Masking: Enabling MAE Pre-training for Pyramid-based Vision Transformers with Locality",
+          "authors": [
+            "Xiang Li",
+            "Wenhai Wang",
+            "Lingfeng Yang",
+            "Jian Yang"
+          ],
+          "year": 2022,
+          "venue": null,
+          "doi": null,
+          "arxiv_id": "2205.10063"
+        },
+        {
+          "source": "arxiv",
+          "source_id": "2005.07202v3",
+          "title": "Pre-training technique to localize medical BERT and enhance biomedical BERT",
+          "authors": [
+            "Shoya Wada",
+            "Toshihiro Takeda",
+            "Shiro Manabe",
+            "Shozo Konishi",
+            "Jun Kamohara",
+            "Yasushi Matsumura"
+          ],
+          "year": 2020,
+          "venue": null,
+          "doi": "10.1016/j.artmed.2024.102889",
+          "arxiv_id": "2005.07202"
+        }
+      ],
+      "external_errors": [
+        {
+          "source": "semantic_scholar",
+          "query": "BERT: Pre-training of Deep Bidirectional Transformers for",
+          "error_type": "HTTPStatusError",
+          "message": "Client error '429 ' for url 'https://api.semanticscholar.org/graph/v1/paper/search?query=BERT%3A+Pre+training+of+Deep+Bidirectional+Transformers+for&limit=5&fields=title%2Cabstract%2Cauthors%2Cyear%2Cvenue%2CexternalIds%2Curl%2CcitationCount%2CopenAccessPdf%2CpublicationDate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      ],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "NEEDS_REVIEW",
+      "error": null,
+      "classification_before": "MISSING_AUTHORS_AND_YEAR",
+      "classification_after": "MISSING_AUTHORS_AND_YEAR"
+    },
+    {
+      "paper_id": "d4c32e98-c78f-4ff6-9d0b-7651e5dca230",
+      "before": {
+        "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+        "authors": [
+          "Dean Wampler",
+          "Dave Nielson",
+          "Alireza Seddighi"
+        ],
+        "year": 2025,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2601.05264",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "923458f4-7500-4243-a924-da3ef46f385f",
+      "before": {
+        "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+        "authors": [
+          "Nurshat Fateh Ali",
+          "Md. Mahdi Mohtasim",
+          "Shakil Mosharrof",
+          "T. Gopi Krishna"
+        ],
+        "year": 2024,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2411.18583",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "c6280b03-2184-49fe-9b39-eedb1c58b416",
+      "before": {
+        "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
+        "authors": [
+          "Hamideh Ghanadian",
+          "Amin Kamali",
+          "Mohammad Hossein Tekieh"
+        ],
+        "year": 2026,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "2602.17856",
+        "source_type": "arxiv"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    },
+    {
+      "paper_id": "2537b3aa-d6aa-4a4a-aac1-477fc58bc3d9",
+      "before": {
+        "title": "Attention Is All You Need",
+        "authors": [
+          "Ashish Vaswani",
+          "Noam Shazeer",
+          "Niki Parmar",
+          "Jakob Uszkoreit",
+          "Llion Jones",
+          "Aidan N. Gomez",
+          "Lukasz Kaiser",
+          "Illia Polosukhin"
+        ],
+        "year": 2017,
+        "venue": null,
+        "doi": null,
+        "arxiv_id": "1706.03762",
+        "source_type": "upload"
+      },
+      "identifier_candidates": [],
+      "external_candidates": [],
+      "external_errors": [],
+      "selected_match": null,
+      "confidence": 0.0,
+      "proposed_changes": [],
+      "status": "SKIPPED_COMPLETE",
+      "error": null,
+      "classification_before": "COMPLETE",
+      "classification_after": "COMPLETE"
+    }
+  ],
+  "llm_used": false,
+  "raw_external_responses_persisted": false,
+  "vector_payload_metadata_sync": "NOT_APPLICABLE"
+}

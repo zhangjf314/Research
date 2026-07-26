@@ -443,7 +443,9 @@ class DeepResearchGraph:
             ]
         )
         if synthesis["research_gaps"]:
-            lines.extend(f"- {gap}" for gap in synthesis["research_gaps"])
+            lines.extend(
+                f"- {self._format_research_gap(gap)}" for gap in synthesis["research_gaps"]
+            )
         else:
             lines.append("- 当前检索证据覆盖了四个核心章节，但这不等同于完整语义充分性证明。")
         lines.extend(["", "## 9. 参考证据"])
@@ -546,6 +548,18 @@ class DeepResearchGraph:
                 if citation_id not in normalized[section_id]:
                     normalized[section_id].append(citation_id)
         return {spec.section_id: normalized[spec.section_id] for spec in SECTION_SPECS}
+
+    @staticmethod
+    def _format_research_gap(gap: object) -> str:
+        if not isinstance(gap, dict):
+            return str(gap)
+        text = str(gap.get("text") or "").strip()
+        citation_ids = [str(item) for item in gap.get("citation_ids") or []]
+        if citation_ids:
+            return f"{text} {' '.join(citation_ids)}".strip()
+        if gap.get("is_inference"):
+            return f"{text}（综合推断）".strip()
+        return text
 
     @staticmethod
     def _citation_sort_key(citation_id: str) -> int:

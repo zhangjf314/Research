@@ -6,8 +6,11 @@ __pycache__
 .pytest_cache
 .ruff_cache
 *.pyc
+.runtime
 data/raw
 data/parsed
 data/search_cache
 data/reports
-PaperResearch Agent 项目规划.docx
+artifacts/*
+!artifacts/soak-test-portfolio-v1.json
+PaperResearch Agent 椤圭洰瑙勫垝.docx

@@ -120,6 +120,8 @@ def evaluate_report_quality(
         failures.append("cross_section_similarity")
     if raw_quote_copy_ratio > 0.80:
         failures.append("raw_quote_copy_ratio")
+    if re.search(r"\{['\"](?:text|citation_ids|is_inference)['\"]\s*:", report):
+        failures.append("python_dict_literal_leakage")
 
     return ReportQualityMetrics(
         exact_duplicate_paragraph_count=duplicate_paragraphs,

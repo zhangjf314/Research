@@ -112,6 +112,7 @@ def library_page(db: DbSession) -> HTMLResponse:
           </select>
           <input id='paper-query' placeholder='Search title' oninput='loadLibrary()'>
           <button type='button' onclick='loadLibrary()'>Refresh</button>
+          <p id='missing-metadata-count' class='muted'>Missing metadata: loading...</p>
         </section>
         <table><thead><tr><th>Title</th><th>Authors</th><th>Year</th><th>Source</th>
         <th>Parse</th><th>Index</th><th>Created</th><th>Metadata</th><th>Actions</th>
@@ -149,9 +150,12 @@ def library_page(db: DbSession) -> HTMLResponse:
               `<td>${esc(p.created_at)}</td><td>${esc(meta||'OK')}</td>`+
               `<td><a href='/api/v1/ui/papers/${esc(p.id)}'>Open</a> <a href='/api/v1/papers/${esc(p.id)}/pdf'>Open PDF</a> `+
               `<button type='button' data-paper='${payload}' onclick='editMetadata(this.dataset.paper)'>Edit Metadata</button> `+
+              `<button type='button' onclick='enrichMetadata("${esc(p.id)}")'>Enrich Metadata</button> `+
               `<button type='button' onclick='indexPaper("${esc(p.id)}")'>Index/Reindex</button></td></tr>`;
           }).join('');
           document.getElementById('library-rows').innerHTML=rows||'<tr><td colspan="9">No papers match the current filter.</td></tr>';
+          const missing=(papers||[]).filter(p=>!p.year || !(p.authors||[]).length).length;
+          document.getElementById('missing-metadata-count').textContent=`Missing metadata: ${missing}`;
         }
         async function uploadPaper(){
           const file=document.getElementById('paper-file').files[0]; const status=document.getElementById('upload-status');
@@ -188,6 +192,16 @@ def library_page(db: DbSession) -> HTMLResponse:
           const response=await fetch(`/api/v1/papers/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
           const data=await response.json(); document.getElementById('edit-status').textContent=response.ok?'Saved':(data.detail||`HTTP ${response.status}`);
           if(response.ok){hideMetadataEditor(); await loadLibrary();}
+        }
+        async function enrichMetadata(id){
+          const status=document.getElementById('upload-status'); status.textContent='Enriching metadata...';
+          try{
+            const response=await fetch(`/api/v1/papers/${id}/enrich-metadata`,{method:'POST'});
+            const data=await response.json();
+            const changes=Object.entries(data.changes||{}).map(([k,v])=>`${k}: ${v.old||'鈥?} -> ${v.new||'鈥?'}`).join('; ');
+            status.textContent=response.ok ? `Metadata ${data.status}: ${changes||'no changes'}` : (data.detail||`HTTP ${response.status}`);
+            await loadLibrary();
+          }catch(error){status.textContent='Metadata enrichment failed: '+(error.message||error);}
         }
         loadLibrary();
         </script>""",
@@ -292,9 +306,38 @@ def research_page() -> HTMLResponse:
                 ? data.detail : `Research failed: HTTP ${response.status}`;
               throw new Error(message);
             }
+            const completed = data.status === 'COMPLETED' &&
+              data.succeeded === true &&
+              data.report_available === true &&
+              typeof data.report === 'string' &&
+              data.report.trim().length > 0;
+            if (data.status === 'PAUSED') {
+              currentReportMarkdown = '';
+              raw.textContent = JSON.stringify(data, null, 2);
+              report.textContent = `Research paused\n\nTask: ${data.task_id || ''}\nReason: ${data.stop_reason || 'paused'}`;
+              status.textContent = 'Paused';
+              return;
+            }
+            if (!data.succeeded) {
+              currentReportMarkdown = '';
+              raw.textContent = JSON.stringify(data, null, 2);
+              const usage = data.model_usage || {};
+              report.textContent = [
+                'Research failed',
+                '',
+                `Status: ${data.status || data.error_code || 'UNKNOWN'}`,
+                `Task: ${data.task_id || ''}`,
+                `Reason: ${data.stop_reason || ''}`,
+                `Attempts: ${data.request_attempt_count ?? 0}`,
+                `Tokens: ${usage.total_tokens ?? 0}`,
+                `Estimated cost: ${usage.estimated_cost_usd ?? 0}`,
+              ].join('\n');
+              status.textContent = 'Failed';
+              return;
+            }
             currentReportMarkdown = typeof data.report === 'string' ? data.report : '';
-            if (!currentReportMarkdown.trim()) {
-              throw new Error('Research completed without a report.');
+            if (!completed) {
+              throw new Error('Research response contract error: completed task has no report.');
             }
             const safeHtml = await renderMarkdown(currentReportMarkdown);
             report.innerHTML = safeHtml;

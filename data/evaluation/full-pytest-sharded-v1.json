@@ -1,0 +1,81 @@
+﻿{
+    "schema_version":  "full-pytest-sharded-v1",
+    "generated_at":  "2026-07-26T17:10:46.9376136Z",
+    "status":  "PASSED",
+    "collected_total":  677,
+    "executed_total":  677,
+    "passed":  677,
+    "failed":  0,
+    "errors":  0,
+    "skipped":  0,
+    "xfailed":  0,
+    "xpassed":  0,
+    "shard_count":  79,
+    "passed_shards":  79,
+    "failed_shards":  0,
+    "timeout_shards":  0,
+    "missing_test_files":  [
+
+                           ],
+    "duplicate_nodeids":  [
+
+                          ],
+    "collection_errors":  0,
+    "collection_duration_seconds":  5.282,
+    "total_duration_seconds":  1182.845,
+    "slowest_shards":  [
+                           {
+                               "shard":  "shard-038",
+                               "file":  "tests/test_stage12_release_readiness.py",
+                               "duration_seconds":  169.163
+                           },
+                           {
+                               "shard":  "shard-048",
+                               "file":  "tests/test_stage13_16_dev_v3_4.py",
+                               "duration_seconds":  136.053
+                           },
+                           {
+                               "shard":  "shard-040",
+                               "file":  "tests/test_stage13_10_claim_gold.py",
+                               "duration_seconds":  85.335
+                           },
+                           {
+                               "shard":  "shard-070",
+                               "file":  "tests/test_stage13_4_claim_coverage.py",
+                               "duration_seconds":  70.256
+                           },
+                           {
+                               "shard":  "shard-050",
+                               "file":  "tests/test_stage13_18_payload_contract_v4.py",
+                               "duration_seconds":  60.205
+                           },
+                           {
+                               "shard":  "shard-049",
+                               "file":  "tests/test_stage13_17_payload_contract_v3.py",
+                               "duration_seconds":  54.97
+                           },
+                           {
+                               "shard":  "shard-046",
+                               "file":  "tests/test_stage13_14_dev_v3_3.py",
+                               "duration_seconds":  49.094
+                           },
+                           {
+                               "shard":  "shard-051",
+                               "file":  "tests/test_stage13_19_dev_v3_5_live.py",
+                               "duration_seconds":  48.743
+                           },
+                           {
+                               "shard":  "shard-061",
+                               "file":  "tests/test_stage13_3_human_citation_import.py",
+                               "duration_seconds":  47.793
+                           },
+                           {
+                               "shard":  "shard-007",
+                               "file":  "tests/test_evidence_qa_dev_v3_1.py",
+                               "duration_seconds":  30.302
+                           }
+                       ],
+    "monolithic_pytest_status":  "TIMEOUT_NOT_RELEASE_GATE",
+    "monolithic_timeout_reason":  "The monolithic pytest command exceeded the execution wrapper timeout; deterministic sharded execution is the release gate.",
+    "gate":  "PASSED"
+}

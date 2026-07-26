@@ -1,203 +1,184 @@
 # Research synthesis schema replay v1
 
-Legacy frozen replay is retained as diagnostic-only evidence; latest live replay is the hard gate for the revised protocol.
-
 ```json
 {
   "schema_version": "research-synthesis-schema-replay-v1",
-  "legacy_frozen_replay": {
-    "task_id": "ce25169e-7ab7-4d1b-92f2-fec77df06f0a",
-    "status": "FAILED",
-    "classification": "EXPECTED_INCOMPATIBILITY_WITH_REVISED_PROTOCOL",
-    "gate": "DIAGNOSTIC_ONLY",
-    "legacy_replay_passed": false,
-    "legacy_response_validated": false,
-    "attempts": [
-      {
-        "attempt_number": 1,
-        "content_length": 4533,
-        "json_parse_status": "passed",
-        "normalization_actions": [],
-        "top_level_keys": [
-          "consensus",
-          "disagreements",
-          "executive_summary",
-          "research_gaps",
-          "sections",
-          "title"
-        ],
-        "schema_error_count": 1,
-        "schema_error_locations": [
-          "<root>"
-        ],
-        "schema_error_types": [
-          "ValueError"
-        ],
-        "failure_types": [
-          "CITATION_NOT_ALLOWED_FOR_SECTION"
-        ],
-        "offending_citation_ids": [
-          "[E14]",
-          "[E2]"
-        ],
-        "citation_allowlist_details": [
-          {
-            "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
-            "location": "sections.1.claims.4.citation_ids",
-            "section_id": "methods",
-            "citation_ids": [
-              "[E14]"
-            ],
-            "allowed_for_section": [
-              "[E10]",
-              "[E11]",
-              "[E12]",
-              "[E13]",
-              "[E1]",
-              "[E5]",
-              "[E7]",
-              "[E9]"
-            ]
-          },
-          {
-            "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
-            "location": "sections.2.claims.2.citation_ids",
-            "section_id": "results",
-            "citation_ids": [
-              "[E2]"
-            ],
-            "allowed_for_section": [
-              "[E11]",
-              "[E14]",
-              "[E15]",
-              "[E16]",
-              "[E4]",
-              "[E5]",
-              "[E7]",
-              "[E8]"
-            ]
-          }
-        ],
-        "research_synthesis_schema": "failed",
-        "citation_allowlist": "failed"
-      },
-      {
-        "attempt_number": 2,
-        "content_length": 4263,
-        "json_parse_status": "passed",
-        "normalization_actions": [],
-        "top_level_keys": [
-          "consensus",
-          "disagreements",
-          "executive_summary",
-          "research_gaps",
-          "sections",
-          "title"
-        ],
-        "schema_error_count": 5,
-        "schema_error_locations": [
-          "research_gaps.0",
-          "research_gaps.1",
-          "research_gaps.2",
-          "research_gaps.3",
-          "research_gaps.4"
-        ],
-        "schema_error_types": [
-          "model_type",
-          "model_type",
-          "model_type",
-          "model_type",
-          "model_type"
-        ],
-        "failure_types": [
-          "CITATION_NOT_ALLOWED_FOR_SECTION",
-          "WRONG_FIELD_TYPE"
-        ],
-        "offending_citation_ids": [
-          "[E14]",
-          "[E2]"
-        ],
-        "citation_allowlist_details": [
-          {
-            "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
-            "location": "sections.1.claims.4.citation_ids",
-            "section_id": "methods",
-            "citation_ids": [
-              "[E14]"
-            ],
-            "allowed_for_section": [
-              "[E10]",
-              "[E11]",
-              "[E12]",
-              "[E13]",
-              "[E1]",
-              "[E5]",
-              "[E7]",
-              "[E9]"
-            ]
-          },
-          {
-            "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
-            "location": "sections.2.claims.2.citation_ids",
-            "section_id": "results",
-            "citation_ids": [
-              "[E2]"
-            ],
-            "allowed_for_section": [
-              "[E11]",
-              "[E14]",
-              "[E15]",
-              "[E16]",
-              "[E4]",
-              "[E5]",
-              "[E7]",
-              "[E8]"
-            ]
-          }
-        ],
-        "research_synthesis_schema": "failed",
-        "citation_allowlist": "failed"
-      }
-    ],
-    "failure_reasons": [
-      "Attempt 1: JSON parse passed and ResearchGap object shape is compatible with the revised schema, but methods cited E14 outside the legacy methods allowlist and results cited E2 outside the legacy results allowlist.",
-      "Attempt 2: research_gaps remained a string array, and methods/results repeated the same section allowlist violations."
-    ]
-  },
-  "latest_live_replay": {
-    "task_id": "hotfix-deep-research-20260725220952",
-    "input": ".runtime/research-synthesis-provider/hotfix-deep-research-20260725220952",
-    "attempts": [
-      {
-        "attempt_number": 1,
-        "content_length": 4520,
-        "json_parse_status": "passed",
-        "normalization_actions": [],
-        "top_level_keys": [
-          "consensus",
-          "disagreements",
-          "executive_summary",
-          "research_gaps",
-          "sections",
-          "title"
-        ],
-        "schema_error_count": 0,
-        "schema_error_locations": [],
-        "schema_error_types": [],
-        "failure_types": [],
-        "offending_citation_ids": [],
-        "citation_allowlist_details": [],
-        "research_synthesis_schema": "passed",
-        "section_set": "passed",
-        "citation_allowlist": "passed",
-        "report_render": "passed",
-        "report_quality_gate": "passed",
-        "report_quality_failures": []
-      }
-    ],
-    "all_passed": true
-  },
-  "all_passed": true,
-  "new_protocol_live_requires_legacy_attempt_1_replay_passed": false
+  "input": ".runtime/research-synthesis-provider/c88e94e6-a8b1-41d5-8c6f-b75cc90778db",
+  "attempts": [
+    {
+      "attempt_number": 1,
+      "content_length": 4689,
+      "json_parse_status": "passed",
+      "normalization_actions": [],
+      "top_level_keys": [
+        "consensus",
+        "disagreements",
+        "executive_summary",
+        "research_gaps",
+        "sections",
+        "title"
+      ],
+      "schema_error_count": 1,
+      "schema_error_locations": [
+        "<root>"
+      ],
+      "schema_error_types": [
+        "ValueError"
+      ],
+      "failure_types": [
+        "CITATION_NOT_ALLOWED_FOR_SECTION"
+      ],
+      "offending_citation_ids": [
+        "E02",
+        "E07",
+        "E15",
+        "E16"
+      ],
+      "citation_allowlist_details": [
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.0.claims.2.citation_ids",
+          "section_id": "background",
+          "citation_ids": [
+            "E16"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E02",
+            "E03",
+            "E04",
+            "E05",
+            "E06",
+            "E07",
+            "E08"
+          ]
+        },
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.0.claims.3.citation_ids",
+          "section_id": "background",
+          "citation_ids": [
+            "E15"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E02",
+            "E03",
+            "E04",
+            "E05",
+            "E06",
+            "E07",
+            "E08"
+          ]
+        },
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.0.claims.4.citation_ids",
+          "section_id": "background",
+          "citation_ids": [
+            "E16"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E02",
+            "E03",
+            "E04",
+            "E05",
+            "E06",
+            "E07",
+            "E08"
+          ]
+        },
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.1.claims.3.citation_ids",
+          "section_id": "methods",
+          "citation_ids": [
+            "E07"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E04",
+            "E05",
+            "E06",
+            "E09",
+            "E10",
+            "E11",
+            "E12"
+          ]
+        },
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.2.claims.2.citation_ids",
+          "section_id": "results",
+          "citation_ids": [
+            "E02"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E03",
+            "E04",
+            "E06",
+            "E07",
+            "E08",
+            "E12",
+            "E13"
+          ]
+        }
+      ],
+      "research_synthesis_schema": "failed",
+      "citation_allowlist": "failed"
+    },
+    {
+      "attempt_number": 2,
+      "content_length": 4689,
+      "json_parse_status": "passed",
+      "normalization_actions": [],
+      "top_level_keys": [
+        "consensus",
+        "disagreements",
+        "executive_summary",
+        "research_gaps",
+        "sections",
+        "title"
+      ],
+      "schema_error_count": 1,
+      "schema_error_locations": [
+        "<root>"
+      ],
+      "schema_error_types": [
+        "ValueError"
+      ],
+      "failure_types": [
+        "CITATION_NOT_ALLOWED_FOR_SECTION"
+      ],
+      "offending_citation_ids": [
+        "E02"
+      ],
+      "citation_allowlist_details": [
+        {
+          "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+          "location": "sections.2.claims.2.citation_ids",
+          "section_id": "results",
+          "citation_ids": [
+            "E02"
+          ],
+          "allowed_for_section": [
+            "E01",
+            "E03",
+            "E04",
+            "E06",
+            "E07",
+            "E08",
+            "E12",
+            "E13"
+          ]
+        }
+      ],
+      "research_synthesis_schema": "failed",
+      "citation_allowlist": "failed"
+    }
+  ],
+  "all_passed": false
 }
 ```

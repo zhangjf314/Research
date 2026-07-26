@@ -25,7 +25,11 @@ if (-not (Test-Path -LiteralPath $Python)) {
     $Python = "python"
 }
 
-& $Python -m pytest -q --basetemp $BaseTemp -p no:cacheprovider
+& powershell -ExecutionPolicy Bypass `
+    -File (Join-Path $Root "scripts\run_full_test_suite_sharded.ps1") `
+    -PythonPath $Python `
+    -TestsPath "tests" `
+    -OutputDirectory (Join-Path $Runtime "full-pytest-shards-release")
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 & $Python -m ruff check .

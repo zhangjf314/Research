@@ -18,6 +18,7 @@ from paper_research.indexing.registry import IndexRegistry
 from paper_research.indexing.service import IndexingService
 from paper_research.indexing.vector_store import QdrantVectorStore
 from paper_research.ingestion.upload_service import UploadService, UploadValidationError
+from paper_research.metadata.enrichment_service import MetadataEnrichmentService
 from paper_research.models.paper import PaperStatus
 from paper_research.providers.factory import build_embedding_provider
 from paper_research.repositories.paper import PaperRepository
@@ -27,6 +28,8 @@ from paper_research.schemas.paper import (
     PaperRead,
     PaperUploadResponse,
 )
+from paper_research.search.clients import ArxivClient, SemanticScholarClient
+from paper_research.search.http import CachedRetryClient
 
 router = APIRouter()
 DbSession = Annotated[Session, Depends(get_db)]
@@ -193,3 +196,41 @@ def update_paper_metadata(
     for field, value in updates.items():
         setattr(paper, field, value)
     return repository.save(paper)
+
+
+@router.post("/{paper_id}/enrich-metadata")
+def enrich_paper_metadata(paper_id: uuid.UUID, db: DbSession) -> dict:
+    settings = get_settings()
+    repository = PaperRepository(db)
+    paper = repository.get(paper_id)
+    if paper is None:
+        raise HTTPException(status_code=404, detail="paper not found")
+    http = CachedRetryClient(
+        settings.search_cache_dir,
+        settings.search_cache_ttl_seconds,
+        settings.external_request_retries,
+    )
+    service = MetadataEnrichmentService(
+        arxiv_client=ArxivClient(http),
+        semantic_scholar_client=SemanticScholarClient(http, settings.semantic_scholar_api_key),
+    )
+    result = service.enrich(paper, apply=True)
+    if result.status == "UPDATED":
+        repository.save(paper)
+    return {
+        "paper_id": str(paper.id),
+        "status": result.status,
+        "match_source": (result.selected_match or {}).get("source"),
+        "confidence": result.confidence,
+        "changes": {
+            change.field: {
+                "old": change.old_value,
+                "new": change.new_value,
+                "source": change.source,
+                "confidence": change.confidence,
+                "match_reason": change.match_reason,
+            }
+            for change in result.proposed_changes
+        },
+        "candidates": result.external_candidates,
+    }

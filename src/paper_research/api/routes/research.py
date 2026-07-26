@@ -44,6 +44,9 @@ class DeepResearchRequest(BaseModel):
 class DeepResearchResponse(BaseModel):
     task_id: str
     status: str
+    succeeded: bool = False
+    terminal: bool = True
+    error_code: str | None = None
     stop_reason: str | None
     research_plan: list[str]
     sub_questions: list[str]
@@ -53,6 +56,7 @@ class DeepResearchResponse(BaseModel):
     citation_results: list[dict]
     node_history: list[str]
     report_path: str
+    report_available: bool = False
     report: str
     report_quality: dict | None = None
     model_usage: dict | None = None
@@ -93,14 +97,23 @@ def _providers(payload: DeepResearchRequest, db: Session):
 def _response(state: dict) -> DeepResearchResponse:
     output_dir = Path("data/reports/research")
     output_dir.mkdir(parents=True, exist_ok=True)
-    report_path = output_dir / f"{state['task_id']}.md"
     state_path = output_dir / f"{state['task_id']}.json"
     report = state.get("draft_report", "")
-    report_path.write_text(report, encoding="utf-8")
+    report_available = bool(isinstance(report, str) and report.strip())
+    report_path = output_dir / f"{state['task_id']}.md"
+    if report_available:
+        report_path.write_text(report, encoding="utf-8")
     state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    status = state.get("status", "PAUSED")
+    succeeded = status == "COMPLETED" and report_available
+    terminal = status != "PAUSED"
+    error_code = status if status.startswith("FAILED_") else None
     return DeepResearchResponse(
         task_id=state["task_id"],
-        status=state.get("status", "PAUSED"),
+        status=status,
+        succeeded=succeeded,
+        terminal=terminal,
+        error_code=error_code,
         stop_reason=state.get("stop_reason"),
         research_plan=state.get("research_plan", []),
         sub_questions=state.get("sub_questions", []),
@@ -109,7 +122,8 @@ def _response(state: dict) -> DeepResearchResponse:
         contradictions=state.get("contradictions", []),
         citation_results=state.get("citation_results", []),
         node_history=state.get("node_history", []),
-        report_path=str(report_path),
+        report_path=str(report_path) if report_available else "",
+        report_available=report_available,
         report=report,
         report_quality=state.get("report_quality"),
         model_usage=state.get("model_usage"),
