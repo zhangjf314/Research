@@ -86,8 +86,16 @@ class Settings(BaseSettings):
     redis_cache_ttl_seconds: int = 3600
     redis_max_cache_keys: int = 10000
     api_rate_limit_per_minute: int = 120
+    trusted_proxy_cidrs: str = "127.0.0.1/32,::1/128,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+    api_rate_limit_ui_page_per_minute: int = 1000
+    api_rate_limit_read_api_per_minute: int = 300
+    api_rate_limit_search_per_minute: int = 60
+    api_rate_limit_upload_per_minute: int = 20
+    api_rate_limit_metadata_enrichment_per_minute: int = 20
+    api_rate_limit_deep_research_per_minute: int = 5
     checkpoint_provider: str = "memory"
     checkpoint_database_url: str | None = None
+    deep_research_enabled: bool = False
     deep_research_mode: str = "disabled"
     deep_research_max_queries: int = Field(default=3, ge=1, le=3)
     deep_research_max_iterations_per_query: int = Field(default=2, ge=1, le=2)

@@ -1,5 +1,19 @@
 # Known Limitations
 
+## Post-release UI availability hotfix boundary
+
+- Library, Search, and Deep Research UI route availability now has executable
+  JavaScript syntax coverage through `node --check`.
+- Real browser smoke requires Playwright. If Playwright is not installed, the
+  browser smoke is recorded as `BLOCKED_NOT_FAKED`; it must not be described as
+  a passed browser-console audit.
+- UI GET pages no longer consume business API rate-limit buckets. Search,
+  upload, metadata enrichment, read APIs, and Deep Research have separate Redis
+  buckets.
+- `X-Forwarded-For` and `X-Real-IP` are trusted only from configured proxy CIDRs;
+  this is a local reverse-proxy policy, not a complete public edge-security
+  solution.
+
 ## Post-release Deep Research report boundary
 
 - `v1.0.1-portfolio` is the recommended demo release after the Deep Research

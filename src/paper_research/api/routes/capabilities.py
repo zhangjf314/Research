@@ -132,6 +132,20 @@ def capabilities() -> CapabilitiesResponse:
             or settings.llm_output_price_per_million_tokens is not None
         )
     )
+    live_model_calls_enabled = os.getenv("LIVE_MODEL_CALLS_ENABLED", "").lower() == "true"
+    research_synthesis_ready = (
+        not settings.llm_configuration_issues
+        and settings.llm_provider != "template"
+    )
+    deep_research_issues: list[str] = []
+    if not settings.deep_research_enabled:
+        deep_research_issues.append("DEEP_RESEARCH_ENABLED=false")
+    if not live_model_calls_enabled:
+        deep_research_issues.append("LIVE_MODEL_CALLS_ENABLED=false")
+    if not research_synthesis_ready:
+        deep_research_issues.extend(settings.llm_configuration_issues)
+        if settings.llm_provider == "template":
+            deep_research_issues.append("LLM_PROVIDER=template")
     items = {
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
@@ -227,6 +241,30 @@ def capabilities() -> CapabilitiesResponse:
                 if settings.llm_provider != "template"
                 else "deterministic"
             ),
+            model=settings.llm_model,
+            thinking="enabled" if settings.llm_thinking_enabled else "disabled",
+            response_format=settings.llm_response_format,
+            stream=settings.llm_stream,
+            template_fallback=settings.llm_provider == "template",
+            base_url_hostname=(
+                urlparse(settings.llm_base_url).hostname if settings.llm_base_url else None
+            ),
+            api_key_present=bool(settings.llm_api_key),
+            api_key_fingerprint=_api_key_fingerprint(settings.llm_api_key),
+            temperature=settings.llm_temperature,
+            max_tokens=settings.llm_max_output_tokens,
+            billing_configured=llm_billing_configured,
+        ),
+        "deep_research": Capability(
+            status="available" if not deep_research_issues else "degraded",
+            configured=not deep_research_issues,
+            verified=False,
+            detail=(
+                "configured; live smoke required for verification"
+                if not deep_research_issues
+                else "; ".join(dict.fromkeys(deep_research_issues))
+            ),
+            provider=(settings.llm_provider_name or settings.llm_provider),
             model=settings.llm_model,
             thinking="enabled" if settings.llm_thinking_enabled else "disabled",
             response_format=settings.llm_response_format,

@@ -164,6 +164,14 @@ def _failed_state(task_id: str | None, status: str, stop_reason: str) -> dict:
 def run_deep_research(payload: DeepResearchRequest, db: DbSession) -> DeepResearchResponse:
     try:
         settings, external, import_provider = _providers(payload, db)
+        if not settings.deep_research_enabled:
+            return _response(
+                _failed_state(
+                    payload.task_id,
+                    "FAILED_PROVIDER_CONFIGURATION",
+                    "DEEP_RESEARCH_ENABLED=false",
+                )
+            )
         try:
             local_provider = HybridLocalResearchProvider(settings)
         except Exception as exc:
@@ -216,6 +224,14 @@ def resume_deep_research(
 ) -> DeepResearchResponse:
     try:
         settings, external, import_provider = _providers(payload, db)
+        if not settings.deep_research_enabled:
+            return _response(
+                _failed_state(
+                    payload.task_id,
+                    "FAILED_PROVIDER_CONFIGURATION",
+                    "DEEP_RESEARCH_ENABLED=false",
+                )
+            )
         local_provider = HybridLocalResearchProvider(settings)
         synthesis_provider = build_research_synthesis_provider(settings)
         with checkpoint_saver(settings) as saver:

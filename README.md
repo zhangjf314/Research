@@ -136,6 +136,8 @@ Invoke-RestMethod http://localhost/api/v1/capabilities
 - OpenAPI: <http://localhost/docs>
 - Health: <http://localhost/api/v1/health>
 - Qdrant: <http://localhost:6333>
+UI page GETs do not consume business API rate buckets; see
+[Quickstart](docs/quickstart.md) for capability checks and UI smoke commands.
 `.env` 不得提交 Git。默认 Compose 凭据仅用于本地开发。
 
 ## 使用示例

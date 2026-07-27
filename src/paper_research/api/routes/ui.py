@@ -131,6 +131,14 @@ def library_page(db: DbSession) -> HTMLResponse:
         </section>
         <script>
         const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        async function readJson(response){try{return await response.json();}catch(error){return {};}}
+        function httpMessage(response, data){
+          if(response.status===429){
+            const retry=response.headers.get('Retry-After') || data.retry_after_seconds || 'later';
+            return `Rate limited. Please retry after ${retry} seconds. Request ${data.request_id || ''}`.trim();
+          }
+          return data.detail || data.error?.message || `HTTP ${response.status}`;
+        }
         async function loadLibrary(){
           const filter=document.getElementById('paper-filter').value;
           const params=new URLSearchParams({limit:'100'});
@@ -139,8 +147,14 @@ def library_page(db: DbSession) -> HTMLResponse:
           if(filter==='not-indexed') params.set('not_indexed','true');
           if(filter==='missing-metadata') params.set('missing_metadata','true');
           if(filter==='upload'||filter==='external_search') params.set('source_type', filter);
+          const tbody=document.getElementById('library-rows');
+          tbody.innerHTML='<tr><td colspan="9">Loading...</td></tr>';
           const response=await fetch('/api/v1/papers?'+params.toString());
-          const papers=await response.json();
+          const papers=await readJson(response);
+          if(!response.ok){
+            tbody.innerHTML=`<tr><td colspan="9">${esc(httpMessage(response, papers))}</td></tr>`;
+            return;
+          }
           const rows=(papers||[]).filter(p=>filter!=='ready'||p.index_status==='READY').map(p=>{
             const authors=(p.authors||[]).join('; ');
             const meta=(p.year?'':'Missing year')+(authors?'':' Missing authors');
@@ -161,8 +175,8 @@ def library_page(db: DbSession) -> HTMLResponse:
           const file=document.getElementById('paper-file').files[0]; const status=document.getElementById('upload-status');
           if(!file){status.textContent='Choose a PDF first.';return}
           const form=new FormData(); form.append('file', file, file.name); status.textContent='Uploading...';
-          try{const response=await fetch('/api/v1/papers/upload',{method:'POST',body:form}); const data=await response.json();
-            if(!response.ok) throw new Error(data.detail||`HTTP ${response.status}`);
+          try{const response=await fetch('/api/v1/papers/upload',{method:'POST',body:form}); const data=await readJson(response);
+            if(!response.ok) throw new Error(httpMessage(response,data));
             status.textContent=`Uploaded ${file.name}; duplicate=${data.duplicate}; paper=${data.paper.id}; parse=${data.paper.parse_status}`;
             if(document.getElementById('auto-index').checked && !data.duplicate){await indexPaper(data.paper.id);}
             await loadLibrary();
@@ -170,7 +184,7 @@ def library_page(db: DbSession) -> HTMLResponse:
         }
         async function indexPaper(id){
           const response=await fetch(`/api/v1/papers/${id}/index`,{method:'POST'});
-          if(!response.ok){const data=await response.json(); alert(data.detail||`Index failed ${response.status}`);}
+          if(!response.ok){const data=await readJson(response); alert(data.detail||httpMessage(response,data));}
           await loadLibrary();
         }
         function editMetadata(serialized){
@@ -190,16 +204,16 @@ def library_page(db: DbSession) -> HTMLResponse:
           payload.doi=document.getElementById('edit-doi').value.trim()||null;
           payload.arxiv_id=document.getElementById('edit-arxiv').value.trim()||null;
           const response=await fetch(`/api/v1/papers/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-          const data=await response.json(); document.getElementById('edit-status').textContent=response.ok?'Saved':(data.detail||`HTTP ${response.status}`);
+          const data=await readJson(response); document.getElementById('edit-status').textContent=response.ok?'Saved':httpMessage(response,data);
           if(response.ok){hideMetadataEditor(); await loadLibrary();}
         }
         async function enrichMetadata(id){
           const status=document.getElementById('upload-status'); status.textContent='Enriching metadata...';
           try{
             const response=await fetch(`/api/v1/papers/${id}/enrich-metadata`,{method:'POST'});
-            const data=await response.json();
-            const changes=Object.entries(data.changes||{}).map(([k,v])=>`${k}: ${v.old||'鈥?} -> ${v.new||'鈥?'}`).join('; ');
-            status.textContent=response.ok ? `Metadata ${data.status}: ${changes||'no changes'}` : (data.detail||`HTTP ${response.status}`);
+            const data=await readJson(response);
+            const changes=Object.entries(data.changes||{}).map(([k,v])=>`${k}: ${v.old ?? 'missing'} -> ${v.new ?? 'missing'}`).join('; ');
+            status.textContent=response.ok ? `Metadata ${data.status}: ${changes||'no changes'}` : httpMessage(response,data);
             await loadLibrary();
           }catch(error){status.textContent='Metadata enrichment failed: '+(error.message||error);}
         }
@@ -219,13 +233,26 @@ def search_page() -> HTMLResponse:
         <script>
         const esc=s=>String(s??'').replace(/[&<>"']/g,c=>
           ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        async function readJson(response){try{return await response.json();}catch(error){return {};}}
+        function httpMessage(response, data){
+          if(response.status===429){
+            const retry=response.headers.get('Retry-After') || data.retry_after_seconds || 'later';
+            return `Rate limited. Please retry after ${retry} seconds. Request ${data.request_id || ''}`.trim();
+          }
+          return data.detail || data.error?.message || `HTTP ${response.status}`;
+        }
         async function searchPapers(){
-          const q=document.getElementById('query').value;
+          const q=document.getElementById('query').value.trim();
+          const target=document.getElementById('results');
+          if(!q){target.innerHTML='<section class="card">Enter a search query.</section>';return;}
+          target.innerHTML='<section class="card">Searching...</section>';
           const r=await fetch('/api/v1/search/papers',{method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({query:q,limit:10,open_access_only:false})});
-          const d=await r.json(); const items=d.candidates||[];
-          document.getElementById('results').innerHTML=items.map(x=>
+          const d=await readJson(r);
+          if(!r.ok){target.innerHTML=`<section class="card">${esc(httpMessage(r,d))}</section>`;return;}
+          const items=d.candidates||[];
+          target.innerHTML=items.length ? items.map(x=>
             `<section class="card"><h2>${esc(x.title)}</h2><p>${esc(x.abstract)}</p>`+
             `<p class="muted">${esc((x.authors||[]).join('; '))}</p>`+
             `<p>${esc(x.year)} | ${esc(x.venue)} | ${esc(x.source)} | `+
@@ -233,14 +260,15 @@ def search_page() -> HTMLResponse:
             `<p>Open Access: ${esc(x.open_access)} | PDF: ${x.pdf_url?'available':'No downloadable PDF'}</p>`+
             (x.pdf_url?`<button onclick='importPaper(this.dataset.candidate,false)' data-candidate='${esc(JSON.stringify(x))}'>Import PDF</button> `+
             `<button onclick='importPaper(this.dataset.candidate,true)' data-candidate='${esc(JSON.stringify(x))}'>Import and Index</button>`:
-            `<button disabled>No downloadable PDF</button>`)+`</section>`).join('');
+            `<button disabled>No downloadable PDF</button>`)+`</section>`).join('') :
+            '<section class="card">No candidates found.</section>';
         }
         async function importPaper(serialized, autoIndex){
           const candidate=JSON.parse(serialized);
           const response=await fetch('/api/v1/search/import',{method:'POST',
             headers:{'Content-Type':'application/json'},body:JSON.stringify(candidate)});
-          const paper=await response.json();
-          if(!response.ok){alert(paper.detail||`Import failed ${response.status}`);return;}
+          const paper=await readJson(response);
+          if(!response.ok){alert(paper.detail||httpMessage(response,paper));return;}
           if(autoIndex){await fetch(`/api/v1/papers/${paper.id}/index`,{method:'POST'});}
           alert(`Imported ${paper.title}`);
         }</script>""",
@@ -271,6 +299,32 @@ def research_page() -> HTMLResponse:
         </section>
         <script>
         let currentReportMarkdown = "";
+        async function readJson(response){try{return await response.json();}catch(error){return {};}}
+        function httpMessage(response, data){
+          if(response.status===429){
+            const retry=response.headers.get('Retry-After') || data.retry_after_seconds || 'later';
+            return `Rate limited. Please retry after ${retry} seconds. Request ${data.request_id || ''}`.trim();
+          }
+          return data.detail || data.error?.message || `HTTP ${response.status}`;
+        }
+        async function checkResearchCapabilities(){
+          const status=document.getElementById('research-status');
+          const button=document.getElementById('run-research');
+          try{
+            const response=await fetch('/api/v1/capabilities');
+            const data=await readJson(response);
+            const capability=data.capabilities?.deep_research || data.capabilities?.research_synthesis;
+            if(!response.ok || !capability || capability.status!=='available'){
+              button.disabled=true;
+              status.textContent=`Deep Research unavailable: ${capability?.detail || httpMessage(response,data)}`;
+              return;
+            }
+            status.textContent=`Deep Research ready: ${capability.provider || 'provider'} / ${capability.model || 'model'}`;
+          }catch(error){
+            button.disabled=true;
+            status.textContent='Deep Research capability check failed.';
+          }
+        }
         async function renderMarkdown(markdown) {
           const response = await fetch('/api/v1/ui/render-markdown', {
             method: 'POST',
@@ -289,7 +343,7 @@ def research_page() -> HTMLResponse:
           const button = document.getElementById('run-research');
           const query = document.getElementById('query').value.trim();
           if (query.length < 3) {
-            status.textContent = '请输入至少 3 个字符的研究问题。';
+            status.textContent = 'Please enter a research question with at least 3 characters.';
             return;
           }
           button.disabled = true;
@@ -300,11 +354,9 @@ def research_page() -> HTMLResponse:
             const response = await fetch('/api/v1/research/deep',{method:'POST',
               headers:{'Content-Type':'application/json'},body:JSON.stringify({
               query,allow_external_search:false})});
-            const data = await response.json();
+            const data = await readJson(response);
             if (!response.ok) {
-              const message = typeof data.detail === 'string'
-                ? data.detail : `Research failed: HTTP ${response.status}`;
-              throw new Error(message);
+              throw new Error(httpMessage(response, data));
             }
             const completed = data.status === 'COMPLETED' &&
               data.succeeded === true &&
@@ -331,7 +383,7 @@ def research_page() -> HTMLResponse:
                 `Attempts: ${data.request_attempt_count ?? 0}`,
                 `Tokens: ${usage.total_tokens ?? 0}`,
                 `Estimated cost: ${usage.estimated_cost_usd ?? 0}`,
-              ].join('\n');
+              ].join('\\n');
               status.textContent = 'Failed';
               return;
             }
@@ -372,8 +424,9 @@ def research_page() -> HTMLResponse:
         }
         function fillExampleQuery() {
           document.getElementById('query').value =
-            'RAG 方法的主要技术路线、实验结果和局限分别是什么？';
+            'Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.';
         }
+        checkResearchCapabilities();
         </script>""",
     )
 

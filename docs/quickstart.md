@@ -34,6 +34,38 @@ Invoke-RestMethod http://localhost/api/v1/capabilities
 
 Default Compose credentials are for local development only.
 
+## UI and runtime checks
+
+UI page GETs (`/api/v1/ui` and `/api/v1/ui/*`) do not consume Search, Upload, or
+Deep Research rate-limit buckets. Business APIs are rate-limited separately:
+read APIs, search, upload, metadata enrichment, and Deep Research. A 429 response
+includes `Retry-After`, `error_code=RATE_LIMITED`, and `request_id`.
+
+Check runtime capabilities before a demo:
+
+```powershell
+Invoke-RestMethod http://localhost/api/v1/capabilities |
+  ConvertTo-Json -Depth 20
+```
+
+For Production Deep Research, confirm `capabilities.deep_research` reports the
+expected provider/model, `response_format=json_object`, and
+`template_fallback=false`.
+
+Run the executable UI JavaScript gate:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\check_ui_javascript_syntax_v1.py
+```
+
+Optional real browser smoke requires Playwright. If Playwright is unavailable,
+the smoke script reports `BLOCKED_NOT_FAKED` instead of pretending the browser
+test passed.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_ui_browser_smoke.py
+```
+
 ## Import a local PDF
 
 Use the browser UI:

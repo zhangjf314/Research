@@ -66,19 +66,27 @@ class RedisService:
             self.last_error = type(exc).__name__
             return False
 
-    def allow_request(self, identity: str) -> bool:
+    def allow_request(
+        self,
+        identity: str,
+        *,
+        bucket_name: str = "default",
+        limit_per_minute: int | None = None,
+    ) -> tuple[bool, int]:
         if self.client is None:
-            return True
+            return True, 0
         bucket = int(time.time() // 60)
-        key = f"paperresearch:rate:{bucket}:{identity}"
+        key = f"paperresearch:rate:{bucket_name}:{bucket}:{identity}"
+        limit = limit_per_minute or self.settings.api_rate_limit_per_minute
         try:
             count = self.client.incr(key)
             if count == 1:
                 self.client.expire(key, 120)
-            return count <= self.settings.api_rate_limit_per_minute
+            retry_after = max(1, 60 - int(time.time() % 60))
+            return count <= limit, retry_after
         except redis.RedisError as exc:
             self.last_error = type(exc).__name__
-            return True
+            return True, 0
 
     @contextmanager
     def lock(self, name: str, timeout: int = 300) -> Iterator[bool]:

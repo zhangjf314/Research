@@ -1,0 +1,92 @@
+{
+  "audit_id": "ui-pages-unavailable-forensics-v1",
+  "branch": "fix/ui-pages-unavailable",
+  "baseline_observed": {
+    "nginx_routes": {
+      "/api/v1/ui": 200,
+      "/api/v1/ui/library": 200,
+      "/api/v1/ui/search": 200,
+      "/api/v1/ui/research": 200,
+      "/api/v1/health": 200,
+      "/api/v1/capabilities": 200,
+      "/api/v1/papers?limit=5": 200
+    },
+    "docker_runtime": {
+      "app_profile": "production",
+      "llm_provider": "openai_compatible",
+      "llm_provider_name": "deepseek",
+      "llm_model": "deepseek-v4-flash",
+      "live_model_calls_enabled": true,
+      "deep_research_enabled_before_fix": false
+    },
+    "redis_rate_keys_observed": [
+      "paperresearch:rate:29752364:172.18.0.6",
+      "paperresearch:rate:29752363:127.0.0.1",
+      "paperresearch:rate:29752364:127.0.0.1"
+    ]
+  },
+  "root_causes": {
+    "library": [
+      {
+        "type": "JAVASCRIPT_PARSE_ERROR",
+        "evidence": "Inline Library JavaScript contained a broken authors fallback string in the table renderer."
+      },
+      {
+        "type": "JAVASCRIPT_PARSE_ERROR",
+        "evidence": "Metadata enrichment output contained broken old/new fallback string literals."
+      }
+    ],
+    "search": [
+      {
+        "type": "API_FETCH_ERROR_VISIBILITY",
+        "evidence": "Search page did not render a deterministic 429/HTTP failure state before this hotfix."
+      }
+    ],
+    "deep_research": [
+      {
+        "type": "CONFIGURATION_DISABLED",
+        "evidence": "Docker Compose defaulted DEEP_RESEARCH_ENABLED to false even when the production DeepSeek provider was otherwise configured."
+      },
+      {
+        "type": "JAVASCRIPT_PARSE_ERROR",
+        "evidence": "Deep Research inline JavaScript emitted Python-decoded newlines inside a quoted JavaScript string and had a broken localized validation message."
+      }
+    ],
+    "shared": [
+      {
+        "type": "MISSING_EXECUTABLE_JS_GATE",
+        "evidence": "Route availability tests passed while browser-executable JavaScript could still fail."
+      },
+      {
+        "type": "GLOBAL_RATE_LIMIT_BUCKET",
+        "evidence": "All non-health/capability routes used a single Redis rate bucket and request.client.host, so Nginx traffic collapsed to the proxy IP."
+      }
+    ]
+  },
+  "fixes": {
+    "javascript_gate": "scripts/check_ui_javascript_syntax_v1.py extracts FastAPI UI scripts and validates them with node --check.",
+    "rate_limit": {
+      "ui_get_pages_exempt": true,
+      "trusted_proxy_header_policy": "X-Forwarded-For/X-Real-IP are accepted only when request.client.host is inside TRUSTED_PROXY_CIDRS.",
+      "buckets": [
+        "read_api",
+        "search",
+        "upload",
+        "metadata_enrichment",
+        "deep_research"
+      ],
+      "429_contract": {
+        "retry_after_header": true,
+        "error_code": "RATE_LIMITED",
+        "request_id": true
+      }
+    },
+    "capabilities": "Added explicit deep_research capability with provider/model/template_fallback/configuration detail.",
+    "docker_compose": "DEEP_RESEARCH_ENABLED now defaults to true in Compose while provider and live-call configuration still fail closed when missing."
+  },
+  "browser_smoke": {
+    "playwright_available": false,
+    "result": "BLOCKED_NOT_FAKED",
+    "reason": "Playwright is not installed in the current workspace."
+  }
+}

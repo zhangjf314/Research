@@ -140,7 +140,7 @@ def test_research_textarea_is_empty_with_placeholder_and_example_button() -> Non
     assert "fillExampleQuery()" in html
     assert "value.trim()" in html
     assert "query.length < 3" in html
-    assert "请输入至少 3 个字符的研究问题。" in html
+    assert "Please enter a research question with at least 3 characters." in html
     assert "fetch('/api/v1/research/deep'" in html
     assert html.index("query.length < 3") < html.index("fetch('/api/v1/research/deep'")
 
