@@ -1,0 +1,415 @@
+# Stage 2C evidence funnel v1
+
+- dev_questions: `98`
+- dev_answerable: `88`
+- test_questions_evaluated: `0`
+- context_trace_source: `RECONSTRUCTED_DETERMINISTIC`
+
+```json
+{
+  "commit": "24cc578df5d8a1cfa2e1a4c0ba64118fd2e3caf1",
+  "context_selection_hypothesis_supported": true,
+  "context_trace_source": "RECONSTRUCTED_DETERMINISTIC",
+  "created_at": "2026-08-07T17:27:10.428973+00:00",
+  "dev_answerable": 88,
+  "dev_questions": 98,
+  "generation_requests": 0,
+  "hypothesis_gate": {
+    "c0_context_selection_drop_min_answerable_rate": 0.15,
+    "pre_to_final_required_claim_coverage_drop_min": 0.1,
+    "required_claim_context_retention_min": 0.9
+  },
+  "metrics": {
+    "answerable_count": 88,
+    "claim_cited_rate": 0.136792,
+    "claim_generated_rate": 0.070755,
+    "context_block_p50": 5.0,
+    "context_block_p95": 5.0,
+    "context_gold_density": 0.104545,
+    "context_redundancy": 0.01515,
+    "context_token_p50": 2000.0,
+    "context_token_p95": 4160.0,
+    "exclusive_failure_funnel": {
+      "counts": {
+        "C0_CONTEXT_SELECTION_DROP": 37,
+        "CITATION_FAILURE": 0,
+        "G0_GENERATION_OMISSION": 31,
+        "G1_GENERATION_UNSUPPORTED_OR_INCORRECT": 0,
+        "R0_RETRIEVAL_MISS": 20,
+        "SUCCESS": 0
+      },
+      "items": [
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q001"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q002"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q003"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q006"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q008"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q010"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q011"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q012"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q013"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q014"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q015"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q017"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q018"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q019"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q020"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q022"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q023"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q024"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q025"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q026"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q029"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q031"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q033"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q034"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q035"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q036"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q037"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q039"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q040"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q041"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q042"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q044"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q045"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q046"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q052"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q055"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q059"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q060"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q061"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q062"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q063"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q064"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q066"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q068"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q069"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q071"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q073"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q074"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q075"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q076"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q078"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q081"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q082"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q083"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q084"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q085"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q086"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q087"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q090"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q091"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q093"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q094"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q095"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q097"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q098"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q099"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q103"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q105"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q108"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q109"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q111"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q112"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q113"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q114"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q116"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q117"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q118"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q119"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q120"
+        },
+        {
+          "primary_failure_stage": "R0_RETRIEVAL_MISS",
+          "question_id": "q122"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q124"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q127"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q130"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q131"
+        },
+        {
+          "primary_failure_stage": "G0_GENERATION_OMISSION",
+          "question_id": "q132"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q135"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q136"
+        },
+        {
+          "primary_failure_stage": "C0_CONTEXT_SELECTION_DROP",
+          "question_id": "q137"
+        }
+      ]
+    },
+    "full_required_claim_evidence_coverage_in_final_context": 0.272727,
+    "gold_evidence_available_at_20": 0.772727,
+    "gold_evidence_retained_final_context": 0.389831,
+    "required_claim_context_retention": 0.487179,
+    "required_claim_evidence_available_at_20": 0.735849,
+    "required_claim_evidence_coverage_in_final_context": 0.358491,
+    "required_claim_evidence_retained_final_context": 0.358491,
+    "retrieved_gold_blocks_dropped_by_context": 72,
+    "retrieved_required_claims_dropped_by_context": 80,
+    "same_paper_block_concentration": 0.738636,
+    "unique_paper_count_mean": 2.227273,
+    "unique_section_count_mean": 0
+  },
+  "retrieval_config": "Current Hybrid / Stage 2A selected Q0",
+  "schema_version": "stage2c-evidence-funnel-v1",
+  "split": "dev",
+  "test_protocol_violation": false,
+  "test_questions_evaluated": 0
+}
+```
