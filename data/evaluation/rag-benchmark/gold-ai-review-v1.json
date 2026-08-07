@@ -1,0 +1,5425 @@
+{
+  "schema_version": "rag-gold-ai-review-v1",
+  "reviewer_type": "codex_evidence_grounded",
+  "created_at": "2026-08-07T12:51:32.882074+00:00",
+  "authored": 150,
+  "approved_first_pass": 146,
+  "revised": 0,
+  "approved_after_revision": 0,
+  "rejected": 4,
+  "needs_review": 0,
+  "unsupported_claims_found": 6,
+  "duplicate_candidates_removed": 1,
+  "ambiguous_candidates_removed": 0,
+  "validation": {
+    "record_count": 146,
+    "approved_count": 146,
+    "answerable_count": 132,
+    "unanswerable_count": 14,
+    "duplicate_question_count": 0,
+    "near_duplicate_question_count": 75,
+    "near_duplicates": [
+      {
+        "left_question_id": "q005",
+        "right_question_id": "q138",
+        "overlap": 0.846154
+      },
+      {
+        "left_question_id": "q005",
+        "right_question_id": "q141",
+        "overlap": 0.846154
+      },
+      {
+        "left_question_id": "q005",
+        "right_question_id": "q143",
+        "overlap": 0.846154
+      },
+      {
+        "left_question_id": "q005",
+        "right_question_id": "q146",
+        "overlap": 0.846154
+      },
+      {
+        "left_question_id": "q018",
+        "right_question_id": "q043",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q019",
+        "right_question_id": "q044",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q020",
+        "right_question_id": "q045",
+        "overlap": 0.846154
+      },
+      {
+        "left_question_id": "q056",
+        "right_question_id": "q061",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q067",
+        "right_question_id": "q072",
+        "overlap": 0.875
+      },
+      {
+        "left_question_id": "q068",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q069",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q073",
+        "right_question_id": "q077",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q073",
+        "right_question_id": "q078",
+        "overlap": 0.888889
+      },
+      {
+        "left_question_id": "q073",
+        "right_question_id": "q081",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q073",
+        "right_question_id": "q083",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q074",
+        "right_question_id": "q077",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q074",
+        "right_question_id": "q078",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q078",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q079",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q080",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q081",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q082",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q077",
+        "right_question_id": "q083",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q078",
+        "right_question_id": "q079",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q078",
+        "right_question_id": "q080",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q078",
+        "right_question_id": "q081",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q078",
+        "right_question_id": "q082",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q078",
+        "right_question_id": "q083",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q080",
+        "right_question_id": "q081",
+        "overlap": 0.869565
+      },
+      {
+        "left_question_id": "q080",
+        "right_question_id": "q083",
+        "overlap": 0.869565
+      },
+      {
+        "left_question_id": "q080",
+        "right_question_id": "q084",
+        "overlap": 0.826087
+      },
+      {
+        "left_question_id": "q080",
+        "right_question_id": "q089",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q081",
+        "right_question_id": "q083",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q081",
+        "right_question_id": "q088",
+        "overlap": 0.863636
+      },
+      {
+        "left_question_id": "q081",
+        "right_question_id": "q089",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q081",
+        "right_question_id": "q090",
+        "overlap": 0.85
+      },
+      {
+        "left_question_id": "q081",
+        "right_question_id": "q092",
+        "overlap": 0.85
+      },
+      {
+        "left_question_id": "q082",
+        "right_question_id": "q089",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q083",
+        "right_question_id": "q088",
+        "overlap": 0.863636
+      },
+      {
+        "left_question_id": "q083",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q083",
+        "right_question_id": "q090",
+        "overlap": 0.85
+      },
+      {
+        "left_question_id": "q084",
+        "right_question_id": "q089",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q085",
+        "right_question_id": "q089",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q086",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q087",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q088",
+        "right_question_id": "q089",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q088",
+        "right_question_id": "q090",
+        "overlap": 0.85
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q090",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q091",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q092",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q094",
+        "overlap": 0.894737
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q095",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q089",
+        "right_question_id": "q096",
+        "overlap": 0.842105
+      },
+      {
+        "left_question_id": "q090",
+        "right_question_id": "q096",
+        "overlap": 0.85
+      },
+      {
+        "left_question_id": "q097",
+        "right_question_id": "q102",
+        "overlap": 0.857143
+      },
+      {
+        "left_question_id": "q103",
+        "right_question_id": "q108",
+        "overlap": 0.875
+      },
+      {
+        "left_question_id": "q115",
+        "right_question_id": "q137",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q116",
+        "right_question_id": "q136",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q117",
+        "right_question_id": "q135",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q118",
+        "right_question_id": "q134",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q119",
+        "right_question_id": "q133",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q120",
+        "right_question_id": "q132",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q121",
+        "right_question_id": "q131",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q122",
+        "right_question_id": "q130",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q123",
+        "right_question_id": "q129",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q124",
+        "right_question_id": "q128",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q125",
+        "right_question_id": "q127",
+        "overlap": 1.0
+      },
+      {
+        "left_question_id": "q138",
+        "right_question_id": "q143",
+        "overlap": 0.875
+      },
+      {
+        "left_question_id": "q144",
+        "right_question_id": "q145",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q144",
+        "right_question_id": "q148",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q144",
+        "right_question_id": "q149",
+        "overlap": 0.888889
+      },
+      {
+        "left_question_id": "q144",
+        "right_question_id": "q150",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q145",
+        "right_question_id": "q149",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q148",
+        "right_question_id": "q149",
+        "overlap": 0.833333
+      },
+      {
+        "left_question_id": "q149",
+        "right_question_id": "q150",
+        "overlap": 0.833333
+      }
+    ],
+    "error_count": 0,
+    "warning_count": 0,
+    "errors": [],
+    "warnings": [],
+    "valid": true
+  },
+  "category_distribution": {
+    "cross_paper_comparison": 27,
+    "limitations_and_research_gaps": 20,
+    "methods_and_experiments": 25,
+    "multi_evidence_synthesis": 30,
+    "single_hop_factual": 30,
+    "unanswerable": 14
+  },
+  "difficulty_distribution": {
+    "easy": 24,
+    "hard": 75,
+    "medium": 47
+  },
+  "corpus_coverage": {
+    "corpus_paper_count": 33,
+    "papers_covered": 33,
+    "papers": [
+      {
+        "paper_id": "1706.03762",
+        "title": "1706.03762",
+        "question_count": 9,
+        "evidence_block_count": 19,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 4
+        }
+      },
+      {
+        "paper_id": "1810.04805",
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers for",
+        "question_count": 10,
+        "evidence_block_count": 26,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
+        }
+      },
+      {
+        "paper_id": "1910.10683",
+        "title": "1910.10683",
+        "question_count": 10,
+        "evidence_block_count": 26,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
+        }
+      },
+      {
+        "paper_id": "2001.08361",
+        "title": "Scaling Laws for Neural Language Models",
+        "question_count": 10,
+        "evidence_block_count": 19,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
+        }
+      },
+      {
+        "paper_id": "2005.14165",
+        "title": "Language Models are Few-Shot Learners",
+        "question_count": 10,
+        "evidence_block_count": 28,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
+        }
+      },
+      {
+        "paper_id": "2104.08691",
+        "title": "The Power of Scale for Parameter-Efﬁcient Prompt Tuning",
+        "question_count": 9,
+        "evidence_block_count": 22,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
+        }
+      },
+      {
+        "paper_id": "2106.09685",
+        "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS",
+        "question_count": 10,
+        "evidence_block_count": 22,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
+        }
+      },
+      {
+        "paper_id": "2203.02155",
+        "title": "Training language models to follow instructions",
+        "question_count": 10,
+        "evidence_block_count": 28,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
+        }
+      },
+      {
+        "paper_id": "2210.11416",
+        "title": "Scaling Instruction-Finetuned Language Models",
+        "question_count": 9,
+        "evidence_block_count": 23,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
+        }
+      },
+      {
+        "paper_id": "2302.13971",
+        "title": "LLaMA: Open and Efﬁcient Foundation Language Models",
+        "question_count": 7,
+        "evidence_block_count": 17,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
+        }
+      },
+      {
+        "paper_id": "2309.15217",
+        "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2403.10081",
+        "title": "DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2404.10981",
+        "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2405.13622",
+        "title": "Automated Evaluation of Retrieval-Augmented Language Models with Task-Specific Exam Generation",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2409.03759",
+        "title": "VERA: Validation and Evaluation of Retrieval-Augmented Systems",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2409.11353",
+        "title": "THaMES: An End-to-End Tool for Hallucination Mitigation and Evaluation in Large Language Models",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2411.02832",
+        "title": "PersianRAG: A Retrieval-Augmented Generation System for Persian Language",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2411.18583",
+        "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
+      },
+      {
+        "paper_id": "2502.00306",
+        "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
+      },
+      {
+        "paper_id": "2503.16581",
+        "title": "Investigating Retrieval-Augmented Generation in Quranic Studies: A Study of 13 Open-Source Large Language Models",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2504.14891",
+        "title": "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2504.19754",
+        "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
+      },
+      {
+        "paper_id": "2507.06956",
+        "title": "Investigating the Robustness of Retrieval-Augmented Generation at the Query Level",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2507.23334",
+        "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
+      },
+      {
+        "paper_id": "2508.14066",
+        "title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use Cases, Requirements, Challenges, and Evaluation",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2509.12382",
+        "title": "LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2510.22344",
+        "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2601.05264",
+        "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
+      },
+      {
+        "paper_id": "2601.11863",
+        "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2602.07525",
+        "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2602.17856",
+        "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
+      },
+      {
+        "paper_id": "2605.27444",
+        "title": "A Systematic Evaluation of Retrieval-Augmented Generation and Language Models for Space Operations",
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
+      },
+      {
+        "paper_id": "2606.28358",
+        "title": "How Do LLMs Cite? A Mechanistic Interpretation of Attribution in Retrieval-Augmented Generation",
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "question_id": "q001",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000022",
+            "1706.03762:b000025",
+            "1706.03762:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000022",
+            "1706.03762:b000025",
+            "1706.03762:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000022",
+            "1706.03762:b000025",
+            "1706.03762:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q002",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000025"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000025"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000025"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q003",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000032",
+            "1706.03762:b000034",
+            "1706.03762:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000032",
+            "1706.03762:b000034",
+            "1706.03762:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000032",
+            "1706.03762:b000034",
+            "1706.03762:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q004",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000103",
+            "1706.03762:b000105",
+            "1706.03762:b000107",
+            "1706.03762:b000109",
+            "1706.03762:b000112"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000103",
+            "1706.03762:b000105",
+            "1706.03762:b000107",
+            "1706.03762:b000109",
+            "1706.03762:b000112"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000103",
+            "1706.03762:b000105",
+            "1706.03762:b000107",
+            "1706.03762:b000109",
+            "1706.03762:b000112"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q005",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q006",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000012",
+            "1810.04805:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000012",
+            "1810.04805:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000012",
+            "1810.04805:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q007",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000005",
+            "1810.04805:b000015",
+            "1810.04805:b000016",
+            "1810.04805:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000005",
+            "1810.04805:b000015",
+            "1810.04805:b000016",
+            "1810.04805:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000005",
+            "1810.04805:b000015",
+            "1810.04805:b000016",
+            "1810.04805:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q008",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000012",
+            "1810.04805:b000013",
+            "1810.04805:b000060",
+            "1810.04805:b000063"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000012",
+            "1810.04805:b000013",
+            "1810.04805:b000060",
+            "1810.04805:b000063"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000012",
+            "1810.04805:b000013",
+            "1810.04805:b000060",
+            "1810.04805:b000063"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q009",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000088",
+            "1810.04805:b000091",
+            "1810.04805:b000093",
+            "1810.04805:b000098",
+            "1810.04805:b000100",
+            "1810.04805:b000104"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000088",
+            "1810.04805:b000091",
+            "1810.04805:b000093",
+            "1810.04805:b000098",
+            "1810.04805:b000100",
+            "1810.04805:b000104"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000088",
+            "1810.04805:b000091",
+            "1810.04805:b000093",
+            "1810.04805:b000098",
+            "1810.04805:b000100",
+            "1810.04805:b000104"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q010",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000100"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000100"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010",
+            "1810.04805:b000100"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q011",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000030",
+            "1910.10683:b000031"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000030",
+            "1910.10683:b000031"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000030",
+            "1910.10683:b000031"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q012",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000052",
+            "1910.10683:b000091"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000052",
+            "1910.10683:b000091"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016",
+            "1910.10683:b000052",
+            "1910.10683:b000091"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q013",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000031",
+            "1910.10683:b000050",
+            "1910.10683:b000057",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000031",
+            "1910.10683:b000050",
+            "1910.10683:b000057",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000031",
+            "1910.10683:b000050",
+            "1910.10683:b000057",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q014",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000053",
+            "1910.10683:b000094",
+            "1910.10683:b000107",
+            "1910.10683:b000108",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000053",
+            "1910.10683:b000094",
+            "1910.10683:b000107",
+            "1910.10683:b000108",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000053",
+            "1910.10683:b000094",
+            "1910.10683:b000107",
+            "1910.10683:b000108",
+            "1910.10683:b000110"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q015",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000052",
+            "1910.10683:b000130",
+            "1910.10683:b000520"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000052",
+            "1910.10683:b000130",
+            "1910.10683:b000520"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000052",
+            "1910.10683:b000130",
+            "1910.10683:b000520"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q016",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q017",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q018",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000188",
+            "2001.08361:b000190",
+            "2001.08361:b000191"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000188",
+            "2001.08361:b000190",
+            "2001.08361:b000191"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000188",
+            "2001.08361:b000190",
+            "2001.08361:b000191"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q019",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000215",
+            "2001.08361:b000216",
+            "2001.08361:b000217",
+            "2001.08361:b000218"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000215",
+            "2001.08361:b000216",
+            "2001.08361:b000217",
+            "2001.08361:b000218"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000215",
+            "2001.08361:b000216",
+            "2001.08361:b000217",
+            "2001.08361:b000218"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q020",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000629",
+            "2001.08361:b000857"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000629",
+            "2001.08361:b000857"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000629",
+            "2001.08361:b000857"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q021",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000012",
+            "2005.14165:b000034",
+            "2005.14165:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000012",
+            "2005.14165:b000034",
+            "2005.14165:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000012",
+            "2005.14165:b000034",
+            "2005.14165:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q022",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000049",
+            "2005.14165:b000056",
+            "2005.14165:b000057",
+            "2005.14165:b000058"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000049",
+            "2005.14165:b000056",
+            "2005.14165:b000057",
+            "2005.14165:b000058"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000049",
+            "2005.14165:b000056",
+            "2005.14165:b000057",
+            "2005.14165:b000058"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q023",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000061",
+            "2005.14165:b000063",
+            "2005.14165:b000064",
+            "2005.14165:b000067",
+            "2005.14165:b000068"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000061",
+            "2005.14165:b000063",
+            "2005.14165:b000064",
+            "2005.14165:b000067",
+            "2005.14165:b000068"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000061",
+            "2005.14165:b000063",
+            "2005.14165:b000064",
+            "2005.14165:b000067",
+            "2005.14165:b000068"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q024",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000111",
+            "2005.14165:b000112",
+            "2005.14165:b000113",
+            "2005.14165:b000115"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000111",
+            "2005.14165:b000112",
+            "2005.14165:b000113",
+            "2005.14165:b000115"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000111",
+            "2005.14165:b000112",
+            "2005.14165:b000113",
+            "2005.14165:b000115"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q025",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000351",
+            "2005.14165:b000352",
+            "2005.14165:b000353",
+            "2005.14165:b000354"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000351",
+            "2005.14165:b000352",
+            "2005.14165:b000353",
+            "2005.14165:b000354"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000351",
+            "2005.14165:b000352",
+            "2005.14165:b000353",
+            "2005.14165:b000354"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q026",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000023",
+            "2104.08691:b000024",
+            "2104.08691:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000023",
+            "2104.08691:b000024",
+            "2104.08691:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000023",
+            "2104.08691:b000024",
+            "2104.08691:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q027",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000016",
+            "2104.08691:b000017",
+            "2104.08691:b000019",
+            "2104.08691:b000056"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000016",
+            "2104.08691:b000017",
+            "2104.08691:b000019",
+            "2104.08691:b000056"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000016",
+            "2104.08691:b000017",
+            "2104.08691:b000019",
+            "2104.08691:b000056"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q028",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000062",
+            "2104.08691:b000186",
+            "2104.08691:b000189"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000062",
+            "2104.08691:b000186",
+            "2104.08691:b000189"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000062",
+            "2104.08691:b000186",
+            "2104.08691:b000189"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q029",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000086",
+            "2104.08691:b000088",
+            "2104.08691:b000089",
+            "2104.08691:b000231"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000086",
+            "2104.08691:b000088",
+            "2104.08691:b000089",
+            "2104.08691:b000231"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000086",
+            "2104.08691:b000088",
+            "2104.08691:b000089",
+            "2104.08691:b000231"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q030",
+      "decision": "REJECT",
+      "question_quality": "FAIL",
+      "answer_quality": "NOT_APPLICABLE",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": true,
+      "suggested_revision": null,
+      "reason": "Duplicate or near-duplicate benchmark capability cluster."
+    },
+    {
+      "question_id": "q031",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q032",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000026",
+            "2106.09685:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000026",
+            "2106.09685:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004",
+            "2106.09685:b000026",
+            "2106.09685:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q033",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000067",
+            "2106.09685:b000068",
+            "2106.09685:b000069",
+            "2106.09685:b000070"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000067",
+            "2106.09685:b000068",
+            "2106.09685:b000069",
+            "2106.09685:b000070"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000067",
+            "2106.09685:b000068",
+            "2106.09685:b000069",
+            "2106.09685:b000070"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q034",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000083",
+            "2106.09685:b000085",
+            "2106.09685:b000086"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000083",
+            "2106.09685:b000085",
+            "2106.09685:b000086"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000083",
+            "2106.09685:b000085",
+            "2106.09685:b000086"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q035",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000237",
+            "2106.09685:b000239"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000237",
+            "2106.09685:b000239"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000237",
+            "2106.09685:b000239"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q036",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q037",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000027",
+            "2203.02155:b000031",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000027",
+            "2203.02155:b000031",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011",
+            "2203.02155:b000027",
+            "2203.02155:b000031",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q038",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000068",
+            "2203.02155:b000069",
+            "2203.02155:b000070",
+            "2203.02155:b000071"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000068",
+            "2203.02155:b000069",
+            "2203.02155:b000070",
+            "2203.02155:b000071"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000068",
+            "2203.02155:b000069",
+            "2203.02155:b000070",
+            "2203.02155:b000071"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q039",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000031",
+            "2203.02155:b000035",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000031",
+            "2203.02155:b000035",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000031",
+            "2203.02155:b000035",
+            "2203.02155:b000036",
+            "2203.02155:b000037",
+            "2203.02155:b000038"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q040",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000304",
+            "2203.02155:b000305",
+            "2203.02155:b000309"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000304",
+            "2203.02155:b000305",
+            "2203.02155:b000309"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000304",
+            "2203.02155:b000305",
+            "2203.02155:b000309"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q041",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000032",
+            "2210.11416:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000032",
+            "2210.11416:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000032",
+            "2210.11416:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q042",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000006",
+            "2210.11416:b000033",
+            "2210.11416:b000034",
+            "2210.11416:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000006",
+            "2210.11416:b000033",
+            "2210.11416:b000034",
+            "2210.11416:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000006",
+            "2210.11416:b000033",
+            "2210.11416:b000034",
+            "2210.11416:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q043",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000028",
+            "2210.11416:b000071",
+            "2210.11416:b000112",
+            "2210.11416:b000113"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000028",
+            "2210.11416:b000071",
+            "2210.11416:b000112",
+            "2210.11416:b000113"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000028",
+            "2210.11416:b000071",
+            "2210.11416:b000112",
+            "2210.11416:b000113"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q044",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000112",
+            "2210.11416:b000113",
+            "2210.11416:b000114"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000112",
+            "2210.11416:b000113",
+            "2210.11416:b000114"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000112",
+            "2210.11416:b000113",
+            "2210.11416:b000114"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q045",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000724",
+            "2210.11416:b000725",
+            "2210.11416:b000726"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000724",
+            "2210.11416:b000725",
+            "2210.11416:b000726"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000724",
+            "2210.11416:b000725",
+            "2210.11416:b000726"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q046",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000010",
+            "2302.13971:b000012",
+            "2302.13971:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000010",
+            "2302.13971:b000012",
+            "2302.13971:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000010",
+            "2302.13971:b000012",
+            "2302.13971:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q047",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000008",
+            "2302.13971:b000010",
+            "2302.13971:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000008",
+            "2302.13971:b000010",
+            "2302.13971:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000008",
+            "2302.13971:b000010",
+            "2302.13971:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q048",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000018",
+            "2302.13971:b000021",
+            "2302.13971:b000022",
+            "2302.13971:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000018",
+            "2302.13971:b000021",
+            "2302.13971:b000022",
+            "2302.13971:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000018",
+            "2302.13971:b000021",
+            "2302.13971:b000022",
+            "2302.13971:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q049",
+      "decision": "REJECT",
+      "question_quality": "PASS",
+      "answer_quality": "FAIL",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        },
+        {
+          "claim_id": "C2",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        },
+        {
+          "claim_id": "C3",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "At least one required claim is not fully supported by explicit evidence pairs."
+    },
+    {
+      "question_id": "q050",
+      "decision": "REJECT",
+      "question_quality": "PASS",
+      "answer_quality": "FAIL",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        },
+        {
+          "claim_id": "C2",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        },
+        {
+          "claim_id": "C3",
+          "support": "NOT_SUPPORTED",
+          "evidence_ids": [],
+          "reason": "Claim is missing explicit valid evidence pairs."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "At least one required claim is not fully supported by explicit evidence pairs."
+    },
+    {
+      "question_id": "q051",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000001"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q052",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000001"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q053",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000001"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q054",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000001"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q055",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000005"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q056",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q057",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q058",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q059",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q060",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q061",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q062",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q063",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q064",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q065",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000004"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q066",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q067",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000022"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q068",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000021"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q069",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q070",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q071",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q072",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000020"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000028"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q073",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000036"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000053"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q074",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000034"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q075",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000019"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q076",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000022"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000020"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q077",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000030"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q078",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000033"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q079",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q080",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.14891:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.14891:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q081",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2605.27444:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2605.27444:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q082",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2405.13622:b000004"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2405.13622:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q083",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2404.10981:b000003"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2404.10981:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q084",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2503.16581:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2503.16581:b000021"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q085",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2403.10081:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2403.10081:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q086",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2509.12382:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2509.12382:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q087",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2508.14066:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2508.14066:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q088",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.02832:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.02832:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q089",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2309.15217:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2309.15217:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q090",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.11863:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.11863:b000002"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q091",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.06956:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.06956:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q092",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.03759:b000021"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.03759:b000020"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q093",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.11353:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.11353:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q094",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.07525:b000006"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.07525:b000005"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q095",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2606.28358:b000005"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2606.28358:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q096",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2510.22344:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2510.22344:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q097",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q098",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000043"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q099",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000022"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q100",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000050"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q101",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q102",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000032"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q103",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000093"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q104",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000041"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q105",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q106",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q107",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q108",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000071"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q109",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q110",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000025"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.19754:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1706.03762:b000025",
+            "2504.19754:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q111",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.23334:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.17856:b000016",
+            "2507.23334:b000007"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q112",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2502.00306:b000024"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.18583:b000018",
+            "2502.00306:b000024"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q113",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2510.22344:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.05264:b000017",
+            "2510.22344:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q114",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2606.28358:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1810.04805:b000011",
+            "2606.28358:b000012"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q115",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.07525:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000027",
+            "2602.07525:b000008"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q116",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000052"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.11353:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000052",
+            "2409.11353:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q117",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000036"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.03759:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000036",
+            "2409.03759:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q118",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.06956:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000018",
+            "2507.06956:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q119",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.11863:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000023",
+            "2601.11863:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q120",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000029"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2309.15217:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000029",
+            "2309.15217:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q121",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000034"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.02832:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000034",
+            "2411.02832:b000027"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q122",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2508.14066:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000010",
+            "2508.14066:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q123",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.14891:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2509.12382:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.14891:b000017",
+            "2509.12382:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q124",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2605.27444:b000011"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2403.10081:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2605.27444:b000011",
+            "2403.10081:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q125",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2405.13622:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2503.16581:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2405.13622:b000010",
+            "2503.16581:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q126",
+      "decision": "REJECT",
+      "question_quality": "FAIL",
+      "answer_quality": "FAIL",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Deterministic validation failed: [{'type': 'cross_paper_requires_two_papers', 'question_id': 'q126'}]"
+    },
+    {
+      "question_id": "q127",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2503.16581:b000028"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2405.13622:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2503.16581:b000028",
+            "2405.13622:b000017"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q128",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2403.10081:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2605.27444:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2403.10081:b000015",
+            "2605.27444:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q129",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2509.12382:b000010"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2504.14891:b000020"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2509.12382:b000010",
+            "2504.14891:b000020"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q130",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2508.14066:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2302.13971:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2508.14066:b000013",
+            "2302.13971:b000015"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q131",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.02832:b000028"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2210.11416:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2411.02832:b000028",
+            "2210.11416:b000035"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q132",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2309.15217:b000018"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2203.02155:b000031"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2309.15217:b000018",
+            "2203.02155:b000031"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q133",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.11863:b000016"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2106.09685:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2601.11863:b000016",
+            "2106.09685:b000026"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q134",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.06956:b000014"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2104.08691:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2507.06956:b000014",
+            "2104.08691:b000023"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q135",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.03759:b000025"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2005.14165:b000037"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.03759:b000025",
+            "2005.14165:b000037"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q136",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.11353:b000013"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2001.08361:b000054"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2409.11353:b000013",
+            "2001.08361:b000054"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q137",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [
+        {
+          "claim_id": "C1",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.07525:b000009"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C2",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "1910.10683:b000029"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        },
+        {
+          "claim_id": "C3",
+          "support": "SUPPORTED",
+          "evidence_ids": [
+            "2602.07525:b000009",
+            "1910.10683:b000029"
+          ],
+          "reason": "Claim has explicit evidence pairs that exist in the frozen evidence corpus."
+        }
+      ],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Question, answer, claims, pages, blocks, and explicit evidence pairs passed evidence-grounded review."
+    },
+    {
+      "question_id": "q138",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q139",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q140",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q141",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q142",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q143",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q144",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q145",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q146",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q147",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q148",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q149",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    },
+    {
+      "question_id": "q150",
+      "decision": "APPROVE",
+      "question_quality": "PASS",
+      "answer_quality": "PASS",
+      "claim_reviews": [],
+      "ambiguity": false,
+      "duplicate_risk": false,
+      "suggested_revision": null,
+      "reason": "Unanswerable hard negative has no gold answer or gold blocks and includes a verified unanswerable reason."
+    }
+  ]
+}

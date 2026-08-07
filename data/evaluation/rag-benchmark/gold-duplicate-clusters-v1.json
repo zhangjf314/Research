@@ -1,0 +1,255 @@
+{
+  "schema_version": "rag-gold-duplicate-clusters-v1",
+  "created_at": "2026-08-07T12:51:33.486931+00:00",
+  "input": "data\\evaluation\\rag-benchmark\\gold-ai-reviewed-full-v1.jsonl",
+  "threshold": 0.82,
+  "near_duplicate_pair_count": 75,
+  "cluster_count": 21,
+  "unresolved_cluster_count": 0,
+  "classification_distribution": {
+    "DUPLICATE": 0,
+    "DISTINCT_CAPABILITY": 1,
+    "DISTINCT_EVIDENCE": 20,
+    "DISTINCT_COMPARISON": 0,
+    "NEEDS_REVIEW": 0
+  },
+  "clusters": [
+    {
+      "cluster_id": "dup-cluster-001",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q005",
+        "q138",
+        "q141",
+        "q143",
+        "q146"
+      ],
+      "size": 5,
+      "reason": "Similar unanswerable template but different searched paper scopes."
+    },
+    {
+      "cluster_id": "dup-cluster-002",
+      "classification": "DISTINCT_CAPABILITY",
+      "question_ids": [
+        "q018",
+        "q043"
+      ],
+      "size": 2,
+      "reason": "Similar wording but different benchmark categories/capabilities."
+    },
+    {
+      "cluster_id": "dup-cluster-003",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q019",
+        "q044"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-004",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q020",
+        "q045"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-005",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q056",
+        "q061"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-006",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q067",
+        "q072"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-007",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q068",
+        "q069",
+        "q073",
+        "q074",
+        "q077",
+        "q078",
+        "q079",
+        "q080",
+        "q081",
+        "q082",
+        "q083",
+        "q084",
+        "q085",
+        "q086",
+        "q087",
+        "q088",
+        "q089",
+        "q090",
+        "q091",
+        "q092",
+        "q094",
+        "q095",
+        "q096"
+      ],
+      "size": 23,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-008",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q097",
+        "q102"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-009",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q103",
+        "q108"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-010",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q115",
+        "q137"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-011",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q116",
+        "q136"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-012",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q117",
+        "q135"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-013",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q118",
+        "q134"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-014",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q119",
+        "q133"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-015",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q120",
+        "q132"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-016",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q121",
+        "q131"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-017",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q122",
+        "q130"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-018",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q123",
+        "q129"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-019",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q124",
+        "q128"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-020",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q125",
+        "q127"
+      ],
+      "size": 2,
+      "reason": "Template-like wording but different papers or evidence blocks."
+    },
+    {
+      "cluster_id": "dup-cluster-021",
+      "classification": "DISTINCT_EVIDENCE",
+      "question_ids": [
+        "q144",
+        "q145",
+        "q148",
+        "q149",
+        "q150"
+      ],
+      "size": 5,
+      "reason": "Similar unanswerable template but different searched paper scopes."
+    }
+  ]
+}

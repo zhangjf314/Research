@@ -1,50 +1,50 @@
 {
   "schema_version": "rag-gold-expansion-plan-v1",
-  "current_total": 50,
+  "current_total": 146,
   "target_total": 150,
-  "questions_to_add": 100,
+  "questions_to_add": 4,
   "category_plan": [
     {
       "category": "single_hop_factual",
-      "current": 25,
+      "current": 30,
       "target": 30,
-      "deficit": 5
+      "deficit": 0
     },
     {
       "category": "multi_evidence_synthesis",
-      "current": 0,
+      "current": 30,
       "target": 30,
-      "deficit": 30
+      "deficit": 0
     },
     {
       "category": "cross_paper_comparison",
-      "current": 2,
+      "current": 27,
       "target": 30,
-      "deficit": 28
+      "deficit": 3
     },
     {
       "category": "methods_and_experiments",
-      "current": 14,
+      "current": 25,
       "target": 25,
-      "deficit": 11
+      "deficit": 0
     },
     {
       "category": "limitations_and_research_gaps",
-      "current": 7,
+      "current": 20,
       "target": 20,
-      "deficit": 13
+      "deficit": 0
     },
     {
       "category": "unanswerable",
-      "current": 2,
+      "current": 14,
       "target": 15,
-      "deficit": 13
+      "deficit": 1
     }
   ],
   "difficulty_current": {
-    "easy": 20,
-    "hard": 24,
-    "medium": 6
+    "easy": 24,
+    "hard": 75,
+    "medium": 47
   },
   "difficulty_target_guidance": {
     "easy": "25-30%",
@@ -63,300 +63,376 @@
     "approved_requires_human_review": true,
     "llm_drafts_must_not_be_auto_approved": true
   },
-  "created_at": "2026-08-07T11:30:52.013975+00:00",
-  "source_gold": "data/evaluation/gold-set-v1.jsonl",
+  "created_at": "2026-08-07T12:52:38.863538+00:00",
+  "source_gold": "data\\evaluation\\rag-benchmark\\gold-full-v1.jsonl",
   "corpus_coverage": {
     "corpus_paper_count": 33,
-    "papers_covered": 10,
+    "papers_covered": 33,
     "papers": [
       {
         "paper_id": "1706.03762",
         "title": "1706.03762",
-        "question_count": 6,
-        "evidence_block_count": 22,
+        "question_count": 9,
+        "evidence_block_count": 19,
         "category_distribution": {
-          "experiment_setup": 1,
-          "method": 1,
-          "multi_paper_comparison": 2,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 4
         }
       },
       {
         "paper_id": "1810.04805",
         "title": "BERT: Pre-training of Deep Bidirectional Transformers for",
-        "question_count": 7,
-        "evidence_block_count": 29,
+        "question_count": 10,
+        "evidence_block_count": 26,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "multi_paper_comparison": 2,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "1910.10683",
         "title": "1910.10683",
-        "question_count": 5,
-        "evidence_block_count": 18,
+        "question_count": 10,
+        "evidence_block_count": 26,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2001.08361",
         "title": "Scaling Laws for Neural Language Models",
-        "question_count": 5,
-        "evidence_block_count": 11,
+        "question_count": 10,
+        "evidence_block_count": 19,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2005.14165",
         "title": "Language Models are Few-Shot Learners",
-        "question_count": 5,
-        "evidence_block_count": 20,
+        "question_count": 10,
+        "evidence_block_count": 28,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2104.08691",
         "title": "The Power of Scale for Parameter-Efﬁcient Prompt Tuning",
-        "question_count": 4,
-        "evidence_block_count": 14,
+        "question_count": 9,
+        "evidence_block_count": 22,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2106.09685",
         "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS",
-        "question_count": 5,
-        "evidence_block_count": 14,
+        "question_count": 10,
+        "evidence_block_count": 22,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2203.02155",
         "title": "Training language models to follow instructions",
-        "question_count": 5,
-        "evidence_block_count": 20,
+        "question_count": 10,
+        "evidence_block_count": 28,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2210.11416",
         "title": "Scaling Instruction-Finetuned Language Models",
-        "question_count": 5,
-        "evidence_block_count": 16,
+        "question_count": 9,
+        "evidence_block_count": 23,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2302.13971",
         "title": "LLaMA: Open and Efﬁcient Foundation Language Models",
-        "question_count": 3,
-        "evidence_block_count": 10,
+        "question_count": 7,
+        "evidence_block_count": 17,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2309.15217",
         "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2403.10081",
         "title": "DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2404.10981",
         "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2405.13622",
         "title": "Automated Evaluation of Retrieval-Augmented Language Models with Task-Specific Exam Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2409.03759",
         "title": "VERA: Validation and Evaluation of Retrieval-Augmented Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2409.11353",
         "title": "THaMES: An End-to-End Tool for Hallucination Mitigation and Evaluation in Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2411.02832",
         "title": "PersianRAG: A Retrieval-Augmented Generation System for Persian Language",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2411.18583",
         "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2502.00306",
         "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2503.16581",
         "title": "Investigating Retrieval-Augmented Generation in Quranic Studies: A Study of 13 Open-Source Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2504.14891",
         "title": "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2504.19754",
         "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2507.06956",
         "title": "Investigating the Robustness of Retrieval-Augmented Generation at the Query Level",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2507.23334",
         "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2508.14066",
         "title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use Cases, Requirements, Challenges, and Evaluation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2509.12382",
         "title": "LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2510.22344",
         "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2601.05264",
         "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2601.11863",
         "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2602.07525",
         "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2602.17856",
         "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2605.27444",
         "title": "A Systematic Evaluation of Retrieval-Augmented Generation and Language Models for Space Operations",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2606.28358",
         "title": "How Do LLMs Cite? A Mechanistic Interpretation of Attribution in Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
       }
     ]
   }

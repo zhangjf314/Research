@@ -2,9 +2,9 @@
 
 This plan expands the current human-reviewed internal Gold set toward approximately 150 questions before any Stage 2 RAG optimization.
 
-- current_total: 50
+- current_total: 146
 - target_total: 150
-- questions_to_add: 100
+- questions_to_add: 4
 - candidate review_status default: `pending`
 - approved requires human review: `true`
 
@@ -12,12 +12,12 @@ This plan expands the current human-reviewed internal Gold set toward approximat
 
 | category | current | target | deficit |
 | --- | ---: | ---: | ---: |
-| single_hop_factual | 25 | 30 | 5 |
-| multi_evidence_synthesis | 0 | 30 | 30 |
-| cross_paper_comparison | 2 | 30 | 28 |
-| methods_and_experiments | 14 | 25 | 11 |
-| limitations_and_research_gaps | 7 | 20 | 13 |
-| unanswerable | 2 | 15 | 13 |
+| single_hop_factual | 30 | 30 | 0 |
+| multi_evidence_synthesis | 30 | 30 | 0 |
+| cross_paper_comparison | 27 | 30 | 3 |
+| methods_and_experiments | 25 | 25 | 0 |
+| limitations_and_research_gaps | 20 | 20 | 0 |
+| unanswerable | 14 | 15 | 1 |
 
 ## Difficulty guidance
 
@@ -30,7 +30,7 @@ New questions must not all be simple factual questions. Medium and hard question
 ## Corpus coverage
 
 - corpus_paper_count: 33
-- papers_covered_by_current_gold: 10
+- papers_covered_by_current_gold: 33
 
 ## Review policy
 

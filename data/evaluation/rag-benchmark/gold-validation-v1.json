@@ -1,1327 +1,764 @@
 {
-  "record_count": 50,
-  "approved_count": 50,
-  "answerable_count": 48,
-  "unanswerable_count": 2,
-  "duplicate_question_count": 6,
-  "near_duplicate_question_count": 193,
+  "record_count": 146,
+  "approved_count": 146,
+  "answerable_count": 132,
+  "unanswerable_count": 14,
+  "duplicate_question_count": 0,
+  "near_duplicate_question_count": 75,
   "near_duplicates": [
     {
-      "left_question_id": "q001",
-      "right_question_id": "q006",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q011",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q016",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q021",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q026",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q031",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q001",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q007",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q012",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q017",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q022",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q027",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q032",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q002",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q008",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q013",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q018",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q023",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q028",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q033",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q038",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q003",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q009",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q014",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q019",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q024",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q029",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q034",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q004",
-      "right_question_id": "q044",
-      "overlap": 1.0
+      "left_question_id": "q005",
+      "right_question_id": "q138",
+      "overlap": 0.846154
     },
     {
       "left_question_id": "q005",
-      "right_question_id": "q030",
-      "overlap": 1.0
+      "right_question_id": "q141",
+      "overlap": 0.846154
     },
     {
-      "left_question_id": "q006",
-      "right_question_id": "q011",
-      "overlap": 1.0
+      "left_question_id": "q005",
+      "right_question_id": "q143",
+      "overlap": 0.846154
     },
     {
-      "left_question_id": "q006",
-      "right_question_id": "q016",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q021",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q026",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q031",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q006",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q012",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q017",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q022",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q027",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q032",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q007",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q013",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q018",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q023",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q028",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q033",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q038",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q008",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q014",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q019",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q024",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q029",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q034",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q009",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q015",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q020",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q025",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q035",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q040",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q010",
-      "right_question_id": "q045",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q016",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q021",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q026",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q031",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q011",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q017",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q022",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q027",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q032",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q012",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q018",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q023",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q028",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q033",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q038",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q013",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q019",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q024",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q029",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q034",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q014",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q015",
-      "right_question_id": "q020",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q015",
-      "right_question_id": "q025",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q015",
-      "right_question_id": "q035",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q015",
-      "right_question_id": "q040",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q015",
-      "right_question_id": "q045",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q021",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q026",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q031",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q016",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q022",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q027",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q032",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q017",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q018",
-      "right_question_id": "q023",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q018",
-      "right_question_id": "q028",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q018",
-      "right_question_id": "q033",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q018",
-      "right_question_id": "q038",
-      "overlap": 1.0
+      "left_question_id": "q005",
+      "right_question_id": "q146",
+      "overlap": 0.846154
     },
     {
       "left_question_id": "q018",
       "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q018",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q019",
-      "right_question_id": "q024",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q019",
-      "right_question_id": "q029",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q019",
-      "right_question_id": "q034",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q019",
-      "right_question_id": "q039",
-      "overlap": 1.0
+      "overlap": 0.833333
     },
     {
       "left_question_id": "q019",
       "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q020",
-      "right_question_id": "q025",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q020",
-      "right_question_id": "q035",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q020",
-      "right_question_id": "q040",
-      "overlap": 1.0
+      "overlap": 0.833333
     },
     {
       "left_question_id": "q020",
       "right_question_id": "q045",
+      "overlap": 0.846154
+    },
+    {
+      "left_question_id": "q056",
+      "right_question_id": "q061",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q067",
+      "right_question_id": "q072",
+      "overlap": 0.875
+    },
+    {
+      "left_question_id": "q068",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q069",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q073",
+      "right_question_id": "q077",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q073",
+      "right_question_id": "q078",
+      "overlap": 0.888889
+    },
+    {
+      "left_question_id": "q073",
+      "right_question_id": "q081",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q073",
+      "right_question_id": "q083",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q074",
+      "right_question_id": "q077",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q074",
+      "right_question_id": "q078",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q078",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q079",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q080",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q081",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q082",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q077",
+      "right_question_id": "q083",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q078",
+      "right_question_id": "q079",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q078",
+      "right_question_id": "q080",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q078",
+      "right_question_id": "q081",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q078",
+      "right_question_id": "q082",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q078",
+      "right_question_id": "q083",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q080",
+      "right_question_id": "q081",
+      "overlap": 0.869565
+    },
+    {
+      "left_question_id": "q080",
+      "right_question_id": "q083",
+      "overlap": 0.869565
+    },
+    {
+      "left_question_id": "q080",
+      "right_question_id": "q084",
+      "overlap": 0.826087
+    },
+    {
+      "left_question_id": "q080",
+      "right_question_id": "q089",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q081",
+      "right_question_id": "q083",
+      "overlap": 0.833333
+    },
+    {
+      "left_question_id": "q081",
+      "right_question_id": "q088",
+      "overlap": 0.863636
+    },
+    {
+      "left_question_id": "q081",
+      "right_question_id": "q089",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q081",
+      "right_question_id": "q090",
+      "overlap": 0.85
+    },
+    {
+      "left_question_id": "q081",
+      "right_question_id": "q092",
+      "overlap": 0.85
+    },
+    {
+      "left_question_id": "q082",
+      "right_question_id": "q089",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q083",
+      "right_question_id": "q088",
+      "overlap": 0.863636
+    },
+    {
+      "left_question_id": "q083",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q083",
+      "right_question_id": "q090",
+      "overlap": 0.85
+    },
+    {
+      "left_question_id": "q084",
+      "right_question_id": "q089",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q085",
+      "right_question_id": "q089",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q086",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q087",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q088",
+      "right_question_id": "q089",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q088",
+      "right_question_id": "q090",
+      "overlap": 0.85
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q090",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q091",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q092",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q094",
+      "overlap": 0.894737
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q095",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q089",
+      "right_question_id": "q096",
+      "overlap": 0.842105
+    },
+    {
+      "left_question_id": "q090",
+      "right_question_id": "q096",
+      "overlap": 0.85
+    },
+    {
+      "left_question_id": "q097",
+      "right_question_id": "q102",
+      "overlap": 0.857143
+    },
+    {
+      "left_question_id": "q103",
+      "right_question_id": "q108",
+      "overlap": 0.875
+    },
+    {
+      "left_question_id": "q115",
+      "right_question_id": "q137",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q021",
-      "right_question_id": "q026",
+      "left_question_id": "q116",
+      "right_question_id": "q136",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q021",
-      "right_question_id": "q031",
+      "left_question_id": "q117",
+      "right_question_id": "q135",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q021",
-      "right_question_id": "q036",
+      "left_question_id": "q118",
+      "right_question_id": "q134",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q021",
-      "right_question_id": "q041",
+      "left_question_id": "q119",
+      "right_question_id": "q133",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q021",
-      "right_question_id": "q046",
+      "left_question_id": "q120",
+      "right_question_id": "q132",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q022",
-      "right_question_id": "q027",
+      "left_question_id": "q121",
+      "right_question_id": "q131",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q022",
-      "right_question_id": "q032",
+      "left_question_id": "q122",
+      "right_question_id": "q130",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q022",
-      "right_question_id": "q037",
+      "left_question_id": "q123",
+      "right_question_id": "q129",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q022",
-      "right_question_id": "q042",
+      "left_question_id": "q124",
+      "right_question_id": "q128",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q022",
-      "right_question_id": "q047",
+      "left_question_id": "q125",
+      "right_question_id": "q127",
       "overlap": 1.0
     },
     {
-      "left_question_id": "q023",
-      "right_question_id": "q028",
-      "overlap": 1.0
+      "left_question_id": "q138",
+      "right_question_id": "q143",
+      "overlap": 0.875
     },
     {
-      "left_question_id": "q023",
-      "right_question_id": "q033",
-      "overlap": 1.0
+      "left_question_id": "q144",
+      "right_question_id": "q145",
+      "overlap": 0.833333
     },
     {
-      "left_question_id": "q023",
-      "right_question_id": "q038",
-      "overlap": 1.0
+      "left_question_id": "q144",
+      "right_question_id": "q148",
+      "overlap": 0.833333
     },
     {
-      "left_question_id": "q023",
-      "right_question_id": "q043",
-      "overlap": 1.0
+      "left_question_id": "q144",
+      "right_question_id": "q149",
+      "overlap": 0.888889
     },
     {
-      "left_question_id": "q023",
-      "right_question_id": "q048",
-      "overlap": 1.0
+      "left_question_id": "q144",
+      "right_question_id": "q150",
+      "overlap": 0.833333
     },
     {
-      "left_question_id": "q024",
-      "right_question_id": "q029",
-      "overlap": 1.0
+      "left_question_id": "q145",
+      "right_question_id": "q149",
+      "overlap": 0.833333
     },
     {
-      "left_question_id": "q024",
-      "right_question_id": "q034",
-      "overlap": 1.0
+      "left_question_id": "q148",
+      "right_question_id": "q149",
+      "overlap": 0.833333
     },
     {
-      "left_question_id": "q024",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q024",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q025",
-      "right_question_id": "q035",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q025",
-      "right_question_id": "q040",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q025",
-      "right_question_id": "q045",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q026",
-      "right_question_id": "q031",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q026",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q026",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q026",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q027",
-      "right_question_id": "q032",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q027",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q027",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q027",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q028",
-      "right_question_id": "q033",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q028",
-      "right_question_id": "q038",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q028",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q028",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q029",
-      "right_question_id": "q034",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q029",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q029",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q031",
-      "right_question_id": "q036",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q031",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q031",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q032",
-      "right_question_id": "q037",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q032",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q032",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q033",
-      "right_question_id": "q038",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q033",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q033",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q034",
-      "right_question_id": "q039",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q034",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q035",
-      "right_question_id": "q040",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q035",
-      "right_question_id": "q045",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q036",
-      "right_question_id": "q041",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q036",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q037",
-      "right_question_id": "q042",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q037",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q038",
-      "right_question_id": "q043",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q038",
-      "right_question_id": "q048",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q039",
-      "right_question_id": "q044",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q040",
-      "right_question_id": "q045",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q041",
-      "right_question_id": "q046",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q042",
-      "right_question_id": "q047",
-      "overlap": 1.0
-    },
-    {
-      "left_question_id": "q043",
-      "right_question_id": "q048",
-      "overlap": 1.0
+      "left_question_id": "q149",
+      "right_question_id": "q150",
+      "overlap": 0.833333
     }
   ],
-  "error_count": 10,
+  "error_count": 0,
   "warning_count": 0,
-  "errors": [
-    {
-      "type": "duplicate_question",
-      "normalized_question": "what research problem does the target paper address",
-      "count": 10
-    },
-    {
-      "type": "duplicate_question",
-      "normalized_question": "what are the target paper s main contributions",
-      "count": 10
-    },
-    {
-      "type": "duplicate_question",
-      "normalized_question": "what method or technical approach does the target paper propose",
-      "count": 10
-    },
-    {
-      "type": "duplicate_question",
-      "normalized_question": "how are the target paper s experiments designed and evaluated",
-      "count": 9
-    },
-    {
-      "type": "duplicate_question",
-      "normalized_question": "for the target paper what exact total energy consumption is reported for all experiments",
-      "count": 2
-    },
-    {
-      "type": "duplicate_question",
-      "normalized_question": "what limitations or unresolved issues are reported in the target paper",
-      "count": 7
-    },
-    {
-      "type": "unanswerable_has_gold_answer",
-      "question_id": "q005"
-    },
-    {
-      "type": "missing_or_invalid_unanswerable_reason",
-      "question_id": "q005",
-      "reason": ""
-    },
-    {
-      "type": "unanswerable_has_gold_answer",
-      "question_id": "q030"
-    },
-    {
-      "type": "missing_or_invalid_unanswerable_reason",
-      "question_id": "q030",
-      "reason": ""
-    }
-  ],
+  "errors": [],
   "warnings": [],
-  "valid": false,
+  "valid": true,
   "schema_version": "rag-gold-validation-v1",
-  "validated_at": "2026-08-07T11:30:52.746878+00:00",
-  "input": "data\\evaluation\\gold-set-v1.jsonl",
-  "strict_structured_claims": false,
+  "validated_at": "2026-08-07T12:52:08.343708+00:00",
+  "input": "data\\evaluation\\rag-benchmark\\gold-full-v1.jsonl",
+  "strict_structured_claims": true,
   "corpus_coverage": {
     "corpus_paper_count": 33,
-    "papers_covered": 10,
+    "papers_covered": 33,
     "papers": [
       {
         "paper_id": "1706.03762",
         "title": "1706.03762",
-        "question_count": 6,
-        "evidence_block_count": 22,
+        "question_count": 9,
+        "evidence_block_count": 19,
         "category_distribution": {
-          "experiment_setup": 1,
-          "method": 1,
-          "multi_paper_comparison": 2,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 4
         }
       },
       {
         "paper_id": "1810.04805",
         "title": "BERT: Pre-training of Deep Bidirectional Transformers for",
-        "question_count": 7,
-        "evidence_block_count": 29,
+        "question_count": 10,
+        "evidence_block_count": 26,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "multi_paper_comparison": 2,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "1910.10683",
         "title": "1910.10683",
-        "question_count": 5,
-        "evidence_block_count": 18,
+        "question_count": 10,
+        "evidence_block_count": 26,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2001.08361",
         "title": "Scaling Laws for Neural Language Models",
-        "question_count": 5,
-        "evidence_block_count": 11,
+        "question_count": 10,
+        "evidence_block_count": 19,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2005.14165",
         "title": "Language Models are Few-Shot Learners",
-        "question_count": 5,
-        "evidence_block_count": 20,
+        "question_count": 10,
+        "evidence_block_count": 28,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2104.08691",
         "title": "The Power of Scale for Parameter-Efﬁcient Prompt Tuning",
-        "question_count": 4,
-        "evidence_block_count": 14,
+        "question_count": 9,
+        "evidence_block_count": 22,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2106.09685",
         "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS",
-        "question_count": 5,
-        "evidence_block_count": 14,
+        "question_count": 10,
+        "evidence_block_count": 22,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 2,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2203.02155",
         "title": "Training language models to follow instructions",
-        "question_count": 5,
-        "evidence_block_count": 20,
+        "question_count": 10,
+        "evidence_block_count": 28,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "experiment_results": 1,
-          "limitations": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 3,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2210.11416",
         "title": "Scaling Instruction-Finetuned Language Models",
-        "question_count": 5,
-        "evidence_block_count": 16,
+        "question_count": 9,
+        "evidence_block_count": 23,
         "category_distribution": {
-          "experiment_setup": 1,
-          "limitations": 1,
-          "method": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 2,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 3
         }
       },
       {
         "paper_id": "2302.13971",
         "title": "LLaMA: Open and Efﬁcient Foundation Language Models",
-        "question_count": 3,
-        "evidence_block_count": 10,
+        "question_count": 7,
+        "evidence_block_count": 17,
         "category_distribution": {
-          "algorithm_steps": 1,
-          "paper_contributions": 1,
-          "research_background": 1
+          "cross_paper_comparison": 2,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 2
         }
       },
       {
         "paper_id": "2309.15217",
         "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2403.10081",
         "title": "DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2404.10981",
         "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2405.13622",
         "title": "Automated Evaluation of Retrieval-Augmented Language Models with Task-Specific Exam Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2409.03759",
         "title": "VERA: Validation and Evaluation of Retrieval-Augmented Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2409.11353",
         "title": "THaMES: An End-to-End Tool for Hallucination Mitigation and Evaluation in Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2411.02832",
         "title": "PersianRAG: A Retrieval-Augmented Generation System for Persian Language",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2411.18583",
         "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2502.00306",
         "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2503.16581",
         "title": "Investigating Retrieval-Augmented Generation in Quranic Studies: A Study of 13 Open-Source Large Language Models",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2504.14891",
         "title": "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2504.19754",
         "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2507.06956",
         "title": "Investigating the Robustness of Retrieval-Augmented Generation at the Query Level",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2507.23334",
         "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 1,
+        "evidence_block_count": 2,
+        "category_distribution": {
+          "cross_paper_comparison": 1
+        }
       },
       {
         "paper_id": "2508.14066",
         "title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use Cases, Requirements, Challenges, and Evaluation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2509.12382",
         "title": "LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2510.22344",
         "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2601.05264",
         "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2601.11863",
         "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2602.07525",
         "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2602.17856",
         "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 5,
+        "evidence_block_count": 7,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "limitations_and_research_gaps": 1,
+          "methods_and_experiments": 1,
+          "multi_evidence_synthesis": 1,
+          "single_hop_factual": 1
+        }
       },
       {
         "paper_id": "2605.27444",
         "title": "A Systematic Evaluation of Retrieval-Augmented Generation and Language Models for Space Operations",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 3,
+        "evidence_block_count": 6,
+        "category_distribution": {
+          "cross_paper_comparison": 2,
+          "multi_evidence_synthesis": 1
+        }
       },
       {
         "paper_id": "2606.28358",
         "title": "How Do LLMs Cite? A Mechanistic Interpretation of Attribution in Retrieval-Augmented Generation",
-        "question_count": 0,
-        "evidence_block_count": 0,
-        "category_distribution": {}
+        "question_count": 2,
+        "evidence_block_count": 4,
+        "category_distribution": {
+          "cross_paper_comparison": 1,
+          "multi_evidence_synthesis": 1
+        }
       }
     ]
   }

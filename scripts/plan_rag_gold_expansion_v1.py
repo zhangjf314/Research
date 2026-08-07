@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 # ruff: noqa: E501
+import argparse
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -12,10 +13,13 @@ DOCS = Path("docs/rag-benchmark")
 
 
 def main() -> int:
-    records = read_jsonl(Path("data/evaluation/gold-set-v1.jsonl"))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=Path, default=Path("data/evaluation/gold-set-v1.jsonl"))
+    args = parser.parse_args()
+    records = read_jsonl(args.input)
     plan = expansion_plan(records)
     plan["created_at"] = datetime.now(UTC).isoformat()
-    plan["source_gold"] = "data/evaluation/gold-set-v1.jsonl"
+    plan["source_gold"] = str(args.input)
     plan["corpus_coverage"] = corpus_coverage(records)
     output_json = ROOT / "gold-expansion-plan-v1.json"
     write_json_artifact(output_json, plan)

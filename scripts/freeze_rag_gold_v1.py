@@ -2,6 +2,7 @@ from __future__ import annotations
 
 # ruff: noqa: E501
 import argparse
+import json
 from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
@@ -32,7 +33,27 @@ def main() -> int:
     raw_records = read_jsonl(args.input)
     approved = [normalize_gold_record(row) for row in raw_records if row.get("review_status") == "approved"]
     validation = validate_gold_records(approved, strict_structured_claims=True)
-    status = "READY_TO_FREEZE" if len(approved) >= args.min_approved and validation["valid"] else "BLOCKED"
+    category_counts = Counter(str(row.get("category")) for row in approved)
+    gate_checks = {
+        "benchmark_valid_approved_min": len(approved) >= args.min_approved,
+        "unanswerable_min": category_counts.get("unanswerable", 0) >= 10,
+        "cross_paper_comparison_min": category_counts.get("cross_paper_comparison", 0) >= 25,
+        "methods_and_experiments_min": category_counts.get("methods_and_experiments", 0) >= 20,
+        "limitations_and_research_gaps_min": category_counts.get("limitations_and_research_gaps", 0) >= 15,
+        "multi_evidence_synthesis_min": category_counts.get("multi_evidence_synthesis", 0) >= 20,
+        "validator_valid": validation["valid"],
+    }
+    duplicate_audit_path = ROOT / "gold-duplicate-clusters-v1.json"
+    duplicate_audit = (
+        json.loads(duplicate_audit_path.read_text(encoding="utf-8"))
+        if duplicate_audit_path.exists()
+        else {"unresolved_cluster_count": None}
+    )
+    if duplicate_audit.get("unresolved_cluster_count") not in {0, None}:
+        gate_checks["unresolved_near_duplicate_clusters_zero"] = False
+    else:
+        gate_checks["unresolved_near_duplicate_clusters_zero"] = True
+    status = "READY_TO_FREEZE" if all(gate_checks.values()) else "BLOCKED"
 
     if status == "BLOCKED" and not args.allow_incomplete_preview:
         manifest = {
@@ -43,6 +64,12 @@ def main() -> int:
             "created_at": datetime.now(UTC).isoformat(),
             "approved_count": len(approved),
             "min_approved": args.min_approved,
+            "category_distribution": dict(sorted(category_counts.items())),
+            "freeze_gate_checks": gate_checks,
+            "duplicate_audit": {
+                "path": str(duplicate_audit_path),
+                "unresolved_cluster_count": duplicate_audit.get("unresolved_cluster_count"),
+            },
             "validation": validation,
             "freeze_performed": False,
         }
@@ -80,7 +107,7 @@ def main() -> int:
     manifest = {
         "schema_version": "rag-gold-manifest-v1",
         "dataset_version": "rag-gold-v1",
-        "status": "PREVIEW_INCOMPLETE" if args.allow_incomplete_preview and len(approved) < args.min_approved else status,
+        "status": "FROZEN" if len(approved) >= args.min_approved and all(gate_checks.values()) else ("PREVIEW_INCOMPLETE" if args.allow_incomplete_preview and len(approved) < args.min_approved else status),
         "created_at": datetime.now(UTC).isoformat(),
         "seed": args.seed,
         "total": len(full),
@@ -96,8 +123,16 @@ def main() -> int:
         "reviewed_count": len(approved),
         "pending_count": sum(1 for row in raw_records if row.get("review_status") == "pending"),
         "validation": validation,
+        "freeze_gate_checks": gate_checks,
+        "duplicate_audit": {
+            "path": str(duplicate_audit_path),
+            "unresolved_cluster_count": duplicate_audit.get("unresolved_cluster_count"),
+            "near_duplicate_pair_count": duplicate_audit.get("near_duplicate_pair_count"),
+            "cluster_count": duplicate_audit.get("cluster_count"),
+        },
         "corpus_coverage": corpus_coverage(full),
-        "freeze_performed": len(approved) >= args.min_approved and validation["valid"],
+        "freeze_performed": all(gate_checks.values()),
+        "stage_1c_ready": all(gate_checks.values()),
     }
     write_json_artifact(ROOT / "gold-manifest-v1.json", manifest)
 

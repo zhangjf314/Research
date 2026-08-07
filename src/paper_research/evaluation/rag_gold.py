@@ -81,6 +81,13 @@ def overlap_ratio(left: str, right: str) -> float:
 
 def load_evidence_index(root: Path = Path("data/reports/parsing-audit")) -> dict[tuple[str, str], dict[str, Any]]:
     index: dict[tuple[str, str], dict[str, Any]] = {}
+    corpus_path = Path("data/evaluation/evidence-corpus-v1.jsonl")
+    if corpus_path.exists():
+        for record in read_jsonl(corpus_path):
+            paper_id = str(record.get("paper_id", ""))
+            block_id = str(record.get("block_id", ""))
+            if paper_id and block_id:
+                index[(paper_id, block_id)] = record
     if not root.exists():
         return index
     for blocks_path in root.glob("*/paper_blocks.jsonl"):
@@ -101,18 +108,39 @@ def normalize_required_claims(record: dict[str, Any]) -> list[dict[str, Any]]:
             claim_id = str(claim.get("claim_id") or f"C{index}")
             text = str(claim.get("text") or "")
             claim_blocks = [str(value) for value in claim.get("gold_block_ids", [])]
+            claim_evidence = claim.get("gold_evidence", [])
         else:
             claim_id = f"C{index}"
             text = str(claim)
             claim_blocks = question_blocks
+            claim_evidence = []
         normalized.append(
             {
                 "claim_id": claim_id,
                 "text": text,
                 "gold_block_ids": claim_blocks,
+                "gold_evidence": claim_evidence,
             }
         )
     return normalized
+
+
+def evidence_pairs(record: dict[str, Any]) -> list[tuple[str, str]]:
+    explicit = record.get("gold_evidence") or record.get("gold_evidence_pairs") or []
+    pairs: list[tuple[str, str]] = []
+    for item in explicit:
+        if isinstance(item, dict):
+            paper_id = str(item.get("paper_id", ""))
+            block_id = str(item.get("block_id", ""))
+            if paper_id and block_id:
+                pairs.append((paper_id, block_id))
+    if pairs:
+        return pairs
+    paper_ids = [str(value) for value in record.get("gold_paper_ids", [])]
+    block_ids = [str(value) for value in record.get("gold_block_ids", [])]
+    if len(paper_ids) == 1:
+        return [(paper_ids[0], block_id) for block_id in block_ids]
+    return []
 
 
 def normalize_gold_record(record: dict[str, Any], *, dataset_version: str = "rag-gold-v1") -> dict[str, Any]:
@@ -120,6 +148,13 @@ def normalize_gold_record(record: dict[str, Any], *, dataset_version: str = "rag
     normalized["dataset_version"] = dataset_version
     normalized["authoring_source"] = normalized.get("authoring_source") or "existing_gold"
     normalized["required_claims"] = normalize_required_claims(record)
+    if normalized.get("answerable") and not normalized.get("gold_evidence"):
+        paper_ids = [str(value) for value in normalized.get("gold_paper_ids", [])]
+        block_ids = [str(value) for value in normalized.get("gold_block_ids", [])]
+        if len(paper_ids) == 1:
+            normalized["gold_evidence"] = [
+                {"paper_id": paper_ids[0], "block_id": block_id} for block_id in block_ids
+            ]
     return normalized
 
 
@@ -177,6 +212,7 @@ def validate_gold_records(
 
         paper_ids = [str(value) for value in record.get("gold_paper_ids", [])]
         block_ids = [str(value) for value in record.get("gold_block_ids", [])]
+        pairs = evidence_pairs(record)
         pages = record.get("gold_pages", [])
         claims = record.get("required_claims") or []
         structured_claims = normalize_required_claims(record)
@@ -192,8 +228,14 @@ def validate_gold_records(
                 errors.append({"type": "answerable_missing_gold_paper_ids", "question_id": qid})
             if not block_ids:
                 errors.append({"type": "answerable_missing_gold_block_ids", "question_id": qid})
+            if not pairs:
+                errors.append({"type": "answerable_missing_gold_evidence_pairs", "question_id": qid})
             if not pages:
                 errors.append({"type": "answerable_missing_gold_pages", "question_id": qid})
+            if category == "cross_paper_comparison" and len(set(paper_ids)) < 2:
+                errors.append({"type": "cross_paper_requires_two_papers", "question_id": qid})
+            if category == "multi_evidence_synthesis" and len(set(block_ids)) < 2:
+                errors.append({"type": "multi_evidence_requires_two_blocks", "question_id": qid})
             for claim in structured_claims:
                 if not claim["text"].strip():
                     errors.append({"type": "required_claim_empty_text", "question_id": qid, "claim_id": claim["claim_id"]})
@@ -208,17 +250,16 @@ def validate_gold_records(
             if reason not in VALID_UNANSWERABLE_REASONS:
                 errors.append({"type": "missing_or_invalid_unanswerable_reason", "question_id": qid, "reason": reason})
 
-        for paper_id in paper_ids:
-            for block_id in block_ids:
-                if (paper_id, block_id) not in evidence_index:
-                    errors.append(
-                        {
-                            "type": "gold_block_not_found",
-                            "question_id": qid,
-                            "paper_id": paper_id,
-                            "block_id": block_id,
-                        }
-                    )
+        for paper_id, block_id in pairs:
+            if (paper_id, block_id) not in evidence_index:
+                errors.append(
+                    {
+                        "type": "gold_block_not_found",
+                        "question_id": qid,
+                        "paper_id": paper_id,
+                        "block_id": block_id,
+                    }
+                )
 
     return {
         "record_count": len(records),
