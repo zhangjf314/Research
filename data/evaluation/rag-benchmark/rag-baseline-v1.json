@@ -1,82 +1,2585 @@
 {
-  "schema_version": "rag-baseline-report-v1",
-  "status": "FRAMEWORK_READY_BASELINE_NOT_RERUN",
+  "schema_version": "rag-baseline-v1-official",
+  "created_at": "2026-08-07T22:16:08.413914+08:00",
+  "system_under_test_commit": "f97746e84b98d6b4e07984a3abbdab206f156839",
+  "benchmark_harness_commit": "3e8a0c7a6c552853beaacc86c77df26312c587e8",
+  "dataset_version": "rag-gold-v1",
   "baseline_config_hash": "8817891ed73fc0c0fa2f3a7fc90baf3591b3ab0006934bbb058cbff87e657c94",
-  "dataset_hash": "01660d3dd734003bcf1bbedebfec30f224524a91190bb6295ea51069a416cffa",
-  "gold_audit": {
-    "total": 50,
-    "approved": 50,
-    "review_status_distribution": {
-      "approved": 50
+  "full_dataset_hash": "b5a2a25e540affc1acaed3e339067d0c541afd4014dd29f211ad33f85f033935",
+  "dev_dataset_hash": "f61fc199c559250d32811f755db1400114b131b5da7b94b7abab6be0340c722a",
+  "test_dataset_hash": "e991feb4d1d60a852926d736ed4e0a97f72a437b67def5dfb9afe4cde4e0eaf8",
+  "retrieval": {
+    "schema_version": "retrieval-baseline-v1",
+    "created_at": "2026-08-07T14:16:06.830864+00:00",
+    "system_under_test_commit": "f97746e84b98d6b4e07984a3abbdab206f156839",
+    "benchmark_harness_commit": "3e8a0c7a6c552853beaacc86c77df26312c587e8",
+    "dataset_version": "rag-gold-v1",
+    "baseline_config_hash": "8817891ed73fc0c0fa2f3a7fc90baf3591b3ab0006934bbb058cbff87e657c94",
+    "full_dataset_hash": "b5a2a25e540affc1acaed3e339067d0c541afd4014dd29f211ad33f85f033935",
+    "dev_dataset_hash": "f61fc199c559250d32811f755db1400114b131b5da7b94b7abab6be0340c722a",
+    "test_dataset_hash": "e991feb4d1d60a852926d736ed4e0a97f72a437b67def5dfb9afe4cde4e0eaf8",
+    "retrieval_questions": 146,
+    "retrieval_completed": 146,
+    "retrieval_failed": 0,
+    "metrics": {
+      "full": {
+        "question_count": 146,
+        "completed": 146,
+        "failed": 0,
+        "answerable_count": 132,
+        "unanswerable_count": 14,
+        "recall_at_5": 0.322854,
+        "recall_at_10": 0.483586,
+        "recall_at_20": 0.635606,
+        "mrr_at_10": 0.246414,
+        "ndcg_at_10": 0.273671,
+        "paper_recall_at_5": 0.852273,
+        "paper_recall_at_10": 0.901515,
+        "evidence_coverage_at_5": 0.322854,
+        "evidence_coverage_at_10": 0.483586,
+        "evidence_coverage_at_20": 0.635606,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2576.622,
+          "p50": 2241.787,
+          "p95": 4098.747
+        }
+      },
+      "dev": {
+        "question_count": 98,
+        "completed": 98,
+        "failed": 0,
+        "answerable_count": 88,
+        "unanswerable_count": 10,
+        "recall_at_5": 0.281629,
+        "recall_at_10": 0.469697,
+        "recall_at_20": 0.611174,
+        "mrr_at_10": 0.219467,
+        "ndcg_at_10": 0.250609,
+        "paper_recall_at_5": 0.863636,
+        "paper_recall_at_10": 0.926136,
+        "evidence_coverage_at_5": 0.281629,
+        "evidence_coverage_at_10": 0.469697,
+        "evidence_coverage_at_20": 0.611174,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2545.632,
+          "p50": 2233.879,
+          "p95": 3967.058
+        }
+      },
+      "test": {
+        "question_count": 48,
+        "completed": 48,
+        "failed": 0,
+        "answerable_count": 44,
+        "unanswerable_count": 4,
+        "recall_at_5": 0.405303,
+        "recall_at_10": 0.511364,
+        "recall_at_20": 0.68447,
+        "mrr_at_10": 0.300307,
+        "ndcg_at_10": 0.319795,
+        "paper_recall_at_5": 0.829545,
+        "paper_recall_at_10": 0.852273,
+        "evidence_coverage_at_5": 0.405303,
+        "evidence_coverage_at_10": 0.511364,
+        "evidence_coverage_at_20": 0.68447,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2639.894,
+          "p50": 2241.787,
+          "p95": 4180.491
+        }
+      }
     },
-    "answerable": 48,
-    "unanswerable": 2,
-    "category_distribution": {
-      "algorithm_steps": 5,
-      "experiment_results": 4,
-      "experiment_setup": 5,
-      "limitations": 7,
-      "method": 5,
-      "multi_paper_comparison": 2,
-      "paper_contributions": 10,
-      "research_background": 10,
-      "unanswerable": 2
+    "by_category": {
+      "cross_paper_comparison": {
+        "question_count": 27,
+        "completed": 27,
+        "failed": 0,
+        "answerable_count": 27,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.296296,
+        "recall_at_10": 0.537037,
+        "recall_at_20": 0.703704,
+        "mrr_at_10": 0.257598,
+        "ndcg_at_10": 0.337447,
+        "paper_recall_at_5": 0.722222,
+        "paper_recall_at_10": 0.851852,
+        "evidence_coverage_at_5": 0.296296,
+        "evidence_coverage_at_10": 0.537037,
+        "evidence_coverage_at_20": 0.703704,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 2433.198,
+          "p50": 2149.117,
+          "p95": 3810.869
+        }
+      },
+      "limitations_and_research_gaps": {
+        "question_count": 20,
+        "completed": 20,
+        "failed": 0,
+        "answerable_count": 20,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.2625,
+        "recall_at_10": 0.3125,
+        "recall_at_20": 0.429167,
+        "mrr_at_10": 0.165833,
+        "ndcg_at_10": 0.175421,
+        "paper_recall_at_5": 0.85,
+        "paper_recall_at_10": 0.85,
+        "evidence_coverage_at_5": 0.2625,
+        "evidence_coverage_at_10": 0.3125,
+        "evidence_coverage_at_20": 0.429167,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 3009.745,
+          "p50": 2551.369,
+          "p95": 5600.123
+        }
+      },
+      "methods_and_experiments": {
+        "question_count": 25,
+        "completed": 25,
+        "failed": 0,
+        "answerable_count": 25,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.276667,
+        "recall_at_10": 0.378,
+        "recall_at_20": 0.579333,
+        "mrr_at_10": 0.126667,
+        "ndcg_at_10": 0.175718,
+        "paper_recall_at_5": 0.92,
+        "paper_recall_at_10": 0.92,
+        "evidence_coverage_at_5": 0.276667,
+        "evidence_coverage_at_10": 0.378,
+        "evidence_coverage_at_20": 0.579333,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 2483.707,
+          "p50": 2233.879,
+          "p95": 3840.588
+        }
+      },
+      "multi_evidence_synthesis": {
+        "question_count": 30,
+        "completed": 30,
+        "failed": 0,
+        "answerable_count": 30,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.4,
+        "recall_at_10": 0.55,
+        "recall_at_20": 0.683333,
+        "mrr_at_10": 0.346151,
+        "ndcg_at_10": 0.318065,
+        "paper_recall_at_5": 0.933333,
+        "paper_recall_at_10": 0.933333,
+        "evidence_coverage_at_5": 0.4,
+        "evidence_coverage_at_10": 0.55,
+        "evidence_coverage_at_20": 0.683333,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 2543.63,
+          "p50": 2191.471,
+          "p95": 3947.483
+        }
+      },
+      "single_hop_factual": {
+        "question_count": 30,
+        "completed": 30,
+        "failed": 0,
+        "answerable_count": 30,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.348333,
+        "recall_at_10": 0.571111,
+        "recall_at_20": 0.711111,
+        "mrr_at_10": 0.290119,
+        "ndcg_at_10": 0.319006,
+        "paper_recall_at_5": 0.833333,
+        "paper_recall_at_10": 0.933333,
+        "evidence_coverage_at_5": 0.348333,
+        "evidence_coverage_at_10": 0.571111,
+        "evidence_coverage_at_20": 0.711111,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 2530.367,
+          "p50": 2241.787,
+          "p95": 4516.55
+        }
+      },
+      "unanswerable": {
+        "question_count": 14,
+        "completed": 14,
+        "failed": 0,
+        "answerable_count": 0,
+        "unanswerable_count": 14,
+        "recall_at_5": null,
+        "recall_at_10": null,
+        "recall_at_20": null,
+        "mrr_at_10": null,
+        "ndcg_at_10": null,
+        "paper_recall_at_5": null,
+        "paper_recall_at_10": null,
+        "evidence_coverage_at_5": null,
+        "evidence_coverage_at_10": null,
+        "evidence_coverage_at_20": null,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2570.213,
+          "p50": 2211.178,
+          "p95": 3772.05
+        }
+      }
     },
-    "difficulty_distribution": {
-      "easy": 20,
-      "hard": 24,
-      "medium": 6
+    "by_difficulty": {
+      "easy": {
+        "question_count": 24,
+        "completed": 24,
+        "failed": 0,
+        "answerable_count": 23,
+        "unanswerable_count": 1,
+        "recall_at_5": 0.376812,
+        "recall_at_10": 0.536232,
+        "recall_at_20": 0.731884,
+        "mrr_at_10": 0.331263,
+        "ndcg_at_10": 0.352145,
+        "paper_recall_at_5": 0.913043,
+        "paper_recall_at_10": 0.956522,
+        "evidence_coverage_at_5": 0.376812,
+        "evidence_coverage_at_10": 0.536232,
+        "evidence_coverage_at_20": 0.731884,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2473.569,
+          "p50": 2117.417,
+          "p95": 4180.491
+        }
+      },
+      "hard": {
+        "question_count": 75,
+        "completed": 75,
+        "failed": 0,
+        "answerable_count": 62,
+        "unanswerable_count": 13,
+        "recall_at_5": 0.225,
+        "recall_at_10": 0.403226,
+        "recall_at_20": 0.56828,
+        "mrr_at_10": 0.182898,
+        "ndcg_at_10": 0.224485,
+        "paper_recall_at_5": 0.782258,
+        "paper_recall_at_10": 0.854839,
+        "evidence_coverage_at_5": 0.225,
+        "evidence_coverage_at_10": 0.403226,
+        "evidence_coverage_at_20": 0.56828,
+        "unanswerable_irrelevant_retrieval_rate": 1.0,
+        "latency_ms": {
+          "mean": 2622.162,
+          "p50": 2385.038,
+          "p95": 4649.419
+        }
+      },
+      "medium": {
+        "question_count": 47,
+        "completed": 47,
+        "failed": 0,
+        "answerable_count": 47,
+        "unanswerable_count": 0,
+        "recall_at_5": 0.425532,
+        "recall_at_10": 0.56383,
+        "recall_at_20": 0.677305,
+        "mrr_at_10": 0.288678,
+        "ndcg_at_10": 0.300152,
+        "paper_recall_at_5": 0.914894,
+        "paper_recall_at_10": 0.93617,
+        "evidence_coverage_at_5": 0.425532,
+        "evidence_coverage_at_10": 0.56383,
+        "evidence_coverage_at_20": 0.677305,
+        "unanswerable_irrelevant_retrieval_rate": null,
+        "latency_ms": {
+          "mean": 2556.575,
+          "p50": 2233.879,
+          "p95": 3947.483
+        }
+      }
     },
-    "required_claim_coverage": {
-      "questions_with_required_claims": 48,
-      "total_required_claims": 144,
-      "mean_required_claims_per_answerable": 3.0
-    },
-    "gold_paper_coverage": {
-      "questions_with_gold_paper": 48,
-      "unique_gold_papers": 10
-    },
-    "gold_page_coverage": {
-      "questions_with_gold_pages": 48,
-      "total_gold_page_refs": 89
-    },
-    "gold_evidence_coverage": {
-      "answerable_questions_with_gold_blocks": 48,
-      "total_gold_block_refs": 164,
-      "complete_for_answerable": true
-    },
-    "gap_plan": {
-      "recommended_target_gold_count": 150,
-      "current_approved_count": 50,
-      "questions_to_add": 100,
-      "target_question_types": [
-        "single-hop factual",
-        "multi-evidence synthesis",
-        "cross-paper comparison",
-        "methods / experiments",
-        "limitations / research gaps",
-        "unanswerable"
-      ],
-      "manual_review_required": true,
-      "do_not_bulk_generate_with_llm": true
-    },
-    "dataset_hash": "01660d3dd734003bcf1bbedebfec30f224524a91190bb6295ea51069a416cffa",
-    "source_path": "data\\evaluation\\gold-set-v1.jsonl",
-    "retrieval_gold_hash": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d"
+    "bad_cases": {
+      "distribution": {
+        "PARTIAL_EVIDENCE_RETRIEVAL": 39,
+        "RANKING_ERROR": 10,
+        "RETRIEVAL_MISS": 27,
+        "UNANSWERABLE_FALSE_POSITIVE": 14
+      },
+      "items": [
+        {
+          "question_id": "q001",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q002",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 17,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q003",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 8,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q004",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 12,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q005",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "easy",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q009",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 13,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q010",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 5,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q011",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q012",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 5,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q013",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 20,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q014",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q015",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q018",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q019",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 19,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q020",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 2,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q021",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 19,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q022",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 11,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q024",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 8,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q025",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 2,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q026",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q034",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 16,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q036",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 15,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q037",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 4,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q038",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q039",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 8,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q040",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 12,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q042",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 4,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q043",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q044",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q045",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q046",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 6,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q048",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 11,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q051",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 14,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q056",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q058",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 11,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q061",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q066",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q067",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q068",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 3,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q071",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 8,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q072",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q073",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 17,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q074",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q076",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q077",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 12,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q079",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 13,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q087",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 1,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q089",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 2,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q091",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 12,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q092",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 3,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q094",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q095",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 1,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q096",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 1,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q097",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q098",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q100",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 11,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q102",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 16,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q103",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q104",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q105",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q106",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q108",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q113",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 3,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q114",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q115",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 11,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q117",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 12,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q118",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RANKING_ERROR",
+          "gold_first_rank": 16,
+          "diagnosis": "Gold evidence is retrieved late but not in the evaluated cutoff."
+        },
+        {
+          "question_id": "q119",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 7,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q122",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_MISS",
+          "gold_first_rank": null,
+          "diagnosis": "Gold evidence is absent from Top20."
+        },
+        {
+          "question_id": "q123",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 4,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q124",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 4,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q131",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 2,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q132",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 2,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q133",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 9,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q134",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 7,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q135",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 18,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q137",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "PARTIAL_EVIDENCE_RETRIEVAL",
+          "gold_first_rank": 11,
+          "diagnosis": "Only part of a multi-block Gold evidence set is retrieved."
+        },
+        {
+          "question_id": "q138",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q139",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q140",
+          "split": "test",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q141",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q142",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q143",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q144",
+          "split": "test",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q145",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q146",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q147",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q148",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q149",
+          "split": "test",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        },
+        {
+          "question_id": "q150",
+          "split": "test",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "UNANSWERABLE_FALSE_POSITIVE",
+          "gold_first_rank": null,
+          "diagnosis": "Unanswerable query retrieved plausible non-Gold context."
+        }
+      ]
+    }
   },
-  "retrieval_benchmark_ready": true,
-  "generation_benchmark_ready": true,
-  "bad_case_taxonomy_ready": true,
-  "answers": {
-    "current_retrieval_biggest_problem": "Formal Stage 1 retrieval benchmark has not been run yet; current evidence shows historical gold-block-present gaps in Full QA artifacts.",
-    "current_generation_biggest_problem": "Historical Full QA diagnostics show low required-claim and exact citation recall; semantic support is not formally validated.",
-    "worst_question_type": "paper_contributions",
-    "best_question_type": "not yet measured by the Stage 1 harness",
-    "unanswerable_performance": "Existing Gold contains two unanswerable questions; formal Stage 1 benchmark run is pending authorization.",
-    "failure_source": {
-      "retrieval_failed_items_in_historical_generation_artifact": 29,
-      "generation_or_citation_failed_items_in_historical_generation_artifact": 21
+  "generation": {
+    "schema_version": "generation-baseline-v1",
+    "created_at": "2026-08-07T14:16:07.759678+00:00",
+    "system_under_test_commit": "f97746e84b98d6b4e07984a3abbdab206f156839",
+    "benchmark_harness_commit": "3e8a0c7a6c552853beaacc86c77df26312c587e8",
+    "dataset_version": "rag-gold-v1",
+    "baseline_config_hash": "8817891ed73fc0c0fa2f3a7fc90baf3591b3ab0006934bbb058cbff87e657c94",
+    "full_dataset_hash": "b5a2a25e540affc1acaed3e339067d0c541afd4014dd29f211ad33f85f033935",
+    "dev_dataset_hash": "f61fc199c559250d32811f755db1400114b131b5da7b94b7abab6be0340c722a",
+    "test_dataset_hash": "e991feb4d1d60a852926d736ed4e0a97f72a437b67def5dfb9afe4cde4e0eaf8",
+    "generation_questions": 146,
+    "generation_completed": 146,
+    "generation_failed": 0,
+    "provider_request_count": 146,
+    "provider_failure_count": 0,
+    "duplicate_execution_count": 0,
+    "resume_count": 1,
+    "metrics": {
+      "full": {
+        "question_count": 146,
+        "completed": 146,
+        "failed": 0,
+        "required_claim_coverage": 0.058081,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.102273,
+        "answer_completeness": 0.058081,
+        "abstention_accuracy": 0.714286,
+        "unsupported_claim_count": 280,
+        "input_tokens": 552352,
+        "output_tokens": 16814,
+        "total_tokens": 569166,
+        "cost": 0.0820372,
+        "provider_request_count": 146,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4641.464,
+          "p50": 4327.713,
+          "p95": 6779.647
+        }
+      },
+      "dev": {
+        "question_count": 98,
+        "completed": 98,
+        "failed": 0,
+        "required_claim_coverage": 0.060606,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.088068,
+        "answer_completeness": 0.060606,
+        "abstention_accuracy": 0.7,
+        "unsupported_claim_count": 192,
+        "input_tokens": 361612,
+        "output_tokens": 11475,
+        "total_tokens": 373087,
+        "cost": 0.05383868,
+        "provider_request_count": 98,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4694.63,
+          "p50": 4327.713,
+          "p95": 6779.647
+        }
+      },
+      "test": {
+        "question_count": 48,
+        "completed": 48,
+        "failed": 0,
+        "required_claim_coverage": 0.05303,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.130682,
+        "answer_completeness": 0.05303,
+        "abstention_accuracy": 0.75,
+        "unsupported_claim_count": 88,
+        "input_tokens": 190740,
+        "output_tokens": 5339,
+        "total_tokens": 196079,
+        "cost": 0.02819852,
+        "provider_request_count": 48,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4532.917,
+          "p50": 4168.269,
+          "p95": 7164.534
+        }
+      }
     },
-    "stage2_hypothesis": "Hypothesis only: first validate whether retrieval misses versus context/citation selection dominate exact-Gold failures before changing algorithms."
-  }
+    "by_category": {
+      "cross_paper_comparison": {
+        "question_count": 27,
+        "completed": 27,
+        "failed": 0,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.037037,
+        "answer_completeness": 0.0,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 36,
+        "input_tokens": 92691,
+        "output_tokens": 2886,
+        "total_tokens": 95577,
+        "cost": 0.01378482,
+        "provider_request_count": 27,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4749.488,
+          "p50": 4916.169,
+          "p95": 6852.832
+        }
+      },
+      "limitations_and_research_gaps": {
+        "question_count": 20,
+        "completed": 20,
+        "failed": 0,
+        "required_claim_coverage": 0.066667,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0875,
+        "answer_completeness": 0.066667,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 41,
+        "input_tokens": 71446,
+        "output_tokens": 2504,
+        "total_tokens": 73950,
+        "cost": 0.01070356,
+        "provider_request_count": 20,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 5458.612,
+          "p50": 4812.424,
+          "p95": 7978.633
+        }
+      },
+      "methods_and_experiments": {
+        "question_count": 25,
+        "completed": 25,
+        "failed": 0,
+        "required_claim_coverage": 0.08,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.09,
+        "answer_completeness": 0.08,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 63,
+        "input_tokens": 99574,
+        "output_tokens": 3363,
+        "total_tokens": 102937,
+        "cost": 0.014882,
+        "provider_request_count": 25,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4449.743,
+          "p50": 4158.205,
+          "p95": 5745.701
+        }
+      },
+      "multi_evidence_synthesis": {
+        "question_count": 30,
+        "completed": 30,
+        "failed": 0,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.166667,
+        "answer_completeness": 0.0,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 77,
+        "input_tokens": 118876,
+        "output_tokens": 4064,
+        "total_tokens": 122940,
+        "cost": 0.01778056,
+        "provider_request_count": 30,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4934.389,
+          "p50": 4742.184,
+          "p95": 7135.904
+        }
+      },
+      "single_hop_factual": {
+        "question_count": 30,
+        "completed": 30,
+        "failed": 0,
+        "required_claim_coverage": 0.144444,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.116667,
+        "answer_completeness": 0.144444,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 57,
+        "input_tokens": 112660,
+        "output_tokens": 3168,
+        "total_tokens": 115828,
+        "cost": 0.01665944,
+        "provider_request_count": 30,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4188.086,
+          "p50": 3769.823,
+          "p95": 5922.259
+        }
+      },
+      "unanswerable": {
+        "question_count": 14,
+        "completed": 14,
+        "failed": 0,
+        "required_claim_coverage": null,
+        "supported_claim_ratio": null,
+        "citation_precision": null,
+        "citation_recall": null,
+        "answer_completeness": null,
+        "abstention_accuracy": 0.714286,
+        "unsupported_claim_count": 6,
+        "input_tokens": 57105,
+        "output_tokens": 829,
+        "total_tokens": 57934,
+        "cost": 0.00822682,
+        "provider_request_count": 14,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 3951.963,
+          "p50": 3778.364,
+          "p95": 5982.982
+        }
+      }
+    },
+    "by_difficulty": {
+      "easy": {
+        "question_count": 24,
+        "completed": 24,
+        "failed": 0,
+        "required_claim_coverage": 0.188406,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.101449,
+        "answer_completeness": 0.188406,
+        "abstention_accuracy": 0.0,
+        "unsupported_claim_count": 50,
+        "input_tokens": 96467,
+        "output_tokens": 2791,
+        "total_tokens": 99258,
+        "cost": 0.01428686,
+        "provider_request_count": 24,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4267.143,
+          "p50": 4024.457,
+          "p95": 5922.259
+        }
+      },
+      "hard": {
+        "question_count": 75,
+        "completed": 75,
+        "failed": 0,
+        "required_claim_coverage": 0.037634,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.040323,
+        "answer_completeness": 0.037634,
+        "abstention_accuracy": 0.769231,
+        "unsupported_claim_count": 114,
+        "input_tokens": 272528,
+        "output_tokens": 7928,
+        "total_tokens": 280456,
+        "cost": 0.04037376,
+        "provider_request_count": 75,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4710.217,
+          "p50": 4203.643,
+          "p95": 7978.633
+        }
+      },
+      "medium": {
+        "question_count": 47,
+        "completed": 47,
+        "failed": 0,
+        "required_claim_coverage": 0.021277,
+        "supported_claim_ratio": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.184397,
+        "answer_completeness": 0.021277,
+        "abstention_accuracy": null,
+        "unsupported_claim_count": 116,
+        "input_tokens": 183357,
+        "output_tokens": 6095,
+        "total_tokens": 189452,
+        "cost": 0.02737658,
+        "provider_request_count": 47,
+        "provider_failure_count": 0,
+        "latency_ms": {
+          "mean": 4722.895,
+          "p50": 4596.689,
+          "p95": 6779.647
+        }
+      }
+    },
+    "bad_cases": {
+      "distribution": {
+        "ABSTENTION_FAILURE": 4,
+        "GENERATION_OMISSION": 61,
+        "RETRIEVAL_ROOTED": 71
+      },
+      "items": [
+        {
+          "question_id": "q001",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q002",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q003",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q004",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q005",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "easy",
+          "primary_bad_case": "ABSTENTION_FAILURE",
+          "diagnosis": "Unanswerable item was not refused cleanly."
+        },
+        {
+          "question_id": "q006",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q007",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q008",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q009",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q010",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q011",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q012",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q013",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q014",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q015",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q016",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q017",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q018",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q019",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q020",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q021",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q022",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q023",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q024",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q025",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q026",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q027",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q028",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q029",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q031",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q032",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q033",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q034",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q035",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q036",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q037",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q038",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q039",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q040",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q041",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q042",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q043",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q044",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q045",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q046",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q047",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q048",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q051",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q052",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q053",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q054",
+          "split": "test",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q055",
+          "split": "dev",
+          "category": "single_hop_factual",
+          "difficulty": "easy",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q056",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q057",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q058",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q059",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q060",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q061",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q062",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q063",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q064",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q065",
+          "split": "test",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q066",
+          "split": "dev",
+          "category": "methods_and_experiments",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q067",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q068",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q069",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q070",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q071",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q072",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q073",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q074",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q075",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q076",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q077",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q078",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q079",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q080",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q081",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q082",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q083",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q084",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q085",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q086",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q087",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q088",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q089",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q090",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q091",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q092",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q093",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q094",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q095",
+          "split": "dev",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q096",
+          "split": "test",
+          "category": "multi_evidence_synthesis",
+          "difficulty": "medium",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q097",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q098",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q099",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q100",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q101",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q102",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q103",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q104",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q105",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q106",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q107",
+          "split": "test",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q108",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q109",
+          "split": "dev",
+          "category": "limitations_and_research_gaps",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q110",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q111",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q112",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q113",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q114",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q115",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q116",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q117",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q118",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q119",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q120",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q121",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q122",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q123",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q124",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q125",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q127",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q128",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q129",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q130",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q131",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q132",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q133",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q134",
+          "split": "test",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q135",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q136",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "GENERATION_OMISSION",
+          "diagnosis": "Gold evidence was available but required claims were omitted or weakly covered."
+        },
+        {
+          "question_id": "q137",
+          "split": "dev",
+          "category": "cross_paper_comparison",
+          "difficulty": "hard",
+          "primary_bad_case": "RETRIEVAL_ROOTED",
+          "diagnosis": "Gold evidence did not enter the actual generation context."
+        },
+        {
+          "question_id": "q138",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "ABSTENTION_FAILURE",
+          "diagnosis": "Unanswerable item was not refused cleanly."
+        },
+        {
+          "question_id": "q143",
+          "split": "dev",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "ABSTENTION_FAILURE",
+          "diagnosis": "Unanswerable item was not refused cleanly."
+        },
+        {
+          "question_id": "q150",
+          "split": "test",
+          "category": "unanswerable",
+          "difficulty": "hard",
+          "primary_bad_case": "ABSTENTION_FAILURE",
+          "diagnosis": "Unanswerable item was not refused cleanly."
+        }
+      ]
+    },
+    "semantic_claim_support_audit": "NOT_FORMALLY_VALIDATED",
+    "budget": {
+      "max_logical_questions": 146,
+      "max_total_tokens": 2000000,
+      "max_total_cost_usd": 0.3
+    }
+  },
+  "failure_attribution": {
+    "total_failed_or_degraded_cases": 226,
+    "distribution": {
+      "ABSTENTION_FAILURE": 4,
+      "GENERATION_OMISSION": 61,
+      "PARTIAL_EVIDENCE_RETRIEVAL": 39,
+      "RANKING_ERROR": 10,
+      "RETRIEVAL_MISS": 27,
+      "RETRIEVAL_ROOTED": 71,
+      "UNANSWERABLE_FALSE_POSITIVE": 14
+    },
+    "proportions": {
+      "ABSTENTION_FAILURE": 0.017699,
+      "GENERATION_OMISSION": 0.269912,
+      "PARTIAL_EVIDENCE_RETRIEVAL": 0.172566,
+      "RANKING_ERROR": 0.044248,
+      "RETRIEVAL_MISS": 0.119469,
+      "RETRIEVAL_ROOTED": 0.314159,
+      "UNANSWERABLE_FALSE_POSITIVE": 0.061947
+    },
+    "largest_bottleneck": "RETRIEVAL_ROOTED"
+  },
+  "stage_2_hypotheses": [
+    {
+      "id": "H1",
+      "hypothesis": "If many Gold blocks appear in Top20 but miss Top5/Top10, a reranker may improve ranking."
+    },
+    {
+      "id": "H2",
+      "hypothesis": "If multi-evidence or cross-paper recall is weak, query rewrite or retrieval expansion should be evaluated."
+    },
+    {
+      "id": "H3",
+      "hypothesis": "If Gold evidence enters context but claim coverage remains low, context selection or generation should be studied."
+    },
+    {
+      "id": "H4",
+      "hypothesis": "If dense and sparse errors are complementary, Hybrid weighting deserves ablation."
+    }
+  ],
+  "stage_1_gate": {
+    "gold_frozen": true,
+    "retrieval_benchmark_completed": true,
+    "retrieval_bad_case_completed": true,
+    "generation_benchmark_completed": true,
+    "generation_bad_case_completed": true,
+    "dev_metrics_available": true,
+    "test_metrics_available": true,
+    "failure_attribution_completed": true,
+    "token_accounting_complete": true,
+    "cost_accounting_complete": true,
+    "baseline_report_completed": true
+  },
+  "stage_1_complete": true,
+  "stage_2_ready": true
 }
