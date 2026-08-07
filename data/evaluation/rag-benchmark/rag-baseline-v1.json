@@ -1,0 +1,82 @@
+{
+  "schema_version": "rag-baseline-report-v1",
+  "status": "FRAMEWORK_READY_BASELINE_NOT_RERUN",
+  "baseline_config_hash": "8817891ed73fc0c0fa2f3a7fc90baf3591b3ab0006934bbb058cbff87e657c94",
+  "dataset_hash": "01660d3dd734003bcf1bbedebfec30f224524a91190bb6295ea51069a416cffa",
+  "gold_audit": {
+    "total": 50,
+    "approved": 50,
+    "review_status_distribution": {
+      "approved": 50
+    },
+    "answerable": 48,
+    "unanswerable": 2,
+    "category_distribution": {
+      "algorithm_steps": 5,
+      "experiment_results": 4,
+      "experiment_setup": 5,
+      "limitations": 7,
+      "method": 5,
+      "multi_paper_comparison": 2,
+      "paper_contributions": 10,
+      "research_background": 10,
+      "unanswerable": 2
+    },
+    "difficulty_distribution": {
+      "easy": 20,
+      "hard": 24,
+      "medium": 6
+    },
+    "required_claim_coverage": {
+      "questions_with_required_claims": 48,
+      "total_required_claims": 144,
+      "mean_required_claims_per_answerable": 3.0
+    },
+    "gold_paper_coverage": {
+      "questions_with_gold_paper": 48,
+      "unique_gold_papers": 10
+    },
+    "gold_page_coverage": {
+      "questions_with_gold_pages": 48,
+      "total_gold_page_refs": 89
+    },
+    "gold_evidence_coverage": {
+      "answerable_questions_with_gold_blocks": 48,
+      "total_gold_block_refs": 164,
+      "complete_for_answerable": true
+    },
+    "gap_plan": {
+      "recommended_target_gold_count": 150,
+      "current_approved_count": 50,
+      "questions_to_add": 100,
+      "target_question_types": [
+        "single-hop factual",
+        "multi-evidence synthesis",
+        "cross-paper comparison",
+        "methods / experiments",
+        "limitations / research gaps",
+        "unanswerable"
+      ],
+      "manual_review_required": true,
+      "do_not_bulk_generate_with_llm": true
+    },
+    "dataset_hash": "01660d3dd734003bcf1bbedebfec30f224524a91190bb6295ea51069a416cffa",
+    "source_path": "data\\evaluation\\gold-set-v1.jsonl",
+    "retrieval_gold_hash": "a196fc0c40823dd66b3972cf1d455d647325a20872cfe1f81685b967ec4e2e8d"
+  },
+  "retrieval_benchmark_ready": true,
+  "generation_benchmark_ready": true,
+  "bad_case_taxonomy_ready": true,
+  "answers": {
+    "current_retrieval_biggest_problem": "Formal Stage 1 retrieval benchmark has not been run yet; current evidence shows historical gold-block-present gaps in Full QA artifacts.",
+    "current_generation_biggest_problem": "Historical Full QA diagnostics show low required-claim and exact citation recall; semantic support is not formally validated.",
+    "worst_question_type": "paper_contributions",
+    "best_question_type": "not yet measured by the Stage 1 harness",
+    "unanswerable_performance": "Existing Gold contains two unanswerable questions; formal Stage 1 benchmark run is pending authorization.",
+    "failure_source": {
+      "retrieval_failed_items_in_historical_generation_artifact": 29,
+      "generation_or_citation_failed_items_in_historical_generation_artifact": 21
+    },
+    "stage2_hypothesis": "Hypothesis only: first validate whether retrieval misses versus context/citation selection dominate exact-Gold failures before changing algorithms."
+  }
+}

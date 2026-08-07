@@ -1,0 +1,1648 @@
+{
+  "source": "data\\evaluation\\deepseek-full-qa-final-items-v1.jsonl",
+  "items": [
+    {
+      "question_id": "q001",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762"
+        ],
+        "gold_block_ids": [
+          "b000022",
+          "b000025",
+          "b000027"
+        ],
+        "gold_pages": [
+          2
+        ],
+        "required_claims": [
+          "The prior state of the art relied heavily on RNN/LSTM/GRU or convolutional sequence transduction models.",
+          "Sequential computation limits parallelization in training.",
+          "The paper targets long-range dependency modeling and proposes an attention-only alternative."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the problem of sequence transduction models relying on complex recurrent or convolutional neural networks, proposing the Transformer, a model based solely on attention mechanisms.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q002",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762"
+        ],
+        "gold_block_ids": [
+          "b000025"
+        ],
+        "gold_pages": [
+          2
+        ],
+        "required_claims": [
+          "The Transformer eschews recurrence.",
+          "It relies on attention to draw dependencies between input and output.",
+          "It improves parallelization and achieves strong translation quality."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The Transformer is a novel sequence transduction model based solely on attention mechanisms, dispensing with recurrence and convolutions. It achieves state-of-the-art BLEU scores on WMT 2014 English-to-German (28.4) and English-to-French (41.8) translation tasks, with significantly faster training and better parallelization.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q003",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762"
+        ],
+        "gold_block_ids": [
+          "b000032",
+          "b000034",
+          "b000035"
+        ],
+        "gold_pages": [
+          2,
+          3
+        ],
+        "required_claims": [
+          "The model uses an encoder-decoder structure.",
+          "The Transformer uses stacked self-attention layers.",
+          "It also uses point-wise fully connected layers in both encoder and decoder."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes the Transformer, a network architecture based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q004",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762"
+        ],
+        "gold_block_ids": [
+          "b000103",
+          "b000105",
+          "b000107",
+          "b000109",
+          "b000112"
+        ],
+        "gold_pages": [
+          7
+        ],
+        "required_claims": [
+          "Experiments use WMT 2014 English-German and English-French data.",
+          "Sentences are tokenized with BPE or word-piece vocabularies and batched by approximate sequence length.",
+          "Training uses eight P100 GPUs and an Adam schedule with warmup."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The experiments are designed as machine translation tasks on WMT 2014 English-German and English-French datasets, and English constituency parsing. Evaluation uses BLEU scores and perplexity, with model variations tested on development sets.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q005",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": false,
+        "gold_paper_ids": [],
+        "gold_block_ids": [],
+        "gold_pages": [],
+        "required_claims": [
+          "No exact total energy-consumption value is reported in the paper."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "Within the attention-only Transformer sequence transduction paper, what exact total energy consumption is reported for all experiments?",
+        "retrieval_scope": "unanswerable"
+      },
+      "generated_answer": null,
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q006",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000010",
+          "b000012",
+          "b000013"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Prior fine-tuning approaches are restricted by unidirectional language modeling.",
+          "Unidirectionality limits architecture choices during pre-training.",
+          "Bidirectional context is important for token-level tasks such as question answering."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the limitation of unidirectional language models in pre-training, which restricts the power of representations for fine-tuning on NLP tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q007",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000005",
+          "b000015",
+          "b000016",
+          "b000017"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "BERT is a bidirectional Transformer-based language representation model.",
+          "Masked language modeling enables deep bidirectional pre-training.",
+          "BERT reduces reliance on task-specific architectures and improves results on eleven NLP tasks."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper demonstrates the importance of bidirectional pre-training, shows pre-trained representations reduce need for task-specific architectures, and advances state of the art for eleven NLP tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q008",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000012",
+          "b000013",
+          "b000060",
+          "b000063"
+        ],
+        "gold_pages": [
+          1,
+          2,
+          3
+        ],
+        "required_claims": [
+          "BERT is based on a multi-layer bidirectional Transformer encoder.",
+          "Pre-training uses masked language modeling and next-sentence prediction.",
+          "Fine-tuning initializes from the pre-trained model and adapts all parameters to downstream tasks."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "BERT proposes a masked language model (MLM) pre-training objective to enable deep bidirectional representations from Transformers.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q009",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000088",
+          "b000091",
+          "b000093",
+          "b000098",
+          "b000100",
+          "b000104"
+        ],
+        "gold_pages": [
+          5,
+          6
+        ],
+        "required_claims": [
+          "Experiments fine-tune BERT on eleven NLP tasks.",
+          "GLUE evaluation uses task-specific inputs/outputs and a classification layer over the [CLS] vector.",
+          "Results are reported on evaluation-server metrics and compared against prior systems."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "Experiments are designed as ablation studies on NSP, bidirectionality, and masking strategies, evaluated on GLUE, SQuAD, and SWAG benchmarks using accuracy and F1 scores.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q010",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000010",
+          "b000100"
+        ],
+        "gold_pages": [
+          1,
+          6
+        ],
+        "required_claims": [
+          "Standard language models being unidirectional is identified as a major limitation of previous work.",
+          "Unidirectionality is suboptimal for sentence-level and token-level tasks.",
+          "BERT_LARGE fine-tuning can be unstable on small datasets."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper reports that standard language models are unidirectional, limiting architecture choices and harming token-level tasks. The masked LM only predicts 15% of tokens, requiring more pre-training steps. The WNLI dataset has construction issues and is excluded.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q011",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000016",
+          "b000030",
+          "b000031"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Transfer learning in NLP has produced diverse approaches that are hard to compare.",
+          "The paper introduces a text-to-text framework for all text-based language problems.",
+          "The unified framing supports systematic comparison of transfer-learning design choices."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the challenge of systematically understanding and comparing transfer learning techniques in NLP by proposing a unified text-to-text framework.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q012",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000016",
+          "b000052",
+          "b000091"
+        ],
+        "gold_pages": [
+          1,
+          3,
+          7
+        ],
+        "required_claims": [
+          "The work casts NLP tasks into a unified text-to-text format.",
+          "It provides a survey, exploration, and empirical comparison of existing techniques.",
+          "It introduces C4 and scales T5 up to achieve strong benchmark results."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper's main contributions are a unified text-to-text framework, the C4 dataset, a systematic study of transfer learning, and state-of-the-art results on many tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q013",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000031",
+          "b000050",
+          "b000057",
+          "b000110"
+        ],
+        "gold_pages": [
+          2,
+          3,
+          4,
+          8
+        ],
+        "required_claims": [
+          "Every task is formulated as text input to text output.",
+          "The same model/objective/training/decoding process is reused across tasks.",
+          "The framework is called T5, the Text-to-Text Transfer Transformer."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes the Text-to-Text Transfer Transformer (T5), a framework that casts every NLP task as a text-to-text problem using a unified model, loss function, and hyperparameters.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q014",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000053",
+          "b000094",
+          "b000107",
+          "b000108",
+          "b000110"
+        ],
+        "gold_pages": [
+          3,
+          7,
+          8
+        ],
+        "required_claims": [
+          "The experiments cover diverse tasks including classification, summarization, question answering, and translation.",
+          "GLUE/SuperGLUE tasks are combined in the text-to-text setting.",
+          "Training uses a consistent maximum-likelihood objective."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The experiments compare T5-Base to a baseline and baseline-1T on GLUE, CNNDM, SQuAD, SGLUE, and translation tasks, using validation sets. Final experiments scale up to 11B parameters and report test set results.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q015",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1910.10683"
+        ],
+        "gold_block_ids": [
+          "b000052",
+          "b000130",
+          "b000520"
+        ],
+        "gold_pages": [
+          3,
+          10,
+          40
+        ],
+        "required_claims": [
+          "The work is primarily a survey/exploration rather than a new-method proposal.",
+          "The coordinate-ascent study can miss second-order effects among design choices.",
+          "Some automatic benchmark improvements may not correspond to better qualitative behavior."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper reports that English-only pre-training did not achieve state-of-the-art on translation tasks, and that scaling and English-language pre-training may be insufficient for sophisticated methods like backtranslation. Additionally, improvements to ROUGE scores do not necessarily correspond to more coherent summaries, and generative models trained with maximum likelihood are prone to repetitive summaries.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q016",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000033"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "The target quantity is language-model cross-entropy loss.",
+          "Loss is studied as a function of model size, dataset size, and training compute.",
+          "The goal is to derive practical scaling relations and compute allocation guidance."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the research problem of understanding and predicting the scaling laws for neural language models, specifically how performance depends on model size, dataset size, and compute budget, and how to optimally allocate compute resources.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q017",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000033"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "The paper identifies power-law scaling of loss with model size, data size, and compute.",
+          "It observes limited effects from some architectural details within the studied range.",
+          "It uses the relationships to guide fixed-budget compute allocation."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper's main contributions are empirical scaling laws for language model performance, showing power-law relationships with model size, dataset size, and compute, and providing equations to predict optimal allocation of compute budget.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q018",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000188",
+          "b000190",
+          "b000191"
+        ],
+        "gold_pages": [
+          6
+        ],
+        "required_claims": [
+          "Models are trained on WebText2 using BPE tokenization.",
+          "The principal metric is autoregressive cross-entropy loss.",
+          "The main experiments use decoder-only Transformers with controlled scaling parameters."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes scaling laws for neural language models, specifically power-law relationships between loss and model size, dataset size, and compute, along with optimal allocation of compute between model size and data.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q019",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000215",
+          "b000216",
+          "b000217",
+          "b000218"
+        ],
+        "gold_pages": [
+          7
+        ],
+        "required_claims": [
+          "Model size is varied from 768 to 1.5B non-embedding parameters.",
+          "Dataset size is varied from 22M to 23B tokens.",
+          "Model shape variables include depth, width, attention heads, and feed-forward dimension."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The experiments train Transformer language models on WebText2, varying model size (768 to 1.5B non-embedding parameters), dataset size (22M to 23B tokens), shape, context length, and batch size. Performance is evaluated via cross-entropy loss on WebText2 and other text distributions, with power-law fits to model size, dataset size, and compute.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q020",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2001.08361"
+        ],
+        "gold_block_ids": [
+          "b000629",
+          "b000857"
+        ],
+        "gold_pages": [
+          19,
+          23
+        ],
+        "required_claims": [
+          "Generalization of the laws beyond natural language is uncertain.",
+          "Predictions such as Bcrit(L) are uncertain outside the explored loss range.",
+          "The small-data regime, regularization, and data augmentation were not thoroughly studied."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper reports several limitations: low confidence in Bcrit predictions far outside explored loss range, poor fits for small data regimes, no experimentation with regularization or data augmentation, compute scaling may be confounded for large nctx, possible untuned hyperparameters, and sensitivity of learning rate to target loss. Additionally, scaling laws lack theoretical understanding and may break down at extreme scales due to contradictions between L(Cmin) and L(D) predictions.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q021",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000012",
+          "b000034",
+          "b000035"
+        ],
+        "gold_pages": [
+          1,
+          3
+        ],
+        "required_claims": [
+          "Fine-tuning typically requires task-specific datasets with many examples.",
+          "Humans can often perform new tasks from instructions or a few examples.",
+          "The paper studies whether large language models can achieve this kind of in-context learning."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the research problem of scaling up autoregressive language models to improve in-context learning performance, while also investigating the limitations of such scaling, including structural and algorithmic constraints, and broader impacts like fairness and bias.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q022",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000049",
+          "b000056",
+          "b000057",
+          "b000058"
+        ],
+        "gold_pages": [
+          5,
+          6
+        ],
+        "required_claims": [
+          "The paper trains and evaluates a 175B-parameter GPT-3 model.",
+          "It evaluates zero-shot, one-shot, and few-shot settings across many tasks.",
+          "It studies data contamination, scaling behavior, and broader impacts."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper's main contributions include training GPT-3, a 175 billion parameter language model, evaluating its in-context learning abilities across many NLP tasks, studying data contamination, and analyzing broader impacts.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q023",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000061",
+          "b000063",
+          "b000064",
+          "b000067",
+          "b000068"
+        ],
+        "gold_pages": [
+          6,
+          7
+        ],
+        "required_claims": [
+          "The base pre-training approach scales model size, dataset diversity, and training length.",
+          "Few-shot learning uses demonstrations in the context without weight updates.",
+          "One-shot and zero-shot variants reduce or remove demonstrations while retaining natural-language task descriptions."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes scaling up transformer language models (GPT-3) by straightforwardly increasing model size and compute, using a decoder-only transformer architecture trained on a large text corpus.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q024",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000111",
+          "b000112",
+          "b000113",
+          "b000115"
+        ],
+        "gold_pages": [
+          10,
+          11
+        ],
+        "required_claims": [
+          "The evaluation compares GPT-3 with seven smaller models.",
+          "Datasets are grouped into multiple task categories.",
+          "Performance is analyzed through scaling curves and task-specific evaluations."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The experiments train 8 GPT-3 models (125M to 175B parameters) on a filtered Common Crawl and curated datasets, then evaluate on 9 task categories in zero-shot, one-shot, and few-shot settings using metrics like cross-entropy loss, accuracy, F1, BLEU, and exact match.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q025",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2005.14165"
+        ],
+        "gold_block_ids": [
+          "b000351",
+          "b000352",
+          "b000353",
+          "b000354"
+        ],
+        "gold_pages": [
+          33
+        ],
+        "required_claims": [
+          "GPT-3 text can repeat, lose coherence, contradict itself, or include non sequiturs.",
+          "Some tasks such as ANLI/WIC-style comparison and reading-comprehension tasks remain difficult.",
+          "The experiments focus on autoregressive models rather than bidirectional or denoising alternatives."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "GPT-3 has limitations including poor interpretability, high variance on novel inputs, biases, structural issues (no bidirectionality), text synthesis weaknesses (repetition, incoherence), difficulty with common sense physics, poor sample efficiency, and lack of grounding.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q026",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2104.08691"
+        ],
+        "gold_block_ids": [
+          "b000023",
+          "b000024",
+          "b000026"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "Large pre-trained models need downstream adaptation.",
+          "Manual prompt design is brittle and constrained by context length.",
+          "Full model tuning is expensive because it requires task-specific model copies."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the problem of adapting large pre-trained language models to downstream tasks without fine-tuning all parameters, focusing on prompt tuning as a parameter-efficient method.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q027",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2104.08691"
+        ],
+        "gold_block_ids": [
+          "b000016",
+          "b000017",
+          "b000019",
+          "b000056"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Prompt tuning learns soft prompts for frozen language models.",
+          "It becomes competitive with full model tuning at large scale.",
+          "It supports domain-transfer robustness and prompt ensembling."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper introduces prompt tuning, a method for learning soft prompts to condition frozen language models, which outperforms GPT-3's few-shot learning and matches model tuning performance at scale, while enabling efficient multi-task serving and prompt ensembling.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q028",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2104.08691"
+        ],
+        "gold_block_ids": [
+          "b000062",
+          "b000186",
+          "b000189"
+        ],
+        "gold_pages": [
+          2,
+          6
+        ],
+        "required_claims": [
+          "The pre-trained model parameters are frozen.",
+          "Additional trainable soft-prompt tokens are prepended to the input.",
+          "Only prompt parameters are updated during training."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes prompt tuning, a method that freezes the entire pre-trained model and only allows additional k tunable tokens (soft prompts) prepended to the input text to be trained end-to-end via backpropagation.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q029",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2104.08691"
+        ],
+        "gold_block_ids": [
+          "b000086",
+          "b000088",
+          "b000089",
+          "b000231"
+        ],
+        "gold_pages": [
+          4,
+          9
+        ],
+        "required_claims": [
+          "Experiments use T5 checkpoints from Small through XXL.",
+          "Baselines include model tuning and multi-task model tuning.",
+          "The paper evaluates SuperGLUE and domain-transfer behavior under different prompt-tuning configurations."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "Experiments use GLUE, SuperGLUE, SQuAD, and MRQA datasets. Evaluation metrics are benchmark-specific (e.g., F1). Models are T5 1.1 with prompt tuning, using 3 runs for mean and stddev. Hyperparameters are tuned manually.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q030",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": false,
+        "gold_paper_ids": [],
+        "gold_block_ids": [],
+        "gold_pages": [],
+        "required_claims": [
+          "No exact total energy-consumption value is reported in the paper."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "Within the parameter-efficient prompt tuning paper, what exact total energy consumption is reported for all experiments?",
+        "retrieval_scope": "unanswerable"
+      },
+      "generated_answer": null,
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q031",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000004",
+          "b000023"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Full fine-tuning becomes less feasible as pre-trained models grow.",
+          "Deploying independent fine-tuned instances of GPT-3-sized models is prohibitively expensive.",
+          "The paper seeks a parameter-efficient adaptation method."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the problem of efficiently adapting large pre-trained language models to downstream tasks without full fine-tuning, which is costly in storage and deployment.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q032",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000004",
+          "b000026",
+          "b000027"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "LoRA freezes pre-trained weights and trains low-rank matrices.",
+          "It reduces trainable parameters and GPU memory requirements.",
+          "Its linear design can be merged at inference time with no added latency."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes LoRA, a low-rank adaptation method that freezes pre-trained weights and injects trainable rank decomposition matrices, reducing trainable parameters by 10,000x and GPU memory by 3x for GPT-3 175B while maintaining or improving model quality.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q033",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000067",
+          "b000068",
+          "b000069",
+          "b000070"
+        ],
+        "gold_pages": [
+          4
+        ],
+        "required_claims": [
+          "LoRA assumes adaptation updates have low intrinsic rank.",
+          "It represents the weight update with low-rank matrices.",
+          "The frozen matrix output is augmented as W0x + BAx."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes Low-Rank Adaptation (LoRA), which optimizes rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q034",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000083",
+          "b000085",
+          "b000086"
+        ],
+        "gold_pages": [
+          5
+        ],
+        "required_claims": [
+          "Experiments cover RoBERTa, DeBERTa, GPT-2, and GPT-3.",
+          "Tasks include GLUE-style NLU and generation tasks such as WikiSQL/SAMSum.",
+          "Baselines include full fine-tuning and other prior adaptation methods."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "Experiments evaluate LoRA on RoBERTa, DeBERTa, and GPT-2, then scale to GPT-3 175B, using GLUE, E2E NLG, WikiSQL, and SAMSum benchmarks. Performance is measured via accuracy, BLEU, ROUGE, and compared against fine-tuning, adapters, and prefix tuning baselines.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q035",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2106.09685"
+        ],
+        "gold_block_ids": [
+          "b000237",
+          "b000239"
+        ],
+        "gold_pages": [
+          12,
+          13
+        ],
+        "required_claims": [
+          "The mechanism behind fine-tuning and LoRA remains unclear.",
+          "Selecting which matrices to adapt currently depends largely on heuristics.",
+          "Combining LoRA with other efficient adaptation methods remains a future direction."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper reports that existing adapter layers introduce inference latency and prompt tuning reduces usable sequence length, while LoRA cannot batch inputs with different modules in a single forward pass if weights are merged.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q036",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000011",
+          "b000013"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "Bigger language models do not automatically follow user intent.",
+          "Models can generate untruthful, toxic, biased, or unhelpful outputs.",
+          "The paper studies fine-tuning with human feedback as an alignment method."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the problem of aligning large language models with human intentions using reinforcement learning from human feedback (RLHF).",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q037",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000011",
+          "b000027",
+          "b000031",
+          "b000036",
+          "b000037",
+          "b000038"
+        ],
+        "gold_pages": [
+          1,
+          2,
+          3
+        ],
+        "required_claims": [
+          "The paper fine-tunes language models with human demonstrations and preferences.",
+          "InstructGPT outputs are preferred over GPT-3 outputs in human evaluations.",
+          "The paper reports improvements in truthfulness and some toxicity measures."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper's main contributions are: (1) fine-tuning large language models using human preferences significantly improves their behavior on a wide range of tasks, and (2) InstructGPT models are preferred over GPT-3 outputs by labelers, with the 1.3B parameter model outperforming the 175B GPT-3.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q038",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000068",
+          "b000069",
+          "b000070",
+          "b000071"
+        ],
+        "gold_pages": [
+          6
+        ],
+        "required_claims": [
+          "Start from a pre-trained language model and prompt distribution.",
+          "Train a supervised policy on human demonstrations.",
+          "Train a reward model from comparisons and optimize the policy with RLHF."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes fine-tuning large language models using human preferences via Reinforcement Learning from Human Feedback (RLHF).",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q039",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000031",
+          "b000035",
+          "b000036",
+          "b000037",
+          "b000038"
+        ],
+        "gold_pages": [
+          2,
+          3
+        ],
+        "required_claims": [
+          "Human labelers evaluate outputs on held-out API prompts.",
+          "The paper also uses public NLP datasets and safety-related benchmarks.",
+          "It compares 1.3B, 6B, and 175B InstructGPT variants to GPT-3 baselines."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "Experiments use human preference ratings on held-out API prompts and public NLP datasets for safety and zero-shot tasks. Models are fine-tuned via SFT, RM, and PPO, evaluated by labeler preferences and automatic metrics.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q040",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2203.02155"
+        ],
+        "gold_block_ids": [
+          "b000304",
+          "b000305",
+          "b000309"
+        ],
+        "gold_pages": [
+          17,
+          18
+        ],
+        "required_claims": [
+          "The systems studied are still limited.",
+          "The iterative approach does not directly address alignment problems unique to superhuman systems.",
+          "Deployment feedback is needed to understand effectiveness and limitations."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "InstructGPT still makes simple mistakes: fails to follow instructions, makes up facts, hedges, and degrades with multiple constraints. Much work remains to improve safety and reliability.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q041",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000032",
+          "b000006"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "Generalization to unseen tasks is the core problem.",
+          "Instruction fine-tuning helps models respond to instructions.",
+          "The paper explores scaling task count, model size, and chain-of-thought data."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the research problem of improving large language models through instruction finetuning by scaling the number of tasks, model size, and incorporating chain-of-thought data.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q042",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000006",
+          "b000033",
+          "b000034",
+          "b000035"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "It studies scaling the number of tasks and model size in instruction fine-tuning.",
+          "It adds chain-of-thought fine-tuning data.",
+          "It reports improvements for Flan-PaLM and Flan-T5 across varied benchmarks and prompting setups."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper extends instruction finetuning by scaling tasks, model size, and including chain-of-thought data, improving performance across evaluations.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q043",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000028",
+          "b000071",
+          "b000112",
+          "b000113"
+        ],
+        "gold_pages": [
+          1,
+          3,
+          5
+        ],
+        "required_claims": [
+          "Flan fine-tunes models on many tasks phrased as instructions.",
+          "The fine-tuned models are evaluated on held-out tasks.",
+          "Evaluation includes zero-shot, few-shot, and chain-of-thought prompting."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper proposes extending instruction finetuning by scaling the number of tasks, scaling model size, and finetuning on chain-of-thought data.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q044",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000112",
+          "b000113",
+          "b000114"
+        ],
+        "gold_pages": [
+          5
+        ],
+        "required_claims": [
+          "Held-out tasks are excluded from the fine-tuning data.",
+          "Benchmarks include MMLU, BBH, TyDiQA, MGSM, and open-ended generation.",
+          "Evaluation uses direct prompting, chain-of-thought prompting, exact-match/accuracy, and normalized metrics."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "How are the target paper's experiments designed and evaluated?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The experiments evaluate Flan-PaLM on held-out benchmarks (MMLU, BBH, TyDiQA, MGSM) using direct and chain-of-thought prompting, plus a human evaluation on 190 open-ended examples. Scaling curves show performance improves with model size and number of finetuning tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q045",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2210.11416"
+        ],
+        "gold_block_ids": [
+          "b000724",
+          "b000725",
+          "b000726"
+        ],
+        "gold_pages": [
+          33
+        ],
+        "required_claims": [
+          "The evaluation does not cover all possible harms and biases.",
+          "Automated toxicity measures themselves contain noise and bias.",
+          "Toxicity-related findings are limited in scope and mostly English-focused."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What limitations or unresolved issues are reported in the target paper?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The paper reports limitations including potential biases in Flan data, limited evaluation of harms and biases, automated toxicity measures with noise and bias, and that improvements are limited to biased identity terms and English only.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q046",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2302.13971"
+        ],
+        "gold_block_ids": [
+          "b000010",
+          "b000012",
+          "b000015"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "The paper targets performance at different inference budgets.",
+          "It trains smaller models longer/on more tokens than is typical.",
+          "It connects this choice to the trade-off between training cost and inference cost."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What research problem does the target paper address?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper addresses the problem of training large language models that are both performant and efficient at inference, unlike prior work focused solely on training compute budgets.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q047",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2302.13971"
+        ],
+        "gold_block_ids": [
+          "b000008",
+          "b000010",
+          "b000011"
+        ],
+        "gold_pages": [
+          1
+        ],
+        "required_claims": [
+          "LLaMA is a family of 7B to 65B foundation language models.",
+          "The models are trained on trillions of tokens from publicly available data.",
+          "The paper reports competitive benchmark performance and releases the models for research."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "What are the target paper's main contributions?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper introduces LLaMA, a series of language models trained on more tokens to achieve competitive performance at various inference budgets, using only publicly available data. LLaMA-13B outperforms GPT-3 while being 10× smaller, and LLaMA-65B is competitive with Chinchilla-70B and PaLM-540B. The models are released openly to democratize LLM access and study.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q048",
+      "category": null,
+      "failure_stage": "retrieval",
+      "bad_case_type": "RETRIEVAL_MISS",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "2302.13971"
+        ],
+        "gold_block_ids": [
+          "b000018",
+          "b000021",
+          "b000022",
+          "b000023"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "The approach uses large Transformer models.",
+          "Training is inspired by Chinchilla-style scaling and uses many tokens.",
+          "The data mixture is made from publicly available sources with specified sampling proportions."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": false,
+        "retrieval_query": "What method or technical approach does the target paper propose?",
+        "retrieval_scope": "paper"
+      },
+      "generated_answer": "The target paper proposes LLaMA, a collection of open and efficient foundation language models.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q049",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "GENERATION_OMISSION",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762",
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000025",
+          "b000005",
+          "b000015",
+          "b000016",
+          "b000017"
+        ],
+        "gold_pages": [
+          1,
+          2
+        ],
+        "required_claims": [
+          "The Transformer paper introduces an attention-only architecture without recurrence.",
+          "The BERT paper introduces bidirectional Transformer pre-training with masked language modeling.",
+          "BERT demonstrates broad downstream gains through fine-tuning, while Transformer focuses on sequence transduction architecture."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "Compare the main contributions of the two target papers.",
+        "retrieval_scope": "multi_paper"
+      },
+      "generated_answer": "The Transformer introduces a novel architecture based solely on attention mechanisms, enabling parallelization and state-of-the-art translation quality. BERT demonstrates the importance of bidirectional pre-training using masked language models, achieving state-of-the-art on eleven NLP tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    },
+    {
+      "question_id": "q050",
+      "category": null,
+      "failure_stage": "generation",
+      "bad_case_type": "CITATION_MISMATCH",
+      "gold_evidence": {
+        "answerable": true,
+        "gold_paper_ids": [
+          "1706.03762",
+          "1810.04805"
+        ],
+        "gold_block_ids": [
+          "b000032",
+          "b000035",
+          "b000012",
+          "b000013",
+          "b000063"
+        ],
+        "gold_pages": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "required_claims": [
+          "The first paper presents the Transformer as an encoder-decoder architecture for sequence transduction.",
+          "The second paper uses a bidirectional Transformer encoder as a representation model.",
+          "BERT adds pre-training and fine-tuning objectives rather than introducing the original Transformer architecture."
+        ]
+      },
+      "retrieved_evidence": {
+        "gold_block_present": true,
+        "retrieval_query": "Compare how the two target papers use the Transformer architecture.",
+        "retrieval_scope": "multi_paper"
+      },
+      "generated_answer": "The original Transformer uses an encoder-decoder architecture with stacked self-attention and feed-forward layers for sequence transduction. BERT uses only the Transformer encoder, pre-trained bidirectionally and fine-tuned for language understanding tasks.",
+      "diagnosis": "Historical existing QA run diagnostic; no new model call was made."
+    }
+  ]
+}

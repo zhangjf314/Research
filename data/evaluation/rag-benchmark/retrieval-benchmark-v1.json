@@ -1,0 +1,41 @@
+{
+  "schema_version": "rag-retrieval-benchmark-v1",
+  "status": "READY_NOT_RUN",
+  "started_at": "2026-08-07T10:17:53.941032+00:00",
+  "finished_at": "2026-08-07T10:17:53.941032+00:00",
+  "git_commit": "f97746e84b98d6b4e07984a3abbdab206f156839",
+  "dataset_version": "retrieval-gold-v2",
+  "dataset_hash": "9a43bab1e9234a884256447e80afa3c2d0b4c6467b95604073f1355d63042f9f",
+  "baseline_config_hash": "8817891ed73fc0c0fa2f3a7fc90baf3591b3ab0006934bbb058cbff87e657c94",
+  "provider": "deepseek",
+  "model": "deepseek-v4-flash",
+  "embedding_model": "jina-embeddings-v5-text-small",
+  "retrieval_config": {
+    "production_collection": "papers_production_v1",
+    "baseline_collection": "papers_hash_v1",
+    "score_threshold": 0.12,
+    "recall_k": 20,
+    "top_k": 5,
+    "strategy": "current production route; frozen for benchmark"
+  },
+  "tokens": 0,
+  "cost": 0.0,
+  "dry_run": true,
+  "per_question": [],
+  "aggregate": {},
+  "by_category": {},
+  "by_difficulty": {},
+  "required_metrics": [
+    "Recall@5",
+    "Recall@10",
+    "Recall@20",
+    "MRR@10",
+    "nDCG@10",
+    "Paper Recall@5",
+    "Paper Recall@10",
+    "Evidence Coverage@5",
+    "Evidence Coverage@10",
+    "Evidence Coverage@20",
+    "irrelevant_retrieval_rate"
+  ]
+}
