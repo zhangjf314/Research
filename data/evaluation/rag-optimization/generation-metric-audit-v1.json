@@ -1,0 +1,448 @@
+{
+  "answerable_questions": 132,
+  "benchmark_harness_commit": "4239e8fd4b6971f8f9bf0dd5c4bbc640cc7e1150",
+  "citation_precision": {
+    "denominator": 430,
+    "numerator": 0,
+    "value": 0.0
+  },
+  "citation_recall": {
+    "denominator": 296,
+    "numerator": 29,
+    "value": 0.097973
+  },
+  "created_at": "2026-08-07T15:19:34.242227+00:00",
+  "explanation": "Precision can be 0 while recall is positive because precision requires an exact paper/page/block triple for every generated citation, while recall only counts whether any generated citation mentions a gold block ID. In the frozen results, some answers cite gold block IDs but fail exact page or paper matching.",
+  "representation": {
+    "block_id_normalization": "exact string comparison",
+    "generated": "claim.citations[].paper_id/page/block_id",
+    "gold": "paper_id + page + block_id from gold_paper_ids/gold_pages/gold_block_ids",
+    "page_normalization": "integer comparison",
+    "paper_id_normalization": "exact string comparison"
+  },
+  "sample_bucket_counts": {
+    "no_citation": 30,
+    "wrong_citation": 102
+  },
+  "sampled_examples": [
+    {
+      "bucket": "no_citation",
+      "citation_count": 0,
+      "correct_citation_count": 0,
+      "generated_citations": [],
+      "gold_block_ids": [
+        "b000022",
+        "b000025",
+        "b000027"
+      ],
+      "gold_pages": [
+        2
+      ],
+      "gold_paper_ids": [
+        "1706.03762"
+      ],
+      "question_id": "q001",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 0
+      }
+    },
+    {
+      "bucket": "no_citation",
+      "citation_count": 0,
+      "correct_citation_count": 0,
+      "generated_citations": [],
+      "gold_block_ids": [
+        "b000025"
+      ],
+      "gold_pages": [
+        2
+      ],
+      "gold_paper_ids": [
+        "1706.03762"
+      ],
+      "question_id": "q002",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 0
+      }
+    },
+    {
+      "bucket": "no_citation",
+      "citation_count": 0,
+      "correct_citation_count": 0,
+      "generated_citations": [],
+      "gold_block_ids": [
+        "b000032",
+        "b000034",
+        "b000035"
+      ],
+      "gold_pages": [
+        2,
+        3
+      ],
+      "gold_paper_ids": [
+        "1706.03762"
+      ],
+      "question_id": "q003",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 0
+      }
+    },
+    {
+      "bucket": "no_citation",
+      "citation_count": 0,
+      "correct_citation_count": 0,
+      "generated_citations": [],
+      "gold_block_ids": [
+        "b000103",
+        "b000105",
+        "b000107",
+        "b000109",
+        "b000112"
+      ],
+      "gold_pages": [
+        7
+      ],
+      "gold_paper_ids": [
+        "1706.03762"
+      ],
+      "question_id": "q004",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 0
+      }
+    },
+    {
+      "bucket": "wrong_citation",
+      "citation_count": 6,
+      "correct_citation_count": 0,
+      "generated_citations": [
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000004",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000004",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        }
+      ],
+      "gold_block_ids": [
+        "b000010",
+        "b000012",
+        "b000013"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "gold_paper_ids": [
+        "1810.04805"
+      ],
+      "question_id": "q006",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": true,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 3
+      }
+    },
+    {
+      "bucket": "wrong_citation",
+      "citation_count": 6,
+      "correct_citation_count": 0,
+      "generated_citations": [
+        {
+          "block_id": "b000013",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000014",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000015",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000016",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000017",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        }
+      ],
+      "gold_block_ids": [
+        "b000005",
+        "b000015",
+        "b000016",
+        "b000017"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "gold_paper_ids": [
+        "1810.04805"
+      ],
+      "question_id": "q007",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.3333333333333333,
+        "citation_precision": 0.0,
+        "citation_recall": 0.75,
+        "gold_evidence_in_context": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 3
+      }
+    },
+    {
+      "bucket": "wrong_citation",
+      "citation_count": 4,
+      "correct_citation_count": 0,
+      "generated_citations": [
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000013",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000014",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        }
+      ],
+      "gold_block_ids": [
+        "b000012",
+        "b000013",
+        "b000060",
+        "b000063"
+      ],
+      "gold_pages": [
+        1,
+        2,
+        3
+      ],
+      "gold_paper_ids": [
+        "1810.04805"
+      ],
+      "question_id": "q008",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.3333333333333333,
+        "citation_precision": 0.0,
+        "citation_recall": 0.25,
+        "gold_evidence_in_context": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 3
+      }
+    },
+    {
+      "bucket": "wrong_citation",
+      "citation_count": 6,
+      "correct_citation_count": 0,
+      "generated_citations": [
+        {
+          "block_id": "b000013",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000014",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000003",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000017",
+          "page": 2,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000144",
+          "page": 8,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        }
+      ],
+      "gold_block_ids": [
+        "b000088",
+        "b000091",
+        "b000093",
+        "b000098",
+        "b000100",
+        "b000104"
+      ],
+      "gold_pages": [
+        5,
+        6
+      ],
+      "gold_paper_ids": [
+        "1810.04805"
+      ],
+      "question_id": "q009",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.3333333333333333,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.3333333333333333,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 3
+      }
+    },
+    {
+      "bucket": "wrong_citation",
+      "citation_count": 5,
+      "correct_citation_count": 0,
+      "generated_citations": [
+        {
+          "block_id": "b000010",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000011",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000011",
+          "page": 1,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000144",
+          "page": 8,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        },
+        {
+          "block_id": "b000145",
+          "page": 8,
+          "paper_id": "50ae59a6-368b-41ba-a527-fff27cac57d8"
+        }
+      ],
+      "gold_block_ids": [
+        "b000010",
+        "b000100"
+      ],
+      "gold_pages": [
+        1,
+        6
+      ],
+      "gold_paper_ids": [
+        "1810.04805"
+      ],
+      "question_id": "q010",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.3333333333333333,
+        "citation_precision": 0.0,
+        "citation_recall": 0.5,
+        "gold_evidence_in_context": true,
+        "required_claim_coverage": 0.3333333333333333,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 3
+      }
+    },
+    {
+      "bucket": "no_citation",
+      "citation_count": 0,
+      "correct_citation_count": 0,
+      "generated_citations": [],
+      "gold_block_ids": [
+        "b000016",
+        "b000030",
+        "b000031"
+      ],
+      "gold_pages": [
+        1,
+        2
+      ],
+      "gold_paper_ids": [
+        "1910.10683"
+      ],
+      "question_id": "q011",
+      "reported_metrics": {
+        "abstention_accuracy": null,
+        "answer_completeness": 0.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "gold_evidence_in_context": false,
+        "required_claim_coverage": 0.0,
+        "supported_claim_ratio": 0.0,
+        "unsupported_claim_count": 0
+      }
+    }
+  ],
+  "schema_version": "generation-metric-audit-v1",
+  "status": "METRICS_VALID"
+}
