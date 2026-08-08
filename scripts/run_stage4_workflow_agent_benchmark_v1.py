@@ -640,14 +640,16 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
     docker_ps = subprocess.run(
         ["docker", "compose", "ps"],
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
         timeout=60,
     )
     preflight["docker_compose_ps"] = {
         "returncode": docker_ps.returncode,
-        "stdout_tail": docker_ps.stdout[-2000:],
-        "stderr_tail": docker_ps.stderr[-2000:],
+        "stdout_tail": (docker_ps.stdout or "")[-2000:],
+        "stderr_tail": (docker_ps.stderr or "")[-2000:],
     }
     provider = subprocess.run(
         [
@@ -658,6 +660,8 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
             str(PRECHECK_PATH),
         ],
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
         timeout=120,
