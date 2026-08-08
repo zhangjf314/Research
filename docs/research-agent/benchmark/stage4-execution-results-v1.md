@@ -2,21 +2,26 @@
 
 This file records deterministic execution/accounting status only. Semantic judging and paired quality analysis are deferred to Stage 4C.
 
-- benchmark_status: `INCOMPLETE`
+- official_run_id: `stage4-official-v1-attempt2`
+- attempt1_status: `INVALIDATED_INFRASTRUCTURE`
+- benchmark_status: `INVALID`
 - stage4b_complete: `False`
 - stage4c_ready: `False`
-- stop_reason: `GLOBAL_BENCHMARK_BUDGET_EXHAUSTED`
-- official_workflow_runs: `19`
-- official_agent_runs: `18`
-- complete_pairs: `18`
+- stop_reason: `BENCHMARK_API_WIRING_FAILURE`
+- official_workflow_runs: `1`
+- official_agent_runs: `2`
+- terminal_units: `3`
+- pending_units: `117`
+- infrastructure_invalid_units: `1`
+- complete_pairs: `1`
 - order_violations: `0`
 - duplicate_logical_execution_count: `0`
 - duplicate_completed_unit_count: `0`
 - duplicate_provider_execution_count: `0`
 - semantic_judge_requests: `0`
-- provider_requests: `126`
-- total_tokens: `157424`
-- estimated_cost_usd: `0.76206156`
+- provider_requests: `9`
+- total_tokens: `13013`
+- estimated_cost_usd: `0.05137732`
 
 ## Notes
 

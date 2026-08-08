@@ -1,0 +1,83 @@
+{
+  "affected_units": [
+    {
+      "accounting_complete": true,
+      "attempt_count": 1,
+      "behavioral_metrics": {
+        "evidence_count": 0,
+        "observation_count": 0,
+        "plan_version": 0,
+        "provider_call_count": 0,
+        "step_count": 0,
+        "tool_call_count": 0,
+        "tool_history_count": 0,
+        "verification_status": null
+      },
+      "benchmark_version": "research-benchmark-v1",
+      "blind_label": "SYSTEM_A",
+      "citation_count": 0,
+      "citation_ids_structurally_valid": true,
+      "citation_structure_parseable": true,
+      "error": "HTTP Error 503",
+      "estimated_cost_usd": 0.0,
+      "execution_unit_id": "research-benchmark-v1:rt-v1-002:agent",
+      "failure_category": "BENCHMARK_API_WIRING_FAILURE",
+      "failure_validity": "invalid_infrastructure_failure",
+      "finished_at": "2026-08-08T13:44:22.832421+00:00",
+      "http_error_detail": {
+        "error": {
+          "code": "HTTP_503",
+          "message": "research agent failed: AgentDecisionProviderError",
+          "request_id": "57778858-ae75-4bc3-baa2-4df2d1a26599"
+        }
+      },
+      "http_status": 503,
+      "input_tokens": 0,
+      "latency_seconds": 10.952035,
+      "original_execution_unit_id": "rt-v1-002-agent",
+      "output_exists": false,
+      "output_tokens": 0,
+      "provider_failures": 0,
+      "provider_requests": 0,
+      "response_status": null,
+      "started_at": "2026-08-08T13:44:11.876901+00:00",
+      "status": "FAILED",
+      "stop_reason": "HTTP_OR_RUNTIME_FAILURE",
+      "system": "agent",
+      "target_paper_count": 2,
+      "task_category": "multi_paper_synthesis",
+      "task_difficulty": "easy",
+      "task_id": "rt-v1-002",
+      "total_tokens": 0,
+      "trace_complete": false
+    }
+  ],
+  "agent_terminal": 2,
+  "benchmark_status": "INVALID",
+  "complete_pairs": 1,
+  "conclusion": "ATTEMPT2_EXPOSED_INFRASTRUCTURE_OR_FROZEN_RUNTIME_INTEGRITY_DEFECT",
+  "created_at": "2026-08-08T13:44:53.965802+00:00",
+  "defect_code": "BENCHMARK_API_WIRING_FAILURE",
+  "execution_commit": "894dfe33b235726fb1ceed216207096a8c9f178a",
+  "global_totals": {
+    "estimated_cost_usd": 0.05137732,
+    "input_tokens": 9293,
+    "official_agent_runs": 2,
+    "official_logical_runs": 3,
+    "official_workflow_runs": 1,
+    "output_tokens": 3720,
+    "provider_failures": 0,
+    "provider_requests": 9,
+    "total_tokens": 13013
+  },
+  "infrastructure_invalid_units": 1,
+  "official_run_id": "stage4-official-v1-attempt2",
+  "pending_units": 117,
+  "schema_version": "stage4-attempt2-runtime-defect-v1",
+  "semantic_judge_requests": 0,
+  "stage4b_complete": false,
+  "stage4c_ready": false,
+  "stop_reason": "BENCHMARK_API_WIRING_FAILURE",
+  "terminal_units": 3,
+  "workflow_terminal": 1
+}
