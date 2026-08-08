@@ -1,0 +1,67 @@
+{
+  "additional_tasks_after_preregistered_set": 0,
+  "amendment_version": "v1",
+  "behavior_changes_during_stage3c2": 0,
+  "created_after_evidence": [
+    "Stage 3C initial live smoke",
+    "Stage 3C.1 same-task post-fix revalidation",
+    "Stage 3C.2 preregistered frozen validation set"
+  ],
+  "created_at": "2026-08-08T10:49:36.231126+00:00",
+  "effective_live_replan_observed": false,
+  "evidence_considered": {
+    "stage3c2_validation_artifact": "data\\evaluation\\research-agent\\stage3-live-replan-validation-v1.json",
+    "stage3c_forensics_artifact": "data\\evaluation\\research-agent\\stage3c-replan-forensics-v1.json",
+    "stage3c_smoke_artifact": "data\\evaluation\\research-agent\\stage3-agent-smoke-v1.json"
+  },
+  "forbidden_claims": [
+    "Live replan is unnecessary.",
+    "Replan has been fully validated in live runs.",
+    "Live adaptive replanning demonstrated.",
+    "Agent routinely replans based on observations."
+  ],
+  "known_limitation": "LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED",
+  "previous_gate": {
+    "effective_live_replan_observed": true,
+    "meaning": "required for Stage 3 freeze"
+  },
+  "reason": "Continuing to design tasks or adjust runtime/prompt/policy until a live replan appears would overfit the validation set. Live validation remains evidence for real-provider integration, dynamic decisions, observation-driven actions, verification, checkpoint/resume, budget, trace, and accounting. The replan branch is covered by controlled deterministic runtime tests.",
+  "required_protocol_statement": "The replan branch is covered by controlled deterministic runtime tests, including PARTIAL/FAIL to REPLAN transition, effective plan delta, changed next action, checkpoint interaction, and trace causality. Real-provider validation demonstrated dynamic tool selection and observation-driven actions, but no preregistered live development task exercised the complete effective-replan causal chain. Rather than continue adapting validation tasks or runtime behavior until a replan appears, the live-replan requirement is moved from a Stage 3 release gate to a Stage 4 behavioral measurement.",
+  "revised_gate": {
+    "effective_live_replan_observed": "NOT_REQUIRED_FOR_STAGE3_FREEZE",
+    "live_effective_replan_recorded_value": false,
+    "stage4_behavioral_metric": true
+  },
+  "runtime_was_frozen_during_stage3c2": true,
+  "schema_version": "stage3-validation-protocol-amendment-v1",
+  "stage3c1_result": {
+    "dynamic_path": true,
+    "effective_replan_observed": false,
+    "forensics_root_cause": [
+      "NO_TRUE_REPLAN_NEEDED",
+      "PARTIAL_MAPPED_TO_FINISH",
+      "REPLAN_TRANSITION_BUG",
+      "TRACE_MISSING_DECISION_CAUSALITY",
+      "TRACE_MISSING_VERIFY_EVENT",
+      "VERIFY_ONLY_EXECUTED_AT_TERMINAL"
+    ],
+    "resume": true,
+    "runtime_defect_fixed": true,
+    "same_smoke_2_3_rerun": true
+  },
+  "stage3c2_result": {
+    "dynamic_tool_selection_observed": true,
+    "effective_live_replan_observed": false,
+    "observation_driven_action_observed": true,
+    "runtime_frozen": true,
+    "task1_plan_version_2_is_not_effective_replan": true,
+    "validation_task_count": 3
+  },
+  "stage3c_result": {
+    "effective_replan_observed": false,
+    "gate": "LIVE_AGENT_DYNAMIC_REPLAN_NOT_DEMONSTRATED",
+    "live_smoke_completed": 3,
+    "live_smoke_count": 3,
+    "runtime_defect_discovered": true
+  }
+}

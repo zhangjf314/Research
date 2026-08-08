@@ -1,4 +1,4 @@
-# Research Agent Architecture v1
+﻿# Research Agent Architecture v1
 
 LangGraph remains the existing workflow substrate for the control-group Deep
 Research path. Research Agent v1 is introduced as a parallel runtime path whose
@@ -23,3 +23,15 @@ flowchart TD
 
 The existing `CONTROL_GROUP_WORKFLOW` is not rewritten and remains the default.
 Agent mode is exposed separately as `research_mode=agent`.
+
+## Stage 3D validation protocol amendment
+
+The runtime supports an explicit REPLAN transition and the transition is covered
+by deterministic controlled tests.
+
+Real-provider development validation demonstrated dynamic tool selection and
+observation-driven actions. However, the complete effective live-replan causal
+chain was not observed in the frozen Stage 3 development validation tasks.
+
+Stage 4 therefore measures replanning as an observed runtime behavior rather
+than assuming it occurs.
