@@ -1,0 +1,351 @@
+{
+  "agent_runs": 0,
+  "corpus_candidate_map": [
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "1706.03762",
+      "section_availability": "unknown_from_manifest",
+      "title": "1706.03762",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2602.17856",
+      "section_availability": "unknown_from_manifest",
+      "title": "Enhancing Scientific Literature Chatbots with Retrieval-Augmented Generation: A Performance Evaluation of Vector and Graph-Based Systems",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2411.18583",
+      "section_availability": "unknown_from_manifest",
+      "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2601.05264",
+      "section_availability": "unknown_from_manifest",
+      "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "1810.04805",
+      "section_availability": "unknown_from_manifest",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for",
+      "topic": "transformer_language_model"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "1910.10683",
+      "section_availability": "unknown_from_manifest",
+      "title": "1910.10683",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2001.08361",
+      "section_availability": "unknown_from_manifest",
+      "title": "Scaling Laws for Neural Language Models",
+      "topic": "language_model_scaling"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2005.14165",
+      "section_availability": "unknown_from_manifest",
+      "title": "Language Models are Few-Shot Learners",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2104.08691",
+      "section_availability": "unknown_from_manifest",
+      "title": "The Power of Scale for Parameter-Efﬁcient Prompt Tuning",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2106.09685",
+      "section_availability": "unknown_from_manifest",
+      "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2203.02155",
+      "section_availability": "unknown_from_manifest",
+      "title": "Training language models to follow instructions",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2210.11416",
+      "section_availability": "unknown_from_manifest",
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "topic": "language_model_scaling"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2302.13971",
+      "section_availability": "unknown_from_manifest",
+      "title": "LLaMA: Open and Efﬁcient Foundation Language Models",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2504.14891",
+      "section_availability": "unknown_from_manifest",
+      "title": "Retrieval Augmented Generation Evaluation in the Era of Large Language Models: A Comprehensive Survey",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2605.27444",
+      "section_availability": "unknown_from_manifest",
+      "title": "A Systematic Evaluation of Retrieval-Augmented Generation and Language Models for Space Operations",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2405.13622",
+      "section_availability": "unknown_from_manifest",
+      "title": "Automated Evaluation of Retrieval-Augmented Language Models with Task-Specific Exam Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2404.10981",
+      "section_availability": "unknown_from_manifest",
+      "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2503.16581",
+      "section_availability": "unknown_from_manifest",
+      "title": "Investigating Retrieval-Augmented Generation in Quranic Studies: A Study of 13 Open-Source Large Language Models",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2403.10081",
+      "section_availability": "unknown_from_manifest",
+      "title": "DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2509.12382",
+      "section_availability": "unknown_from_manifest",
+      "title": "LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2508.14066",
+      "section_availability": "unknown_from_manifest",
+      "title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use Cases, Requirements, Challenges, and Evaluation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2411.02832",
+      "section_availability": "unknown_from_manifest",
+      "title": "PersianRAG: A Retrieval-Augmented Generation System for Persian Language",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2309.15217",
+      "section_availability": "unknown_from_manifest",
+      "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2601.11863",
+      "section_availability": "unknown_from_manifest",
+      "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2507.06956",
+      "section_availability": "unknown_from_manifest",
+      "title": "Investigating the Robustness of Retrieval-Augmented Generation at the Query Level",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2409.03759",
+      "section_availability": "unknown_from_manifest",
+      "title": "VERA: Validation and Evaluation of Retrieval-Augmented Systems",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2409.11353",
+      "section_availability": "unknown_from_manifest",
+      "title": "THaMES: An End-to-End Tool for Hallucination Mitigation and Evaluation in Large Language Models",
+      "topic": "other"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2602.07525",
+      "section_availability": "unknown_from_manifest",
+      "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2606.28358",
+      "section_availability": "unknown_from_manifest",
+      "title": "How Do LLMs Cite? A Mechanistic Interpretation of Attribution in Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2510.22344",
+      "section_availability": "unknown_from_manifest",
+      "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2502.00306",
+      "section_availability": "unknown_from_manifest",
+      "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2507.23334",
+      "section_availability": "unknown_from_manifest",
+      "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    },
+    {
+      "corpus_role": "research_paper",
+      "included_in_production": true,
+      "paper_id": "2504.19754",
+      "section_availability": "unknown_from_manifest",
+      "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
+      "topic": "retrieval_augmented_generation"
+    }
+  ],
+  "corpus_manifest": "data\\evaluation\\production-corpus-v1.json",
+  "created_at": "2026-08-08T10:25:56.471691+00:00",
+  "excluded_roles": [
+    "ocr_fixture",
+    "release_acceptance_text_fixture"
+  ],
+  "formal_research_paper_count": 33,
+  "git_commit": "7af18fb613f74036fdb9114cbab29238aa3695e2",
+  "gold_leakage_guard": {
+    "agent_input_fields": [
+      "research_question"
+    ],
+    "uses_gold_answers": false,
+    "uses_gold_block_ids": false,
+    "uses_gold_pages": false,
+    "uses_required_claims": false,
+    "uses_stage4_benchmark_tasks": false
+  },
+  "provider_requests": 0,
+  "schema_version": "stage3-live-replan-validation-plan-v1",
+  "stage2_rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
+  "stage3_live_replan_validation_set_hash": "711662c4e9668952bd2c2f3824dfecdaf9bc94953410d43422b0767d2b676817",
+  "stage4_task_exclusions": [
+    {
+      "exclude_exact_question": true,
+      "exclude_obvious_paraphrase": true,
+      "exclude_same_observation_dependent_comparison": true,
+      "research_question": "Compare DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models with FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation. Determine which evaluation datasets or benchmarks DRAGIN actually uses, then assess whether FAIR-RAG reports directly comparable results on any of those datasets; if direct dataset overlap is not supported by evidence, identify the closest evidence-supported comparison dimension.",
+      "task_id": "stage3-replan-v1-task-1-dataset-bridge"
+    },
+    {
+      "exclude_exact_question": true,
+      "exclude_obvious_paraphrase": true,
+      "exclude_same_observation_dependent_comparison": true,
+      "research_question": "Compare Investigating the Robustness of Retrieval-Augmented Generation at the Query Level with IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory. Identify a major limitation or failure mode that the robustness paper explicitly reports, then determine whether IGMiRAG provides a directly targeted mechanism or experimental evidence addressing that limitation; if direct evidence is absent, state the closest evidence-supported mitigation and its boundary.",
+      "task_id": "stage3-replan-v1-task-2-limitation-bridge"
+    },
+    {
+      "exclude_exact_question": true,
+      "exclude_obvious_paraphrase": true,
+      "exclude_same_observation_dependent_comparison": true,
+      "research_question": "Assess whether Ragas: Automated Evaluation of Retrieval Augmented Generation and VERA: Validation and Evaluation of Retrieval-Augmented Systems can be compared on a shared quality or efficiency metric. First identify the metrics each paper actually reports, then restrict the comparison to metrics that both papers report with evidence; clearly separate any initially expected comparison dimension that the evidence does not support.",
+      "task_id": "stage3-replan-v1-task-3-metric-comparability"
+    }
+  ],
+  "validation_set_frozen": true,
+  "validation_task_count": 3,
+  "validation_tasks": [
+    {
+      "authoring_notes": "Dependency-shaped task: the second comparison target depends on datasets discovered from DRAGIN evidence. Notes are not sent to Agent.",
+      "paper_ids_named_in_question": [
+        "2403.10081",
+        "2510.22344"
+      ],
+      "research_question": "Compare DRAGIN: Dynamic Retrieval Augmented Generation based on the Information Needs of Large Language Models with FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation. Determine which evaluation datasets or benchmarks DRAGIN actually uses, then assess whether FAIR-RAG reports directly comparable results on any of those datasets; if direct dataset overlap is not supported by evidence, identify the closest evidence-supported comparison dimension.",
+      "task_hash": "66fe613bd877a623335f51ab810dd4cbe151bb4b7a7aea5dee25dd5d1ffeb32e",
+      "task_id": "stage3-replan-v1-task-1-dataset-bridge",
+      "task_pattern": "OBSERVATION_DERIVED_DATASET_BRIDGE"
+    },
+    {
+      "authoring_notes": "Dependency-shaped task: the second search target should depend on the limitation/failure mode observed in the first paper.",
+      "paper_ids_named_in_question": [
+        "2507.06956",
+        "2602.07525"
+      ],
+      "research_question": "Compare Investigating the Robustness of Retrieval-Augmented Generation at the Query Level with IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory. Identify a major limitation or failure mode that the robustness paper explicitly reports, then determine whether IGMiRAG provides a directly targeted mechanism or experimental evidence addressing that limitation; if direct evidence is absent, state the closest evidence-supported mitigation and its boundary.",
+      "task_hash": "b4ec53358c61846dc5d9de0a9a73139b6b1e76e95b7373ac9542725593ddbef7",
+      "task_id": "stage3-replan-v1-task-2-limitation-bridge",
+      "task_pattern": "OBSERVATION_DERIVED_LIMITATION_BRIDGE"
+    },
+    {
+      "authoring_notes": "Dependency-shaped task: the valid comparison dimension should be chosen after observing metrics from both papers.",
+      "paper_ids_named_in_question": [
+        "2309.15217",
+        "2409.03759"
+      ],
+      "research_question": "Assess whether Ragas: Automated Evaluation of Retrieval Augmented Generation and VERA: Validation and Evaluation of Retrieval-Augmented Systems can be compared on a shared quality or efficiency metric. First identify the metrics each paper actually reports, then restrict the comparison to metrics that both papers report with evidence; clearly separate any initially expected comparison dimension that the evidence does not support.",
+      "task_hash": "795f42f2e0aefd79b0823dd3542b1187a58145bc1990455133f46eebbd6798f9",
+      "task_id": "stage3-replan-v1-task-3-metric-comparability",
+      "task_pattern": "OBSERVATION_DERIVED_METRIC_COMPARABILITY"
+    }
+  ]
+}

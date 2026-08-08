@@ -5,15 +5,20 @@
   "checkpoint_resume": true,
   "created_at": "2026-08-08T09:48:32.947020+00:00",
   "dynamic_tool_selection": true,
-  "failure_freeze": "LIVE_AGENT_DYNAMIC_REPLAN_NOT_DEMONSTRATED",
-  "git_commit": "4525789da1073351b22980387edd241fc55ab834",
+  "failure_freeze": {
+    "code": "LIVE_REPLAN_NOT_OBSERVED",
+    "rerun_performed": false,
+    "runtime_modified_after_freeze": false,
+    "task4_designed": false
+  },
+  "git_commit": "7af18fb613f74036fdb9114cbab29238aa3695e2",
   "live_replan_causal_chain": null,
   "live_resume_causal_chain": null,
   "live_smoke_completed": 3,
   "live_smoke_count": 3,
   "live_smoke_failed": 0,
-  "observation_changes_next_action": false,
-  "provider_requests": 13,
+  "observation_changes_next_action": true,
+  "provider_requests": 18,
   "rag_backend_lock_match": true,
   "replan_supported": false,
   "retry_bounded": true,
@@ -26,12 +31,19 @@
   "schema_version": "research-agent-stage3-final-v1",
   "stage2_rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
   "stage3_complete": false,
+  "stage3c2_validation": {
+    "artifact": "data\\evaluation\\research-agent\\stage3-live-replan-validation-v1.json",
+    "effective_replan_observed": false,
+    "validation_plan_hash": "711662c4e9668952bd2c2f3824dfecdaf9bc94953410d43422b0767d2b676817",
+    "validation_status": "COMPLETED_NO_REPLAN"
+  },
   "stage4_benchmark_run": false,
   "stage4_ready": false,
   "stop_conditions_enforced": true,
-  "total_cost": 0.00177352,
-  "total_tokens": 11370,
+  "total_cost": 0.00275366,
+  "total_tokens": 17542,
   "trace_complete": true,
+  "updated_at": "2026-08-08T10:32:06.081024+00:00",
   "validation_attempt_1": {
     "budget_passed": true,
     "checkpoint_resume_smoke": true,
@@ -749,6 +761,6 @@
     ],
     "status": "post_fix_revalidation"
   },
-  "verification_before_finish": false,
+  "verification_before_finish": true,
   "workflow_behavior_changed": false
 }
