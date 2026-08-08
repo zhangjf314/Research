@@ -181,14 +181,16 @@ def official_run(inputs: BenchmarkInputs, args: argparse.Namespace) -> int:
         state["benchmark_process_resume_count"] = (
             int(state.get("benchmark_process_resume_count", 0)) + 1
         )
+        if int(state["global_totals"].get("official_logical_runs", 0)) == 0:
+            state["benchmark_execution_commit"] = current_commit()
         recover_running_units(state)
 
     preflight = state.get("preflight", {})
-    if not args.skip_provider_preflight and not preflight.get("provider_health_passed"):
+    if not args.skip_provider_preflight and not preflight_passed(preflight):
         preflight = run_preflight(args.api_base_url)
         state["preflight"] = preflight
         save_state(state)
-        if not preflight.get("provider_health_passed"):
+        if not preflight_passed(preflight):
             state["benchmark_status"] = "BLOCKED"
             state["stop_reason"] = "PROVIDER_PREFLIGHT_FAILED"
             save_all_outputs(inputs, state)
@@ -667,7 +669,9 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
         timeout=120,
     )
     provider_payload = read_json(PRECHECK_PATH) if PRECHECK_PATH.exists() else {}
-    minimal_status = provider_payload.get("minimal_completion_status")
+    minimal_status = normalize_probe_status(
+        provider_payload.get("minimal_completion_status")
+    )
     preflight["provider_health"] = {
         "returncode": provider.returncode,
         "stdout_tail": provider.stdout[-2000:],
@@ -675,20 +679,32 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
         "payload": sanitize_payload(provider_payload),
     }
     preflight["preflight_provider_requests"] = 1
-    preflight["provider_health_passed"] = (
-        provider.returncode == 0 and minimal_status == "PASSED"
+    preflight["provider_health_passed"] = provider.returncode == 0 and (
+        minimal_status == "PASSED"
     )
     preflight["finished_at"] = now()
     return preflight
 
 
+def preflight_passed(preflight: dict[str, Any]) -> bool:
+    if preflight.get("provider_health_passed") is True:
+        return True
+    payload = preflight.get("provider_health", {}).get("payload", {})
+    if not isinstance(payload, dict):
+        return False
+    return (
+        normalize_probe_status(payload.get("status")) == "PASSED"
+        and normalize_probe_status(payload.get("minimal_completion_status")) == "PASSED"
+        and payload.get("safe_to_start_batch") is True
+    )
+
+
+def normalize_probe_status(value: Any) -> str:
+    return str(value or "").strip().upper()
+
+
 def create_initial_state(inputs: BenchmarkInputs) -> dict[str, Any]:
-    commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        text=True,
-        capture_output=True,
-        check=False,
-    ).stdout.strip()
+    commit = current_commit()
     units = {
         official_execution_unit_id(unit): {
             "benchmark_version": inputs.manifest["benchmark_version"],
@@ -734,6 +750,15 @@ def create_initial_state(inputs: BenchmarkInputs) -> dict[str, Any]:
         "stage4c_ready": False,
         "semantic_judge_requests": 0,
     }
+
+
+def current_commit() -> str:
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        text=True,
+        capture_output=True,
+        check=False,
+    ).stdout.strip()
 
 
 def recover_running_units(state: dict[str, Any]) -> None:

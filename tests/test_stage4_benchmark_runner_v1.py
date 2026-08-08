@@ -153,3 +153,18 @@ def test_sanitizer_redacts_secret_fields() -> None:
     assert sanitized["normal"] == "visible"
     assert "secret" not in sanitized["Authorization"]
     assert "abc123" not in sanitized["nested"]["LLM_API_KEY"]
+
+
+def test_preflight_status_is_case_insensitive_for_provider_script_output() -> None:
+    runner = _runner()
+    preflight = {
+        "provider_health": {
+            "payload": {
+                "status": "PASSED",
+                "minimal_completion_status": "passed",
+                "safe_to_start_batch": True,
+            }
+        }
+    }
+
+    assert runner.preflight_passed(preflight) is True
