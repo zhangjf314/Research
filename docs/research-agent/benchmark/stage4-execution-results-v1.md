@@ -4,6 +4,7 @@ This file records deterministic execution/accounting status only. Semantic judgi
 
 - official_run_id: `stage4-official-v1-attempt2`
 - attempt1_status: `INVALIDATED_INFRASTRUCTURE`
+- attempt2_status: `INVALIDATED_INFRASTRUCTURE`
 - benchmark_status: `INVALID`
 - stage4b_complete: `False`
 - stage4c_ready: `False`

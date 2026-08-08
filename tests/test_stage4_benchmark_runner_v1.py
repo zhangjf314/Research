@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
@@ -181,6 +182,21 @@ def test_agent_invocation_keeps_frozen_budget() -> None:
     assert contract["external_search_capability"] is False
 
 
+def test_official_attempt_task_ids_are_namespaced_by_run_id() -> None:
+    runner = _runner()
+    payload = runner.build_request_payload(
+        {"system": "agent", "task_id": "rt-v1-002"},
+        {
+            "task_id": "rt-v1-002",
+            "research_question": "Compare papers.",
+            "target_paper_ids": ["p1", "p2"],
+        },
+        run_id="stage4-official-v1-attempt3",
+    )
+
+    assert payload["task_id"] == "stage4-official-v1-attempt3-rt-v1-002-agent"
+
+
 def test_http_error_body_parsing_keeps_structured_detail() -> None:
     runner = _runner()
     detail = runner.parse_error_body(
@@ -267,6 +283,38 @@ def test_sanitizer_redacts_secret_fields() -> None:
     assert "abc123" not in sanitized["nested"]["LLM_API_KEY"]
 
 
+def test_public_results_payload_json_round_trips_with_docker_ps_output() -> None:
+    runner = _runner()
+    inputs = runner.BenchmarkInputs(
+        manifest={"benchmark_version": "research-benchmark-v1", **runner.FROZEN_HASHES},
+        order={"units": []},
+        tasks={},
+        rubrics={},
+    )
+    state = {
+        "official_run_id": "stage4-official-v1-attempt2",
+        "benchmark_status": "INVALID",
+        "global_caps": runner.GLOBAL_CAPS,
+        "global_totals": {
+            "provider_requests": 0,
+            "total_tokens": 0,
+            "estimated_cost_usd": 0.0,
+        },
+        "preflight": {
+            "docker_compose_ps": {
+                "stdout_tail": 'research-api-1 "uvicorn paper_resea…" api\n',
+            }
+        },
+        "units": {},
+    }
+
+    payload = runner.public_results_payload(inputs, state)
+    round_tripped = json.loads(json.dumps(payload, ensure_ascii=False))
+
+    assert round_tripped["attempt_2"]["status"] == "INVALIDATED_INFRASTRUCTURE"
+    assert "uvicorn" in round_tripped["preflight"]["docker_compose_ps"]["stdout_tail"]
+
+
 def test_preflight_status_is_case_insensitive_for_provider_script_output() -> None:
     runner = _runner()
     preflight = {
@@ -280,3 +328,50 @@ def test_preflight_status_is_case_insensitive_for_provider_script_output() -> No
     }
 
     assert runner.preflight_passed(preflight) is True
+
+
+def test_agent_provider_failure_is_valid_system_failure() -> None:
+    runner = _runner()
+    response = {
+        "status": "FAILED",
+        "terminal": True,
+        "stop_reason": "PROVIDER_FAILURE",
+        "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+        "provider_call_count": 1,
+        "token_usage": {
+            "input_tokens": 491,
+            "output_tokens": 599,
+            "total_tokens": 1090,
+        },
+        "estimated_cost": 0.00023646,
+        "checkpoint_id": "stage4-rt-v1-002-agent-0003-PROVIDER_FAILURE",
+        "verification_state": None,
+    }
+
+    unit = runner.summarize_unit_result(
+        unit={
+            "system": "agent",
+            "task_id": "rt-v1-002",
+            "blind_label": "SYSTEM_A",
+            "execution_unit_id": "rt-v1-002-agent",
+        },
+        task={
+            "task_id": "rt-v1-002",
+            "category": "multi_paper_synthesis",
+            "difficulty": "easy",
+            "target_paper_ids": ["p1", "p2"],
+        },
+        response=response,
+        http_status=200,
+        error=None,
+        http_error_detail=None,
+        latency_seconds=1.0,
+    )
+
+    assert unit["status"] == "FAILED"
+    assert unit["stop_reason"] == "PROVIDER_FAILURE"
+    assert unit["failure_category"] == "SYSTEM_PROVIDER_FAILURE"
+    assert unit["failure_validity"] == "valid_system_failure"
+    assert unit["provider_requests"] == 1
+    assert unit["total_tokens"] == 1090
+    assert unit["trace_complete"] is True

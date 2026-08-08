@@ -1,0 +1,136 @@
+{
+  "schema_version": "stage4-agent-decision-provider-forensics-v1",
+  "generated_at": "2026-08-08T14:03:40.026330+00:00",
+  "branch": "eval/research-agent-benchmark-run-v1",
+  "forensics_scope": "Stage 4B.3 offline forensics and behavior-neutral failure-contract validation",
+  "request_id": "57778858-ae75-4bc3-baa2-4df2d1a26599",
+  "attempt": {
+    "official_run_id": "stage4-official-v1-attempt2",
+    "previous_status": "INVALID",
+    "updated_status": "INVALIDATED_INFRASTRUCTURE",
+    "stop_reason": "BENCHMARK_API_WIRING_FAILURE",
+    "terminal_units_preserved": 3,
+    "pending_units_preserved": 117,
+    "quality_results_usable": false,
+    "paired_results_usable": false,
+    "resume_allowed": false,
+    "salvage_allowed": false,
+    "stage4c_eligible": false
+  },
+  "failed_unit": {
+    "execution_unit_id": "research-benchmark-v1:rt-v1-002:agent",
+    "task_id": "rt-v1-002",
+    "runtime_task_id": "stage4-rt-v1-002-agent",
+    "system": "agent",
+    "http_status_seen_by_runner": 503,
+    "http_error_detail": {
+      "code": "HTTP_503",
+      "message": "research agent failed: AgentDecisionProviderError"
+    },
+    "normal_agent_terminal_state_seen_by_runner": false,
+    "trace_available_to_runner": false,
+    "verification_state_available_to_runner": false,
+    "provider_usage_available_to_runner": false
+  },
+  "container_forensics": {
+    "provider_audit_found": true,
+    "checkpoint_found": true,
+    "trace_found": true,
+    "provider_request_occurred": true,
+    "provider_response_received": true,
+    "provider_http_status": 200,
+    "provider_request_id": null,
+    "input_tokens": 491,
+    "output_tokens": 599,
+    "total_tokens": 1090,
+    "estimated_cost_usd": 0.00023646000000000002,
+    "usage_source": "provider_reported",
+    "retry_count": 0,
+    "raw_response_persisted_privately": true,
+    "raw_response_committed": false,
+    "raw_response_summary": "Provider returned JSON that echoed the request payload instead of the required ResearchPlan shape.",
+    "checkpoint_status": "FAILED",
+    "checkpoint_stop_reason_before_fix": "CHECKPOINT_FAILURE",
+    "checkpoint_chain": [
+      "stage4-rt-v1-002-agent-0001-POST_USAGE_ACCOUNTING",
+      "stage4-rt-v1-002-agent-0002-FINAL"
+    ],
+    "trace_event_count": 2,
+    "trace_event_ids_unique_within_latest_container_task_state": true,
+    "historical_trace_file_contains_prior_same_task_id_events": true
+  },
+  "root_cause": {
+    "root_exception_type": "AgentDecisionProviderError",
+    "root_exception_code": "DECISION_SCHEMA_VALIDATION_ERROR",
+    "root_exception_message": "invalid provider plan payload: KeyError",
+    "provider_failure_subtype": "PROVIDER_VALID_JSON_WRONG_SCHEMA",
+    "expected_failure_contract": {
+      "status": "FAILED",
+      "stop_reason": "PROVIDER_FAILURE",
+      "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+      "verification_status": "N/A"
+    },
+    "actual_failure_path_before_fix": [
+      "Provider returned HTTP 200 with provider-reported usage",
+      "Decision provider parsed JSON but failed required plan schema access",
+      "AgentDecisionProviderError was raised",
+      "Runner persisted usage then re-raised",
+      "Runner generic exception handler marked stop_reason=CHECKPOINT_FAILURE",
+      "API catch-all converted the exception to HTTP 503",
+      "Benchmark runner classified the unit as BENCHMARK_API_WIRING_FAILURE"
+    ],
+    "root_cause_classification": "AGENT_FAILURE_MATERIALIZATION_DEFECT",
+    "behavior_change_required": false
+  },
+  "fix_classification": {
+    "failure_materialization_fix": true,
+    "api_contract_fix": true,
+    "usage_persistence_fix": false,
+    "trace_fix": true,
+    "attempt_task_id_isolation_fix": true,
+    "agent_planner_changed": false,
+    "agent_policy_changed": false,
+    "agent_verifier_changed": false,
+    "decision_prompt_changed": false,
+    "decision_schema_changed": false,
+    "decision_parser_tolerance_changed": false,
+    "provider_retry_count_changed": false,
+    "tool_registry_changed": false,
+    "rag_changed": false,
+    "workflow_changed": false,
+    "benchmark_tasks_changed": false,
+    "rubrics_changed": false,
+    "evaluation_protocol_changed": false
+  },
+  "frozen_hashes": {
+    "stage3_agent_behavior_hash_before": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
+    "stage3_agent_behavior_hash_after": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
+    "agent_behavior_hash_match": true,
+    "stage3_agent_lock_sha256": "05852243973c75bc4a539e9b61ea2c027e57cba656959256a70b81695e8fe4ef",
+    "rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9"
+  },
+  "post_fix_expected_runner_contract": {
+    "http_status": 200,
+    "response_status": "FAILED",
+    "stop_reason": "PROVIDER_FAILURE",
+    "failure_category": "SYSTEM_PROVIDER_FAILURE",
+    "failure_validity": "valid_system_failure",
+    "benchmark_should_stop_for_this_failure": false,
+    "provider_usage_should_be_counted": true
+  },
+  "attempt3_authorization_state": {
+    "attempt3_started": false,
+    "attempt3_authorized": false,
+    "stage4c_ready": false,
+    "non_benchmark_live_wiring_validation_required_before_attempt3": true,
+    "non_benchmark_live_wiring_validation_run": false,
+    "non_benchmark_live_wiring_validation_blocker": "stage4-task-exclusions-v1 was not present in the repository; official benchmark tasks were not used as substitutes."
+  },
+  "notes": [
+    "Attempt2 remains invalidated and must not be resumed or salvaged.",
+    "If authorized later, Attempt3 must start from 0/120 in a new runtime directory.",
+    "No semantic judge requests were made during this forensics phase.",
+    "No provider or retrieval requests were made before root-cause classification.",
+    "Live wiring validation was not run because the required excluded-task manifest could not be located."
+  ]
+}

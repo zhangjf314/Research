@@ -261,7 +261,7 @@ def execute_unit(
     save_state(state)
 
     task = inputs.tasks[unit["task_id"]]
-    request_payload = build_request_payload(unit, task)
+    request_payload = build_request_payload(unit, task, run_id=state["official_run_id"])
     raw_dir = raw_unit_dir(state["official_run_id"], execution_unit_id)
     raw_dir.mkdir(parents=True, exist_ok=True)
     write_json(raw_dir / "request.json", sanitize_payload(request_payload))
@@ -305,14 +305,20 @@ def execute_unit(
     save_state(state)
 
 
-def build_request_payload(unit: dict[str, Any], task: dict[str, Any]) -> dict[str, Any]:
+def build_request_payload(
+    unit: dict[str, Any],
+    task: dict[str, Any],
+    *,
+    run_id: str | None = None,
+) -> dict[str, Any]:
+    namespace = f"{run_id}-" if run_id else "stage4-"
     if unit["system"] == "workflow":
         return {
             "query": task["research_question"],
             "paper_ids": task["target_paper_ids"],
             "allow_external_search": False,
             "allow_external_import": False,
-            "task_id": f"stage4-{task['task_id']}-workflow",
+            "task_id": f"{namespace}{task['task_id']}-workflow",
         }
     return {
         "query": task["research_question"],
@@ -324,7 +330,7 @@ def build_request_payload(unit: dict[str, Any], task: dict[str, Any]) -> dict[st
             "max_cost_usd": 0.05,
             "max_no_progress_actions": 2,
         },
-        "task_id": f"stage4-{task['task_id']}-agent",
+        "task_id": f"{namespace}{task['task_id']}-agent",
     }
 
 
@@ -514,6 +520,8 @@ def classify_unit_failure(
         return "SYSTEM_VERIFICATION_FAILURE", "valid_system_failure"
     if stop_reason in {"MAX_STEPS_REACHED", "TOKEN_BUDGET_EXHAUSTED", "COST_BUDGET_EXHAUSTED"}:
         return "SYSTEM_BUDGET_EXHAUSTED", "valid_system_failure"
+    if stop_reason == "PROVIDER_FAILURE":
+        return "SYSTEM_PROVIDER_FAILURE", "valid_system_failure"
     if stop_reason == "NO_PROGRESS":
         return "SYSTEM_NO_PROGRESS", "valid_system_failure"
     if error:
@@ -992,8 +1000,20 @@ def public_results_payload(
         "attempt_1": invalidated_attempt1_summary(),
         "attempt_2": {
             "official_run_id": state.get("official_run_id"),
-            "status": state.get("benchmark_status"),
+            "status": (
+                "INVALIDATED_INFRASTRUCTURE"
+                if state.get("official_run_id") == DEFAULT_OFFICIAL_RUN_ID
+                and state.get("benchmark_status") == "INVALID"
+                else state.get("benchmark_status")
+            ),
             "terminal_units": state.get("terminal_units", 0),
+            "pending_units": state.get("pending_units", 0),
+            "infrastructure_invalid_units": state.get("infrastructure_invalid_units", 0),
+            "quality_results_usable": False,
+            "paired_results_usable": False,
+            "resume_allowed": False,
+            "salvage_allowed": False,
+            "stage4c_eligible": False,
             "cost": state.get("global_totals", {}).get("estimated_cost_usd", 0),
         },
         "created_at": now(),
@@ -1085,6 +1105,12 @@ def public_unit(unit: dict[str, Any]) -> dict[str, Any]:
 
 def public_results_markdown(state: dict[str, Any]) -> str:
     totals = state["global_totals"]
+    attempt2_status = (
+        "INVALIDATED_INFRASTRUCTURE"
+        if state.get("official_run_id") == DEFAULT_OFFICIAL_RUN_ID
+        and state.get("benchmark_status") == "INVALID"
+        else state.get("benchmark_status")
+    )
     lines = [
         "# Stage 4B Paired Execution Results",
         "",
@@ -1095,6 +1121,7 @@ def public_results_markdown(state: dict[str, Any]) -> str:
         "",
         f"- official_run_id: `{state.get('official_run_id')}`",
         "- attempt1_status: `INVALIDATED_INFRASTRUCTURE`",
+        f"- attempt2_status: `{attempt2_status}`",
         f"- benchmark_status: `{state.get('benchmark_status')}`",
         f"- stage4b_complete: `{state.get('stage4b_complete')}`",
         f"- stage4c_ready: `{state.get('stage4c_ready')}`",

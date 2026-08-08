@@ -16,9 +16,10 @@ from paper_research.agents.providers import (
 )
 from paper_research.agents.research_agent import AgentBudget, ResearchAgentRunner
 from paper_research.agents.research_agent.decision_provider import (
+    AgentDecisionProviderError,
     LLMResearchAgentDecisionProvider,
 )
-from paper_research.agents.research_agent.models import AgentStatus
+from paper_research.agents.research_agent.models import AgentStatus, StopReason
 from paper_research.agents.state import ResearchBudget
 from paper_research.config import get_settings
 from paper_research.db import get_db
@@ -103,6 +104,7 @@ class ResearchAgentResponse(BaseModel):
     verification_state: dict | None
     checkpoint_id: str | None
     checkpoint_count: int
+    failure_code: str | None = None
 
 
 def _providers(payload: DeepResearchRequest, db: Session):
@@ -198,6 +200,9 @@ def _failed_state(task_id: str | None, status: str, stop_reason: str) -> dict:
 
 
 def _agent_response(state) -> ResearchAgentResponse:
+    failure_code = None
+    if state.status == AgentStatus.FAILED and state.stop_reason == StopReason.PROVIDER_FAILURE:
+        failure_code = "AGENT_DECISION_PROVIDER_ERROR"
     return ResearchAgentResponse(
         task_id=state.task_id,
         status=state.status.value if hasattr(state.status, "value") else str(state.status),
@@ -226,7 +231,45 @@ def _agent_response(state) -> ResearchAgentResponse:
         else None,
         checkpoint_id=state.checkpoint_id,
         checkpoint_count=len(state.checkpoint_chain),
+        failure_code=failure_code,
     )
+
+
+def _materialize_agent_decision_provider_failure(
+    runner: ResearchAgentRunner,
+    task_id: str,
+    exc: AgentDecisionProviderError,
+):
+    try:
+        state = runner.checkpoints.load(task_id)
+    except KeyError:
+        state = None
+    if state is None:
+        raise exc
+    state.status = AgentStatus.FAILED
+    state.stop_reason = StopReason.PROVIDER_FAILURE
+    state.retry_state.last_error = type(exc).__name__
+    state.retry_state.retryable = False
+    state.refresh_remaining_budget()
+    state.tool_history.append(
+        {
+            "phase": "TERMINAL_FAILURE",
+            "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+            "root_exception": type(exc).__name__,
+            "stop_reason": StopReason.PROVIDER_FAILURE.value,
+        }
+    )
+    runner.checkpoints.save(state, "PROVIDER_FAILURE")
+    runner.trace.append(
+        state,
+        phase="PROVIDER_FAILURE",
+        extra={
+            "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+            "root_exception": type(exc).__name__,
+            "failure_materialized": True,
+        },
+    )
+    return state
 
 
 @router.post("/deep", response_model=DeepResearchResponse)
@@ -332,13 +375,18 @@ def run_research_agent(payload: ResearchAgentRequest) -> ResearchAgentResponse:
                     detail=f"production hybrid retrieval unavailable: {type(exc).__name__}",
                 ) from exc
             local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
+        task_id = payload.task_id or f"agent-{uuid.uuid4().hex[:12]}"
         decision_provider = _agent_decision_provider(settings)
-        state = ResearchAgentRunner(local_provider, decision_provider=decision_provider).run(
-            payload.query,
-            task_id=payload.task_id,
-            budget=payload.budget,
-            interrupt_after_phase=payload.pause_after_phase,
-        )
+        runner = ResearchAgentRunner(local_provider, decision_provider=decision_provider)
+        try:
+            state = runner.run(
+                payload.query,
+                task_id=task_id,
+                budget=payload.budget,
+                interrupt_after_phase=payload.pause_after_phase,
+            )
+        except AgentDecisionProviderError as exc:
+            state = _materialize_agent_decision_provider_failure(runner, task_id, exc)
         return _agent_response(state)
     except HTTPException:
         raise
@@ -372,10 +420,14 @@ def resume_research_agent(task_id: str) -> ResearchAgentResponse:
                 ) from exc
             local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
         decision_provider = _agent_decision_provider(settings)
-        state = ResearchAgentRunner(
+        runner = ResearchAgentRunner(
             local_provider,
             decision_provider=decision_provider,
-        ).resume(task_id)
+        )
+        try:
+            state = runner.resume(task_id)
+        except AgentDecisionProviderError as exc:
+            state = _materialize_agent_decision_provider_failure(runner, task_id, exc)
         return _agent_response(state)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
