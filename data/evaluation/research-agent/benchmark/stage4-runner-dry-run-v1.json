@@ -1,0 +1,20 @@
+{
+  "agent_execution_units": 60,
+  "benchmark_version": "research-benchmark-v1",
+  "dry_run": true,
+  "duplicate_logical_execution_count": 0,
+  "duplicate_provider_execution_count": 0,
+  "hashes_match": true,
+  "locks_loaded": true,
+  "official_agent_runs": 0,
+  "official_workflow_runs": 0,
+  "order_randomization_valid": true,
+  "passed": true,
+  "provider_requests": 0,
+  "resume_state_initialized": true,
+  "schema_version": "stage4-runner-dry-run-v1",
+  "task_pair_integrity": true,
+  "tasks_loaded": 60,
+  "total_execution_units": 120,
+  "workflow_execution_units": 60
+}

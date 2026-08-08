@@ -1,0 +1,100 @@
+{
+  "agent_behavioral_metrics": [
+    "replan_task_count",
+    "effective_replan_count",
+    "replan_task_rate",
+    "replans_per_task",
+    "replan_trigger_distribution",
+    "post_replan_success_rate",
+    "post_replan_evidence_gain",
+    "post_replan_claim_coverage_delta",
+    "Dynamic Tool Selection Rate",
+    "Observation-driven Action Rate",
+    "No-progress Stop Rate"
+  ],
+  "bootstrap": {
+    "paired": true,
+    "report": "mean delta and 95% bootstrap CI; no significance claim",
+    "resamples": 1000,
+    "seed": 41007
+  },
+  "created_at": "2026-08-08T11:19:03.741059+00:00",
+  "effective_replan_definition": [
+    "Observation",
+    "Verification PARTIAL/FAIL",
+    "recommended REPLAN",
+    "effective plan delta",
+    "REPLAN-triggered Decision",
+    "new real Tool Action"
+  ],
+  "efficiency_metrics": [
+    "Latency",
+    "Total Tokens",
+    "Cost",
+    "Provider Requests",
+    "Tool Calls",
+    "Steps"
+  ],
+  "evaluation_layers": {
+    "layer_1_deterministic": [
+      "task_completed",
+      "provider_failure",
+      "citation_exists",
+      "citation_source_exists",
+      "citation_belongs_to_observed_evidence",
+      "invalid_citation_count",
+      "paper_page_block_identity",
+      "latency",
+      "tokens",
+      "cost",
+      "tool_calls",
+      "steps",
+      "replans",
+      "stop_reason"
+    ],
+    "layer_2_evidence_grounded_rubric": [
+      "required_dimension_coverage",
+      "required_claim_coverage",
+      "evidence_coverage",
+      "gap_handling",
+      "abstention_correctness",
+      "unsupported_claim_count"
+    ],
+    "layer_3_ai_semantic_judge": [
+      "DIAGNOSTIC_AI_JUDGE: semantic completeness",
+      "DIAGNOSTIC_AI_JUDGE: synthesis quality",
+      "DIAGNOSTIC_AI_JUDGE: comparative reasoning"
+    ]
+  },
+  "partial_success_rule": {
+    "required_claim_coverage_min": 0.6,
+    "required_dimension_coverage_min": 0.7,
+    "severe_unsupported_core_claim": false
+  },
+  "primary_metrics": [
+    "Task Success Rate",
+    "Required Dimension Coverage",
+    "Required Claim Coverage",
+    "Evidence Coverage",
+    "Unsupported Claim Rate",
+    "Citation Validity",
+    "Evidence-gap Handling Accuracy"
+  ],
+  "schema_version": "stage4-evaluation-protocol-v1",
+  "task_success_rule": {
+    "citation_validity_gate": "passed",
+    "gap_task_requires_correct_qualification": true,
+    "mandatory_dimensions_covered": "all",
+    "required_claim_coverage_min": 0.8,
+    "unsupported_core_claim_count": 0
+  },
+  "win_tie_loss_rule": {
+    "ai_judge_tiebreaker": "diagnostic_only",
+    "priority": [
+      "Task Success",
+      "Required Claim Coverage",
+      "Unsupported Core Claims",
+      "Evidence Coverage"
+    ]
+  }
+}
