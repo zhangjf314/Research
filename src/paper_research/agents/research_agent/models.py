@@ -110,6 +110,7 @@ class VerificationResult(BaseModel):
     verified_claims: list[str] = Field(default_factory=list)
     unsupported_claims: list[str] = Field(default_factory=list)
     unresolved_subquestions: list[str] = Field(default_factory=list)
+    evidence_gaps: list[str] = Field(default_factory=list)
     contradictions: list[str] = Field(default_factory=list)
     recommended_next_action: str = "REPLAN"
 
@@ -126,4 +127,3 @@ class TokenUsage(BaseModel):
     output_tokens: int = 0
     total_tokens: int = 0
     usage_source: str = "not_used"
-

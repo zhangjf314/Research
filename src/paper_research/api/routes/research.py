@@ -15,12 +15,16 @@ from paper_research.agents.providers import (
     SearchServiceExternalProvider,
 )
 from paper_research.agents.research_agent import AgentBudget, ResearchAgentRunner
+from paper_research.agents.research_agent.decision_provider import (
+    LLMResearchAgentDecisionProvider,
+)
 from paper_research.agents.research_agent.models import AgentStatus
 from paper_research.agents.state import ResearchBudget
 from paper_research.config import get_settings
 from paper_research.db import get_db
 from paper_research.providers.factory import (
     ProviderConfigurationError,
+    build_llm_provider,
     build_research_synthesis_provider,
 )
 from paper_research.search.clients import ArxivClient, SemanticScholarClient
@@ -328,7 +332,8 @@ def run_research_agent(payload: ResearchAgentRequest) -> ResearchAgentResponse:
                     detail=f"production hybrid retrieval unavailable: {type(exc).__name__}",
                 ) from exc
             local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
-        state = ResearchAgentRunner(local_provider).run(
+        decision_provider = _agent_decision_provider(settings)
+        state = ResearchAgentRunner(local_provider, decision_provider=decision_provider).run(
             payload.query,
             task_id=payload.task_id,
             budget=payload.budget,
@@ -366,7 +371,11 @@ def resume_research_agent(task_id: str) -> ResearchAgentResponse:
                     detail=f"production hybrid retrieval unavailable: {type(exc).__name__}",
                 ) from exc
             local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
-        state = ResearchAgentRunner(local_provider).resume(task_id)
+        decision_provider = _agent_decision_provider(settings)
+        state = ResearchAgentRunner(
+            local_provider,
+            decision_provider=decision_provider,
+        ).resume(task_id)
         return _agent_response(state)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
@@ -377,3 +386,12 @@ def resume_research_agent(task_id: str) -> ResearchAgentResponse:
             status_code=503,
             detail=f"research agent resume failed: {type(exc).__name__}",
         ) from exc
+
+
+def _agent_decision_provider(settings):
+    if settings.app_profile != "production" or settings.llm_provider == "template":
+        return None
+    llm = build_llm_provider(settings)
+    if not hasattr(llm, "generate_structured_json"):
+        raise ProviderConfigurationError("research agent requires structured JSON LLM provider")
+    return LLMResearchAgentDecisionProvider(llm)

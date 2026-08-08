@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-08-08T09:47:38.393483+00:00",
+  "excluded_from_stage4_benchmark": true,
+  "schema_version": "stage3-smoke-task-exclusion-v1",
+  "smoke_suite": "STAGE3_DEVELOPMENT_SMOKE",
+  "stage4_benchmark": false,
+  "tasks": [
+    {
+      "kind": "straightforward_evidence_synthesis",
+      "reason": "development smoke validates runtime mechanics, not quality benchmark",
+      "task_id": "stage3c-smoke-1-straightforward"
+    },
+    {
+      "kind": "multi_evidence_dynamic_task",
+      "reason": "development smoke validates runtime mechanics, not quality benchmark",
+      "task_id": "stage3c-smoke-2-multi-evidence"
+    },
+    {
+      "kind": "evidence_insufficient_resume_task",
+      "reason": "development smoke validates runtime mechanics, not quality benchmark",
+      "task_id": "stage3c-smoke-3-insufficient-resume"
+    }
+  ]
+}

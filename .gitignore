@@ -85,6 +85,7 @@ docs/full-qa-canary-audit-v2.md
 # Local evaluation run evidence; canonical summaries and hash freezes are tracked
 data/evaluation/evidence-qa-dev-v*/runs/
 data/evaluation/research-agent/stage3-smoke-runtime/
+data/evaluation/research-agent/traces/
 
 # OS files
 .DS_Store

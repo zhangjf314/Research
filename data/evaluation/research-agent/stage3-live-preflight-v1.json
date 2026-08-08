@@ -1,0 +1,34 @@
+{
+  "agent_api_registered": true,
+  "agent_resume_api_registered": true,
+  "checkpoint_status": "available",
+  "created_at": "2026-08-08T09:05:26.426281+00:00",
+  "deep_research_status": "available",
+  "docker_compose_ps_exit_code": 0,
+  "embedding_status": "available",
+  "git_commit": "4525789da1073351b22980387edd241fc55ab834",
+  "health_status": "healthy",
+  "llm": {
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "response_format": "json_object",
+    "template_fallback": false,
+    "thinking": false
+  },
+  "postgres_status": "available",
+  "preflight_passed": true,
+  "provider_health_status": "PASSED",
+  "provider_safe_to_start_batch": true,
+  "qdrant_status": "available",
+  "redis_status": "available",
+  "reranker_enabled": false,
+  "retrieval_backend": {
+    "context_selector": "baseline",
+    "query_decomposition": "disabled",
+    "query_rewrite": "disabled",
+    "reranker": "disabled",
+    "retrieval": "Current Hybrid"
+  },
+  "schema_version": "stage3-live-preflight-v1",
+  "stage2_final_config_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9"
+}

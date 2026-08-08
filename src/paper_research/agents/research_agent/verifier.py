@@ -22,6 +22,9 @@ class DeterministicResearchVerifier:
                 status=VerificationStatus.PARTIAL,
                 verified_claims=verified,
                 unresolved_subquestions=unresolved,
+                evidence_gaps=[
+                    f"missing evidence for {subquestion_id}" for subquestion_id in unresolved
+                ],
                 contradictions=contradictions,
                 recommended_next_action="REPLAN",
             )
@@ -36,6 +39,6 @@ class DeterministicResearchVerifier:
             verified_claims=verified,
             unsupported_claims=[f"Missing evidence for {item}" for item in unresolved],
             unresolved_subquestions=unresolved,
+            evidence_gaps=[f"missing evidence for {item}" for item in unresolved],
             recommended_next_action="REPLAN",
         )
-

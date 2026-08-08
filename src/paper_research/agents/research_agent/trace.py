@@ -9,7 +9,7 @@ from paper_research.agents.research_agent.state import AgentState
 
 
 class ResearchAgentTraceWriter:
-    def __init__(self, root: Path = Path("data/evaluation/research-agent/traces")) -> None:
+    def __init__(self, root: Path = Path(".runtime/research-agent/traces")) -> None:
         self.root = root
         self.root.mkdir(parents=True, exist_ok=True)
 
@@ -74,4 +74,3 @@ def _sanitize_args(arguments: dict[str, Any]) -> dict[str, Any]:
         key: ("<redacted>" if "key" in key.lower() or "authorization" in key.lower() else value)
         for key, value in arguments.items()
     }
-

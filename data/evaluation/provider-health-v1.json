@@ -1,17 +1,26 @@
 {
-  "checked_at": "2026-07-20T13:11:14.980200+00:00",
+  "checked_at": "2026-08-08T09:04:45.756692+00:00",
   "base_url_host": "api.deepseek.com",
   "base_url_valid": true,
   "dns_status": "passed",
   "tcp_status": "passed",
   "tls_status": "passed",
   "models_endpoint_status": "passed",
-  "minimal_completion_status": "not_run",
-  "minimal_completion_json_valid": null,
-  "minimal_completion_model": null,
-  "minimal_completion_usage": null,
-  "minimal_completion_finish_reason": null,
-  "minimal_completion_reasoning_content_present": null,
+  "minimal_completion_status": "passed",
+  "minimal_completion_json_valid": true,
+  "minimal_completion_model": "deepseek-v4-flash",
+  "minimal_completion_usage": {
+    "prompt_tokens": 35,
+    "completion_tokens": 5,
+    "total_tokens": 40,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 35
+  },
+  "minimal_completion_finish_reason": "stop",
+  "minimal_completion_reasoning_content_present": false,
   "factory_provider": "deepseek",
   "factory_model": "deepseek-v4-flash",
   "provider_name": "deepseek",
@@ -31,10 +40,11 @@
   },
   "template_fallback": false,
   "latency": {
-    "dns_ms": 4.868,
-    "tcp_ms": 0.672,
-    "tls_ms": 13.373,
-    "models_ms": 555.395
+    "dns_ms": 8.117,
+    "tcp_ms": 1.528,
+    "tls_ms": 45.533,
+    "models_ms": 323.267,
+    "minimal_completion_ms": 899.908
   },
   "error_type": null,
   "safe_to_start_batch": true,
