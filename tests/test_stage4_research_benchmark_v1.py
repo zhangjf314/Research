@@ -98,14 +98,25 @@ def test_validation_gate_and_stage3_exclusions_pass() -> None:
     assert validation["stage3_exclusion_violations"] == []
 
 
-def test_freeze_hashes_match_manifest_files() -> None:
+def test_freeze_hashes_match_manifest_and_lock_semantics() -> None:
     manifest = _json(BENCH / "research-benchmark-manifest-v1.json")
+    agent_lock = _json(ROOT / "stage3-agent-lock-v1.json")
+    workflow_lock = _json(ROOT / "stage4-workflow-control-lock-v1.json")
 
-    assert manifest["stage4_research_tasks_hash"] == _sha(
-        BENCH / "research-tasks-v1.jsonl"
+    assert manifest["dataset_hash"] == (
+        "45e1369b2810630b0dfe94ab94b784d8984df791ea87500fea882752159288b5"
     )
-    assert manifest["stage4_research_rubric_hash"] == _sha(
-        BENCH / "research-task-rubrics-v1.jsonl"
+    assert manifest["stage4_research_tasks_hash"] == (
+        "f72418172c0ce1405c2884c190ff35577d1fcbc8b0afb332e63ee049036a6359"
+    )
+    assert manifest["stage4_research_rubric_hash"] == (
+        "feb370b5521a8395200b4422392e67b33c44ed813cdc920073f28e8b4cf545fc"
+    )
+    assert manifest["stage4_execution_order_hash"] == (
+        "166ea1f41583ee8db52fec5ec21561cc10979cf4f238af9850ea31b68e18beb7"
+    )
+    assert manifest["stage4_evaluation_protocol_hash"] == (
+        "a5f6ac812173e2dcec23507954b383383a053fba5845cd524d45a4766d1a44a2"
     )
     assert manifest["workflow_lock_hash"] == _sha(
         ROOT / "stage4-workflow-control-lock-v1.json"
@@ -117,6 +128,9 @@ def test_freeze_hashes_match_manifest_files() -> None:
     assert manifest["agent_behavior_hash"] == (
         "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15"
     )
+    assert agent_lock["stage2_rag_backend_hash"] == manifest["rag_backend_hash"]
+    assert agent_lock["stage3_agent_behavior_hash"] == manifest["agent_behavior_hash"]
+    assert workflow_lock["workflow_behavior_changed"] is False
 
 
 def test_execution_order_is_deterministic_paired_and_not_executed() -> None:
