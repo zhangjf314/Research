@@ -14,6 +14,8 @@ from paper_research.agents.providers import (
     HybridLocalResearchProvider,
     SearchServiceExternalProvider,
 )
+from paper_research.agents.research_agent import AgentBudget, ResearchAgentRunner
+from paper_research.agents.research_agent.models import AgentStatus
 from paper_research.agents.state import ResearchBudget
 from paper_research.config import get_settings
 from paper_research.db import get_db
@@ -66,6 +68,37 @@ class DeepResearchResponse(BaseModel):
     provider_completed_request_count: int = 0
     usage_record_count: int = 0
     active_reserved_tokens: int = 0
+
+
+class ResearchAgentRequest(BaseModel):
+    query: str = Field(min_length=3)
+    budget: AgentBudget = Field(default_factory=AgentBudget)
+    task_id: str | None = None
+    pause_after_phase: str | None = None
+
+
+class ResearchAgentResponse(BaseModel):
+    task_id: str
+    research_mode: str = "agent"
+    status: str
+    terminal: bool
+    stop_reason: str | None
+    plan_version: int
+    subquestions: list[dict]
+    resolved_subquestions: list[str]
+    unresolved_subquestions: list[str]
+    evidence_count: int
+    observations: list[dict]
+    tool_history: list[dict]
+    step_count: int
+    tool_call_count: int
+    provider_call_count: int
+    token_usage: dict
+    estimated_cost: float
+    remaining_budget: dict
+    verification_state: dict | None
+    checkpoint_id: str | None
+    checkpoint_count: int
 
 
 def _providers(payload: DeepResearchRequest, db: Session):
@@ -160,6 +193,38 @@ def _failed_state(task_id: str | None, status: str, stop_reason: str) -> dict:
     }
 
 
+def _agent_response(state) -> ResearchAgentResponse:
+    return ResearchAgentResponse(
+        task_id=state.task_id,
+        status=state.status.value if hasattr(state.status, "value") else str(state.status),
+        terminal=state.status != AgentStatus.PAUSED,
+        stop_reason=state.stop_reason.value if state.stop_reason else None,
+        plan_version=state.plan_version,
+        subquestions=[item.model_dump() for item in state.subquestions],
+        resolved_subquestions=state.resolved_subquestions,
+        unresolved_subquestions=state.unresolved_subquestions,
+        evidence_count=len(state.evidence_state.items),
+        observations=[item.model_dump() for item in state.observations],
+        tool_history=state.tool_history,
+        step_count=state.step_count,
+        tool_call_count=state.tool_call_count,
+        provider_call_count=state.provider_call_count,
+        token_usage=state.token_usage.model_dump(),
+        estimated_cost=state.estimated_cost,
+        remaining_budget={
+            "steps": state.remaining_step_budget,
+            "tools": state.remaining_tool_budget,
+            "tokens": state.remaining_token_budget,
+            "cost_usd": state.remaining_cost_budget,
+        },
+        verification_state=state.verification_state.model_dump()
+        if state.verification_state
+        else None,
+        checkpoint_id=state.checkpoint_id,
+        checkpoint_count=len(state.checkpoint_chain),
+    )
+
+
 @router.post("/deep", response_model=DeepResearchResponse)
 def run_deep_research(payload: DeepResearchRequest, db: DbSession) -> DeepResearchResponse:
     try:
@@ -248,3 +313,67 @@ def resume_deep_research(
         detail = f"deep research resume failed: {type(exc).__name__}"
         raise HTTPException(status_code=503, detail=detail) from exc
     return _response(state)
+
+
+@router.post("/agent", response_model=ResearchAgentResponse)
+def run_research_agent(payload: ResearchAgentRequest) -> ResearchAgentResponse:
+    try:
+        settings = get_settings()
+        try:
+            local_provider = HybridLocalResearchProvider(settings)
+        except Exception as exc:
+            if settings.app_profile == "production":
+                raise HTTPException(
+                    status_code=503,
+                    detail=f"production hybrid retrieval unavailable: {type(exc).__name__}",
+                ) from exc
+            local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
+        state = ResearchAgentRunner(local_provider).run(
+            payload.query,
+            task_id=payload.task_id,
+            budget=payload.budget,
+            interrupt_after_phase=payload.pause_after_phase,
+        )
+        return _agent_response(state)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"research agent failed: {type(exc).__name__}",
+        ) from exc
+
+
+@router.get("/agent/{task_id}", response_model=ResearchAgentResponse)
+def get_research_agent(task_id: str) -> ResearchAgentResponse:
+    try:
+        state = ResearchAgentRunner(None).checkpoints.load(task_id)
+        return _agent_response(state)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@router.post("/agent/{task_id}/resume", response_model=ResearchAgentResponse)
+def resume_research_agent(task_id: str) -> ResearchAgentResponse:
+    try:
+        settings = get_settings()
+        try:
+            local_provider = HybridLocalResearchProvider(settings)
+        except Exception as exc:
+            if settings.app_profile == "production":
+                raise HTTPException(
+                    status_code=503,
+                    detail=f"production hybrid retrieval unavailable: {type(exc).__name__}",
+                ) from exc
+            local_provider = ArtifactLocalResearchProvider(settings.parsed_papers_dir)
+        state = ResearchAgentRunner(local_provider).resume(task_id)
+        return _agent_response(state)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"research agent resume failed: {type(exc).__name__}",
+        ) from exc

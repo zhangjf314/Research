@@ -1,0 +1,111 @@
+{
+  "controlled_scenarios": [
+    {
+      "checkpoint_count": 12,
+      "completed_tool_call_ids_unique": true,
+      "dynamic_path_observed": true,
+      "evidence_count": 2,
+      "observation_count": 2,
+      "plan_version": 1,
+      "provider_call_count": 0,
+      "replan_observed": false,
+      "resume_count": 0,
+      "retrieval_queries": [
+        "alpha",
+        "beta"
+      ],
+      "scenario": "complete_evidence_early_finish",
+      "status": "COMPLETED",
+      "step_count": 3,
+      "stop_reason": "SUCCESS",
+      "task_id": "stage3-complete_evidence_early_finish",
+      "tool_call_count": 2,
+      "trace_event_count": 14,
+      "trace_event_ids_unique": true
+    },
+    {
+      "checkpoint_count": 20,
+      "completed_tool_call_ids_unique": true,
+      "dynamic_path_observed": true,
+      "evidence_count": 2,
+      "observation_count": 5,
+      "plan_version": 2,
+      "provider_call_count": 0,
+      "replan_observed": true,
+      "resume_count": 0,
+      "retrieval_queries": [
+        "alpha",
+        "beta",
+        "beta",
+        "Find missing evidence for beta",
+        "Find missing evidence for beta"
+      ],
+      "scenario": "missing_evidence_replan",
+      "status": "PARTIAL",
+      "step_count": 6,
+      "stop_reason": "NO_PROGRESS",
+      "task_id": "stage3-missing_evidence_replan",
+      "tool_call_count": 5,
+      "trace_event_count": 25,
+      "trace_event_ids_unique": true
+    },
+    {
+      "checkpoint_count": 11,
+      "completed_tool_call_ids_unique": true,
+      "dynamic_path_observed": true,
+      "evidence_count": 0,
+      "observation_count": 2,
+      "plan_version": 2,
+      "provider_call_count": 0,
+      "replan_observed": true,
+      "resume_count": 0,
+      "retrieval_queries": [
+        "alpha",
+        "alpha"
+      ],
+      "scenario": "tool_failure_retry",
+      "status": "PARTIAL",
+      "step_count": 3,
+      "stop_reason": "NO_PROGRESS",
+      "task_id": "stage3-tool_failure_retry",
+      "tool_call_count": 2,
+      "trace_event_count": 13,
+      "trace_event_ids_unique": true
+    },
+    {
+      "checkpoint_count": 15,
+      "completed_tool_call_ids_unique": true,
+      "dynamic_path_observed": true,
+      "evidence_count": 2,
+      "observation_count": 2,
+      "plan_version": 1,
+      "provider_call_count": 0,
+      "replan_observed": false,
+      "resume_count": 1,
+      "retrieval_queries": [
+        "alpha",
+        "beta"
+      ],
+      "scenario": "checkpoint_resume",
+      "status": "COMPLETED",
+      "step_count": 3,
+      "stop_reason": "SUCCESS",
+      "task_id": "stage3-checkpoint_resume",
+      "tool_call_count": 2,
+      "trace_event_count": 16,
+      "trace_event_ids_unique": true
+    }
+  ],
+  "created_at": "2026-08-08T07:50:45.380306+00:00",
+  "live_dynamic_path_observed": false,
+  "live_replan_observed": false,
+  "live_smoke_completed": 0,
+  "live_smoke_count": 0,
+  "live_smoke_failed": 0,
+  "mode": "controlled_development_runtime",
+  "note": "No real LLM, embedding, reranker, or Stage 4 benchmark was run. Stage 3 runtime mechanics were validated with controlled providers.",
+  "provider_requests": 0,
+  "schema_version": "stage3-agent-smoke-v1",
+  "total_cost": 0,
+  "total_tokens": 0
+}

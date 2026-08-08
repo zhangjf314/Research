@@ -1,0 +1,27 @@
+{
+  "agent_path": "RESEARCH_AGENT_V1",
+  "created_at": "2026-08-08T07:50:45.417363+00:00",
+  "fairness_note": "Agent v1 changes action timing and state-conditioned tool selection only; it does not add a new retriever, reranker, embedding model, query rewrite, query decomposition module, or information source.",
+  "rag_backend_lock": {
+    "context_selector": "baseline",
+    "query_decomposition": "disabled",
+    "query_rewrite": "disabled",
+    "reranker": "disabled",
+    "retrieval": "Current Hybrid"
+  },
+  "same_baseline_context_backend_where_applicable": true,
+  "same_corpus": true,
+  "same_embedding": true,
+  "same_hybrid_retrieval_backend": true,
+  "same_index": true,
+  "same_model_family_where_comparable": true,
+  "same_query_decomposition": true,
+  "same_query_decomposition_enabled": false,
+  "same_query_rewrite": true,
+  "same_query_rewrite_enabled": false,
+  "same_reranker": true,
+  "same_reranker_enabled": false,
+  "schema_version": "workflow-agent-comparability-v1",
+  "stage2_final_config_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
+  "workflow_path": "CONTROL_GROUP_WORKFLOW"
+}
