@@ -112,6 +112,12 @@ def test_global_caps_stop_before_next_unit() -> None:
     assert runner.cap_exceeded(state) is True
 
 
+def test_stage4b2_global_cost_cap_is_amended_once() -> None:
+    runner = _runner()
+
+    assert runner.GLOBAL_CAPS["max_benchmark_total_cost_usd"] == 4.00
+
+
 def test_usage_extraction_handles_workflow_and_agent_shapes() -> None:
     runner = _runner()
     workflow = {
@@ -138,6 +144,112 @@ def test_usage_extraction_handles_workflow_and_agent_shapes() -> None:
     assert runner.extract_usage(workflow)["total_tokens"] == 15
     assert runner.extract_usage(agent)["provider_requests"] == 3
     assert runner.extract_usage(agent)["total_tokens"] == 11
+
+
+def test_workflow_invocation_omits_budget_and_external_search_override() -> None:
+    runner = _runner()
+    payload = runner.build_request_payload(
+        {"system": "workflow", "task_id": "rt-v1-001"},
+        {
+            "task_id": "rt-v1-001",
+            "research_question": "Compare papers.",
+            "target_paper_ids": ["p1", "p2"],
+        },
+    )
+
+    assert "budget" not in payload
+    contract = runner.workflow_invocation_contract(payload)
+    assert contract["max_external_searches"] == "OMITTED"
+    assert contract["budget_field_present"] is False
+
+
+def test_agent_invocation_keeps_frozen_budget() -> None:
+    runner = _runner()
+    payload = runner.build_request_payload(
+        {"system": "agent", "task_id": "rt-v1-001"},
+        {
+            "task_id": "rt-v1-001",
+            "research_question": "Compare papers.",
+            "target_paper_ids": ["p1", "p2"],
+        },
+    )
+
+    contract = runner.agent_invocation_contract(payload)
+    assert contract["max_steps"] == 12
+    assert contract["max_tool_calls"] == 16
+    assert contract["max_provider_requests"] == 12
+    assert contract["external_search_capability"] is False
+
+
+def test_http_error_body_parsing_keeps_structured_detail() -> None:
+    runner = _runner()
+    detail = runner.parse_error_body(
+        '{"detail":{"code":"SCHEMA_FAILURE","request_id":"req-1"}}',
+        "application/json",
+    )
+    error = runner.BenchmarkHttpError(
+        status=503,
+        content_type="application/json",
+        detail=detail,
+    ).to_dict()
+
+    assert error["http_status"] == 503
+    assert error["structured_error_code"] == "SCHEMA_FAILURE"
+    assert error["request_id"] == "req-1"
+
+
+def test_attempt2_runtime_paths_are_isolated_from_legacy_attempt1() -> None:
+    runner = _runner()
+
+    state_path = str(runner.state_path_for_run("stage4-official-v1-attempt2"))
+    normalized = state_path.replace("\\", "/")
+
+    assert normalized.endswith(
+        ".runtime/stage4/stage4-official-v1-attempt2/"
+        "execution-state/stage4-execution-state-v1.json"
+    )
+
+
+def test_recompute_summary_uses_unit_records_for_failed_and_partial() -> None:
+    runner = _runner()
+    inputs = runner.BenchmarkInputs(
+        manifest={"benchmark_version": "research-benchmark-v1"},
+        order={
+            "units": [
+                {"task_id": "rt-v1-001", "system": "workflow"},
+                {"task_id": "rt-v1-001", "system": "agent"},
+            ]
+        },
+        tasks={},
+        rubrics={},
+    )
+    state = {
+        "units": {
+            "w": {
+                "execution_unit_id": "w",
+                "task_id": "rt-v1-001",
+                "system": "workflow",
+                "status": "FAILED",
+                "accounting_complete": True,
+            },
+            "a": {
+                "execution_unit_id": "a",
+                "task_id": "rt-v1-001",
+                "system": "agent",
+                "status": "PARTIAL",
+                "accounting_complete": True,
+            },
+        }
+    }
+
+    runner.recompute_summary_from_units(inputs, state)
+
+    assert state["terminal_units"] == 2
+    assert state["official_workflow_runs"] == 1
+    assert state["official_agent_runs"] == 1
+    assert state["complete_pairs"] == 1
+    assert state["failed_units"] == 1
+    assert state["partial_units"] == 1
 
 
 def test_sanitizer_redacts_secret_fields() -> None:

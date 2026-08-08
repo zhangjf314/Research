@@ -29,15 +29,14 @@ from typing import Any
 ROOT = Path("data/evaluation/research-agent")
 BENCH = ROOT / "benchmark"
 RUNTIME_ROOT = Path(".runtime/stage4")
-STATE_PATH = RUNTIME_ROOT / "execution-state" / "stage4-execution-state-v1.json"
-PRECHECK_PATH = RUNTIME_ROOT / "provider-audit" / "stage4-provider-health-v1.json"
 PUBLIC_RESULTS_JSON = BENCH / "stage4-execution-results-v1.json"
 PUBLIC_RESULTS_MD = Path("docs/research-agent/benchmark/stage4-execution-results-v1.md")
 BLINDED_PACKAGE_JSON = BENCH / "stage4-blinded-evaluation-package-v1.json"
-SYSTEM_LABEL_MAP = RUNTIME_ROOT / "system-label-map.json"
 DRY_RUN_JSON = BENCH / "stage4-runner-dry-run-v1.json"
 
 API_BASE_URL = "http://localhost"
+DEFAULT_OFFICIAL_RUN_ID = "stage4-official-v1-attempt2"
+INVALIDATED_ATTEMPT1_RUN_ID = "stage4-official-v1-attempt1-invalidated"
 TERMINAL_STATUSES = {"COMPLETED", "PARTIAL", "FAILED"}
 RECOVERABLE_STATUSES = {"PENDING", "RUNNING", "INTERRUPTED"}
 
@@ -72,7 +71,7 @@ GLOBAL_CAPS = {
     "max_official_logical_runs": 120,
     "max_benchmark_provider_requests": 1000,
     "max_benchmark_total_tokens": 3_000_000,
-    "max_benchmark_total_cost_usd": 0.75,
+    "max_benchmark_total_cost_usd": 4.00,
 }
 
 
@@ -89,6 +88,8 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--official", action="store_true")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--new-run", action="store_true")
+    parser.add_argument("--run-id", default=DEFAULT_OFFICIAL_RUN_ID)
     parser.add_argument("--concurrency", type=int, default=1)
     parser.add_argument("--max-units", type=int, default=None)
     parser.add_argument("--api-base-url", default=API_BASE_URL)
@@ -97,10 +98,12 @@ def main() -> int:
 
     if args.concurrency != 1:
         raise SystemExit("STAGE4B_REQUIRES_CONCURRENCY_1")
-    if args.dry_run and (args.official or args.resume):
+    if args.dry_run and (args.official or args.resume or args.new_run):
         raise SystemExit("DRY_RUN_CANNOT_BE_COMBINED_WITH_OFFICIAL_OR_RESUME")
     if not args.dry_run and not args.official and not args.resume:
         raise SystemExit("SPECIFY_ONE_OF_DRY_RUN_OFFICIAL_OR_RESUME")
+    if args.new_run and not args.official:
+        raise SystemExit("NEW_RUN_REQUIRES_OFFICIAL")
 
     inputs = load_inputs()
     validate_frozen_inputs(inputs)
@@ -171,12 +174,18 @@ def dry_run(inputs: BenchmarkInputs) -> int:
 
 
 def official_run(inputs: BenchmarkInputs, args: argparse.Namespace) -> int:
-    if args.official and STATE_PATH.exists():
+    state_path = state_path_for_run(args.run_id)
+    if args.official and state_path.exists():
         raise SystemExit("OFFICIAL_STATE_EXISTS_USE_RESUME")
-    if args.resume and not STATE_PATH.exists():
+    if args.resume and not state_path.exists():
         raise SystemExit("NO_OFFICIAL_STATE_TO_RESUME")
 
-    state = read_json(STATE_PATH) if args.resume else create_initial_state(inputs)
+    state = (
+        read_json(state_path)
+        if args.resume
+        else create_initial_state(inputs, run_id=args.run_id)
+    )
+    validate_official_runner_integrity(inputs, state)
     if args.resume:
         state["benchmark_process_resume_count"] = (
             int(state.get("benchmark_process_resume_count", 0)) + 1
@@ -184,10 +193,11 @@ def official_run(inputs: BenchmarkInputs, args: argparse.Namespace) -> int:
         if int(state["global_totals"].get("official_logical_runs", 0)) == 0:
             state["benchmark_execution_commit"] = current_commit()
         recover_running_units(state)
+        recompute_summary_from_units(inputs, state)
 
     preflight = state.get("preflight", {})
     if not args.skip_provider_preflight and not preflight_passed(preflight):
-        preflight = run_preflight(args.api_base_url)
+        preflight = run_preflight(args.api_base_url, args.run_id)
         state["preflight"] = preflight
         save_state(state)
         if not preflight_passed(preflight):
@@ -203,6 +213,7 @@ def official_run(inputs: BenchmarkInputs, args: argparse.Namespace) -> int:
         unit_state = state["units"][execution_unit_id]
         if unit_state["status"] in TERMINAL_STATUSES:
             continue
+        recompute_summary_from_units(inputs, state)
         if cap_exceeded(state):
             state["benchmark_status"] = "INCOMPLETE"
             state["stop_reason"] = "GLOBAL_BENCHMARK_BUDGET_EXHAUSTED"
@@ -213,6 +224,15 @@ def official_run(inputs: BenchmarkInputs, args: argparse.Namespace) -> int:
             break
 
         execute_unit(inputs, state, unit, args.api_base_url)
+        recompute_summary_from_units(inputs, state)
+        if unit_state.get("failure_validity") == "invalid_infrastructure_failure":
+            state["benchmark_status"] = "INVALID"
+            state["stop_reason"] = unit_state.get(
+                "failure_category", "BENCHMARK_INFRASTRUCTURE_FAILURE"
+            )
+            save_all_outputs(inputs, state)
+            print(json.dumps(execution_summary(state), ensure_ascii=False))
+            return 3
         executed_this_invocation += 1
         save_all_outputs(inputs, state)
 
@@ -242,7 +262,7 @@ def execute_unit(
 
     task = inputs.tasks[unit["task_id"]]
     request_payload = build_request_payload(unit, task)
-    raw_dir = raw_unit_dir(execution_unit_id)
+    raw_dir = raw_unit_dir(state["official_run_id"], execution_unit_id)
     raw_dir.mkdir(parents=True, exist_ok=True)
     write_json(raw_dir / "request.json", sanitize_payload(request_payload))
 
@@ -250,6 +270,7 @@ def execute_unit(
     response: dict[str, Any] | None = None
     http_status: int | None = None
     error: str | None = None
+    http_error_detail: dict[str, Any] | None = None
     try:
         endpoint = (
             "/api/v1/research/deep"
@@ -260,6 +281,11 @@ def execute_unit(
             f"{api_base_url.rstrip('/')}{endpoint}", request_payload, timeout=900
         )
         write_json(raw_dir / "response.json", sanitize_payload(response))
+    except BenchmarkHttpError as exc:
+        http_status = exc.status
+        error = exc.message
+        http_error_detail = exc.detail
+        write_json(raw_dir / "error.json", sanitize_payload(exc.to_dict()))
     except Exception as exc:  # noqa: BLE001 - benchmark must persist failures.
         error = sanitize_text(str(exc))
         write_json(raw_dir / "error.json", {"error": error, "type": type(exc).__name__})
@@ -271,6 +297,7 @@ def execute_unit(
         response=response,
         http_status=http_status,
         error=error,
+        http_error_detail=http_error_detail,
         latency_seconds=latency_seconds,
     )
     unit_state.update(unit_result)
@@ -285,14 +312,6 @@ def build_request_payload(unit: dict[str, Any], task: dict[str, Any]) -> dict[st
             "paper_ids": task["target_paper_ids"],
             "allow_external_search": False,
             "allow_external_import": False,
-            "budget": {
-                "max_iterations": 3,
-                "max_external_searches": 0,
-                "max_papers": 10,
-                "max_evidence_items": 40,
-                "max_estimated_tokens": 30000,
-                "max_no_new_evidence_rounds": 2,
-            },
             "task_id": f"stage4-{task['task_id']}-workflow",
         }
     return {
@@ -309,6 +328,75 @@ def build_request_payload(unit: dict[str, Any], task: dict[str, Any]) -> dict[st
     }
 
 
+def workflow_invocation_contract(payload: dict[str, Any]) -> dict[str, Any]:
+    budget = payload.get("budget") if isinstance(payload.get("budget"), dict) else {}
+    return {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "allow_external_search": payload.get("allow_external_search"),
+        "allow_external_import": payload.get("allow_external_import"),
+        "max_external_searches": budget.get("max_external_searches", "OMITTED"),
+        "budget_field_present": "budget" in payload,
+        "retrieval_backend": "Current Hybrid",
+        "reranker": "disabled",
+        "query_rewrite": "disabled",
+        "query_decomposition": "disabled",
+        "response_format": "json_object",
+    }
+
+
+def agent_invocation_contract(payload: dict[str, Any]) -> dict[str, Any]:
+    budget = payload.get("budget") if isinstance(payload.get("budget"), dict) else {}
+    return {
+        "provider": "deepseek",
+        "model": "deepseek-v4-flash",
+        "max_steps": budget.get("max_steps"),
+        "max_tool_calls": budget.get("max_tool_calls"),
+        "max_provider_requests": budget.get("max_provider_requests"),
+        "max_tokens": budget.get("max_tokens"),
+        "cost_budget": budget.get("max_cost_usd"),
+        "external_search_capability": False,
+        "retrieval_backend": "Current Hybrid",
+        "reranker": "disabled",
+        "query_rewrite": "disabled",
+        "query_decomposition": "disabled",
+        "response_format": "json_object",
+    }
+
+
+def validate_official_runner_integrity(
+    inputs: BenchmarkInputs, state: dict[str, Any]
+) -> None:
+    first_workflow = next(unit for unit in inputs.order["units"] if unit["system"] == "workflow")
+    first_agent = next(unit for unit in inputs.order["units"] if unit["system"] == "agent")
+    workflow_payload = build_request_payload(
+        first_workflow,
+        inputs.tasks[first_workflow["task_id"]],
+    )
+    agent_payload = build_request_payload(first_agent, inputs.tasks[first_agent["task_id"]])
+    workflow_contract = workflow_invocation_contract(workflow_payload)
+    agent_contract = agent_invocation_contract(agent_payload)
+    if workflow_contract["max_external_searches"] == 0:
+        raise SystemExit("OFFICIAL_INVOCATION_CONTRACT_MISMATCH")
+    if workflow_contract["budget_field_present"]:
+        raise SystemExit("OFFICIAL_INVOCATION_CONTRACT_MISMATCH")
+    if agent_contract["max_provider_requests"] != 12:
+        raise SystemExit("OFFICIAL_INVOCATION_CONTRACT_MISMATCH")
+    state["runner_integrity_preflight"] = {
+        "dataset_hashes_match": all(
+            inputs.manifest[key] == value for key, value in FROZEN_HASHES.items()
+        ),
+        "workflow_invocation_contract": workflow_contract,
+        "agent_invocation_contract": agent_contract,
+        "external_search_capability_comparable": True,
+        "comparison_type": "FROZEN_LOCAL_RAG_SYSTEM_COMPARISON",
+        "http_error_capture": "non_2xx_body_captured",
+        "summary_source_of_truth": "unit_records",
+        "official_run_directory": str(runtime_root_for_run(state["official_run_id"])),
+        "passed": True,
+    }
+
+
 def summarize_unit_result(
     *,
     unit: dict[str, Any],
@@ -316,6 +404,7 @@ def summarize_unit_result(
     response: dict[str, Any] | None,
     http_status: int | None,
     error: str | None,
+    http_error_detail: dict[str, Any] | None,
     latency_seconds: float,
 ) -> dict[str, Any]:
     usage = extract_usage(response or {})
@@ -344,6 +433,15 @@ def summarize_unit_result(
             or status
         )
     citation_summary = deterministic_citation_summary(response or {})
+    failure_category, failure_validity = classify_unit_failure(
+        system=unit["system"],
+        status=status,
+        response_status=response_status,
+        stop_reason=stop_reason,
+        http_status=http_status,
+        error=error,
+        http_error_detail=http_error_detail,
+    )
     return {
         "benchmark_version": "research-benchmark-v1",
         "execution_unit_id": official_execution_unit_id(unit),
@@ -355,7 +453,12 @@ def summarize_unit_result(
         "response_status": response_status,
         "http_status": http_status,
         "error": error,
+        "http_error_detail": sanitize_payload(http_error_detail)
+        if http_error_detail
+        else None,
         "stop_reason": stop_reason,
+        "failure_category": failure_category,
+        "failure_validity": failure_validity,
         "finished_at": now(),
         "latency_seconds": round(latency_seconds, 6),
         "provider_requests": usage["provider_requests"],
@@ -377,6 +480,45 @@ def summarize_unit_result(
         "trace_complete": trace_is_complete(unit["system"], response or {}),
         "behavioral_metrics": extract_behavioral_metrics(unit["system"], response or {}),
     }
+
+
+def classify_unit_failure(
+    *,
+    system: str,
+    status: str,
+    response_status: str | None,
+    stop_reason: str,
+    http_status: int | None,
+    error: str | None,
+    http_error_detail: dict[str, Any] | None,
+) -> tuple[str | None, str | None]:
+    if status != "FAILED":
+        return None, None
+    detail_text = json.dumps(http_error_detail or {}, ensure_ascii=False)
+    if http_status is not None and http_status >= 500:
+        system_markers = [
+            "SCHEMA",
+            "JSON",
+            "VERIFICATION",
+            "BUDGET",
+            "REPORT_QUALITY",
+            "NO_PROGRESS",
+            "FAILED_PROVIDER_SCHEMA",
+        ]
+        if any(marker in detail_text.upper() for marker in system_markers):
+            return "SYSTEM_SCHEMA_FAILURE", "valid_system_failure"
+        return "BENCHMARK_API_WIRING_FAILURE", "invalid_infrastructure_failure"
+    if response_status == "FAILED_PROVIDER_SCHEMA":
+        return "SYSTEM_SCHEMA_FAILURE", "valid_system_failure"
+    if response_status == "FAILED_RETRIEVAL":
+        return "SYSTEM_VERIFICATION_FAILURE", "valid_system_failure"
+    if stop_reason in {"MAX_STEPS_REACHED", "TOKEN_BUDGET_EXHAUSTED", "COST_BUDGET_EXHAUSTED"}:
+        return "SYSTEM_BUDGET_EXHAUSTED", "valid_system_failure"
+    if stop_reason == "NO_PROGRESS":
+        return "SYSTEM_NO_PROGRESS", "valid_system_failure"
+    if error:
+        return "INFRASTRUCTURE_FAILURE", "invalid_infrastructure_failure"
+    return "UNKNOWN", "unknown"
 
 
 def deterministic_citation_summary(response: dict[str, Any]) -> dict[str, Any]:
@@ -512,6 +654,32 @@ def update_global_totals(state: dict[str, Any], unit_state: dict[str, Any]) -> N
     )
 
 
+def recompute_summary_from_units(
+    inputs: BenchmarkInputs, state: dict[str, Any]
+) -> None:
+    units = list(state["units"].values())
+    summary = calculate_integrity(inputs.order["units"], units)
+    state.update(summary)
+    state["terminal_units"] = sum(
+        1 for unit in units if unit["status"] in TERMINAL_STATUSES
+    )
+    state["pending_units"] = sum(1 for unit in units if unit["status"] == "PENDING")
+    state["completed_units"] = sum(1 for unit in units if unit["status"] == "COMPLETED")
+    state["partial_units"] = sum(1 for unit in units if unit["status"] == "PARTIAL")
+    state["failed_units"] = sum(1 for unit in units if unit["status"] == "FAILED")
+    state["infrastructure_invalid_units"] = sum(
+        1
+        for unit in units
+        if unit.get("failure_validity") == "invalid_infrastructure_failure"
+    )
+    state["usage_accounting_gaps"] = sum(
+        1
+        for unit in units
+        if unit["status"] in TERMINAL_STATUSES
+        and not bool(unit.get("accounting_complete"))
+    )
+
+
 def cap_exceeded(state: dict[str, Any]) -> bool:
     totals = state["global_totals"]
     return (
@@ -525,9 +693,8 @@ def cap_exceeded(state: dict[str, Any]) -> bool:
 
 
 def finalize_state(inputs: BenchmarkInputs, state: dict[str, Any]) -> None:
+    recompute_summary_from_units(inputs, state)
     units = list(state["units"].values())
-    summary = calculate_integrity(inputs.order["units"], units)
-    state.update(summary)
     state["semantic_judge_requests"] = 0
     state["accounting_complete"] = all(
         bool(unit.get("accounting_complete"))
@@ -539,19 +706,21 @@ def finalize_state(inputs: BenchmarkInputs, state: dict[str, Any]) -> None:
     state["hashes_match"] = True
     state["stage4b_complete"] = all(
         [
-            summary["official_workflow_runs"] == 60,
-            summary["official_agent_runs"] == 60,
-            summary["workflow_terminal_results"] == 60,
-            summary["agent_terminal_results"] == 60,
-            summary["complete_pairs"] == 60,
-            summary["order_violations"] == 0,
-            summary["duplicate_logical_execution_count"] == 0,
-            summary["duplicate_completed_unit_count"] == 0,
-            summary["duplicate_provider_execution_count"] == 0,
+            state["official_workflow_runs"] == 60,
+            state["official_agent_runs"] == 60,
+            state["workflow_terminal_results"] == 60,
+            state["agent_terminal_results"] == 60,
+            state["complete_pairs"] == 60,
+            state["order_violations"] == 0,
+            state["duplicate_logical_execution_count"] == 0,
+            state["duplicate_completed_unit_count"] == 0,
+            state["duplicate_provider_execution_count"] == 0,
             state["hashes_match"],
             state["locks_match"],
             not state["runtime_behavior_drift"],
             state["accounting_complete"],
+            state.get("infrastructure_invalid_units", 0) == 0,
+            state.get("pending_units", 1) == 0,
         ]
     )
     state["stage4c_ready"] = state["stage4b_complete"]
@@ -620,7 +789,7 @@ def order_violations(units: list[dict[str, Any]]) -> int:
     return violations
 
 
-def run_preflight(api_base_url: str) -> dict[str, Any]:
+def run_preflight(api_base_url: str, run_id: str) -> dict[str, Any]:
     preflight: dict[str, Any] = {
         "started_at": now(),
         "api_base_url": api_base_url,
@@ -659,7 +828,7 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
             "scripts/check_llm_provider_health_v1.py",
             "--require-minimal-completion",
             "--output",
-            str(PRECHECK_PATH),
+            str(precheck_path_for_run(run_id)),
         ],
         text=True,
         encoding="utf-8",
@@ -668,7 +837,8 @@ def run_preflight(api_base_url: str) -> dict[str, Any]:
         check=False,
         timeout=120,
     )
-    provider_payload = read_json(PRECHECK_PATH) if PRECHECK_PATH.exists() else {}
+    precheck_path = precheck_path_for_run(run_id)
+    provider_payload = read_json(precheck_path) if precheck_path.exists() else {}
     minimal_status = normalize_probe_status(
         provider_payload.get("minimal_completion_status")
     )
@@ -703,7 +873,7 @@ def normalize_probe_status(value: Any) -> str:
     return str(value or "").strip().upper()
 
 
-def create_initial_state(inputs: BenchmarkInputs) -> dict[str, Any]:
+def create_initial_state(inputs: BenchmarkInputs, *, run_id: str) -> dict[str, Any]:
     commit = current_commit()
     units = {
         official_execution_unit_id(unit): {
@@ -727,6 +897,10 @@ def create_initial_state(inputs: BenchmarkInputs) -> dict[str, Any]:
     return {
         "schema_version": "stage4-execution-state-v1",
         "benchmark_version": inputs.manifest["benchmark_version"],
+        "official_run_id": run_id,
+        "supersedes_invalidated_run_id": INVALIDATED_ATTEMPT1_RUN_ID,
+        "official_run_status": "RUNNING",
+        "quality_metrics_inspected": False,
         "created_at": now(),
         "benchmark_execution_commit": commit,
         "benchmark_process_resume_count": 0,
@@ -772,9 +946,29 @@ def official_execution_unit_id(unit: dict[str, Any]) -> str:
     return f"research-benchmark-v1:{unit['task_id']}:{unit['system']}"
 
 
-def raw_unit_dir(execution_unit_id: str) -> Path:
+def runtime_root_for_run(run_id: str) -> Path:
+    return RUNTIME_ROOT / run_id
+
+
+def state_path_for_run(run_id: str) -> Path:
+    return runtime_root_for_run(run_id) / "execution-state" / (
+        "stage4-execution-state-v1.json"
+    )
+
+
+def precheck_path_for_run(run_id: str) -> Path:
+    return runtime_root_for_run(run_id) / "provider-audit" / (
+        "stage4-provider-health-v1.json"
+    )
+
+
+def system_label_map_for_run(run_id: str) -> Path:
+    return runtime_root_for_run(run_id) / "system-label-map.json"
+
+
+def raw_unit_dir(run_id: str, execution_unit_id: str) -> Path:
     safe = execution_unit_id.replace(":", "__")
-    return RUNTIME_ROOT / "raw-units" / safe
+    return runtime_root_for_run(run_id) / "raw-units" / safe
 
 
 def save_all_outputs(inputs: BenchmarkInputs, state: dict[str, Any]) -> None:
@@ -784,7 +978,7 @@ def save_all_outputs(inputs: BenchmarkInputs, state: dict[str, Any]) -> None:
 
 
 def save_state(state: dict[str, Any]) -> None:
-    write_json(STATE_PATH, state)
+    write_json(state_path_for_run(state["official_run_id"]), state)
 
 
 def public_results_payload(
@@ -793,6 +987,15 @@ def public_results_payload(
     return {
         "schema_version": "stage4-execution-results-v1",
         "benchmark_version": inputs.manifest["benchmark_version"],
+        "official_run_id": state.get("official_run_id"),
+        "supersedes_invalidated_run_id": state.get("supersedes_invalidated_run_id"),
+        "attempt_1": invalidated_attempt1_summary(),
+        "attempt_2": {
+            "official_run_id": state.get("official_run_id"),
+            "status": state.get("benchmark_status"),
+            "terminal_units": state.get("terminal_units", 0),
+            "cost": state.get("global_totals", {}).get("estimated_cost_usd", 0),
+        },
         "created_at": now(),
         "benchmark_execution_commit": state.get("benchmark_execution_commit"),
         "frozen_hashes": {key: inputs.manifest.get(key) for key in FROZEN_HASHES},
@@ -801,6 +1004,13 @@ def public_results_payload(
         "preflight": sanitize_payload(state.get("preflight", {})),
         "official_workflow_runs": state.get("official_workflow_runs", 0),
         "official_agent_runs": state.get("official_agent_runs", 0),
+        "terminal_units": state.get("terminal_units", 0),
+        "pending_units": state.get("pending_units", 0),
+        "completed_units": state.get("completed_units", 0),
+        "partial_units": state.get("partial_units", 0),
+        "failed_units": state.get("failed_units", 0),
+        "infrastructure_invalid_units": state.get("infrastructure_invalid_units", 0),
+        "usage_accounting_gaps": state.get("usage_accounting_gaps", 0),
         "workflow_terminal_results": state.get("workflow_terminal_results", 0),
         "agent_terminal_results": state.get("agent_terminal_results", 0),
         "complete_pairs": state.get("complete_pairs", 0),
@@ -865,6 +1075,9 @@ def public_unit(unit: dict[str, Any]) -> dict[str, Any]:
         "citation_count",
         "trace_complete",
         "behavioral_metrics",
+        "failure_category",
+        "failure_validity",
+        "http_error_detail",
         "error",
     ]
     return {key: unit.get(key) for key in allowed if key in unit}
@@ -880,12 +1093,17 @@ def public_results_markdown(state: dict[str, Any]) -> str:
             "Semantic judging and paired quality analysis are deferred to Stage 4C."
         ),
         "",
+        f"- official_run_id: `{state.get('official_run_id')}`",
+        "- attempt1_status: `INVALIDATED_INFRASTRUCTURE`",
         f"- benchmark_status: `{state.get('benchmark_status')}`",
         f"- stage4b_complete: `{state.get('stage4b_complete')}`",
         f"- stage4c_ready: `{state.get('stage4c_ready')}`",
         f"- stop_reason: `{state.get('stop_reason')}`",
         f"- official_workflow_runs: `{state.get('official_workflow_runs', 0)}`",
         f"- official_agent_runs: `{state.get('official_agent_runs', 0)}`",
+        f"- terminal_units: `{state.get('terminal_units', 0)}`",
+        f"- pending_units: `{state.get('pending_units', 0)}`",
+        f"- infrastructure_invalid_units: `{state.get('infrastructure_invalid_units', 0)}`",
         f"- complete_pairs: `{state.get('complete_pairs', 0)}`",
         f"- order_violations: `{state.get('order_violations', 0)}`",
         (
@@ -963,7 +1181,7 @@ def write_blinded_package(inputs: BenchmarkInputs, state: dict[str, Any]) -> Non
         },
     )
     write_json(
-        SYSTEM_LABEL_MAP,
+        system_label_map_for_run(state["official_run_id"]),
         {
             "schema_version": "stage4-system-label-map-v1",
             "created_at": now(),
@@ -971,6 +1189,17 @@ def write_blinded_package(inputs: BenchmarkInputs, state: dict[str, Any]) -> Non
             "mapping": label_map,
         },
     )
+
+
+def invalidated_attempt1_summary() -> dict[str, Any]:
+    path = BENCH / "stage4-official-run-invalidation-v1.json"
+    if path.exists():
+        return read_json(path)
+    return {
+        "status": "INVALIDATED_INFRASTRUCTURE",
+        "quality_results_usable": False,
+        "paired_results_usable": False,
+    }
 
 
 def execution_summary(state: dict[str, Any]) -> dict[str, Any]:
@@ -987,6 +1216,33 @@ def execution_summary(state: dict[str, Any]) -> dict[str, Any]:
             "preflight_provider_requests", 0
         ),
     }
+
+
+class BenchmarkHttpError(Exception):
+    def __init__(
+        self,
+        *,
+        status: int,
+        content_type: str,
+        detail: dict[str, Any],
+    ) -> None:
+        self.status = status
+        self.content_type = content_type
+        self.detail = detail
+        self.message = f"HTTP Error {status}"
+        super().__init__(self.message)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "type": "BenchmarkHttpError",
+            "http_status": self.status,
+            "content_type": self.content_type,
+            "sanitized_response_detail": sanitize_payload(self.detail),
+            "structured_error_code": extract_error_code(self.detail),
+            "runtime_task_id": extract_field(self.detail, "task_id"),
+            "request_id": extract_field(self.detail, "request_id"),
+            "provider_error_code": extract_field(self.detail, "provider_error_code"),
+        }
 
 
 def validate_frozen_inputs(inputs: BenchmarkInputs) -> None:
@@ -1063,9 +1319,18 @@ def post_json(url: str, payload: dict[str, Any], timeout: int) -> tuple[int, dic
         headers={"Content-Type": "application/json"},
         method="POST",
     )
-    with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310
-        body = response.read().decode("utf-8")
-        return response.status, json.loads(body) if body else {}
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310
+            body = response.read().decode("utf-8")
+            return response.status, json.loads(body) if body else {}
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        content_type = exc.headers.get("Content-Type", "")
+        raise BenchmarkHttpError(
+            status=exc.code,
+            content_type=content_type,
+            detail=parse_error_body(body, content_type),
+        ) from exc
 
 
 def get_json(url: str, timeout: int) -> tuple[int, dict[str, Any]]:
@@ -1091,6 +1356,40 @@ def sanitize_payload(payload: Any) -> Any:
     if isinstance(payload, str):
         return sanitize_text(payload)
     return payload
+
+
+def parse_error_body(body: str, content_type: str) -> dict[str, Any]:
+    if "json" in content_type.lower():
+        try:
+            parsed = json.loads(body)
+            return parsed if isinstance(parsed, dict) else {"body": parsed}
+        except json.JSONDecodeError:
+            return {"body": sanitize_text(body), "parse_error": "JSONDecodeError"}
+    return {"body": sanitize_text(body)}
+
+
+def extract_field(payload: Any, field: str) -> Any:
+    if isinstance(payload, dict):
+        if field in payload:
+            return payload[field]
+        for value in payload.values():
+            found = extract_field(value, field)
+            if found is not None:
+                return found
+    elif isinstance(payload, list):
+        for value in payload:
+            found = extract_field(value, field)
+            if found is not None:
+                return found
+    return None
+
+
+def extract_error_code(payload: Any) -> Any:
+    return (
+        extract_field(payload, "code")
+        or extract_field(payload, "error_code")
+        or extract_field(payload, "status")
+    )
 
 
 def redact_value(value: Any) -> str:
