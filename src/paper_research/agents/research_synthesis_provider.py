@@ -105,6 +105,31 @@ class ResearchSynthesisResult(BaseModel):
     total_latency_ms: float = 0
 
 
+class CitationScopeViolation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    section_id: str
+    section_title: str | None = None
+    claim_path: str
+    claim_index: int | None = None
+    offending_citation_ids: list[str] = Field(default_factory=list)
+    allowed_citation_ids: list[str] = Field(default_factory=list)
+    globally_known_but_section_disallowed_ids: list[str] = Field(default_factory=list)
+    unknown_citation_ids: list[str] = Field(default_factory=list)
+    validation_code: str
+    validation_message: str
+
+
+class CitationScopeValidationError(ValueError):
+    def __init__(self, violations: list[CitationScopeViolation]) -> None:
+        self.violations = violations
+        sections = sorted({violation.section_id for violation in violations})
+        super().__init__(
+            "section-scoped citation validation failed for sections: "
+            + ", ".join(sections)
+        )
+
+
 class StructuredJSONProvider(Protocol):
     provider_name: str
     model_name: str
@@ -179,14 +204,21 @@ class DeepSeekResearchSynthesisProvider:
         last_error: Exception | None = None
         last_payload: object | None = None
         repairing_sections: set[str] = set()
+        repaired_section_count = 0
         for attempt in range(1, self.max_attempts + 1):
             attempts += 1
             prompt = user_prompt
+            attempt_type = "FULL_SYNTHESIS"
             if last_error is not None:
                 repairing_sections = _invalid_section_ids(
                     last_payload,
                     validation_error=last_error,
                     section_evidence_ids=section_evidence_ids,
+                )
+                attempt_type = (
+                    "TARGETED_SECTION_REPAIR"
+                    if repairing_sections and set(repairing_sections) != set(EXPECTED_SECTIONS)
+                    else "FULL_SYNTHESIS_REPAIR"
                 )
                 if set(repairing_sections) == set(EXPECTED_SECTIONS):
                     prompt = _research_repair_prompt(
@@ -214,6 +246,7 @@ class DeepSeekResearchSynthesisProvider:
                         or (request_context or {}).get("run_id"),
                         "node": "synthesize_llm",
                         "attempt_number": attempt,
+                        "attempt_type": attempt_type,
                         "section_evidence_ids": section_evidence_ids,
                         "allowed_citation_ids": sorted(allowed),
                         "repair_target_sections": sorted(repairing_sections),
@@ -223,12 +256,17 @@ class DeepSeekResearchSynthesisProvider:
                 usage_records.extend(result.usage_records)
                 normalization_events.extend(result.normalization_events)
                 payload = result.payload
-                if last_error is not None and isinstance(last_payload, dict):
+                if (
+                    last_error is not None
+                    and isinstance(last_payload, dict)
+                    and attempt_type == "TARGETED_SECTION_REPAIR"
+                ):
                     payload = _merge_component_repair_payload(
                         previous_payload=last_payload,
                         repair_payload=result.payload,
                         target_sections=repairing_sections,
                     )
+                    repaired_section_count = len(repairing_sections)
                 last_payload = payload
                 synthesis = ResearchSynthesis.model_validate(payload)
                 _validate_synthesis_citations(
@@ -236,6 +274,25 @@ class DeepSeekResearchSynthesisProvider:
                     allowed_citation_ids=allowed,
                     section_evidence_ids=section_evidence_ids,
                 )
+                if usage_records and usage_records[-1].raw_response_path:
+                    _update_json_file(
+                        Path(usage_records[-1].raw_response_path),
+                        {
+                            "schema_parse_status": "passed",
+                            "validation_errors": [],
+                            "section_repair_triggered": attempt_type
+                            == "TARGETED_SECTION_REPAIR",
+                            "section_repair_section_count": repaired_section_count,
+                            "section_repair_success": attempt_type
+                            == "TARGETED_SECTION_REPAIR",
+                            "repaired_section_ids": sorted(repairing_sections),
+                            "unchanged_section_count": (
+                                len(EXPECTED_SECTIONS) - repaired_section_count
+                                if repaired_section_count
+                                else len(EXPECTED_SECTIONS)
+                            ),
+                        },
+                    )
                 return ResearchSynthesisResult(
                     synthesis=synthesis,
                     usage=_sum_usage_records(usage_records),
@@ -278,14 +335,26 @@ class DeepSeekResearchSynthesisProvider:
                     usage_records[-1].schema_valid = False
                     usage_records[-1].error_category = "PROVIDER_SCHEMA"
                     if usage_records[-1].raw_response_path:
+                        diagnostics = _schema_failure_diagnostics(
+                            payload=last_payload,
+                            error=exc,
+                            allowed_citation_ids=allowed,
+                            section_evidence_ids=section_evidence_ids,
+                        )
+                        diagnostics.update(
+                            {
+                                "attempt_type": attempt_type,
+                                "section_repair_triggered": bool(
+                                    diagnostics.get("section_repair_triggered")
+                                )
+                                or attempt_type == "TARGETED_SECTION_REPAIR",
+                                "section_repair_success": False,
+                                "repaired_section_ids": sorted(repairing_sections),
+                            }
+                        )
                         _update_json_file(
                             Path(usage_records[-1].raw_response_path),
-                            _schema_failure_diagnostics(
-                                payload=last_payload,
-                                error=exc,
-                                allowed_citation_ids=allowed,
-                                section_evidence_ids=section_evidence_ids,
-                            ),
+                            diagnostics,
                         )
                 last_error = exc
                 retry_reasons.append(type(exc).__name__)
@@ -315,12 +384,8 @@ def _validate_synthesis_citations(
     allowed_citation_ids: set[str],
     section_evidence_ids: dict[str, list[str]],
 ) -> None:
-    for claim in [
-        *[claim for section in synthesis.sections for claim in section.claims],
-        *synthesis.consensus,
-        *synthesis.disagreements,
-        *synthesis.research_gaps,
-    ]:
+    global_claims = [*synthesis.consensus, *synthesis.disagreements, *synthesis.research_gaps]
+    for claim in global_claims:
         unknown = [
             citation_id
             for citation_id in claim.citation_ids
@@ -328,24 +393,50 @@ def _validate_synthesis_citations(
         ]
         if unknown:
             raise ValueError(f"unknown citation IDs: {unknown}")
+    violations: list[CitationScopeViolation] = []
     for section in synthesis.sections:
         allowed_for_section = set(section_evidence_ids.get(section.section_id, []))
         if section.insufficient_evidence:
             if any(claim.citation_ids for claim in section.claims):
                 raise ValueError("insufficient section cannot contain cited claims")
             continue
-        for claim in section.claims:
-            outside = [
+        for claim_index, claim in enumerate(section.claims):
+            citation_ids = list(claim.citation_ids)
+            unknown = [
                 citation_id
-                for citation_id in claim.citation_ids
-                if citation_id not in allowed_for_section
+                for citation_id in citation_ids
+                if citation_id not in allowed_citation_ids
             ]
-            if outside:
-                raise ValueError(
-                    "citation IDs outside section allowlist for "
-                    f"{section.section_id} claim[{section.claims.index(claim)}]: {outside}; "
-                    f"allowed={sorted(allowed_for_section)}"
+            globally_known_but_section_disallowed = [
+                citation_id
+                for citation_id in citation_ids
+                if citation_id in allowed_citation_ids and citation_id not in allowed_for_section
+            ]
+            if unknown or globally_known_but_section_disallowed:
+                offending = [*globally_known_but_section_disallowed, *unknown]
+                violations.append(
+                    CitationScopeViolation(
+                        section_id=section.section_id,
+                        section_title=section.section_id.title(),
+                        claim_path=f"sections[{list(EXPECTED_SECTIONS).index(section.section_id)}].claims[{claim_index}]",
+                        claim_index=claim_index,
+                        offending_citation_ids=offending,
+                        allowed_citation_ids=sorted(allowed_for_section),
+                        globally_known_but_section_disallowed_ids=globally_known_but_section_disallowed,
+                        unknown_citation_ids=unknown,
+                        validation_code=(
+                            "CITATION_ID_UNKNOWN"
+                            if unknown
+                            else "CITATION_NOT_ALLOWED_FOR_SECTION"
+                        ),
+                        validation_message=(
+                            "Citation IDs must be globally known and belong to the "
+                            f"{section.section_id} section allowlist."
+                        ),
+                    )
                 )
+    if violations:
+        raise CitationScopeValidationError(violations)
 
 
 def _schema_failure_diagnostics(
@@ -356,8 +447,9 @@ def _schema_failure_diagnostics(
     section_evidence_ids: dict[str, list[str]],
 ) -> dict[str, Any]:
     validation_errors = _validation_error_details(error)
-    citation_details = _citation_allowlist_diagnostics(
-        payload,
+    citation_details = _structured_citation_violations(
+        error,
+        payload=payload,
         allowed_citation_ids=allowed_citation_ids,
         section_evidence_ids=section_evidence_ids,
     )
@@ -376,16 +468,55 @@ def _schema_failure_diagnostics(
             {
                 citation_id
                 for detail in citation_details
-                for citation_id in detail.get("citation_ids", [])
+                for citation_id in detail.get("offending_citation_ids", [])
             }
         ),
+        "violations_by_section": _violations_by_section(citation_details),
+        "section_repair_triggered": bool(citation_details),
+        "section_repair_section_count": len(
+            {detail.get("section_id") for detail in citation_details}
+        ),
+        "section_repair_violation_count": len(citation_details),
     }
     if isinstance(payload, dict):
         updates["content_top_level_fields"] = sorted(str(key) for key in payload)
     return updates
 
 
+def _structured_citation_violations(
+    error: BaseException,
+    *,
+    payload: object,
+    allowed_citation_ids: set[str],
+    section_evidence_ids: dict[str, list[str]],
+) -> list[dict[str, Any]]:
+    if isinstance(error, CitationScopeValidationError):
+        return [violation.model_dump() for violation in error.violations]
+    return _citation_allowlist_diagnostics(
+        payload,
+        allowed_citation_ids=allowed_citation_ids,
+        section_evidence_ids=section_evidence_ids,
+    )
+
+
+def _violations_by_section(violations: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for violation in violations:
+        section_id = str(violation.get("section_id") or "unknown")
+        grouped.setdefault(section_id, []).append(violation)
+    return grouped
+
+
 def _validation_error_details(error: BaseException) -> list[dict[str, str]]:
+    if isinstance(error, CitationScopeValidationError):
+        return [
+            {
+                "path": violation.claim_path,
+                "type": violation.validation_code,
+                "message": violation.validation_message[:1000],
+            }
+            for violation in error.violations
+        ]
     if isinstance(error, ValidationError):
         return [
             {
@@ -412,6 +543,8 @@ def _schema_failure_types(
     output = {"PROVIDER_VALID_JSON_WRONG_SCHEMA", "SYNTHESIS_SCHEMA_VALIDATION_ERROR"}
     if citation_details:
         output.add("INVALID_CITATION_SCHEMA")
+        codes = {str(detail.get("validation_code")) for detail in citation_details}
+        output.update(code for code in codes if code)
     message = str(error)
     if "unknown citation IDs" in message:
         output.add("UNKNOWN_CITATION_ID")
@@ -468,11 +601,22 @@ def _citation_allowlist_diagnostics(
                     details.append(
                         {
                             "failure_type": "UNKNOWN_CITATION_ID",
+                            "validation_code": "CITATION_ID_UNKNOWN",
                             "location": (
                                 f"sections.{section_index}.claims.{claim_index}.citation_ids"
                             ),
+                            "claim_path": f"sections[{section_index}].claims[{claim_index}]",
+                            "claim_index": claim_index,
                             "section_id": section_id,
+                            "section_title": section_id.title(),
                             "citation_ids": unknown,
+                            "offending_citation_ids": unknown,
+                            "allowed_citation_ids": sorted(allowed_for_section),
+                            "globally_known_but_section_disallowed_ids": [],
+                            "unknown_citation_ids": unknown,
+                            "validation_message": (
+                                "Citation IDs must exist in the global Evidence Catalog."
+                            ),
                         }
                     )
                 outside = [
@@ -485,12 +629,23 @@ def _citation_allowlist_diagnostics(
                     details.append(
                         {
                             "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+                            "validation_code": "CITATION_NOT_ALLOWED_FOR_SECTION",
                             "location": (
                                 f"sections.{section_index}.claims.{claim_index}.citation_ids"
                             ),
+                            "claim_path": f"sections[{section_index}].claims[{claim_index}]",
+                            "claim_index": claim_index,
                             "section_id": section_id,
+                            "section_title": section_id.title(),
                             "citation_ids": outside,
+                            "offending_citation_ids": outside,
+                            "allowed_citation_ids": sorted(allowed_for_section),
                             "allowed_for_section": sorted(allowed_for_section),
+                            "globally_known_but_section_disallowed_ids": outside,
+                            "unknown_citation_ids": [],
+                            "validation_message": (
+                                "Citation IDs exist globally but are not allowed for this section."
+                            ),
                         }
                     )
     return details
@@ -577,6 +732,8 @@ def _invalid_section_ids(
     """Return sections that should be regenerated by the second provider attempt."""
 
     fallback = set(EXPECTED_SECTIONS)
+    if isinstance(validation_error, CitationScopeValidationError):
+        return {violation.section_id for violation in validation_error.violations}
     if not isinstance(previous_payload, dict):
         return fallback
     sections = previous_payload.get("sections")
@@ -613,7 +770,7 @@ def _invalid_section_ids(
                 invalid.add(section_id)
                 continue
             if any(citation_id not in allowed for citation_id in citation_ids):
-                invalid.add(section_id)
+                return fallback
     missing = set(EXPECTED_SECTIONS) - found
     if missing:
         return fallback
@@ -638,6 +795,7 @@ def _research_component_repair_prompt(
     """Build a bounded repair prompt with only target-section evidence."""
 
     previous_sections = _previous_sections_for_prompt(previous_payload, target_sections)
+    violations = _violations_for_prompt(validation_error, target_sections)
     evidence_blocks: list[str] = []
     for section_id in EXPECTED_SECTIONS:
         if section_id not in target_sections:
@@ -665,6 +823,14 @@ def _research_component_repair_prompt(
         "code fences, explanations, or evidence outside the listed target sections.\n\n"
         "Target sections: "
         + json.dumps(sorted(target_sections), ensure_ascii=False)
+        + "\nReturn sections for every target section and no other sections. "
+        "Do not rename, split, merge, or omit target sections.\n"
+        "If an existing claim cannot be supported by the allowed evidence for its section, "
+        "rewrite it more narrowly, remove it, or mark the whole section insufficient using "
+        "the existing section schema. Do not invent citations and do not keep unsupported "
+        "claims without citations.\n"
+        "\n\nStructured citation violations:\n"
+        + json.dumps(violations, ensure_ascii=False, indent=2)
         + "\n\nEach returned section must obey this shape:\n"
         '{"section_id":"background|methods|results|limitations","summary":"string",'
         '"claims":[{"text":"string","citation_ids":["E01"]}],'
@@ -685,6 +851,19 @@ def _research_component_repair_prompt(
         + "Allowed evidence for target sections only:\n"
         + "\n\n".join(evidence_blocks)
     )
+
+
+def _violations_for_prompt(
+    validation_error: BaseException,
+    target_sections: set[str],
+) -> list[dict[str, Any]]:
+    if not isinstance(validation_error, CitationScopeValidationError):
+        return []
+    return [
+        violation.model_dump()
+        for violation in validation_error.violations
+        if violation.section_id in target_sections
+    ]
 
 
 def _previous_sections_for_prompt(
@@ -726,10 +905,10 @@ def _merge_component_repair_payload(
     target_sections: set[str],
 ) -> dict[str, Any]:
     if not isinstance(repair_payload, dict):
-        return previous_payload
+        raise ValueError("targeted section repair response must be a JSON object")
     repaired_sections = repair_payload.get("sections")
     if not isinstance(repaired_sections, list):
-        return previous_payload
+        raise ValueError('targeted section repair response requires "sections" list')
     repaired_section_ids = {
         section.get("section_id") for section in repaired_sections if isinstance(section, dict)
     }
@@ -738,7 +917,15 @@ def _merge_component_repair_payload(
         and "title" in repair_payload
         and "executive_summary" in repair_payload
     ):
-        return repair_payload
+        raise ValueError("targeted section repair must not return a full report")
+    if len(repaired_section_ids) != len(repaired_sections):
+        raise ValueError("targeted section repair returned duplicate or malformed sections")
+    if repaired_section_ids != set(target_sections):
+        actual_sections = sorted(str(item) for item in repaired_section_ids)
+        raise ValueError(
+            "targeted section repair returned wrong section set: "
+            f"expected={sorted(target_sections)} actual={actual_sections}"
+        )
     by_id = {
         section.get("section_id"): section
         for section in repaired_sections
@@ -746,16 +933,41 @@ def _merge_component_repair_payload(
         and section.get("section_id") in target_sections
     }
     if set(by_id) != set(target_sections):
-        return previous_payload
+        raise ValueError("targeted section repair returned malformed target sections")
     merged = dict(previous_payload)
+    before_non_target = _canonical_non_target_sections(previous_payload, target_sections)
     merged["sections"] = [
         by_id.get(section.get("section_id"), section) if isinstance(section, dict) else section
         for section in previous_payload.get("sections", [])
     ]
+    after_non_target = _canonical_non_target_sections(merged, target_sections)
+    if before_non_target != after_non_target:
+        raise ValueError("targeted section repair changed non-offending sections")
     return merged
 
 
+def _canonical_non_target_sections(
+    payload: dict[str, Any],
+    target_sections: set[str],
+) -> dict[str, Any]:
+    sections = payload.get("sections")
+    if not isinstance(sections, list):
+        return {}
+    return {
+        str(section.get("section_id")): section
+        for section in sections
+        if isinstance(section, dict) and section.get("section_id") not in target_sections
+    }
+
+
 def _validation_error_summary(error: BaseException) -> list[str]:
+    if isinstance(error, CitationScopeValidationError):
+        return [
+            f"{violation.claim_path}: {violation.validation_code} - "
+            f"offending={violation.offending_citation_ids}; "
+            f"allowed={violation.allowed_citation_ids}"
+            for violation in error.violations
+        ]
     if isinstance(error, ValidationError):
         output = []
         for item in error.errors()[:20]:

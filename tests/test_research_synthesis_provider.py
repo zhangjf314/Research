@@ -231,15 +231,49 @@ def test_adapter_fails_closed_after_second_schema_failure() -> None:
 def test_cross_section_citation_repair_receives_specific_validation_error() -> None:
     bad = valid_payload()
     bad["sections"][0]["claims"][0]["citation_ids"] = ["E02"]
-    provider = FakeStructuredProvider([bad, valid_payload()])
+    repaired = {"sections": [valid_payload()["sections"][0]]}
+    provider = FakeStructuredProvider([bad, repaired])
 
     result = synthesize(provider)
 
     assert result.request_attempt_count == 2
     repair_prompt = provider.calls[1]["user_prompt"]
-    assert "citation IDs outside section allowlist for background claim[0]" in repair_prompt
+    assert "CITATION_NOT_ALLOWED_FOR_SECTION" in repair_prompt
     assert "SECTION: background" in repair_prompt
+    assert "SECTION: methods" not in repair_prompt
     assert '"E01"' in repair_prompt
+    assert '<EVIDENCE id="E02"' not in repair_prompt
+    assert provider.calls[1]["request_context"]["attempt_type"] == "TARGETED_SECTION_REPAIR"
+
+
+def test_unknown_section_citation_uses_targeted_repair_without_inventing_lookup() -> None:
+    bad = valid_payload()
+    bad["sections"][0]["claims"][0]["citation_ids"] = ["E999"]
+    repaired = {"sections": [valid_payload()["sections"][0]]}
+    provider = FakeStructuredProvider([bad, repaired])
+
+    result = synthesize(provider)
+
+    assert result.request_attempt_count == 2
+    repair_prompt = provider.calls[1]["user_prompt"]
+    assert "CITATION_ID_UNKNOWN" in repair_prompt
+    assert "E999" in repair_prompt
+    assert '<EVIDENCE id="E999"' not in repair_prompt
+    assert '<EVIDENCE id="E01"' in repair_prompt
+
+
+def test_targeted_repair_fails_closed_when_forbidden_citation_remains() -> None:
+    bad = valid_payload()
+    bad["sections"][0]["claims"][0]["citation_ids"] = ["E02"]
+    repaired = {"sections": [bad["sections"][0]]}
+    provider = FakeStructuredProvider([bad, repaired])
+
+    with pytest.raises(LLMProviderError) as exc:
+        synthesize(provider)
+
+    assert exc.value.error_code == "FAILED_PROVIDER_SCHEMA"
+    assert exc.value.api_request_count == 2
+    assert len(provider.calls) == 2
 
 
 def test_schema_failure_updates_runtime_raw_response_diagnostics(tmp_path: Path) -> None:
@@ -270,9 +304,9 @@ def test_schema_failure_updates_runtime_raw_response_diagnostics(tmp_path: Path)
     assert record["schema_failure_subtype"] == "INVALID_CITATION_SCHEMA"
     assert "CITATION_NOT_ALLOWED_FOR_SECTION" in record["failure_types"]
     assert record["offending_citation_ids"] == ["E02"]
-    assert record["citation_allowlist_details"][0]["location"] == (
-        "sections.0.claims.0.citation_ids"
-    )
+    assert record["citation_allowlist_details"][0]["claim_path"] == "sections[0].claims[0]"
+    assert record["violations_by_section"]["background"]
+    assert record["section_repair_triggered"] is True
 
 
 def test_unknown_citation_id_is_rejected() -> None:

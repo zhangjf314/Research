@@ -891,6 +891,8 @@ class SiliconFlowLLMProvider(LLMProvider):
             "task_id": safe_task_id,
             "run_id": context.get("run_id"),
             "attempt_number": attempt_number,
+            "attempt_type": context.get("attempt_type"),
+            "repair_target_sections": context.get("repair_target_sections") or [],
             "provider": self.provider_name,
             "model": str(body.get("model") or self.model_name),
             "http_status": response.status_code,
