@@ -597,11 +597,14 @@ def extract_usage(response: dict[str, Any]) -> dict[str, Any]:
     total_tokens = recursive_numeric(source, {"total_tokens"})
     if total_tokens == 0:
         total_tokens = input_tokens + output_tokens
-    estimated_cost = recursive_numeric(
-        response,
-        {"estimated_cost_usd", "monetary_cost_usd", "cost_usd"},
-        include_nested=True,
+    estimated_cost = numeric_float(response, "estimated_cost") or numeric_float(
+        response, "estimated_cost_usd"
     )
+    if estimated_cost == 0:
+        estimated_cost = recursive_numeric(
+            source,
+            {"estimated_cost_usd", "monetary_cost_usd", "cost_usd"},
+        )
     usage_record_count = numeric_value(response, "usage_record_count")
     active_reserved_tokens = numeric_value(response, "active_reserved_tokens")
     provider_failures = max(request_attempts - provider_completed, 0)
@@ -621,6 +624,11 @@ def extract_usage(response: dict[str, Any]) -> dict[str, Any]:
 def numeric_value(mapping: dict[str, Any], key: str) -> int:
     value = mapping.get(key)
     return int(value) if isinstance(value, int | float) else 0
+
+
+def numeric_float(mapping: dict[str, Any], key: str) -> float:
+    value = mapping.get(key)
+    return float(value) if isinstance(value, int | float) else 0.0
 
 
 def recursive_numeric(

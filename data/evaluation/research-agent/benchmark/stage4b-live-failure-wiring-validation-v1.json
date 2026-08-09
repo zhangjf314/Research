@@ -1,0 +1,160 @@
+{
+  "accounting_summary": {
+    "estimated_cost_usd": 0.00023646,
+    "input_tokens": 491,
+    "output_tokens": 599,
+    "provider_requests": 1,
+    "terminal_units": 1,
+    "total_tokens": 1090
+  },
+  "api_response": {
+    "checkpoint_count": 3,
+    "checkpoint_id": "stage4-wiring-validation-v1-stage3c-smoke-1-straightforward-agent-0003-PROVIDER_FAILURE",
+    "estimated_cost": 0.00023646,
+    "evidence_count": 0,
+    "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+    "observations": [],
+    "plan_version": 0,
+    "provider_call_count": 1,
+    "remaining_budget": {
+      "cost_usd": 0.04976354,
+      "steps": 12,
+      "tokens": 38910,
+      "tools": 16
+    },
+    "research_mode": "agent",
+    "resolved_subquestions": [],
+    "status": "FAILED",
+    "step_count": 0,
+    "stop_reason": "PROVIDER_FAILURE",
+    "subquestions": [],
+    "task_id": "stage4-wiring-validation-v1-stage3c-smoke-1-straightforward-agent",
+    "terminal": true,
+    "token_usage": {
+      "input_tokens": 491,
+      "output_tokens": 599,
+      "total_tokens": 1090,
+      "usage_source": "provider_reported"
+    },
+    "tool_call_count": 0,
+    "tool_history": [
+      {
+        "estimated_cost_usd": 0.00023646,
+        "input_tokens": 491,
+        "latency_ms": 10.0,
+        "model": "deepseek-v4-flash",
+        "output_tokens": 599,
+        "phase": "PROVIDER_DECISION",
+        "provider": "deepseek",
+        "provider_request_id": null,
+        "request_attempt_count": 1,
+        "retry_count": 0,
+        "total_tokens": 1090,
+        "usage_source": "provider_reported"
+      },
+      {
+        "failure_code": "AGENT_DECISION_PROVIDER_ERROR",
+        "phase": "TERMINAL_FAILURE",
+        "root_exception": "AgentDecisionProviderError",
+        "stop_reason": "PROVIDER_FAILURE"
+      }
+    ],
+    "unresolved_subquestions": [],
+    "verification_state": null
+  },
+  "checks": {
+    "accounting_integrity": true,
+    "agent_behavior_hash_match": true,
+    "agent_http_status_not_503": true,
+    "checkpoint_trace_exposed": true,
+    "exclusion_count_valid": true,
+    "exclusion_hash_match": true,
+    "exclusion_manifest_found": true,
+    "exclusion_schema_valid": true,
+    "namespace_isolated": true,
+    "not_benchmark_api_wiring_failure": true,
+    "provider_failure_materialized": true,
+    "rag_backend_hash_match": true,
+    "runner_classification_valid": true,
+    "secret_scan_passed": true,
+    "usage_recovered": true,
+    "workflow_failure_classification_still_valid": true
+  },
+  "created_at": "2026-08-09T08:33:55.051903+00:00",
+  "exclusion_manifest": {
+    "path": "data\\evaluation\\research-agent\\stage4-task-exclusions-v1.json",
+    "restored_from_commit": "7d7139a9ada54e94b97d8827b198e44d3692bc9e",
+    "sha256": "fd9a015c3d7b725cb863f766d25fafafb266576271b3422d0200c1b6c567c0cb",
+    "task_count": 6
+  },
+  "hashes": {
+    "agent_behavior_hash": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
+    "dataset_hash": "45e1369b2810630b0dfe94ab94b784d8984df791ea87500fea882752159288b5",
+    "evaluation_protocol_hash": "a5f6ac812173e2dcec23507954b383383a053fba5845cd524d45a4766d1a44a2",
+    "execution_order_hash": "166ea1f41583ee8db52fec5ec21561cc10979cf4f238af9850ea31b68e18beb7",
+    "rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
+    "research_rubric_hash": "feb370b5521a8395200b4422392e67b33c44ed813cdc920073f28e8b4cf545fc",
+    "research_tasks_hash": "f72418172c0ce1405c2884c190ff35577d1fcbc8b0afb332e63ee049036a6359",
+    "workflow_lock_hash": "dbe1b6e927c6deb458684644dae1890bfc9c71b6ab0b0b26090efb6c1286b1eb"
+  },
+  "official_attempt_started": false,
+  "official_benchmark_units_used": 0,
+  "passed": true,
+  "provider_requests_made_by_this_script": 0,
+  "retrieval_requests_made_by_this_script": 0,
+  "schema_version": "stage4b-live-failure-wiring-validation-v1",
+  "secret_scan": {
+    "secret_hits": []
+  },
+  "unit_result": {
+    "accounting_complete": true,
+    "behavioral_metrics": {
+      "evidence_count": 0,
+      "observation_count": 0,
+      "plan_version": 0,
+      "provider_call_count": 1,
+      "step_count": 0,
+      "tool_call_count": 0,
+      "tool_history_count": 2,
+      "verification_status": null
+    },
+    "benchmark_version": "research-benchmark-v1",
+    "blind_label": "VALIDATION",
+    "citation_count": 0,
+    "citation_ids_structurally_valid": true,
+    "citation_structure_parseable": true,
+    "error": null,
+    "estimated_cost_usd": 0.00023646,
+    "execution_unit_id": "research-benchmark-v1:stage3c-smoke-1-straightforward:agent",
+    "failure_category": "SYSTEM_PROVIDER_FAILURE",
+    "failure_validity": "valid_system_failure",
+    "finished_at": "2026-08-09T08:33:55.051903+00:00",
+    "http_error_detail": null,
+    "http_status": 200,
+    "input_tokens": 491,
+    "latency_seconds": 0.0,
+    "original_execution_unit_id": "stage3c-smoke-1-straightforward-agent",
+    "output_exists": true,
+    "output_tokens": 599,
+    "provider_failures": 0,
+    "provider_requests": 1,
+    "response_status": "FAILED",
+    "status": "FAILED",
+    "stop_reason": "PROVIDER_FAILURE",
+    "system": "agent",
+    "target_paper_count": 0,
+    "task_category": "non_benchmark_wiring_validation",
+    "task_difficulty": "not_scored",
+    "task_id": "stage3c-smoke-1-straightforward",
+    "total_tokens": 1090,
+    "trace_complete": true
+  },
+  "validation_mode": "non_benchmark_controlled_api_wiring_replay",
+  "validation_task_ids": [
+    "stage4-wiring-validation-v1-stage3c-smoke-1-straightforward-agent"
+  ],
+  "workflow_path_validation": {
+    "failure_category": "SYSTEM_VERIFICATION_FAILURE",
+    "failure_validity": "valid_system_failure"
+  }
+}

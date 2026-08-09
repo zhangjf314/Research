@@ -145,6 +145,25 @@ def test_usage_extraction_handles_workflow_and_agent_shapes() -> None:
     assert runner.extract_usage(workflow)["total_tokens"] == 15
     assert runner.extract_usage(agent)["provider_requests"] == 3
     assert runner.extract_usage(agent)["total_tokens"] == 11
+    assert runner.extract_usage(agent)["estimated_cost_usd"] == 0.02
+
+
+def test_agent_usage_extraction_does_not_treat_remaining_budget_as_cost() -> None:
+    runner = _runner()
+    agent = {
+        "provider_call_count": 1,
+        "token_usage": {
+            "input_tokens": 491,
+            "output_tokens": 599,
+            "total_tokens": 1090,
+        },
+        "estimated_cost": 0.00023646,
+        "remaining_budget": {"cost_usd": 0.04976354},
+    }
+
+    usage = runner.extract_usage(agent)
+
+    assert usage["estimated_cost_usd"] == 0.00023646
 
 
 def test_workflow_invocation_omits_budget_and_external_search_override() -> None:
