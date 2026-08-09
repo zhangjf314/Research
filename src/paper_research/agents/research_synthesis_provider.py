@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
@@ -13,6 +14,7 @@ from paper_research.providers.llm import (
     ModelUsage,
     ProviderUsageRecord,
     StructuredJSONResult,
+    _update_json_file,
 )
 
 SectionId = Literal["background", "methods", "results", "limitations"]
@@ -275,6 +277,16 @@ class DeepSeekResearchSynthesisProvider:
                 if usage_records:
                     usage_records[-1].schema_valid = False
                     usage_records[-1].error_category = "PROVIDER_SCHEMA"
+                    if usage_records[-1].raw_response_path:
+                        _update_json_file(
+                            Path(usage_records[-1].raw_response_path),
+                            _schema_failure_diagnostics(
+                                payload=last_payload,
+                                error=exc,
+                                allowed_citation_ids=allowed,
+                                section_evidence_ids=section_evidence_ids,
+                            ),
+                        )
                 last_error = exc
                 retry_reasons.append(type(exc).__name__)
                 if attempt >= self.max_attempts:
@@ -330,8 +342,158 @@ def _validate_synthesis_citations(
             ]
             if outside:
                 raise ValueError(
-                    f"citation IDs outside section allowlist for {section.section_id}: {outside}"
+                    "citation IDs outside section allowlist for "
+                    f"{section.section_id} claim[{section.claims.index(claim)}]: {outside}; "
+                    f"allowed={sorted(allowed_for_section)}"
                 )
+
+
+def _schema_failure_diagnostics(
+    *,
+    payload: object,
+    error: BaseException,
+    allowed_citation_ids: set[str],
+    section_evidence_ids: dict[str, list[str]],
+) -> dict[str, Any]:
+    validation_errors = _validation_error_details(error)
+    citation_details = _citation_allowlist_diagnostics(
+        payload,
+        allowed_citation_ids=allowed_citation_ids,
+        section_evidence_ids=section_evidence_ids,
+    )
+    failure_types = _schema_failure_types(error, validation_errors, citation_details)
+    updates: dict[str, Any] = {
+        "schema_parse_status": "failed",
+        "validation_errors": validation_errors,
+        "schema_failure_subtype": (
+            "INVALID_CITATION_SCHEMA"
+            if citation_details
+            else "PROVIDER_VALID_JSON_WRONG_SCHEMA"
+        ),
+        "failure_types": failure_types,
+        "citation_allowlist_details": citation_details,
+        "offending_citation_ids": sorted(
+            {
+                citation_id
+                for detail in citation_details
+                for citation_id in detail.get("citation_ids", [])
+            }
+        ),
+    }
+    if isinstance(payload, dict):
+        updates["content_top_level_fields"] = sorted(str(key) for key in payload)
+    return updates
+
+
+def _validation_error_details(error: BaseException) -> list[dict[str, str]]:
+    if isinstance(error, ValidationError):
+        return [
+            {
+                "path": ".".join(str(part) for part in item.get("loc", ())) or "<root>",
+                "type": str(item.get("type")),
+                "message": str(item.get("msg"))[:1000],
+            }
+            for item in error.errors()[:20]
+        ]
+    return [
+        {
+            "path": "<root>",
+            "type": type(error).__name__,
+            "message": str(error)[:1000],
+        }
+    ]
+
+
+def _schema_failure_types(
+    error: BaseException,
+    validation_errors: list[dict[str, str]],
+    citation_details: list[dict[str, Any]],
+) -> list[str]:
+    output = {"PROVIDER_VALID_JSON_WRONG_SCHEMA", "SYNTHESIS_SCHEMA_VALIDATION_ERROR"}
+    if citation_details:
+        output.add("INVALID_CITATION_SCHEMA")
+    message = str(error)
+    if "unknown citation IDs" in message:
+        output.add("UNKNOWN_CITATION_ID")
+    if "outside section allowlist" in message:
+        output.add("CITATION_NOT_ALLOWED_FOR_SECTION")
+    types = [item.get("type", "") for item in validation_errors]
+    if any("missing" in item for item in types):
+        output.add("MISSING_REQUIRED_FIELD")
+    if any(
+        marker in item
+        for item in types
+        for marker in ("list_type", "string_type", "bool_type", "model_type")
+    ):
+        output.add("WRONG_FIELD_TYPE")
+    return sorted(output)
+
+
+def _citation_allowlist_diagnostics(
+    payload: object,
+    *,
+    allowed_citation_ids: set[str],
+    section_evidence_ids: dict[str, list[str]],
+) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return []
+    details: list[dict[str, Any]] = []
+    sections = payload.get("sections")
+    if isinstance(sections, list):
+        for section_index, section in enumerate(sections):
+            if not isinstance(section, dict):
+                continue
+            section_id = section.get("section_id")
+            if not isinstance(section_id, str):
+                continue
+            allowed_for_section = set(section_evidence_ids.get(section_id, []))
+            claims = section.get("claims")
+            if not isinstance(claims, list):
+                continue
+            for claim_index, claim in enumerate(claims):
+                if not isinstance(claim, dict):
+                    continue
+                citation_ids = claim.get("citation_ids")
+                if not isinstance(citation_ids, list):
+                    continue
+                string_ids = [
+                    citation_id for citation_id in citation_ids if isinstance(citation_id, str)
+                ]
+                unknown = [
+                    citation_id
+                    for citation_id in string_ids
+                    if citation_id not in allowed_citation_ids
+                ]
+                if unknown:
+                    details.append(
+                        {
+                            "failure_type": "UNKNOWN_CITATION_ID",
+                            "location": (
+                                f"sections.{section_index}.claims.{claim_index}.citation_ids"
+                            ),
+                            "section_id": section_id,
+                            "citation_ids": unknown,
+                        }
+                    )
+                outside = [
+                    citation_id
+                    for citation_id in string_ids
+                    if citation_id in allowed_citation_ids
+                    and citation_id not in allowed_for_section
+                ]
+                if outside:
+                    details.append(
+                        {
+                            "failure_type": "CITATION_NOT_ALLOWED_FOR_SECTION",
+                            "location": (
+                                f"sections.{section_index}.claims.{claim_index}.citation_ids"
+                            ),
+                            "section_id": section_id,
+                            "citation_ids": outside,
+                            "allowed_for_section": sorted(allowed_for_section),
+                        }
+                    )
+    return details
 
 
 def _sum_usage_records(records: list[ProviderUsageRecord]) -> ModelUsage:
@@ -694,20 +856,31 @@ def _research_user_prompt(  # type: ignore[no-redef]
     section_evidence_ids: dict[str, list[str]],
     contradictions: list[dict[str, Any]],
 ) -> str:
-    evidence_lines = []
-    for citation_id, raw in sorted(evidence_catalog.items()):
-        evidence = ResearchEvidence.model_validate(raw)
-        section = " > ".join(evidence.section_path) or "unknown"
-        text = evidence.text[:1200]
-        evidence_lines.append(
-            f'<EVIDENCE id="{citation_id}" paper_id="{evidence.paper_id}" '
-            f'page_start="{evidence.page_start}" page_end="{evidence.page_end}" '
-            f'section="{section}">\n{text}\n</EVIDENCE>'
+    section_evidence_lines: list[str] = []
+    for section_id in EXPECTED_SECTIONS:
+        section_evidence_lines.append(f"SECTION_ONLY: {section_id}")
+        section_evidence_lines.append(
+            "ALLOWED_CITATION_IDS: "
+            + json.dumps(section_evidence_ids.get(section_id, []), ensure_ascii=False)
         )
+        for citation_id in section_evidence_ids.get(section_id, []):
+            raw = evidence_catalog.get(citation_id)
+            if not raw:
+                continue
+            evidence = ResearchEvidence.model_validate(raw)
+            section = " > ".join(evidence.section_path) or "unknown"
+            text = evidence.text[:1200]
+            section_evidence_lines.append(
+                f'<EVIDENCE_FOR_SECTION section_id="{section_id}" id="{citation_id}" '
+                f'paper_id="{evidence.paper_id}" page_start="{evidence.page_start}" '
+                f'page_end="{evidence.page_end}" source_section="{section}">\n'
+                f"{text}\n</EVIDENCE_FOR_SECTION>"
+            )
     payload = {
         "question": question,
         "section_queries": section_queries,
         "allowed_evidence_ids_by_section": section_evidence_ids,
+        "global_allowed_evidence_ids": sorted(evidence_catalog),
         "contradictions": contradictions,
         "output_rules": [
             "Return a single JSON object only.",
@@ -719,6 +892,10 @@ def _research_user_prompt(  # type: ignore[no-redef]
             "A claim inside one section may only cite IDs listed for that section.",
             "An ID being present in the global evidence catalog does not make it "
             "valid for every section.",
+            "When writing a section, cite only evidence shown under that exact "
+            "SECTION_ONLY block. If useful evidence is only shown under another "
+            "section, do not cite it in this section; mark the section insufficient "
+            "or write a narrower claim using only its section evidence.",
             "Consensus, disagreements, and research_gaps citation IDs must exist in the "
             "global Evidence Catalog.",
             "research_gaps must be objects with text, citation_ids, and is_inference. "
@@ -773,6 +950,8 @@ def _research_user_prompt(  # type: ignore[no-redef]
         + _section_allowlist_prompt_block(section_evidence_ids)
         + '\n\nResearchGap Skeleton: {"text": "string", "citation_ids": ["E01"], '
         '"is_inference": false}'
-        + "\n\nEvidence Catalog:\n"
-        + "\n\n".join(evidence_lines)
+        + "\n\nSection-scoped Evidence Catalog. Evidence IDs may repeat across sections; "
+        + "an ID is valid in a section only when listed in that section's "
+        + "SECTION_ONLY block:\n"
+        + "\n\n".join(section_evidence_lines)
     )

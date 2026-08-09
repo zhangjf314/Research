@@ -690,6 +690,34 @@ class SiliconFlowLLMProvider(LLMProvider):
                         error_details={"parse_error": str(exc)[:1000]},
                         usage_records=[usage_record],
                     ) from exc
+                except ValueError as exc:
+                    usage_record.error_category = "PROVIDER_SCHEMA"
+                    if usage_record.raw_response_path:
+                        _update_json_file(
+                            Path(usage_record.raw_response_path),
+                            {
+                                "json_parse_status": "failed",
+                                "schema_parse_status": "not_run",
+                                "validation_errors": [
+                                    {
+                                        "path": "<root>",
+                                        "type": type(exc).__name__,
+                                        "message": str(exc)[:1000],
+                                    }
+                                ],
+                            },
+                        )
+                    raise LLMProviderError(
+                        "structured JSON response extraction failed",
+                        error_code="STRUCTURED_JSON_RESPONSE_ERROR",
+                        stage="STRUCTURED_JSON_RESPONSE_EXTRACT",
+                        api_request_count=requests,
+                        retry_reasons=[*retry_reasons, "wrong_top_level_shape"],
+                        rate_limit_events=rate_limits,
+                        response_audit_path=str(audit_path) if audit_path else None,
+                        error_details={"reason": str(exc)[:1000]},
+                        usage_records=[usage_record],
+                    ) from exc
                 if not isinstance(parsed, dict):
                     usage_record.error_category = "PROVIDER_SCHEMA"
                     raise LLMProviderError(
@@ -701,6 +729,15 @@ class SiliconFlowLLMProvider(LLMProvider):
                         rate_limit_events=rate_limits,
                         response_audit_path=str(audit_path) if audit_path else None,
                         usage_records=[usage_record],
+                    )
+                if usage_record.raw_response_path:
+                    _update_json_file(
+                        Path(usage_record.raw_response_path),
+                        {
+                            "json_parse_status": "passed",
+                            "normalization_events": normalization_events,
+                            "content_top_level_fields": sorted(str(key) for key in parsed),
+                        },
                     )
                 usage_record.schema_valid = True
                 return StructuredJSONResult(
@@ -1663,3 +1700,19 @@ def _sha256_text(value: str) -> str:
     import hashlib
 
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _update_json_file(path: Path, updates: dict[str, Any]) -> None:
+    """Best-effort structured update for local runtime observability artifacts."""
+
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return
+    record.update(updates)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    try:
+        tmp.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        tmp.replace(path)
+    except OSError:
+        return

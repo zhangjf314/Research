@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -107,13 +109,20 @@ class FakeStructuredProvider:
     provider_name = "deepseek"
     model_name = "deepseek-v4-flash"
 
-    def __init__(self, payloads: list[dict[str, Any]]) -> None:
+    def __init__(
+        self,
+        payloads: list[dict[str, Any]],
+        *,
+        raw_response_paths: list[str] | None = None,
+    ) -> None:
         self.payloads = list(payloads)
+        self.raw_response_paths = list(raw_response_paths or [])
         self.calls: list[dict[str, Any]] = []
 
     def generate_structured_json(self, **kwargs: Any) -> StructuredJSONResult:
         self.calls.append(kwargs)
         payload = self.payloads.pop(0)
+        raw_response_path = self.raw_response_paths.pop(0) if self.raw_response_paths else None
         return StructuredJSONResult(
             payload=payload,
             provider=self.provider_name,
@@ -133,6 +142,7 @@ class FakeStructuredProvider:
                         total_tokens=30,
                         estimated_cost_usd=0.0,
                     ),
+                    raw_response_path=raw_response_path,
                 )
             ],
             request_attempt_count=len(self.calls),
@@ -175,6 +185,9 @@ def test_adapter_uses_structured_json_transport_not_qa_protocol() -> None:
     assert "ALLOWED_CITATION_IDS:" in user_prompt
     assert "A claim inside one section may only cite IDs listed for that section." in user_prompt
     assert "An ID being present in the global evidence catalog does not make it" in user_prompt
+    assert "SECTION_ONLY: background" in user_prompt
+    assert '<EVIDENCE_FOR_SECTION section_id="background" id="E01"' in user_prompt
+    assert '<EVIDENCE id="E01"' not in user_prompt
     assert '"citation_ids"' in user_prompt
     assert '"E01"' in user_prompt
 
@@ -213,6 +226,53 @@ def test_adapter_fails_closed_after_second_schema_failure() -> None:
     assert len(exc.value.usage_records) == 2
     assert exc.value.error_details["usage"]["total_tokens"] == 60
     assert exc.value.error_details["usage_record_count"] == 2
+
+
+def test_cross_section_citation_repair_receives_specific_validation_error() -> None:
+    bad = valid_payload()
+    bad["sections"][0]["claims"][0]["citation_ids"] = ["E02"]
+    provider = FakeStructuredProvider([bad, valid_payload()])
+
+    result = synthesize(provider)
+
+    assert result.request_attempt_count == 2
+    repair_prompt = provider.calls[1]["user_prompt"]
+    assert "citation IDs outside section allowlist for background claim[0]" in repair_prompt
+    assert "SECTION: background" in repair_prompt
+    assert '"E01"' in repair_prompt
+
+
+def test_schema_failure_updates_runtime_raw_response_diagnostics(tmp_path: Path) -> None:
+    raw_path = tmp_path / "attempt-01.json"
+    raw_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "research-synthesis-raw-response-v1",
+                "json_parse_status": "passed",
+                "schema_parse_status": "not_run",
+                "validation_errors": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    bad = valid_payload()
+    bad["sections"][0]["claims"][0]["citation_ids"] = ["E02"]
+    provider = FakeStructuredProvider(
+        [bad, bad],
+        raw_response_paths=[str(raw_path), str(tmp_path / "attempt-02.json")],
+    )
+
+    with pytest.raises(LLMProviderError):
+        synthesize(provider)
+
+    record = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert record["schema_parse_status"] == "failed"
+    assert record["schema_failure_subtype"] == "INVALID_CITATION_SCHEMA"
+    assert "CITATION_NOT_ALLOWED_FOR_SECTION" in record["failure_types"]
+    assert record["offending_citation_ids"] == ["E02"]
+    assert record["citation_allowlist_details"][0]["location"] == (
+        "sections.0.claims.0.citation_ids"
+    )
 
 
 def test_unknown_citation_id_is_rejected() -> None:
