@@ -23,7 +23,7 @@ def _json(path: Path) -> dict:
 
 
 def _copy_workspace(tmp_path: Path) -> Path:
-    target = tmp_path / "Windows Style Workspace"
+    target = tmp_path / "ws space"
     for directory in ("data", "docs", "src", "tests"):
         shutil.copytree(ROOT / directory, target / directory)
     shutil.copy2(ROOT / "pyproject.toml", target / "pyproject.toml")
