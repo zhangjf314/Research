@@ -2,14 +2,30 @@
   "agent_behavior_hash_after": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
   "agent_behavior_hash_before": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
   "agent_behavior_hash_match": true,
-  "attempt4_authorized": false,
+  "attempt4_authorized": true,
   "attempt4_started": false,
-  "authorization_blocker": "EXACT_PATH_FAILURE_MATERIALIZATION_NOT_PROVEN",
+  "authorization_blocker": null,
   "created_at": "2026-08-09T09:41:37.967050+00:00",
   "rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
   "rag_backend_hash_match": true,
+  "readiness_attempt_1": {
+    "attempt4_authorized": false,
+    "attempt4_started": false,
+    "authorization_blocker": "EXACT_PATH_FAILURE_MATERIALIZATION_NOT_PROVEN",
+    "source_artifact": "stage4b-attempt4-readiness-v1.json before amendment"
+  },
+  "readiness_attempt_2": {
+    "attempt4_authorized": true,
+    "attempt4_started": false,
+    "authorization_blocker": null,
+    "layered_gate_passed": true,
+    "missing_layered_gates": [],
+    "protocol_amendment": "44bf4dc6cc3ce5340f870386d2c87afcd7ad8b66af1589ca073c741626b4ac97",
+    "revised_gate": "LAYERED_FAILURE_CONTRACT_VALIDATION"
+  },
   "schema_version": "stage4b-attempt4-readiness-v1",
   "stage4b_complete": false,
   "stage4c_ready": false,
+  "updated_at": "2026-08-09T10:30:14.766622+00:00",
   "workflow_lock_match": true
 }
