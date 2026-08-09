@@ -1,0 +1,20 @@
+{
+  "blind_mode": true,
+  "diagnostic_ai_judge": true,
+  "judge_cost": 0.0,
+  "judge_failures": 0,
+  "judge_gap": "JUDGE_MISSING_OUTPUT_TEXT_FOR_FAIR_BLIND_INPUT",
+  "judge_independence_limitation": "No semantic judge request was made; diagnostic semantic judging requires a future frozen blind package with fair answer text for both systems.",
+  "judge_input_tokens": 0,
+  "judge_model": null,
+  "judge_output_tokens": 0,
+  "judge_prompt_hash": null,
+  "judge_provider": null,
+  "judge_requests": 0,
+  "judge_schema_hash": null,
+  "judge_total_tokens": 0,
+  "official_run_id": "stage4-official-v1-attempt4",
+  "same_model_family_as_evaluated_system": null,
+  "schema_version": "stage4-blind-semantic-judge-v1",
+  "semantic_judge_complete": false
+}

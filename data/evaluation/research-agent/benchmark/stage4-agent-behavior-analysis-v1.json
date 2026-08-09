@@ -1,0 +1,22 @@
+{
+  "dynamic_tool_selection_task_count": 56,
+  "effective_replan_count": 0,
+  "effective_replan_definition": [
+    "Observation",
+    "Verification PARTIAL/FAIL",
+    "recommended REPLAN",
+    "effective plan delta",
+    "REPLAN-triggered Decision",
+    "new real Tool Action"
+  ],
+  "effective_replan_limitation": "LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED",
+  "effective_replan_task_count": 0,
+  "no_progress_stop_count": 0,
+  "observation_driven_action_task_count": 56,
+  "official_run_id": "stage4-official-v1-attempt4",
+  "plan_version_gt1_task_count": 0,
+  "replan_event_task_count": 0,
+  "replan_task_rate": 0.0,
+  "replans_per_task": 0.0,
+  "schema_version": "stage4-agent-behavior-analysis-v1"
+}

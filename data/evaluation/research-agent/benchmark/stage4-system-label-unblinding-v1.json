@@ -1,0 +1,12 @@
+{
+  "blind_scores_bundle_hash": "6579453399f1e3710b8afa21de4548aad9eb60865b0b4de95332f7d9e7e65fb8",
+  "label_randomization_distribution": {
+    "agent": 30,
+    "workflow": 30
+  },
+  "mapping_not_committed": true,
+  "mapping_source": "private_runtime_label_map_redacted",
+  "official_run_id": "stage4-official-v1-attempt4",
+  "schema_version": "stage4-system-label-unblinding-v1",
+  "unblinding_performed_after_score_freeze": true
+}

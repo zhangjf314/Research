@@ -1,0 +1,1133 @@
+{
+  "agent_behavior": {
+    "dynamic_tool_selection_task_count": 56,
+    "effective_replan_count": 0,
+    "effective_replan_definition": [
+      "Observation",
+      "Verification PARTIAL/FAIL",
+      "recommended REPLAN",
+      "effective plan delta",
+      "REPLAN-triggered Decision",
+      "new real Tool Action"
+    ],
+    "effective_replan_limitation": "LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED",
+    "effective_replan_task_count": 0,
+    "no_progress_stop_count": 0,
+    "observation_driven_action_task_count": 56,
+    "official_run_id": "stage4-official-v1-attempt4",
+    "plan_version_gt1_task_count": 0,
+    "replan_event_task_count": 0,
+    "replan_task_rate": 0.0,
+    "replans_per_task": 0.0,
+    "schema_version": "stage4-agent-behavior-analysis-v1"
+  },
+  "attempt_history": {
+    "attempt_1": {
+      "agent_reuse_disallowed_reason": "paired temporal protocol broken; old Agent units were paired with invalid Workflow counterparts.",
+      "agent_units_reused_in_attempt2": false,
+      "cost": 0.76206156,
+      "created_at": "2026-08-08T13:34:46.123071+00:00",
+      "explanation": "The first execution attempt was invalidated before quality evaluation because benchmark infrastructure changed the frozen Workflow invocation contract and failed to capture HTTP 503 response detail for attribution.",
+      "failure_audit": "data\\evaluation\\research-agent\\benchmark\\stage4b-failure-audit-v1.json",
+      "invalidated_agent_units": 19,
+      "invalidated_complete_pairs": 19,
+      "invalidated_run_id": "a34f8217b923c93d",
+      "invalidated_run_label": "INVALIDATED_OFFICIAL_ATTEMPT_1",
+      "invalidated_units": 38,
+      "invalidated_workflow_units": 19,
+      "paired_results_usable": false,
+      "partial_run_lock": "data\\evaluation\\research-agent\\benchmark\\stage4b-partial-run-lock-v1.json",
+      "provider_requests": 126,
+      "quality_metrics_inspected": false,
+      "quality_results_usable": false,
+      "reason_codes": [
+        "WORKFLOW_INVOCATION_CONFIG_DRIFT",
+        "BENCHMARK_RUNNER_INVOCATION_FAILURE",
+        "BENCHMARK_API_WIRING_FAILURE",
+        "UNATTRIBUTABLE_HTTP_503",
+        "SUMMARY_COUNTER_DEFECT"
+      ],
+      "schema_version": "stage4-official-run-invalidation-v1",
+      "semantic_judge_requests": 0,
+      "stage4c_eligible": false,
+      "status": "INVALIDATED_INFRASTRUCTURE",
+      "tokens": 157424
+    },
+    "attempt_2": {
+      "cost": 0.05137732,
+      "infrastructure_invalid_units": 1,
+      "official_run_id": "stage4-official-v1-attempt2",
+      "paired_results_usable": false,
+      "pending_units": 117,
+      "quality_results_usable": false,
+      "resume_allowed": false,
+      "salvage_allowed": false,
+      "stage4c_eligible": false,
+      "status": "INVALIDATED_INFRASTRUCTURE",
+      "terminal_units": 3
+    },
+    "attempt_3": {
+      "cost": 0.00215782,
+      "infrastructure_invalid_units": 1,
+      "official_run_id": "stage4-official-v1-attempt3",
+      "paired_results_usable": false,
+      "pending_units": 117,
+      "quality_results_usable": false,
+      "resume_allowed": false,
+      "salvage_allowed": false,
+      "stage4c_eligible": false,
+      "status": "INVALID",
+      "stop_reason": "BENCHMARK_API_WIRING_FAILURE",
+      "terminal_units": 3
+    },
+    "attempt_4": {
+      "agent_terminal_results": 60,
+      "complete_pairs": 60,
+      "cost": 0.09540524,
+      "infrastructure_invalid_units": 0,
+      "official_agent_runs": 60,
+      "official_run_id": "stage4-official-v1-attempt4",
+      "official_workflow_runs": 60,
+      "paired_results_usable": true,
+      "pending_units": 0,
+      "provider_failures": 0,
+      "provider_requests": 487,
+      "quality_results_usable": true,
+      "semantic_judge_requests": 0,
+      "stage4c_eligible": true,
+      "status": "VALID_COMPLETE",
+      "stop_reason": "ALL_UNITS_TERMINAL",
+      "terminal_units": 120,
+      "tokens": 574338,
+      "workflow_terminal_results": 60
+    }
+  },
+  "blind_scores_bundle_hash": "6579453399f1e3710b8afa21de4548aad9eb60865b0b4de95332f7d9e7e65fb8",
+  "bootstrap": {
+    "metrics": {
+      "citation_validity": {
+        "bootstrap_mean_delta": 0.0,
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "ci_crosses_zero": true,
+        "observed_delta": 0.0
+      },
+      "core_unsupported_claim_rate": {
+        "bootstrap_mean_delta": 0.0,
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "ci_crosses_zero": true,
+        "observed_delta": 0.0
+      },
+      "cost": {
+        "bootstrap_mean_delta": 0.0005579716986666666,
+        "ci95_high": 0.0006933934000000001,
+        "ci95_low": 0.00041491245833333334,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.0005591553333333334
+      },
+      "evidence_coverage": {
+        "bootstrap_mean_delta": 0.93365,
+        "ci95_high": 0.9833333333333333,
+        "ci95_low": 0.8666666666666667,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.9333333333333333
+      },
+      "gap_handling_accuracy": {
+        "bootstrap_mean_delta": 0.8504333333333333,
+        "ci95_high": 0.9333333333333333,
+        "ci95_low": 0.75,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.85
+      },
+      "latency": {
+        "bootstrap_mean_delta": 3.713833650716667,
+        "ci95_high": 6.632169895416666,
+        "ci95_low": 1.296779739166667,
+        "ci_crosses_zero": false,
+        "observed_delta": 3.7011714833333333
+      },
+      "partial_or_better": {
+        "bootstrap_mean_delta": 0.9338333333333334,
+        "ci95_high": 0.9833333333333333,
+        "ci95_low": 0.8666666666666667,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.9333333333333333
+      },
+      "required_claim_coverage": {
+        "bootstrap_mean_delta": 0.9331,
+        "ci95_high": 0.9833333333333333,
+        "ci95_low": 0.8666666666666667,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.9333333333333333
+      },
+      "required_dimension_coverage": {
+        "bootstrap_mean_delta": 0.9344666666666667,
+        "ci95_high": 0.9833333333333333,
+        "ci95_low": 0.8666666666666667,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.9333333333333333
+      },
+      "task_success": {
+        "bootstrap_mean_delta": 0.9335333333333333,
+        "ci95_high": 0.9833333333333333,
+        "ci95_low": 0.8666666666666667,
+        "ci_crosses_zero": false,
+        "observed_delta": 0.9333333333333333
+      },
+      "tokens": {
+        "bootstrap_mean_delta": 4257.121,
+        "ci95_high": 5019.642083333333,
+        "ci95_low": 3458.9733333333334,
+        "ci_crosses_zero": false,
+        "observed_delta": 4246.666666666667
+      }
+    },
+    "paired_by_task": true,
+    "resamples": 1000,
+    "schema_version": "stage4-paired-bootstrap-v1",
+    "seed": 41007
+  },
+  "category_results": {
+    "cross_paper_comparison": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 1.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0012007613333333334,
+        "estimated_cost_usd": 0.01801142,
+        "evidence_coverage": 1.0,
+        "failed_rate": 0.0,
+        "failure_categories": {
+          "NONE": 15
+        },
+        "gap_handling_accuracy": 1.0,
+        "input_tokens": 104297,
+        "latency_p50_seconds": 16.468891,
+        "latency_p95_seconds": 37.228481,
+        "output_tokens": 12178,
+        "partial_or_better": 1.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 116,
+        "provider_requests_per_task": 7.733333333333333,
+        "required_claim_coverage": 1.0,
+        "required_dimension_coverage": 1.0,
+        "task_success": 1.0,
+        "tokens_per_task": 7765.0,
+        "total_tokens": 116475
+      },
+      "task_count": 15,
+      "w_t_l": {
+        "agent": 15
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0003777853333333333,
+        "estimated_cost_usd": 0.00566678,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 1,
+          "SYSTEM_VERIFICATION_FAILURE": 14
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 19975,
+        "latency_p50_seconds": 8.484366,
+        "latency_p95_seconds": 17.432332,
+        "output_tokens": 10251,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 16,
+        "provider_requests_per_task": 1.0666666666666667,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2015.0666666666666,
+        "total_tokens": 30226
+      }
+    },
+    "evidence_insufficiency_or_noncomparability": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 1.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.001268232,
+        "estimated_cost_usd": 0.00634116,
+        "evidence_coverage": 1.0,
+        "failed_rate": 0.0,
+        "failure_categories": {
+          "NONE": 5
+        },
+        "gap_handling_accuracy": 1.0,
+        "input_tokens": 36276,
+        "latency_p50_seconds": 17.184928,
+        "latency_p95_seconds": 18.211511,
+        "output_tokens": 4509,
+        "partial_or_better": 1.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 38,
+        "provider_requests_per_task": 7.6,
+        "required_claim_coverage": 1.0,
+        "required_dimension_coverage": 1.0,
+        "task_success": 1.0,
+        "tokens_per_task": 8157.0,
+        "total_tokens": 40785
+      },
+      "task_count": 5,
+      "w_t_l": {
+        "agent": 5
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.000391356,
+        "estimated_cost_usd": 0.00195678,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_VERIFICATION_FAILURE": 5
+        },
+        "gap_handling_accuracy": 1.0,
+        "input_tokens": 6525,
+        "latency_p50_seconds": 11.350972,
+        "latency_p95_seconds": 13.367056,
+        "output_tokens": 3726,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 5,
+        "provider_requests_per_task": 1.0,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2050.2,
+        "total_tokens": 10251
+      }
+    },
+    "limitations_and_research_gaps": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.9,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.001100302,
+        "estimated_cost_usd": 0.01100302,
+        "evidence_coverage": 0.9,
+        "failed_rate": 0.1,
+        "failure_categories": {
+          "NONE": 9,
+          "SYSTEM_PROVIDER_FAILURE": 1
+        },
+        "gap_handling_accuracy": 0.9,
+        "input_tokens": 63059,
+        "latency_p50_seconds": 16.520142,
+        "latency_p95_seconds": 20.009013,
+        "output_tokens": 7767,
+        "partial_or_better": 0.9,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 70,
+        "provider_requests_per_task": 7.0,
+        "required_claim_coverage": 0.9,
+        "required_dimension_coverage": 0.9,
+        "task_success": 0.9,
+        "tokens_per_task": 7082.6,
+        "total_tokens": 70826
+      },
+      "task_count": 10,
+      "w_t_l": {
+        "agent": 9,
+        "tie": 1
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.00035644,
+        "estimated_cost_usd": 0.0035644,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_VERIFICATION_FAILURE": 10
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 12140,
+        "latency_p50_seconds": 9.918623,
+        "latency_p95_seconds": 14.248445,
+        "output_tokens": 6660,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 10,
+        "provider_requests_per_task": 1.0,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 1880.0,
+        "total_tokens": 18800
+      }
+    },
+    "methods_and_experiments": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 1.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.001130598,
+        "estimated_cost_usd": 0.01130598,
+        "evidence_coverage": 1.0,
+        "failed_rate": 0.0,
+        "failure_categories": {
+          "NONE": 10
+        },
+        "gap_handling_accuracy": 1.0,
+        "input_tokens": 65065,
+        "latency_p50_seconds": 15.129912,
+        "latency_p95_seconds": 19.800204,
+        "output_tokens": 7846,
+        "partial_or_better": 1.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 73,
+        "provider_requests_per_task": 7.3,
+        "required_claim_coverage": 1.0,
+        "required_dimension_coverage": 1.0,
+        "task_success": 1.0,
+        "tokens_per_task": 7291.1,
+        "total_tokens": 72911
+      },
+      "task_count": 10,
+      "w_t_l": {
+        "agent": 10
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0005614,
+        "estimated_cost_usd": 0.005614,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 2,
+          "SYSTEM_VERIFICATION_FAILURE": 8
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 18052,
+        "latency_p50_seconds": 10.954917,
+        "latency_p95_seconds": 23.359304,
+        "output_tokens": 11024,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 13,
+        "provider_requests_per_task": 1.3,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2907.6,
+        "total_tokens": 29076
+      }
+    },
+    "multi_paper_synthesis": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.8666666666666667,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.000832188,
+        "estimated_cost_usd": 0.01248282,
+        "evidence_coverage": 0.8666666666666667,
+        "failed_rate": 0.13333333333333333,
+        "failure_categories": {
+          "NONE": 13,
+          "SYSTEM_PROVIDER_FAILURE": 2
+        },
+        "gap_handling_accuracy": 0.8666666666666667,
+        "input_tokens": 70021,
+        "latency_p50_seconds": 14.52157,
+        "latency_p95_seconds": 21.058614,
+        "output_tokens": 9571,
+        "partial_or_better": 0.8666666666666667,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 86,
+        "provider_requests_per_task": 5.733333333333333,
+        "required_claim_coverage": 0.8666666666666667,
+        "required_dimension_coverage": 0.8666666666666667,
+        "task_success": 0.8666666666666667,
+        "tokens_per_task": 5306.133333333333,
+        "total_tokens": 79592
+      },
+      "task_count": 15,
+      "w_t_l": {
+        "agent": 13,
+        "tie": 2
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0008147159999999999,
+        "estimated_cost_usd": 0.01222074,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 7,
+          "SYSTEM_VERIFICATION_FAILURE": 8
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 34051,
+        "latency_p50_seconds": 17.892698,
+        "latency_p95_seconds": 31.148134,
+        "output_tokens": 26620,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 23,
+        "provider_requests_per_task": 1.5333333333333334,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 4044.733333333333,
+        "total_tokens": 60671
+      }
+    },
+    "observation_dependent_research": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.8,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.001066576,
+        "estimated_cost_usd": 0.00533288,
+        "evidence_coverage": 0.8,
+        "failed_rate": 0.2,
+        "failure_categories": {
+          "NONE": 4,
+          "SYSTEM_PROVIDER_FAILURE": 1
+        },
+        "gap_handling_accuracy": 0.8,
+        "input_tokens": 29868,
+        "latency_p50_seconds": 14.82143,
+        "latency_p95_seconds": 17.324618,
+        "output_tokens": 4112,
+        "partial_or_better": 0.8,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 31,
+        "provider_requests_per_task": 6.2,
+        "required_claim_coverage": 0.8,
+        "required_dimension_coverage": 0.8,
+        "task_success": 0.8,
+        "tokens_per_task": 6796.0,
+        "total_tokens": 33980
+      },
+      "task_count": 5,
+      "w_t_l": {
+        "agent": 4,
+        "tie": 1
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.00038105200000000005,
+        "estimated_cost_usd": 0.00190526,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_VERIFICATION_FAILURE": 5
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 7881,
+        "latency_p50_seconds": 9.50353,
+        "latency_p95_seconds": 12.532694,
+        "output_tokens": 2864,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 6,
+        "provider_requests_per_task": 1.2,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2149.0,
+        "total_tokens": 10745
+      }
+    }
+  },
+  "cost_separation": {
+    "development_validation_overhead_cost_known": {
+      "attempt1": 0.76206156,
+      "attempt2": 0.05137732,
+      "attempt3": 0.00215782,
+      "mistaken_runtime_parity_help_invocation_provider_requests": 9
+    },
+    "official_attempt4_system_cost": 0.09540524,
+    "stage4c_judge_cost": 0.0
+  },
+  "difficulty_results": {
+    "easy": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.8,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.000835058,
+        "estimated_cost_usd": 0.00835058,
+        "evidence_coverage": 0.8,
+        "failed_rate": 0.2,
+        "failure_categories": {
+          "NONE": 8,
+          "SYSTEM_PROVIDER_FAILURE": 2
+        },
+        "gap_handling_accuracy": 0.8,
+        "input_tokens": 46449,
+        "latency_p50_seconds": 16.398662,
+        "latency_p95_seconds": 22.134325,
+        "output_tokens": 6599,
+        "partial_or_better": 0.8,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 56,
+        "provider_requests_per_task": 5.6,
+        "required_claim_coverage": 0.8,
+        "required_dimension_coverage": 0.8,
+        "task_success": 0.8,
+        "tokens_per_task": 5304.8,
+        "total_tokens": 53048
+      },
+      "task_count": 10,
+      "w_t_l": {
+        "agent": 8,
+        "tie": 2
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.000896602,
+        "estimated_cost_usd": 0.00896602,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 5,
+          "SYSTEM_VERIFICATION_FAILURE": 5
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 23851,
+        "latency_p50_seconds": 20.158691,
+        "latency_p95_seconds": 31.943937,
+        "output_tokens": 20096,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 16,
+        "provider_requests_per_task": 1.6,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 4394.7,
+        "total_tokens": 43947
+      }
+    },
+    "hard": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.9,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.001133853,
+        "estimated_cost_usd": 0.02267706,
+        "evidence_coverage": 0.9,
+        "failed_rate": 0.1,
+        "failure_categories": {
+          "NONE": 18,
+          "SYSTEM_PROVIDER_FAILURE": 2
+        },
+        "gap_handling_accuracy": 0.9,
+        "input_tokens": 129203,
+        "latency_p50_seconds": 16.520142,
+        "latency_p95_seconds": 18.509118,
+        "output_tokens": 16388,
+        "partial_or_better": 0.9,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 139,
+        "provider_requests_per_task": 6.95,
+        "required_claim_coverage": 0.9,
+        "required_dimension_coverage": 0.9,
+        "task_success": 0.9,
+        "tokens_per_task": 7279.55,
+        "total_tokens": 145591
+      },
+      "task_count": 20,
+      "w_t_l": {
+        "agent": 18,
+        "tie": 2
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.000371322,
+        "estimated_cost_usd": 0.00742644,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_VERIFICATION_FAILURE": 20
+        },
+        "gap_handling_accuracy": 0.25,
+        "input_tokens": 26546,
+        "latency_p50_seconds": 10.379745,
+        "latency_p95_seconds": 13.699382,
+        "output_tokens": 13250,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 21,
+        "provider_requests_per_task": 1.05,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 1989.8,
+        "total_tokens": 39796
+      }
+    },
+    "medium": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 1.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0011149880000000001,
+        "estimated_cost_usd": 0.03344964,
+        "evidence_coverage": 1.0,
+        "failed_rate": 0.0,
+        "failure_categories": {
+          "NONE": 30
+        },
+        "gap_handling_accuracy": 1.0,
+        "input_tokens": 192934,
+        "latency_p50_seconds": 15.857954,
+        "latency_p95_seconds": 21.969013,
+        "output_tokens": 22996,
+        "partial_or_better": 1.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 219,
+        "provider_requests_per_task": 7.3,
+        "required_claim_coverage": 1.0,
+        "required_dimension_coverage": 1.0,
+        "task_success": 1.0,
+        "tokens_per_task": 7197.666666666667,
+        "total_tokens": 215930
+      },
+      "task_count": 30,
+      "w_t_l": {
+        "agent": 30
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.00048451666666666664,
+        "estimated_cost_usd": 0.0145355,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 5,
+          "SYSTEM_VERIFICATION_FAILURE": 25
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 48227,
+        "latency_p50_seconds": 9.796805,
+        "latency_p95_seconds": 24.981081,
+        "output_tokens": 27799,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 36,
+        "provider_requests_per_task": 1.2,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2534.2,
+        "total_tokens": 76026
+      }
+    }
+  },
+  "efficiency": {
+    "agent": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.9333333333333333,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.0010746213333333334,
+      "estimated_cost_usd": 0.06447728,
+      "evidence_coverage": 0.9333333333333333,
+      "failed_rate": 0.06666666666666667,
+      "failure_categories": {
+        "NONE": 56,
+        "SYSTEM_PROVIDER_FAILURE": 4
+      },
+      "gap_handling_accuracy": 0.9333333333333333,
+      "input_tokens": 368586,
+      "latency_p50_seconds": 15.988605,
+      "latency_p95_seconds": 21.447215,
+      "output_tokens": 45983,
+      "partial_or_better": 0.9333333333333333,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 414,
+      "provider_requests_per_task": 6.9,
+      "required_claim_coverage": 0.9333333333333333,
+      "required_dimension_coverage": 0.9333333333333333,
+      "task_success": 0.9333333333333333,
+      "tokens_per_task": 6909.483333333334,
+      "total_tokens": 414569
+    },
+    "budget_comparable": false,
+    "descriptive_not_equal_budget_causal": true,
+    "official_run_id": "stage4-official-v1-attempt4",
+    "quality_per_0_01_usd": {
+      "agent_task_success": 8.6852298980354,
+      "workflow_task_success": 0.0
+    },
+    "quality_per_10k_tokens": {
+      "agent_task_success": 1.350800469885592,
+      "workflow_task_success": 0.0
+    },
+    "ratios": {
+      "agent_minus_workflow_p50_latency": 5.556341,
+      "agent_minus_workflow_p95_latency": -5.388570999999999,
+      "agent_workflow_cost_ratio": 2.084756964248531,
+      "agent_workflow_token_ratio": 2.5948024961037497
+    },
+    "schema_version": "stage4-efficiency-analysis-v1",
+    "workflow": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.0,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.000515466,
+      "estimated_cost_usd": 0.03092796,
+      "evidence_coverage": 0.0,
+      "failed_rate": 1.0,
+      "failure_categories": {
+        "SYSTEM_SCHEMA_FAILURE": 10,
+        "SYSTEM_VERIFICATION_FAILURE": 50
+      },
+      "gap_handling_accuracy": 0.08333333333333333,
+      "input_tokens": 98624,
+      "latency_p50_seconds": 10.432264,
+      "latency_p95_seconds": 26.835786,
+      "output_tokens": 61145,
+      "partial_or_better": 0.0,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 73,
+      "provider_requests_per_task": 1.2166666666666666,
+      "required_claim_coverage": 0.0,
+      "required_dimension_coverage": 0.0,
+      "task_success": 0.0,
+      "tokens_per_task": 2662.8166666666666,
+      "total_tokens": 159769
+    }
+  },
+  "evaluated_pairs": 60,
+  "feature_development_stopped": true,
+  "final_conclusion": "MIXED: Agent has much higher completed/task-success proxy metrics in this frozen run, while consuming substantially more provider calls/tokens/cost. Semantic content judging remains a diagnostic gap because the blind package lacks fair answer text.",
+  "judge": {
+    "blind_mode": true,
+    "diagnostic_ai_judge": true,
+    "judge_cost": 0.0,
+    "judge_failures": 0,
+    "judge_gap": "JUDGE_MISSING_OUTPUT_TEXT_FOR_FAIR_BLIND_INPUT",
+    "judge_independence_limitation": "No semantic judge request was made; diagnostic semantic judging requires a future frozen blind package with fair answer text for both systems.",
+    "judge_input_tokens": 0,
+    "judge_model": null,
+    "judge_output_tokens": 0,
+    "judge_prompt_hash": null,
+    "judge_provider": null,
+    "judge_requests": 0,
+    "judge_schema_hash": null,
+    "judge_total_tokens": 0,
+    "official_run_id": "stage4-official-v1-attempt4",
+    "same_model_family_as_evaluated_system": null,
+    "schema_version": "stage4-blind-semantic-judge-v1",
+    "semantic_judge_complete": false
+  },
+  "known_limitations": [
+    "budget_comparable=false",
+    "LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED",
+    "DEPLOYED_EXACT_PATH_WRONG_SCHEMA_FAILURE_NOT_DIRECTLY_OBSERVED",
+    "AI semantic judge not run because fair blind answer text was unavailable",
+    "internal AI-authored/AI-reviewed benchmark"
+  ],
+  "official_run_id": "stage4-official-v1-attempt4",
+  "paired_deltas": {
+    "citation_validity": 0.0,
+    "core_unsupported_claim_rate": 0.0,
+    "evidence_coverage": 0.9333333333333333,
+    "gap_handling_accuracy": 0.85,
+    "partial_or_better": 0.9333333333333333,
+    "required_claim_coverage": 0.9333333333333333,
+    "required_dimension_coverage": 0.9333333333333333,
+    "task_success": 0.9333333333333333
+  },
+  "paper_count_results": {
+    "2-paper": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.9166666666666666,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0009448716666666667,
+        "estimated_cost_usd": 0.02267692,
+        "evidence_coverage": 0.9166666666666666,
+        "failed_rate": 0.08333333333333333,
+        "failure_categories": {
+          "NONE": 22,
+          "SYSTEM_PROVIDER_FAILURE": 2
+        },
+        "gap_handling_accuracy": 0.9166666666666666,
+        "input_tokens": 129110,
+        "latency_p50_seconds": 15.990315,
+        "latency_p95_seconds": 22.739566,
+        "output_tokens": 16434,
+        "partial_or_better": 0.9166666666666666,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 154,
+        "provider_requests_per_task": 6.416666666666667,
+        "required_claim_coverage": 0.9166666666666666,
+        "required_dimension_coverage": 0.9166666666666666,
+        "task_success": 0.9166666666666666,
+        "tokens_per_task": 6064.333333333333,
+        "total_tokens": 145544
+      },
+      "task_count": 24,
+      "w_t_l": {
+        "agent": 22,
+        "tie": 2
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0006638799999999999,
+        "estimated_cost_usd": 0.01593312,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 8,
+          "SYSTEM_VERIFICATION_FAILURE": 16
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 46580,
+        "latency_p50_seconds": 11.462241,
+        "latency_p95_seconds": 29.831272,
+        "output_tokens": 33614,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 33,
+        "provider_requests_per_task": 1.375,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 3341.4166666666665,
+        "total_tokens": 80194
+      }
+    },
+    "3-paper": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.9583333333333334,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.00114212,
+        "estimated_cost_usd": 0.02741088,
+        "evidence_coverage": 0.9583333333333334,
+        "failed_rate": 0.041666666666666664,
+        "failure_categories": {
+          "NONE": 23,
+          "SYSTEM_PROVIDER_FAILURE": 1
+        },
+        "gap_handling_accuracy": 0.9583333333333334,
+        "input_tokens": 157720,
+        "latency_p50_seconds": 15.87404,
+        "latency_p95_seconds": 21.206718,
+        "output_tokens": 19036,
+        "partial_or_better": 0.9583333333333334,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 175,
+        "provider_requests_per_task": 7.291666666666667,
+        "required_claim_coverage": 0.9583333333333334,
+        "required_dimension_coverage": 0.9583333333333334,
+        "task_success": 0.9583333333333334,
+        "tokens_per_task": 7364.833333333333,
+        "total_tokens": 176756
+      },
+      "task_count": 24,
+      "w_t_l": {
+        "agent": 23,
+        "tie": 1
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0004324366666666666,
+        "estimated_cost_usd": 0.01037848,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_SCHEMA_FAILURE": 2,
+          "SYSTEM_VERIFICATION_FAILURE": 22
+        },
+        "gap_handling_accuracy": 0.0,
+        "input_tokens": 35056,
+        "latency_p50_seconds": 10.00131,
+        "latency_p95_seconds": 21.514972,
+        "output_tokens": 19538,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 27,
+        "provider_requests_per_task": 1.125,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2274.75,
+        "total_tokens": 54594
+      }
+    },
+    "4+-paper": {
+      "agent": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.9166666666666666,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.0011991233333333332,
+        "estimated_cost_usd": 0.01438948,
+        "evidence_coverage": 0.9166666666666666,
+        "failed_rate": 0.08333333333333333,
+        "failure_categories": {
+          "NONE": 11,
+          "SYSTEM_PROVIDER_FAILURE": 1
+        },
+        "gap_handling_accuracy": 0.9166666666666666,
+        "input_tokens": 81756,
+        "latency_p50_seconds": 17.066268,
+        "latency_p95_seconds": 18.27914,
+        "output_tokens": 10513,
+        "partial_or_better": 0.9166666666666666,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 85,
+        "provider_requests_per_task": 7.083333333333333,
+        "required_claim_coverage": 0.9166666666666666,
+        "required_dimension_coverage": 0.9166666666666666,
+        "task_success": 0.9166666666666666,
+        "tokens_per_task": 7689.083333333333,
+        "total_tokens": 92269
+      },
+      "task_count": 12,
+      "w_t_l": {
+        "agent": 11,
+        "tie": 1
+      },
+      "workflow": {
+        "citation_validity": 1.0,
+        "completed_rate": 0.0,
+        "core_unsupported_claim_rate": 0.0,
+        "cost_per_task": 0.00038469666666666666,
+        "estimated_cost_usd": 0.00461636,
+        "evidence_coverage": 0.0,
+        "failed_rate": 1.0,
+        "failure_categories": {
+          "SYSTEM_VERIFICATION_FAILURE": 12
+        },
+        "gap_handling_accuracy": 0.4166666666666667,
+        "input_tokens": 16988,
+        "latency_p50_seconds": 10.663396,
+        "latency_p95_seconds": 13.154048,
+        "output_tokens": 7993,
+        "partial_or_better": 0.0,
+        "partial_rate": 0.0,
+        "provider_failure_count": 0,
+        "provider_requests": 13,
+        "provider_requests_per_task": 1.0833333333333333,
+        "required_claim_coverage": 0.0,
+        "required_dimension_coverage": 0.0,
+        "task_success": 0.0,
+        "tokens_per_task": 2081.75,
+        "total_tokens": 24981
+      }
+    }
+  },
+  "schema_version": "stage4-final-benchmark-v1",
+  "stage4_complete": true,
+  "stage4c_complete": true,
+  "systems": {
+    "agent": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.9333333333333333,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.0010746213333333334,
+      "estimated_cost_usd": 0.06447728,
+      "evidence_coverage": 0.9333333333333333,
+      "failed_rate": 0.06666666666666667,
+      "failure_categories": {
+        "NONE": 56,
+        "SYSTEM_PROVIDER_FAILURE": 4
+      },
+      "gap_handling_accuracy": 0.9333333333333333,
+      "input_tokens": 368586,
+      "latency_p50_seconds": 15.988605,
+      "latency_p95_seconds": 21.447215,
+      "output_tokens": 45983,
+      "partial_or_better": 0.9333333333333333,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 414,
+      "provider_requests_per_task": 6.9,
+      "required_claim_coverage": 0.9333333333333333,
+      "required_dimension_coverage": 0.9333333333333333,
+      "task_success": 0.9333333333333333,
+      "tokens_per_task": 6909.483333333334,
+      "total_tokens": 414569
+    },
+    "workflow": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.0,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.000515466,
+      "estimated_cost_usd": 0.03092796,
+      "evidence_coverage": 0.0,
+      "failed_rate": 1.0,
+      "failure_categories": {
+        "SYSTEM_SCHEMA_FAILURE": 10,
+        "SYSTEM_VERIFICATION_FAILURE": 50
+      },
+      "gap_handling_accuracy": 0.08333333333333333,
+      "input_tokens": 98624,
+      "latency_p50_seconds": 10.432264,
+      "latency_p95_seconds": 26.835786,
+      "output_tokens": 61145,
+      "partial_or_better": 0.0,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 73,
+      "provider_requests_per_task": 1.2166666666666666,
+      "required_claim_coverage": 0.0,
+      "required_dimension_coverage": 0.0,
+      "task_success": 0.0,
+      "tokens_per_task": 2662.8166666666666,
+      "total_tokens": 159769
+    }
+  },
+  "unblinding_after_score_freeze": true,
+  "w_t_l": {
+    "agent": 56,
+    "tie": 4
+  }
+}
