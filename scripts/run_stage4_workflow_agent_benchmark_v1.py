@@ -74,6 +74,25 @@ GLOBAL_CAPS = {
     "max_benchmark_total_cost_usd": 4.00,
 }
 
+DEPLOYED_SOURCE_MODULES = {
+    "research_route": (
+        "src/paper_research/api/routes/research.py",
+        "paper_research.api.routes.research",
+    ),
+    "agent_runner": (
+        "src/paper_research/agents/research_agent/runner.py",
+        "paper_research.agents.research_agent.runner",
+    ),
+    "decision_provider": (
+        "src/paper_research/agents/research_agent/decision_provider.py",
+        "paper_research.agents.research_agent.decision_provider",
+    ),
+    "agent_checkpoint": (
+        "src/paper_research/agents/research_agent/checkpoint.py",
+        "paper_research.agents.research_agent.checkpoint",
+    ),
+}
+
 
 @dataclass(frozen=True)
 class BenchmarkInputs:
@@ -838,6 +857,9 @@ def run_preflight(api_base_url: str, run_id: str) -> dict[str, Any]:
         "stdout_tail": (docker_ps.stdout or "")[-2000:],
         "stderr_tail": (docker_ps.stderr or "")[-2000:],
     }
+    preflight["deployed_runtime_source_fingerprint"] = (
+        deployed_runtime_source_fingerprint()
+    )
     provider = subprocess.run(
         [
             sys.executable,
@@ -873,6 +895,9 @@ def run_preflight(api_base_url: str, run_id: str) -> dict[str, Any]:
 
 
 def preflight_passed(preflight: dict[str, Any]) -> bool:
+    deployed = preflight.get("deployed_runtime_source_fingerprint", {})
+    if deployed.get("parity") is not True:
+        return False
     if preflight.get("provider_health_passed") is True:
         return True
     payload = preflight.get("provider_health", {}).get("payload", {})
@@ -883,6 +908,139 @@ def preflight_passed(preflight: dict[str, Any]) -> bool:
         and normalize_probe_status(payload.get("minimal_completion_status")) == "PASSED"
         and payload.get("safe_to_start_batch") is True
     )
+
+
+def deployed_runtime_source_fingerprint() -> dict[str, Any]:
+    """Compare behavior-relevant host source bytes with the running API container."""
+    host_modules = {
+        name: {
+            "host_path": host_path,
+            "host_sha256": optional_sha256_file(Path(host_path)),
+            "module": module,
+        }
+        for name, (host_path, module) in DEPLOYED_SOURCE_MODULES.items()
+    }
+    probe = r"""
+import hashlib
+import importlib
+import json
+import pathlib
+import sys
+
+modules = json.loads(sys.argv[1])
+result = {"modules": {}, "duplicates": [], "sys_path": sys.path}
+for name, spec in modules.items():
+    module_name = spec["module"]
+    try:
+        module = importlib.import_module(module_name)
+        path = getattr(module, "__file__", None)
+        item = {"module": module_name, "loaded_path": path}
+        if path and pathlib.Path(path).exists():
+            blob = pathlib.Path(path).read_bytes()
+            text = blob.decode("utf-8", "ignore")
+            item.update(
+                {
+                    "deployed_sha256": hashlib.sha256(blob).hexdigest(),
+                    "size": len(blob),
+                    "agent_decision_provider_error_present": (
+                        "AgentDecisionProviderError" in text
+                    ),
+                    "agent_decision_failure_code_present": (
+                        "AGENT_DECISION_PROVIDER_ERROR" in text
+                    ),
+                    "provider_failure_present": "PROVIDER_FAILURE" in text,
+                }
+            )
+        result["modules"][name] = item
+    except Exception as exc:  # noqa: BLE001
+        result["modules"][name] = {
+            "module": module_name,
+            "error": f"{type(exc).__name__}: {exc}",
+        }
+
+for base in ["/app", "/usr/local/lib/python3.12/site-packages", "/workspace"]:
+    root = pathlib.Path(base)
+    if root.exists():
+        for hit in root.rglob("paper_research/__init__.py"):
+            result["duplicates"].append(str(hit))
+
+print(json.dumps(result, sort_keys=True))
+"""
+    try:
+        proc = subprocess.run(
+            [
+                "docker",
+                "compose",
+                "exec",
+                "-T",
+                "api",
+                "python",
+                "-c",
+                probe,
+                json.dumps(host_modules, sort_keys=True),
+            ],
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            check=False,
+            timeout=120,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "parity": False,
+            "error": sanitize_text(f"{type(exc).__name__}: {exc}"),
+            "host_modules": host_modules,
+        }
+    payload = parse_probe_json(proc.stdout)
+    modules: dict[str, Any] = {}
+    parity = proc.returncode == 0 and bool(payload)
+    for name, host_info in host_modules.items():
+        deployed_info = payload.get("modules", {}).get(name, {})
+        host_sha = host_info.get("host_sha256")
+        deployed_sha = deployed_info.get("deployed_sha256")
+        match = bool(host_sha and deployed_sha and host_sha == deployed_sha)
+        parity = parity and match
+        modules[name] = {
+            **host_info,
+            "loaded_path": deployed_info.get("loaded_path"),
+            "deployed_sha256": deployed_sha,
+            "match": match,
+            "agent_decision_provider_error_present": deployed_info.get(
+                "agent_decision_provider_error_present"
+            ),
+            "agent_decision_failure_code_present": deployed_info.get(
+                "agent_decision_failure_code_present"
+            ),
+            "provider_failure_present": deployed_info.get("provider_failure_present"),
+            "error": deployed_info.get("error"),
+        }
+    return {
+        "schema_version": "deployed-runtime-source-fingerprint-v1",
+        "parity": parity,
+        "returncode": proc.returncode,
+        "modules": modules,
+        "duplicate_package_installations": payload.get("duplicates", []),
+        "sys_path": payload.get("sys_path", []),
+        "stderr_tail": (proc.stderr or "")[-1000:],
+    }
+
+
+def optional_sha256_file(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def parse_probe_json(stdout: str) -> dict[str, Any]:
+    start = stdout.find("{")
+    end = stdout.rfind("}")
+    if start < 0 or end < start:
+        return {}
+    try:
+        return json.loads(stdout[start : end + 1])
+    except json.JSONDecodeError:
+        return {}
 
 
 def normalize_probe_status(value: Any) -> str:

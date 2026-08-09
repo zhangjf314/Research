@@ -1,0 +1,146 @@
+{
+  "api_container": {
+    "args": [
+      "paper_research.main:app",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8000"
+    ],
+    "cmd": [
+      "uvicorn",
+      "paper_research.main:app",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8000"
+    ],
+    "container_id": "6f94375ec4cae853ec2a0e93ac82d2253aa8cb5e5bf5e2f508cc446f7303dbf0",
+    "created": "2026-08-09T09:35:35.896856006Z",
+    "entrypoint": null,
+    "image_id": "sha256:b118925ce303af29be3564511cd1def72d728bf1d3194bf8a8555358382a12e8",
+    "mounts": [
+      {
+        "Destination": "/app/data",
+        "Mode": "rw",
+        "RW": true,
+        "Source": "/var/lib/docker/volumes/research_app_data/_data",
+        "Type": "volume"
+      },
+      {
+        "Destination": "/app/data/evaluation",
+        "Mode": "rw",
+        "RW": true,
+        "Source": "/run/desktop/mnt/host/d/Agents/Codex/research/data/evaluation",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/app/docs",
+        "Mode": "rw",
+        "RW": true,
+        "Source": "/run/desktop/mnt/host/d/Agents/Codex/research/docs",
+        "Type": "bind"
+      },
+      {
+        "Destination": "/app/artifacts",
+        "Mode": "rw",
+        "RW": true,
+        "Source": "/run/desktop/mnt/host/d/Agents/Codex/research/artifacts",
+        "Type": "bind"
+      }
+    ],
+    "path": "uvicorn",
+    "state": {
+      "FinishedAt": "0001-01-01T00:00:00Z",
+      "Pid": 27854,
+      "Running": true,
+      "StartedAt": "2026-08-09T09:35:38.876467119Z",
+      "Status": "running"
+    },
+    "working_dir": "/app"
+  },
+  "created_at": "2026-08-09T09:41:37.967050+00:00",
+  "deployed_runtime_source_parity": true,
+  "duplicate_package_installations_found": true,
+  "failure_materialization_branch_present": true,
+  "loaded_research_module_path": "/usr/local/lib/python3.12/site-packages/paper_research/api/routes/research.py",
+  "old_container_predated_failure_fix": true,
+  "previous_attempt3_container": {
+    "container_id": "7b87b6faffae41ddb5f083f87f205437da4396987c43903642975103b9d174f1",
+    "created": "2026-08-08T09:46:39.144100079Z",
+    "failure_materialization_branch_present": false,
+    "image_id": "sha256:d6516e10d9d5f6edd048a8858a25bd40cbfcbf533dd4402c5ffe36867ab638e7",
+    "research_py_sha256": "ebe5f5f84b9666527b44422a2d63f77702521563245449520dbb5d3f8d32fa68",
+    "source": "captured before deployment rebuild during Stage 4B.4",
+    "started_at": "2026-08-08T09:46:42.235937904Z"
+  },
+  "schema_version": "stage4-deployed-runtime-parity-v1",
+  "source_delivery_mode": "IMAGE_COPY",
+  "source_fingerprint": {
+    "duplicate_package_installations": [
+      "/app/src/paper_research/__init__.py",
+      "/usr/local/lib/python3.12/site-packages/paper_research/__init__.py"
+    ],
+    "modules": {
+      "agent_checkpoint": {
+        "agent_decision_failure_code_present": false,
+        "agent_decision_provider_error_present": false,
+        "deployed_sha256": "260502869dd4e31784f004eb185709971e7ca35e4347e655c3c51ca01e19b56f",
+        "error": null,
+        "host_path": "src/paper_research/agents/research_agent/checkpoint.py",
+        "host_sha256": "260502869dd4e31784f004eb185709971e7ca35e4347e655c3c51ca01e19b56f",
+        "loaded_path": "/usr/local/lib/python3.12/site-packages/paper_research/agents/research_agent/checkpoint.py",
+        "match": true,
+        "module": "paper_research.agents.research_agent.checkpoint",
+        "provider_failure_present": false
+      },
+      "agent_runner": {
+        "agent_decision_failure_code_present": false,
+        "agent_decision_provider_error_present": true,
+        "deployed_sha256": "cf4e8ce2dbe40935eb7ee5234190bfa8cf9176f291b31da547a0d2868fb195a2",
+        "error": null,
+        "host_path": "src/paper_research/agents/research_agent/runner.py",
+        "host_sha256": "cf4e8ce2dbe40935eb7ee5234190bfa8cf9176f291b31da547a0d2868fb195a2",
+        "loaded_path": "/usr/local/lib/python3.12/site-packages/paper_research/agents/research_agent/runner.py",
+        "match": true,
+        "module": "paper_research.agents.research_agent.runner",
+        "provider_failure_present": false
+      },
+      "decision_provider": {
+        "agent_decision_failure_code_present": false,
+        "agent_decision_provider_error_present": true,
+        "deployed_sha256": "ffbf6168acbec915b6c816c46b3470c95e7c876e7111bafc17032c3692cd4772",
+        "error": null,
+        "host_path": "src/paper_research/agents/research_agent/decision_provider.py",
+        "host_sha256": "ffbf6168acbec915b6c816c46b3470c95e7c876e7111bafc17032c3692cd4772",
+        "loaded_path": "/usr/local/lib/python3.12/site-packages/paper_research/agents/research_agent/decision_provider.py",
+        "match": true,
+        "module": "paper_research.agents.research_agent.decision_provider",
+        "provider_failure_present": false
+      },
+      "research_route": {
+        "agent_decision_failure_code_present": true,
+        "agent_decision_provider_error_present": true,
+        "deployed_sha256": "d9076e6856b45f63b96d5d96ea35fe4d6a03c9dbc58b74e44538c1330a55a254",
+        "error": null,
+        "host_path": "src/paper_research/api/routes/research.py",
+        "host_sha256": "d9076e6856b45f63b96d5d96ea35fe4d6a03c9dbc58b74e44538c1330a55a254",
+        "loaded_path": "/usr/local/lib/python3.12/site-packages/paper_research/api/routes/research.py",
+        "match": true,
+        "module": "paper_research.api.routes.research",
+        "provider_failure_present": true
+      }
+    },
+    "parity": true,
+    "returncode": 0,
+    "schema_version": "deployed-runtime-source-fingerprint-v1",
+    "stderr_tail": "",
+    "sys_path": [
+      "",
+      "/usr/local/lib/python312.zip",
+      "/usr/local/lib/python3.12",
+      "/usr/local/lib/python3.12/lib-dynload",
+      "/usr/local/lib/python3.12/site-packages"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -201,6 +202,56 @@ def test_agent_invocation_keeps_frozen_budget() -> None:
     assert contract["external_search_capability"] is False
 
 
+def test_preflight_requires_deployed_runtime_source_parity() -> None:
+    runner = _runner()
+
+    assert (
+        runner.preflight_passed(
+            {
+                "provider_health_passed": True,
+                "deployed_runtime_source_fingerprint": {"parity": False},
+            }
+        )
+        is False
+    )
+
+
+def test_deployed_runtime_source_fingerprint_detects_mismatch(monkeypatch) -> None:
+    runner = _runner()
+    expected = "a" * 64
+    monkeypatch.setattr(runner, "optional_sha256_file", lambda path: expected)
+
+    def fake_run(*args, **kwargs):  # noqa: ANN001, ANN002, ANN003
+        payload = {
+            "modules": {
+                name: {
+                    "loaded_path": f"/usr/local/lib/{name}.py",
+                    "deployed_sha256": "b" * 64,
+                }
+                for name in runner.DEPLOYED_SOURCE_MODULES
+            },
+            "duplicates": [
+                "/app/src/paper_research/__init__.py",
+                "/usr/local/lib/python3.12/site-packages/paper_research/__init__.py",
+            ],
+            "sys_path": ["/usr/local/lib/python3.12/site-packages"],
+        }
+        return subprocess.CompletedProcess(
+            args=["docker"],
+            returncode=0,
+            stdout=json.dumps(payload),
+            stderr="",
+        )
+
+    monkeypatch.setattr(runner.subprocess, "run", fake_run)
+
+    fingerprint = runner.deployed_runtime_source_fingerprint()
+
+    assert fingerprint["parity"] is False
+    assert all(not item["match"] for item in fingerprint["modules"].values())
+    assert fingerprint["duplicate_package_installations"]
+
+
 def test_official_attempt_task_ids_are_namespaced_by_run_id() -> None:
     runner = _runner()
     payload = runner.build_request_payload(
@@ -337,6 +388,7 @@ def test_public_results_payload_json_round_trips_with_docker_ps_output() -> None
 def test_preflight_status_is_case_insensitive_for_provider_script_output() -> None:
     runner = _runner()
     preflight = {
+        "deployed_runtime_source_fingerprint": {"parity": True},
         "provider_health": {
             "payload": {
                 "status": "PASSED",

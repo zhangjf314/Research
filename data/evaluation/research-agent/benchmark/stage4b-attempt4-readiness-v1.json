@@ -1,0 +1,15 @@
+{
+  "agent_behavior_hash_after": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
+  "agent_behavior_hash_before": "bce71a51171b2e1187d579a2278cc34f1202ed7b84e9482cbffe42d00b92ff15",
+  "agent_behavior_hash_match": true,
+  "attempt4_authorized": false,
+  "attempt4_started": false,
+  "authorization_blocker": "EXACT_PATH_FAILURE_MATERIALIZATION_NOT_PROVEN",
+  "created_at": "2026-08-09T09:41:37.967050+00:00",
+  "rag_backend_hash": "995a144385180b2931ec2c6366f7f7306301a42d77ad7c85f4be9e6d9e5091d9",
+  "rag_backend_hash_match": true,
+  "schema_version": "stage4b-attempt4-readiness-v1",
+  "stage4b_complete": false,
+  "stage4c_ready": false,
+  "workflow_lock_match": true
+}
