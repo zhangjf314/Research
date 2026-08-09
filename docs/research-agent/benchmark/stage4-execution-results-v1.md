@@ -2,9 +2,10 @@
 
 This file records deterministic execution/accounting status only. Semantic judging and paired quality analysis are deferred to Stage 4C.
 
-- official_run_id: `stage4-official-v1-attempt2`
+- official_run_id: `stage4-official-v1-attempt3`
 - attempt1_status: `INVALIDATED_INFRASTRUCTURE`
 - attempt2_status: `INVALIDATED_INFRASTRUCTURE`
+- attempt3_status: `INVALID`
 - benchmark_status: `INVALID`
 - stage4b_complete: `False`
 - stage4c_ready: `False`
@@ -20,9 +21,9 @@ This file records deterministic execution/accounting status only. Semantic judgi
 - duplicate_completed_unit_count: `0`
 - duplicate_provider_execution_count: `0`
 - semantic_judge_requests: `0`
-- provider_requests: `9`
-- total_tokens: `13013`
-- estimated_cost_usd: `0.05137732`
+- provider_requests: `8`
+- total_tokens: `11842`
+- estimated_cost_usd: `0.00215782`
 
 ## Notes
 
