@@ -52,10 +52,10 @@ def test_portfolio_base_gates_pass_and_v1_strict_fails() -> None:
     assert rc_code == 0
     assert rc["status"] == "passed"
     assert rc["recommended_rc_version"] == "v0.9.0-rc3"
-    assert rc["highest_satisfied_version"] == "v1.0.1-portfolio"
+    assert rc["highest_satisfied_version"] == "v1.1.0-portfolio"
     assert v1_code != 0
     assert v1["status"] == "failed"
-    assert v1["highest_satisfied_version"] == "v1.0.1-portfolio"
+    assert v1["highest_satisfied_version"] == "v1.1.0-portfolio"
 
 
 def test_release_package_version_satisfies_rc_or_portfolio_gate() -> None:

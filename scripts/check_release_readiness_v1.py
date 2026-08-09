@@ -264,7 +264,7 @@ def _apply_authoritative_checks(root: Path, gates: dict[str, dict[str, Any]]) ->
         pyproject = (root / "pyproject.toml").read_text(encoding="utf-8")
         version_match = re.search(r'^version\s*=\s*"([^"]+)"', pyproject, re.MULTILINE)
         package_version = version_match.group(1) if version_match else None
-        portfolio_patch = re.fullmatch(r"1\.0\.\d+\+portfolio", package_version or "")
+        portfolio_patch = re.fullmatch(r"1\.\d+\.\d+\+portfolio", package_version or "")
         _set_gate(gates, "REL-01", package_version == "0.9.0rc3" or portfolio_patch is not None)
         _set_gate(gates, "REL-02", package_version == "1.0.0")
 
@@ -358,7 +358,7 @@ def evaluate(root: Path, target: str, strict: bool) -> tuple[dict[str, Any], int
         package_version = version_match.group(1) if version_match else None
     highest_satisfied = recommended_rc if not rc_unmet and not errors else "v0.9.0-rc2"
     portfolio_match = (
-        re.fullmatch(r"1\.0\.\d+\+portfolio", package_version or "") is not None
+        re.fullmatch(r"1\.\d+\.\d+\+portfolio", package_version or "") is not None
     )
     if portfolio_match and not rc_unmet and not errors:
         highest_satisfied = f"v{package_version.replace('+portfolio', '-portfolio')}"

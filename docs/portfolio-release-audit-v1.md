@@ -1,16 +1,15 @@
 # Portfolio Release Audit v1
 
-Final Stage 13.40 conclusion:
+Final portfolio release conclusion:
 
-`A. All v1.0.0-portfolio hard gates passed; local release preparation is ready, awaiting explicit user authorization for merge/tag/push.`
+`A. v1.1.0-portfolio release finalization is authorized with READY_WITH_SEMANTIC_EVALUATION_LIMITATION.`
 
 ## Current evidence
 
-- Branch: `eval/retrieval-recall-benchmark-v1`
-- Version: `1.0.0+portfolio` / display `1.0.0-portfolio`
-- Tag created: `false`
-- Main merged: `false`
-- Pushed in Stage 13.40: `false`
+- Branch before final merge: `eval/research-agent-benchmark-run-v1`
+- Version: `1.1.0+portfolio` / display `1.1.0-portfolio`
+- Previous tags retained: `v1.0.0-portfolio`, `v1.0.1-portfolio`
+- Stage 4 release readiness: `READY_WITH_SEMANTIC_EVALUATION_LIMITATION`
 - Provider/model: `deepseek` / `deepseek-v4-flash`
 - Reranker enabled: `false`
 - Template fallback: `false`
@@ -62,6 +61,7 @@ public wording:
 
 ## Release boundary
 
-The local tree is ready for a release preparation commit if the user chooses.
-This audit does not authorize merge to `main`, pushing, creating a tag, or
-creating a remote release.
+The final release process may merge the release branch into `main`, create the
+annotated tag `v1.1.0-portfolio`, and push `main` plus that tag after the final
+test gates pass. This does not create a GitHub Release and does not move any
+existing tag.

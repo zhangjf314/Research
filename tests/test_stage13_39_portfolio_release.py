@@ -23,10 +23,7 @@ def test_portfolio_manifest_preserves_real_model_evidence_and_release_gates() ->
     manifest = _read_json("data/evaluation/portfolio-evidence-manifest-v1.json")
 
     assert manifest["package_version"] == _pyproject_version()
-    assert (
-        manifest["release_decision"]
-        == "LOCAL_RELEASE_PREPARED_AWAITING_USER_MERGE_TAG_PUSH_AUTHORIZATION"
-    )
+    assert manifest["release_decision"] == "PORTFOLIO_RELEASE_FINALIZATION_AUTHORIZED"
     assert manifest["strong_generalization_claim_allowed"] is False
     assert manifest["semantic_claim_support_audit"] == "NOT_FORMALLY_VALIDATED"
     assert manifest["llm"] == {
@@ -93,14 +90,34 @@ def test_dockerfile_oci_label_matches_pyproject_version() -> None:
     assert "org.opencontainers.image.version=$APP_VERSION" in dockerfile
 
 
+def test_v11_portfolio_final_facts_bound_claims() -> None:
+    facts = _read_json("data/evaluation/research-agent/portfolio-final-facts-v1.json")
+
+    assert facts["release_target"] == "v1.1.0-portfolio"
+    assert facts["package_version"] == _pyproject_version()
+    benchmark = facts["workflow_vs_agent_benchmark"]
+    assert benchmark["paired_units"] == 60
+    assert benchmark["workflow"]["completed"] == 0
+    assert benchmark["agent"]["completed"] == 56
+    assert benchmark["structured_proxy_metrics_valid"] is True
+    assert benchmark["content_level_rubric_validated"] is False
+    assert benchmark["semantic_judge_complete"] is False
+    assert benchmark["budget_comparable"] is False
+
+    boundaries = facts["claim_boundaries"]
+    assert boundaries["strong_generalization_claim_allowed"] is False
+    assert boundaries["strong_grounding_claim_allowed"] is False
+    assert boundaries["semantic_benchmark_claim_allowed"] is False
+
+
 def test_content_claims_forbid_strong_generalization_and_remote_release() -> None:
     release_audit = (ROOT / "docs/portfolio-release-audit-v1.md").read_text(
         encoding="utf-8"
     )
     claims_audit = (ROOT / "docs/content-claims-audit-v1.md").read_text(encoding="utf-8")
 
-    assert "All v1.0.0-portfolio hard gates passed" in release_audit
-    assert "awaiting explicit user authorization for merge/tag/push" in release_audit
+    assert "v1.1.0-portfolio release finalization is authorized" in release_audit
+    assert "READY_WITH_SEMANTIC_EVALUATION_LIMITATION" in release_audit
     assert "STRONG_GENERALIZATION_CLAIM_ALLOWED=false" in claims_audit
     assert "production-grade generalization" in claims_audit
     assert "production-ready commercial v1.0" in claims_audit

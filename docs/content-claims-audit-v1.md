@@ -12,9 +12,9 @@ Allowed with caveat:
 > A 27-claim diagnostic benchmark was used for retrieval and citation failure
 > analysis.
 
-> The local v1.0.0-portfolio hard gates passed, including restore, OCR, and a
-> 30-minute Portfolio stability test; merge, tag, push, and remote release still
-> require explicit user authorization.
+> The v1.1.0-portfolio release includes the frozen Workflow vs Agent benchmark,
+> restore, OCR, and a 30-minute Portfolio stability test, with explicit
+> limitations on semantic validation and generalization claims.
 
 Forbidden wording:
 
@@ -39,3 +39,6 @@ Required caveats:
 - The Portfolio 30-minute stability test passed as a bounded engineering check.
   Only say that no obvious sustained abnormal memory growth was observed within
   that 30-minute window.
+- The Workflow vs Agent benchmark can be described as an internally authored
+  paired benchmark with valid structured proxy metrics. Do not describe it as a
+  fully validated semantic benchmark.

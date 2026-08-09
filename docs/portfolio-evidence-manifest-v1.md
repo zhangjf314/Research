@@ -1,11 +1,11 @@
 # Portfolio Evidence Manifest v1
 
-- Generated at: `2026-07-20T14:00:00Z`
-- Branch: `eval/retrieval-recall-benchmark-v1`
-- HEAD: `39173e426ab816da37b2b1253603dfa30f22e413`
-- Version: `0.9.0rc3` / display `0.9.0-rc3`
-- Target: `v1.0.0-portfolio`
-- Release decision from this manifest: `BLOCKED_BY_OPERATIONS_GATES`
+- Generated at: `2026-08-09`
+- Branch before final merge: `eval/research-agent-benchmark-run-v1`
+- Stage 4C.1 audit commit: `dd7401b530eee98658c93033cd0f57d58a344587`
+- Version: `1.1.0+portfolio` / display `1.1.0-portfolio`
+- Target: `v1.1.0-portfolio`
+- Release decision from this manifest: `PORTFOLIO_RELEASE_FINALIZATION_AUTHORIZED`
 
 ## Frozen evaluation evidence
 
@@ -38,10 +38,9 @@ Deep Research evidence was not rerun in Stage 13.39.
 
 ## Boundary
 
-The QA and Deep Research engineering evidence is sufficient to continue release
-closure work, but it is not enough by itself to publish `v1.0.0-portfolio`.
-The current Deep Research checkpoint artifact is a smoke-run SQLite checkpoint;
-the Stage 13.39 PostgreSQL production recovery v2 gate has not been executed.
+The QA, Deep Research, operations, and Stage 4 Workflow vs Agent engineering
+evidence is sufficient for `v1.1.0-portfolio` portfolio release finalization
+with explicit limitations.
 
 `STRONG_GROUNDING_CLAIM_ALLOWED=false` and
 `SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED` remain in force.

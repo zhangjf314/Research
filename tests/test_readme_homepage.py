@@ -29,26 +29,25 @@ def is_external(target: str) -> bool:
 
 def test_readme_version_and_release_badges() -> None:
     text = readme_text()
-    assert "v1.0.1-portfolio" in text
-    assert "1.0.1+portfolio" in text
+    assert "v1.1.0-portfolio" in text
+    assert "1.1.0+portfolio" in text
     assert "actions/workflows/ci.yml/badge.svg?branch=main" in text
-    assert "releases/tag/v1.0.1-portfolio" in text
+    assert "releases/tag/v1.1.0-portfolio" in text
 
 
 def test_readme_removes_stale_release_status() -> None:
     text = readme_text()
     forbidden = [
-        "等待",
         "awaiting explicit user authorization",
         "merge, tag, push",
         "highest published version is v0.9.0-rc2",
-        "当前版本为 v0.9.0-rc1 候选",
         "Stage 10",
         "Stage 11",
         "Stage 12",
         "Stage 13",
-        "Release Candidate 状态",
-        "当前候选版本",
+        "Release Candidate",
+        "个人求职 Portfolio 项目",
+        "job-seeking Portfolio project",
     ]
     for phrase in forbidden:
         assert phrase not in text
@@ -85,21 +84,21 @@ def test_readme_has_no_secret_or_local_path() -> None:
 
 def test_readme_truth_boundaries_are_explicit() -> None:
     text = readme_text()
-    assert "内部开发评测集" in text
-    assert "不是独立 blind benchmark" in text
-    assert "SEMANTIC_CLAIM_SUPPORT_AUDIT=NOT_FORMALLY_VALIDATED" in text
-    assert "STRONG_GROUNDING_CLAIM_ALLOWED=false" in text
+    assert "internally authored and reviewed" in text
+    assert "not a strict equal-budget causal ablation" in text
+    assert "structural proxies" in text
+    assert "semantic_judge_complete = false" in text
+    assert "LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED" in text
     assert "STRONG_GENERALIZATION_CLAIM_ALLOWED=false" in text
-    assert "RETRIEVAL_GENERALIZATION_EVIDENCE=DIAGNOSTIC_ONLY" in text
 
     forbidden_claims = [
-        "严格证明泛化能力",
-        "生产级强 Grounding",
-        "商业生产就绪",
-        "长期稳定性已证明",
-        "消除幻觉",
+        "strict blind benchmark",
         "production-grade grounding",
         "strong generalization benchmark",
+        "commercial production-ready",
+        "fully validated semantic benchmark",
+        "proved long-term stability",
+        "eliminates hallucination",
     ]
     lowered = text.lower()
     for claim in forbidden_claims:
@@ -108,4 +107,4 @@ def test_readme_truth_boundaries_are_explicit() -> None:
 
 def test_readme_line_count_is_reasonable() -> None:
     line_count = len(readme_text().splitlines())
-    assert 150 <= line_count <= 230
+    assert 180 <= line_count <= 320

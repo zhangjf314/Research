@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.1.0-portfolio] - 2026-08-09
+
+### Added
+
+- Research Agent v1 runtime with explicit state, evidence state, dynamic tool
+  selection, verification-before-finish, checkpoint/resume, retry bounds,
+  budget limits, stop conditions, and trace.
+- Frozen 60-unit Workflow vs Agent paired benchmark and Stage 4C validity audit.
+- Portfolio final facts, project summary, interview notes, release status, and
+  v1.1.0 release notes.
+
+### Changed
+
+- Package/runtime version is `1.1.0+portfolio`; display/tag version is
+  `1.1.0-portfolio`.
+- README public positioning now emphasizes real engineering closure and
+  auditable evidence boundaries without the removed personal job-seeking
+  sentence.
+
+### Validation
+
+- Stage 4C.1 final validity audit completed with no new provider, Workflow, or
+  Agent runs.
+- Structured proxy metrics are valid for portfolio claims.
+- Semantic content-level rubric validation remains explicitly incomplete.
+
 ## [1.0.1-portfolio] - 2026-07-25
 
 ### Fixed
