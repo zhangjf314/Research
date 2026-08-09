@@ -1,0 +1,324 @@
+{
+  "attempt4_integrity_unchanged": true,
+  "bootstrap_metric_semantics": "STRUCTURAL_PROXY",
+  "claims_actually_scored_individually": 0,
+  "content_level_rubric_validated": false,
+  "created_at": "2026-08-09T13:42:52.256192+00:00",
+  "dimensions_actually_scored_individually": 0,
+  "evaluation_protocol_implementation_mismatch": false,
+  "evidence_items_actually_scored_individually": 0,
+  "failure_and_body_audit": {
+    "agent_failure_categories": {
+      "SYSTEM_PROVIDER_FAILURE": {
+        "count": 4,
+        "task_ids": [
+          "rt-v1-002",
+          "rt-v1-007",
+          "rt-v1-048",
+          "rt-v1-059"
+        ]
+      }
+    },
+    "blind_package_body_count": {
+      "agent": 0,
+      "workflow": 0
+    },
+    "blind_package_content_omission": true,
+    "citation_validity_denominator": {
+      "agent_citation_count": 0,
+      "agent_citation_emitting_task_count": 0,
+      "convention": "VACUOUS_VALIDITY_CONVENTION_FOR_EMPTY_CITATION_SETS",
+      "workflow_citation_count": 0,
+      "workflow_citation_emitting_task_count": 0
+    },
+    "runtime_body_recoverable_count": {
+      "agent": 0,
+      "workflow": 50
+    },
+    "semantic_content_evaluation_case": "CASE_B_BLIND_PACKAGE_CONTENT_OMISSION_FOR_WORKFLOW_AND_CASE_A_AGENT_NO_FINAL_REPORT_BODY",
+    "unsupported_claim_denominator": {
+      "evaluated_core_claim_count": 0,
+      "interpretation": "No direct emitted-claim semantic denominator was available.",
+      "unsupported_core_claim_count": 0
+    },
+    "workflow_failure_categories": {
+      "SYSTEM_SCHEMA_FAILURE": {
+        "count": 10,
+        "task_ids": [
+          "rt-v1-002",
+          "rt-v1-003",
+          "rt-v1-004",
+          "rt-v1-005",
+          "rt-v1-009",
+          "rt-v1-013",
+          "rt-v1-015",
+          "rt-v1-019",
+          "rt-v1-033",
+          "rt-v1-036"
+        ]
+      },
+      "SYSTEM_VERIFICATION_FAILURE": {
+        "count": 50,
+        "task_ids": [
+          "rt-v1-001",
+          "rt-v1-006",
+          "rt-v1-007",
+          "rt-v1-008",
+          "rt-v1-010",
+          "rt-v1-011",
+          "rt-v1-012",
+          "rt-v1-014",
+          "rt-v1-016",
+          "rt-v1-017",
+          "rt-v1-018",
+          "rt-v1-020",
+          "rt-v1-021",
+          "rt-v1-022",
+          "rt-v1-023",
+          "rt-v1-024",
+          "rt-v1-025",
+          "rt-v1-026",
+          "rt-v1-027",
+          "rt-v1-028",
+          "rt-v1-029",
+          "rt-v1-030",
+          "rt-v1-031",
+          "rt-v1-032",
+          "rt-v1-034",
+          "rt-v1-035",
+          "rt-v1-037",
+          "rt-v1-038",
+          "rt-v1-039",
+          "rt-v1-040",
+          "rt-v1-041",
+          "rt-v1-042",
+          "rt-v1-043",
+          "rt-v1-044",
+          "rt-v1-045",
+          "rt-v1-046",
+          "rt-v1-047",
+          "rt-v1-048",
+          "rt-v1-049",
+          "rt-v1-050",
+          "rt-v1-051",
+          "rt-v1-052",
+          "rt-v1-053",
+          "rt-v1-054",
+          "rt-v1-055",
+          "rt-v1-056",
+          "rt-v1-057",
+          "rt-v1-058",
+          "rt-v1-059",
+          "rt-v1-060"
+        ]
+      }
+    },
+    "workflow_failure_interpretation": "Frozen Workflow returned terminal FAILED states. Most failures are verification/retrieval or provider-schema terminal states from the frozen system path, not Stage4B infrastructure invalidations.",
+    "workflow_http_runtime_succeeded": 60,
+    "workflow_schema_failure_task_ids": [
+      "rt-v1-002",
+      "rt-v1-003",
+      "rt-v1-004",
+      "rt-v1-005",
+      "rt-v1-009",
+      "rt-v1-013",
+      "rt-v1-015",
+      "rt-v1-019",
+      "rt-v1-033",
+      "rt-v1-036"
+    ],
+    "workflow_units_with_provider_calls": 60,
+    "workflow_units_with_report_before_failure": 50,
+    "workflow_units_with_report_body": 50,
+    "workflow_units_with_schema_failure": 10,
+    "workflow_units_without_report_body": 10
+  },
+  "final_interpretation": "Agent strongly outperformed Workflow on operational completion and structured proxy metrics in Attempt4, while using substantially more provider requests/tokens/cost. The benchmark does not independently establish an equivalent semantic research-quality improvement because individual rubric claims/dimensions/evidence were not semantically scored.",
+  "gap_handling_task_values": [
+    {
+      "agent": 1.0,
+      "task_id": "rt-v1-051",
+      "workflow": 1.0
+    },
+    {
+      "agent": 1.0,
+      "task_id": "rt-v1-052",
+      "workflow": 1.0
+    },
+    {
+      "agent": 1.0,
+      "task_id": "rt-v1-053",
+      "workflow": 1.0
+    },
+    {
+      "agent": 1.0,
+      "task_id": "rt-v1-054",
+      "workflow": 1.0
+    },
+    {
+      "agent": 1.0,
+      "task_id": "rt-v1-055",
+      "workflow": 1.0
+    }
+  ],
+  "judge_requests": 0,
+  "metric_provenance_summary": {
+    "bootstrap_deltas": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "CI quantifies proxy metric variability, not semantic validity."
+    },
+    "citation_validity": {
+      "classification": "CITATION_STRUCTURE_DERIVED",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Structural validity; empty citation sets can be vacuously valid."
+    },
+    "core_unsupported_claim_rate": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "A zero value here is not proof of perfect factual reliability."
+    },
+    "evidence_coverage": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Does not prove each gold evidence set was matched to output text."
+    },
+    "gap_handling_accuracy": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Structural gap-handling proxy."
+    },
+    "partial_or_better_rate": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Partial-or-better structural proxy."
+    },
+    "required_claim_coverage": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Does not constitute direct semantic scoring of all 180 claims."
+    },
+    "required_dimension_coverage": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Does not constitute direct scoring of all 250 dimensions."
+    },
+    "task_success_rate": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Structured task-success proxy, not direct semantic task success."
+    },
+    "w_t_l": {
+      "classification": "STRUCTURAL_PROXY",
+      "evidence_tier": "Tier 2 - Deterministic structural/proxy",
+      "safe_interpretation": "Structured outcome W/T/L, not semantic quality W/T/L."
+    }
+  },
+  "metric_vector_identity": {
+    "agent": {
+      "claim_vector_equals_completion_vector": true,
+      "dimension_vector_equals_completion_vector": true,
+      "evidence_vector_equals_completion_vector": true
+    },
+    "workflow": {
+      "claim_vector_equals_completion_vector": true,
+      "dimension_vector_equals_completion_vector": true,
+      "evidence_vector_equals_completion_vector": true
+    }
+  },
+  "new_agent_runs": 0,
+  "new_provider_requests": 0,
+  "new_workflow_runs": 0,
+  "original_blind_score_hash_unchanged": true,
+  "pre_validity_audit_lock": {
+    "bootstrap_resamples": 1000,
+    "bootstrap_seed": 41007,
+    "created_at": "2026-08-09T13:42:52.196257+00:00",
+    "evaluated_pairs": 60,
+    "original_blind_score_bundle_hash": "6579453399f1e3710b8afa21de4548aad9eb60865b0b4de95332f7d9e7e65fb8",
+    "original_blind_score_freeze_hash": "dfb1749f307627cb813cde741b58c028ec00a643b42df4156ff6723355211bb8",
+    "original_bootstrap_hash": "0ac80c2d37b45eea1c20db1f8e915999875421d4f02f18261e6fbd9e4205f9c7",
+    "original_final_benchmark_hash": "922751742b277cddadc7803674ab7babf0cfc14615d08dffde99e6667fe2e7bb",
+    "original_paired_results_hash": "3048d21298825f1ce5c0a53c67dfdf8f6ac636c3c34b50fd7f50eb6ae6155d8e",
+    "original_stage4c_commit": "9a678eadb7349d6616b628d7aca66ade7577ff84",
+    "schema_version": "stage4c-pre-validity-audit-lock-v1",
+    "stage4_complete": true,
+    "stage4c_complete": true
+  },
+  "release_readiness": "READY_WITH_SEMANTIC_EVALUATION_LIMITATION",
+  "reported_values": {
+    "agent": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.9333333333333333,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.0010746213333333334,
+      "estimated_cost_usd": 0.06447728,
+      "evidence_coverage": 0.9333333333333333,
+      "failed_rate": 0.06666666666666667,
+      "failure_categories": {
+        "NONE": 56,
+        "SYSTEM_PROVIDER_FAILURE": 4
+      },
+      "gap_handling_accuracy": 0.9333333333333333,
+      "input_tokens": 368586,
+      "latency_p50_seconds": 15.988605,
+      "latency_p95_seconds": 21.447215,
+      "output_tokens": 45983,
+      "partial_or_better": 0.9333333333333333,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 414,
+      "provider_requests_per_task": 6.9,
+      "required_claim_coverage": 0.9333333333333333,
+      "required_dimension_coverage": 0.9333333333333333,
+      "task_success": 0.9333333333333333,
+      "tokens_per_task": 6909.483333333334,
+      "total_tokens": 414569
+    },
+    "bootstrap_task_success": {
+      "bootstrap_mean_delta": 0.9335333333333333,
+      "ci95_high": 0.9833333333333333,
+      "ci95_low": 0.8666666666666667,
+      "ci_crosses_zero": false,
+      "observed_delta": 0.9333333333333333
+    },
+    "w_t_l": {
+      "agent": 56,
+      "tie": 4
+    },
+    "workflow": {
+      "citation_validity": 1.0,
+      "completed_rate": 0.0,
+      "core_unsupported_claim_rate": 0.0,
+      "cost_per_task": 0.000515466,
+      "estimated_cost_usd": 0.03092796,
+      "evidence_coverage": 0.0,
+      "failed_rate": 1.0,
+      "failure_categories": {
+        "SYSTEM_SCHEMA_FAILURE": 10,
+        "SYSTEM_VERIFICATION_FAILURE": 50
+      },
+      "gap_handling_accuracy": 0.08333333333333333,
+      "input_tokens": 98624,
+      "latency_p50_seconds": 10.432264,
+      "latency_p95_seconds": 26.835786,
+      "output_tokens": 61145,
+      "partial_or_better": 0.0,
+      "partial_rate": 0.0,
+      "provider_failure_count": 0,
+      "provider_requests": 73,
+      "provider_requests_per_task": 1.2166666666666666,
+      "required_claim_coverage": 0.0,
+      "required_dimension_coverage": 0.0,
+      "task_success": 0.0,
+      "tokens_per_task": 2662.8166666666666,
+      "total_tokens": 159769
+    }
+  },
+  "schema_version": "stage4c-final-validity-audit-v1",
+  "semantic_judge_complete": false,
+  "semantic_judge_gap": "JUDGE_MISSING_OUTPUT_TEXT_FOR_FAIR_BLIND_INPUT",
+  "semantic_judge_requests": 0,
+  "structured_proxy_metrics_valid": true,
+  "w_t_l_classification": "STRUCTURED_OUTCOME_W_T_L"
+}

@@ -1,0 +1,18 @@
+{
+  "content_level_rubric_validated": false,
+  "created_at": "2026-08-09T13:42:52.257184+00:00",
+  "feature_development_stopped": true,
+  "must_not_claim": [
+    "FULLY_VALIDATED_SEMANTIC_BENCHMARK",
+    "Agent semantic research quality win 56/60",
+    "60-task benchmark demonstrated effective replanning"
+  ],
+  "readiness_detail": "READY_WITH_SEMANTIC_EVALUATION_LIMITATION",
+  "release_claim_boundary": "data\\evaluation\\research-agent\\benchmark\\stage4-portfolio-claim-boundary-v1.json",
+  "schema_version": "stage4-portfolio-release-readiness-v1",
+  "semantic_judge_complete": false,
+  "semantic_judge_gap": "JUDGE_MISSING_OUTPUT_TEXT_FOR_FAIR_BLIND_INPUT",
+  "stage4_complete": true,
+  "status": "READY_WITH_LIMITATIONS",
+  "structured_proxy_metrics_valid": true
+}
