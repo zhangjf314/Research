@@ -17,3 +17,28 @@ def test_research_agent_schema_uses_explicit_agent_mode() -> None:
     schema = client.get("/openapi.json").json()
     response_schema = schema["components"]["schemas"]["ResearchAgentResponse"]
     assert response_schema["properties"]["research_mode"]["default"] == "agent"
+
+
+def test_research_agent_schema_adds_report_fields_without_removing_execution_fields() -> None:
+    client = TestClient(create_app())
+    schema = client.get("/openapi.json").json()
+    properties = schema["components"]["schemas"]["ResearchAgentResponse"]["properties"]
+
+    for existing in [
+        "status",
+        "verification_state",
+        "tool_history",
+        "provider_call_count",
+        "token_usage",
+    ]:
+        assert existing in properties
+    for added in [
+        "report_status",
+        "report_markdown",
+        "report_usage",
+        "report_provider_requests",
+        "agent_execution_provider_requests",
+        "agent_report_tokens",
+        "total_agent_user_request_tokens",
+    ]:
+        assert added in properties

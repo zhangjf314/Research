@@ -70,6 +70,7 @@ def test_research_ui_gates_report_controls_on_real_report_body() -> None:
     assert "id='report-actions' hidden" in html
     assert "setReportControls(hasReportBody, title)" in html
     assert "hasReportBody: typeof data.report === 'string' && data.report.trim().length > 0" in html
+    assert "typeof data.report_markdown === 'string'" in html
     assert "setReportControls(true, 'Research Report')" in html
     assert "setReportControls(false, `${adapter.label} Failure Details`)" in html
 

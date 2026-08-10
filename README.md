@@ -20,7 +20,7 @@ PaperResearch is an end-to-end system for academic PDF ingestion, hybrid retriev
 | Retrieval | Jina embeddings, Qdrant, lexical index, Current Hybrid + RRF |
 | QA | DeepSeek V4 Flash, structured claim JSON, deterministic citation validation |
 | Deep Research Workflow | Fixed orchestration: plan, retrieve, assess, synthesize, validate, persist |
-| Research Agent | Planner, dynamic tool/action selection, Evidence State, verifier, bounded replan mechanism |
+| Research Agent | Planner, dynamic tool/action selection, Evidence State, verifier, bounded replan mechanism, post-loop final-report synthesis |
 | Reliability | PostgreSQL checkpoint/resume, request ledger, usage/cost accounting, stop policies |
 | Observability | Trace, request IDs, failure taxonomy, Docker/runtime capability checks |
 | Benchmarking | Frozen RAG backend, Workflow vs Agent paired harness, blind score freeze, validity audit |
@@ -45,14 +45,19 @@ flowchart LR
     K --> L["Evidence State"]
     K --> M["Verifier"]
     K --> N["Checkpoint / Budget / Trace"]
+    M --> R["Final Report Synthesizer"]
+    R --> S["Report Validator"]
+    S --> T["Markdown Report"]
     J --> O["Citation Validation"]
     I --> O
-    K --> O
+    T --> O
     P["PostgreSQL"] --> N
     Q["Redis"] --> G
 ```
 
 The Research Agent is not the default UI path. The default Deep Research path remains the frozen Workflow. The Agent is an evaluated parallel runtime.
+
+Agent final-report synthesis is a presentation stage after the Agent control loop has finished and verification has passed. It uses only the verified Evidence State; it is not an Agent tool, planner step, retriever, or replan behavior.
 
 The UI exposes two research execution modes:
 
@@ -78,6 +83,10 @@ flowchart TB
         A4 --> A5["Evidence State"]
         A5 --> A6["Verifier"]
         A6 --> A7["Finish or bounded Replan decision"]
+        A7 --> A8["Agent control loop ends"]
+        A8 --> A9["Final Report Synthesizer"]
+        A9 --> A10["Report Validator"]
+        A10 --> A11["Markdown Report"]
     end
 
     C["Checkpoint / Budget / Trace"] --> Workflow
@@ -90,6 +99,8 @@ The Agent implements a bounded replanning mechanism, but no effective replan was
 LIVE_EFFECTIVE_REPLAN_NOT_OBSERVED
 effective_replan_count = 0
 ```
+
+Stage 4 benchmark artifacts and conclusions correspond to the frozen v1.1.0 Agent runtime before final-report synthesis was added. The final-report layer is a later runtime capability and does not reinterpret those benchmark results.
 
 The observed dynamic behavior came from state/observation-driven tool and action selection.
 

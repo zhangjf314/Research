@@ -166,7 +166,9 @@ const modeAdapters = {
       const usage = data.token_usage || {};
       const tools = data.tool_history || [];
       const lastTool = [...tools].reverse().find(item => item.tool || item.tool_name || item.action || item.phase) || {};
-      const report = typeof data.report === 'string' ? data.report : '';
+      const report = typeof data.report_markdown === 'string'
+        ? data.report_markdown
+        : (typeof data.report === 'string' ? data.report : '');
       const selectedTool = lastTool.tool || lastTool.tool_name || lastTool.action || '';
       const selectedToolDisplay = selectedTool || (lastTool.phase ? `Decision event: ${lastTool.phase}` : '-');
       return {
@@ -181,6 +183,10 @@ const modeAdapters = {
         succeeded: data.status === 'COMPLETED',
         paused: data.status === 'PAUSED',
         stopReason: data.stop_reason || data.failure_code || '',
+        reportStatus: data.report_status || 'NOT_STARTED',
+        reportFailureReason: data.report_failure_reason || '',
+        reportProviderRequests: data.report_provider_requests ?? 0,
+        reportUsage: data.report_usage || {},
         agent: {
           planVersion: data.plan_version ?? '-',
           stepCount: data.step_count ?? 0,
@@ -385,7 +391,22 @@ async function runResearch(){
     } else {
       if (normalized.hasReportBody) {
         setReportControls(true, 'Research Report');
-        report.innerHTML = await renderMarkdown(currentReportMarkdown);
+        const reportHtml = await renderMarkdown(currentReportMarkdown);
+        report.innerHTML = [
+          reportHtml,
+          '<hr>',
+          '<h2>Agent Execution</h2>',
+          '<table><tbody>',
+          `<tr><th>Status</th><td>${esc(normalized.status)}</td></tr>`,
+          `<tr><th>Verification</th><td>${esc(normalized.agent?.verification || '-')}</td></tr>`,
+          `<tr><th>Evidence count</th><td>${esc(normalized.agent?.evidenceCount ?? 0)}</td></tr>`,
+          `<tr><th>Tool calls</th><td>${esc(normalized.agent?.toolCalls ?? 0)}</td></tr>`,
+          `<tr><th>Replan</th><td>${esc(normalized.agent?.replanCount ?? 0)}</td></tr>`,
+          `<tr><th>Report provider requests</th><td>${esc(normalized.reportProviderRequests ?? 0)}</td></tr>`,
+          '</tbody></table>',
+          '<h2>Sanitized Agent Trace</h2>',
+          `<pre>${esc(normalized.agent?.trace || 'No sanitized trace returned.')}</pre>`,
+        ].join('');
         raw.textContent = currentReportMarkdown;
       } else {
         currentReportMarkdown = '';
@@ -393,6 +414,7 @@ async function runResearch(){
         report.innerHTML = [
         `<h1>Research Agent Execution Result</h1>`,
         '<p>This Agent runtime completed evidence gathering and verification, but the current Agent API response does not include a final narrative research report.</p>',
+        normalized.reportFailureReason ? `<p><strong>Final report status:</strong> ${esc(normalized.reportStatus)}. ${esc(normalized.reportFailureReason)}</p>` : `<p><strong>Final report status:</strong> ${esc(normalized.reportStatus)}</p>`,
         '<h2>Execution Summary</h2>',
         '<table><tbody>',
         `<tr><th>Mode</th><td>${esc(adapter.label)}</td></tr>`,
@@ -403,6 +425,7 @@ async function runResearch(){
         `<tr><th>Evidence count</th><td>${esc(normalized.agent?.evidenceCount ?? 0)}</td></tr>`,
         `<tr><th>Tool calls</th><td>${esc(normalized.agent?.toolCalls ?? 0)}</td></tr>`,
         `<tr><th>Replan</th><td>${esc(normalized.agent?.replanCount ?? 0)}</td></tr>`,
+        `<tr><th>Report provider requests</th><td>${esc(normalized.reportProviderRequests ?? 0)}</td></tr>`,
         '</tbody></table>',
         '<h2>Sanitized Agent Trace</h2>',
         `<pre>${esc(normalized.agent?.trace || 'No sanitized trace returned.')}</pre>`,

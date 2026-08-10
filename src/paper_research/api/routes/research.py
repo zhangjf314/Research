@@ -19,6 +19,13 @@ from paper_research.agents.research_agent.decision_provider import (
     AgentDecisionProviderError,
     LLMResearchAgentDecisionProvider,
 )
+from paper_research.agents.research_agent.final_report import (
+    FINAL_REPORT_INPUT_FIELDS,
+    AgentFinalReportStore,
+    AgentFinalReportSynthesizer,
+    AgentReportResult,
+    AgentReportStatus,
+)
 from paper_research.agents.research_agent.models import AgentStatus, StopReason
 from paper_research.agents.state import ResearchBudget
 from paper_research.config import get_settings
@@ -105,6 +112,20 @@ class ResearchAgentResponse(BaseModel):
     checkpoint_id: str | None
     checkpoint_count: int
     failure_code: str | None = None
+    report_status: str = "NOT_STARTED"
+    report_markdown: str = ""
+    report_available: bool = False
+    report_failure_reason: str | None = None
+    report_usage: dict = Field(default_factory=dict)
+    report_provider_requests: int = 0
+    agent_execution_provider_requests: int = 0
+    agent_execution_tokens: dict = Field(default_factory=dict)
+    agent_report_tokens: dict = Field(default_factory=dict)
+    total_agent_user_request_tokens: int = 0
+    report_claim_count: int = 0
+    report_citation_count: int = 0
+    report_evidence_references: list[dict] = Field(default_factory=list)
+    final_report_input_fields: list[str] = Field(default_factory=list)
 
 
 def _providers(payload: DeepResearchRequest, db: Session):
@@ -199,10 +220,19 @@ def _failed_state(task_id: str | None, status: str, stop_reason: str) -> dict:
     }
 
 
-def _agent_response(state) -> ResearchAgentResponse:
+def _agent_response(
+    state,
+    report_result: AgentReportResult | None = None,
+) -> ResearchAgentResponse:
     failure_code = None
     if state.status == AgentStatus.FAILED and state.stop_reason == StopReason.PROVIDER_FAILURE:
         failure_code = "AGENT_DECISION_PROVIDER_ERROR"
+    report_result = report_result or AgentFinalReportStore().load(state.task_id)
+    report_usage = dict(report_result.usage or {})
+    execution_tokens = state.token_usage.model_dump()
+    total_tokens = int(execution_tokens.get("total_tokens") or 0) + int(
+        report_usage.get("total_tokens") or 0
+    )
     return ResearchAgentResponse(
         task_id=state.task_id,
         status=state.status.value if hasattr(state.status, "value") else str(state.status),
@@ -232,7 +262,70 @@ def _agent_response(state) -> ResearchAgentResponse:
         checkpoint_id=state.checkpoint_id,
         checkpoint_count=len(state.checkpoint_chain),
         failure_code=failure_code,
+        report_status=report_result.status.value
+        if hasattr(report_result.status, "value")
+        else str(report_result.status),
+        report_markdown=report_result.markdown,
+        report_available=bool(report_result.markdown.strip()),
+        report_failure_reason=report_result.failure_reason,
+        report_usage=report_usage,
+        report_provider_requests=report_result.provider_request_count,
+        agent_execution_provider_requests=state.provider_call_count,
+        agent_execution_tokens=execution_tokens,
+        agent_report_tokens=report_usage,
+        total_agent_user_request_tokens=total_tokens,
+        report_claim_count=report_result.claim_count,
+        report_citation_count=report_result.citation_count,
+        report_evidence_references=report_result.evidence_references,
+        final_report_input_fields=list(FINAL_REPORT_INPUT_FIELDS),
     )
+
+
+def _synthesize_agent_report_if_ready(
+    runner: ResearchAgentRunner,
+    state,
+    settings,
+    store: AgentFinalReportStore | None = None,
+) -> AgentReportResult:
+    store = store or AgentFinalReportStore()
+    existing = store.load(state.task_id)
+    if existing.markdown.strip() or existing.status != AgentReportStatus.NOT_STARTED:
+        return existing
+    if state.status != AgentStatus.COMPLETED:
+        return existing
+    verification_status = getattr(getattr(state, "verification_state", None), "status", None)
+    if getattr(verification_status, "value", verification_status) != "PASS":
+        return existing
+    if settings.app_profile != "production" or settings.llm_provider == "template":
+        result = AgentReportResult(
+            status=AgentReportStatus.NOT_STARTED,
+            failure_reason="real report provider is not configured",
+        )
+        store.save(state.task_id, result)
+        return result
+    try:
+        llm = build_llm_provider(settings)
+    except ProviderConfigurationError as exc:
+        result = AgentReportResult(
+            status=AgentReportStatus.FAILED_PROVIDER,
+            failure_reason=str(exc),
+        )
+        store.save(state.task_id, result)
+        return result
+    synthesizer = AgentFinalReportSynthesizer(llm)
+    result = synthesizer.synthesize(state)
+    store.save(state.task_id, result)
+    runner.trace.append(
+        state,
+        phase="FINAL_REPORT_SYNTHESIS",
+        extra={
+            "report_status": result.status.value,
+            "report_provider_requests": result.provider_request_count,
+            "report_claim_count": result.claim_count,
+            "report_citation_count": result.citation_count,
+        },
+    )
+    return result
 
 
 def _materialize_agent_decision_provider_failure(
@@ -387,7 +480,8 @@ def run_research_agent(payload: ResearchAgentRequest) -> ResearchAgentResponse:
             )
         except AgentDecisionProviderError as exc:
             state = _materialize_agent_decision_provider_failure(runner, task_id, exc)
-        return _agent_response(state)
+        report_result = _synthesize_agent_report_if_ready(runner, state, settings)
+        return _agent_response(state, report_result)
     except HTTPException:
         raise
     except Exception as exc:
@@ -428,7 +522,8 @@ def resume_research_agent(task_id: str) -> ResearchAgentResponse:
             state = runner.resume(task_id)
         except AgentDecisionProviderError as exc:
             state = _materialize_agent_decision_provider_failure(runner, task_id, exc)
-        return _agent_response(state)
+        report_result = _synthesize_agent_report_if_ready(runner, state, settings)
+        return _agent_response(state, report_result)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except HTTPException:
