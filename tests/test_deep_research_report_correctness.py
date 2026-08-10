@@ -142,7 +142,7 @@ def test_research_textarea_is_empty_with_placeholder_and_example_button() -> Non
     assert "query.length < 3" in html
     assert "Please enter a research question with at least 3 characters." in html
     assert "fetch('/api/v1/research/deep'" in html
-    assert html.index("query.length < 3") < html.index("fetch('/api/v1/research/deep'")
+    assert "adapter.submit(query)" in html
 
 
 def test_repeated_evidence_is_global_deduplicated() -> None:

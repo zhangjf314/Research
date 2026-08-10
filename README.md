@@ -54,6 +54,13 @@ flowchart LR
 
 The Research Agent is not the default UI path. The default Deep Research path remains the frozen Workflow. The Agent is an evaluated parallel runtime.
 
+The UI exposes two research execution modes:
+
+- Deep Research Workflow — predefined orchestration.
+- Research Agent — state/observation-driven dynamic tool execution.
+
+Both reuse the frozen RAG backend.
+
 ## Workflow vs Research Agent
 
 ```mermaid

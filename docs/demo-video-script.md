@@ -43,3 +43,21 @@ internal Full QA engineering evaluation and one bounded Deep Research smoke.
 Also say that final release is still blocked by restore/recovery/OCR/soak
 operations evidence. Do not show `.env`, raw provider payloads, human review
 ZIPs, long traces, database dumps, or private PDF content.
+
+## Research mode UI demo addendum
+
+Recommended UI sequence:
+
+1. Open `/api/v1/ui`.
+2. Open the Research page and show the two explicit entries:
+   Deep Research Workflow and Research Agent.
+3. Run the same example question with Deep Research Workflow and point out
+   the visible execution mode in status and result areas.
+4. Switch to Research Agent only after the Workflow task reaches a terminal
+   state or after pressing Reset.
+5. Run the same example question with Research Agent and show the sanitized
+   Agent trace fields: planner, selected tool, evidence count, verification
+   status, tool calls, and replan count.
+
+Do not automatically run both modes from a single click. The user must choose
+one execution mode for each run.

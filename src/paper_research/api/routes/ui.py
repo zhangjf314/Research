@@ -25,6 +25,395 @@ class MarkdownRenderRequest(BaseModel):
     markdown: str = Field(max_length=500_000)
 
 
+RESEARCH_MODE_UI = """
+<h1>Research Execution</h1>
+<p class='muted'>Choose an explicit execution mode. Both modes reuse the frozen Current Hybrid RAG backend; the difference is the research control path.</p>
+<section class='card'>
+  <h2>Choose research mode</h2>
+  <div class='grid'>
+    <section id='workflow-card' class='card mode-card' data-mode='workflow'>
+      <h2>Deep Research Workflow</h2>
+      <p><strong>Predefined research orchestration</strong></p>
+      <p>Runs the existing fixed research workflow for evidence retrieval, evidence organization, report synthesis, and verification.</p>
+      <p class='muted'>Fixed orchestration · Frozen RAG · Evidence synthesis · Verification</p>
+      <button type='button' onclick='selectResearchMode("workflow")'>Use Workflow</button>
+    </section>
+    <section id='agent-card' class='card mode-card' data-mode='agent'>
+      <h2>Research Agent</h2>
+      <p><strong>State/observation-driven research execution</strong></p>
+      <p>Uses Planner, current Evidence State, dynamic tool selection, observations, verification, checkpoints, and bounded replan capability.</p>
+      <p class='muted'>Planner · Dynamic tools · Evidence State · Verification · Checkpoint · Bounded Replan</p>
+      <button type='button' onclick='selectResearchMode("agent")'>Use Agent</button>
+    </section>
+  </div>
+  <details>
+    <summary>What is the difference between Workflow and Agent?</summary>
+    <table>
+      <thead><tr><th></th><th>Workflow</th><th>Agent</th></tr></thead>
+      <tbody>
+        <tr><td>Research flow</td><td>Predefined orchestration</td><td>Dynamic execution</td></tr>
+        <tr><td>RAG</td><td>Frozen Current Hybrid</td><td>Frozen Current Hybrid</td></tr>
+        <tr><td>Planner</td><td>Fixed orchestration</td><td>Planner-driven</td></tr>
+        <tr><td>Tool Selection</td><td>Fixed workflow path</td><td>Dynamic tool/action selection</td></tr>
+        <tr><td>Evidence State</td><td>Workflow-internal</td><td>Explicit state</td></tr>
+        <tr><td>Verification</td><td>Available</td><td>Available</td></tr>
+        <tr><td>Replan</td><td>Not Agent Replan</td><td>Bounded capability</td></tr>
+      </tbody>
+    </table>
+  </details>
+</section>
+<div class='card'>
+  <p><span id='mode-badge' class='muted'>[ WORKFLOW ]</span> Current mode: <strong id='mode-label'>Deep Research Workflow</strong></p>
+  <p id='mode-description' class='muted'>Execution path: predefined orchestration → evidence synthesis → verification.</p>
+  <textarea id='query' rows='4' style='width:95%' placeholder='Example: Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.'></textarea><br>
+  <button id='run-research' type='button' onclick='runResearch()'>Run Workflow</button>
+  <button type='button' onclick='fillExampleQuery()'>Fill example</button>
+  <button id='reset-research' type='button' onclick='resetResearchState()'>Reset</button>
+  <p id='research-status' class='muted'></p>
+</div>
+<section class='card'>
+  <h2 id='status-heading'>Deep Research Workflow status</h2>
+  <table>
+    <tbody>
+      <tr><th>Mode</th><td id='status-mode'>Deep Research Workflow</td></tr>
+      <tr><th>Task ID</th><td id='status-task-id'>-</td></tr>
+      <tr><th>Status</th><td id='status-state'>Idle</td></tr>
+      <tr><th>Elapsed time</th><td id='status-elapsed'>-</td></tr>
+      <tr><th>Provider requests</th><td id='status-provider-requests'>-</td></tr>
+      <tr><th>Tokens</th><td id='status-tokens'>-</td></tr>
+      <tr><th>Estimated cost</th><td id='status-cost'>-</td></tr>
+    </tbody>
+  </table>
+  <div id='workflow-telemetry'>
+    <h3>Research Workflow</h3>
+    <pre id='workflow-stages'>Waiting</pre>
+  </div>
+  <div id='agent-telemetry' hidden>
+    <h3>Agent trace</h3>
+    <table>
+      <tbody>
+        <tr><th>Planner</th><td id='agent-plan-version'>-</td></tr>
+        <tr><th>Current step</th><td id='agent-step-count'>-</td></tr>
+        <tr><th>Selected tool</th><td id='agent-selected-tool'>-</td></tr>
+        <tr><th>Evidence count</th><td id='agent-evidence-count'>-</td></tr>
+        <tr><th>Verification status</th><td id='agent-verification'>-</td></tr>
+        <tr><th>Tool calls</th><td id='agent-tool-calls'>-</td></tr>
+        <tr><th>Replan count</th><td id='agent-replan-count'>0</td></tr>
+      </tbody>
+    </table>
+    <pre id='agent-trace'>Waiting</pre>
+  </div>
+</section>
+<section class='card report-card'>
+  <div class='report-toolbar'>
+    <strong>Research Report</strong>
+    <div>
+      <button type='button' onclick='copyReport()'>Copy Markdown</button>
+      <button type='button' onclick='toggleRaw()'>View Raw</button>
+    </div>
+  </div>
+  <article id='report' class='markdown-body'><p class='muted'>Waiting</p></article>
+  <pre id='report-raw' class='report-raw' hidden></pre>
+</section>
+<p class='muted'>Research Agent and Workflow are two independent execution architectures. They share the base retrieval capability but use different research control strategies.</p>
+<script>
+let currentReportMarkdown = "";
+let researchMode = new URLSearchParams(window.location.search).get('mode') === 'agent' ? 'agent' : 'workflow';
+let activeTaskRunning = false;
+let runStartedAt = null;
+const modeAdapters = {
+  workflow: {
+    label: 'Deep Research Workflow',
+    badge: '[ WORKFLOW ]',
+    runLabel: 'Run Workflow',
+    heading: 'Deep Research Workflow status',
+    description: 'Execution path: predefined orchestration → evidence synthesis → verification.',
+    async submit(query) {
+      const response = await fetch('/api/v1/research/deep',{method:'POST',
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({query,allow_external_search:false})});
+      return {response, data: await readJson(response)};
+    },
+    normalize(data) {
+      const usage = data.model_usage || {};
+      return {
+        taskId: data.task_id || '',
+        status: data.status || data.error_code || 'UNKNOWN',
+        terminal: data.terminal !== false,
+        providerRequests: data.provider_completed_request_count ?? data.request_attempt_count ?? 0,
+        tokens: usage.total_tokens ?? 0,
+        cost: usage.estimated_cost_usd ?? 0,
+        report: typeof data.report === 'string' ? data.report : '',
+        succeeded: data.status === 'COMPLETED' && data.succeeded === true && data.report_available === true,
+        paused: data.status === 'PAUSED',
+        stopReason: data.stop_reason || '',
+      };
+    },
+  },
+  agent: {
+    label: 'Research Agent',
+    badge: '[ AGENT ]',
+    runLabel: 'Run Agent',
+    heading: 'Research Agent status',
+    description: 'Execution path: Planner → Dynamic Tool Selection → Evidence State → Verification.',
+    async submit(query) {
+      const response = await fetch('/api/v1/research/agent',{method:'POST',
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({query})});
+      return {response, data: await readJson(response)};
+    },
+    normalize(data) {
+      const usage = data.token_usage || {};
+      const tools = data.tool_history || [];
+      const lastTool = [...tools].reverse().find(item => item.tool || item.action || item.phase) || {};
+      return {
+        taskId: data.task_id || '',
+        status: data.status || data.failure_code || 'UNKNOWN',
+        terminal: data.terminal !== false,
+        providerRequests: data.provider_call_count ?? 0,
+        tokens: usage.total_tokens ?? usage.total ?? 0,
+        cost: data.estimated_cost ?? 0,
+        report: '',
+        succeeded: data.status === 'COMPLETED',
+        paused: data.status === 'PAUSED',
+        stopReason: data.stop_reason || data.failure_code || '',
+        agent: {
+          planVersion: data.plan_version ?? '-',
+          stepCount: data.step_count ?? 0,
+          selectedTool: lastTool.tool || lastTool.action || lastTool.phase || '-',
+          evidenceCount: data.evidence_count ?? 0,
+          verification: data.verification_state?.status || data.verification_state?.verification_status || '-',
+          toolCalls: data.tool_call_count ?? tools.length,
+          replanCount: tools.filter(item => String(item.phase || item.action || '').toUpperCase().includes('REPLAN')).length,
+          trace: tools.map((item, idx) => {
+            const phase = item.phase || item.action || item.tool || 'step';
+            const tool = item.tool || item.tool_name || item.action || '';
+            return `Step ${idx + 1}: ${phase}${tool && tool !== phase ? ' → ' + tool : ''}`;
+          }).join('\\n') || 'No sanitized tool history returned.',
+        },
+      };
+    },
+  },
+};
+async function readJson(response){try{return await response.json();}catch(error){return {};}}
+function httpMessage(response, data){
+  if(response.status===429){
+    const retry=response.headers.get('Retry-After') || data.retry_after_seconds || 'later';
+    return `Rate limited. Please retry after ${retry} seconds. Request ${data.request_id || ''}`.trim();
+  }
+  return data.detail || data.error?.message || `HTTP ${response.status}`;
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function selectResearchMode(mode) {
+  if (activeTaskRunning) {
+    document.getElementById('research-status').textContent = 'A task is running. Reset or wait for a terminal state before switching mode.';
+    return;
+  }
+  researchMode = mode === 'agent' ? 'agent' : 'workflow';
+  const adapter = modeAdapters[researchMode];
+  document.getElementById('mode-label').textContent = adapter.label;
+  document.getElementById('mode-badge').textContent = adapter.badge;
+  document.getElementById('mode-description').textContent = adapter.description;
+  document.getElementById('run-research').textContent = adapter.runLabel;
+  document.getElementById('status-heading').textContent = adapter.heading;
+  document.getElementById('status-mode').textContent = adapter.label;
+  document.getElementById('workflow-card').style.outline = researchMode === 'workflow' ? '3px solid #155eaa' : '';
+  document.getElementById('agent-card').style.outline = researchMode === 'agent' ? '3px solid #155eaa' : '';
+  document.getElementById('workflow-telemetry').hidden = researchMode !== 'workflow';
+  document.getElementById('agent-telemetry').hidden = researchMode !== 'agent';
+  if (window.history?.replaceState) {
+    window.history.replaceState(null, '', `/api/v1/ui/research?mode=${researchMode}`);
+  }
+  clearTaskStatus();
+}
+function clearTaskStatus() {
+  document.getElementById('status-task-id').textContent = '-';
+  document.getElementById('status-state').textContent = 'Idle';
+  document.getElementById('status-elapsed').textContent = '-';
+  document.getElementById('status-provider-requests').textContent = '-';
+  document.getElementById('status-tokens').textContent = '-';
+  document.getElementById('status-cost').textContent = '-';
+  document.getElementById('workflow-stages').textContent = 'Waiting';
+  document.getElementById('agent-plan-version').textContent = '-';
+  document.getElementById('agent-step-count').textContent = '-';
+  document.getElementById('agent-selected-tool').textContent = '-';
+  document.getElementById('agent-evidence-count').textContent = '-';
+  document.getElementById('agent-verification').textContent = '-';
+  document.getElementById('agent-tool-calls').textContent = '-';
+  document.getElementById('agent-replan-count').textContent = '0';
+  document.getElementById('agent-trace').textContent = 'Waiting';
+}
+function updateTaskStatus(normalized, data) {
+  const elapsed = runStartedAt ? ((Date.now() - runStartedAt) / 1000).toFixed(1) + 's' : '-';
+  document.getElementById('status-mode').textContent = modeAdapters[researchMode].label;
+  document.getElementById('status-task-id').textContent = normalized.taskId || '-';
+  document.getElementById('status-state').textContent = normalized.status || '-';
+  document.getElementById('status-elapsed').textContent = elapsed;
+  document.getElementById('status-provider-requests').textContent = normalized.providerRequests ?? 0;
+  document.getElementById('status-tokens').textContent = normalized.tokens ?? 0;
+  document.getElementById('status-cost').textContent = normalized.cost ?? 0;
+  if (researchMode === 'workflow') {
+    const stages = (data.node_history || []).map((item, idx) => `✓ ${idx + 1}. ${item}`).join('\\n');
+    document.getElementById('workflow-stages').textContent = stages || 'No workflow node history returned.';
+  } else if (normalized.agent) {
+    document.getElementById('agent-plan-version').textContent = normalized.agent.planVersion;
+    document.getElementById('agent-step-count').textContent = normalized.agent.stepCount;
+    document.getElementById('agent-selected-tool').textContent = normalized.agent.selectedTool;
+    document.getElementById('agent-evidence-count').textContent = normalized.agent.evidenceCount;
+    document.getElementById('agent-verification').textContent = normalized.agent.verification;
+    document.getElementById('agent-tool-calls').textContent = normalized.agent.toolCalls;
+    document.getElementById('agent-replan-count').textContent = normalized.agent.replanCount;
+    document.getElementById('agent-trace').textContent = normalized.agent.trace;
+  }
+}
+async function checkResearchCapabilities(){
+  const status=document.getElementById('research-status');
+  const button=document.getElementById('run-research');
+  try{
+    const response=await fetch('/api/v1/capabilities');
+    const data=await readJson(response);
+    const capability=data.capabilities?.deep_research || data.capabilities?.research_synthesis;
+    if(!response.ok || !capability || capability.status!=='available'){
+      button.disabled=true;
+      status.textContent=`Research runtime unavailable: ${capability?.detail || httpMessage(response,data)}`;
+      return;
+    }
+    status.textContent=`Research runtime ready: ${capability.provider || 'provider'} / ${capability.model || 'model'}`;
+  }catch(error){
+    button.disabled=true;
+    status.textContent='Research capability check failed.';
+  }
+}
+async function renderMarkdown(markdown) {
+  const response = await fetch('/api/v1/ui/render-markdown', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({markdown}),
+  });
+  if (!response.ok) {
+    throw new Error(`Markdown rendering failed: ${response.status}`);
+  }
+  return await response.text();
+}
+async function runResearch(){
+  const report = document.getElementById('report');
+  const raw = document.getElementById('report-raw');
+  const status = document.getElementById('research-status');
+  const button = document.getElementById('run-research');
+  const query = document.getElementById('query').value.trim();
+  const adapter = modeAdapters[researchMode];
+  if (query.length < 3) {
+    status.textContent = 'Please enter a research question with at least 3 characters.';
+    return;
+  }
+  button.disabled = true;
+  activeTaskRunning = true;
+  runStartedAt = Date.now();
+  status.textContent = `${adapter.label} running...`;
+  report.innerHTML = "<p class='muted'>Generating report...</p>";
+  raw.hidden = true;
+  try {
+    const {response, data} = await adapter.submit(query);
+    if (!response.ok) {
+      throw new Error(httpMessage(response, data));
+    }
+    const normalized = adapter.normalize(data);
+    updateTaskStatus(normalized, data);
+    raw.textContent = JSON.stringify({execution_mode: researchMode, ...data}, null, 2);
+    if (normalized.paused) {
+      currentReportMarkdown = '';
+      report.textContent = `${adapter.label} paused\\n\\nTask: ${normalized.taskId || ''}\\nReason: ${normalized.stopReason || 'paused'}`;
+      status.textContent = `${adapter.label} paused`;
+      return;
+    }
+    if (!normalized.succeeded) {
+      currentReportMarkdown = '';
+      report.textContent = [
+        `${adapter.label} failed`,
+        '',
+        `Mode: ${adapter.label}`,
+        `Status: ${normalized.status || 'UNKNOWN'}`,
+        `Task: ${normalized.taskId || ''}`,
+        `Reason: ${normalized.stopReason || ''}`,
+        `Provider requests: ${normalized.providerRequests ?? 0}`,
+        `Tokens: ${normalized.tokens ?? 0}`,
+        `Estimated cost: ${normalized.cost ?? 0}`,
+      ].join('\\n');
+      status.textContent = `${adapter.label} failed`;
+      return;
+    }
+    currentReportMarkdown = normalized.report || '';
+    if (researchMode === 'workflow') {
+      if (!currentReportMarkdown.trim()) {
+        throw new Error('Research response contract error: completed task has no report.');
+      }
+      const modeHeader = `Execution Mode\\n${adapter.label}\\n\\nExecution\\nWorkflow\\n\\nOrchestration\\nPredefined\\n\\nRAG\\nFrozen Current Hybrid\\n\\n`;
+      report.innerHTML = await renderMarkdown(modeHeader + currentReportMarkdown);
+      raw.textContent = currentReportMarkdown;
+    } else {
+      currentReportMarkdown = '';
+      report.innerHTML = [
+        `<h1>Execution Mode</h1><p>${esc(adapter.label)}</p>`,
+        '<h2>Execution Summary</h2>',
+        '<table><tbody>',
+        `<tr><th>Control</th><td>State / observation-driven</td></tr>`,
+        `<tr><th>RAG</th><td>Frozen Current Hybrid</td></tr>`,
+        `<tr><th>Status</th><td>${esc(normalized.status)}</td></tr>`,
+        `<tr><th>Verification</th><td>${esc(normalized.agent?.verification || '-')}</td></tr>`,
+        `<tr><th>Evidence count</th><td>${esc(normalized.agent?.evidenceCount ?? 0)}</td></tr>`,
+        `<tr><th>Tool calls</th><td>${esc(normalized.agent?.toolCalls ?? 0)}</td></tr>`,
+        `<tr><th>Replan</th><td>${esc(normalized.agent?.replanCount ?? 0)}</td></tr>`,
+        '</tbody></table>',
+        '<h2>Sanitized Agent Trace</h2>',
+        `<pre>${esc(normalized.agent?.trace || 'No sanitized trace returned.')}</pre>`,
+      ].join('');
+    }
+    status.textContent = `${adapter.label} completed · task ${normalized.taskId || 'unknown'} · ${normalized.status || 'unknown'}`;
+  } catch (error) {
+    currentReportMarkdown = '';
+    report.textContent = error instanceof Error ? error.message : 'Research failed.';
+    raw.textContent = '';
+    status.textContent = `${modeAdapters[researchMode].label} failed`;
+  } finally {
+    button.disabled = false;
+    activeTaskRunning = false;
+  }
+}
+async function copyReport() {
+  const status = document.getElementById('research-status');
+  if (!currentReportMarkdown) {
+    status.textContent = 'No Markdown report to copy. Use View Raw for structured Agent output.';
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(currentReportMarkdown);
+    status.textContent = 'Markdown copied.';
+  } catch (error) {
+    status.textContent = 'Copy failed. Use View Raw and copy manually.';
+  }
+}
+function toggleRaw() {
+  const raw = document.getElementById('report-raw');
+  raw.hidden = !raw.hidden;
+}
+function fillExampleQuery() {
+  document.getElementById('query').value =
+    'Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.';
+}
+function resetResearchState() {
+  activeTaskRunning = false;
+  runStartedAt = null;
+  currentReportMarkdown = '';
+  document.getElementById('report').innerHTML = "<p class='muted'>Waiting</p>";
+  document.getElementById('report-raw').textContent = '';
+  document.getElementById('report-raw').hidden = true;
+  document.getElementById('research-status').textContent = '';
+  clearTaskStatus();
+}
+selectResearchMode(researchMode);
+checkResearchCapabilities();
+</script>
+"""
+
+
 def page(title: str, body: str) -> HTMLResponse:
     return HTMLResponse(
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
@@ -58,7 +447,7 @@ def page(title: str, body: str) -> HTMLResponse:
         ".grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}"
         "</style></head><body><nav><a href='/api/v1/ui'>Dashboard</a>"
         "<a href='/api/v1/ui/library'>Library</a><a href='/api/v1/ui/search'>Search</a>"
-        "<a href='/api/v1/ui/research'>Deep Research</a>"
+        "<a href='/api/v1/ui/research'>Research</a>"
         "<a href='/api/v1/ui/evaluation'>Evaluation</a>"
         "<a href='/api/v1/ui/gold-review'>Gold Review</a><a href='/docs'>API Docs</a>"
         f"</nav>{body}</body></html>"
@@ -78,7 +467,11 @@ def dashboard() -> HTMLResponse:
         for title, description, url in (
             ("Paper Library", "Inspect parse, index, and analysis status.", "/api/v1/ui/library"),
             ("External Search", "Search arXiv and Semantic Scholar.", "/api/v1/ui/search"),
-            ("Deep Research", "Run the budgeted evidence workflow.", "/api/v1/ui/research"),
+            (
+                "Research",
+                "Choose Deep Research Workflow or Research Agent.",
+                "/api/v1/ui/research",
+            ),
             ("Evaluation", "Read reproducible RC audit reports.", "/api/v1/ui/evaluation"),
         )
     )
@@ -277,8 +670,9 @@ def search_page() -> HTMLResponse:
 
 @router.get("/research", response_class=HTMLResponse)
 def research_page() -> HTMLResponse:
+    return page("Research", RESEARCH_MODE_UI)
     return page(
-        "Deep Research",
+        "Research",
         """
         <h1>Deep Research</h1><div class='card'>
         <textarea id='query' rows='4' style='width:95%'
