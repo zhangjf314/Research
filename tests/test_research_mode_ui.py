@@ -24,6 +24,16 @@ def test_research_ui_exposes_two_explicit_modes() -> None:
     assert "default" not in html.lower() or "workflow" in html.lower()
 
 
+def test_dashboard_exposes_dual_research_mode_entries() -> None:
+    html = TestClient(create_app()).get("/api/v1/ui").text
+
+    assert "Research execution modes" in html
+    assert "Deep Research Workflow" in html
+    assert "Research Agent" in html
+    assert "/api/v1/ui/research?mode=workflow" in html
+    assert "/api/v1/ui/research?mode=agent" in html
+
+
 def test_research_ui_routes_workflow_and_agent_to_separate_endpoints() -> None:
     html = _research_html()
 

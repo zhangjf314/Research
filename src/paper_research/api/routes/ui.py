@@ -461,6 +461,26 @@ def render_markdown_fragment(payload: MarkdownRenderRequest) -> HTMLResponse:
 
 @router.get("", response_class=HTMLResponse)
 def dashboard() -> HTMLResponse:
+    research_mode_cards = """
+        <section class='card'>
+          <h2>Research execution modes</h2>
+          <p class='muted'>Workflow and Agent share the same frozen Current Hybrid RAG backend. Choose one execution mode explicitly.</p>
+          <div class='grid'>
+            <section class='card'>
+              <h2>Deep Research Workflow</h2>
+              <p><strong>Predefined research orchestration</strong></p>
+              <p>Fixed orchestration for retrieval, evidence synthesis, and verification.</p>
+              <a href='/api/v1/ui/research?mode=workflow'>Open Workflow</a>
+            </section>
+            <section class='card'>
+              <h2>Research Agent</h2>
+              <p><strong>State/observation-driven research execution</strong></p>
+              <p>Planner, dynamic tools, Evidence State, verification, checkpoint, and bounded replan.</p>
+              <a href='/api/v1/ui/research?mode=agent'>Open Agent</a>
+            </section>
+          </div>
+        </section>
+    """
     cards = "".join(
         f"<section class='card'><h2>{title}</h2><p>{description}</p>"
         f"<a href='{url}'>Open</a></section>"
@@ -479,6 +499,7 @@ def dashboard() -> HTMLResponse:
         "PaperResearch Agent",
         "<h1>PaperResearch Agent</h1>"
         "<p class='muted'>Paper RAG and evidence-oriented research assistant.</p>"
+        f"{research_mode_cards}"
         f"<div class='grid'>{cards}</div>",
     )
 
