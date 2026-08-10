@@ -1,0 +1,131 @@
+{
+  "schema_version": "provider-schema-reliability-audit-v1",
+  "branch": "fix/v1.1.1-provider-schema-reliability",
+  "baseline": {
+    "tag": "v1.1.0-portfolio",
+    "commit": "e407f22b74616cc0a525e3749392af63c55ab510"
+  },
+  "patch_commits": {
+    "r1": "b7bbf5ad598c68ac6b31ef1a9435ff3ba7de5ce6",
+    "r2": "21224ce8dbecbea8ec4513c40ee46600a324b56a",
+    "r3": "da87190fdb2f391a8ecdceb333adcbee8e95fdc1"
+  },
+  "latest_failure_task": "015f3f64-233a-4b88-baf7-6a4686005427",
+  "new_provider_requests_for_audit": 0,
+  "latest_failure": {
+    "section": "results",
+    "claims_count": 2,
+    "evidence_gap_count": 1,
+    "insufficient_evidence": true,
+    "citations": ["E01", "E03"],
+    "citations_known": true,
+    "citations_in_section_allowlist": true,
+    "evidence_validation_pass": true,
+    "duplicate_validation_pass_after_derivation": true,
+    "only_original_failure": "insufficient_evidence=true with non-empty claims",
+    "second_attempt_returned_same_contradictory_state": true,
+    "latest_failure_can_be_safely_derived": true
+  },
+  "insufficient_evidence_semantics": {
+    "domain_meaning": "A final section has no supported claims and must expose an evidence_gap.",
+    "provider_draft_meaning": "A non-authoritative hint that may indicate partial or missing evidence.",
+    "partial_evidence": "Represented as supported claims plus a preserved gap promoted to research_gaps.",
+    "boolean_evidence_state_too_coarse": true
+  },
+  "truth_table": [
+    {
+      "claims": "present",
+      "evidence_gap": "absent",
+      "provider_insufficient_evidence": false,
+      "current_domain_legal_before_r4": true,
+      "r4_derived_domain_state": "supported"
+    },
+    {
+      "claims": "present",
+      "evidence_gap": "present",
+      "provider_insufficient_evidence": false,
+      "current_domain_legal_before_r4": false,
+      "r4_derived_domain_state": "supported_with_gap_preserved_as_research_gap"
+    },
+    {
+      "claims": "present",
+      "evidence_gap": "present",
+      "provider_insufficient_evidence": true,
+      "current_domain_legal_before_r4": false,
+      "r4_derived_domain_state": "supported_with_gap_preserved_as_research_gap"
+    },
+    {
+      "claims": "absent",
+      "evidence_gap": "present",
+      "provider_insufficient_evidence": true,
+      "current_domain_legal_before_r4": true,
+      "r4_derived_domain_state": "insufficient"
+    },
+    {
+      "claims": "absent",
+      "evidence_gap": "present",
+      "provider_insufficient_evidence": false,
+      "current_domain_legal_before_r4": false,
+      "r4_derived_domain_state": "insufficient"
+    },
+    {
+      "claims": "absent",
+      "evidence_gap": "absent",
+      "provider_insufficient_evidence": true,
+      "current_domain_legal_before_r4": false,
+      "r4_derived_domain_state": "invalid"
+    }
+  ],
+  "provider_schema_fields": {
+    "content_generated": [
+      "title",
+      "executive_summary",
+      "section.summary",
+      "section.claims[].text",
+      "section.claims[].citation_ids",
+      "consensus[].text",
+      "consensus[].citation_ids",
+      "disagreements[].text",
+      "disagreements[].citation_ids",
+      "research_gaps[].text",
+      "research_gaps[].citation_ids",
+      "research_gaps[].is_inference"
+    ],
+    "model_judgment": [
+      "section.evidence_gap",
+      "research_gaps"
+    ],
+    "derivable_state": [
+      "section.insufficient_evidence"
+    ],
+    "redundant_state": [
+      "section.insufficient_evidence with section.claims",
+      "section.insufficient_evidence with section.evidence_gap"
+    ],
+    "system_control_state": [
+      "schema_parse_status",
+      "validation_errors",
+      "report_quality",
+      "status",
+      "stop_reason",
+      "usage",
+      "cost"
+    ]
+  },
+  "multiple_sources_of_truth": [
+    "section.claims",
+    "section.evidence_gap",
+    "section.insufficient_evidence"
+  ],
+  "provider_schema_overconstrained": true,
+  "provider_schema_equals_domain_schema_before_r4": true,
+  "compiler_layer_recommended": true,
+  "implemented_option": "A",
+  "patch_safe": true,
+  "public_api_change_required": false,
+  "semantic_behavior_change_required": false,
+  "quality_gates_changed": false,
+  "stage4_results_unchanged": true,
+  "benchmark_rerun": false,
+  "v1_1_1_release_ready": false
+}

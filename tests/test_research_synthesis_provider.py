@@ -10,6 +10,7 @@ from paper_research.agents.research_synthesis_provider import (
     DeepSeekResearchSynthesisProvider,
     ResearchGap,
     ResearchSynthesis,
+    compile_synthesis_draft,
 )
 from paper_research.providers.llm import (
     LLMProviderError,
@@ -323,6 +324,95 @@ def test_duplicate_bullet_repair_fails_closed_after_second_attempt() -> None:
     assert exc.value.error_code == "FAILED_PROVIDER_SCHEMA"
     assert exc.value.api_request_count == 2
     assert len(provider.calls) == 2
+
+
+def test_provider_draft_derives_insufficient_evidence_from_claim_structure() -> None:
+    payload = valid_payload()
+    payload["sections"][2]["insufficient_evidence"] = True
+    payload["sections"][2]["evidence_gap"] = "Specific benchmark coverage is incomplete."
+
+    compiled = compile_synthesis_draft(payload)
+
+    results = next(
+        section for section in compiled.synthesis.sections
+        if section.section_id == "results"
+    )
+    assert results.insufficient_evidence is False
+    assert results.claims
+    assert results.evidence_gap is None
+    assert compiled.provider_state_conflict_detected_count == 1
+    assert "sections.results.insufficient_evidence" in compiled.derived_state_fields
+    assert "sections.results.evidence_gap" in compiled.derived_state_fields
+    assert any(
+        gap.text.startswith("results: Specific benchmark coverage")
+        for gap in compiled.synthesis.research_gaps
+    )
+
+
+def test_provider_draft_derives_insufficient_section_when_claims_absent() -> None:
+    payload = valid_payload()
+    payload["sections"][2]["claims"] = []
+    payload["sections"][2]["insufficient_evidence"] = False
+    payload["sections"][2]["evidence_gap"] = "No quantitative results were found."
+
+    compiled = compile_synthesis_draft(payload)
+
+    results = next(
+        section for section in compiled.synthesis.sections
+        if section.section_id == "results"
+    )
+    assert results.insufficient_evidence is True
+    assert results.claims == []
+    assert results.evidence_gap == "No quantitative results were found."
+    assert compiled.derived_insufficient_evidence_count == 1
+    assert compiled.provider_state_conflict_detected_count == 1
+
+
+def test_provider_draft_rejects_empty_section_without_gap() -> None:
+    payload = valid_payload()
+    payload["sections"][2]["claims"] = []
+    payload["sections"][2]["insufficient_evidence"] = False
+    payload["sections"][2]["evidence_gap"] = None
+
+    with pytest.raises(ValueError, match="no claims and no evidence_gap"):
+        compile_synthesis_draft(payload)
+
+
+def test_provider_draft_result_preserves_public_domain_schema() -> None:
+    payload = valid_payload()
+    payload["sections"][2]["insufficient_evidence"] = True
+    payload["sections"][2]["evidence_gap"] = "Partial evidence remains."
+
+    compiled = compile_synthesis_draft(payload)
+    dumped = compiled.synthesis.model_dump()
+
+    assert set(dumped) == {
+        "title",
+        "executive_summary",
+        "sections",
+        "consensus",
+        "disagreements",
+        "research_gaps",
+    }
+    assert "insufficient_evidence" in dumped["sections"][2]
+    assert dumped["sections"][2]["insufficient_evidence"] is False
+
+
+def test_adapter_accepts_legacy_provider_state_hint_without_retry() -> None:
+    payload = valid_payload()
+    payload["sections"][2]["insufficient_evidence"] = True
+    payload["sections"][2]["evidence_gap"] = "Specific benchmark coverage is incomplete."
+    provider = FakeStructuredProvider([payload])
+
+    result = synthesize(provider)
+
+    assert result.request_attempt_count == 1
+    assert result.provider_state_conflict_detected_count == 1
+    assert result.synthesis.sections[2].insufficient_evidence is False
+    assert any(
+        gap.text.startswith("results: Specific benchmark coverage")
+        for gap in result.synthesis.research_gaps
+    )
 
 
 def test_schema_failure_updates_runtime_raw_response_diagnostics(tmp_path: Path) -> None:

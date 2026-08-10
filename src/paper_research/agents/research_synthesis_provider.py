@@ -58,6 +58,18 @@ class ResearchSection(BaseModel):
         return self
 
 
+class ResearchSectionDraft(BaseModel):
+    """Provider-facing section draft with non-authoritative state hints."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    section_id: SectionId
+    summary: str = Field(min_length=1, max_length=4_000)
+    claims: list[ResearchClaim] = Field(default_factory=list)
+    insufficient_evidence: bool | None = None
+    evidence_gap: str | None = None
+
+
 class ResearchGap(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -92,6 +104,35 @@ class ResearchSynthesis(BaseModel):
         return self
 
 
+class ResearchSynthesisDraft(BaseModel):
+    """Provider-facing synthesis draft.
+
+    The provider writes content fields. Deterministic state fields such as
+    section ``insufficient_evidence`` are treated as hints and compiled into
+    the stricter domain ``ResearchSynthesis`` model.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(min_length=1, max_length=300)
+    executive_summary: str = Field(min_length=1, max_length=4_000)
+    sections: list[ResearchSectionDraft]
+    consensus: list[ResearchClaim] = Field(default_factory=list)
+    disagreements: list[ResearchClaim] = Field(default_factory=list)
+    research_gaps: list[ResearchGap] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_sections(self) -> ResearchSynthesisDraft:
+        section_ids = [section.section_id for section in self.sections]
+        if sorted(section_ids) != sorted(EXPECTED_SECTIONS):
+            raise ValueError(
+                "research synthesis draft must contain each required section exactly once"
+            )
+        if len(section_ids) != len(set(section_ids)):
+            raise ValueError("duplicate research section")
+        return self
+
+
 class ResearchSynthesisResult(BaseModel):
     synthesis: ResearchSynthesis
     usage: ModelUsage = Field(default_factory=ModelUsage)
@@ -104,6 +145,8 @@ class ResearchSynthesisResult(BaseModel):
     retry_reasons: list[str] = Field(default_factory=list)
     normalization_events: list[str] = Field(default_factory=list)
     total_latency_ms: float = 0
+    provider_state_conflict_detected_count: int = 0
+    derived_insufficient_evidence_count: int = 0
 
 
 class CitationScopeViolation(BaseModel):
@@ -175,6 +218,15 @@ class DuplicateBulletValidationError(ValueError):
             "duplicate report bullets detected for sections: "
             + ", ".join(sections)
         )
+
+
+class ResearchSynthesisCompilerResult(BaseModel):
+    synthesis: ResearchSynthesis
+    provider_draft_parse_status: str = "passed"
+    derived_state_fields: list[str] = Field(default_factory=list)
+    derived_insufficient_evidence_count: int = 0
+    provider_state_conflict_detected_count: int = 0
+    compiler_validation_failures: list[str] = Field(default_factory=list)
 
 
 class StructuredJSONProvider(Protocol):
@@ -315,7 +367,8 @@ class DeepSeekResearchSynthesisProvider:
                     )
                     repaired_section_count = len(repairing_sections)
                 last_payload = payload
-                synthesis = ResearchSynthesis.model_validate(payload)
+                compiler = compile_synthesis_draft(payload)
+                synthesis = compiler.synthesis
                 _validate_synthesis_citations(
                     synthesis,
                     allowed_citation_ids=allowed,
@@ -340,6 +393,17 @@ class DeepSeekResearchSynthesisProvider:
                             "citation_violation_count": 0,
                             "duplicate_violation_count": 0,
                             "post_repair_validation_failures": [],
+                            "provider_draft_parse_status": compiler.provider_draft_parse_status,
+                            "derived_state_fields": compiler.derived_state_fields,
+                            "derived_insufficient_evidence_count": (
+                                compiler.derived_insufficient_evidence_count
+                            ),
+                            "provider_state_conflict_detected_count": (
+                                compiler.provider_state_conflict_detected_count
+                            ),
+                            "compiler_validation_failures": (
+                                compiler.compiler_validation_failures
+                            ),
                             "repaired_section_ids": sorted(repairing_sections),
                             "unchanged_section_count": (
                                 len(EXPECTED_SECTIONS) - repaired_section_count
@@ -360,6 +424,12 @@ class DeepSeekResearchSynthesisProvider:
                     retry_reasons=retry_reasons,
                     normalization_events=normalization_events,
                     total_latency_ms=result.total_latency_ms,
+                    provider_state_conflict_detected_count=(
+                        compiler.provider_state_conflict_detected_count
+                    ),
+                    derived_insufficient_evidence_count=(
+                        compiler.derived_insufficient_evidence_count
+                    ),
                 )
             except LLMProviderError as exc:
                 if exc.error_code not in {
@@ -495,6 +565,74 @@ def _validate_synthesis_citations(
         raise CitationScopeValidationError(violations)
 
 
+def compile_synthesis_draft(payload: object) -> ResearchSynthesisCompilerResult:
+    """Compile a provider-facing draft into the strict domain synthesis model."""
+
+    draft = ResearchSynthesisDraft.model_validate(payload)
+    derived_state_fields: list[str] = []
+    derived_insufficient_evidence_count = 0
+    provider_state_conflict_detected_count = 0
+    sections: list[ResearchSection] = []
+    research_gaps = list(draft.research_gaps)
+    for section in draft.sections:
+        gap = (section.evidence_gap or "").strip()
+        if section.claims:
+            if section.insufficient_evidence is True:
+                provider_state_conflict_detected_count += 1
+            if section.insufficient_evidence is not False:
+                derived_state_fields.append(f"sections.{section.section_id}.insufficient_evidence")
+            if gap:
+                research_gaps.append(
+                    ResearchGap(
+                        text=f"{section.section_id}: {gap}",
+                        citation_ids=[],
+                        is_inference=True,
+                    )
+                )
+                derived_state_fields.append(f"sections.{section.section_id}.evidence_gap")
+            sections.append(
+                ResearchSection(
+                    section_id=section.section_id,
+                    summary=section.summary,
+                    claims=section.claims,
+                    insufficient_evidence=False,
+                    evidence_gap=None,
+                )
+            )
+            continue
+        if not gap:
+            raise ValueError(
+                f"section {section.section_id} has no claims and no evidence_gap"
+            )
+        if section.insufficient_evidence is not True:
+            provider_state_conflict_detected_count += 1
+            derived_state_fields.append(f"sections.{section.section_id}.insufficient_evidence")
+        derived_insufficient_evidence_count += 1
+        sections.append(
+            ResearchSection(
+                section_id=section.section_id,
+                summary=section.summary,
+                claims=[],
+                insufficient_evidence=True,
+                evidence_gap=gap,
+            )
+        )
+    synthesis = ResearchSynthesis(
+        title=draft.title,
+        executive_summary=draft.executive_summary,
+        sections=sections,
+        consensus=draft.consensus,
+        disagreements=draft.disagreements,
+        research_gaps=research_gaps,
+    )
+    return ResearchSynthesisCompilerResult(
+        synthesis=synthesis,
+        derived_state_fields=sorted(set(derived_state_fields)),
+        derived_insufficient_evidence_count=derived_insufficient_evidence_count,
+        provider_state_conflict_detected_count=provider_state_conflict_detected_count,
+    )
+
+
 def _validate_synthesis_duplicate_bullets(synthesis: ResearchSynthesis) -> None:
     """Fail on report-bullet duplicates before returning synthesis to the graph.
 
@@ -606,6 +744,15 @@ def _schema_failure_diagnostics(
         "citation_violation_count": len(citation_details),
         "duplicate_violation_count": len(duplicate_details),
         "post_repair_validation_failures": failure_types,
+        "provider_draft_parse_status": _provider_draft_parse_status(error),
+        "derived_state_fields": [],
+        "derived_insufficient_evidence_count": 0,
+        "provider_state_conflict_detected_count": 0,
+        "compiler_validation_failures": (
+            []
+            if citation_details or duplicate_details
+            else failure_types
+        ),
     }
     if isinstance(payload, dict):
         updates["content_top_level_fields"] = sorted(str(key) for key in payload)
@@ -632,6 +779,14 @@ def _structured_duplicate_violations(error: BaseException) -> list[dict[str, Any
     if not isinstance(error, DuplicateBulletValidationError):
         return []
     return [violation.model_dump() for violation in error.violations]
+
+
+def _provider_draft_parse_status(error: BaseException) -> str:
+    if isinstance(error, CitationScopeValidationError | DuplicateBulletValidationError):
+        return "passed"
+    if isinstance(error, ValidationError):
+        return "failed"
+    return "passed"
 
 
 def _violations_by_section(violations: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
