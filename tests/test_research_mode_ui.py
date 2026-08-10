@@ -63,6 +63,58 @@ def test_research_ui_shows_mode_specific_status_and_result_fields() -> None:
     assert "Execution Mode" in html
 
 
+def test_research_ui_gates_report_controls_on_real_report_body() -> None:
+    html = _research_html()
+
+    assert "id='report-title'>Research Output" in html
+    assert "id='report-actions' hidden" in html
+    assert "setReportControls(hasReportBody, title)" in html
+    assert "hasReportBody: typeof data.report === 'string' && data.report.trim().length > 0" in html
+    assert "setReportControls(true, 'Research Report')" in html
+    assert "setReportControls(false, `${adapter.label} Failure Details`)" in html
+
+
+def test_research_ui_agent_completed_without_report_is_not_labeled_report() -> None:
+    html = _research_html()
+
+    assert "Research Agent Execution Result" in html
+    assert "does not include a final narrative research report" in html
+    assert "if (normalized.hasReportBody)" in html
+    assert "setReportControls(false, 'Research Agent Execution Result')" in html
+
+
+def test_research_ui_uses_submitted_mode_as_single_source_of_truth() -> None:
+    html = _research_html()
+
+    assert "let taskExecutionMode = researchMode;" in html
+    assert "taskExecutionMode = researchMode;" in html
+    assert "const adapter = modeAdapters[taskExecutionMode];" in html
+    assert "execution_mode: taskExecutionMode" in html
+    assert "assertModeConsistency(researchMode, adapter)" in html
+
+
+def test_research_ui_workflow_stage_history_is_visited_not_success() -> None:
+    html = _research_html()
+
+    assert "Visited stages are not success indicators." in html
+    assert "Terminal status:" in html
+    assert (
+        "const visitedStages = (data.node_history || []).map((item, idx) => "
+        "`- ${idx + 1}. ${item}`)"
+    ) in html
+
+
+def test_research_ui_agent_trace_distinguishes_decision_events_from_tools() -> None:
+    html = _research_html()
+
+    assert "Decision event: ${lastTool.phase}" in html
+    assert "Decision event: ${phase}" in html
+    assert (
+        "const selectedTool = lastTool.tool || lastTool.tool_name || "
+        "lastTool.action || ''"
+    ) in html
+
+
 def test_research_ui_does_not_expose_private_reasoning_terms() -> None:
     html = _research_html().lower()
 

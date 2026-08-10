@@ -106,8 +106,8 @@ RESEARCH_MODE_UI = """
 </section>
 <section class='card report-card'>
   <div class='report-toolbar'>
-    <strong>Research Report</strong>
-    <div>
+    <strong id='report-title'>Research Output</strong>
+    <div id='report-actions' hidden>
       <button type='button' onclick='copyReport()'>Copy Markdown</button>
       <button type='button' onclick='toggleRaw()'>View Raw</button>
     </div>
@@ -119,6 +119,7 @@ RESEARCH_MODE_UI = """
 <script>
 let currentReportMarkdown = "";
 let researchMode = new URLSearchParams(window.location.search).get('mode') === 'agent' ? 'agent' : 'workflow';
+let taskExecutionMode = researchMode;
 let activeTaskRunning = false;
 let runStartedAt = null;
 const modeAdapters = {
@@ -143,6 +144,7 @@ const modeAdapters = {
         tokens: usage.total_tokens ?? 0,
         cost: usage.estimated_cost_usd ?? 0,
         report: typeof data.report === 'string' ? data.report : '',
+        hasReportBody: typeof data.report === 'string' && data.report.trim().length > 0,
         succeeded: data.status === 'COMPLETED' && data.succeeded === true && data.report_available === true,
         paused: data.status === 'PAUSED',
         stopReason: data.stop_reason || '',
@@ -163,7 +165,10 @@ const modeAdapters = {
     normalize(data) {
       const usage = data.token_usage || {};
       const tools = data.tool_history || [];
-      const lastTool = [...tools].reverse().find(item => item.tool || item.action || item.phase) || {};
+      const lastTool = [...tools].reverse().find(item => item.tool || item.tool_name || item.action || item.phase) || {};
+      const report = typeof data.report === 'string' ? data.report : '';
+      const selectedTool = lastTool.tool || lastTool.tool_name || lastTool.action || '';
+      const selectedToolDisplay = selectedTool || (lastTool.phase ? `Decision event: ${lastTool.phase}` : '-');
       return {
         taskId: data.task_id || '',
         status: data.status || data.failure_code || 'UNKNOWN',
@@ -171,21 +176,25 @@ const modeAdapters = {
         providerRequests: data.provider_call_count ?? 0,
         tokens: usage.total_tokens ?? usage.total ?? 0,
         cost: data.estimated_cost ?? 0,
-        report: '',
+        report,
+        hasReportBody: report.trim().length > 0,
         succeeded: data.status === 'COMPLETED',
         paused: data.status === 'PAUSED',
         stopReason: data.stop_reason || data.failure_code || '',
         agent: {
           planVersion: data.plan_version ?? '-',
           stepCount: data.step_count ?? 0,
-          selectedTool: lastTool.tool || lastTool.action || lastTool.phase || '-',
+          selectedTool: selectedToolDisplay,
           evidenceCount: data.evidence_count ?? 0,
           verification: data.verification_state?.status || data.verification_state?.verification_status || '-',
           toolCalls: data.tool_call_count ?? tools.length,
           replanCount: tools.filter(item => String(item.phase || item.action || '').toUpperCase().includes('REPLAN')).length,
           trace: tools.map((item, idx) => {
-            const phase = item.phase || item.action || item.tool || 'step';
+            let phase = item.phase || item.action || item.tool || 'step';
             const tool = item.tool || item.tool_name || item.action || '';
+            if (!tool) {
+              phase = `Decision event: ${phase}`;
+            }
             return `Step ${idx + 1}: ${phase}${tool && tool !== phase ? ' → ' + tool : ''}`;
           }).join('\\n') || 'No sanitized tool history returned.',
         },
@@ -202,12 +211,27 @@ function httpMessage(response, data){
   return data.detail || data.error?.message || `HTTP ${response.status}`;
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function setReportControls(hasReportBody, title) {
+  document.getElementById('report-title').textContent = title;
+  document.getElementById('report-actions').hidden = !hasReportBody;
+}
+function assertModeConsistency(mode, adapter) {
+  const mismatches = [];
+  if (document.getElementById('mode-label').textContent !== adapter.label) mismatches.push('mode label');
+  if (document.getElementById('mode-badge').textContent !== adapter.badge) mismatches.push('mode badge');
+  if (document.getElementById('run-research').textContent !== adapter.runLabel) mismatches.push('run button');
+  if (document.getElementById('status-mode').textContent !== adapter.label) mismatches.push('status mode');
+  if (mismatches.length) {
+    throw new Error(`Research mode UI mismatch for ${mode}: ${mismatches.join(', ')}`);
+  }
+}
 function selectResearchMode(mode) {
   if (activeTaskRunning) {
     document.getElementById('research-status').textContent = 'A task is running. Reset or wait for a terminal state before switching mode.';
     return;
   }
   researchMode = mode === 'agent' ? 'agent' : 'workflow';
+  taskExecutionMode = researchMode;
   const adapter = modeAdapters[researchMode];
   document.getElementById('mode-label').textContent = adapter.label;
   document.getElementById('mode-badge').textContent = adapter.badge;
@@ -222,6 +246,7 @@ function selectResearchMode(mode) {
   if (window.history?.replaceState) {
     window.history.replaceState(null, '', `/api/v1/ui/research?mode=${researchMode}`);
   }
+  assertModeConsistency(researchMode, adapter);
   clearTaskStatus();
 }
 function clearTaskStatus() {
@@ -243,16 +268,20 @@ function clearTaskStatus() {
 }
 function updateTaskStatus(normalized, data) {
   const elapsed = runStartedAt ? ((Date.now() - runStartedAt) / 1000).toFixed(1) + 's' : '-';
-  document.getElementById('status-mode').textContent = modeAdapters[researchMode].label;
+  document.getElementById('status-mode').textContent = modeAdapters[taskExecutionMode].label;
   document.getElementById('status-task-id').textContent = normalized.taskId || '-';
   document.getElementById('status-state').textContent = normalized.status || '-';
   document.getElementById('status-elapsed').textContent = elapsed;
   document.getElementById('status-provider-requests').textContent = normalized.providerRequests ?? 0;
   document.getElementById('status-tokens').textContent = normalized.tokens ?? 0;
   document.getElementById('status-cost').textContent = normalized.cost ?? 0;
-  if (researchMode === 'workflow') {
-    const stages = (data.node_history || []).map((item, idx) => `✓ ${idx + 1}. ${item}`).join('\\n');
-    document.getElementById('workflow-stages').textContent = stages || 'No workflow node history returned.';
+  if (taskExecutionMode === 'workflow') {
+    const visitedStages = (data.node_history || []).map((item, idx) => `- ${idx + 1}. ${item}`).join('\\n');
+    document.getElementById('workflow-stages').textContent = [
+      'Visited stages are not success indicators.',
+      `Terminal status: ${normalized.status || '-'}`,
+      visitedStages || 'No workflow node history returned.',
+    ].join('\\n');
   } else if (normalized.agent) {
     document.getElementById('agent-plan-version').textContent = normalized.agent.planVersion;
     document.getElementById('agent-step-count').textContent = normalized.agent.stepCount;
@@ -299,7 +328,8 @@ async function runResearch(){
   const status = document.getElementById('research-status');
   const button = document.getElementById('run-research');
   const query = document.getElementById('query').value.trim();
-  const adapter = modeAdapters[researchMode];
+  taskExecutionMode = researchMode;
+  const adapter = modeAdapters[taskExecutionMode];
   if (query.length < 3) {
     status.textContent = 'Please enter a research question with at least 3 characters.';
     return;
@@ -308,6 +338,7 @@ async function runResearch(){
   activeTaskRunning = true;
   runStartedAt = Date.now();
   status.textContent = `${adapter.label} running...`;
+  setReportControls(false, `${adapter.label} running`);
   report.innerHTML = "<p class='muted'>Generating report...</p>";
   raw.hidden = true;
   try {
@@ -317,15 +348,17 @@ async function runResearch(){
     }
     const normalized = adapter.normalize(data);
     updateTaskStatus(normalized, data);
-    raw.textContent = JSON.stringify({execution_mode: researchMode, ...data}, null, 2);
+    raw.textContent = JSON.stringify({execution_mode: taskExecutionMode, ...data}, null, 2);
     if (normalized.paused) {
       currentReportMarkdown = '';
+      setReportControls(false, `${adapter.label} Paused`);
       report.textContent = `${adapter.label} paused\\n\\nTask: ${normalized.taskId || ''}\\nReason: ${normalized.stopReason || 'paused'}`;
       status.textContent = `${adapter.label} paused`;
       return;
     }
     if (!normalized.succeeded) {
       currentReportMarkdown = '';
+      setReportControls(false, `${adapter.label} Failure Details`);
       report.textContent = [
         `${adapter.label} failed`,
         '',
@@ -341,19 +374,28 @@ async function runResearch(){
       return;
     }
     currentReportMarkdown = normalized.report || '';
-    if (researchMode === 'workflow') {
+    if (taskExecutionMode === 'workflow') {
       if (!currentReportMarkdown.trim()) {
         throw new Error('Research response contract error: completed task has no report.');
       }
+      setReportControls(true, 'Research Report');
       const modeHeader = `Execution Mode\\n${adapter.label}\\n\\nExecution\\nWorkflow\\n\\nOrchestration\\nPredefined\\n\\nRAG\\nFrozen Current Hybrid\\n\\n`;
       report.innerHTML = await renderMarkdown(modeHeader + currentReportMarkdown);
       raw.textContent = currentReportMarkdown;
     } else {
-      currentReportMarkdown = '';
-      report.innerHTML = [
-        `<h1>Execution Mode</h1><p>${esc(adapter.label)}</p>`,
+      if (normalized.hasReportBody) {
+        setReportControls(true, 'Research Report');
+        report.innerHTML = await renderMarkdown(currentReportMarkdown);
+        raw.textContent = currentReportMarkdown;
+      } else {
+        currentReportMarkdown = '';
+        setReportControls(false, 'Research Agent Execution Result');
+        report.innerHTML = [
+        `<h1>Research Agent Execution Result</h1>`,
+        '<p>This Agent runtime completed evidence gathering and verification, but the current Agent API response does not include a final narrative research report.</p>',
         '<h2>Execution Summary</h2>',
         '<table><tbody>',
+        `<tr><th>Mode</th><td>${esc(adapter.label)}</td></tr>`,
         `<tr><th>Control</th><td>State / observation-driven</td></tr>`,
         `<tr><th>RAG</th><td>Frozen Current Hybrid</td></tr>`,
         `<tr><th>Status</th><td>${esc(normalized.status)}</td></tr>`,
@@ -364,14 +406,16 @@ async function runResearch(){
         '</tbody></table>',
         '<h2>Sanitized Agent Trace</h2>',
         `<pre>${esc(normalized.agent?.trace || 'No sanitized trace returned.')}</pre>`,
-      ].join('');
+        ].join('');
+      }
     }
     status.textContent = `${adapter.label} completed · task ${normalized.taskId || 'unknown'} · ${normalized.status || 'unknown'}`;
   } catch (error) {
     currentReportMarkdown = '';
+    setReportControls(false, `${modeAdapters[taskExecutionMode].label} Failure Details`);
     report.textContent = error instanceof Error ? error.message : 'Research failed.';
     raw.textContent = '';
-    status.textContent = `${modeAdapters[researchMode].label} failed`;
+    status.textContent = `${modeAdapters[taskExecutionMode].label} failed`;
   } finally {
     button.disabled = false;
     activeTaskRunning = false;
@@ -401,7 +445,9 @@ function fillExampleQuery() {
 function resetResearchState() {
   activeTaskRunning = false;
   runStartedAt = null;
+  taskExecutionMode = researchMode;
   currentReportMarkdown = '';
+  setReportControls(false, 'Research Output');
   document.getElementById('report').innerHTML = "<p class='muted'>Waiting</p>";
   document.getElementById('report-raw').textContent = '';
   document.getElementById('report-raw').hidden = true;
