@@ -199,6 +199,74 @@ def test_report_quality_rejects_duplicate_sections_and_references() -> None:
     assert "cross_section_similarity" in quality.failures
 
 
+def test_report_quality_duplicate_bullet_key_preserves_fact_details() -> None:
+    base_kwargs = {
+        "sections": {
+            "background": "background",
+            "methods": "methods",
+            "results": "results",
+            "limitations": "limitations",
+        },
+        "evidence_catalog": {"E01": {"text": "allowed evidence", "paper_id": "p"}},
+        "section_evidence_ids": {"background": ["E01"]},
+    }
+
+    punctuation_duplicate = evaluate_report_quality(
+        "- Method A improves Dataset X. E01\n- method a improves dataset x! E02",
+        **base_kwargs,
+    )
+    assert punctuation_duplicate.normalized_duplicate_bullet_count == 1
+    assert "normalized_duplicate_bullet" in punctuation_duplicate.failures
+
+    numeric_difference = evaluate_report_quality(
+        "- Method A reduced error by 10%. E01\n- Method A reduced error by 20%. E01",
+        **base_kwargs,
+    )
+    assert numeric_difference.normalized_duplicate_bullet_count == 0
+    assert "normalized_duplicate_bullet" not in numeric_difference.failures
+
+    dataset_difference = evaluate_report_quality(
+        "- Method A improves Dataset X. E01\n- Method A improves Dataset Y. E01",
+        **base_kwargs,
+    )
+    assert dataset_difference.normalized_duplicate_bullet_count == 0
+
+    direction_difference = evaluate_report_quality(
+        "- Method A increases accuracy. E01\n- Method A decreases accuracy. E01",
+        **base_kwargs,
+    )
+    assert direction_difference.normalized_duplicate_bullet_count == 0
+
+
+def test_report_quality_does_not_count_reference_entries_as_duplicate_bullets() -> None:
+    quality = evaluate_report_quality(
+        "\n".join(
+            [
+                "# Report",
+                "## 3. Background",
+                "- Method A improves Dataset X. E01",
+                "## 9. References",
+                "- E01 paper-1, page 3, Method",
+                "- E02 paper-1, page 3, Method",
+            ]
+        ),
+        sections={
+            "background": "Method A improves Dataset X. E01",
+            "methods": "methods",
+            "results": "results",
+            "limitations": "limitations",
+        },
+        evidence_catalog={
+            "E01": {"text": "allowed evidence", "paper_id": "p"},
+            "E02": {"text": "allowed evidence", "paper_id": "p"},
+        },
+        section_evidence_ids={"background": ["E01"]},
+    )
+
+    assert quality.normalized_duplicate_bullet_count == 0
+    assert "normalized_duplicate_bullet" not in quality.failures
+
+
 def test_results_section_marks_insufficient_when_quantitative_evidence_missing() -> None:
     result = DeepResearchGraph(NoResultMetricProvider()).run("RAG background only")
 

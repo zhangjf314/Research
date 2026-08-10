@@ -3,9 +3,12 @@ from __future__ import annotations
 from paper_research.agents.research_synthesis_provider import (
     CitationScopeValidationError,
     CitationScopeViolation,
+    DuplicateBulletValidationError,
+    DuplicateBulletViolation,
     _invalid_section_ids,
     _merge_component_repair_payload,
     _research_component_repair_prompt,
+    _validate_synthesis_duplicate_bullets,
 )
 
 
@@ -74,7 +77,7 @@ def test_component_repair_targets_only_invalid_section_evidence() -> None:
     assert "SECTION: methods" not in prompt
     assert "<EVIDENCE id=\"E01\"" in prompt
     assert "<EVIDENCE id=\"E02\"" not in prompt
-    assert "Structured citation violations" in prompt
+    assert "Structured repairable violations" in prompt
     assert "CITATION_NOT_ALLOWED_FOR_SECTION" in prompt
 
 
@@ -167,3 +170,135 @@ def test_non_citation_error_uses_full_repair_target() -> None:
     )
 
     assert invalid == {"background", "methods", "results", "limitations"}
+
+
+def test_duplicate_bullet_repair_targets_both_sections() -> None:
+    payload = {
+        "sections": [
+            {"section_id": "background", "claims": [{"citation_ids": ["E01"]}]},
+            {"section_id": "methods", "claims": [{"citation_ids": ["E02"]}]},
+            {"section_id": "results", "claims": [{"citation_ids": ["E03"]}]},
+            {"section_id": "limitations", "claims": [{"citation_ids": ["E01"]}]},
+        ]
+    }
+    section_ids = {
+        "background": ["E01"],
+        "methods": ["E02"],
+        "results": ["E03"],
+        "limitations": ["E01"],
+    }
+    error = DuplicateBulletValidationError(
+        [
+            DuplicateBulletViolation(
+                section_id="limitations",
+                section_title="Limitations",
+                claim_path="sections[3].claims[0]",
+                claim_index=0,
+                raw_text="Method A has a repeated limitation.",
+                normalized_text="method a has a repeated limitation.",
+                citation_ids=["E01"],
+                duplicate_of_section_id="background",
+                duplicate_of_claim_path="sections[0].claims[0]",
+                duplicate_of_claim_index=0,
+                duplicate_of_raw_text="Method A has a repeated limitation.",
+                duplicate_of_citation_ids=["E01"],
+                exact_raw_duplicate=True,
+                normalized_duplicate=True,
+                same_section=False,
+                same_citations=True,
+            )
+        ]
+    )
+
+    invalid = _invalid_section_ids(
+        payload,
+        validation_error=error,
+        section_evidence_ids=section_ids,
+    )
+    prompt = _research_component_repair_prompt(
+        previous_payload=payload,
+        validation_error=error,
+        evidence_catalog={
+            "E01": {
+                "paper_id": "p1",
+                "text": "Shared evidence",
+                "section_path": ["Intro"],
+                "page_start": 1,
+                "page_end": 1,
+                "evidence_id": "b1",
+            },
+            "E02": {
+                "paper_id": "p2",
+                "text": "Methods evidence",
+                "section_path": ["Methods"],
+                "page_start": 2,
+                "page_end": 2,
+                "evidence_id": "b2",
+            },
+        },
+        section_evidence_ids=section_ids,
+        target_sections=invalid,
+    )
+
+    assert invalid == {"background", "limitations"}
+    assert "TRUE_EXACT_DUPLICATE" in prompt
+    assert "SECTION: background" in prompt
+    assert "SECTION: limitations" in prompt
+    assert "SECTION: methods" not in prompt
+    assert "<EVIDENCE id=\"E02\"" not in prompt
+
+
+def test_duplicate_bullet_detector_preserves_numeric_dataset_and_direction_details() -> None:
+    from paper_research.agents.research_synthesis_provider import (
+        ResearchSynthesis,
+    )
+
+    payload = {
+        "title": "t",
+        "executive_summary": "summary",
+        "sections": [
+            {
+                "section_id": "background",
+                "summary": "s",
+                "claims": [{"text": "Method A reduced error by 10%.", "citation_ids": ["E01"]}],
+                "insufficient_evidence": False,
+                "evidence_gap": None,
+            },
+            {
+                "section_id": "methods",
+                "summary": "s",
+                "claims": [{"text": "Method A reduced error by 20%.", "citation_ids": ["E02"]}],
+                "insufficient_evidence": False,
+                "evidence_gap": None,
+            },
+            {
+                "section_id": "results",
+                "summary": "s",
+                "claims": [{"text": "Method A improves Dataset X.", "citation_ids": ["E03"]}],
+                "insufficient_evidence": False,
+                "evidence_gap": None,
+            },
+            {
+                "section_id": "limitations",
+                "summary": "s",
+                "claims": [{"text": "Method A improves Dataset Y.", "citation_ids": ["E04"]}],
+                "insufficient_evidence": False,
+                "evidence_gap": None,
+            },
+        ],
+        "consensus": [],
+        "disagreements": [],
+        "research_gaps": [],
+    }
+    _validate_synthesis_duplicate_bullets(ResearchSynthesis.model_validate(payload))
+
+    payload["sections"][3]["claims"][0]["text"] = "Method A decreases accuracy."
+    _validate_synthesis_duplicate_bullets(ResearchSynthesis.model_validate(payload))
+
+    payload["sections"][3]["claims"][0]["text"] = "method a improves dataset x!"
+    try:
+        _validate_synthesis_duplicate_bullets(ResearchSynthesis.model_validate(payload))
+    except DuplicateBulletValidationError as exc:
+        assert exc.violations[0].validation_code == "TRUE_EXACT_DUPLICATE"
+    else:  # pragma: no cover
+        raise AssertionError("expected punctuation/casing duplicate")

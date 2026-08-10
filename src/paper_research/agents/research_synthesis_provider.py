@@ -8,6 +8,7 @@ from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
+from paper_research.agents.report_quality import normalize_duplicate_bullet_text
 from paper_research.agents.research_models import ResearchEvidence
 from paper_research.providers.llm import (
     LLMProviderError,
@@ -130,6 +131,52 @@ class CitationScopeValidationError(ValueError):
         )
 
 
+class DuplicateBulletViolation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    section_id: str
+    section_title: str | None = None
+    claim_path: str
+    claim_index: int | None = None
+    raw_text: str
+    normalized_text: str
+    citation_ids: list[str] = Field(default_factory=list)
+    duplicate_of_section_id: str
+    duplicate_of_claim_path: str
+    duplicate_of_claim_index: int | None = None
+    duplicate_of_raw_text: str
+    duplicate_of_citation_ids: list[str] = Field(default_factory=list)
+    exact_raw_duplicate: bool
+    normalized_duplicate: bool
+    same_section: bool
+    same_citations: bool
+    validation_code: str = "TRUE_EXACT_DUPLICATE"
+    validation_message: str = (
+        "A section claim duplicates another report bullet after deterministic "
+        "normalization. Preserve section semantics by rewriting or merging only "
+        "the affected section claims with section-allowed evidence."
+    )
+
+
+class DuplicateBulletValidationError(ValueError):
+    def __init__(self, violations: list[DuplicateBulletViolation]) -> None:
+        self.violations = violations
+        sections = sorted(
+            {
+                violation.section_id
+                for violation in violations
+            }
+            | {
+                violation.duplicate_of_section_id
+                for violation in violations
+            }
+        )
+        super().__init__(
+            "duplicate report bullets detected for sections: "
+            + ", ".join(sections)
+        )
+
+
 class StructuredJSONProvider(Protocol):
     provider_name: str
     model_name: str
@@ -216,7 +263,7 @@ class DeepSeekResearchSynthesisProvider:
                     section_evidence_ids=section_evidence_ids,
                 )
                 attempt_type = (
-                    "TARGETED_SECTION_REPAIR"
+                    "TARGETED_REPORT_REPAIR"
                     if repairing_sections and set(repairing_sections) != set(EXPECTED_SECTIONS)
                     else "FULL_SYNTHESIS_REPAIR"
                 )
@@ -259,7 +306,7 @@ class DeepSeekResearchSynthesisProvider:
                 if (
                     last_error is not None
                     and isinstance(last_payload, dict)
-                    and attempt_type == "TARGETED_SECTION_REPAIR"
+                    and attempt_type == "TARGETED_REPORT_REPAIR"
                 ):
                     payload = _merge_component_repair_payload(
                         previous_payload=last_payload,
@@ -274,6 +321,7 @@ class DeepSeekResearchSynthesisProvider:
                     allowed_citation_ids=allowed,
                     section_evidence_ids=section_evidence_ids,
                 )
+                _validate_synthesis_duplicate_bullets(synthesis)
                 if usage_records and usage_records[-1].raw_response_path:
                     _update_json_file(
                         Path(usage_records[-1].raw_response_path),
@@ -281,10 +329,17 @@ class DeepSeekResearchSynthesisProvider:
                             "schema_parse_status": "passed",
                             "validation_errors": [],
                             "section_repair_triggered": attempt_type
-                            == "TARGETED_SECTION_REPAIR",
+                            == "TARGETED_REPORT_REPAIR",
                             "section_repair_section_count": repaired_section_count,
                             "section_repair_success": attempt_type
-                            == "TARGETED_SECTION_REPAIR",
+                            == "TARGETED_REPORT_REPAIR",
+                            "repair_attempt_type": attempt_type,
+                            "full_validation_failures": [],
+                            "repairable_violation_count": 0,
+                            "repairable_sections": sorted(repairing_sections),
+                            "citation_violation_count": 0,
+                            "duplicate_violation_count": 0,
+                            "post_repair_validation_failures": [],
                             "repaired_section_ids": sorted(repairing_sections),
                             "unchanged_section_count": (
                                 len(EXPECTED_SECTIONS) - repaired_section_count
@@ -347,8 +402,9 @@ class DeepSeekResearchSynthesisProvider:
                                 "section_repair_triggered": bool(
                                     diagnostics.get("section_repair_triggered")
                                 )
-                                or attempt_type == "TARGETED_SECTION_REPAIR",
+                                or attempt_type == "TARGETED_REPORT_REPAIR",
                                 "section_repair_success": False,
+                                "repair_attempt_type": attempt_type,
                                 "repaired_section_ids": sorted(repairing_sections),
                             }
                         )
@@ -439,6 +495,63 @@ def _validate_synthesis_citations(
         raise CitationScopeValidationError(violations)
 
 
+def _validate_synthesis_duplicate_bullets(synthesis: ResearchSynthesis) -> None:
+    """Fail on report-bullet duplicates before returning synthesis to the graph.
+
+    This mirrors the rendered report's duplicate-bullet gate at the structured
+    claim layer. It intentionally preserves numbers, percentages, dataset names,
+    directionality, and method names because ``normalize_text`` only lowercases,
+    trims, and collapses whitespace.
+    """
+
+    seen: dict[str, dict[str, Any]] = {}
+    violations: list[DuplicateBulletViolation] = []
+    section_index_by_id = {
+        section_id: index for index, section_id in enumerate(EXPECTED_SECTIONS)
+    }
+    for section in synthesis.sections:
+        section_index = section_index_by_id[section.section_id]
+        for claim_index, claim in enumerate(section.claims):
+            normalized = normalize_duplicate_bullet_text(claim.text)
+            if not normalized:
+                continue
+            current = {
+                "section_id": section.section_id,
+                "claim_path": f"sections[{section_index}].claims[{claim_index}]",
+                "claim_index": claim_index,
+                "raw_text": claim.text,
+                "normalized_text": normalized,
+                "citation_ids": list(claim.citation_ids),
+            }
+            duplicate_of = seen.get(normalized)
+            if duplicate_of is None:
+                seen[normalized] = current
+                continue
+            violations.append(
+                DuplicateBulletViolation(
+                    section_id=section.section_id,
+                    section_title=section.section_id.title(),
+                    claim_path=current["claim_path"],
+                    claim_index=claim_index,
+                    raw_text=claim.text,
+                    normalized_text=normalized,
+                    citation_ids=list(claim.citation_ids),
+                    duplicate_of_section_id=str(duplicate_of["section_id"]),
+                    duplicate_of_claim_path=str(duplicate_of["claim_path"]),
+                    duplicate_of_claim_index=int(duplicate_of["claim_index"]),
+                    duplicate_of_raw_text=str(duplicate_of["raw_text"]),
+                    duplicate_of_citation_ids=list(duplicate_of["citation_ids"]),
+                    exact_raw_duplicate=claim.text == duplicate_of["raw_text"],
+                    normalized_duplicate=True,
+                    same_section=section.section_id == duplicate_of["section_id"],
+                    same_citations=list(claim.citation_ids)
+                    == list(duplicate_of["citation_ids"]),
+                )
+            )
+    if violations:
+        raise DuplicateBulletValidationError(violations)
+
+
 def _schema_failure_diagnostics(
     *,
     payload: object,
@@ -453,17 +566,27 @@ def _schema_failure_diagnostics(
         allowed_citation_ids=allowed_citation_ids,
         section_evidence_ids=section_evidence_ids,
     )
-    failure_types = _schema_failure_types(error, validation_errors, citation_details)
+    duplicate_details = _structured_duplicate_violations(error)
+    repairable_details = [*citation_details, *duplicate_details]
+    failure_types = _schema_failure_types(
+        error,
+        validation_errors,
+        citation_details,
+        duplicate_details,
+    )
     updates: dict[str, Any] = {
         "schema_parse_status": "failed",
         "validation_errors": validation_errors,
         "schema_failure_subtype": (
             "INVALID_CITATION_SCHEMA"
             if citation_details
+            else "REPORT_QUALITY_DUPLICATE_BULLET"
+            if duplicate_details
             else "PROVIDER_VALID_JSON_WRONG_SCHEMA"
         ),
         "failure_types": failure_types,
         "citation_allowlist_details": citation_details,
+        "duplicate_bullet_details": duplicate_details,
         "offending_citation_ids": sorted(
             {
                 citation_id
@@ -471,12 +594,18 @@ def _schema_failure_diagnostics(
                 for citation_id in detail.get("offending_citation_ids", [])
             }
         ),
-        "violations_by_section": _violations_by_section(citation_details),
-        "section_repair_triggered": bool(citation_details),
+        "violations_by_section": _violations_by_section(repairable_details),
+        "full_validation_failures": failure_types,
+        "repairable_violation_count": len(repairable_details),
+        "repairable_sections": _repairable_sections_from_details(repairable_details),
+        "section_repair_triggered": bool(repairable_details),
         "section_repair_section_count": len(
-            {detail.get("section_id") for detail in citation_details}
+            {detail.get("section_id") for detail in repairable_details}
         ),
-        "section_repair_violation_count": len(citation_details),
+        "section_repair_violation_count": len(repairable_details),
+        "citation_violation_count": len(citation_details),
+        "duplicate_violation_count": len(duplicate_details),
+        "post_repair_validation_failures": failure_types,
     }
     if isinstance(payload, dict):
         updates["content_top_level_fields"] = sorted(str(key) for key in payload)
@@ -499,15 +628,45 @@ def _structured_citation_violations(
     )
 
 
+def _structured_duplicate_violations(error: BaseException) -> list[dict[str, Any]]:
+    if not isinstance(error, DuplicateBulletValidationError):
+        return []
+    return [violation.model_dump() for violation in error.violations]
+
+
 def _violations_by_section(violations: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for violation in violations:
         section_id = str(violation.get("section_id") or "unknown")
         grouped.setdefault(section_id, []).append(violation)
+        duplicate_of = violation.get("duplicate_of_section_id")
+        if duplicate_of:
+            grouped.setdefault(str(duplicate_of), []).append(violation)
     return grouped
 
 
+def _repairable_sections_from_details(violations: list[dict[str, Any]]) -> list[str]:
+    sections: set[str] = set()
+    for violation in violations:
+        section_id = violation.get("section_id")
+        if section_id:
+            sections.add(str(section_id))
+        duplicate_of = violation.get("duplicate_of_section_id")
+        if duplicate_of:
+            sections.add(str(duplicate_of))
+    return sorted(sections)
+
+
 def _validation_error_details(error: BaseException) -> list[dict[str, str]]:
+    if isinstance(error, DuplicateBulletValidationError):
+        return [
+            {
+                "path": violation.claim_path,
+                "type": violation.validation_code,
+                "message": violation.validation_message[:1000],
+            }
+            for violation in error.violations
+        ]
     if isinstance(error, CitationScopeValidationError):
         return [
             {
@@ -539,11 +698,16 @@ def _schema_failure_types(
     error: BaseException,
     validation_errors: list[dict[str, str]],
     citation_details: list[dict[str, Any]],
+    duplicate_details: list[dict[str, Any]],
 ) -> list[str]:
     output = {"PROVIDER_VALID_JSON_WRONG_SCHEMA", "SYNTHESIS_SCHEMA_VALIDATION_ERROR"}
     if citation_details:
         output.add("INVALID_CITATION_SCHEMA")
         codes = {str(detail.get("validation_code")) for detail in citation_details}
+        output.update(code for code in codes if code)
+    if duplicate_details:
+        output.add("REPORT_QUALITY_DUPLICATE_BULLET")
+        codes = {str(detail.get("validation_code")) for detail in duplicate_details}
         output.update(code for code in codes if code)
     message = str(error)
     if "unknown citation IDs" in message:
@@ -734,6 +898,12 @@ def _invalid_section_ids(
     fallback = set(EXPECTED_SECTIONS)
     if isinstance(validation_error, CitationScopeValidationError):
         return {violation.section_id for violation in validation_error.violations}
+    if isinstance(validation_error, DuplicateBulletValidationError):
+        sections: set[str] = set()
+        for violation in validation_error.violations:
+            sections.add(violation.section_id)
+            sections.add(violation.duplicate_of_section_id)
+        return sections
     if not isinstance(previous_payload, dict):
         return fallback
     sections = previous_payload.get("sections")
@@ -825,11 +995,17 @@ def _research_component_repair_prompt(
         + json.dumps(sorted(target_sections), ensure_ascii=False)
         + "\nReturn sections for every target section and no other sections. "
         "Do not rename, split, merge, or omit target sections.\n"
+        "If duplicate-bullet violations are listed, preserve all distinct facts that have "
+        "independent section-allowed evidence, but eliminate repeated wording. If two "
+        "claims express the same fact, merge or narrow the affected section claim without "
+        "expanding factual scope. If the repeated fact belongs in only one section, rewrite "
+        "the other section so it serves that section objective using only section-allowed "
+        "evidence. "
         "If an existing claim cannot be supported by the allowed evidence for its section, "
         "rewrite it more narrowly, remove it, or mark the whole section insufficient using "
         "the existing section schema. Do not invent citations and do not keep unsupported "
         "claims without citations.\n"
-        "\n\nStructured citation violations:\n"
+        "\n\nStructured repairable violations:\n"
         + json.dumps(violations, ensure_ascii=False, indent=2)
         + "\n\nEach returned section must obey this shape:\n"
         '{"section_id":"background|methods|results|limitations","summary":"string",'
@@ -857,13 +1033,20 @@ def _violations_for_prompt(
     validation_error: BaseException,
     target_sections: set[str],
 ) -> list[dict[str, Any]]:
-    if not isinstance(validation_error, CitationScopeValidationError):
-        return []
-    return [
-        violation.model_dump()
-        for violation in validation_error.violations
-        if violation.section_id in target_sections
-    ]
+    if isinstance(validation_error, CitationScopeValidationError):
+        return [
+            violation.model_dump()
+            for violation in validation_error.violations
+            if violation.section_id in target_sections
+        ]
+    if isinstance(validation_error, DuplicateBulletValidationError):
+        return [
+            violation.model_dump()
+            for violation in validation_error.violations
+            if violation.section_id in target_sections
+            or violation.duplicate_of_section_id in target_sections
+        ]
+    return []
 
 
 def _previous_sections_for_prompt(
@@ -961,6 +1144,14 @@ def _canonical_non_target_sections(
 
 
 def _validation_error_summary(error: BaseException) -> list[str]:
+    if isinstance(error, DuplicateBulletValidationError):
+        return [
+            f"{violation.claim_path}: {violation.validation_code} - "
+            f"duplicates={violation.duplicate_of_claim_path}; "
+            f"same_section={violation.same_section}; "
+            f"same_citations={violation.same_citations}"
+            for violation in error.violations
+        ]
     if isinstance(error, CitationScopeValidationError):
         return [
             f"{violation.claim_path}: {violation.validation_code} - "

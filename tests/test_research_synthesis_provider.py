@@ -243,7 +243,7 @@ def test_cross_section_citation_repair_receives_specific_validation_error() -> N
     assert "SECTION: methods" not in repair_prompt
     assert '"E01"' in repair_prompt
     assert '<EVIDENCE id="E02"' not in repair_prompt
-    assert provider.calls[1]["request_context"]["attempt_type"] == "TARGETED_SECTION_REPAIR"
+    assert provider.calls[1]["request_context"]["attempt_type"] == "TARGETED_REPORT_REPAIR"
 
 
 def test_unknown_section_citation_uses_targeted_repair_without_inventing_lookup() -> None:
@@ -267,6 +267,55 @@ def test_targeted_repair_fails_closed_when_forbidden_citation_remains() -> None:
     bad["sections"][0]["claims"][0]["citation_ids"] = ["E02"]
     repaired = {"sections": [bad["sections"][0]]}
     provider = FakeStructuredProvider([bad, repaired])
+
+    with pytest.raises(LLMProviderError) as exc:
+        synthesize(provider)
+
+    assert exc.value.error_code == "FAILED_PROVIDER_SCHEMA"
+    assert exc.value.api_request_count == 2
+    assert len(provider.calls) == 2
+
+
+def test_duplicate_bullet_repair_targets_offending_sections_only() -> None:
+    bad = valid_payload()
+    bad["sections"][3]["claims"][0]["text"] = bad["sections"][0]["claims"][0]["text"]
+    bad["sections"][3]["claims"][0]["citation_ids"] = ["E04"]
+    repaired = {
+        "sections": [
+            valid_payload()["sections"][0],
+            {
+                **valid_payload()["sections"][3],
+                "claims": [
+                    {
+                        "text": "Limitations cite risk evidence.",
+                        "citation_ids": ["E04"],
+                    }
+                ],
+            },
+        ]
+    }
+    provider = FakeStructuredProvider([bad, repaired])
+
+    result = synthesize(provider)
+
+    assert result.request_attempt_count == 2
+    repair_prompt = provider.calls[1]["user_prompt"]
+    assert provider.calls[1]["request_context"]["attempt_type"] == "TARGETED_REPORT_REPAIR"
+    assert "TRUE_EXACT_DUPLICATE" in repair_prompt
+    assert "SECTION: background" in repair_prompt
+    assert "SECTION: limitations" in repair_prompt
+    assert "SECTION: methods" not in repair_prompt
+    assert "SECTION: results" not in repair_prompt
+    assert '<EVIDENCE id="E02"' not in repair_prompt
+    assert '<EVIDENCE id="E03"' not in repair_prompt
+    assert result.synthesis.sections[3].claims[0].text == "Limitations cite risk evidence."
+
+
+def test_duplicate_bullet_repair_fails_closed_after_second_attempt() -> None:
+    bad = valid_payload()
+    bad["sections"][3]["claims"][0]["text"] = bad["sections"][0]["claims"][0]["text"]
+    bad["sections"][3]["claims"][0]["citation_ids"] = ["E04"]
+    provider = FakeStructuredProvider([bad, {"sections": [bad["sections"][0], bad["sections"][3]]}])
 
     with pytest.raises(LLMProviderError) as exc:
         synthesize(provider)

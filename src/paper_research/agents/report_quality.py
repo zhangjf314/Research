@@ -32,6 +32,22 @@ def normalize_text(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip().lower())
 
 
+def normalize_duplicate_bullet_text(value: str) -> str:
+    """Normalize bullet text without erasing fact-bearing details.
+
+    The duplicate gate should ignore casing, whitespace, Markdown decoration,
+    safe punctuation differences, and citation-only differences. It must retain
+    numbers, percentages' numeric values, dataset names, method names, entities,
+    and directionality terms.
+    """
+
+    lowered = value.strip().lower()
+    without_citations = re.sub(r"\b[e]\d{2,3}\b|\[e\d+\]", " ", lowered)
+    without_markdown = re.sub(r"[*_`~]+", " ", without_citations)
+    tokenized = re.findall(r"[\w\u4e00-\u9fff]+", without_markdown)
+    return " ".join(tokenized)
+
+
 def normalized_tokens(value: str) -> set[str]:
     without_citations = re.sub(r"\b[e]\d{2,3}\b|\[e\d+\]", " ", value.lower())
     return set(re.findall(r"[\w\u4e00-\u9fff]+", without_citations))
@@ -69,11 +85,18 @@ def evaluate_report_quality(
         paragraph_counts[paragraph] = paragraph_counts.get(paragraph, 0) + 1
     duplicate_paragraphs = sum(count - 1 for count in paragraph_counts.values() if count > 1)
 
-    bullets = [
-        normalize_text(line[1:].strip())
-        for line in report.splitlines()
-        if line.strip().startswith("- ")
-    ]
+    bullets: list[str] = []
+    references_started = False
+    for line in report.splitlines():
+        if line.startswith("## 9."):
+            references_started = True
+            continue
+        if references_started:
+            continue
+        if line.strip().startswith("- "):
+            normalized_bullet = normalize_duplicate_bullet_text(line[1:].strip())
+            if normalized_bullet:
+                bullets.append(normalized_bullet)
     bullet_counts: dict[str, int] = {}
     for bullet in bullets:
         bullet_counts[bullet] = bullet_counts.get(bullet, 0) + 1
