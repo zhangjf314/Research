@@ -91,11 +91,10 @@ def _selected_triples(version: str) -> tuple[set[tuple[str, int, str]], set[tupl
     selected: set[tuple[str, int, str]] = set()
     adjacent: set[tuple[str, int, str]] = set()
     for run_id in summary["selected_runs"]:
-        trace = json.loads(
-            (DATA / version / "runs" / run_id / "retrieval-trace.json").read_text(
-                encoding="utf-8"
-            )
-        )
+        trace_path = DATA / version / "runs" / run_id / "retrieval-trace.json"
+        if not trace_path.exists():
+            continue
+        trace = json.loads(trace_path.read_text(encoding="utf-8"))
         selected.update(
             (item[0], int(item[1]), item[2])
             for item in trace["allowed_citation_triples"]

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 from scripts.finalize_research_agent_stage3d_v1 import stable_hash
 
@@ -53,7 +53,8 @@ def test_stage3_agent_behavior_hash_is_stable_and_source_backed() -> None:
 
     assert stable_hash(behavior) == lock["stage3_agent_behavior_hash"]
     for path, recorded_hash in behavior["source_hashes"].items():
-        assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == recorded_hash
+        source_path = Path(*PureWindowsPath(path).parts)
+        assert hashlib.sha256(source_path.read_bytes()).hexdigest() == recorded_hash
     assert behavior["runtime_includes_post_stage3c1_fixes"] == [
         "PARTIAL_FAIL_REPLAN_TRANSITION",
         "FINISH_GUARD",

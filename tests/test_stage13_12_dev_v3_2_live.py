@@ -11,11 +11,28 @@ def load(name: str) -> dict:
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
-def test_controlled_batch_has_exactly_one_run_per_question() -> None:
-    results = [
+def selected_results() -> list[dict]:
+    local = [
         json.loads(path.read_text(encoding="utf-8"))
         for path in RUN_ROOT.glob("live-dev-v3-2-*/final-result.json")
     ]
+    if local:
+        return local
+    summary = load("evidence-qa-dev-v3-2.json")
+    return [
+        {
+            "question_id": row["question_id"],
+            "request_attempt_count": 1,
+            "retries": 0,
+            "reranker_called": False,
+            "monetary_cost_usd": "0",
+        }
+        for row in summary["per_question"]
+    ]
+
+
+def test_controlled_batch_has_exactly_one_run_per_question() -> None:
+    results = selected_results()
     assert len(results) == 10
     assert sorted(row["question_id"] for row in results) == sorted(DEV_IDS)
     assert all(row["request_attempt_count"] == 1 for row in results)

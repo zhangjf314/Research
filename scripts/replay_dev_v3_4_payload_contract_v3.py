@@ -95,6 +95,25 @@ def historical_raw_payload(question_id: str) -> tuple[str, dict[str, Any]]:
                 "refusal_reason": "The supplied evidence does not report the requested total.",
             },
         )
+    if question_id == "q015":
+        return (
+            "sanitized-fixture-dev-v3-4-q015",
+            {
+                "answerable": True,
+                "required_claim_results": [
+                    {
+                        "required_claim_id": claim_id,
+                        "status": "supported",
+                        "claim_text": f"Sanitized historical claim fixture for {claim_id}.",
+                        "omission_reason": (
+                            "Sanitized historical conflict fixture preserving the "
+                            "Stage 13.16 q015 shape failure."
+                        ),
+                    }
+                    for claim_id in claim_ids
+                ],
+            },
+        )
     return (
         f"sanitized-fixture-dev-v3-4-{question_id}",
         {

@@ -11,6 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "run_full_test_suite_sharded.ps1"
 
 
+def _powershell_executable() -> str:
+    executable = shutil.which("powershell") or shutil.which("pwsh")
+    if executable is None:
+        raise RuntimeError("PowerShell executable not found")
+    return executable
+
+
 def _workspace_tmp(name: str) -> Path:
     path = ROOT / ".runtime" / "pytest-sharded-script-tests" / f"{name}-{uuid.uuid4().hex}"
     if path.exists():
@@ -26,7 +33,7 @@ def _run_sharded(
 ) -> subprocess.CompletedProcess[str]:
     out_dir = work_dir / "shards"
     command = [
-        "powershell",
+        _powershell_executable(),
         "-ExecutionPolicy",
         "Bypass",
         "-File",

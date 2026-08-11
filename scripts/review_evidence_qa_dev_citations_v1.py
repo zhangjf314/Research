@@ -308,7 +308,25 @@ def build_pack() -> None:
     ARTIFACTS.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(PACK, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in files:
-            archive.write(path, arcname=path.name)
+            if path == AUDIT:
+                rows = read_jsonl(AUDIT)
+                pending_rows = []
+                for row in rows:
+                    clean = dict(row)
+                    clean.update(
+                        human_review_status="pending",
+                        human_label=None,
+                        reviewer=None,
+                        reviewed_at=None,
+                        review_notes=None,
+                    )
+                    pending_rows.append(clean)
+                body = "".join(
+                    json.dumps(row, ensure_ascii=False) + "\n" for row in pending_rows
+                )
+                archive.writestr(path.name, body)
+            else:
+                archive.write(path, arcname=path.name)
 
 
 def write_guide() -> None:

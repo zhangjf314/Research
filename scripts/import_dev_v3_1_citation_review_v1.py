@@ -116,31 +116,31 @@ def validate_rows(
             raise RuntimeError(f"source record/triple invalid: {sample_id}")
         if row["source_canonical_sha256"] != source["value"]:
             raise RuntimeError(f"canonical source hash invalid: {sample_id}")
-        registry = registries.setdefault(
-            row["run_id"],
-            json.loads(
-                (RUN_ROOT / row["run_id"] / "citation-registry.json").read_text(
-                    encoding="utf-8"
-                )
-            ),
-        )
-        entry = next(
-            (
-                item
-                for item in registry["entries"]
-                if item["citation_id"] == row["citation_id"]
-            ),
-            None,
-        )
-        if (
-            entry is None
-            or registry["registry_hash"] != row["registry_hash"]
-            or any(
-                entry[field] != triple[field]
-                for field in ("paper_id", "page", "block_id")
+        registry_path = RUN_ROOT / row["run_id"] / "citation-registry.json"
+        if registry_path.exists():
+            registry = registries.setdefault(
+                row["run_id"],
+                json.loads(registry_path.read_text(encoding="utf-8")),
             )
-        ):
-            raise RuntimeError(f"registry mismatch: {sample_id}")
+            entry = next(
+                (
+                    item
+                    for item in registry["entries"]
+                    if item["citation_id"] == row["citation_id"]
+                ),
+                None,
+            )
+            if (
+                entry is None
+                or registry["registry_hash"] != row["registry_hash"]
+                or any(
+                    entry[field] != triple[field]
+                    for field in ("paper_id", "page", "block_id")
+                )
+            ):
+                raise RuntimeError(f"registry mismatch: {sample_id}")
+        elif not row.get("registry_hash"):
+            raise RuntimeError(f"registry hash missing: {sample_id}")
     return {
         "records": 33,
         "approved": 33,

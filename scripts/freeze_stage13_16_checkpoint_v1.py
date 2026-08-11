@@ -209,6 +209,8 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def build_failure_freeze() -> dict[str, Any]:
+    if not any(RUN_ROOT.glob("live-dev-v3-4-*")) and FREEZE.exists():
+        return load_json(FREEZE)
     protocol = load_json(DATA / "evidence-qa-dev-v3-4-protocol-freeze-v1.json")
     summary = load_json(DATA / "evidence-qa-dev-v3-4.json")
     final_audit = load_json(DATA / "evidence-qa-dev-v3-4-final-audit.json")
