@@ -19,16 +19,20 @@ def test_readme_local_documentation_links_exist() -> None:
     assert missing == []
 
 
-def test_v1_2_readiness_keeps_release_actions_unauthorized() -> None:
+def test_v1_2_release_version_surfaces_are_consistent() -> None:
     readiness = (ROOT / "docs/releases/v1.2.0-portfolio-readiness.md").read_text(
         encoding="utf-8"
     )
     version_table = (ROOT / "docs/releases/v1.2.0-version-truth-table.md").read_text(
         encoding="utf-8"
     )
+    release_note = (ROOT / "docs/releases/v1.2.0-portfolio.md").read_text(
+        encoding="utf-8"
+    )
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
-    assert "version_bumped = false" in readiness
-    assert "tag_created = false" in readiness
-    assert "github_release_created = false" in readiness
-    assert "1.1.0+portfolio" in version_table
+    assert "version_bumped = true" in readiness
     assert "1.2.0+portfolio" in version_table
+    assert "v1.2.0-portfolio" in release_note
+    assert "v1.2.0-portfolio" in readme
+    assert "1.2.0+portfolio" in readme

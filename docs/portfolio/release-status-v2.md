@@ -4,17 +4,16 @@
 
 | Field | Value |
 | --- | --- |
-| Latest released tag | `v1.1.0-portfolio` |
-| Package/runtime version | `1.1.0+portfolio` |
-| Candidate under audit | `v1.2.0-portfolio` |
-| Version bump in this branch | `false` |
-| Tag creation in this branch | `false` |
-| GitHub Release creation | `false` |
+| Latest released tag | `v1.2.0-portfolio` |
+| Package/runtime version | `1.2.0+portfolio` |
+| Release status | `RELEASED_WITH_DOCUMENTED_LIMITATIONS` |
+| Version bump in release commit | `true` |
+| Tag creation | `authorized after green main CI` |
+| GitHub Release creation | `authorized after tag verification` |
 
-## v1.2.0 candidate scope
+## v1.2.0 release scope
 
-The v1.2.0 candidate is a release-readiness and public-documentation truth audit
-for changes after `v1.1.0-portfolio`:
+The v1.2.0 release covers audited changes after `v1.1.0-portfolio`:
 
 - Research UI mode separation for Workflow and Agent.
 - Agent final-report synthesis from verified Evidence State.
@@ -24,15 +23,11 @@ for changes after `v1.1.0-portfolio`:
 
 ## Release interpretation
 
-`READY_WITH_DOCUMENTED_LIMITATION` is the expected readiness class if local and
-remote gates pass. The documented limitation is that Stage 4 benchmark results
-remain historical v1.1.0 artifacts and do not include the later Agent
-final-report synthesis layer.
+`RELEASED_WITH_DOCUMENTED_LIMITATIONS` is the release class. The documented
+limitation is that Stage 4 benchmark results remain historical v1.1.0 artifacts
+and do not include the later Agent final-report synthesis layer.
 
-## Not authorized here
+## Not included
 
-- No v1.2.0 tag.
-- No GitHub Release.
-- No version bump.
 - No rerun of Stage 4 benchmark.
 - No live provider calls.

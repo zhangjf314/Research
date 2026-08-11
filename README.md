@@ -3,7 +3,7 @@
 Evidence-grounded Paper RAG, Deep Research Workflow, and Research Agent runtime for academic papers.
 
 [![CI](https://github.com/zhangjf314/Research/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/zhangjf314/Research/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/tag/zhangjf314/Research?label=release)](https://github.com/zhangjf314/Research/releases/tag/v1.1.0-portfolio)
+[![Release](https://img.shields.io/github/v/tag/zhangjf314/Research?label=release)](https://github.com/zhangjf314/Research/releases/tag/v1.2.0-portfolio)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
@@ -292,7 +292,7 @@ More commands: [Quickstart](docs/quickstart.md), [API Examples](docs/api-example
 - Research Agent benchmark: [Final benchmark](docs/research-agent/benchmark/stage4-final-benchmark-v1.md), [Validity audit](docs/research-agent/benchmark/stage4c-final-validity-audit-v1.md)
 - Portfolio materials: [Project summary](docs/portfolio/project-summary-v2.md), [Interview notes](docs/portfolio/interview-notes-v2.md), [Release status](docs/portfolio/release-status-v2.md)
 - Security and limits: [Security audit](docs/git-history-secret-review-v1.md), [Known limitations](docs/known-limitations.md)
-- v1.2.0 candidate audit: [Truth audit](docs/public-documentation-truth-audit-v1.md), [Change inventory](docs/releases/v1.2.0-change-inventory.md), [Version truth table](docs/releases/v1.2.0-version-truth-table.md), [Readiness](docs/releases/v1.2.0-portfolio-readiness.md)
+- v1.2.0 release: [Release notes](docs/releases/v1.2.0-portfolio.md), [Truth audit](docs/public-documentation-truth-audit-v1.md), [Change inventory](docs/releases/v1.2.0-change-inventory.md), [Version truth table](docs/releases/v1.2.0-version-truth-table.md), [Readiness](docs/releases/v1.2.0-portfolio-readiness.md)
 
 ## Development and tests
 
@@ -305,8 +305,8 @@ powershell -ExecutionPolicy Bypass -File scripts\run_release_tests.ps1
 
 ## Release status
 
-- Current recommended release: [`v1.1.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.1.0-portfolio)
-- Current main candidate: `v1.2.0-portfolio` readiness audit; package/runtime remains `1.1.0+portfolio` until a release commit is explicitly authorized.
-- Project status: Portfolio Release / Feature Complete, with v1.2.0 release readiness under documentation audit.
+- Current recommended release: [`v1.2.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.2.0-portfolio)
+- Package/runtime version: `1.2.0+portfolio`
+- Project status: Portfolio Release / Feature Complete, released with documented limitations.
 - `FEATURE_DEVELOPMENT_STOPPED=true`
 - Previous tags retained: [`v1.0.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio), [`v1.0.1-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.1-portfolio)

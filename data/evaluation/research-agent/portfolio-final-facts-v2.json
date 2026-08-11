@@ -1,0 +1,75 @@
+{
+  "schema_version": "portfolio-final-facts-v2",
+  "release_target": "v1.2.0-portfolio",
+  "package_version": "1.2.0+portfolio",
+  "display_version": "1.2.0-portfolio",
+  "release_status": "RELEASED_WITH_DOCUMENTED_LIMITATIONS",
+  "release_commit_resolution": "annotated tag v1.2.0-portfolio points to the final main release commit",
+  "source_branch": "audit/v1.2.0-portfolio-readiness",
+  "readiness_audit_commit": "fe6782d2de2b7c0e2755ee0496c7c02746bd2a0a",
+  "readiness_decision": "B. READY_WITH_DOCUMENTED_LIMITATION",
+  "recommended_use": "portfolio_demo_and_engineering_review",
+  "feature_development_stopped": true,
+  "release_scope": {
+    "workflow_agent_dual_mode_ui": true,
+    "agent_result_completeness": true,
+    "post_agent_final_report_synthesis": true,
+    "final_report_uses_verified_evidence_state_only": true,
+    "agent_execution_status_report_status_separated": true,
+    "additive_agent_report_api_fields": true,
+    "truthful_result_failure_ui": true,
+    "public_architecture_documentation_aligned": true,
+    "linux_ci_portability_fixes": true,
+    "github_actions_runtime_maintenance": true
+  },
+  "excluded_scope": {
+    "r1_r4_provider_schema_reliability_patch": false,
+    "workflow_prompt_tuning": false,
+    "workflow_schema_repair": false,
+    "duplicate_repair": false,
+    "new_retry_policy": false,
+    "rag_optimization": false,
+    "new_agent_tools": false,
+    "new_planner_logic": false,
+    "new_replan_behavior": false,
+    "new_benchmark": false,
+    "new_semantic_judge": false
+  },
+  "stage4_historical_boundary": {
+    "benchmark_runtime": "frozen_v1.1.0_runtime_evidence",
+    "artifacts_changed": false,
+    "agent_final_report_in_benchmark": false,
+    "dual_mode_ui_in_benchmark": false,
+    "effective_replan_count": 0
+  },
+  "provider_activity_during_release": {
+    "provider_requests": 0,
+    "embedding_requests": 0,
+    "reranker_requests": 0,
+    "deep_research_runs": 0,
+    "workflow_live_runs": 0,
+    "agent_live_runs": 0,
+    "benchmark_rerun": false
+  },
+  "claim_boundaries": {
+    "strong_generalization_claim_allowed": false,
+    "strong_grounding_claim_allowed": false,
+    "commercial_production_readiness_claim_allowed": false,
+    "semantic_benchmark_claim_allowed": false,
+    "blind_generalization_claim_allowed": false
+  },
+  "known_limitations": [
+    "Deep Research Workflow synthesis remains subject to stochastic provider/schema/report-quality failures under strict validation.",
+    "Stage4 benchmark evidence predates Agent final-report synthesis.",
+    "Effective live replanning was not observed in the frozen benchmark.",
+    "This release is a portfolio release and does not claim commercial production readiness."
+  ],
+  "must_not_claim": [
+    "Agent semantic quality improved by 93.3 percentage points",
+    "Agent semantically won 56/60",
+    "strong semantic grounding proven",
+    "large-scale strict blind generalization proven",
+    "commercial production readiness",
+    "long-term production reliability proven"
+  ]
+}

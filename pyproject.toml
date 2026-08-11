@@ -1,6 +1,6 @@
 [project]
 name = "paper-research-agent"
-version = "1.1.0+portfolio"
+version = "1.2.0+portfolio"
 description = "Paper RAG and deep research assistant"
 readme = "README.md"
 requires-python = ">=3.12"

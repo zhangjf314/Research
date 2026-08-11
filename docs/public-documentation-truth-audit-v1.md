@@ -12,13 +12,13 @@ Baseline main commit:
 
 | Check | Result |
 | --- | --- |
-| README local documentation links checked | 29 |
+| README local documentation links checked | 30 |
 | Missing README local documentation links after this audit | 0 |
 | Stage 4 benchmark rerun | `false` |
 | Live provider/model calls | `0` |
-| v1.2.0 version bump | `false` |
-| v1.2.0 tag created | `false` |
-| GitHub Release created | `false` |
+| v1.2.0 version bump during readiness audit | `false` |
+| v1.2.0 tag created during readiness audit | `false` |
+| GitHub Release created during readiness audit | `false` |
 | R1-R4 reliability branch merged | `false` |
 | Workflow known reliability limitation documented | `true` |
 | Agent final-report fresh live smoke attempted | `false` |
@@ -32,15 +32,16 @@ Baseline main commit:
 | `docs/pdf-rag-data-flow.md` | README | PDF to RAG pipeline | Current runtime plus frozen backend | Yes | Previous file was stale and implied optional components as normal path. | Rewritten. |
 | `docs/langgraph-workflow.md` | README | Deep Research Workflow | Current Workflow/control path | Yes | Needed explicit separation from Agent. | Rewritten. |
 | `docs/research-agent/research-agent-runtime.md` | README | Agent runtime | Current runtime | Yes | Missing current runtime boundary doc. | Added. |
-| `docs/portfolio/project-summary-v2.md` | README | Public project summary | Current candidate summary | Yes | v1 materials did not capture post-v1.1 UI/Agent-report boundary. | Added v2. |
-| `docs/portfolio/interview-notes-v2.md` | README | Interview-safe wording | Current candidate summary | Yes | Needed safe claims and forbidden claims aligned to Stage 4 validity. | Added v2. |
-| `docs/portfolio/release-status-v2.md` | README | Release status | Current candidate status | Yes | Needed to state no version bump/tag in readiness audit. | Added v2. |
+| `docs/portfolio/project-summary-v2.md` | README | Public project summary | v1.2 release summary | Yes | v1 materials did not capture post-v1.1 UI/Agent-report boundary. | Added v2. |
+| `docs/portfolio/interview-notes-v2.md` | README | Interview-safe wording | v1.2 release summary | Yes | Needed safe claims and forbidden claims aligned to Stage 4 validity. | Added v2. |
+| `docs/portfolio/release-status-v2.md` | README | Release status | v1.2 release status | Yes | Needed to state release status and documented limitations. | Added v2. |
 | `docs/releases/v1.2.0-change-inventory.md` | README | Change inventory | Candidate readiness | Yes | Missing inventory for post-v1.1 changes. | Added. |
 | `docs/releases/v1.2.0-version-truth-table.md` | release docs | Version source truth | Candidate readiness | Yes | Needed explicit package/runtime/display/tag separation. | Added. |
 | `docs/releases/v1.2.0-portfolio-readiness.md` | README | Readiness decision | Candidate readiness | Yes | Missing readiness decision with limitations. | Added. |
 | `docs/research-agent/benchmark/stage4-final-benchmark-v1.md` | README | Official Stage 4 result | Historical v1.1 artifact | Yes | Must not be reinterpreted with final-report synthesis. | Preserved. |
 | `docs/research-agent/benchmark/stage4c-final-validity-audit-v1.md` | README | Validity audit | Historical v1.1 artifact | Yes | No action; boundaries referenced from README. | Preserved. |
 | `docs/known-limitations.md` | README | Limitations | Current limitations with historical boundaries | Yes | Contained stale RC-era "current blocker" text that conflicted with later release evidence. | Rewritten. |
+| `docs/releases/v1.2.0-portfolio.md` | README | Release notes | v1.2 release | Yes | Formal release note needed after authorization. | Added. |
 
 ## Architecture facts verified from source
 
@@ -86,6 +87,7 @@ All README-local Markdown links resolve after this audit.
 | `docs/portfolio/release-status-v2.md` | yes |
 | `docs/git-history-secret-review-v1.md` | yes |
 | `docs/known-limitations.md` | yes |
+| `docs/releases/v1.2.0-portfolio.md` | yes |
 | `docs/public-documentation-truth-audit-v1.md` | yes |
 | `docs/releases/v1.2.0-change-inventory.md` | yes |
 | `docs/releases/v1.2.0-version-truth-table.md` | yes |

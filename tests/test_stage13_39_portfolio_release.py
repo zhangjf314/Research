@@ -22,7 +22,8 @@ def _pyproject_version() -> str:
 def test_portfolio_manifest_preserves_real_model_evidence_and_release_gates() -> None:
     manifest = _read_json("data/evaluation/portfolio-evidence-manifest-v1.json")
 
-    assert manifest["package_version"] == _pyproject_version()
+    assert manifest["package_version"] == "1.1.0+portfolio"
+    assert manifest["release_target"] == "v1.1.0-portfolio"
     assert manifest["release_decision"] == "PORTFOLIO_RELEASE_FINALIZATION_AUTHORIZED"
     assert manifest["strong_generalization_claim_allowed"] is False
     assert manifest["semantic_claim_support_audit"] == "NOT_FORMALLY_VALIDATED"
@@ -94,7 +95,7 @@ def test_v11_portfolio_final_facts_bound_claims() -> None:
     facts = _read_json("data/evaluation/research-agent/portfolio-final-facts-v1.json")
 
     assert facts["release_target"] == "v1.1.0-portfolio"
-    assert facts["package_version"] == _pyproject_version()
+    assert facts["package_version"] == "1.1.0+portfolio"
     benchmark = facts["workflow_vs_agent_benchmark"]
     assert benchmark["paired_units"] == 60
     assert benchmark["workflow"]["completed"] == 0
@@ -108,6 +109,21 @@ def test_v11_portfolio_final_facts_bound_claims() -> None:
     assert boundaries["strong_generalization_claim_allowed"] is False
     assert boundaries["strong_grounding_claim_allowed"] is False
     assert boundaries["semantic_benchmark_claim_allowed"] is False
+
+
+def test_v12_portfolio_final_facts_bound_claims() -> None:
+    facts = _read_json("data/evaluation/research-agent/portfolio-final-facts-v2.json")
+
+    assert facts["release_target"] == "v1.2.0-portfolio"
+    assert facts["package_version"] == _pyproject_version()
+    assert facts["display_version"] == display_version(_pyproject_version())
+    assert facts["release_status"] == "RELEASED_WITH_DOCUMENTED_LIMITATIONS"
+    assert facts["stage4_historical_boundary"]["artifacts_changed"] is False
+    assert facts["stage4_historical_boundary"]["agent_final_report_in_benchmark"] is False
+    assert facts["stage4_historical_boundary"]["effective_replan_count"] == 0
+    assert facts["provider_activity_during_release"]["provider_requests"] == 0
+    assert facts["provider_activity_during_release"]["benchmark_rerun"] is False
+    assert facts["excluded_scope"]["r1_r4_provider_schema_reliability_patch"] is False
 
 
 def test_content_claims_forbid_strong_generalization_and_remote_release() -> None:

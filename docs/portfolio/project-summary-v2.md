@@ -10,10 +10,10 @@ checks, benchmark artifacts, and explicit limitations.
 
 | Item | Value |
 | --- | --- |
-| Current released tag | `v1.1.0-portfolio` |
-| Current package/runtime version | `1.1.0+portfolio` |
-| v1.2.0 status | Candidate documentation/readiness audit only |
-| v1.2.0 version bump | Not performed in this branch |
+| Current released tag | `v1.2.0-portfolio` |
+| Current package/runtime version | `1.2.0+portfolio` |
+| v1.2.0 status | Released with documented limitations |
+| v1.2.0 version bump | Performed in release commit |
 | Recommended public wording | Portfolio engineering release with documented limitations |
 
 ## Capabilities
