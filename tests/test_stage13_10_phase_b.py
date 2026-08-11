@@ -51,6 +51,7 @@ def external_summary_for(result: dict) -> dict:
             "partially_relevant": result["partially_relevant"],
             "insufficient": result["insufficient"],
         },
+        "historical_gold_modified": False,
     }
 
 
