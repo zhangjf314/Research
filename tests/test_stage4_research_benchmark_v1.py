@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path("data/evaluation/research-agent")
@@ -171,15 +172,15 @@ def test_fairness_and_replan_metrics_are_frozen() -> None:
 
 def test_validator_and_runner_dry_run_do_not_call_provider() -> None:
     validate = subprocess.run(
-        [".\\.venv\\Scripts\\python.exe", "scripts\\validate_research_benchmark_v1.py"],
+        [sys.executable, "scripts/validate_research_benchmark_v1.py"],
         text=True,
         capture_output=True,
         check=False,
     )
     dry_run = subprocess.run(
         [
-            ".\\.venv\\Scripts\\python.exe",
-            "scripts\\run_stage4_workflow_agent_benchmark_v1.py",
+            sys.executable,
+            "scripts/run_stage4_workflow_agent_benchmark_v1.py",
             "--dry-run",
         ],
         text=True,

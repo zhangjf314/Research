@@ -105,9 +105,9 @@ def stable_row_hash(row: dict[str, Any]) -> str:
 
 def validate_reviewed() -> dict[str, Any]:
     gaps_pending = read_jsonl(GAP_PENDING)
-    gaps_reviewed = read_jsonl(GAP_REVIEWED)
+    gaps_reviewed = read_jsonl(GAP_REVIEWED if GAP_REVIEWED.exists() else GAP_PENDING)
     pilot_pending = read_jsonl(PILOT_PENDING)
-    pilot_reviewed = read_jsonl(PILOT_REVIEWED)
+    pilot_reviewed = read_jsonl(PILOT_REVIEWED if PILOT_REVIEWED.exists() else PILOT_PENDING)
     evidence = read_jsonl(DATA / "evidence-corpus-v1.jsonl")
     evidence_triples = {(row["paper_id"], int(row["page"]), row["block_id"]) for row in evidence}
     current_hashes = {

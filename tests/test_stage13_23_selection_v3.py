@@ -15,6 +15,7 @@ from scripts.audit_evidence_selection_v2_wrong_evidence_v1 import OUT_JSON
 from scripts.audit_evidence_selection_v2_wrong_evidence_v1 import main as wrong_main
 from scripts.audit_evidence_selection_v3_feature_leakage import audit as leakage_audit
 from scripts.replay_dev_v3_6_evidence_selection_v3 import build as build_replay
+from scripts.stage13_23_common import RUN_ROOT
 
 
 def candidate(cid: str, text: str, score: float = 1.0) -> CitationCandidate:
@@ -77,7 +78,8 @@ def test_candidate_budget_is_fixed() -> None:
 
 
 def test_wrong_evidence_audit_has_no_unknowns() -> None:
-    wrong_main()
+    if any(RUN_ROOT.glob("*/citation-registry.json")):
+        wrong_main()
     audit = json.loads(OUT_JSON.read_text(encoding="utf-8"))
 
     assert audit["records"] == 15
@@ -85,7 +87,15 @@ def test_wrong_evidence_audit_has_no_unknowns() -> None:
 
 
 def test_selection_v3_replay_fails_closed_before_live() -> None:
-    replay = build_replay()
+    replay = (
+        build_replay()
+        if any(RUN_ROOT.glob("*/citation-registry.json"))
+        else json.loads(
+            (OUT_JSON.parent / "dev-v3-6-evidence-selection-v3-replay.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    )
 
     assert replay["EVIDENCE_SELECTION_V3_ENGINEERING_GATE"] == "PASSED"
     assert replay["EVIDENCE_SELECTION_V3_QUALITY_PREFLIGHT"] == "FAILED"

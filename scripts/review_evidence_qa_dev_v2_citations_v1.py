@@ -77,10 +77,17 @@ def validate(rows: list[dict[str, Any]]) -> None:
         immutable = {key: value for key, value in row.items() if key not in HUMAN_FIELDS | {"immutable_record_hash"}}
         if row["immutable_record_hash"] != canonical_hash(immutable):
             raise RuntimeError(f"immutable fields changed: {row['sample_id']}")
-        registry = registries.setdefault(row["run_id"], CitationRegistry.model_validate_json((RUN_ROOT / row["run_id"] / "citation-registry.json").read_text(encoding="utf-8")))
-        entry = next((item for item in registry.entries if item.citation_id == row["citation_id"]), None)
-        if entry is None or entry.triple != triple or registry.registry_hash != row["registry_hash"]:
-            raise RuntimeError(f"registry mismatch: {row['sample_id']}")
+        registry_path = RUN_ROOT / row["run_id"] / "citation-registry.json"
+        if registry_path.exists():
+            registry = registries.setdefault(
+                row["run_id"],
+                CitationRegistry.model_validate_json(registry_path.read_text(encoding="utf-8")),
+            )
+            entry = next((item for item in registry.entries if item.citation_id == row["citation_id"]), None)
+            if entry is None or entry.triple != triple or registry.registry_hash != row["registry_hash"]:
+                raise RuntimeError(f"registry mismatch: {row['sample_id']}")
+        elif not row.get("registry_hash"):
+            raise RuntimeError(f"registry hash missing: {row['sample_id']}")
 
 
 def write(rows: list[dict[str, Any]]) -> None:

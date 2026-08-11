@@ -51,8 +51,12 @@ def unsupported_response(question_id: str = "q001") -> dict:
 
 
 def test_manifest_and_preflight_are_frozen(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("QDRANT_COLLECTION", "papers_jina_eval34_v2__20260713152149")
+    monkeypatch.setenv("EMBEDDING_MODEL", "jina-embeddings-v5-text-small")
+    monkeypatch.setenv("EMBEDDING_DIMENSIONS", "1024")
     monkeypatch.setenv("LLM_PROVIDER", "siliconflow")
     monkeypatch.setenv("LLM_MODEL", "Qwen/Qwen3-8B")
+    monkeypatch.setenv("LLM_MAX_RETRIES", "0")
     monkeypatch.setenv("LLM_BILLING_MODE", "free")
     body = build_manifest()
     assert body["manifest_hash"] == SOURCE_MANIFEST_HASH

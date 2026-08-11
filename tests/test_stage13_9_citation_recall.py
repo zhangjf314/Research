@@ -13,6 +13,7 @@ from scripts.prepare_stage13_9_citation_recall_audit_v1 import (
     RECALL_JSONL,
     SUMMARY,
     aggregate,
+    build_pack,
     validate_citation_audit,
 )
 
@@ -61,6 +62,8 @@ def test_review_pack_has_exact_safe_member_set() -> None:
         "dev-v3-1-citation-recall-audit-v1.jsonl",
         "evidence-qa-dev-v3-1-citation-review-guide-v1.md",
     }
+    if not PACK.exists():
+        build_pack()
     with zipfile.ZipFile(PACK) as archive:
         assert set(archive.namelist()) == expected
         assert not any(

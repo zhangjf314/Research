@@ -9,12 +9,14 @@ from typing import Any
 try:
     from scripts.evidence_qa_dev_lib_v1 import DEV_IDS
     from scripts.payload_contract_v4_lib import RUN_ROOT, project_raw_payload_v4
+    from scripts.replay_dev_v3_4_payload_contract_v3 import historical_raw_payload
 except ModuleNotFoundError:
     from evidence_qa_dev_lib_v1 import DEV_IDS  # type: ignore[no-redef]
     from payload_contract_v4_lib import (  # type: ignore[no-redef]
         RUN_ROOT,
         project_raw_payload_v4,
     )
+    from replay_dev_v3_4_payload_contract_v3 import historical_raw_payload  # type: ignore[no-redef]
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -24,13 +26,18 @@ def load_json(path: Path) -> dict[str, Any]:
 def build_projection_rows() -> list[dict[str, Any]]:
     rows = []
     for question_id in DEV_IDS:
-        run_dir = next(RUN_ROOT.glob(f"live-dev-v3-4-{question_id}-*"))
-        raw = load_json(run_dir / "raw-model-payload.json")
+        run_dirs = sorted(RUN_ROOT.glob(f"live-dev-v3-4-{question_id}-*"))
+        if run_dirs:
+            run_dir = run_dirs[0]
+            run_id = run_dir.name
+            raw = load_json(run_dir / "raw-model-payload.json")
+        else:
+            run_id, raw = historical_raw_payload(question_id)
         projection = project_raw_payload_v4(raw)
         rows.append(
             {
                 "question_id": question_id,
-                "run_id": run_dir.name,
+                "run_id": run_id,
                 **projection,
             }
         )

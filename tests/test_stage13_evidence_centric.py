@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 import pytest
 
@@ -310,7 +310,7 @@ def test_no_api_key_in_stage13_outputs_and_windows_paths_work() -> None:
     ]
     text = "\n".join(path.read_text(encoding="utf-8") for path in paths)
     assert "api_key" not in text.casefold()
-    windows = Path(r"D:\Agents\Codex\research\data\evaluation")
+    windows = PureWindowsPath(r"D:\Agents\Codex\research\data\evaluation")
     assert windows.parts[-2:] == ("data", "evaluation")
 
 

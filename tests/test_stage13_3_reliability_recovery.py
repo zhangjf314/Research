@@ -351,6 +351,8 @@ def test_review_rows_and_pack_are_safe_and_complete() -> None:
     assert all(row["human_label"] in review.LABELS for row in rows)
     assert all(row["cited_evidence_text"] for row in rows)
     assert all("previous" in row["adjacent_evidence_context"] for row in rows)
+    if not review.PACK.exists():
+        review.build_pack()
     with zipfile.ZipFile(review.PACK) as archive:
         names = set(archive.namelist())
         packed_audit = [

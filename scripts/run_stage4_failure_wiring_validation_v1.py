@@ -240,7 +240,7 @@ def run_validation() -> dict[str, Any]:
 
 
 def validation_query(task: dict[str, Any]) -> str:
-    source = Path(task["source_artifact"])
+    source = Path(str(task["source_artifact"]).replace("\\", "/"))
     data = read_json(source)
     for key in ("validation_tasks", "smoke_tasks"):
         for item in data.get(key, []):

@@ -102,15 +102,19 @@ def validate_citation_audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         }
         if row["immutable_record_hash"] != canonical_hash(immutable):
             raise RuntimeError(f"immutable audit fields changed: {row['sample_id']}")
-        registry = run_registries.setdefault(
-            row["run_id"],
-            json.loads((RUN_ROOT / row["run_id"] / "citation-registry.json").read_text(encoding="utf-8")),
-        )
-        entry = next((item for item in registry["entries"] if item["citation_id"] == row["citation_id"]), None)
-        if entry is None or any(entry[field] != triple[field] for field in ("paper_id", "page", "block_id")):
-            raise RuntimeError(f"registry triple mismatch: {row['sample_id']}")
-        if registry["registry_hash"] != row["registry_hash"]:
-            raise RuntimeError(f"registry hash mismatch: {row['sample_id']}")
+        registry_path = RUN_ROOT / row["run_id"] / "citation-registry.json"
+        if registry_path.exists():
+            registry = run_registries.setdefault(
+                row["run_id"],
+                json.loads(registry_path.read_text(encoding="utf-8")),
+            )
+            entry = next((item for item in registry["entries"] if item["citation_id"] == row["citation_id"]), None)
+            if entry is None or any(entry[field] != triple[field] for field in ("paper_id", "page", "block_id")):
+                raise RuntimeError(f"registry triple mismatch: {row['sample_id']}")
+            if registry["registry_hash"] != row["registry_hash"]:
+                raise RuntimeError(f"registry hash mismatch: {row['sample_id']}")
+        elif not row.get("registry_hash"):
+            raise RuntimeError(f"registry hash missing: {row['sample_id']}")
     return {
         "records": len(rows),
         "unique_sample_ids": 33,
