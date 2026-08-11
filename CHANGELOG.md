@@ -1,5 +1,31 @@
 # Changelog
 
+## [Unreleased] - v1.2.0 portfolio candidate
+
+### Added
+
+- Explicit Workflow / Agent UI mode documentation for the v1.2.0 candidate.
+- Agent final-report synthesis documented as a post-loop feature.
+- Public documentation truth audit for the v1.2.0 portfolio candidate.
+- v2 portfolio project summary, interview notes, and release status materials.
+- v1.2.0 change inventory, version truth table, and readiness document.
+- Current Research Agent runtime documentation covering the post-loop final-report
+  synthesis boundary.
+
+### Changed
+
+- README and architecture documentation now separate current runtime features
+  from frozen Stage 4 benchmark artifacts.
+- Public docs clarify that Workflow is preselected by default and Agent is an
+  explicit parallel mode.
+
+### Not changed
+
+- Package/runtime remains `1.1.0+portfolio`.
+- Stage 4 benchmark artifacts and v1.1.0 conclusions are not rerun or
+  reinterpreted.
+- No v1.2.0 tag or GitHub Release is created by the readiness audit.
+
 ## [1.1.0-portfolio] - 2026-08-09
 
 ### Added

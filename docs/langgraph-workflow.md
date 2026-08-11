@@ -1,20 +1,51 @@
-# LangGraph 深度研究工作流
+# LangGraph Deep Research Workflow
+
+This document describes the fixed Deep Research Workflow path. It is the
+Workflow/control-group runtime, not the Research Agent.
+
+## Graph
 
 ```mermaid
-flowchart TD
-    START(["START"]) --> U["理解研究问题"]
-    U --> P["拆分子问题与研究计划"]
-    P --> L["检索本地论文库"]
-    L --> A["评估证据覆盖与缺口"]
-    A -->|"证据充分 / 预算停止"| S["多论文综合"]
-    A -->|"存在缺口"| E["外部论文搜索"]
-    E --> C["候选筛选与可选导入"]
-    C -->|"已导入且预算允许"| L
-    C -->|"未导入 / 达到停止条件"| S
-    S --> R["生成多章节报告"]
-    R --> V["引用一致性校验"]
-    V --> END(["END"])
+flowchart TB
+    START --> UNDERSTAND["understand"]
+    UNDERSTAND --> PLAN["plan"]
+    PLAN --> LOCAL["local_search"]
+    LOCAL --> ASSESS["assess"]
+    ASSESS -->|"external evidence needed and allowed"| EXT["external_search"]
+    EXT --> IMPORT["select_import"]
+    IMPORT -->|"retry local after import"| LOCAL
+    ASSESS -->|"sufficient or external disabled"| SYN["synthesize"]
+    IMPORT -->|"ready"| SYN
+    SYN --> REPORT["report"]
+    REPORT --> VALIDATE["validate"]
+    VALIDATE --> END
 ```
 
-显式停止条件：最大迭代数、最大外部搜索次数、最大论文数、最大证据数、最大估算
-Token，以及连续多轮没有新增证据。
+The implementation is `src/paper_research/agents/deep_research_graph.py`.
+
+## Control-flow boundary
+
+The Workflow follows a predefined graph with conditional routing around external
+search/import. It does not select arbitrary tools from an Agent policy after
+each observation. That behavior belongs to the separate Research Agent runtime.
+
+The repository UI currently sends the Workflow request to:
+
+```text
+POST /api/v1/research/deep
+```
+
+with `allow_external_search=false` from the UI path. API callers can set
+`allow_external_search=true`, subject to provider/configuration availability.
+
+## Checkpointing
+
+The graph accepts a LangGraph checkpointer. In-memory checkpointing is available
+for tests; PostgreSQL checkpointing is used where configured and verified by the
+runtime capability checks.
+
+## Benchmark boundary
+
+Stage 4 uses this Workflow as the frozen control group. The later Research Agent
+final-report synthesis layer is not part of this Workflow and must not be
+counted as a Workflow improvement.

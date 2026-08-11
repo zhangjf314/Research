@@ -31,31 +31,31 @@ Reranker, query rewrite, query decomposition, and context-selector variants were
 
 ```mermaid
 flowchart LR
-    A["PDF / Scanned PDF"] --> B["PyMuPDF + Tesseract OCR"]
-    B --> C["Structured Blocks & Chunks"]
-    C --> D["Jina Embeddings"]
-    C --> E["Lexical Index"]
+    A["PDF / scanned PDF"] --> B["ParserRouter"]
+    B --> C["Structured pages, blocks, chunks"]
+    C --> D["Jina embeddings"]
+    C --> E["Lexical index"]
     D --> F["Qdrant"]
-    E --> G["Hybrid Retrieval + RRF"]
+    E --> G["Hybrid retrieval + RRF"]
     F --> G
-    G --> H["Context Builder"]
+    G --> H["Context builder"]
     H --> I["Claim QA"]
     H --> J["Deep Research Workflow"]
     H --> K["Research Agent"]
     K --> L["Evidence State"]
-    K --> M["Verifier"]
-    K --> N["Checkpoint / Budget / Trace"]
-    M --> R["Final Report Synthesizer"]
-    R --> S["Report Validator"]
-    S --> T["Markdown Report"]
-    J --> O["Citation Validation"]
+    L --> M["Verifier"]
+    K --> N["Checkpoint / budget / trace"]
+    M --> R["Agent final-report synthesizer"]
+    R --> S["Report validator"]
+    S --> T["Markdown report"]
+    J --> O["Citation validation"]
     I --> O
     T --> O
     P["PostgreSQL"] --> N
-    Q["Redis"] --> G
+    Q["Redis"] --> U["Cache / rate limit / import lock"]
 ```
 
-The Research Agent is not the default UI path. The default Deep Research path remains the frozen Workflow. The Agent is an evaluated parallel runtime.
+The UI exposes Workflow and Agent as explicit research modes. `workflow` is preselected when no `mode` query parameter is provided. The Agent remains a parallel experimental runtime, not the default execution path.
 
 Agent final-report synthesis is a presentation stage after the Agent control loop has finished and verification has passed. It uses only the verified Evidence State; it is not an Agent tool, planner step, retriever, or replan behavior.
 
@@ -286,12 +286,13 @@ More commands: [Quickstart](docs/quickstart.md), [API Examples](docs/api-example
 
 ## Documentation
 
-- Architecture: [Architecture](docs/architecture.md), [PDF RAG data flow](docs/pdf-rag-data-flow.md), [LangGraph workflow](docs/langgraph-workflow.md)
+- Architecture: [Architecture](docs/architecture.md), [PDF RAG data flow](docs/pdf-rag-data-flow.md), [LangGraph workflow](docs/langgraph-workflow.md), [Research Agent runtime](docs/research-agent/research-agent-runtime.md)
 - Operations: [Deployment runbook](docs/deployment-runbook.md), [Docker OCR audit](docs/docker-ocr-production-audit-v2.md), [Checkpoint recovery](docs/langgraph-production-recovery-audit-v2.md), [Backup / Restore](docs/backup-restore-audit.md)
 - Evaluation: [Portfolio evaluation policy](docs/portfolio-evaluation-policy-v1.md), [Full QA](docs/deepseek-full-qa-final-summary-v1.md), [Deep Research](docs/end-to-end-deepseek-production-v2.md)
 - Research Agent benchmark: [Final benchmark](docs/research-agent/benchmark/stage4-final-benchmark-v1.md), [Validity audit](docs/research-agent/benchmark/stage4c-final-validity-audit-v1.md)
-- Portfolio materials: [Project summary](docs/portfolio/project-summary-v1.md), [Interview notes](docs/portfolio/interview-notes-v1.md), [Release status](docs/portfolio/release-status-v1.md)
+- Portfolio materials: [Project summary](docs/portfolio/project-summary-v2.md), [Interview notes](docs/portfolio/interview-notes-v2.md), [Release status](docs/portfolio/release-status-v2.md)
 - Security and limits: [Security audit](docs/git-history-secret-review-v1.md), [Known limitations](docs/known-limitations.md)
+- v1.2.0 candidate audit: [Truth audit](docs/public-documentation-truth-audit-v1.md), [Change inventory](docs/releases/v1.2.0-change-inventory.md), [Version truth table](docs/releases/v1.2.0-version-truth-table.md), [Readiness](docs/releases/v1.2.0-portfolio-readiness.md)
 
 ## Development and tests
 
@@ -305,7 +306,7 @@ powershell -ExecutionPolicy Bypass -File scripts\run_release_tests.ps1
 ## Release status
 
 - Current recommended release: [`v1.1.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.1.0-portfolio)
-- Package version: `1.1.0+portfolio`
-- Project status: Portfolio Release / Feature Complete
+- Current main candidate: `v1.2.0-portfolio` readiness audit; package/runtime remains `1.1.0+portfolio` until a release commit is explicitly authorized.
+- Project status: Portfolio Release / Feature Complete, with v1.2.0 release readiness under documentation audit.
 - `FEATURE_DEVELOPMENT_STOPPED=true`
 - Previous tags retained: [`v1.0.0-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.0-portfolio), [`v1.0.1-portfolio`](https://github.com/zhangjf314/Research/releases/tag/v1.0.1-portfolio)
