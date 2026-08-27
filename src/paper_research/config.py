@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     ocr_language: str = "eng"
     page_asset_dpi: int = 144
     qdrant_collection: str | None = None
+    retrieval_backend: str = "production_hybrid_rrf"
     baseline_collection: str = "papers_hash_v1"
     production_collection: str = "papers_production_v1"
     embedding_provider: str = "hash"
@@ -36,6 +37,7 @@ class Settings(BaseSettings):
     embedding_batch_size: int = Field(default=32, ge=1, le=2048)
     embedding_timeout_seconds: float = Field(default=60.0, gt=0, le=600)
     embedding_max_retries: int = Field(default=2, ge=0, le=10)
+    siliconflow_embedding_api_key: str | None = None
     rerank_provider: str = "lexical"
     rerank_model: str = "lexical-v1"
     rerank_enabled: bool = False
@@ -113,6 +115,16 @@ class Settings(BaseSettings):
     deepseek_canary_max_total_tokens: int | None = Field(default=None, ge=1)
     deepseek_canary_max_cost_usd: Decimal | None = Field(default=None, ge=0)
     deepseek_canary_max_total_seconds: int | None = Field(default=None, ge=1)
+
+    @field_validator("retrieval_backend")
+    @classmethod
+    def validate_retrieval_backend(cls, value: str) -> str:
+        allowed = {"production_hybrid_rrf", "rag_v2_cstar"}
+        if value not in allowed:
+            raise ValueError(
+                f"RETRIEVAL_BACKEND must be one of {sorted(allowed)}, got {value!r}"
+            )
+        return value
 
     @field_validator(
         "llm_input_cost_per_million",
@@ -216,7 +228,7 @@ class Settings(BaseSettings):
         missing: list[str] = []
         if provider == "hash":
             return ["EMBEDDING_PROVIDER"]
-        if provider not in {"jina", "openai_compatible"}:
+        if provider not in {"jina", "openai_compatible", "siliconflow"}:
             return ["EMBEDDING_PROVIDER"]
         if (
             "embedding_model" not in self.model_fields_set
@@ -229,9 +241,13 @@ class Settings(BaseSettings):
             or self.embedding_dimensions <= 0
         ):
             missing.append("EMBEDDING_DIMENSIONS")
-        if not self.embedding_api_key:
+        if provider == "siliconflow" and not (
+            self.embedding_api_key or self.siliconflow_embedding_api_key
+        ):
             missing.append("EMBEDDING_API_KEY")
-        if provider == "openai_compatible" and (
+        elif provider != "siliconflow" and not self.embedding_api_key:
+            missing.append("EMBEDDING_API_KEY")
+        if provider in {"openai_compatible", "siliconflow"} and (
             "embedding_base_url" not in self.model_fields_set or not self.embedding_base_url
         ):
             missing.append("EMBEDDING_BASE_URL")

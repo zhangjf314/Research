@@ -1,0 +1,225 @@
+{
+  "B2_FRESH_BLIND_ELIGIBLE": "no",
+  "cohorts": {
+    "COMBINED236": {
+      "D1-R0": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 24
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.738812,
+          "MRR": 0.639689,
+          "NDCG@10": 0.628499,
+          "context_precision": 0.233898,
+          "context_recall": 0.738812,
+          "multi_evidence_complete_rate@5": 0.5625,
+          "required_claim_coverage@5": 0.852941
+        }
+      },
+      "D1-R1": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 31
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.69432,
+          "MRR": 0.603672,
+          "NDCG@10": 0.599063,
+          "context_precision": 0.219492,
+          "context_recall": 0.69432,
+          "multi_evidence_complete_rate@5": 0.5625,
+          "required_claim_coverage@5": 0.805147
+        }
+      },
+      "D1-R2": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 30
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.696439,
+          "MRR": 0.591455,
+          "NDCG@10": 0.589981,
+          "context_precision": 0.220339,
+          "context_recall": 0.696439,
+          "multi_evidence_complete_rate@5": 0.59375,
+          "required_claim_coverage@5": 0.808824
+        }
+      }
+    },
+    "DEV176": {
+      "D1-R0": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 7
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.723634,
+          "MRR": 0.651515,
+          "NDCG@10": 0.609116,
+          "context_precision": 0.251136,
+          "context_recall": 0.723634,
+          "multi_evidence_complete_rate@5": 0.6,
+          "required_claim_coverage@5": 0.907895
+        }
+      },
+      "D1-R1": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 14
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.663975,
+          "MRR": 0.629735,
+          "NDCG@10": 0.584634,
+          "context_precision": 0.231818,
+          "context_recall": 0.663975,
+          "multi_evidence_complete_rate@5": 0.6,
+          "required_claim_coverage@5": 0.822368
+        }
+      },
+      "D1-R2": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 14
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.663975,
+          "MRR": 0.626799,
+          "NDCG@10": 0.582804,
+          "context_precision": 0.231818,
+          "context_recall": 0.663975,
+          "multi_evidence_complete_rate@5": 0.6,
+          "required_claim_coverage@5": 0.822368
+        }
+      }
+    },
+    "POSTBLIND60": {
+      "D1-R0": {
+        "losses": {
+          "candidate_loss": 0,
+          "packing_loss": 0,
+          "ranking_loss": 17
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.783333,
+          "MRR": 0.605,
+          "NDCG@10": 0.685355,
+          "context_precision": 0.183333,
+          "context_recall": 0.783333,
+          "multi_evidence_complete_rate@5": 0.5,
+          "required_claim_coverage@5": 0.783333
+        }
+      },
+      "D1-R1": {
+        "losses": {
+          "candidate_loss": 0,
+          "packing_loss": 0,
+          "ranking_loss": 17
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.783333,
+          "MRR": 0.527222,
+          "NDCG@10": 0.641389,
+          "context_precision": 0.183333,
+          "context_recall": 0.783333,
+          "multi_evidence_complete_rate@5": 0.5,
+          "required_claim_coverage@5": 0.783333
+        }
+      },
+      "D1-R2": {
+        "losses": {
+          "candidate_loss": 0,
+          "packing_loss": 0,
+          "ranking_loss": 16
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.791667,
+          "MRR": 0.487778,
+          "NDCG@10": 0.611033,
+          "context_precision": 0.186667,
+          "context_recall": 0.791667,
+          "multi_evidence_complete_rate@5": 0.583333,
+          "required_claim_coverage@5": 0.791667
+        }
+      }
+    }
+  },
+  "d0_residual_recovery": {
+    "D1-R1": {
+      "CROSS_SECTION": {
+        "fixed": 0,
+        "newly_regressed": 0,
+        "unchanged": 5
+      },
+      "POINTWISE_MISRANKING": {
+        "fixed": 4,
+        "newly_regressed": 0,
+        "unchanged": 4
+      },
+      "SET_COMPLETENESS": {
+        "fixed": 1,
+        "newly_regressed": 0,
+        "unchanged": 3
+      }
+    },
+    "D1-R2": {
+      "CROSS_SECTION": {
+        "fixed": 0,
+        "newly_regressed": 0,
+        "unchanged": 5
+      },
+      "POINTWISE_MISRANKING": {
+        "fixed": 4,
+        "newly_regressed": 0,
+        "unchanged": 4
+      },
+      "SET_COMPLETENESS": {
+        "fixed": 2,
+        "newly_regressed": 0,
+        "unchanged": 2
+      }
+    }
+  },
+  "decision": "MIXED_POST_RETRIEVAL_INTERVENTION_NOT_SUFFICIENT",
+  "freeze_commit": "dd6bd9783de6ea869c3a9fb4fa7eae8e90feb94f",
+  "frozen_gate": {
+    "D1-R1": {
+      "PASS": false
+    },
+    "D1-R2": {
+      "PASS": false
+    }
+  },
+  "invariants": {
+    "embedding": 0,
+    "full_qa": "NOT_RUN",
+    "production_change": "no",
+    "reranker": 0,
+    "retrieval": 0
+  },
+  "paired_identity": {
+    "DEV176": 176,
+    "POSTBLIND60": 60
+  },
+  "provider_calls": 0,
+  "schema_version": "ragq3-d1-offline-evaluation-v1",
+  "selected_candidate": "NONE",
+  "tuning": "no"
+}

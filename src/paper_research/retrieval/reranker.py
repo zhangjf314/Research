@@ -29,6 +29,8 @@ class RerankOutcome:
     fallback_occurred: bool = False
     failure_reason: str | None = None
     api_request_count: int = 0
+    prompt_tokens: int | None = None
+    total_tokens: int | None = None
 
 
 class Reranker(ABC):
@@ -143,7 +145,7 @@ class JinaReranker(Reranker):
         started = time.perf_counter()
         requests = 0
         try:
-            ranked, requests = self._request(query, results, top_k)
+            ranked, requests, usage = self._request(query, results, top_k)
             return RerankOutcome(
                 results=ranked,
                 provider=self.provider_name,
@@ -152,6 +154,8 @@ class JinaReranker(Reranker):
                 output_count=len(ranked),
                 latency_ms=round((time.perf_counter() - started) * 1000, 3),
                 api_request_count=requests,
+                prompt_tokens=usage["prompt_tokens"],
+                total_tokens=usage["total_tokens"],
             )
         except RerankerProviderError as exc:
             requests = exc.api_request_count
@@ -172,7 +176,7 @@ class JinaReranker(Reranker):
 
     def _request(
         self, query: str, results: list[FusedResult], top_k: int
-    ) -> tuple[list[FusedResult], int]:
+    ) -> tuple[list[FusedResult], int, dict[str, int | None]]:
         payload = {
             "model": self.model_name,
             "query": query,
@@ -192,7 +196,13 @@ class JinaReranker(Reranker):
                     _rerank_endpoint(self.base_url), headers=headers, json=payload
                 )
                 response.raise_for_status()
-                return _validated_results(response.json(), results, top_k), requests
+                body = response.json()
+                usage = body.get("usage") if isinstance(body, dict) else None
+                return (
+                    _validated_results(body, results, top_k),
+                    requests,
+                    _validated_usage(usage),
+                )
             except (httpx.TimeoutException, httpx.NetworkError, httpx.HTTPStatusError) as exc:
                 last_error = exc
                 retryable = not isinstance(exc, httpx.HTTPStatusError) or (
@@ -215,6 +225,44 @@ class JinaReranker(Reranker):
         raise RerankerProviderError(
             f"Jina rerank request failed: {detail}", api_request_count=requests
         ) from last_error
+
+
+class SiliconFlowReranker(JinaReranker):
+    """SiliconFlow's OpenAI-compatible ``/v1/rerank`` adapter.
+
+    The endpoint has the same request/response contract used by ``JinaReranker``.
+    It deliberately reuses the supplied candidate list only; it never retrieves
+    or appends documents.
+    """
+
+    provider_name = "siliconflow"
+
+    def __init__(
+        self,
+        *,
+        base_url: str,
+        api_key: str,
+        model: str,
+        timeout_seconds: float = 60,
+        max_retries: int = 2,
+        allow_fallback: bool = False,
+        fallback: Reranker | None = None,
+        client: httpx.Client | None = None,
+    ) -> None:
+        if not api_key:
+            raise ValueError("EMBEDDING_API_KEY is required for SiliconFlow reranking")
+        if not model:
+            raise ValueError("SiliconFlow reranker model is required")
+        super().__init__(
+            base_url=base_url,
+            api_key=api_key,
+            model=model,
+            timeout_seconds=timeout_seconds,
+            max_retries=max_retries,
+            allow_fallback=allow_fallback,
+            fallback=fallback,
+            client=client,
+        )
 
 
 class CrossEncoderReranker(JinaReranker):
@@ -272,6 +320,20 @@ def _validated_results(
             )
         )
     return ranked
+
+
+def _validated_usage(value: object) -> dict[str, int | None]:
+    if not isinstance(value, dict):
+        return {"prompt_tokens": None, "total_tokens": None}
+    output: dict[str, int | None] = {}
+    for field in ("prompt_tokens", "total_tokens"):
+        item = value.get(field)
+        output[field] = (
+            item
+            if isinstance(item, int) and not isinstance(item, bool) and item >= 0
+            else None
+        )
+    return output
 
 
 def _retry_delay(exc: Exception, attempt: int) -> float:

@@ -6,6 +6,7 @@ from paper_research.indexing.embedding import (
     HashEmbeddingProvider,
     JinaEmbeddingProvider,
     OpenAICompatibleEmbeddingProvider,
+    SiliconFlowEmbeddingProvider,
 )
 from paper_research.providers.llm import (
     LLMProvider,
@@ -65,6 +66,20 @@ def build_embedding_provider(settings: Settings) -> EmbeddingProvider:
             dimensions=settings.embedding_dimensions,
             revision=settings.embedding_revision,
             timeout=settings.embedding_timeout_seconds,
+        )
+    elif settings.embedding_provider == "siliconflow":
+        api_key = settings.embedding_api_key or settings.siliconflow_embedding_api_key
+        assert settings.embedding_base_url is not None
+        assert api_key is not None
+        return SiliconFlowEmbeddingProvider(
+            base_url=settings.embedding_base_url,
+            api_key=api_key,
+            model=settings.embedding_model,
+            dimensions=settings.embedding_dimensions,
+            revision=settings.embedding_revision,
+            batch_size=settings.embedding_batch_size,
+            timeout_seconds=settings.embedding_timeout_seconds,
+            max_retries=settings.embedding_max_retries,
         )
     raise ProviderConfigurationError(
         f"unsupported embedding provider: {settings.embedding_provider}"

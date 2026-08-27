@@ -1,0 +1,31 @@
+{
+  "schema_version": "ragq3-c0-final-decision-v1",
+  "classification": "HISTORICAL_DEVELOPMENT_EVIDENCE_NOT_SALVAGEABLE",
+  "historical_status": {
+    "A1D_PROMOTION_EVIDENCE_INVALIDATED_BY_GOLD_DEPENDENCY": true,
+    "A2B_PROMOTION_EVIDENCE_INVALIDATED_BY_GOLD_DEPENDENCY": true,
+    "A2B_R1_TOMBSTONED_PENDING_CLEAN_REEVALUATION": true,
+    "BLIND_HOLDOUT_ELIGIBLE": "no"
+  },
+  "gold_free_runtime": {
+    "implemented": true,
+    "module": "paper_research.indexing.gold_free_runtime",
+    "evaluation_resolver": "paper_research.evaluation.gold_free_attribution.GoldFreeEvaluationAttributionResolver",
+    "gold_removed_from_new_runtime_payload": true,
+    "gold_mutation_runtime_byte_identical": true,
+    "synthetic_unseen_paper_runtime_test": "PASS"
+  },
+  "historical_salvage": {
+    "a1d_cleanly_rescorable": false,
+    "a1d_coverage": "0/17558",
+    "a2b_cleanly_rescorable": false,
+    "a2b_coverage": "0/3520"
+  },
+  "clean_rescore_executed": false,
+  "fresh_gold_free_development_rerun_required": true,
+  "provider_calls": {"embedding": 0, "reranker_quality": 0},
+  "production_change": "no",
+  "blind_papers": 0,
+  "blind_questions": 0,
+  "blind_retrieval": 0
+}

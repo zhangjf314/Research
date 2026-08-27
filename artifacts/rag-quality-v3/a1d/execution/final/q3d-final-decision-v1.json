@@ -1,0 +1,462 @@
+{
+  "A2_SELECTIVE_RERANKING_ELIGIBLE": "yes",
+  "arms": {
+    "Q3D-R0": {
+      "arm": "Q3D-R0",
+      "attempted_questions": 176,
+      "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+      "losses": {
+        "candidate_loss": 5,
+        "packing_loss": 0,
+        "ranking_loss": 20
+      },
+      "metrics": {
+        "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+        "MRR": 0.582955,
+        "NDCG@10": 0.536708,
+        "all_claims_candidate_covered_rate@pool": 0.947368,
+        "candidate_pool_gold_recall": 0.876163,
+        "context_gold_precision": 0.207955,
+        "context_gold_recall": 0.60119,
+        "gold_block_recall@5": 0.60119,
+        "multi_evidence_all_claims_present@pool": 0.44898,
+        "multi_evidence_complete_rate@5": 0.326531,
+        "required_claim_coverage@5": 0.756579,
+        "required_claim_coverage@pool": 0.960526
+      },
+      "provider": {
+        "base_url": "https://api.siliconflow.cn/v1",
+        "deepseek_embedding_calls": 0,
+        "jina_calls": 0,
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "name": "SiliconFlow",
+        "stats": {
+          "429": 0,
+          "estimated_cost": null,
+          "failures": 0,
+          "http_attempts": 248,
+          "latency_seconds": 51.5231991969049,
+          "logical_requests": 248,
+          "prompt_tokens": 940171,
+          "retries": 0,
+          "total_tokens": 940171
+        }
+      },
+      "schema_version": "ragq3-a1d-summary-v1",
+      "status": "PASS"
+    },
+    "Q3D-R1": {
+      "arm": "Q3D-R1",
+      "attempted_questions": 176,
+      "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+      "losses": {
+        "candidate_loss": 2,
+        "packing_loss": 0,
+        "ranking_loss": 16
+      },
+      "metrics": {
+        "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+        "MRR": 0.605777,
+        "NDCG@10": 0.583181,
+        "all_claims_candidate_covered_rate@pool": 0.973684,
+        "candidate_pool_gold_recall": 0.918655,
+        "context_gold_precision": 0.2375,
+        "context_gold_recall": 0.665963,
+        "gold_block_recall@5": 0.665963,
+        "multi_evidence_all_claims_present@pool": 0.469388,
+        "multi_evidence_complete_rate@5": 0.326531,
+        "required_claim_coverage@5": 0.822368,
+        "required_claim_coverage@pool": 0.986842
+      },
+      "provider": {
+        "base_url": "https://api.siliconflow.cn/v1",
+        "deepseek_embedding_calls": 0,
+        "jina_calls": 0,
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "name": "SiliconFlow",
+        "stats": {
+          "429": 0,
+          "estimated_cost": null,
+          "failures": 0,
+          "http_attempts": 232,
+          "latency_seconds": 42.13995149452239,
+          "logical_requests": 232,
+          "prompt_tokens": 949541,
+          "retries": 0,
+          "total_tokens": 949541
+        }
+      },
+      "schema_version": "ragq3-a1d-summary-v1",
+      "status": "PASS"
+    },
+    "Q3D-R2": {
+      "arm": "Q3D-R2",
+      "attempted_questions": 176,
+      "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+      "losses": {
+        "candidate_loss": 1,
+        "packing_loss": 0,
+        "ranking_loss": 15
+      },
+      "metrics": {
+        "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+        "MRR": 0.617992,
+        "NDCG@10": 0.643362,
+        "all_claims_candidate_covered_rate@pool": 0.986842,
+        "candidate_pool_gold_recall": 0.943642,
+        "context_gold_precision": 0.259091,
+        "context_gold_recall": 0.716342,
+        "gold_block_recall@5": 0.716342,
+        "multi_evidence_all_claims_present@pool": 0.510204,
+        "multi_evidence_complete_rate@5": 0.346939,
+        "required_claim_coverage@5": 0.868421,
+        "required_claim_coverage@pool": 0.986842
+      },
+      "provider": {
+        "base_url": "https://api.siliconflow.cn/v1",
+        "deepseek_embedding_calls": 0,
+        "jina_calls": 0,
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "name": "SiliconFlow",
+        "stats": {
+          "429": 0,
+          "estimated_cost": null,
+          "failures": 0,
+          "http_attempts": 224,
+          "latency_seconds": 43.906743603758514,
+          "logical_requests": 224,
+          "prompt_tokens": 1083226,
+          "retries": 0,
+          "total_tokens": 1083226
+        }
+      },
+      "schema_version": "ragq3-a1d-summary-v1",
+      "status": "PASS"
+    },
+    "Q3D-R3": {
+      "arm": "Q3D-R3",
+      "attempted_questions": 176,
+      "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+      "losses": {
+        "candidate_loss": 18,
+        "packing_loss": 0,
+        "ranking_loss": 19
+      },
+      "metrics": {
+        "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+        "MRR": 0.452178,
+        "NDCG@10": 0.707013,
+        "all_claims_candidate_covered_rate@pool": 0.828947,
+        "candidate_pool_gold_recall": 0.617424,
+        "context_gold_precision": 0.260227,
+        "context_gold_recall": 0.41553,
+        "gold_block_recall@5": 0.41553,
+        "multi_evidence_all_claims_present@pool": 0.306122,
+        "multi_evidence_complete_rate@5": 0.122449,
+        "required_claim_coverage@5": 0.684211,
+        "required_claim_coverage@pool": 0.861842
+      },
+      "provider": {
+        "base_url": "https://api.siliconflow.cn/v1",
+        "deepseek_embedding_calls": 0,
+        "jina_calls": 0,
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "name": "SiliconFlow",
+        "stats": {
+          "429": 0,
+          "estimated_cost": null,
+          "failures": 0,
+          "http_attempts": 1580,
+          "latency_seconds": 543.0201364029199,
+          "logical_requests": 1580,
+          "prompt_tokens": 1925622,
+          "retries": 0,
+          "total_tokens": 1925622
+        }
+      },
+      "schema_version": "ragq3-a1d-summary-v1",
+      "status": "PASS"
+    },
+    "Q3D-R4": {
+      "arm": "Q3D-R4",
+      "attempted_questions": 176,
+      "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+      "losses": {
+        "candidate_loss": 5,
+        "packing_loss": 0,
+        "ranking_loss": 16
+      },
+      "metrics": {
+        "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+        "MRR": 0.56108,
+        "NDCG@10": 0.712316,
+        "all_claims_candidate_covered_rate@pool": 0.934211,
+        "candidate_pool_gold_recall": 0.864232,
+        "context_gold_precision": 0.2625,
+        "context_gold_recall": 0.581209,
+        "gold_block_recall@5": 0.581209,
+        "multi_evidence_all_claims_present@pool": 0.408163,
+        "multi_evidence_complete_rate@5": 0.285714,
+        "required_claim_coverage@5": 0.828947,
+        "required_claim_coverage@pool": 0.967105
+      },
+      "provider": {
+        "base_url": "https://api.siliconflow.cn/v1",
+        "deepseek_embedding_calls": 0,
+        "jina_calls": 0,
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "name": "SiliconFlow",
+        "stats": {
+          "429": 0,
+          "estimated_cost": null,
+          "failures": 0,
+          "http_attempts": 405,
+          "latency_seconds": 94.40363330859691,
+          "logical_requests": 405,
+          "prompt_tokens": 1167420,
+          "retries": 0,
+          "total_tokens": 1167420
+        }
+      },
+      "schema_version": "ragq3-a1d-summary-v1",
+      "status": "PASS"
+    }
+  },
+  "decision": "EVIDENCE_REPRESENTATION_NOT_SUFFICIENT",
+  "execution_status": "COMPLETE_VALID",
+  "freeze": "35869a15b8dea4a488bfbc0dce66cce57eb9fea5",
+  "full_qa": "NOT_RUN",
+  "gates": {
+    "Q3D-R1": {
+      "PASS": false,
+      "arm": "Q3D-R1",
+      "checks": {
+        "A_candidate_generation_improvement": {
+          "multi_evidence_delta": 0.020408,
+          "pass": false,
+          "required_claim_delta": 0.040816
+        },
+        "B_global_candidate_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "C_semantic_safety": {
+          "applicable": true,
+          "gold_recall_delta": 0.101191,
+          "pass": true,
+          "required_claim_delta": 0.0
+        },
+        "D_ranking_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "E_context_precision_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "F_paper_robustness": {
+          "paper_count": 14,
+          "pass": true,
+          "rate": 1.0,
+          "ties_or_better": 14
+        },
+        "G_no_concentration": {
+          "pass": false,
+          "positive_papers": 3,
+          "top_two_share_of_positive_gain": 0.744681
+        }
+      }
+    },
+    "Q3D-R2": {
+      "PASS": false,
+      "arm": "Q3D-R2",
+      "checks": {
+        "A_candidate_generation_improvement": {
+          "multi_evidence_delta": 0.061224,
+          "pass": false,
+          "required_claim_delta": 0.040816
+        },
+        "B_global_candidate_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "C_semantic_safety": {
+          "applicable": true,
+          "gold_recall_delta": 0.17381,
+          "pass": true,
+          "required_claim_delta": 0.0
+        },
+        "D_ranking_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "E_context_precision_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "F_paper_robustness": {
+          "paper_count": 14,
+          "pass": true,
+          "rate": 1.0,
+          "ties_or_better": 14
+        },
+        "G_no_concentration": {
+          "pass": false,
+          "positive_papers": 3,
+          "top_two_share_of_positive_gain": 0.764706
+        }
+      }
+    },
+    "Q3D-R3": {
+      "PASS": false,
+      "arm": "Q3D-R3",
+      "checks": {
+        "A_candidate_generation_improvement": {
+          "multi_evidence_delta": -0.142858,
+          "pass": false,
+          "required_claim_delta": -0.153062
+        },
+        "B_global_candidate_safety": {
+          "A": false,
+          "B": false,
+          "C": false,
+          "D": false
+        },
+        "C_semantic_safety": {
+          "applicable": true,
+          "gold_recall_delta": -0.15,
+          "pass": false,
+          "required_claim_delta": -0.125
+        },
+        "D_ranking_safety": {
+          "A": true,
+          "B": false,
+          "C": false,
+          "D": false
+        },
+        "E_context_precision_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": false
+        },
+        "F_paper_robustness": {
+          "paper_count": 14,
+          "pass": false,
+          "rate": 0.5,
+          "ties_or_better": 7
+        },
+        "G_no_concentration": {
+          "pass": false,
+          "positive_papers": 1,
+          "top_two_share_of_positive_gain": 1.0
+        }
+      }
+    },
+    "Q3D-R4": {
+      "PASS": false,
+      "arm": "Q3D-R4",
+      "checks": {
+        "A_candidate_generation_improvement": {
+          "multi_evidence_delta": -0.040817,
+          "pass": false,
+          "required_claim_delta": 0.010204
+        },
+        "B_global_candidate_safety": {
+          "A": true,
+          "B": false,
+          "C": true,
+          "D": true
+        },
+        "C_semantic_safety": {
+          "applicable": true,
+          "gold_recall_delta": 0.0,
+          "pass": true,
+          "required_claim_delta": 0.0
+        },
+        "D_ranking_safety": {
+          "A": true,
+          "B": false,
+          "C": true,
+          "D": true
+        },
+        "E_context_precision_safety": {
+          "A": true,
+          "B": true,
+          "C": true,
+          "D": true
+        },
+        "F_paper_robustness": {
+          "paper_count": 14,
+          "pass": true,
+          "rate": 0.857143,
+          "ties_or_better": 12
+        },
+        "G_no_concentration": {
+          "pass": false,
+          "positive_papers": 2,
+          "top_two_share_of_positive_gain": 1.0
+        }
+      }
+    }
+  },
+  "oracle_ceilings": {
+    "Q3D-R0": {
+      "Candidate Generation Ceiling": 0.960526,
+      "Post-Retrieval Selection Ceiling": 0.960526,
+      "status": "EVALUATION_ONLY_GOLD_INFORMED"
+    },
+    "Q3D-R1": {
+      "Candidate Generation Ceiling": 0.986842,
+      "Post-Retrieval Selection Ceiling": 0.986842,
+      "status": "EVALUATION_ONLY_GOLD_INFORMED"
+    },
+    "Q3D-R2": {
+      "Candidate Generation Ceiling": 0.986842,
+      "Post-Retrieval Selection Ceiling": 0.986842,
+      "status": "EVALUATION_ONLY_GOLD_INFORMED"
+    },
+    "Q3D-R3": {
+      "Candidate Generation Ceiling": 0.861842,
+      "Post-Retrieval Selection Ceiling": 0.861842,
+      "status": "EVALUATION_ONLY_GOLD_INFORMED"
+    },
+    "Q3D-R4": {
+      "Candidate Generation Ceiling": 0.967105,
+      "Post-Retrieval Selection Ceiling": 0.967105,
+      "status": "EVALUATION_ONLY_GOLD_INFORMED"
+    }
+  },
+  "primary_loss": "ranking_loss",
+  "production_change": "no",
+  "provider_calls": {
+    "429": 0,
+    "blind_quality_evaluation": 0,
+    "deepseek_embeddings": 0,
+    "estimated_cost": null,
+    "failures": 0,
+    "http_attempts": 2689,
+    "jina": 0,
+    "logical_requests": 2689,
+    "model": "Qwen/Qwen3-Embedding-0.6B",
+    "prompt_tokens": 6065980,
+    "provider": "SiliconFlow",
+    "provider_latency_seconds": 774.993664,
+    "retries": 0,
+    "total_tokens": 6065980
+  },
+  "schema_version": "ragq3-a1d-final-decision-v1",
+  "selected_candidate": "NONE"
+}

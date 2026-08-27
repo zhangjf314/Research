@@ -1,5 +1,6 @@
 import time
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 
 from paper_research.retrieval.context_builder import ContextBuilder, ContextItem
 from paper_research.retrieval.dense import DenseRetriever, RetrievalResult
@@ -19,6 +20,22 @@ class HybridRetrievalResult:
     def __init__(self, context: list[ContextItem], trace: RetrievalTrace) -> None:
         self.context = context
         self.trace = trace
+
+
+@dataclass(frozen=True)
+class CommonTrunkOutput:
+    """Observable P0 boundary before final reranking/context selection."""
+
+    original_query: str
+    routed_query: str
+    query_routing_signals: list[str]
+    dense_results: list[RetrievalResult]
+    sparse_results: list[RetrievalResult]
+    fused_results: list[FusedResult]
+    candidates: list[FusedResult]
+    retrieval_scope: str
+    retrieval_started: float
+    retrieval_finished: float
 
 
 class HybridRetriever:
@@ -51,50 +68,35 @@ class HybridRetriever:
         top_k: int = 5,
         retrieval_scope: str = "unspecified",
     ) -> HybridRetrievalResult:
-        started = time.perf_counter()
-        contribution_query = (
-            retrieval_scope == "paper" and self._is_contribution_query(query)
+        trunk = self.common_trunk(
+            query, retrieval_filter, recall_k=recall_k, retrieval_scope=retrieval_scope
         )
-        experiment_design_query = (
-            retrieval_scope == "paper" and self._is_experiment_design_query(query)
-        )
-        effective_recall_k = recall_k
-        if contribution_query:
-            effective_recall_k = max(effective_recall_k, 60)
-        if experiment_design_query:
-            effective_recall_k = max(effective_recall_k, 80)
-        routed_query, query_routing_signals = self._route_query(
-            query,
-            retrieval_scope=retrieval_scope,
-            experiment_design_query=experiment_design_query,
-        )
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            dense_future = executor.submit(
-                self.dense.retrieve,
-                routed_query,
-                retrieval_filter=retrieval_filter,
-                top_k=effective_recall_k,
-            )
-            sparse_future = executor.submit(
-                self.sparse.retrieve,
-                routed_query,
-                retrieval_filter=retrieval_filter,
-                top_k=effective_recall_k,
-            )
-            dense_results = dense_future.result()
-            sparse_results = sparse_future.result()
-        retrieval_finished = time.perf_counter()
-        fused = reciprocal_rank_fusion(dense_results, sparse_results)
-        candidate_limit = (
-            effective_recall_k
-            if self.reranker.provider_name == "disabled"
-            else self.rerank_input_k
-        )
-        if contribution_query:
-            candidate_limit = max(candidate_limit, min(60, len(fused)))
-        if experiment_design_query:
-            candidate_limit = max(candidate_limit, min(80, len(fused)))
-        rerank_candidates = fused[:candidate_limit]
+        return self.finalize(trunk, retrieval_filter=retrieval_filter, top_k=top_k)
+
+    def finalize(
+        self,
+        trunk: CommonTrunkOutput,
+        *,
+        retrieval_filter: RetrievalFilter | None = None,
+        top_k: int = 5,
+    ) -> HybridRetrievalResult:
+        """Apply the unchanged P0 ranking and context tail to one trunk output.
+
+        This is intentionally a finalization boundary: it does not call either
+        retrieval provider.  Paired evaluators can therefore fork a single
+        ``common_trunk`` result into P0 and an experimental finalizer without
+        allowing candidate-generation drift.
+        """
+        query = trunk.original_query
+        started = trunk.retrieval_started
+        routed_query = trunk.routed_query
+        query_routing_signals = trunk.query_routing_signals
+        dense_results = trunk.dense_results
+        sparse_results = trunk.sparse_results
+        fused = trunk.fused_results
+        rerank_candidates = trunk.candidates
+        retrieval_finished = trunk.retrieval_finished
+        retrieval_scope = trunk.retrieval_scope
         try:
             if self.reranker.provider_name == "disabled":
                 outcome = RerankOutcome(
@@ -107,9 +109,7 @@ class HybridRetriever:
                 )
             else:
                 rerank_top_n = min(self.rerank_output_k, len(rerank_candidates))
-                outcome = self.reranker.rerank_with_trace(
-                    query, rerank_candidates, rerank_top_n
-                )
+                outcome = self.reranker.rerank_with_trace(query, rerank_candidates, rerank_top_n)
         except RerankerProviderError as exc:
             rerank_finished = time.perf_counter()
             trace = self._trace(
@@ -160,6 +160,52 @@ class HybridRetriever:
         if self.trace_repository:
             self.trace_repository.append(trace)
         return HybridRetrievalResult(context, trace)
+
+    def common_trunk(
+        self,
+        query: str,
+        retrieval_filter: RetrievalFilter | None = None,
+        *,
+        recall_k: int = 20,
+        retrieval_scope: str = "unspecified",
+    ) -> CommonTrunkOutput:
+        """Run the exact current P0 candidate path once, without selection."""
+        started = time.perf_counter()
+        contribution = retrieval_scope == "paper" and self._is_contribution_query(query)
+        experiment = retrieval_scope == "paper" and self._is_experiment_design_query(query)
+        depth = max(recall_k, 60) if contribution else recall_k
+        depth = max(depth, 80) if experiment else depth
+        routed, signals = self._route_query(
+            query, retrieval_scope=retrieval_scope, experiment_design_query=experiment
+        )
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            dense_future = executor.submit(
+                self.dense.retrieve, routed, retrieval_filter=retrieval_filter, top_k=depth
+            )
+            sparse_future = executor.submit(
+                self.sparse.retrieve, routed, retrieval_filter=retrieval_filter, top_k=depth
+            )
+            dense, sparse = dense_future.result(), sparse_future.result()
+        fused = reciprocal_rank_fusion(dense, sparse)
+        candidate_limit = (
+            depth if self.reranker.provider_name == "disabled" else self.rerank_input_k
+        )
+        if contribution:
+            candidate_limit = max(candidate_limit, min(60, len(fused)))
+        if experiment:
+            candidate_limit = max(candidate_limit, min(80, len(fused)))
+        return CommonTrunkOutput(
+            query,
+            routed,
+            signals,
+            dense,
+            sparse,
+            fused,
+            fused[:candidate_limit],
+            retrieval_scope,
+            started,
+            time.perf_counter(),
+        )
 
     def _trace(
         self,
@@ -222,8 +268,7 @@ class HybridRetriever:
         candidates: list[FusedResult], reranked: list[FusedResult]
     ) -> list[RerankTraceCandidate]:
         post = {
-            item.chunk.chunk_id: (rank, item.score)
-            for rank, item in enumerate(reranked, start=1)
+            item.chunk.chunk_id: (rank, item.score) for rank, item in enumerate(reranked, start=1)
         }
         return [
             RerankTraceCandidate(
@@ -387,21 +432,18 @@ class HybridRetriever:
             return 7
         if "varying a number of factors" in normalized:
             return 1
-        if (
-            "result" in section
-            and any(
-                term in normalized
-                for term in (
-                    "evaluate the 8 models",
-                    "evaluate on traditional language modeling tasks",
-                    "wide range of datasets",
-                    "group the datasets",
-                    "task categories",
-                    "scaling curves",
-                    "training curves",
-                    "performance follows a power-law",
-                    "power-law trend",
-                )
+        if "result" in section and any(
+            term in normalized
+            for term in (
+                "evaluate the 8 models",
+                "evaluate on traditional language modeling tasks",
+                "wide range of datasets",
+                "group the datasets",
+                "task categories",
+                "scaling curves",
+                "training curves",
+                "performance follows a power-law",
+                "power-law trend",
             )
         ):
             return 1

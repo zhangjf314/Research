@@ -1,0 +1,258 @@
+{
+  "B2_FRESH_BLIND_ELIGIBLE": "no",
+  "cohorts": {
+    "COMBINED236": {
+      "D2B-R0": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 24
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.738812,
+          "MRR": 0.639689,
+          "NDCG@10": 0.628499,
+          "context_precision": 0.233898,
+          "context_recall": 0.738812,
+          "multi_evidence_complete_rate@5": 0.5625,
+          "required_claim_coverage@5": 0.852941
+        }
+      },
+      "D2B-R1": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 4
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.849738,
+          "MRR": 0.79089,
+          "NDCG@10": 0.74644,
+          "context_precision": 0.277966,
+          "context_recall": 0.849738,
+          "multi_evidence_complete_rate@5": 0.875,
+          "required_claim_coverage@5": 0.955882
+        }
+      }
+    },
+    "DEV176": {
+      "D2B-R0": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 7
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.723634,
+          "MRR": 0.651515,
+          "NDCG@10": 0.609116,
+          "context_precision": 0.251136,
+          "context_recall": 0.723634,
+          "multi_evidence_complete_rate@5": 0.6,
+          "required_claim_coverage@5": 0.907895
+        }
+      },
+      "D2B-R1": {
+        "losses": {
+          "candidate_loss": 5,
+          "packing_loss": 0,
+          "ranking_loss": 3
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.801353,
+          "MRR": 0.735795,
+          "NDCG@10": 0.675803,
+          "context_precision": 0.292045,
+          "context_recall": 0.801353,
+          "multi_evidence_complete_rate@5": 0.85,
+          "required_claim_coverage@5": 0.927632
+        }
+      }
+    },
+    "POSTBLIND60": {
+      "D2B-R0": {
+        "losses": {
+          "candidate_loss": 0,
+          "packing_loss": 0,
+          "ranking_loss": 17
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.783333,
+          "MRR": 0.605,
+          "NDCG@10": 0.685355,
+          "context_precision": 0.183333,
+          "context_recall": 0.783333,
+          "multi_evidence_complete_rate@5": 0.5,
+          "required_claim_coverage@5": 0.783333
+        }
+      },
+      "D2B-R1": {
+        "losses": {
+          "candidate_loss": 0,
+          "packing_loss": 0,
+          "ranking_loss": 1
+        },
+        "metrics": {
+          "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+          "GoldR@5": 0.991667,
+          "MRR": 0.9525,
+          "NDCG@10": 0.953642,
+          "context_precision": 0.236667,
+          "context_recall": 0.991667,
+          "multi_evidence_complete_rate@5": 0.916667,
+          "required_claim_coverage@5": 0.991667
+        }
+      }
+    }
+  },
+  "d0_d1_residual_recovery": {
+    "CROSS_SECTION": {
+      "fixed": 4,
+      "newly_regressed": 0,
+      "unchanged": 1
+    },
+    "POINTWISE_MISRANKING": {
+      "fixed": 8,
+      "newly_regressed": 0,
+      "unchanged": 0
+    },
+    "SET_COMPLETENESS": {
+      "fixed": 4,
+      "newly_regressed": 0,
+      "unchanged": 0
+    }
+  },
+  "decision": "POST_RETRIEVAL_OPTIMIZATION_CLOSED",
+  "execution_valid": true,
+  "freeze_commit": "b9dad71c812ba9f44e660802859cd2530dd89930",
+  "frozen_gate": {
+    "D2B-R1": {
+      "PASS": false
+    }
+  },
+  "historical_d2": {
+    "decision": "POST_RETRIEVAL_SELECTION_PROGRAM_CLOSED_NO_PROMOTION",
+    "reason": "236/236 finish_reason=length; valid outputs=0; fail-closed R1=R0",
+    "selector_quality": "NOT_EVALUATED"
+  },
+  "invariants": {
+    "candidate_membership": "identical",
+    "embedding": 0,
+    "full_qa": "NOT_RUN",
+    "production_change": "no",
+    "reranker": 0,
+    "retrieval": 0
+  },
+  "oracle": {
+    "actual_to_oracle_gap": {
+      "COMBINED236": {
+        "D2-R0": {
+          "GoldR@5": 0.168835,
+          "multi_evidence_complete_rate@5": 0.353676,
+          "required_claim_coverage@5": 0.125
+        },
+        "D2-R1": {
+          "GoldR@5": 0.057909,
+          "multi_evidence_complete_rate@5": 0.041176,
+          "required_claim_coverage@5": 0.022059
+        }
+      },
+      "DEV176": {
+        "D2-R0": {
+          "GoldR@5": 0.152529,
+          "multi_evidence_complete_rate@5": 0.25,
+          "required_claim_coverage@5": 0.052631
+        },
+        "D2-R1": {
+          "GoldR@5": 0.07481,
+          "multi_evidence_complete_rate@5": 0.0,
+          "required_claim_coverage@5": 0.032894
+        }
+      },
+      "POSTBLIND60": {
+        "D2-R0": {
+          "GoldR@5": 0.216667,
+          "multi_evidence_complete_rate@5": 0.5,
+          "required_claim_coverage@5": 0.216667
+        },
+        "D2-R1": {
+          "GoldR@5": 0.008333,
+          "multi_evidence_complete_rate@5": 0.083333,
+          "required_claim_coverage@5": 0.008333
+        }
+      }
+    },
+    "ceilings": {
+      "COMBINED236": {
+        "GoldR@5": 0.907647,
+        "multi_evidence_complete_rate@5": 0.916176,
+        "required_claim_coverage@5": 0.977941
+      },
+      "DEV176": {
+        "GoldR@5": 0.876163,
+        "multi_evidence_complete_rate@5": 0.85,
+        "required_claim_coverage@5": 0.960526,
+        "status": "EVALUATION_ONLY_GOLD_INFORMED_SEALED_POOL"
+      },
+      "POSTBLIND60": {
+        "GoldR@5": 1.0,
+        "multi_evidence_complete_rate@5": 1.0,
+        "required_claim_coverage@5": 1.0
+      }
+    }
+  },
+  "paired_identity": {
+    "DEV176": 176,
+    "POSTBLIND60": 60
+  },
+  "post_retrieval_optimization_closed": "yes",
+  "provider": {
+    "max_output_tokens": 256,
+    "model": "deepseek-v4-flash",
+    "name": "deepseek",
+    "temperature": 0.0
+  },
+  "quality": "EVALUATED",
+  "safety": {
+    "DEV176": {
+      "new_goldr_tail_regressions": 9,
+      "paper_robustness_rate": 0.857143,
+      "pass": false,
+      "subsets": {
+        "comparison": 0.02381,
+        "formula": 0.0,
+        "multi_evidence": 0.200841,
+        "semantic": 0.020834,
+        "single_evidence": 0.0
+      }
+    },
+    "POSTBLIND60": {
+      "new_goldr_tail_regressions": 0,
+      "paper_robustness_rate": 1.0,
+      "pass": true,
+      "subsets": {
+        "comparison": 0.333333,
+        "formula": 0.166667,
+        "multi_evidence": 0.291666,
+        "semantic": 0.083333,
+        "single_evidence": 0.166667
+      }
+    }
+  },
+  "schema_version": "ragq3-d2b-final-decision-v1",
+  "selected_candidate": "NONE",
+  "selection_snapshot_sha256": "2e0b4a7e2c668e65b23fcd390e2e317089ddbe8bbbfc8131e145e913ccde01ae",
+  "selector_calls": {
+    "calls": 236,
+    "finish_reasons": {
+      "non_length": 236
+    },
+    "invalid": 0,
+    "valid": 236
+  }
+}

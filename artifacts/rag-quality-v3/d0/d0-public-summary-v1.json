@@ -1,0 +1,14 @@
+{
+  "artifact_type": "rag_quality_v3_public_d0_summary",
+  "version": 1,
+  "classification": "VALIDATED",
+  "primary_root_cause": "MIXED_RANKING_FAILURE",
+  "residual_taxonomy": {
+    "pointwise": 8,
+    "cross_section": 5,
+    "set_completeness": 4
+  },
+  "publication_scope": "sanitized_public_snapshot",
+  "raw_question_level_attribution_included": false,
+  "note": "This compact manifest preserves the final D0 conclusion without publishing raw provider or question-level artifacts."
+}

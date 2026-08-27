@@ -1,0 +1,20 @@
+{
+  "artifact_type": "rag_quality_v3_sanitized_public_snapshot",
+  "version": 1,
+  "publication_mode": "SANITIZED_PUBLIC_SNAPSHOT",
+  "canonical_closure_commit": "067b1fb6c38c4769b5f1f8e7705d523392624451",
+  "canonical_documentation_commit": "6b9c9f8d81c0a28d8e25e64257e03658b0d647ee",
+  "classifications": [
+    "RAG_QUALITY_V3_CLOSED",
+    "POST_RETRIEVAL_OPTIMIZATION_CLOSED",
+    "NO_CANDIDATE_PROMOTED",
+    "PRODUCTION_P0_RETAINED",
+    "FULL_QA_NOT_ELIGIBLE",
+    "PORTFOLIO_EVIDENCE_READY"
+  ],
+  "selected_candidate": "NONE",
+  "production_p0_changed": false,
+  "full_qa": "NOT_RUN",
+  "included_evidence": "final reports, source, tests, reproducibility scripts, and compact manifests",
+  "excluded_evidence": "provider raw dumps, question-level artifacts, local indexes, caches, credentials, and private operational material"
+}

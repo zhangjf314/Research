@@ -103,6 +103,112 @@ class OpenAICompatibleEmbeddingProvider(EmbeddingProvider):
         return _validated_vectors(response.json(), len(texts), self.dimensions)
 
 
+class SiliconFlowEmbeddingProvider(EmbeddingProvider):
+    """SiliconFlow's OpenAI-compatible embeddings API with explicit Qwen contract fields."""
+
+    provider_name = "siliconflow"
+
+    def __init__(
+        self,
+        *,
+        base_url: str,
+        api_key: str,
+        model: str,
+        dimensions: int,
+        revision: str,
+        batch_size: int = 32,
+        timeout_seconds: float = 60.0,
+        max_retries: int = 2,
+        client: httpx.Client | None = None,
+    ) -> None:
+        if not api_key:
+            raise ValueError("SILICONFLOW_EMBEDDING_API_KEY is required")
+        self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
+        self.model_name = model
+        self.dimensions = dimensions
+        self.revision = revision
+        self.batch_size = batch_size
+        self.timeout_seconds = timeout_seconds
+        self.max_retries = max_retries
+        self.client = client or httpx.Client(timeout=timeout_seconds)
+        self.execution_stats = {
+            "logical_requests": 0,
+            "http_attempts": 0,
+            "429": 0,
+            "retries": 0,
+            "failures": 0,
+            "latency_seconds": 0.0,
+            "prompt_tokens": 0,
+            "total_tokens": 0,
+            "estimated_cost": None,
+        }
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        vectors: list[list[float]] = []
+        for start in range(0, len(texts), self.batch_size):
+            vectors.extend(self._request(texts[start : start + self.batch_size]))
+        return vectors
+
+    def embed_query(self, text: str) -> list[float]:
+        if not text.strip():
+            raise ValueError("embedding query must not be blank")
+        return self._request([text])[0]
+
+    def _request(self, texts: list[str]) -> list[list[float]]:
+        if not texts:
+            return []
+        started = time.perf_counter()
+        self.execution_stats["logical_requests"] += 1
+        payload = {
+            "model": self.model_name,
+            "input": texts,
+            "dimensions": self.dimensions,
+            "encoding_format": "float",
+        }
+        headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+        last_error: Exception | None = None
+        for attempt in range(self.max_retries + 1):
+            try:
+                self.execution_stats["http_attempts"] += 1
+                response = self.client.post(
+                    _embedding_endpoint(self.base_url), headers=headers, json=payload
+                )
+                if response.status_code == 429:
+                    self.execution_stats["429"] += 1
+                response.raise_for_status()
+                body = response.json()
+                usage = body.get("usage") or {}
+                self.execution_stats["prompt_tokens"] += int(usage.get("prompt_tokens") or 0)
+                self.execution_stats["total_tokens"] += int(usage.get("total_tokens") or 0)
+                self.execution_stats["latency_seconds"] += time.perf_counter() - started
+                return _validated_vectors(body, len(texts), self.dimensions)
+            except (httpx.TimeoutException, httpx.NetworkError, httpx.HTTPStatusError) as exc:
+                last_error = exc
+                retryable = not isinstance(exc, httpx.HTTPStatusError) or (
+                    exc.response.status_code == 429 or exc.response.status_code >= 500
+                )
+                if not retryable or attempt >= self.max_retries:
+                    break
+                self.execution_stats["retries"] += 1
+                time.sleep(_retry_delay(exc, attempt))
+            except (KeyError, TypeError, ValueError) as exc:
+                raise EmbeddingProviderError(
+                    f"SiliconFlow embedding response validation failed: {exc}"
+                ) from exc
+        assert last_error is not None
+        self.execution_stats["failures"] += 1
+        self.execution_stats["latency_seconds"] += time.perf_counter() - started
+        detail = (
+            f"HTTP {last_error.response.status_code}"
+            if isinstance(last_error, httpx.HTTPStatusError)
+            else type(last_error).__name__
+        )
+        raise EmbeddingProviderError(
+            f"SiliconFlow embedding request failed: {detail}"
+        ) from last_error
+
+
 class JinaEmbeddingProvider(EmbeddingProvider):
     """Jina embeddings with asymmetric query/passage retrieval tasks."""
 

@@ -14,6 +14,7 @@ from paper_research.indexing.embedding import (
     EmbeddingProviderError,
     HashEmbeddingProvider,
     JinaEmbeddingProvider,
+    SiliconFlowEmbeddingProvider,
 )
 from paper_research.indexing.vector_store import QdrantVectorStore
 from paper_research.providers.factory import (
@@ -92,6 +93,40 @@ def test_jina_uses_asymmetric_tasks_batches_and_dimensions() -> None:
     ]
     assert all(request["dimensions"] == 4 for request in requests)
     assert all(request["model"] == "jina-embeddings-v5-text-small" for request in requests)
+
+
+def test_siliconflow_uses_dedicated_qwen_embedding_contract() -> None:
+    requests: list[dict] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        assert request.url == "https://api.siliconflow.cn/v1/embeddings"
+        assert request.headers["Authorization"] == "Bearer siliconflow-test-key"
+        payload = json.loads(request.content)
+        requests.append(payload)
+        return httpx.Response(
+            200,
+            json={
+                "model": "Qwen/Qwen3-Embedding-0.6B",
+                "usage": {"prompt_tokens": 2, "total_tokens": 2},
+                "data": [
+                    {"index": index, "embedding": [float(index + 1)] * 4}
+                    for index, _ in enumerate(payload["input"])
+                ],
+            },
+        )
+
+    provider = SiliconFlowEmbeddingProvider(
+        base_url="https://api.siliconflow.cn/v1",
+        api_key="siliconflow-test-key",
+        model="Qwen/Qwen3-Embedding-0.6B",
+        dimensions=4,
+        revision="provider-managed",
+        client=mock_client(handler),
+    )
+    assert len(provider.embed_documents(["passage"])) == 1
+    assert len(provider.embed_query("query")) == 4
+    assert all(payload["dimensions"] == 4 for payload in requests)
+    assert all(payload["encoding_format"] == "float" for payload in requests)
 
 
 @pytest.mark.parametrize(

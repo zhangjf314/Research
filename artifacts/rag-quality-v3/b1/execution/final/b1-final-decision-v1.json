@@ -1,0 +1,157 @@
+{
+  "C2_R1_BLIND_GENERALIZED": "no",
+  "FULL_QA_ELIGIBLE": "no",
+  "actual_to_oracle_gap": {
+    "Claim@5": 0.216667,
+    "GoldR@5": 0.216667,
+    "MultiComplete@5": 0.5
+  },
+  "bootstrap_ci_95": {
+    "GoldR@5": [
+      -0.016667,
+      0.208333
+    ],
+    "MRR": [
+      -0.0525,
+      0.192229
+    ],
+    "NDCG@10": [
+      -0.023752,
+      0.178728
+    ]
+  },
+  "classification": "BLIND_GENERALIZATION_FAILED",
+  "execution_status": "COMPLETE_VALID",
+  "frozen_blind_gate": {
+    "PASS": false,
+    "checks": {
+      "claims": {
+        "pass": true
+      },
+      "context": {
+        "pass": true
+      },
+      "gain_concentration": {
+        "pass": false,
+        "positive_papers": 6,
+        "top_two_gain_share": 0.5625
+      },
+      "overall": {
+        "pass": false
+      },
+      "paper_robustness": {
+        "nondecreasing_papers": 9,
+        "paper_count": 12,
+        "pass": true,
+        "positive_papers": 6,
+        "rate": 0.75,
+        "top_two_gain_share": 0.5625
+      },
+      "subsets": {
+        "pass": false
+      }
+    }
+  },
+  "invariants": {
+    "full_qa": "NOT_RUN",
+    "production_change": "no",
+    "retrieval_after_seal": 0,
+    "retrieval_before_freeze": 0,
+    "tuning": "no"
+  },
+  "losses": {
+    "B1-R0": {
+      "candidate_loss": 0,
+      "packing_loss": 0,
+      "ranking_loss": 25
+    },
+    "B1-R1": {
+      "candidate_loss": 0,
+      "packing_loss": 0,
+      "ranking_loss": 17
+    },
+    "ranking_loss_recovered": 8
+  },
+  "metrics": {
+    "B1-R0": {
+      "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+      "GoldR@5": 0.691667,
+      "MRR": 0.536667,
+      "NDCG@10": 0.609226,
+      "context_precision": 0.156667,
+      "context_recall": 0.691667,
+      "multi_evidence_complete_rate@5": 0.25,
+      "required_claim_coverage@5": 0.691667
+    },
+    "B1-R1": {
+      "B_D_claim_metrics": "METRIC_NOT_COMPUTABLE",
+      "GoldR@5": 0.783333,
+      "MRR": 0.605,
+      "NDCG@10": 0.685355,
+      "context_precision": 0.183333,
+      "context_recall": 0.783333,
+      "multi_evidence_complete_rate@5": 0.5,
+      "required_claim_coverage@5": 0.783333
+    },
+    "delta": {
+      "GoldR@5": 0.091666,
+      "MRR": 0.068333,
+      "NDCG@10": 0.076129,
+      "context_precision": 0.026666,
+      "context_recall": 0.091666,
+      "multi_evidence_complete_rate@5": 0.25,
+      "required_claim_coverage@5": 0.091666
+    }
+  },
+  "oracle_ceilings": {
+    "Claim@5": 1.0,
+    "GoldR@5": 1.0,
+    "MultiComplete@5": 1.0
+  },
+  "paired_identity": {
+    "questions": 60,
+    "status": "PASS"
+  },
+  "paper_robustness": {
+    "nondecreasing_papers": 9,
+    "paper_count": 12,
+    "pass": true,
+    "positive_papers": 6,
+    "rate": 0.75,
+    "top_two_gain_share": 0.5625
+  },
+  "provider": {
+    "embedding_calls": 142,
+    "failures": 0,
+    "reranker_calls": 60,
+    "reranker_latency_ms": 18567.51
+  },
+  "schema_version": "ragq3-b1-final-decision-v1",
+  "subset_safety": {
+    "comparison": {
+      "GoldR@5_delta": -0.166666,
+      "pass": false,
+      "questions": 12
+    },
+    "formula": {
+      "GoldR@5_delta": 0.333333,
+      "pass": true,
+      "questions": 12
+    },
+    "multi_evidence": {
+      "GoldR@5_delta": 0.208334,
+      "pass": true,
+      "questions": 12
+    },
+    "semantic_paraphrase": {
+      "GoldR@5_delta": 0.0,
+      "pass": true,
+      "questions": 12
+    },
+    "single_evidence": {
+      "GoldR@5_delta": 0.083333,
+      "pass": true,
+      "questions": 12
+    }
+  }
+}

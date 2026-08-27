@@ -1,0 +1,35 @@
+{
+  "schema_version": "ragq3-p0-runtime-contract-v1",
+  "reconstructed_from_commit": "360aec721b003ad39f39b91bf975d7950d918859",
+  "status": "ACTUAL_P0_RECONSTRUCTED",
+  "baseline_drift": false,
+  "frozen_p0_hashes": {
+    "config_hash": "559505f0740854bb",
+    "policy_hash": "c18b794331bc96a2",
+    "match": true
+  },
+  "runtime": {
+    "backend": "production_hybrid_rrf",
+    "entrypoint": "src/paper_research/api/routes/rag.py:_run_hybrid",
+    "retriever": "src/paper_research/retrieval/hybrid.py:HybridRetriever",
+    "query_routing": "paper-scoped experiment-design query appends fixed signals; all other queries remain original",
+    "query_expansion": "none beyond the fixed experiment-design routing signals",
+    "dense": {"implementation": "DenseRetriever", "provider": "configured production EMBEDDING_PROVIDER/EMBEDDING_MODEL", "model_change": "forbidden"},
+    "bm25": {"implementation": "BM25Retriever", "k1": 1.5, "b": 0.75},
+    "fusion": {"algorithm": "reciprocal_rank_fusion", "legs": ["dense", "sparse"], "rrf_k": 60, "weights": {"dense": 1.0, "sparse": 1.0}},
+    "candidate_depth": {"normal": "request recall_k (QA default RETRIEVAL_RECALL_K=20)", "contribution_query_minimum": 60, "experiment_design_query_minimum": 80, "reranker_disabled": true},
+    "chunk_representation": {"implementation": "StructuralChunker", "max_tokens": 400, "overlap_tokens": 60, "behavior": "section/block-structure-preserving aggregation; oversized blocks use token windows; neighboring chunks are recorded but production context does not include neighbors"},
+    "context": {"top_k": "request-controlled (HybridRetrievalRequest default 5)", "token_budget": "QA_CONTEXT_TOKEN_BUDGET (default 12000)", "packing": "rank-order prefix with token truncation", "include_neighbors": false},
+    "reranker": {"enabled": false, "behavior": "DisabledReranker preserves fused order", "fallback": "not applicable; enabled-provider errors propagate without silent final-rank substitution"}
+  },
+  "source_blobs": {
+    "rag_route": "df94b0cc156e436e611299cd888d5085dc0e6d6c",
+    "hybrid": "d9117a03ab90ab624cb9fe93b4cb1a5b6c75dfd7",
+    "context_builder": "aceae990ebdda0bdf495f10715bfb65b641674b1",
+    "sparse": "b98a8cf3f270e2d43d2673547de4308f84fcd900",
+    "fusion": "6198a67d1c473600e4491aae2cbd1f3cfa79a2c3",
+    "settings": "671c2d492380057ecfc6580b2a44e044e05dd980"
+  },
+  "production_default_change": "no",
+  "provider_calls": 0
+}
