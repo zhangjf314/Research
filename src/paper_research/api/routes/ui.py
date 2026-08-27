@@ -65,6 +65,7 @@ RESEARCH_MODE_UI = """
 <div class='card'>
   <p><span id='mode-badge' class='muted'>[ WORKFLOW ]</span> Current mode: <strong id='mode-label'>Deep Research Workflow</strong></p>
   <p id='mode-description' class='muted'>Execution path: predefined orchestration → evidence synthesis → verification.</p>
+  <p id='research-paper-scope' class='muted'>Paper scope: all indexed papers. <a href='/api/v1/ui/library'>Choose papers in the Library</a>.</p>
   <textarea id='query' rows='4' style='width:95%' placeholder='Example: Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.'></textarea><br>
   <button id='run-research' type='button' onclick='runResearch()'>Run Workflow</button>
   <button type='button' onclick='fillExampleQuery()'>Fill example</button>
@@ -131,7 +132,7 @@ const modeAdapters = {
     description: 'Execution path: predefined orchestration → evidence synthesis → verification.',
     async submit(query) {
       const response = await fetch('/api/v1/research/deep',{method:'POST',
-        headers:{'Content-Type':'application/json'},body:JSON.stringify({query,allow_external_search:false})});
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({query,paper_ids:selectedPaperIds(),allow_external_search:false})});
       return {response, data: await readJson(response)};
     },
     normalize(data) {
@@ -159,7 +160,7 @@ const modeAdapters = {
     description: 'Execution path: Planner → Dynamic Tool Selection → Evidence State → Verification.',
     async submit(query) {
       const response = await fetch('/api/v1/research/agent',{method:'POST',
-        headers:{'Content-Type':'application/json'},body:JSON.stringify({query})});
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({query,paper_ids:selectedPaperIds()})});
       return {response, data: await readJson(response)};
     },
     normalize(data) {
@@ -461,6 +462,25 @@ function toggleRaw() {
   const raw = document.getElementById('report-raw');
   raw.hidden = !raw.hidden;
 }
+function selectedPaperIds() {
+  try {
+    const ids = JSON.parse(window.localStorage.getItem('paperResearchSelectedPaperIds') || '[]');
+    return Array.isArray(ids) ? ids.filter(id => typeof id === 'string' && id) : [];
+  } catch (error) {
+    return [];
+  }
+}
+function refreshResearchPaperScope() {
+  const ids = selectedPaperIds();
+  const target = document.getElementById('research-paper-scope');
+  target.textContent = ids.length
+    ? `Paper scope: ${ids.length} selected indexed paper${ids.length === 1 ? '' : 's'}. `
+    : 'Paper scope: all indexed papers. ';
+  const link = document.createElement('a');
+  link.href = '/api/v1/ui/library';
+  link.textContent = 'Choose papers in the Library';
+  target.append(link, '.');
+}
 function fillExampleQuery() {
   document.getElementById('query').value =
     'Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.';
@@ -478,6 +498,7 @@ function resetResearchState() {
   clearTaskStatus();
 }
 selectResearchMode(researchMode);
+refreshResearchPaperScope();
 checkResearchCapabilities();
 </script>
 """
@@ -586,6 +607,17 @@ def library_page(db: DbSession) -> HTMLResponse:
           <button id='upload-paper' type='button' onclick='uploadPaper()'>Upload PDF</button>
           <p id='upload-status' class='muted'></p>
         </section>
+        <section class='card' id='direct-qa-card'>
+          <h2>Direct QA</h2>
+          <p id='selection-summary' class='muted'>Select one or more indexed papers below before asking a question.</p>
+          <textarea id='direct-qa-question' rows='4' style='width:95%' placeholder='Ask a question about the selected papers.'></textarea><br>
+          <button id='ask-direct-qa' type='button' onclick='askDirectQa()'>Ask selected papers</button>
+          <p id='direct-qa-status' class='muted'></p>
+          <section id='direct-qa-result' hidden>
+            <h3>Answer</h3><article id='direct-qa-answer'></article>
+            <h3>Sources and retrieved evidence</h3><div id='direct-qa-evidence'></div>
+          </section>
+        </section>
         <section class='card'>
           <select id='paper-filter' onchange='loadLibrary()'>
             <option value='all'>All</option><option value='ready'>Ready</option>
@@ -597,7 +629,7 @@ def library_page(db: DbSession) -> HTMLResponse:
           <button type='button' onclick='loadLibrary()'>Refresh</button>
           <p id='missing-metadata-count' class='muted'>Missing metadata: loading...</p>
         </section>
-        <table><thead><tr><th>Title</th><th>Authors</th><th>Year</th><th>Source</th>
+        <table><thead><tr><th>Use</th><th>Title</th><th>Authors</th><th>Year</th><th>Source</th>
         <th>Parse</th><th>Index</th><th>Created</th><th>Metadata</th><th>Actions</th>
         </tr></thead><tbody id='library-rows'></tbody></table>
         <section class='card' id='metadata-editor' hidden>
@@ -622,6 +654,48 @@ def library_page(db: DbSession) -> HTMLResponse:
           }
           return data.detail || data.error?.message || `HTTP ${response.status}`;
         }
+        const selectionStorageKey='paperResearchSelectedPaperIds';
+        let selectedPaperIds=new Set();
+        try{selectedPaperIds=new Set(JSON.parse(localStorage.getItem(selectionStorageKey)||'[]'));}catch(error){selectedPaperIds=new Set();}
+        function savePaperSelection(){
+          localStorage.setItem(selectionStorageKey,JSON.stringify([...selectedPaperIds]));
+          const target=document.getElementById('selection-summary');
+          const count=selectedPaperIds.size;
+          target.textContent=count ? `${count} indexed paper${count===1?'':'s'} selected. This scope is shared with Workflow and Agent.` : 'Select one or more indexed papers below before asking a question.';
+        }
+        function selectPaper(id, checked){
+          if(checked) selectedPaperIds.add(id); else selectedPaperIds.delete(id);
+          savePaperSelection();
+        }
+        function renderDirectQa(answer){
+          const result=document.getElementById('direct-qa-result');
+          result.hidden=false;
+          document.getElementById('direct-qa-answer').textContent=answer.answer || answer.refusal_reason || 'No answer returned.';
+          const citations=answer.citations||[];
+          document.getElementById('direct-qa-evidence').innerHTML=citations.map(item=>{
+            const provenance=(item.block_ids||[]).map(block=>`<code>${esc(block)}</code>`).join(' ');
+            const section=item.section || 'Unlabeled section';
+            return `<section class='card'><p><strong>${esc(item.paper_id)}</strong> — ${esc(section)}, pages ${esc(item.page_start)}–${esc(item.page_end)}</p>`+
+              `<p>${esc(item.quote||'')}</p><p class='muted'>Canonical/block provenance: ${provenance||'not returned by backend'}</p>`+
+              (item.pdf_url?`<a href='${esc(item.pdf_url)}'>Open source PDF</a>`:'')+'</section>';
+          }).join('') || '<p class="muted">No cited evidence was returned by the backend.</p>';
+        }
+        async function askDirectQa(){
+          const status=document.getElementById('direct-qa-status');
+          const button=document.getElementById('ask-direct-qa');
+          const question=document.getElementById('direct-qa-question').value.trim();
+          const paperIds=[...selectedPaperIds];
+          if(!paperIds.length){status.textContent='Select at least one indexed paper before asking Direct QA.';return;}
+          if(!question){status.textContent='Enter a question before asking Direct QA.';return;}
+          button.disabled=true; status.textContent='QA running...';
+          try{
+            const response=await fetch('/api/v1/qa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,paper_ids:paperIds})});
+            const answer=await readJson(response);
+            if(!response.ok) throw new Error(httpMessage(response,answer));
+            renderDirectQa(answer); status.textContent=answer.refused?'Completed with an evidence limitation.':'Direct QA completed.';
+          }catch(error){status.textContent='Direct QA failed: '+(error.message||error);}
+          finally{button.disabled=false;}
+        }
         async function loadLibrary(){
           const filter=document.getElementById('paper-filter').value;
           const params=new URLSearchParams({limit:'100'});
@@ -631,18 +705,21 @@ def library_page(db: DbSession) -> HTMLResponse:
           if(filter==='missing-metadata') params.set('missing_metadata','true');
           if(filter==='upload'||filter==='external_search') params.set('source_type', filter);
           const tbody=document.getElementById('library-rows');
-          tbody.innerHTML='<tr><td colspan="9">Loading...</td></tr>';
+          tbody.innerHTML='<tr><td colspan="10">Loading...</td></tr>';
           const response=await fetch('/api/v1/papers?'+params.toString());
           const papers=await readJson(response);
           if(!response.ok){
-            tbody.innerHTML=`<tr><td colspan="9">${esc(httpMessage(response, papers))}</td></tr>`;
+            tbody.innerHTML=`<tr><td colspan="10">${esc(httpMessage(response, papers))}</td></tr>`;
             return;
           }
           const rows=(papers||[]).filter(p=>filter!=='ready'||p.index_status==='READY').map(p=>{
             const authors=(p.authors||[]).join('; ');
             const meta=(p.year?'':'Missing year')+(authors?'':' Missing authors');
             const payload=esc(JSON.stringify(p));
-            return `<tr><td>${esc(p.title)}</td><td>${esc(authors||'—')}</td><td>${esc(p.year||'Missing year')}</td>`+
+            const ready=p.index_status==='READY';
+            const checked=ready&&selectedPaperIds.has(p.id)?' checked':'';
+            const selector=`<input type='checkbox' aria-label='Select ${esc(p.title)}' onchange='selectPaper("${esc(p.id)}",this.checked)'${checked}${ready?'':' disabled'}>`;
+            return `<tr><td>${selector}</td><td>${esc(p.title)}</td><td>${esc(authors||'—')}</td><td>${esc(p.year||'Missing year')}</td>`+
               `<td>${esc(p.source_type)}</td><td>${esc(p.parse_status)}</td><td>${esc(p.index_status)}</td>`+
               `<td>${esc(p.created_at)}</td><td>${esc(meta||'OK')}</td>`+
               `<td><a href='/api/v1/ui/papers/${esc(p.id)}'>Open</a> <a href='/api/v1/papers/${esc(p.id)}/pdf'>Open PDF</a> `+
@@ -650,7 +727,8 @@ def library_page(db: DbSession) -> HTMLResponse:
               `<button type='button' onclick='enrichMetadata("${esc(p.id)}")'>Enrich Metadata</button> `+
               `<button type='button' onclick='indexPaper("${esc(p.id)}")'>Index/Reindex</button></td></tr>`;
           }).join('');
-          document.getElementById('library-rows').innerHTML=rows||'<tr><td colspan="9">No papers match the current filter.</td></tr>';
+          document.getElementById('library-rows').innerHTML=rows||'<tr><td colspan="10">No papers match the current filter.</td></tr>';
+          savePaperSelection();
           const missing=(papers||[]).filter(p=>!p.year || !(p.authors||[]).length).length;
           document.getElementById('missing-metadata-count').textContent=`Missing metadata: ${missing}`;
         }
@@ -666,8 +744,11 @@ def library_page(db: DbSession) -> HTMLResponse:
           }catch(error){status.textContent='Upload failed: '+(error.message||error);}
         }
         async function indexPaper(id){
-          const response=await fetch(`/api/v1/papers/${id}/index`,{method:'POST'});
-          if(!response.ok){const data=await readJson(response); alert(data.detail||httpMessage(response,data));}
+          const status=document.getElementById('upload-status'); status.textContent='Indexing paper...';
+          try{const response=await fetch(`/api/v1/papers/${id}/index`,{method:'POST'}); const data=await readJson(response);
+            if(!response.ok) throw new Error(httpMessage(response,data));
+            status.textContent=`Index ready: ${data.chunk_count} chunks.`;
+          }catch(error){status.textContent='Indexing failed: '+(error.message||error);}
           await loadLibrary();
         }
         function editMetadata(serialized){
@@ -700,7 +781,7 @@ def library_page(db: DbSession) -> HTMLResponse:
             await loadLibrary();
           }catch(error){status.textContent='Metadata enrichment failed: '+(error.message||error);}
         }
-        loadLibrary();
+        savePaperSelection(); loadLibrary();
         </script>""",
     )
 

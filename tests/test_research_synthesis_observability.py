@@ -55,7 +55,9 @@ def provider(tmp_path: Path, contents: list[str]) -> SiliconFlowLLMProvider:
         client=FakeChatClient(contents),
         input_cost_per_million=1.0,
         output_cost_per_million=1.0,
-        provider_name="deepseek",
+        # This fixture verifies JSON-object raw-response persistence.  DeepSeek
+        # has its own exercised function-call adapter tests.
+        provider_name="compat-test",
     )
 
 

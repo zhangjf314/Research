@@ -74,7 +74,7 @@ class ResearchAgentToolRegistry:
         top_k = int(action.arguments.get("top_k") or 5)
         top_k = max(1, min(top_k, 20))
         try:
-            raw_items = self.retrieval_provider.search(query, None, top_k)
+            raw_items = self.retrieval_provider.search(query, state.paper_ids, top_k)
         except Exception as exc:
             return ToolObservation(
                 tool_call_id=tool_call_id,

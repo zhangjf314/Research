@@ -84,6 +84,7 @@ class DeepResearchResponse(BaseModel):
 
 class ResearchAgentRequest(BaseModel):
     query: str = Field(min_length=3)
+    paper_ids: list[str] | None = None
     budget: AgentBudget = Field(default_factory=AgentBudget)
     task_id: str | None = None
     pause_after_phase: str | None = None
@@ -475,6 +476,7 @@ def run_research_agent(payload: ResearchAgentRequest) -> ResearchAgentResponse:
             state = runner.run(
                 payload.query,
                 task_id=task_id,
+                paper_ids=payload.paper_ids,
                 budget=payload.budget,
                 interrupt_after_phase=payload.pause_after_phase,
             )

@@ -53,7 +53,16 @@ class _FailingRunner:
         self.checkpoints = self.__class__.checkpoint_store
         self.trace = self.__class__.trace_writer
 
-    def run(self, query: str, *, task_id: str, budget, interrupt_after_phase=None):
+    def run(
+        self,
+        query: str,
+        *,
+        task_id: str,
+        paper_ids=None,
+        budget,
+        interrupt_after_phase=None,
+    ):
+        del paper_ids
         state = AgentState(research_question=query, task_id=task_id, budget=budget)
         state.provider_call_count = 1
         state.token_usage.input_tokens = 491

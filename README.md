@@ -25,6 +25,26 @@ No evaluated reranker or selector has been deployed as the production default.
 | Research workflows | Fixed Deep Research orchestration plus an explicitly experimental agent runtime |
 | Evaluation | Gold-free runtime/evaluation separation, sealed snapshots, paired comparisons, loss decomposition, and promotion gates |
 
+## Local runtime validation
+
+The latest local Docker acceptance run validated the following user-facing paths
+against an indexed paper:
+
+- Paper Library upload, indexing, selection, and Direct QA;
+- citation and evidence rendering for Direct QA;
+- Deep Research workflow completion with retrieval and a non-empty report; and
+- Research Agent completion with real model-driven tool calls, evidence, verifier
+  execution, and a non-empty report.
+
+The validated runtime uses SiliconFlow `Qwen/Qwen3-Embedding-0.6B` embeddings
+and DeepSeek Chat Completions. DeepSeek structured results and Agent decisions
+use forced ordinary function calls with strict local validation; this is a
+provider compatibility boundary, not a change to retrieval or production RAG
+semantics. See [local runtime acceptance](docs/LOCAL_RUNTIME_ACCEPTANCE.md).
+
+This validation does not promote a reranker or listwise selector. The RAGQ3
+conclusion remains **NO_CANDIDATE_PROMOTED** and **PRODUCTION_P0_RETAINED**.
+
 ## System architecture
 
 ```mermaid

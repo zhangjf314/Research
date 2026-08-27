@@ -4,6 +4,7 @@
   "publication_mode": "SANITIZED_PUBLIC_SNAPSHOT",
   "canonical_closure_commit": "067b1fb6c38c4769b5f1f8e7705d523392624451",
   "canonical_documentation_commit": "6b9c9f8d81c0a28d8e25e64257e03658b0d647ee",
+  "canonical_runtime_acceptance_commit": "86b02ba3390fd0e74c68b9565935f56ec839bf9e",
   "classifications": [
     "RAG_QUALITY_V3_CLOSED",
     "POST_RETRIEVAL_OPTIMIZATION_CLOSED",
@@ -15,6 +16,6 @@
   "selected_candidate": "NONE",
   "production_p0_changed": false,
   "full_qa": "NOT_RUN",
-  "included_evidence": "final reports, source, tests, reproducibility scripts, and compact manifests",
+  "included_evidence": "final reports, source, tests, reproducibility scripts, compact manifests, and local runtime acceptance documentation",
   "excluded_evidence": "provider raw dumps, question-level artifacts, local indexes, caches, credentials, and private operational material"
 }

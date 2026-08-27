@@ -265,6 +265,31 @@ class SiliconFlowLLMProvider(LLMProvider):
     def endpoint(self) -> str:
         return f"{self.base_url}/chat/completions"
 
+    def _structured_transport(
+        self,
+        schema_name: str,
+        context: dict[str, Any],
+    ) -> tuple[str, str | None, dict[str, Any] | None]:
+        """Choose the provider-supported structured-output transport.
+
+        DeepSeek's Chat Completions API supports ordinary function calling, but is
+        not assumed to implement OpenAI's JSON-schema/parse extensions.  A single
+        forced function gives it a concrete output envelope while the callers keep
+        their existing Pydantic validation as the source of truth.  Other
+        OpenAI-compatible providers continue to use JSON-object mode.
+        """
+        if self.provider_name != "deepseek":
+            return "json_object", None, None
+        tool_name, parameters = _deepseek_structured_tool(schema_name, context)
+        return "function_call", tool_name, {
+            "type": "function",
+            "function": {
+                "name": tool_name,
+                "description": "Return the requested structured result as function arguments.",
+                "parameters": parameters,
+            },
+        }
+
     def _endpoint_hostname(self) -> str:
         return self.base_url.split("://", 1)[-1].split("/", 1)[0].split(":", 1)[0]
 
@@ -533,6 +558,8 @@ class SiliconFlowLLMProvider(LLMProvider):
     ) -> StructuredJSONResult:
         """Generate one JSON object through the shared chat-completions transport."""
         started = time.perf_counter()
+        context = request_context or {}
+        transport_mode, tool_name, tool = self._structured_transport(schema_name, context)
         payload: dict[str, Any] = {
             "model": self.model_name,
             "messages": [
@@ -542,13 +569,17 @@ class SiliconFlowLLMProvider(LLMProvider):
             "temperature": self.temperature,
             "max_tokens": max_output_tokens or self.max_output_tokens,
             "stream": self.stream,
-            "response_format": {"type": "json_object"},
         }
+        if transport_mode == "json_object":
+            payload["response_format"] = {"type": "json_object"}
+        else:
+            assert tool_name is not None and tool is not None
+            payload["tools"] = [tool]
+            payload["tool_choice"] = {"type": "function", "function": {"name": tool_name}}
         payload.update(self._provider_payload_overrides())
         requests = 0
         rate_limits = 0
         retry_reasons: list[str] = []
-        context = request_context or {}
         for attempt in range(self.max_retries + 1):
             requests += 1
             persisted_attempt_number = int(context.get("attempt_number") or requests)
@@ -583,8 +614,15 @@ class SiliconFlowLLMProvider(LLMProvider):
                 choice = body["choices"][0]
                 finish_reason = choice.get("finish_reason")
                 message = choice["message"]
-                content = message["content"]
-                content_text = content if isinstance(content, str) else str(content)
+                content = message.get("content")
+                if transport_mode == "function_call":
+                    content_text, parsed = _extract_function_arguments(
+                        message,
+                        expected_tool_name=tool_name,
+                    )
+                else:
+                    content_text = content if isinstance(content, str) else str(content)
+                    parsed = None
                 usage = self._usage(
                     body.get("usage") if isinstance(body.get("usage"), dict) else {},
                     prompt_text=f"{system_prompt}\n{user_prompt}",
@@ -620,6 +658,8 @@ class SiliconFlowLLMProvider(LLMProvider):
                         usage=usage,
                         finish_reason=finish_reason,
                         schema_name=schema_name,
+                        transport_mode=transport_mode,
+                        tool_name=tool_name,
                     )
                     usage_record.raw_response_path = str(raw_response_path)
                 except OSError as exc:
@@ -647,7 +687,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                         error_details={"finish_reason": finish_reason},
                         usage_records=[usage_record],
                     )
-                if not isinstance(content, str):
+                if transport_mode == "json_object" and not isinstance(content, str):
                     raise LLMProviderError(
                         "structured JSON response content is not a string",
                         error_code="STRUCTURED_JSON_RESPONSE_ERROR",
@@ -659,7 +699,10 @@ class SiliconFlowLLMProvider(LLMProvider):
                         usage_records=[usage_record],
                     )
                 try:
-                    parsed, normalization_events = normalize_structured_json_content(content)
+                    if transport_mode == "json_object":
+                        parsed, normalization_events = normalize_structured_json_content(content)
+                    else:
+                        normalization_events = []
                 except json.JSONDecodeError as exc:
                     audit_payload = self._build_response_audit(
                         response=response,
@@ -836,6 +879,8 @@ class SiliconFlowLLMProvider(LLMProvider):
         usage: ModelUsage,
         finish_reason: str | None,
         schema_name: str,
+        transport_mode: str,
+        tool_name: str | None,
     ) -> Path:
         task_id = str(
             context.get("task_id")
@@ -859,7 +904,10 @@ class SiliconFlowLLMProvider(LLMProvider):
             "http_status": response.status_code,
             "provider_request_id": response.headers.get("x-request-id"),
             "finish_reason": finish_reason,
-            "response_format": "json_object",
+            "api_style": "chat_completions",
+            "response_format": "json_object" if transport_mode == "json_object" else None,
+            "structured_transport": transport_mode,
+            "tool_name": tool_name,
             "raw_content": content,
             "content": content,
             "content_sha256": _sha256_text(content),
@@ -1207,6 +1255,161 @@ class CitationContextError(ValueError):
     def __init__(self, code: str) -> None:
         super().__init__("citation is not present in supplied context")
         self.code = code
+
+
+def _closed_object(properties: dict[str, Any], required: list[str]) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": properties,
+        "required": required,
+    }
+
+
+def _deepseek_structured_tool(
+    schema_name: str,
+    context: dict[str, Any],
+) -> tuple[str, dict[str, Any]]:
+    """Return a normal function-call schema for a named internal result type.
+
+    This is a transport envelope only.  Pydantic models and the evidence/tool
+    validators remain authoritative after the model response is decoded.
+    """
+    string = {"type": "string", "minLength": 1}
+    if schema_name == "deep-research-synthesis-v1":
+        allowed = [str(item) for item in context.get("allowed_citation_ids") or []]
+        citation = {"type": "string", "enum": allowed} if allowed else string
+        claim = _closed_object(
+            {"text": string, "citation_ids": {"type": "array", "minItems": 1, "items": citation}},
+            ["text", "citation_ids"],
+        )
+        sections = []
+        section_allowlists = context.get("section_evidence_ids") or {}
+        for section_id in ("background", "methods", "results", "limitations"):
+            section_ids = [str(item) for item in section_allowlists.get(section_id) or []]
+            section_citation = {"type": "string", "enum": section_ids} if section_ids else citation
+            section_claim = _closed_object(
+                {
+                    "text": string,
+                    "citation_ids": {"type": "array", "minItems": 1, "items": section_citation},
+                },
+                ["text", "citation_ids"],
+            )
+            sections.append(
+                _closed_object(
+                    {
+                        "section_id": {"type": "string", "const": section_id},
+                        "summary": string,
+                        "claims": {"type": "array", "items": section_claim},
+                        "insufficient_evidence": {"type": "boolean"},
+                        "evidence_gap": {"type": ["string", "null"]},
+                    },
+                    ["section_id", "summary", "claims", "insufficient_evidence", "evidence_gap"],
+                )
+            )
+        gap = _closed_object(
+            {
+                "text": string,
+                "citation_ids": {"type": "array", "items": citation},
+                "is_inference": {"type": "boolean"},
+            },
+            ["text", "citation_ids", "is_inference"],
+        )
+        return "submit_research_synthesis", _closed_object(
+            {
+                "title": string,
+                "executive_summary": string,
+                "sections": {
+                    "type": "array",
+                    "minItems": 4,
+                    "maxItems": 4,
+                    "items": {"oneOf": sections},
+                },
+                "consensus": {"type": "array", "items": claim},
+                "disagreements": {"type": "array", "items": claim},
+                "research_gaps": {"type": "array", "items": gap},
+            },
+            [
+                "title",
+                "executive_summary",
+                "sections",
+                "consensus",
+                "disagreements",
+                "research_gaps",
+            ],
+        )
+    if schema_name == "research-agent-decision-v1" and context.get("agent_phase") == "PLAN":
+        subquestion = _closed_object(
+            {"id": string, "question": string, "status": {"type": "string", "enum": ["OPEN"]}},
+            ["id", "question", "status"],
+        )
+        return "submit_research_plan", _closed_object(
+            {
+                "objective": string,
+                "subquestions": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 6,
+                    "items": subquestion,
+                },
+                "completion_criteria": {"type": "array", "items": string},
+            },
+            ["objective", "subquestions", "completion_criteria"],
+        )
+    if schema_name == "research-agent-decision-v1":
+        action_names = [
+            "retrieve_evidence", "inspect_evidence", "inspect_paper", "verify_evidence", "finish",
+        ]
+        return "select_research_action", _closed_object(
+            {
+                "action": {"type": "string", "enum": action_names},
+                "arguments": {"type": "object"},
+                "target_subquestion_ids": {"type": "array", "items": string},
+                "decision_reason": string,
+            },
+            ["action", "arguments", "target_subquestion_ids", "decision_reason"],
+        )
+    if schema_name == "agent_final_report_draft_v1":
+        claim = _closed_object(
+            {"text": string, "evidence_ids": {"type": "array", "minItems": 1, "items": string}},
+            ["text", "evidence_ids"],
+        )
+        section = _closed_object(
+            {"title": string, "claims": {"type": "array", "items": claim}},
+            ["title", "claims"],
+        )
+        return "submit_agent_final_report", _closed_object(
+            {
+                "title": string,
+                "summary": string,
+                "sections": {"type": "array", "minItems": 1, "items": section},
+                "research_gaps": {"type": "array", "items": string},
+            },
+            ["title", "summary", "sections", "research_gaps"],
+        )
+    return "submit_structured_output", {"type": "object"}
+
+
+def _extract_function_arguments(
+    message: Any,
+    *,
+    expected_tool_name: str | None,
+) -> tuple[str, dict[str, Any]]:
+    if not isinstance(message, dict):
+        raise ValueError("tool-call response message is not an object")
+    tool_calls = message.get("tool_calls")
+    if not isinstance(tool_calls, list) or len(tool_calls) != 1:
+        raise ValueError("tool-call response must contain exactly one tool call")
+    function = tool_calls[0].get("function") if isinstance(tool_calls[0], dict) else None
+    if not isinstance(function, dict) or function.get("name") != expected_tool_name:
+        raise ValueError("tool-call response selected an unknown tool")
+    arguments = function.get("arguments")
+    if not isinstance(arguments, str) or not arguments.strip():
+        raise ValueError("tool-call response has empty arguments")
+    parsed = json.loads(arguments)
+    if not isinstance(parsed, dict):
+        raise ValueError("tool-call arguments must decode to an object")
+    return arguments, parsed
 
 
 class OpenAICompatibleLLMProvider(SiliconFlowLLMProvider):

@@ -54,10 +54,15 @@ class ResearchAgentRunner:
         research_question: str,
         *,
         task_id: str | None = None,
+        paper_ids: list[str] | None = None,
         budget: AgentBudget | None = None,
         interrupt_after_phase: str | None = None,
     ) -> AgentState:
-        state = AgentState(research_question=research_question, budget=budget or AgentBudget())
+        state = AgentState(
+            research_question=research_question,
+            paper_ids=list(paper_ids) if paper_ids else None,
+            budget=budget or AgentBudget(),
+        )
         if task_id:
             state.task_id = task_id
         state.refresh_remaining_budget()

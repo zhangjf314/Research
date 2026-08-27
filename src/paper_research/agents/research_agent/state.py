@@ -55,6 +55,7 @@ class EvidenceState(BaseModel):
 class AgentState(BaseModel):
     task_id: str = Field(default_factory=lambda: f"agent-{uuid.uuid4().hex[:12]}")
     research_question: str
+    paper_ids: list[str] | None = None
     current_plan: ResearchPlan | None = None
     plan_version: int = 0
     subquestions: list[Subquestion] = Field(default_factory=list)
@@ -98,4 +99,3 @@ class AgentState(BaseModel):
             0,
         )
         self.remaining_cost_budget = max(self.budget.max_cost_usd - self.estimated_cost, 0.0)
-
