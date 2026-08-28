@@ -4,13 +4,17 @@ PaperResearch is an evidence-grounded system for academic-paper ingestion, hybri
 
 ## Project position
 
-The current production baseline is **P0**: dense retrieval plus BM25, reciprocal-rank fusion (RRF), and rank-order context packing. RAG Quality v3 is closed:
+The current production baseline is **P0**: SiliconFlow
+`Qwen/Qwen3-Embedding-0.6B` dense retrieval plus BM25, reciprocal-rank fusion
+(RRF), and rank-order context packing. Reranking is disabled in the production
+default. The RAG Quality v3-v5 program is closed:
 
-- RAG_QUALITY_V3_CLOSED
-- POST_RETRIEVAL_OPTIMIZATION_CLOSED
+- RAG_QUALITY_OPTIMIZATION_PROGRAM_CLOSED
+- RAG_QUALITY_V3_CLOSED / RAG_QUALITY_V4_CLOSED / RAG_QUALITY_V5_CLOSED
+- NO_ROBUST_POST_RETRIEVAL_POLICY_VALIDATED
 - NO_CANDIDATE_PROMOTED
 - PRODUCTION_P0_RETAINED
-- FULL_QA_NOT_ELIGIBLE
+- FULL_QA_NOT_RUN
 
 No evaluated reranker or selector has been deployed as the production default.
 
@@ -91,40 +95,23 @@ The quality program uses frozen candidate definitions, metric contracts, and pro
 
 Development-visible evidence is not described as blind after it has been consumed. A fresh blind result is required before any Full QA or production promotion path.
 
-## RAGQ3 final results
+## RAG quality program results
 
-### Clean development reranking
+The table reports both measured upside and the frozen reason each candidate was
+rejected. No experimental reranker, selector, or verifier is deployed.
 
-| Metric | C1 clean baseline | C2 Qwen3 reranker |
-| --- | ---: | ---: |
-| GoldR@5 | .603084 | .723634 |
-| Claim@5 | .763158 | .907895 |
-| Ranking loss | 19 | 7 |
+| Program | Candidate | Measured result | Promotion outcome |
+| --- | --- | --- | --- |
+| V3 C2 | Qwen pointwise reranker | Development GoldR@5 `.603084 -> .723634`; Claim@5 `.763158 -> .907895`; ranking loss `19 -> 7`. | Fresh-blind generalization failed. |
+| V3 D2B | Listwise evidence-set selector | GoldR@5 `.738812 -> .849738`; Claim@5 `.852941 -> .955882`; MultiComplete@5 `.562500 -> .875000`; ranking loss `24 -> 4`. | 9 DEV tail regressions, frozen maximum 2. |
+| V4 B2 | Facet-aware variable-K selector | Context precision `.228378 -> .542793`; non-Gold context `3.858108 -> .878379`. | Required evidence under-selected; GoldR, Claim, MultiComplete, and tails regressed. |
+| V5 A | Claim-evidence verifier/controller | SUPPORT recall `.971751` on the sealed evaluation. | Unsafe sufficiency risk; verifier not reliable for promotion. |
 
-C2 passed its clean **development** gate only.
-
-### Fresh blind result
-
-| Metric | B1 R0 | B1 R1 |
-| --- | ---: | ---: |
-| GoldR@5 | .691667 | .783333 |
-| MRR | .536667 | .605000 |
-| NDCG@10 | .609226 | .685355 |
-
-Despite these average changes, the frozen B1 blind gate failed. It is not a blind-validation pass and does not make Full QA eligible.
-
-### Listwise evidence-set selection
-
-| Combined development-visible metric | D2B R0 | D2B R1 |
-| --- | ---: | ---: |
-| GoldR@5 | .738812 | .849738 |
-| Claim@5 | .852941 | .955882 |
-| MultiComplete@5 | .562500 | .875000 |
-| Ranking loss | 24 | 4 |
-
-D2B was a valid 236-question listwise evaluation and recovered 8/8 pointwise, 4/5 cross-section, and 4/4 set-completeness residual cases. Promotion was nevertheless rejected: DEV evidence had 9 new GoldR tail regressions against a frozen maximum of 2.
-
-The final decision is therefore **no candidate promoted** and **production P0 retained**. The static hybrid/heuristic selector was rejected; the earlier D2 selector quality is **NOT_EVALUATED** because all output was truncated and fail-closed to baseline.
+The program conclusion is **NO_CANDIDATE_PROMOTED** and
+**PRODUCTION_P0_RETAINED**. Candidate generation is strong, but no robust
+post-retrieval policy passed the combined average, blind-generalization, and
+tail-safety requirements. FINAL_BLIND_V4, FINAL_BLIND_V5, and Full QA were not
+consumed or run.
 
 ## Limitations
 
@@ -138,11 +125,11 @@ The final decision is therefore **no candidate promoted** and **production P0 re
 
 The repository keeps public-safe frozen manifests, final decisions, tests, and scripts necessary to inspect the methodology. Large raw runtime artifacts, caches, provider raw payloads, credentials, and local operational files are not part of the sanitized public release.
 
-Read the RAGQ3 conclusions in:
+Read the complete RAG Quality program conclusions in:
 
-- [Final report](docs/RAG_QUALITY_V3_FINAL_REPORT.md)
-- [Evidence ledger](docs/rag-quality-v3-evidence-ledger.md)
-- [Portfolio evidence summary](docs/RAG_QUALITY_V3_PORTFOLIO_SUMMARY.md)
+- [Program final report](docs/RAG_QUALITY_PROGRAM_FINAL_REPORT.md)
+- [Program evidence ledger](docs/rag-quality-program-evidence-ledger.md)
+- [Portfolio summary](docs/RAG_QUALITY_PROGRAM_PORTFOLIO_SUMMARY.md)
 
 ## Quick start
 

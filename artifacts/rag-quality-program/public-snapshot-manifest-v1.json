@@ -1,0 +1,21 @@
+{
+  "artifact_type": "rag_quality_optimization_sanitized_public_snapshot",
+  "version": 1,
+  "publication_mode": "SANITIZED_PUBLIC_SNAPSHOT",
+  "canonical_program_closure_commit": "e00f41c75f2e5f45d367c1755054e64e3219b302",
+  "classifications": [
+    "RAG_QUALITY_OPTIMIZATION_PROGRAM_CLOSED",
+    "RAG_QUALITY_V3_CLOSED",
+    "RAG_QUALITY_V4_CLOSED",
+    "RAG_QUALITY_V5_CLOSED",
+    "NO_CANDIDATE_PROMOTED",
+    "PRODUCTION_P0_RETAINED",
+    "FINAL_BLIND_V4_V5_NOT_CONSUMED",
+    "FULL_QA_NOT_RUN"
+  ],
+  "selected_candidate": "NONE",
+  "production_p0_changed": false,
+  "full_qa": "NOT_RUN",
+  "included": "public documentation, application source, tests, and compact public-safe evidence metadata",
+  "excluded": "evaluation corpora, question-level artifacts, provider traces, local indexes, caches, credentials, absolute local paths, and private operational material"
+}
