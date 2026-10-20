@@ -10,7 +10,7 @@ Core application source, existing Provider/Runner/tools/semantic-review/D6 imple
 
 1. The Phase4 helper's ROOT is derived from `__file__` instead of the original workstation path. Retrieval math, ranking, source gates and budgets are unchanged.
 2. The distributed frozen model manifest removes cached workstation paths and a workstation-specific missing-dependency wheel observation. Model repository/revision, input contracts and execution settings remain. This changes its file SHA and is **not** presented as the historical manifest or a way to reuse mismatched indexes.
-3. Dockerfile no longer copies missing migrations or historical soak/evaluation artifacts. It copies only the distributed Phase4 runtime closure. Existing Docker architecture/services are retained; no new CI or deployment service is introduced.
+3. Dockerfile no longer copies missing migrations or historical soak/evaluation artifacts. It copies only the distributed Phase4 runtime closure and prioritizes `/app/src` on PYTHONPATH so repository-relative runtime modules resolve beside the copied source. Existing Docker architecture/services are retained; no new CI or deployment service is introduced.
 4. `.gitignore`/`.dockerignore` protect local assets and explicitly allow the few runtime dependency files. Example flags default to no paid/visual generation; optional native dependencies are declared.
 5. The generic assembly tests retain their assertions. Only the historical FNO replay skips when its excluded raw candidate files are absent. Synthetic fixtures are never represented as human gold.
 6. indexing/service.py has one redundant end-of-file blank line removed so the release diff passes whitespace checks; no executable code changes.

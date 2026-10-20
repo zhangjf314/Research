@@ -2,12 +2,11 @@
   "schema": "paperresearch-v2-publication-v1",
   "branch": "release/paperresearch-v2",
   "repository": "https://github.com/zhangjf314/Research",
-  "parent_commit": "7843ad41eaac9b2bf26cbbdf7e21aea2e84ce784",
   "private_development_head_not_merged": "0e9f65c092299c29a9c503dc2aea6a2a79df3d72",
   "private_development_commits_excluded": 150,
   "file_identity_basis": "Git index blob bytes after repository LF normalization; excludes this self-referential manifest",
   "snapshot_files_excluding_manifest": 423,
-  "snapshot_bytes_excluding_manifest": 2948290,
+  "snapshot_bytes_excluding_manifest": 2948478,
   "changed_paths_excluding_manifest": [
     ".dockerignore",
     ".env.example",
@@ -207,9 +206,9 @@
       "sha256": "c2c8bd70f64e4e7d41d7787b5045c499a8f241e2d83ff46c57f978867b29cd18"
     },
     "Dockerfile": {
-      "git_blob": "10f16b01a164a4551d2b6b22e270068e127f452e",
-      "bytes": 1094,
-      "sha256": "6f911c919aa3fcfd9ea5c0c85d8c295d86086ccd214fa869b1d5a435005018da"
+      "git_blob": "d573f89dc3971a512711a780b47e9db76b719a0c",
+      "bytes": 1120,
+      "sha256": "4b45adc0b62a98e12a93ab56037662b7976516c546c9e26e94b5c1bc3f60b8fd"
     },
     "LICENSE": {
       "git_blob": "310dd4ab96a97580f030b3194deb0820531ff727",
@@ -397,14 +396,14 @@
       "sha256": "3938481ba459a5d5d9dbfad05edf03ac0a7fe2a2a497b3c7c8eaff179284975c"
     },
     "docs/paperresearch-v2/release_checks.md": {
-      "git_blob": "cc552a48ebcddaa1f32abc5c1618115d983c3f59",
-      "bytes": 4673,
-      "sha256": "e85158d956c6cf6021d6ae050ccc9ed0abdb3218582d75b8a856a981daa8e739"
+      "git_blob": "64844b8d8fcfe77097cc9cc46eeab92320ce8f05",
+      "bytes": 4722,
+      "sha256": "6493315b4ef2a3d238ead1decdca791300b61a333d8f4ee0d50099b574ec1bbc"
     },
     "docs/paperresearch-v2/reproducibility.md": {
-      "git_blob": "b94ae7b09cc80e13f0465ca2b7018c32fa010b1a",
-      "bytes": 3502,
-      "sha256": "3dcc9615767b8e49ee5f56a8e873d54c3059a13a35fb2877eb7e29bc7f5e2acf"
+      "git_blob": "e782dbf83ee69861db5a20f809c02eb7654c1940",
+      "bytes": 3615,
+      "sha256": "fb034fce015732db366420901a754419d57f4b1b7a198811576af8ac0aa3d3f1"
     },
     "docs/paperresearch-v2/usage_guide.md": {
       "git_blob": "25b43d06d854acf04a71697ea7fa36e6a020cd58",
@@ -2291,5 +2290,7 @@
       "bytes": 2405,
       "sha256": "72d832eb91c44e76ce7eb66bf6fd54c446359c517a2d4f5ee7ed36c71fec882d"
     }
-  }
+  },
+  "base_commit": "7843ad41eaac9b2bf26cbbdf7e21aea2e84ce784",
+  "release_commit_count": 2
 }

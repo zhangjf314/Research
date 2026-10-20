@@ -27,7 +27,7 @@ The README's bounded suite uses current, relevant contract tests; it is not a st
 
 Confirmed remote: `https://github.com/zhangjf314/Research.git`. Public base: `7843ad41eaac9b2bf26cbbdf7e21aea2e84ce784`. Original development branch: `codex/rag-quality-v4-a`, HEAD `0e9f65c092299c29a9c503dc2aea6a2a79df3d72`; its index was initially empty and its local changes were preserved.
 
-The new release branch starts on public main and adds one curated publication commit. It does **not** include the extra 150 private development commits or their 1120 unique blobs (358,526,359 bytes). No history rewrite, force push, main merge or new public repository/Release was performed.
+The new release branch starts on public main and adds curated publication commits, including a final Docker source-path packaging fix. It does **not** include the extra 150 private development commits or their 1120 unique blobs (358,526,359 bytes). No history rewrite, force push, main merge or new public repository/Release was performed.
 
 The already-public base ancestry was inspected: 126 commits, 1859 blobs, 121,633,533 aggregate blob bytes, no detected credential pattern and no real .env path. It already contains four objects over 10 MB: two historical evaluation JSON/JSONL files and two OCR PDF fixtures (roughly 13.5–25.3 MB each). They are not in the current published tree and are not new objects exposed by this branch. No claim is made to have purged or relicensed existing public history. Removing existing public history would require a separate, explicit decision; this task did not rewrite it.
 
