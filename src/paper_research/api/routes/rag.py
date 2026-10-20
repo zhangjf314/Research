@@ -5,13 +5,18 @@ import uuid
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from qdrant_client import QdrantClient
 
 from paper_research.chunking.types import Chunk
 from paper_research.config import get_settings
+from paper_research.generation.evidence_contract_adapter import ReadOnlyEvidenceContractResult
 from paper_research.generation.qa_service import Answer, QAService
-from paper_research.indexing.registry import IndexRegistry
+from paper_research.indexing.registry import (
+    IndexIdentityError,
+    IndexRegistry,
+    runtime_index_identity,
+)
 from paper_research.indexing.vector_store import QdrantVectorStore
 from paper_research.providers.factory import (
     ProviderConfigurationError,
@@ -21,9 +26,11 @@ from paper_research.providers.factory import (
 )
 from paper_research.providers.llm import LLMProviderError
 from paper_research.retrieval.context_builder import ContextBuilder, ContextItem
+from paper_research.retrieval.contextual import ContextualChunk
 from paper_research.retrieval.dense import DenseRetriever
 from paper_research.retrieval.filters import RetrievalFilter
 from paper_research.retrieval.hybrid import HybridRetrievalResult, HybridRetriever
+from paper_research.retrieval.pipeline import build_v2_retriever, retrieval_collection
 from paper_research.retrieval.sparse import BM25Retriever
 from paper_research.retrieval.trace import JsonlTraceRepository, RetrievalTrace
 
@@ -43,6 +50,21 @@ class HybridRetrievalRequest(BaseModel):
     filters: RetrievalFilter = Field(default_factory=RetrievalFilter)
     recall_k: int = Field(default=20, ge=1, le=100)
     top_k: int = Field(default=5, ge=1, le=20)
+    include_evidence_contract: bool = Field(default=False, strict=True)
+
+    @model_validator(mode="after")
+    def validate_evidence_opt_in(self):
+        if self.include_evidence_contract:
+            if not self.query.strip() or len(self.query) > 2000:
+                raise ValueError(
+                    "evidence opt-in query must be nonblank and at most 2000 characters"
+                )
+            scope = self.filters.paper_ids or []
+            if len(scope) > 38:
+                raise ValueError("evidence opt-in paper scope must contain at most 38 UUIDs")
+            for paper_id in scope:
+                uuid.UUID(paper_id)
+        return self
 
 
 class HybridRetrievalResponse(BaseModel):
@@ -50,48 +72,60 @@ class HybridRetrievalResponse(BaseModel):
     trace: RetrievalTrace
 
 
-def _run_hybrid(payload: HybridRetrievalRequest) -> HybridRetrievalResult:
+class HybridRetrievalEvidenceResponse(HybridRetrievalResponse):
+    evidence_contract: ReadOnlyEvidenceContractResult
+
+
+def _run_hybrid(payload: HybridRetrievalRequest, observer=None):
     settings = get_settings()
-    chunks = _load_chunks(
-        settings.parsed_papers_dir,
-        payload.filters.paper_ids,
-        settings.index_version,
-    )
-    if not chunks:
-        raise HTTPException(status_code=409, detail="no indexed chunk files found")
-    embedding = build_embedding_provider(settings)
-    reranker = build_reranker(settings)
+    registry = IndexRegistry(settings.data_dir / "index_registry.json")
+    collection = retrieval_collection(settings, registry)
     store = QdrantVectorStore(
         QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key),
-        IndexRegistry(settings.data_dir / "index_registry.json").resolve(
-            settings.active_collection
-        ),
+        collection,
         settings.embedding_dimensions,
+        chunk_model=ContextualChunk if settings.retrieval_v2_enabled else Chunk,
     )
-    return HybridRetriever(
-        DenseRetriever(embedding, store),
-        BM25Retriever(chunks),
-        reranker,
-        ContextBuilder(
-            include_neighbors=False,
-            max_characters=settings.qa_context_token_budget * 4,
-            max_tokens=settings.qa_context_token_budget,
-        ),
-        JsonlTraceRepository(settings.retrieval_trace_path),
-        provider_metadata=settings.provider_metadata,
-        rerank_input_k=settings.rerank_input_k,
-        rerank_output_k=settings.rerank_output_k,
-    ).retrieve(
-        payload.query,
-        payload.filters,
-        recall_k=(
-            max(payload.recall_k, settings.rerank_input_k)
-            if settings.rerank_enabled
-            else payload.recall_k
-        ),
-        top_k=payload.top_k,
-        retrieval_scope="paper" if payload.filters.paper_ids else "global",
+    expected = runtime_index_identity(settings.provider_metadata, collection)
+    registry.verify_identity(collection, expected, store.client)
+    embedding = build_embedding_provider(settings)
+    actual = runtime_index_identity(
+        {**settings.provider_metadata,
+         "embedding_provider": embedding.provider_name,
+         "embedding_model": embedding.model_name,
+         "embedding_revision": embedding.revision,
+         "embedding_dimension": embedding.dimensions}, collection,
     )
+    differences = [key for key in actual if actual[key] != expected[key]]
+    if differences:
+        raise IndexIdentityError("INDEX_IDENTITY_CONFLICT", differences, status_code=409)
+    def check_object():
+        actual_identity = runtime_index_identity(
+            {**settings.provider_metadata, "embedding_provider": embedding.provider_name,
+             "embedding_model": embedding.model_name, "embedding_revision": embedding.revision,
+             "embedding_dimension": embedding.dimensions}, collection)
+        if actual_identity != expected or store.collection != collection:
+            raise IndexIdentityError("INDEX_IDENTITY_CONFLICT", status_code=409)
+    with registry.query_admission(settings.active_collection, collection, expected, store.client,
+                                  object_check=check_object,
+                                  supported=not settings.retrieval_v2_enabled) as (verified, _):
+        chunks = _load_chunks(settings.parsed_papers_dir, payload.filters.paper_ids,
+                              settings.index_version, verified_chunks=verified)
+        if not chunks:
+            raise HTTPException(status_code=409, detail="no indexed chunk files found")
+        reranker = build_reranker(settings)
+        result = HybridRetriever(
+            DenseRetriever(embedding, store), BM25Retriever(chunks), reranker,
+            ContextBuilder(include_neighbors=False,
+                max_characters=settings.qa_context_token_budget * 4,
+                max_tokens=settings.qa_context_token_budget),
+            JsonlTraceRepository(settings.retrieval_trace_path),
+            provider_metadata=settings.provider_metadata,
+            rerank_input_k=settings.rerank_input_k, rerank_output_k=settings.rerank_output_k,
+        ).retrieve(payload.query, payload.filters,
+            recall_k=max(payload.recall_k, settings.rerank_input_k) if settings.rerank_enabled else payload.recall_k,
+            top_k=payload.top_k, retrieval_scope="paper" if payload.filters.paper_ids else "global")
+        return observer(result) if observer is not None else result
 
 
 @router.post("/qa", response_model=Answer)
@@ -110,7 +144,11 @@ def ask_question(payload: QARequest) -> Answer:
                 query=payload.question,
                 filters=filters,
                 recall_k=settings.retrieval_recall_k,
-                top_k=payload.top_k,
+                top_k=(
+                    settings.retrieval_v2_final_top_k
+                    if settings.retrieval_v2_enabled and "top_k" not in payload.model_fields_set
+                    else payload.top_k
+                ),
             )
         )
         providers = build_provider_bundle(settings)
@@ -130,6 +168,8 @@ def ask_question(payload: QARequest) -> Answer:
                 "request_id": run_id,
             },
         )
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=str(exc)) from exc
     except ProviderConfigurationError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except LLMProviderError as exc:
@@ -181,11 +221,34 @@ def ask_question(payload: QARequest) -> Answer:
         ) from exc
 
 
-@router.post("/retrieve", response_model=HybridRetrievalResponse)
-def hybrid_retrieve(payload: HybridRetrievalRequest) -> HybridRetrievalResponse:
+@router.post(
+    "/retrieve", response_model=HybridRetrievalEvidenceResponse | HybridRetrievalResponse,
+)
+def hybrid_retrieve(
+    payload: HybridRetrievalRequest,
+) -> HybridRetrievalEvidenceResponse | HybridRetrievalResponse:
     try:
-        result = _run_hybrid(payload)
-        return HybridRetrievalResponse(context=result.context, trace=result.trace)
+        def observe(result):
+            if payload.include_evidence_contract:
+                from paper_research.generation.evidence_contract_adapter import (
+                    build_readonly_evidence_contract,
+                    evidence_contract_failure,
+                )
+
+                try:
+                    sidecar = build_readonly_evidence_contract(
+                        payload.query, result.context, result.trace,
+                        parsed_root=get_settings().parsed_papers_dir,
+                    )
+                except Exception:
+                    sidecar = evidence_contract_failure(payload.query, result.context, result.trace)
+                return HybridRetrievalEvidenceResponse(
+                    context=result.context, trace=result.trace, evidence_contract=sidecar,
+                )
+            return HybridRetrievalResponse(context=result.context, trace=result.trace)
+        return _run_hybrid(payload, observer=observe)
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=str(exc)) from exc
     except ProviderConfigurationError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except HTTPException:
@@ -196,7 +259,23 @@ def hybrid_retrieve(payload: HybridRetrievalRequest) -> HybridRetrievalResponse:
         ) from exc
 
 
-def _load_chunks(root: Path, paper_ids: list[str] | None, index_version: str) -> list[Chunk]:
+def _load_chunks(root: Path, paper_ids: list[str] | None, index_version: str,
+                 *, verified_chunks: list[Chunk] | None = None) -> list[Chunk]:
+    if verified_chunks is not None:
+        pages = {}
+        result = []
+        ordered = ([chunk for paper_id in paper_ids for chunk in verified_chunks
+                    if chunk.paper_id == paper_id] if paper_ids else verified_chunks)
+        for chunk in ordered:
+            if paper_ids and chunk.paper_id not in paper_ids:
+                continue
+            if chunk.paper_id not in pages:
+                try:
+                    pages[chunk.paper_id] = _load_block_pages(root / chunk.paper_id)
+                except (OSError, ValueError, TypeError, AttributeError):
+                    pages[chunk.paper_id] = {}
+            result.append(_with_block_page_map(chunk, pages[chunk.paper_id]))
+        return result
     filename = f"paper_chunks.{index_version}.jsonl"
     paths = (
         [root / paper_id / filename for paper_id in paper_ids]
@@ -242,8 +321,7 @@ def _with_block_page_map(chunk: Chunk, block_pages: dict[str, int]) -> Chunk:
     authoritative_map = {
         block_id: block_pages[block_id]
         for block_id in chunk.block_ids
-        if block_id in block_pages
-        and chunk.page_start <= block_pages[block_id] <= chunk.page_end
+        if block_id in block_pages and chunk.page_start <= block_pages[block_id] <= chunk.page_end
     }
     if set(authoritative_map) == set(chunk.block_ids):
         if chunk.block_page_map == authoritative_map:
@@ -254,9 +332,7 @@ def _with_block_page_map(chunk: Chunk, block_pages: dict[str, int]) -> Chunk:
     return chunk
 
 
-def _persist_qa_exception_audit(
-    exc: BaseException, sample_id: str | None, run_id: str
-) -> Path:
+def _persist_qa_exception_audit(exc: BaseException, sample_id: str | None, run_id: str) -> Path:
     settings = get_settings()
     audit_dir = settings.qa_response_audit_dir
     audit_dir.mkdir(parents=True, exist_ok=True)

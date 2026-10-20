@@ -1,171 +1,122 @@
-# PaperResearch
+# PaperResearch v2
 
-PaperResearch is an evidence-grounded system for academic-paper ingestion, hybrid retrieval, citation-aware question answering, Deep Research workflows, and an experimental Research Agent runtime. The repository emphasizes reproducible evaluation, canonical provenance, explicit promotion gates, and recorded negative results rather than unsupported production claims.
+PaperResearch is an experimental, evidence-grounded research system for academic PDFs. It combines hybrid retrieval, an existing ResearchAgent Runner/Planner/tool/checkpoint chain, PDF-native text/table/equation units, CLIP retrieval, real image inputs to a compatible LLM provider, and source-traceable Markdown drafts.
 
-## Project position
+**Engineering integration is implemented; reliable autonomous scientific research is not established.** Citation identity checks are not semantic proof. Automatic semantic verification and end-to-end strict trusted publication have not obtained full qualification. Drafts remain **UNVERIFIED** unless a separate, valid publication contract is satisfied.
 
-The current production baseline is **P0**: SiliconFlow
-`Qwen/Qwen3-Embedding-0.6B` dense retrieval plus BM25, reciprocal-rank fusion
-(RRF), and rank-order context packing. Reranking is disabled in the production
-default. The RAG Quality v3-v5 program is closed:
+## Actual case results
 
-- RAG_QUALITY_OPTIMIZATION_PROGRAM_CLOSED
-- RAG_QUALITY_V3_CLOSED / RAG_QUALITY_V4_CLOSED / RAG_QUALITY_V5_CLOSED
-- NO_ROBUST_POST_RETRIEVAL_POLICY_VALIDATED
-- NO_CANDIDATE_PROMOTED
-- PRODUCTION_P0_RETAINED
-- FULL_QA_NOT_RUN
-
-No evaluated reranker or selector has been deployed as the production default.
-
-## Core capabilities
-
-| Area | Capability |
+| Paper | Observed outcome |
 | --- | --- |
-| Paper ingestion | PDF parsing, OCR fallback, structured pages, blocks, chunks, and content hashing |
-| Retrieval | Configured dense embeddings, BM25, Qdrant, and deterministic RRF fusion |
-| Provenance | Canonical document and source-block identity preserved from ingestion through evaluation |
-| Evidence QA | Structured claim output and deterministic citation validation |
-| Research workflows | Fixed Deep Research orchestration plus an explicitly experimental agent runtime |
-| Evaluation | Gold-free runtime/evaluation separation, sealed snapshots, paired comparisons, loss decomposition, and promotion gates |
+| COCO-LM | A source-audited research report was delivered. Audit origin was AI, without a signed independent human review. This does not certify the original model's visual correctness. |
+| Fourier Neural Operator (FNO) | First independent scientific acceptance **FAIL**, despite completion of the real multimodal execution chain. |
+| U-NO | First output truncated; the separately authorized longer output produced complete JSON but failed the original citation-format gate. An offline citation-only derivative was rendered as UNVERIFIED. Final scientific acceptance **FAIL**. |
 
-## Local runtime validation
+See [case results](docs/paperresearch-v2/cases.md), [technical closeout](docs/paperresearch-v2/final_report.md), and [known limitations](docs/paperresearch-v2/known_limitations.md). Negative results and historical INCOMPLETE states are retained. No automatic trusted release is enabled.
 
-The latest local Docker acceptance run validated the following user-facing paths
-against an indexed paper:
-
-- Paper Library upload, indexing, selection, and Direct QA;
-- citation and evidence rendering for Direct QA;
-- Deep Research workflow completion with retrieval and a non-empty report; and
-- Research Agent completion with real model-driven tool calls, evidence, verifier
-  execution, and a non-empty report.
-
-The validated runtime uses SiliconFlow `Qwen/Qwen3-Embedding-0.6B` embeddings
-and DeepSeek Chat Completions. DeepSeek structured results and Agent decisions
-use forced ordinary function calls with strict local validation; this is a
-provider compatibility boundary, not a change to retrieval or production RAG
-semantics. See [local runtime acceptance](docs/LOCAL_RUNTIME_ACCEPTANCE.md).
-
-This validation does not promote a reranker or listwise selector. The RAGQ3
-conclusion remains **NO_CANDIDATE_PROMOTED** and **PRODUCTION_P0_RETAINED**.
-
-## System architecture
+## Architecture and features
 
 ```mermaid
 flowchart LR
-    P[Academic PDF] --> I[Parser and OCR]
-    I --> S[Structured pages, blocks, chunks]
-    S --> D[Dense retriever]
-    S --> B[BM25 retriever]
-    D --> R[RRF fusion]
-    B --> R
-    R --> C[Context builder and provenance]
-    C --> Q[Evidence-grounded QA]
-    C --> W[Deep Research workflow]
-    C --> A[Experimental Research Agent]
-    Q --> V[Citation validation]
-    W --> V
-    A --> V
+  PDF[PDF admission / D6 ACTIVE] --> I[Canonical pages / blocks / units]
+  I --> H[Dense + BM25 hybrid RAG]
+  I --> N[PDF-native / CLIP retrieval]
+  R[User question] --> A[Existing ResearchAgent Runner + Planner + Tools]
+  H --> A
+  N --> A
+  A --> E[Goal-aware evidence assembly + coverage gaps]
+  E --> V[Compatible visual Provider / actual image bytes]
+  V --> D[Schema + citation checks / UNVERIFIED draft]
+  D --> S[Claim-level source review]
+  S --> P[Strict publication gates / real HumanApproval required]
 ```
 
-## Retrieval pipeline
+- Text retrieval remains the default; multimodal and paid generation are explicit options.
+- PDF SHA, paper/unit identity, physical page, bbox, ACTIVE generation, media SHA and citation aliases are preserved.
+- Goal-aware evidence assembly records selected evidence, budget limits and unresolved coverage; its independent research-quality improvement was **not** proven.
+- Trace, budget accounting and Checkpoint support bounded execution and recovery.
+- Evidence Contract, Evidence Graph/Wiki and semantic-review code reuse the existing project components.
+- Strict `publish_reviewed` retains source, scope, atomicity and real human-approval requirements. AI-source-audited delivery is a distinct status.
 
-1. A parsed paper is represented as canonical documents, source blocks, and chunks.
-2. Dense retrieval and BM25 each produce an ordered candidate list.
-3. RRF combines both lists with deterministic tie handling.
-4. The context builder preserves candidate rank and provenance while packing the requested top-k context.
-5. QA and evaluation consume the resulting evidence; evaluation attribution is kept separate from runtime retrieval.
+Detailed [architecture](docs/paperresearch-v2/architecture.md) and [reproducibility boundaries](docs/paperresearch-v2/reproducibility.md) describe what is distributed and what requires local assets. Earlier RAG quality program results remain in [their existing report](docs/RAG_QUALITY_PROGRAM_FINAL_REPORT.md); no experimental reranker was promoted to the general production default.
 
-The production P0 contract uses Dense + BM25 + RRF. Reranking is disabled in the production default.
+## Installation
 
-## Gold-free evaluation architecture
-
-RAGQ3 introduced a Gold-free execution boundary: runtime/index payloads do not contain Gold labels, while a separate evaluation resolver applies Gold attribution only after a candidate snapshot has been produced. This supports canonical document and source-block provenance, isolated Gold-free index builds, snapshot-first paired evaluation with identical candidate membership, evaluation-only oracle ceilings, and candidate-generation, ranking, and packing-loss decomposition.
-
-Historical A1D/A2B quality evidence remains preserved, but it is **INVALIDATED_BY_GOLD_DEPENDENCY** and is not used as current promotion evidence.
-
-## RAG quality methodology
-
-The quality program uses frozen candidate definitions, metric contracts, and promotion gates before outcomes are read. It distinguishes:
-
-- **VALIDATED**: execution or measurement evidence that passed its stated boundary;
-- **REJECTED**: a candidate or intervention that failed a frozen promotion/generality gate;
-- **INVALIDATED**: historical evidence excluded because its attribution boundary was unsound;
-- **NOT_RUN**: deliberately prohibited downstream work, including Full QA and further selector search.
-
-Development-visible evidence is not described as blind after it has been consumed. A fresh blind result is required before any Full QA or production promotion path.
-
-## RAG quality program results
-
-The table reports both measured upside and the frozen reason each candidate was
-rejected. No experimental reranker, selector, or verifier is deployed.
-
-| Program | Candidate | Measured result | Promotion outcome |
-| --- | --- | --- | --- |
-| V3 C2 | Qwen pointwise reranker | Development GoldR@5 `.603084 -> .723634`; Claim@5 `.763158 -> .907895`; ranking loss `19 -> 7`. | Fresh-blind generalization failed. |
-| V3 D2B | Listwise evidence-set selector | GoldR@5 `.738812 -> .849738`; Claim@5 `.852941 -> .955882`; MultiComplete@5 `.562500 -> .875000`; ranking loss `24 -> 4`. | 9 DEV tail regressions, frozen maximum 2. |
-| V4 B2 | Facet-aware variable-K selector | Context precision `.228378 -> .542793`; non-Gold context `3.858108 -> .878379`. | Required evidence under-selected; GoldR, Claim, MultiComplete, and tails regressed. |
-| V5 A | Claim-evidence verifier/controller | SUPPORT recall `.971751` on the sealed evaluation. | Unsafe sufficiency risk; verifier not reliable for promotion. |
-
-The program conclusion is **NO_CANDIDATE_PROMOTED** and
-**PRODUCTION_P0_RETAINED**. Candidate generation is strong, but no robust
-post-retrieval policy passed the combined average, blind-generalization, and
-tail-safety requirements. FINAL_BLIND_V4, FINAL_BLIND_V5, and Full QA were not
-consumed or run.
-
-## Limitations
-
-- RAGQ3 does not establish production quality improvement.
-- Clean development gains do not replace fresh blind generalization evidence.
-- Full QA was not run and is not eligible under the final gate.
-- The repository retains historical invalidated artifacts for audit; they are not current quality evidence.
-- Further D3/D4 selector, prompt, threshold, or candidate searches are outside the closed RAGQ3 program.
-
-## Reproducibility
-
-The repository keeps public-safe frozen manifests, final decisions, tests, and scripts necessary to inspect the methodology. Large raw runtime artifacts, caches, provider raw payloads, credentials, and local operational files are not part of the sanitized public release.
-
-Read the complete RAG Quality program conclusions in:
-
-- [Program final report](docs/RAG_QUALITY_PROGRAM_FINAL_REPORT.md)
-- [Program evidence ledger](docs/rag-quality-program-evidence-ledger.md)
-- [Portfolio summary](docs/RAG_QUALITY_PROGRAM_PORTFOLIO_SUMMARY.md)
-
-## Quick start
+Python **3.12+** is required. Use a virtual environment and keep credentials local:
 
 ```powershell
 git clone https://github.com/zhangjf314/Research.git
 cd Research
+git checkout release/paperresearch-v2
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 Copy-Item .env.example .env
-# Configure only the providers needed for your local environment.
-docker compose up -d --build
-Invoke-RestMethod http://localhost/api/v1/health
 ```
 
-Useful local endpoints:
+The base installation supports the API, hash baseline and offline contract tests. Optional heavy local native retrieval dependencies are declared in `.[multimodal]`; do not install them merely to run base tests. Native extraction's frozen parser requires **PyMuPDF 1.28.0**. Model weights, databases, paper PDFs and ready-built native indexes are **not bundled**.
 
-- UI: <http://localhost/api/v1/ui>
-- OpenAPI: <http://localhost/docs>
-- Capabilities: <http://localhost/api/v1/capabilities>
+## Configuration and startup
 
-Never commit .env or provider credentials.
+`.env.example` contains placeholders and safe offline defaults: `LLM_PROVIDER=template`, `LIVE_MODEL_CALLS_ENABLED=false`, `RESEARCH_DRAFT_ENABLED=false`, `LLM_VISION_ENABLED=false`. Configure database/Qdrant/Redis as appropriate. Never commit `.env`, application draft tokens or provider keys.
 
-## Repository structure
-
-| Path | Purpose |
-| --- | --- |
-| src/paper_research/ | API, ingestion, retrieval, QA, workflows, providers, and evaluation infrastructure |
-| scripts/ | Reproducibility, validation, and evaluation utilities |
-| tests/ | Unit, integration, and evaluation-boundary tests |
-| docs/ | Architecture, operations, releases, and public evidence documents |
-| artifacts/rag-quality-v3/ | Preserved RAGQ3 manifests and final decisions; the public snapshot retains only necessary small evidence artifacts |
-| deploy/ | Deployment configuration |
-
-## Development checks
+Use the existing Docker Compose deployment (Docker Desktop/Engine required):
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q tests/test_gold_free_runtime.py tests/test_ragq3_attribution.py tests/test_ragq3_execution_semantics.py tests/test_ragq3_identity.py tests/test_ragq3_lineage.py tests/test_ragq3_production_isolation.py
-.\.venv\Scripts\python.exe -m compileall -q src scripts
+docker compose up -d --build
+# Initialize tables in a fresh database; do not run against an unrelated existing database.
+docker compose exec api python -c "from paper_research.db import Base,engine; import paper_research.models; Base.metadata.create_all(engine)"
+Invoke-RestMethod http://localhost/api/v1/health
+# Stop when finished:
+docker compose down
 ```
 
-The public snapshot intentionally excludes raw provider traces, local indexes, and historical Git-object-only freeze checks. The final reports and compact manifests preserve the conclusions without publishing those private runtime artifacts.
+UI: <http://localhost/api/v1/ui/research?mode=agent>; API specification: <http://localhost/docs>. Compose build/service startup was not re-executed for this release; static configuration and offline checks are reported in [release checks](docs/paperresearch-v2/release_checks.md).
+
+For a preconfigured local database/Qdrant installation, the same application can run with `python -m uvicorn paper_research.main:app --host 127.0.0.1 --port 8000`. See [usage guide](docs/paperresearch-v2/usage_guide.md) for source admission and model-asset prerequisites.
+
+## Uploading and indexing papers
+
+Upload intake and trusted corpus admission are separate. A PDF received at `POST /api/v1/papers/upload` does not automatically gain ACTIVE authority. Direct index mutation is rejected by the D6 gate. For PDFs you are authorized to process, use the existing trusted-operator CLI in a **fresh DATA_DIR and collection**, with the full intended batch:
+
+```powershell
+# Run in the configured API container; place authorized PDFs in its local data volume first.
+docker compose exec api python -m paper_research.admission status
+docker compose exec api python -m paper_research.admission admit --approve --authorization-ref "local-authorized-batch" /app/data/incoming/paper.pdf
+```
+
+Admission validates PDF bytes, records operator approval and builds/seals the canonical corpus. Do not overwrite an existing admission or append to historical experiment indexes. Hosted embeddings may incur cost; the hash baseline avoids that model charge. These commands are documentation, not authorization to upload copyrighted/private material.
+
+## Running ResearchAgent
+
+After a compatible corpus is ACTIVE, an offline/default text task can be submitted without paid drafting:
+
+```powershell
+$request = @{query="Explain the method, experimental conditions and limitations in the admitted papers."; generate_draft=$false; multimodal_enabled=$false} | ConvertTo-Json
+Invoke-RestMethod -Method Post -Uri http://localhost/api/v1/research/agent -ContentType application/json -Body $request
+```
+
+Use returned task IDs, traces and Checkpoints to inspect/resume tasks. Rule-based planning is distinguished from optional model planning. Missing evidence may produce PARTIAL; this is not scientific verification.
+
+Actual visual drafting additionally requires a compatible vision Provider, `RESEARCH_NATIVE_BUNDLE`, a compatible `RESEARCH_NATIVE_FULL_INDEX` for the full N1/M1 backend, local model assets, explicit vision/draft switches, a locally chosen `RESEARCH_DRAFT_TOKEN`, and the `X-Research-Draft-Token` header. **Do not enable paid calls without a separately understood budget.** Application tokens do not establish a universal dollar cap; formal experiments had their own one-attempt controllers. The API's normal 4096-output limit remains and can truncate long structured drafts.
+
+Drafts contain claim proposals, visual observations, canonical references and evidence gaps. Verify the full prose, table headers/conditions, formula completeness and image ROI, not just claim counts or SHA. See [report statuses](docs/paperresearch-v2/usage_guide.md#report-statuses).
+
+## Tests
+
+Run a bounded offline suite, with test outputs kept inside the project:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE="1"
+New-Item -ItemType Directory -Force .runtime/test-tmp | Out-Null
+$env:TEMP=(Resolve-Path .runtime/test-tmp).Path
+$env:TMP=$env:TEMP
+.\.venv\Scripts\python.exe -m pytest -q -p no:cacheprovider --basetemp=.runtime/test-tmp/release tests/test_c1_report_safety.py tests/test_goal_aware_evidence_assembly.py tests/test_product_integration.py tests/test_phase1q_r2_identity.py tests/test_semantic_propositions.py tests/test_semantic_dependency_repair.py tests/test_semantic_targeted_repair.py tests/test_research_agent_state.py tests/test_research_agent_policy.py
+```
+
+These are engineering/contract tests, not verifier qualification. The one FNO historical replay test skips when its excluded raw data are absent. Some older identity/verifier tests fail against the current D6/status contracts, as reproduced in the original workspace; they are retained and documented, not silently repaired or counted as passing. Other historical suites may need private/local fixtures, services or models; a skip is not a PASS. Release test results and distribution checks are recorded in [release_checks.md](docs/paperresearch-v2/release_checks.md).
+
+## Distribution and license
+
+The release branch is a curated snapshot on the existing public `main`, not a push of the private development branch's 150 additional commits. It includes runnable core source, selected contract tests, necessary Phase4 runtime modules, configuration and concise documentation. It excludes credentials, raw model requests, original paper/media copies, indexes, databases, model weights and bulk experimental records. Full historical reproduction requires separately authorized assets; public source alone does not recreate the historical frozen environment.
+
+Code is distributed under the existing [MIT License](LICENSE). Third-party libraries/models retain their own licenses. Paper and model assets are not relicensed or redistributed by this release.

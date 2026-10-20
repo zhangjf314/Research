@@ -1,44 +1,44 @@
 from __future__ import annotations
 
+import re
+
 from paper_research.agents.research_agent.models import VerificationResult, VerificationStatus
 from paper_research.agents.research_agent.state import AgentState
+
+SEMANTIC_SUPPORT_NOT_ASSESSED = "SEMANTIC_SUPPORT_NOT_ASSESSED"
+REPORT_SAFETY_NAMESPACE = "p1_agent_report_safety_v1"
+REPORT_SAFETY_RECEIPT = {
+    "mode": "CANDIDATE_ONLY_REPORT_SUPPRESSED",
+    "schema_version": 1,
+    "policy_id": "paperresearch-agent-report-safety-v1",
+    "semantic_status": SEMANTIC_SUPPORT_NOT_ASSESSED,
+    "source_identity_schema": "legacy-opaque-v0",
+    "canonical_state_injection": False,
+    "semantic_qualification_id": None,
+    "report_eligibility": "DENIED",
+}
+
+
+class ResearchSafetyError(ValueError):
+    def __init__(self, code: str, status_code: int = 503) -> None:
+        self.code = code
+        self.status_code = status_code
+        super().__init__(code)
+
+
+def validate_research_task_id(task_id: str) -> None:
+    if not isinstance(task_id, str) or not re.fullmatch(
+        r"[A-Za-z0-9][A-Za-z0-9_-]{0,127}", task_id
+    ):
+        raise ResearchSafetyError("INVALID_RESEARCH_TASK_ID", 422)
 
 
 class DeterministicResearchVerifier:
     def verify(self, state: AgentState) -> VerificationResult:
-        unresolved = [
-            subquestion.id
-            for subquestion in state.subquestions
-            if not state.evidence_state.evidence_for(subquestion.id)
-        ]
-        contradictions = list(state.evidence_state.contradictions)
-        verified = [
-            f"Evidence supports {subquestion_id}"
-            for subquestion_id, evidence_ids in state.evidence_state.subquestion_evidence.items()
-            if evidence_ids
-        ]
-        if contradictions:
-            return VerificationResult(
-                status=VerificationStatus.PARTIAL,
-                verified_claims=verified,
-                unresolved_subquestions=unresolved,
-                evidence_gaps=[
-                    f"missing evidence for {subquestion_id}" for subquestion_id in unresolved
-                ],
-                contradictions=contradictions,
-                recommended_next_action="REPLAN",
-            )
-        if not unresolved and verified:
-            return VerificationResult(
-                status=VerificationStatus.PASS,
-                verified_claims=verified,
-                recommended_next_action="FINISH",
-            )
+        # Retrieval presence is neither a positive nor a negative semantic judgment.
         return VerificationResult(
-            status=VerificationStatus.PARTIAL if verified else VerificationStatus.FAIL,
-            verified_claims=verified,
-            unsupported_claims=[f"Missing evidence for {item}" for item in unresolved],
-            unresolved_subquestions=unresolved,
-            evidence_gaps=[f"missing evidence for {item}" for item in unresolved],
-            recommended_next_action="REPLAN",
+            status=VerificationStatus.PARTIAL,
+            unresolved_subquestions=[item.id for item in state.subquestions],
+            evidence_gaps=[SEMANTIC_SUPPORT_NOT_ASSESSED],
+            recommended_next_action="FINISH",
         )

@@ -8,11 +8,28 @@ from paper_research.retrieval.filters import RetrievalFilter
 
 
 class BM25Retriever:
-    def __init__(self, chunks: list[Chunk], k1: float = 1.5, b: float = 0.75) -> None:
+    def __init__(
+        self,
+        chunks: list[Chunk],
+        k1: float = 1.5,
+        b: float = 0.75,
+        *,
+        contextual: bool = False,
+    ) -> None:
         self.chunks = chunks
+        self.contextual = contextual
         self.k1 = k1
         self.b = b
-        self.term_frequencies = [Counter(self._tokens(chunk.chunk_text)) for chunk in chunks]
+        self.term_frequencies = [
+            Counter(
+                self._tokens(
+                    getattr(chunk, "contextual_text", "") or chunk.chunk_text
+                    if contextual
+                    else chunk.chunk_text
+                )
+            )
+            for chunk in chunks
+        ]
         self.lengths = [sum(counts.values()) for counts in self.term_frequencies]
         self.average_length = sum(self.lengths) / len(self.lengths) if self.lengths else 1.0
         document_frequency: Counter[str] = Counter()

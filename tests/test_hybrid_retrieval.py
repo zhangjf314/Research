@@ -7,7 +7,7 @@ from paper_research.retrieval.dense import RetrievalResult
 from paper_research.retrieval.filters import RetrievalFilter
 from paper_research.retrieval.fusion import reciprocal_rank_fusion
 from paper_research.retrieval.hybrid import HybridRetriever
-from paper_research.retrieval.reranker import LexicalReranker
+from paper_research.retrieval.reranker import DisabledReranker, LexicalReranker
 from paper_research.retrieval.sparse import BM25Retriever
 from paper_research.retrieval.trace import JsonlTraceRepository
 
@@ -54,6 +54,25 @@ def test_bm25_ranks_exact_terms_and_applies_metadata_filter() -> None:
 
     assert [result.chunk.chunk_id for result in results] == ["a"]
     assert results[0].score > 0
+
+
+def test_semantic_balanced_preserves_query_and_limits_paper_domination() -> None:
+    candidates = [chunk(str(i), "relevant passage", paper=paper)
+                  for i, paper in enumerate(["p1", "p1", "p1", "p1", "p2", "p3"])]
+    dense = FakeDenseRetriever([RetrievalResult(c, .9) for c in candidates])
+    retriever = HybridRetriever(
+        dense, BM25Retriever([]), DisabledReranker(), ContextBuilder(include_neighbors=False),
+        provider_metadata={"retrieval_ranking_profile": "semantic_balanced"},
+    )
+    original = "Find background evidence for: compare the methods"
+    result = retriever.retrieve(original, RetrievalFilter(paper_ids=["p1", "p2", "p3"]), top_k=5)
+    assert dense.queries == ["compare the methods"]
+    assert result.trace.query == original
+    assert result.trace.retrieval_ranking_profile == "semantic_balanced"
+    assert [c.paper_id for c in result.context] == ["p1", "p1", "p2", "p3"]
+    assert all(c.evidence == "relevant passage" for c in result.context)
+    single = retriever.retrieve(original, RetrievalFilter(paper_ids=["p1"]), top_k=4)
+    assert [c.paper_id for c in single.context] == ["p1"] * 4
 
 
 def test_rrf_records_dense_and_sparse_ranks() -> None:

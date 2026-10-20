@@ -47,6 +47,9 @@ services:
       LLM_RESPONSE_FORMAT: ${LLM_RESPONSE_FORMAT:-json_object}
       LLM_THINKING_ENABLED: ${LLM_THINKING_ENABLED:-false}
       LLM_STREAM: ${LLM_STREAM:-false}
+      RESEARCH_DRAFT_ENABLED: ${RESEARCH_DRAFT_ENABLED:-false}
+      RESEARCH_DRAFT_TOKEN: ${RESEARCH_DRAFT_TOKEN:-}
+      LLM_VISION_ENABLED: ${LLM_VISION_ENABLED:-false}
       LLM_INPUT_COST_PER_MILLION: ${LLM_INPUT_COST_PER_MILLION:-}
       LLM_OUTPUT_COST_PER_MILLION: ${LLM_OUTPUT_COST_PER_MILLION:-}
       LLM_INPUT_PRICE_PER_MILLION_TOKENS: ${LLM_INPUT_PRICE_PER_MILLION_TOKENS:-}
@@ -92,6 +95,7 @@ services:
         condition: service_healthy
     volumes:
       - app_data:/app/data
+      - app_data:/app/.runtime
       - ./data/evaluation:/app/data/evaluation
       - ./docs:/app/docs
       - ./artifacts:/app/artifacts

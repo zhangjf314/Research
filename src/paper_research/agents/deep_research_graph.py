@@ -302,8 +302,8 @@ class DeepResearchGraph:
                 )
             except LLMProviderError as exc:
                 status = (
-                    "FAILED_PROVIDER_SCHEMA"
-                    if exc.error_code == "FAILED_PROVIDER_SCHEMA"
+                    exc.error_code
+                    if exc.error_code.startswith("FAILED_")
                     else "FAILED_PROVIDER"
                 )
                 usage = (
@@ -384,7 +384,7 @@ class DeepResearchGraph:
         }
 
     def _report(self, state: ResearchState) -> dict:
-        if state.get("status") in {"FAILED_PROVIDER_SCHEMA", "FAILED_PROVIDER"}:
+        if str(state.get("status", "")).startswith("FAILED_"):
             return {
                 "draft_report": "",
                 "report_quality": None,
@@ -473,7 +473,7 @@ class DeepResearchGraph:
         }
 
     def _validate(self, state: ResearchState) -> dict:
-        if state.get("status") in {"FAILED_PROVIDER_SCHEMA", "FAILED_PROVIDER"}:
+        if str(state.get("status", "")).startswith("FAILED_"):
             return {
                 "citation_results": [],
                 "status": state["status"],

@@ -112,6 +112,8 @@ class LLMResearchAgentDecisionProvider:
             "verify_evidence",
             "finish",
         ]
+        if state.multimodal_enabled:
+            allowed_actions.append("retrieve_multimodal_evidence")
         result = self.provider.generate_structured_json(
             system_prompt=(
                 "You are a research agent policy controller. Return strict JSON only. "
@@ -152,7 +154,7 @@ class LLMResearchAgentDecisionProvider:
                 },
                 ensure_ascii=False,
             ),
-            schema_name=self.schema_version,
+            schema_name=self.schema_version + ("-multimodal" if state.multimodal_enabled else ""),
             request_context={"task_id": state.task_id, "agent_phase": "DECIDE"},
             max_output_tokens=500,
         )

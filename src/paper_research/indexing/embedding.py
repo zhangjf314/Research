@@ -3,6 +3,9 @@ import math
 import re
 import time
 from abc import ABC, abstractmethod
+from functools import lru_cache
+from pathlib import Path
+from threading import Lock
 
 import httpx
 
@@ -56,6 +59,65 @@ class HashEmbeddingProvider(EmbeddingProvider):
             vector[index] += 1.0 if value & 1 else -1.0
         norm = math.sqrt(sum(value * value for value in vector)) or 1.0
         return [value / norm for value in vector]
+
+
+_local_qwen_load_lock = Lock()
+
+
+@lru_cache(maxsize=1)
+def _local_qwen_encoder(snapshot: str):
+    # Optional installed runtime; loading is explicitly local and executes no remote code.
+    try:
+        from sentence_transformers import SentenceTransformer
+    except ImportError as exc:
+        raise EmbeddingProviderError("Local Qwen requires an installed sentence-transformers runtime") from exc
+    model = SentenceTransformer(snapshot, device="cpu", local_files_only=True,
+                                trust_remote_code=False, model_kwargs={"dtype": "auto"})
+    if model.get_sentence_embedding_dimension() != 1024:
+        raise EmbeddingProviderError("Local Qwen snapshot dimension must be 1024")
+    model.eval()
+    return model, Lock()
+
+
+class LocalQwenEmbeddingProvider(EmbeddingProvider):
+    """Offline Qwen3 query-instruction/document encoding from a pinned local snapshot."""
+
+    provider_name = "local_qwen3"
+    model_name = "Qwen/Qwen3-Embedding-0.6B"
+    QUERY_PROMPT = "Instruct: Given a research question, retrieve passages that directly answer it.\nQuery: "
+
+    def __init__(self, model_path: Path, revision: str, dimensions: int = 1024,
+                 batch_size: int = 2) -> None:
+        self.snapshot = model_path.resolve()
+        # The prompt recipe is part of the identity, not an unrecorded query override.
+        if (dimensions != 1024 or not self.snapshot.is_dir()
+                or revision != self.snapshot.name + ":retrieval-v1"
+                or not (self.snapshot / "model.safetensors").is_file()):
+            raise EmbeddingProviderError("Local Qwen requires a pinned 1024-d snapshot and revision <snapshot>:retrieval-v1")
+        self.revision = revision
+        self.dimensions = dimensions
+        self.batch_size = batch_size
+
+    def _encode(self, texts: list[str], *, query: bool) -> list[list[float]]:
+        if not texts:
+            return []
+        with _local_qwen_load_lock:
+            model, lock = _local_qwen_encoder(str(self.snapshot))
+        with lock:
+            vectors = model.encode(texts, prompt=self.QUERY_PROMPT if query else "",
+                                   normalize_embeddings=True, convert_to_numpy=True,
+                                   show_progress_bar=False, batch_size=self.batch_size)
+        return _validated_vectors({"data": [{"index": i, "embedding": row.tolist()}
+                                           for i, row in enumerate(vectors)]},
+                                  len(texts), self.dimensions)
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return self._encode(texts, query=False)
+
+    def embed_query(self, text: str) -> list[float]:
+        if not text.strip():
+            raise ValueError("embedding query must not be blank")
+        return self._encode([text], query=True)[0]
 
 
 class OpenAICompatibleEmbeddingProvider(EmbeddingProvider):

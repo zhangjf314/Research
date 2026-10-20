@@ -180,7 +180,7 @@ class DeepSeekResearchSynthesisProvider:
         for attempt in range(1, self.max_attempts + 1):
             attempts += 1
             prompt = user_prompt
-            if last_error is not None:
+            if last_error is not None and isinstance(last_payload, dict):
                 repairing_sections = _invalid_section_ids(
                     last_payload,
                     validation_error=last_error,
@@ -201,6 +201,11 @@ class DeepSeekResearchSynthesisProvider:
                         section_evidence_ids=section_evidence_ids,
                         target_sections=repairing_sections,
                     )
+            elif last_error is not None:
+                # A malformed or absent tool argument payload cannot be safely
+                # repaired: there is no valid prior object to edit. Reissue the
+                # original constrained request instead of inventing a fallback.
+                repairing_sections = set()
             try:
                 result = self._structured_provider.generate_structured_json(
                     system_prompt=system_prompt,
@@ -220,7 +225,7 @@ class DeepSeekResearchSynthesisProvider:
                 )
                 usage_records.extend(result.usage_records)
                 normalization_events.extend(result.normalization_events)
-                payload = result.payload
+                payload = _normalize_synthesis_transport_payload(result.payload)
                 if last_error is not None and isinstance(last_payload, dict):
                     payload = _merge_component_repair_payload(
                         previous_payload=last_payload,
@@ -251,19 +256,23 @@ class DeepSeekResearchSynthesisProvider:
                 if exc.error_code not in {
                     "STRUCTURED_JSON_PARSE_ERROR",
                     "STRUCTURED_JSON_RESPONSE_ERROR",
+                    "STRUCTURED_OUTPUT_TRUNCATED",
+                    "STRUCTURED_OUTPUT_PROVIDER_FAILURE",
                 }:
                     raise
                 usage_records.extend(exc.usage_records)
                 last_error = exc
                 retry_reasons.append(exc.error_code)
                 if attempt >= self.max_attempts:
+                    category = _classify_structured_provider_error(exc)
                     raise LLMProviderError(
                         "research synthesis structured JSON parsing failed",
-                        error_code="FAILED_PROVIDER_SCHEMA",
-                        stage="RESEARCH_SYNTHESIS_SCHEMA_VALIDATE",
+                        error_code=f"FAILED_{category}",
+                        stage=f"RESEARCH_SYNTHESIS_{category}",
                         api_request_count=attempts,
                         retry_reasons=retry_reasons,
                         error_details={
+                            "failure_category": category,
                             "reason": str(exc)[:1000],
                             "usage": _sum_usage_records(usage_records).model_dump(),
                             "usage_record_count": len(usage_records),
@@ -279,13 +288,16 @@ class DeepSeekResearchSynthesisProvider:
                 retry_reasons.append(type(exc).__name__)
                 if attempt >= self.max_attempts:
                     usage = _sum_usage_records(usage_records)
+                    category = _classify_synthesis_validation_error(exc)
                     raise LLMProviderError(
                         "research synthesis schema validation failed",
-                        error_code="FAILED_PROVIDER_SCHEMA",
-                        stage="RESEARCH_SYNTHESIS_SCHEMA_VALIDATE",
+                        error_code=f"FAILED_{category}",
+                        stage=f"RESEARCH_SYNTHESIS_{category}",
                         api_request_count=attempts,
                         retry_reasons=retry_reasons,
                         error_details={
+                            "failure_category": category,
+                            "validation_issues": _validation_issue_objects(exc),
                             "reason": str(exc)[:1000],
                             "usage": usage.model_dump(),
                             "usage_record_count": len(usage_records),
@@ -295,6 +307,20 @@ class DeepSeekResearchSynthesisProvider:
                     ) from exc
                 continue
         raise AssertionError("unreachable")
+
+
+def _classify_structured_provider_error(exc: LLMProviderError) -> str:
+    """Keep provider-side structured-output failures distinguishable in the UI."""
+    if exc.error_code == "STRUCTURED_OUTPUT_TRUNCATED":
+        return "PROVIDER_OUTPUT_TRUNCATED"
+    if exc.error_code == "STRUCTURED_OUTPUT_PROVIDER_FAILURE":
+        return "PROVIDER_STRUCTURED_OUTPUT_FAILURE"
+    reason = str(exc).lower()
+    if "tool-call" in reason or "tool call" in reason or "unknown tool" in reason:
+        return "PROVIDER_TOOL_CALL_MISSING"
+    if "json" in reason or "arguments" in reason:
+        return "PROVIDER_ARGUMENT_JSON_INVALID"
+    return "PROVIDER_STRUCTURED_RESPONSE_INVALID"
 
 
 def _validate_synthesis_citations(
@@ -334,6 +360,72 @@ def _validate_synthesis_citations(
                 )
 
 
+def _normalize_synthesis_transport_payload(payload: object) -> object:
+    """Map the strict transport's empty optional gap value back to `None`.
+
+    DeepSeek strict function schemas do not document support for JSON `null`.
+    This is a representation-only normalization; Pydantic and all citation and
+    report-quality validation remain mandatory afterwards.
+    """
+    if not isinstance(payload, dict):
+        return payload
+    normalized = dict(payload)
+    sections = normalized.get("sections")
+    if not isinstance(sections, list):
+        return normalized
+    normalized_sections = []
+    for section in sections:
+        if not isinstance(section, dict):
+            normalized_sections.append(section)
+            continue
+        copy = dict(section)
+        if copy.get("insufficient_evidence") is False and copy.get("evidence_gap") == "":
+            copy["evidence_gap"] = None
+        normalized_sections.append(copy)
+    normalized["sections"] = normalized_sections
+    return normalized
+
+
+def _classify_synthesis_validation_error(error: BaseException) -> str:
+    message = str(error)
+    if "outside section allowlist" in message:
+        return "CITATION_ALLOWLIST_VIOLATION"
+    if "unknown citation IDs" in message:
+        return "CITATION_PROVENANCE_INVALID"
+    if isinstance(error, ValidationError):
+        return "LOCAL_SCHEMA_INVALID"
+    return "REPORT_SEMANTIC_VALIDATION_FAILED"
+
+
+def _validation_issue_objects(error: BaseException) -> list[dict[str, object]]:
+    """Produce machine-readable repair input without relaxing any validator."""
+    if isinstance(error, ValidationError):
+        return [
+            {
+                "issue_type": str(item.get("type", "validation_error")),
+                "section": str((item.get("loc") or ("<root>",))[0]),
+                "field": ".".join(str(part) for part in item.get("loc", ())),
+                "invalid_value": None,
+                "allowed_values": None,
+                "message": str(item.get("msg", "validation error")),
+            }
+            for item in error.errors()[:20]
+        ]
+    message = str(error)
+    return [
+        {
+            "issue_type": _classify_synthesis_validation_error(error),
+            "section": message.split(" for ", 1)[1].split(":", 1)[0]
+            if " for " in message
+            else None,
+            "field": "citation_ids" if "citation" in message.lower() else "<root>",
+            "invalid_value": message.rsplit(":", 1)[-1].strip() if ":" in message else None,
+            "allowed_values": None,
+            "message": message,
+        }
+    ]
+
+
 def _sum_usage_records(records: list[ProviderUsageRecord]) -> ModelUsage:
     input_tokens = sum(record.usage.input_tokens for record in records)
     output_tokens = sum(record.usage.output_tokens for record in records)
@@ -365,7 +457,6 @@ def _research_repair_prompt(
     section_evidence_ids: dict[str, list[str]],
 ) -> str:
     previous_json = json.dumps(previous_payload or {}, ensure_ascii=False, indent=2)[:12000]
-    errors = _validation_error_summary(validation_error)
     return (
         "Repair the previous Deep Research synthesis JSON only. Return a single JSON object. "
         "Do not use Markdown, code fences, explanations, or evidence not already represented "
@@ -399,8 +490,8 @@ def _research_repair_prompt(
         '    {"text": "string inference", "citation_ids": [], "is_inference": true}\n'
         "  ]\n"
         "}\n\n"
-        "Validation errors:\n"
-        + "\n".join(f"- {error}" for error in errors)
+        "validation_issues (machine-readable):\n"
+        + json.dumps(_validation_issue_objects(validation_error), ensure_ascii=False)
         + "\n\nPrevious JSON:\n"
         + previous_json
     )
@@ -510,8 +601,8 @@ def _research_component_repair_prompt(
         "or, when evidence is insufficient:\n"
         '{"section_id":"background|methods|results|limitations","summary":"string",'
         '"claims":[],"insufficient_evidence":true,"evidence_gap":"string"}\n\n'
-        "Validation errors:\n"
-        + "\n".join(f"- {error}" for error in _validation_error_summary(validation_error))
+        "validation_issues (machine-readable):\n"
+        + json.dumps(_validation_issue_objects(validation_error), ensure_ascii=False)
         + "\n\nPrevious invalid sections:\n"
         + json.dumps(previous_sections, ensure_ascii=False, indent=2)[:8000]
         + "\n\nAllowed citation IDs by section: target sections only.\n"
