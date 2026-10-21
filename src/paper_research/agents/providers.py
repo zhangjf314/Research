@@ -93,11 +93,19 @@ class ArtifactLocalResearchProvider(LocalResearchProvider):
 class HybridLocalResearchProvider(LocalResearchProvider):
     """Production local provider backed by the existing hybrid retrieval stack."""
 
-    def __init__(self, settings: Settings, *, require_identity: bool = False) -> None:
+    def __init__(
+        self, settings: Settings, *, require_identity: bool = False, graph_options=None,
+    ) -> None:
         from paper_research.providers.factory import build_embedding_provider, build_reranker
 
         self.settings = settings
         self.require_identity = require_identity
+        self.graph_options = graph_options
+        if graph_options is not None:
+            from paper_research.evidence_graph.runtime import GraphRuntimeError
+            if (not require_identity or not settings.graph_rag_enabled
+                    or settings.retrieval_v2_enabled):
+                raise GraphRuntimeError("GRAPH_RAG_CONFIGURATION_UNSUPPORTED", 422)
         self._registry = IndexRegistry(settings.data_dir / "index_registry.json")
         self._client = QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key)
         self._collection = self._resolve_collection()
@@ -370,6 +378,13 @@ class HybridLocalResearchProvider(LocalResearchProvider):
                 fused_results=[hydrated.get(id(item), item) for item in trunk.fused_results],
             )
             result = self.retriever.finalize(trunk, retrieval_filter=retrieval_filter, top_k=limit)
+            if getattr(self, "graph_options", None) is not None:
+                from paper_research.retrieval.graph import augment
+                result = augment(result, query, retrieval_paper_ids or paper_ids, limit,
+                                 self.graph_options, settings=self.settings,
+                                 registry=self._registry,
+                                 chunks=chunks, collection=self._collection)
+                JsonlTraceRepository(self.settings.retrieval_trace_path).append(result.trace)
             try:
                 sidecar = build_readonly_evidence_contract(
                     query, result.context, result.trace, parsed_root=root,
@@ -448,6 +463,14 @@ class HybridLocalResearchProvider(LocalResearchProvider):
                        "retrieval_identity": identity.model_dump(mode="json"),
                        "text_proof": proof, "occurrences": [occurrence]},
                 ))
+            if getattr(self, "graph_options", None) is not None:
+                if sidecar.errors:
+                    from paper_research.evidence_graph.runtime import GraphRuntimeError
+                    raise GraphRuntimeError("GRAPH_CANONICAL_CITATION_INVALID")
+                if state.graph_rag is None or state.graph_rag.options != self.graph_options:
+                    from paper_research.evidence_graph.runtime import GraphRuntimeError
+                    raise GraphRuntimeError("GRAPH_CHECKPOINT_MODE_MISMATCH")
+                state.graph_rag.requests.append({"tool_call_id": tool_call_id, **result.graph_rag})
             return CanonicalRetrievalBatch(
                 items=canonical_items,
                 errors=[error.model_dump(mode="json") for error in sidecar.errors],
@@ -459,7 +482,11 @@ class HybridLocalResearchProvider(LocalResearchProvider):
             )
 
     def validate_active_snapshot(self, state, *, _pinned=None) -> None:
-        """On resume or a later tool, recheck D6 and stored canonical prefixes without retrieval."""
+        """Recheck mode, D6 and stored canonical prefixes without retrieval."""
+        if ((state.graph_rag is not None) != (getattr(self, "graph_options", None) is not None)
+                or (state.graph_rag is not None and state.graph_rag.options != self.graph_options)):
+            from paper_research.evidence_graph.runtime import GraphRuntimeError
+            raise GraphRuntimeError("GRAPH_CHECKPOINT_MODE_MISMATCH")
         from contextlib import nullcontext
         from paper_research.agents.research_agent.models import CanonicalEvidenceItem
         from paper_research.generation.evidence_contract_adapter import (

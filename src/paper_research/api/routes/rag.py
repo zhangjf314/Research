@@ -10,6 +10,7 @@ from qdrant_client import QdrantClient
 
 from paper_research.chunking.types import Chunk
 from paper_research.config import get_settings
+from paper_research.evidence_graph.runtime import GraphRuntimeError, RuntimeGraph
 from paper_research.generation.evidence_contract_adapter import ReadOnlyEvidenceContractResult
 from paper_research.generation.qa_service import Answer, QAService
 from paper_research.indexing.registry import (
@@ -29,6 +30,7 @@ from paper_research.retrieval.context_builder import ContextBuilder, ContextItem
 from paper_research.retrieval.contextual import ContextualChunk
 from paper_research.retrieval.dense import DenseRetriever
 from paper_research.retrieval.filters import RetrievalFilter
+from paper_research.retrieval.graph import GraphOptions, augment
 from paper_research.retrieval.hybrid import HybridRetrievalResult, HybridRetriever
 from paper_research.retrieval.pipeline import build_v2_retriever, retrieval_collection
 from paper_research.retrieval.sparse import BM25Retriever
@@ -51,6 +53,7 @@ class HybridRetrievalRequest(BaseModel):
     recall_k: int = Field(default=20, ge=1, le=100)
     top_k: int = Field(default=5, ge=1, le=20)
     include_evidence_contract: bool = Field(default=False, strict=True)
+    graph_rag: GraphOptions | None = None
 
     @model_validator(mode="after")
     def validate_evidence_opt_in(self):
@@ -76,8 +79,17 @@ class HybridRetrievalEvidenceResponse(HybridRetrievalResponse):
     evidence_contract: ReadOnlyEvidenceContractResult
 
 
+class GraphRetrievalResponse(HybridRetrievalEvidenceResponse):
+    graph_rag: dict
+
+
 def _run_hybrid(payload: HybridRetrievalRequest, observer=None):
     settings = get_settings()
+    if payload.graph_rag is not None and not settings.graph_rag_enabled:
+        raise GraphRuntimeError("GRAPH_RAG_DISABLED", 503)
+    if payload.graph_rag is not None and any((payload.filters.sections, payload.filters.block_types,
+                                              payload.filters.page_from, payload.filters.page_to)):
+        raise GraphRuntimeError("GRAPH_NON_PAPER_FILTERS_UNSUPPORTED", 422)
     registry = IndexRegistry(settings.data_dir / "index_registry.json")
     collection = retrieval_collection(settings, registry)
     store = QdrantVectorStore(
@@ -125,6 +137,11 @@ def _run_hybrid(payload: HybridRetrievalRequest, observer=None):
         ).retrieve(payload.query, payload.filters,
             recall_k=max(payload.recall_k, settings.rerank_input_k) if settings.rerank_enabled else payload.recall_k,
             top_k=payload.top_k, retrieval_scope="paper" if payload.filters.paper_ids else "global")
+        if payload.graph_rag is not None:
+            result = augment(result, payload.query, payload.filters.paper_ids, payload.top_k,
+                             payload.graph_rag, settings=settings, registry=registry,
+                             chunks=verified, collection=collection)
+            JsonlTraceRepository(settings.retrieval_trace_path).append(result.trace)
         return observer(result) if observer is not None else result
 
 
@@ -222,14 +239,16 @@ def ask_question(payload: QARequest) -> Answer:
 
 
 @router.post(
-    "/retrieve", response_model=HybridRetrievalEvidenceResponse | HybridRetrievalResponse,
+    "/retrieve", response_model=(
+        GraphRetrievalResponse | HybridRetrievalEvidenceResponse | HybridRetrievalResponse
+    ),
 )
 def hybrid_retrieve(
     payload: HybridRetrievalRequest,
 ) -> HybridRetrievalEvidenceResponse | HybridRetrievalResponse:
     try:
         def observe(result):
-            if payload.include_evidence_contract:
+            if payload.include_evidence_contract or payload.graph_rag is not None:
                 from paper_research.generation.evidence_contract_adapter import (
                     build_readonly_evidence_contract,
                     evidence_contract_failure,
@@ -242,6 +261,13 @@ def hybrid_retrieve(
                     )
                 except Exception:
                     sidecar = evidence_contract_failure(payload.query, result.context, result.trace)
+                if payload.graph_rag is not None:
+                    if sidecar.errors:
+                        raise GraphRuntimeError("GRAPH_CANONICAL_CITATION_INVALID")
+                    return GraphRetrievalResponse(
+                        context=result.context, trace=result.trace,
+                        evidence_contract=sidecar, graph_rag=result.graph_rag,
+                    )
                 return HybridRetrievalEvidenceResponse(
                     context=result.context, trace=result.trace, evidence_contract=sidecar,
                 )
@@ -257,6 +283,91 @@ def hybrid_retrieve(
         raise HTTPException(
             status_code=503, detail=f"hybrid retrieval unavailable: {type(exc).__name__}"
         ) from exc
+
+
+class GraphQueryRequest(BaseModel):
+    paper_ids: list[str] = Field(min_length=1, max_length=38)
+    seed_chunk_ids: list[str] = Field(min_length=1, max_length=5)
+    options: GraphOptions = Field(default_factory=GraphOptions)
+
+
+class WikiQueryRequest(BaseModel):
+    paper_ids: list[str] = Field(min_length=1, max_length=38)
+    paper_id: str
+    max_evidence_blocks: int = Field(default=4, ge=0, le=8)
+    max_chars: int = Field(default=16000, ge=512, le=24000)
+
+
+def _graph_resource(payload, *, wiki=False):
+    from paper_research.agents.providers import HybridLocalResearchProvider
+    from paper_research.evidence_graph.schema import node_id
+    from paper_research.retrieval.fusion import FusedResult
+    from paper_research.retrieval.graph import neighborhood, scoped_graph
+    from paper_research.wiki.schema import page_id
+
+    settings = get_settings()
+    if not settings.graph_rag_enabled:
+        raise GraphRuntimeError("GRAPH_RAG_DISABLED", 503)
+    provider = HybridLocalResearchProvider(settings, require_identity=True)
+    try:
+        with provider._admission() as (chunks, _):
+            runtime = RuntimeGraph.load(settings, provider._registry, chunks, provider._collection)
+            scope = scoped_graph(runtime, payload.paper_ids)
+            if wiki:
+                if payload.paper_id not in scope:
+                    raise GraphRuntimeError("GRAPH_PAPER_SCOPE_NOT_AUTHORIZED", 403)
+                return {"status": "USED", "binding": runtime.binding,
+                        "bundle": runtime.wiki.build_context_bundle(
+                            page_id("Paper", node_id("Paper", payload.paper_id)),
+                            max_evidence_blocks=payload.max_evidence_blocks,
+                            max_chars=payload.max_chars)}
+            allowed = {cid: Chunk.model_validate(c) for cid, c in runtime.sources.chunks.items()
+                       if c["paper_id"] in scope}
+            if any(c not in allowed for c in payload.seed_chunk_ids):
+                raise GraphRuntimeError("GRAPH_SEED_NOT_AUTHORIZED", 403)
+            seeds = [node_id("Chunk", allowed[c].paper_id, c) for c in payload.seed_chunk_ids]
+            trace = neighborhood(runtime, seeds, payload.paper_ids, payload.options)
+            records = [
+                allowed[runtime.graph.nodes[n].properties["chunk_id"]]
+                for n in trace["node_ids"] if runtime.graph.nodes[n].type == "Chunk"
+            ]
+            builder = ContextBuilder(
+                include_neighbors=False, max_characters=payload.options.max_context_chars,
+            )
+            evidence = builder.build([FusedResult(c, 1.0) for c in records])
+            return {"status": "USED", "binding": runtime.binding,
+                    "graph_digest": runtime.graph.graph_digest,
+                    "traversal": trace, "semantic_support": "NOT_ASSESSED",
+                    "evidence": [{**c.model_dump(),
+                                  "pdf_sha256": runtime.sources.metadata[
+                                      c.paper_id]["pdf_sha256"],
+                                  "quote_start": 0,
+                                  "quote_end": len(c.evidence)} for c in evidence],
+                    "context_strategy": builder.last_trace.model_dump()}
+    finally:
+        provider._client.close()
+
+
+@router.post("/graph/query")
+def graph_query(payload: GraphQueryRequest):
+    try:
+        return _graph_resource(payload)
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.code) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="GRAPH_RUNTIME_UNAVAILABLE") from exc
+
+
+@router.post("/wiki/query")
+def wiki_query(payload: WikiQueryRequest):
+    try:
+        return _graph_resource(payload, wiki=True)
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.code) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="WIKI_RUNTIME_UNAVAILABLE") from exc
 
 
 def _load_chunks(root: Path, paper_ids: list[str] | None, index_version: str,

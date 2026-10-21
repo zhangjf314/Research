@@ -74,6 +74,8 @@ class Settings(BaseSettings):
     llm_vision_enabled: bool = False
     live_model_calls_enabled: bool = False
     research_draft_enabled: bool = False
+    graph_rag_enabled: bool = False
+    graph_rag_allow_hybrid_fallback: bool = False
     research_semantic_review_enabled: bool = False
     research_semantic_review_token: SecretStr | None = None
     research_semantic_receipt_dir: Path = Path(".runtime/semantic-review")

@@ -23,6 +23,10 @@ flowchart LR
   I --> N[PDF-native / CLIP retrieval]
   R[User question] --> A[Existing ResearchAgent Runner + Planner + Tools]
   H --> A
+  I --> GW[Opt-in D6 structural Graph / source Wiki]
+  H --> GR[Optional bounded graph expansion + fusion]
+  GW --> GR
+  GR --> A
   N --> A
   A --> E[Goal-aware evidence assembly + coverage gaps]
   E --> V[Compatible visual Provider / actual image bytes]
@@ -36,6 +40,7 @@ flowchart LR
 - Goal-aware evidence assembly records selected evidence, budget limits and unresolved coverage; its independent research-quality improvement was **not** proven.
 - Trace, budget accounting and Checkpoint support bounded execution and recovery.
 - Evidence Contract, Evidence Graph/Wiki and semantic-review code reuse the existing project components.
+- Optional runtime GraphRAG builds structural Paper/Chunk graphs and source-backed Wiki pages from ACTIVE user PDFs, augments Hybrid, and runs through the existing API/Agent tool and Checkpoint chain. Defaults remain Hybrid. See [GraphRAG usage](docs/graph-rag/usage.md), [module dependencies](docs/graph-rag/architecture.md) and [real local acceptance](docs/graph-rag/integration_report.md).
 - Strict `publish_reviewed` retains source, scope, atomicity and real human-approval requirements. AI-source-audited delivery is a distinct status.
 
 Detailed [architecture](docs/paperresearch-v2/architecture.md) and [reproducibility boundaries](docs/paperresearch-v2/reproducibility.md) describe what is distributed and what requires local assets. Earlier RAG quality program results remain in [their existing report](docs/RAG_QUALITY_PROGRAM_FINAL_REPORT.md); no experimental reranker was promoted to the general production default.
@@ -48,6 +53,8 @@ Python **3.12+** is required. Use a virtual environment and keep credentials loc
 git clone https://github.com/zhangjf314/Research.git
 cd Research
 git checkout release/paperresearch-v2
+# For the Graph/Wiki runtime feature under review, use instead:
+# git checkout feat/graph-wiki-runtime-v2.1
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 Copy-Item .env.example .env
@@ -100,6 +107,16 @@ Use returned task IDs, traces and Checkpoints to inspect/resume tasks. Rule-base
 Actual visual drafting additionally requires a compatible vision Provider, `RESEARCH_NATIVE_BUNDLE`, a compatible `RESEARCH_NATIVE_FULL_INDEX` for the full N1/M1 backend, local model assets, explicit vision/draft switches, a locally chosen `RESEARCH_DRAFT_TOKEN`, and the `X-Research-Draft-Token` header. **Do not enable paid calls without a separately understood budget.** Application tokens do not establish a universal dollar cap; formal experiments had their own one-attempt controllers. The API's normal 4096-output limit remains and can truncate long structured drafts.
 
 Drafts contain claim proposals, visual observations, canonical references and evidence gaps. Verify the full prose, table headers/conditions, formula completeness and image ROI, not just claim counts or SHA. See [report statuses](docs/paperresearch-v2/usage_guide.md#report-statuses).
+
+GraphRAG is separately opt-in: enable `GRAPH_RAG_ENABLED`, build with
+`python -m paper_research.evidence_graph.runtime build` against your ACTIVE corpus,
+then add `"graph_rag": {}` to `/api/v1/retrieve` or the text ACTIVE Agent request.
+Direct `/api/v1/graph/query` and `/api/v1/wiki/query` return original source evidence.
+Missing/stale graphs produce explicit errors; fallback requires both request and
+server permission and records `FALLBACK_HYBRID`. Structural links do not establish
+scientific support. This version provides within-paper structural multihop
+expansion, not inferred cross-paper semantic relationships; native multimodal
+Agent and GraphRAG cannot yet be combined in one request.
 
 ## Tests
 

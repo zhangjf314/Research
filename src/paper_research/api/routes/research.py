@@ -48,6 +48,7 @@ from paper_research.providers.factory import (
     build_research_synthesis_provider,
 )
 from paper_research.providers.llm import LLMProviderError
+from paper_research.retrieval.graph import GraphOptions
 from paper_research.search.clients import ArxivClient, SemanticScholarClient
 from paper_research.search.http import CachedRetryClient
 from paper_research.search.import_service import PaperImportService
@@ -104,9 +105,14 @@ class ResearchAgentRequest(BaseModel):
     include_evidence_contract: bool = Field(default=False, strict=True)
     generate_draft: bool = Field(default=False, strict=True)
     multimodal_enabled: bool = Field(default=False, strict=True)
+    graph_rag: GraphOptions | None = None
 
     @model_validator(mode="after")
     def validate_readonly_opt_in(self):
+        if self.graph_rag is not None and (
+            self.include_evidence_contract or self.multimodal_enabled
+        ):
+            raise ValueError("GraphRAG currently requires the text ACTIVE Agent path")
         if self.multimodal_enabled and self.include_evidence_contract:
             raise ValueError("multimodal requires the ACTIVE Agent execution path")
         if self.generate_draft and (self.include_evidence_contract or self.pause_after_phase
@@ -472,6 +478,8 @@ def _agent_response(
             ],
             "subquestion_evidence": state.evidence_state.subquestion_evidence,
         }
+        if state.graph_rag is not None:
+            active["graph_rag"] = state.graph_rag.model_dump(mode="json")
         return ResearchAgentActiveResponse(
             **response.model_dump(), evidence_trust=trust, active_provenance=active,
         )
@@ -707,7 +715,8 @@ def run_research_agent(
                     or (reports.root / f"{task_id}-final-report.json").exists()
                     or (reports.root / f"{task_id}-final-report.md").exists()):
                 raise ResearchSafetyError("RESEARCH_TASK_ALREADY_EXISTS", 409)
-            local_provider = HybridLocalResearchProvider(settings, require_identity=True)
+            local_provider = HybridLocalResearchProvider(settings, require_identity=True,
+                                                         graph_options=payload.graph_rag)
             decision_provider = _agent_decision_provider(settings)
             if payload.multimodal_enabled:
                 from paper_research.agents.research_agent.multimodal import configured_multimodal_provider
@@ -782,7 +791,9 @@ def resume_research_agent(task_id: str) -> ResearchAgentResponse:
                 raise HTTPException(status_code=409, detail="READONLY_OBSERVATION_TERMINAL")
             require_current_resume(previous)
             settings = get_settings()
-            local_provider = HybridLocalResearchProvider(settings, require_identity=True)
+            saved_graph = previous.graph_rag
+            local_provider = HybridLocalResearchProvider(settings, require_identity=True,
+                graph_options=saved_graph.options if saved_graph else None)
             decision_provider = None if previous.verification_state is not None else _agent_decision_provider(settings)
             if previous.multimodal_enabled:
                 from paper_research.agents.research_agent.multimodal import configured_multimodal_provider

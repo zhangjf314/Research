@@ -30,6 +30,7 @@ from paper_research.agents.research_agent.models import (
     ToolObservation,
     VerificationResult,
 )
+from paper_research.retrieval.graph import GraphAgentRecord
 
 
 class AgentBudget(BaseModel):
@@ -114,6 +115,7 @@ class EvidenceState(BaseModel):
 
 
 class AgentState(BaseModel):
+    graph_rag: GraphAgentRecord | None = None
     multimodal_enabled: bool = Field(default=False, strict=True)
     task_id: str = Field(default_factory=lambda: f"agent-{uuid.uuid4().hex[:12]}")
     research_question: str

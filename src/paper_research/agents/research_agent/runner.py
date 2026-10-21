@@ -220,6 +220,9 @@ class ResearchAgentRunner:
             }
         else:
             state.evidence_provenance[REPORT_SAFETY_NAMESPACE] = dict(REPORT_SAFETY_RECEIPT)
+        if getattr(provider, "graph_options", None) is not None:
+            from paper_research.retrieval.graph import GraphAgentRecord
+            state.graph_rag = GraphAgentRecord(options=provider.graph_options)
         state.refresh_remaining_budget()
         return self._drive(state, interrupt_after_phase=interrupt_after_phase)
 

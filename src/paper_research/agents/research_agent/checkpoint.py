@@ -105,6 +105,14 @@ def checkpoint_kind(raw: dict) -> str:
     if sum(bool(keys) for keys in (readonly_keys, safety_keys, active_keys)) > 1:
         raise ResearchSafetyError("RESEARCH_TRUST_SCHEMA_INVALID")
     active = bool(active_keys)
+    if raw.get("graph_rag") is not None:
+        from paper_research.retrieval.graph import GraphAgentRecord
+        try:
+            GraphAgentRecord.model_validate(raw["graph_rag"])
+            if not active:
+                raise ValueError("GraphRAG requires current canonical admission")
+        except (ValueError, TypeError) as exc:
+            raise ResearchSafetyError("GRAPH_CHECKPOINT_INVALID") from exc
     if active:
         if active_keys != ["p1_active_canonical_provenance_v2"] or set(provenance) != set(active_keys):
             raise ResearchSafetyError("RESEARCH_TRUST_SCHEMA_INVALID")
