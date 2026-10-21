@@ -14,6 +14,7 @@ from paper_research.indexing.embedding import (
     EmbeddingProviderError,
     HashEmbeddingProvider,
     JinaEmbeddingProvider,
+    LocalQwenEmbeddingProvider,
     SiliconFlowEmbeddingProvider,
 )
 from paper_research.indexing.vector_store import QdrantVectorStore
@@ -69,6 +70,44 @@ def test_hash_baseline_supports_query_and_documents() -> None:
     assert len(provider.embed_query("query")) == 384
     assert len(provider.embed_documents(["one", "two"])) == 2
     assert provider.embed(["legacy"]) == provider.embed_documents(["legacy"])
+
+
+def test_local_qwen_uses_query_prompt_and_validates_output(tmp_path, monkeypatch) -> None:
+    from threading import Lock
+    import paper_research.indexing.embedding as module
+
+    snapshot = tmp_path / "pinned-snapshot"
+    snapshot.mkdir()
+    (snapshot / "model.safetensors").touch()
+    calls = []
+
+    class Row:
+        def tolist(self):
+            return [1.0] + [0.0] * 1023
+
+    class Encoder:
+        def encode(self, texts, **kwargs):
+            calls.append((texts, kwargs))
+            return [Row() for _ in texts]
+
+    monkeypatch.setattr(module, "_local_qwen_encoder", lambda path: (Encoder(), Lock()))
+    provider = LocalQwenEmbeddingProvider(snapshot, "pinned-snapshot:retrieval-v1")
+    assert len(provider.embed_documents(["passage"])[0]) == 1024
+    assert len(provider.embed_query("question")) == 1024
+    assert calls[0][1]["prompt"] == ""
+    assert calls[1][1]["prompt"] == provider.QUERY_PROMPT
+    assert all(kwargs["normalize_embeddings"] for _, kwargs in calls)
+    with pytest.raises(ValueError):
+        provider.embed_query("  ")
+
+
+@pytest.mark.parametrize("revision,dimensions", [("old", 1024), ("pinned-snapshot:retrieval-v1", 384)])
+def test_local_qwen_rejects_wrong_index_identity(tmp_path, revision, dimensions) -> None:
+    snapshot = tmp_path / "pinned-snapshot"
+    snapshot.mkdir()
+    (snapshot / "model.safetensors").touch()
+    with pytest.raises(EmbeddingProviderError):
+        LocalQwenEmbeddingProvider(snapshot, revision, dimensions)
 
 
 def test_jina_uses_asymmetric_tasks_batches_and_dimensions() -> None:

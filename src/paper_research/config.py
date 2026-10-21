@@ -1,8 +1,9 @@
 from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -26,11 +27,21 @@ class Settings(BaseSettings):
     page_asset_dpi: int = 144
     qdrant_collection: str | None = None
     retrieval_backend: str = "production_hybrid_rrf"
+    retrieval_v2_enabled: bool = False
+    retrieval_v2_contextual_enabled: bool = True
+    retrieval_v2_contextual_sparse: bool = False
+    retrieval_v2_collection: str | None = None
+    retrieval_v2_rerank_mode: Literal["off", "always", "selective"] = "off"
+    retrieval_v2_candidate_top_k: int = Field(default=30, ge=1, le=100)
+    retrieval_v2_final_top_k: int = Field(default=5, ge=1, le=20)
+    retrieval_v2_margin_threshold: float = Field(default=0.02, ge=0, le=1)
+    retrieval_v2_disagreement_threshold: float = Field(default=0.5, ge=0, le=1)
     baseline_collection: str = "papers_hash_v1"
     production_collection: str = "papers_production_v1"
     embedding_provider: str = "hash"
     embedding_model: str = "hash-v1"
     embedding_revision: str = "v1"
+    embedding_model_path: Path | None = None
     embedding_base_url: str | None = "https://api.jina.ai/v1"
     embedding_api_key: str | None = None
     embedding_dimensions: int = 384
@@ -60,6 +71,19 @@ class Settings(BaseSettings):
     llm_response_format: str = "json_object"
     llm_thinking_enabled: bool = False
     llm_stream: bool = False
+    llm_vision_enabled: bool = False
+    live_model_calls_enabled: bool = False
+    research_draft_enabled: bool = False
+    graph_rag_enabled: bool = False
+    graph_rag_allow_hybrid_fallback: bool = False
+    research_semantic_review_enabled: bool = False
+    research_semantic_review_token: SecretStr | None = None
+    research_semantic_receipt_dir: Path = Path(".runtime/semantic-review")
+    research_native_bundle: Path | None = None
+    research_native_full_index: Path | None = None
+    research_clip_index: Path | None = None
+    research_clip_model: Path | None = None
+    research_draft_token: SecretStr | None = None
     llm_input_cost_per_million: float | None = Field(default=None, ge=0)
     llm_output_cost_per_million: float | None = Field(default=None, ge=0)
     llm_billing_mode: str | None = None
@@ -80,6 +104,7 @@ class Settings(BaseSettings):
     retrieval_score_threshold: float = 0.12
     retrieval_trace_path: Path = Path("data/reports/retrieval_traces.jsonl")
     retrieval_recall_k: int = 20
+    retrieval_ranking_profile: Literal["default", "semantic_balanced"] = "default"
     semantic_scholar_api_key: str | None = None
     search_cache_dir: Path = Path("data/search_cache")
     search_cache_ttl_seconds: int = 3600
@@ -121,9 +146,7 @@ class Settings(BaseSettings):
     def validate_retrieval_backend(cls, value: str) -> str:
         allowed = {"production_hybrid_rrf", "rag_v2_cstar"}
         if value not in allowed:
-            raise ValueError(
-                f"RETRIEVAL_BACKEND must be one of {sorted(allowed)}, got {value!r}"
-            )
+            raise ValueError(f"RETRIEVAL_BACKEND must be one of {sorted(allowed)}, got {value!r}")
         return value
 
     @field_validator(
@@ -151,6 +174,19 @@ class Settings(BaseSettings):
             raise ValueError("APP_PROFILE must be baseline or production")
         if self.rerank_output_k > self.rerank_input_k:
             raise ValueError("RERANK_OUTPUT_K must not exceed RERANK_INPUT_K")
+        if self.retrieval_v2_final_top_k > self.retrieval_v2_candidate_top_k:
+            raise ValueError("v2 final_top_k must not exceed candidate_top_k")
+        if self.retrieval_v2_enabled and self.retrieval_v2_contextual_enabled:
+            if not self.retrieval_v2_collection:
+                raise ValueError("contextual v2 requires RETRIEVAL_V2_COLLECTION")
+            if self.retrieval_v2_collection == self.active_collection:
+                raise ValueError("contextual v2 collection must differ from baseline")
+        if (
+            self.retrieval_v2_enabled
+            and self.retrieval_v2_rerank_mode != "off"
+            and not self.rerank_enabled
+        ):
+            raise ValueError("v2 reranking requires RERANK_ENABLED")
         return self
 
     @property
@@ -203,7 +239,7 @@ class Settings(BaseSettings):
         provider = self.rerank_provider.strip().lower()
         if provider == "lexical":
             return ["RERANK_PROVIDER"]
-        if provider not in {"jina", "cross_encoder"}:
+        if provider not in {"jina", "cross_encoder", "siliconflow"}:
             return ["RERANK_PROVIDER"]
         missing: list[str] = []
         if (
@@ -212,9 +248,12 @@ class Settings(BaseSettings):
             or self.rerank_model == "lexical-v1"
         ):
             missing.append("RERANK_MODEL")
-        if not self.rerank_api_key:
+        api_key = self.rerank_api_key
+        if provider == "siliconflow":
+            api_key = api_key or self.embedding_api_key or self.siliconflow_embedding_api_key
+        if not api_key:
             missing.append("RERANK_API_KEY")
-        if provider == "cross_encoder" and (
+        if provider in {"cross_encoder", "siliconflow"} and (
             "rerank_base_url" not in self.model_fields_set or not self.rerank_base_url
         ):
             missing.append("RERANK_BASE_URL")
@@ -228,6 +267,13 @@ class Settings(BaseSettings):
         missing: list[str] = []
         if provider == "hash":
             return ["EMBEDDING_PROVIDER"]
+        if provider == "local_qwen3":
+            return [name for name, invalid in (
+                ("EMBEDDING_MODEL_PATH", self.embedding_model_path is None),
+                ("EMBEDDING_MODEL", self.embedding_model != "Qwen/Qwen3-Embedding-0.6B"),
+                ("EMBEDDING_DIMENSIONS", self.embedding_dimensions != 1024),
+                ("EMBEDDING_REVISION", not self.embedding_revision.endswith(":retrieval-v1")),
+            ) if invalid]
         if provider not in {"jina", "openai_compatible", "siliconflow"}:
             return ["EMBEDDING_PROVIDER"]
         if (
@@ -236,10 +282,7 @@ class Settings(BaseSettings):
             or self.embedding_model == "hash-v1"
         ):
             missing.append("EMBEDDING_MODEL")
-        if (
-            "embedding_dimensions" not in self.model_fields_set
-            or self.embedding_dimensions <= 0
-        ):
+        if "embedding_dimensions" not in self.model_fields_set or self.embedding_dimensions <= 0:
             missing.append("EMBEDDING_DIMENSIONS")
         if provider == "siliconflow" and not (
             self.embedding_api_key or self.siliconflow_embedding_api_key
@@ -296,6 +339,8 @@ class Settings(BaseSettings):
             "index_version": self.index_version,
             "dataset_version": self.dataset_version,
             "collection": self.active_collection,
+            **({"retrieval_ranking_profile": self.retrieval_ranking_profile}
+               if self.retrieval_ranking_profile != "default" else {}),
         }
 
     @property

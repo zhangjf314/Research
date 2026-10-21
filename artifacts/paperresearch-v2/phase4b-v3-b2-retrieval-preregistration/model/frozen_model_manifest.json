@@ -1,0 +1,1053 @@
+{
+  "execution": {
+    "attention_implementation": "eager",
+    "auto_device_map": false,
+    "batch_size": 1,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "dtype": "float32",
+    "eval_mode": true,
+    "gradient": false,
+    "provider_fallback": false,
+    "runtime_versions": {
+      "Pillow": null,
+      "PyMuPDF": "1.28.0",
+      "huggingface-hub": "1.28.0",
+      "numpy": "2.5.1",
+      "safetensors": "0.8.0",
+      "sentence-transformers": "6.0.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.13.0",
+      "transformers": "5.15.1"
+    },
+    "seed": 20261008,
+    "torch_num_interop_threads": 1,
+    "torch_num_threads": 8,
+    "trust_remote_code": false,
+    "use_cache": false
+  },
+  "metadata_evidence_SHA256": "92508c4fb6668ad9cc7c61ae17b78581633b0a687737bfdd61d251fccda0d30e",
+  "models": {
+    "embedding": {
+      "configurations": {
+        "config.json": {
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "bos_token_id": 151643,
+          "eos_token_id": 151643,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "hidden_size": 1024,
+          "initializer_range": 0.02,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 32768,
+          "max_window_layers": 28,
+          "model_type": "qwen3",
+          "num_attention_heads": 16,
+          "num_hidden_layers": 28,
+          "num_key_value_heads": 8,
+          "rms_norm_eps": 1e-06,
+          "rope_scaling": null,
+          "rope_theta": 1000000,
+          "sliding_window": null,
+          "tie_word_embeddings": true,
+          "torch_dtype": "bfloat16",
+          "transformers_version": "4.51.3",
+          "use_cache": true,
+          "use_sliding_window": false,
+          "vocab_size": 151669
+        },
+        "generation_config.json": {
+          "bos_token_id": 151643,
+          "eos_token_id": 151643,
+          "max_new_tokens": 2048,
+          "transformers_version": "4.51.3"
+        },
+        "tokenizer_config.json": {
+          "add_bos_token": false,
+          "add_prefix_space": false,
+          "added_tokens_decoder": {
+            "151643": {
+              "content": "<|endoftext|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151644": {
+              "content": "<|im_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151645": {
+              "content": "<|im_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151646": {
+              "content": "<|object_ref_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151647": {
+              "content": "<|object_ref_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151648": {
+              "content": "<|box_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151649": {
+              "content": "<|box_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151650": {
+              "content": "<|quad_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151651": {
+              "content": "<|quad_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151652": {
+              "content": "<|vision_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151653": {
+              "content": "<|vision_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151654": {
+              "content": "<|vision_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151655": {
+              "content": "<|image_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151656": {
+              "content": "<|video_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151657": {
+              "content": "<tool_call>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151658": {
+              "content": "</tool_call>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151659": {
+              "content": "<|fim_prefix|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151660": {
+              "content": "<|fim_middle|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151661": {
+              "content": "<|fim_suffix|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151662": {
+              "content": "<|fim_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151663": {
+              "content": "<|repo_name|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151664": {
+              "content": "<|file_sep|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151665": {
+              "content": "<tool_response>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151666": {
+              "content": "</tool_response>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151667": {
+              "content": "<think>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151668": {
+              "content": "</think>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            }
+          },
+          "additional_special_tokens": [
+            "<|im_start|>",
+            "<|im_end|>",
+            "<|object_ref_start|>",
+            "<|object_ref_end|>",
+            "<|box_start|>",
+            "<|box_end|>",
+            "<|quad_start|>",
+            "<|quad_end|>",
+            "<|vision_start|>",
+            "<|vision_end|>",
+            "<|vision_pad|>",
+            "<|image_pad|>",
+            "<|video_pad|>"
+          ],
+          "bos_token": null,
+          "chat_template": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>')) %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n                {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n                    {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}",
+          "clean_up_tokenization_spaces": false,
+          "eos_token": "<|im_end|>",
+          "errors": "replace",
+          "extra_special_tokens": {},
+          "model_max_length": 131072,
+          "pad_token": "<|endoftext|>",
+          "split_special_tokens": false,
+          "tokenizer_class": "Qwen2Tokenizer",
+          "unk_token": null
+        }
+      },
+      "files": {
+        "config.json": {
+          "SHA256": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/config.json",
+          "git_blob_SHA1": "cef2749ee93607b8f9a58ec72f4f6bfaf874e71d",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 727
+        },
+        "generation_config.json": {
+          "SHA256": "28396d421a2108acce96383f6a7de78008f7f1b17f807958f3c14c51dbfb65fb",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/generation_config.json",
+          "git_blob_SHA1": "d46f1983345269c582611bbedb3ca0a13f8e5f7b",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 117
+        },
+        "merges.txt": {
+          "SHA256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/merges.txt",
+          "git_blob_SHA1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 1671853
+        },
+        "model.safetensors": {
+          "SHA256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/model.safetensors",
+          "git_blob_SHA1": "9116264a405846ebfe4e95556b63b1ca07c892a0",
+          "hash_evidence": "official pinned revision Git-LFS content SHA256; reverify saved bytes before D1 load",
+          "size": 1191586416
+        },
+        "tokenizer.json": {
+          "SHA256": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/tokenizer.json",
+          "git_blob_SHA1": "18a4abbf4a408dc534006a455544dcc195f356d2",
+          "hash_evidence": "official pinned revision Git-LFS content SHA256; reverify saved bytes before D1 load",
+          "size": 11423705
+        },
+        "tokenizer_config.json": {
+          "SHA256": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/tokenizer_config.json",
+          "git_blob_SHA1": "7345216a0785dc7086e8c245b2a9d3896ce2b756",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 9706
+        },
+        "vocab.json": {
+          "SHA256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/resolve/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/vocab.json",
+          "git_blob_SHA1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 2776833
+        }
+      },
+      "gated": false,
+      "input_contract": {
+        "document": "raw T0 chunk / frozen N1 surrogate; no instruction",
+        "encoder": "AutoModel last nonpadding token hidden state; L2 normalize p=2 eps=1e-12; full 1024 coordinates; float32 cosine dot product",
+        "query": "verbatim raw query; no task instruction",
+        "tokenizer": "AutoTokenizer pinned files; padding_side=left; truncation_side=right; add_special_tokens=True; max_length=4096"
+      },
+      "license": "apache-2.0",
+      "license_source": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/blob/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/README.md",
+      "model_loaded_in_B2": false,
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "weight_file": "model.safetensors",
+      "weights_downloaded_in_B2": false
+    },
+    "reranker": {
+      "configurations": {
+        "config.json": {
+          "architectures": [
+            "Qwen3ForCausalLM"
+          ],
+          "attention_bias": false,
+          "attention_dropout": 0.0,
+          "bos_token_id": 151643,
+          "eos_token_id": 151645,
+          "head_dim": 128,
+          "hidden_act": "silu",
+          "hidden_size": 1024,
+          "initializer_range": 0.02,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 40960,
+          "max_window_layers": 28,
+          "model_type": "qwen3",
+          "num_attention_heads": 16,
+          "num_hidden_layers": 28,
+          "num_key_value_heads": 8,
+          "rms_norm_eps": 1e-06,
+          "rope_scaling": null,
+          "rope_theta": 1000000,
+          "sliding_window": null,
+          "tie_word_embeddings": true,
+          "torch_dtype": "bfloat16",
+          "transformers_version": "4.51.3",
+          "use_cache": true,
+          "use_sliding_window": false,
+          "vocab_size": 151669
+        },
+        "generation_config.json": {
+          "bos_token_id": 151643,
+          "do_sample": true,
+          "eos_token_id": [
+            151645,
+            151643
+          ],
+          "pad_token_id": 151643,
+          "temperature": 0.6,
+          "top_k": 20,
+          "top_p": 0.95,
+          "transformers_version": "4.51.3"
+        },
+        "tokenizer_config.json": {
+          "add_bos_token": false,
+          "add_prefix_space": false,
+          "added_tokens_decoder": {
+            "151643": {
+              "content": "<|endoftext|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151644": {
+              "content": "<|im_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151645": {
+              "content": "<|im_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151646": {
+              "content": "<|object_ref_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151647": {
+              "content": "<|object_ref_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151648": {
+              "content": "<|box_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151649": {
+              "content": "<|box_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151650": {
+              "content": "<|quad_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151651": {
+              "content": "<|quad_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151652": {
+              "content": "<|vision_start|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151653": {
+              "content": "<|vision_end|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151654": {
+              "content": "<|vision_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151655": {
+              "content": "<|image_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151656": {
+              "content": "<|video_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": true
+            },
+            "151657": {
+              "content": "<tool_call>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151658": {
+              "content": "</tool_call>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151659": {
+              "content": "<|fim_prefix|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151660": {
+              "content": "<|fim_middle|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151661": {
+              "content": "<|fim_suffix|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151662": {
+              "content": "<|fim_pad|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151663": {
+              "content": "<|repo_name|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151664": {
+              "content": "<|file_sep|>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151665": {
+              "content": "<tool_response>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151666": {
+              "content": "</tool_response>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151667": {
+              "content": "<think>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            },
+            "151668": {
+              "content": "</think>",
+              "lstrip": false,
+              "normalized": false,
+              "rstrip": false,
+              "single_word": false,
+              "special": false
+            }
+          },
+          "additional_special_tokens": [
+            "<|im_start|>",
+            "<|im_end|>",
+            "<|object_ref_start|>",
+            "<|object_ref_end|>",
+            "<|box_start|>",
+            "<|box_end|>",
+            "<|quad_start|>",
+            "<|quad_end|>",
+            "<|vision_start|>",
+            "<|vision_end|>",
+            "<|vision_pad|>",
+            "<|image_pad|>",
+            "<|video_pad|>"
+          ],
+          "bos_token": null,
+          "chat_template": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0].role == 'system' %}\n        {{- messages[0].content + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0].content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" and not(message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>')) %}\n        {%- set ns.multi_step_tool = false %}\n        {%- set ns.last_query_index = index %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set content = message.content %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is defined and message.reasoning_content is not none %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in message.content %}\n                {%- set content = message.content.split('</think>')[-1].lstrip('\\n') %}\n                {%- set reasoning_content = message.content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- if loop.index0 > ns.last_query_index %}\n            {%- if loop.last or (not loop.last and reasoning_content) %}\n                {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content.strip('\\n') + '\\n</think>\\n\\n' + content.lstrip('\\n') }}\n            {%- else %}\n                {{- '<|im_start|>' + message.role + '\\n' + content }}\n            {%- endif %}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if (loop.first and content) or (not loop.first) %}\n                    {{- '\\n' }}\n                {%- endif %}\n                {%- if tool_call.function %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {{- '<tool_call>\\n{\"name\": \"' }}\n                {{- tool_call.name }}\n                {{- '\", \"arguments\": ' }}\n                {%- if tool_call.arguments is string %}\n                    {{- tool_call.arguments }}\n                {%- else %}\n                    {{- tool_call.arguments | tojson }}\n                {%- endif %}\n                {{- '}\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.first or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}",
+          "clean_up_tokenization_spaces": false,
+          "eos_token": "<|im_end|>",
+          "errors": "replace",
+          "extra_special_tokens": {},
+          "model_max_length": 131072,
+          "pad_token": "<|endoftext|>",
+          "split_special_tokens": false,
+          "tokenizer_class": "Qwen2Tokenizer",
+          "unk_token": null
+        }
+      },
+      "files": {
+        "chat_template.jinja": {
+          "SHA256": "6f682162495ec5b39fd9005c01b6aa2a74669379fe967039f1e2cbbe8752369d",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/chat_template.jinja",
+          "git_blob_SHA1": "63b97f268a9ddb9c6b34e6d7d8ef531d1fee9cf4",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 741
+        },
+        "config.json": {
+          "SHA256": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/config.json",
+          "git_blob_SHA1": "39784456e9de7a06590f8a4a38760ac1fb38d65e",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 727
+        },
+        "generation_config.json": {
+          "SHA256": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/generation_config.json",
+          "git_blob_SHA1": "e4f1d3193e99a3e5d7047edf56e93a6e933fa31b",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 214
+        },
+        "merges.txt": {
+          "SHA256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/merges.txt",
+          "git_blob_SHA1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 1671853
+        },
+        "model.safetensors": {
+          "SHA256": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/model.safetensors",
+          "git_blob_SHA1": "c2009afdaf622dc596bec224a625daa46a2b4cc9",
+          "hash_evidence": "official pinned revision Git-LFS content SHA256; reverify saved bytes before D1 load",
+          "size": 1191588280
+        },
+        "tokenizer.json": {
+          "SHA256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/tokenizer.json",
+          "git_blob_SHA1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+          "hash_evidence": "official pinned revision Git-LFS content SHA256; reverify saved bytes before D1 load",
+          "size": 11422654
+        },
+        "tokenizer_config.json": {
+          "SHA256": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/tokenizer_config.json",
+          "git_blob_SHA1": "7345216a0785dc7086e8c245b2a9d3896ce2b756",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 9706
+        },
+        "vocab.json": {
+          "SHA256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "URL": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/resolve/e61197ed45024b0ed8a2d74b80b4d909f1255473/vocab.json",
+          "git_blob_SHA1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 2776833
+        }
+      },
+      "gated": false,
+      "input_contract": {
+        "always": true,
+        "body_template": "<Instruct>: \n<Query>: {query}\n<Document>: {document}",
+        "document": "raw chunk / same exact N1/M1 surrogate",
+        "fallback": false,
+        "instruction": "",
+        "max_length": 4096,
+        "prefix": "<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".<|im_end|>\n<|im_start|>user\n",
+        "query": "verbatim original query",
+        "score": "softmax over last-position no/yes logits in float32; P(yes); no generation; assert yes/no each encode as one distinct token before DEV",
+        "suffix": "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+        "tokenizer": "AutoTokenizer pinned files; left padding; tokenize body add_special_tokens=False, right truncate to 4096-len(prefix_tokens)-len(suffix_tokens); prefix/suffix encode add_special_tokens=False"
+      },
+      "license": "apache-2.0",
+      "license_source": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/blob/e61197ed45024b0ed8a2d74b80b4d909f1255473/README.md",
+      "model_loaded_in_B2": false,
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "weight_file": "model.safetensors",
+      "weights_downloaded_in_B2": false
+    },
+    "visual": {
+      "configurations": {
+        "config.json": {
+          "_name_or_path": "openai/clip-vit-base-patch32",
+          "architectures": [
+            "CLIPModel"
+          ],
+          "initializer_factor": 1.0,
+          "logit_scale_init_value": 2.6592,
+          "model_type": "clip",
+          "projection_dim": 512,
+          "text_config": {
+            "_name_or_path": "",
+            "add_cross_attention": false,
+            "architectures": null,
+            "attention_dropout": 0.0,
+            "bad_words_ids": null,
+            "bos_token_id": 0,
+            "chunk_size_feed_forward": 0,
+            "cross_attention_hidden_size": null,
+            "decoder_start_token_id": null,
+            "diversity_penalty": 0.0,
+            "do_sample": false,
+            "dropout": 0.0,
+            "early_stopping": false,
+            "encoder_no_repeat_ngram_size": 0,
+            "eos_token_id": 2,
+            "finetuning_task": null,
+            "forced_bos_token_id": null,
+            "forced_eos_token_id": null,
+            "hidden_act": "quick_gelu",
+            "hidden_size": 512,
+            "id2label": {
+              "0": "LABEL_0",
+              "1": "LABEL_1"
+            },
+            "initializer_factor": 1.0,
+            "initializer_range": 0.02,
+            "intermediate_size": 2048,
+            "is_decoder": false,
+            "is_encoder_decoder": false,
+            "label2id": {
+              "LABEL_0": 0,
+              "LABEL_1": 1
+            },
+            "layer_norm_eps": 1e-05,
+            "length_penalty": 1.0,
+            "max_length": 20,
+            "max_position_embeddings": 77,
+            "min_length": 0,
+            "model_type": "clip_text_model",
+            "no_repeat_ngram_size": 0,
+            "num_attention_heads": 8,
+            "num_beam_groups": 1,
+            "num_beams": 1,
+            "num_hidden_layers": 12,
+            "num_return_sequences": 1,
+            "output_attentions": false,
+            "output_hidden_states": false,
+            "output_scores": false,
+            "pad_token_id": 1,
+            "prefix": null,
+            "problem_type": null,
+            "projection_dim": 512,
+            "pruned_heads": {},
+            "remove_invalid_values": false,
+            "repetition_penalty": 1.0,
+            "return_dict": true,
+            "return_dict_in_generate": false,
+            "sep_token_id": null,
+            "task_specific_params": null,
+            "temperature": 1.0,
+            "tie_encoder_decoder": false,
+            "tie_word_embeddings": true,
+            "tokenizer_class": null,
+            "top_k": 50,
+            "top_p": 1.0,
+            "torch_dtype": null,
+            "torchscript": false,
+            "transformers_version": "4.16.0.dev0",
+            "use_bfloat16": false,
+            "vocab_size": 49408
+          },
+          "text_config_dict": null,
+          "transformers_version": null,
+          "vision_config": {
+            "_name_or_path": "",
+            "add_cross_attention": false,
+            "architectures": null,
+            "attention_dropout": 0.0,
+            "bad_words_ids": null,
+            "bos_token_id": null,
+            "chunk_size_feed_forward": 0,
+            "cross_attention_hidden_size": null,
+            "decoder_start_token_id": null,
+            "diversity_penalty": 0.0,
+            "do_sample": false,
+            "dropout": 0.0,
+            "early_stopping": false,
+            "encoder_no_repeat_ngram_size": 0,
+            "eos_token_id": null,
+            "finetuning_task": null,
+            "forced_bos_token_id": null,
+            "forced_eos_token_id": null,
+            "hidden_act": "quick_gelu",
+            "hidden_size": 768,
+            "id2label": {
+              "0": "LABEL_0",
+              "1": "LABEL_1"
+            },
+            "image_size": 224,
+            "initializer_factor": 1.0,
+            "initializer_range": 0.02,
+            "intermediate_size": 3072,
+            "is_decoder": false,
+            "is_encoder_decoder": false,
+            "label2id": {
+              "LABEL_0": 0,
+              "LABEL_1": 1
+            },
+            "layer_norm_eps": 1e-05,
+            "length_penalty": 1.0,
+            "max_length": 20,
+            "min_length": 0,
+            "model_type": "clip_vision_model",
+            "no_repeat_ngram_size": 0,
+            "num_attention_heads": 12,
+            "num_beam_groups": 1,
+            "num_beams": 1,
+            "num_hidden_layers": 12,
+            "num_return_sequences": 1,
+            "output_attentions": false,
+            "output_hidden_states": false,
+            "output_scores": false,
+            "pad_token_id": null,
+            "patch_size": 32,
+            "prefix": null,
+            "problem_type": null,
+            "projection_dim": 512,
+            "pruned_heads": {},
+            "remove_invalid_values": false,
+            "repetition_penalty": 1.0,
+            "return_dict": true,
+            "return_dict_in_generate": false,
+            "sep_token_id": null,
+            "task_specific_params": null,
+            "temperature": 1.0,
+            "tie_encoder_decoder": false,
+            "tie_word_embeddings": true,
+            "tokenizer_class": null,
+            "top_k": 50,
+            "top_p": 1.0,
+            "torch_dtype": null,
+            "torchscript": false,
+            "transformers_version": "4.16.0.dev0",
+            "use_bfloat16": false
+          },
+          "vision_config_dict": null
+        },
+        "preprocessor_config.json": {
+          "crop_size": 224,
+          "do_center_crop": true,
+          "do_normalize": true,
+          "do_resize": true,
+          "feature_extractor_type": "CLIPFeatureExtractor",
+          "image_mean": [
+            0.48145466,
+            0.4578275,
+            0.40821073
+          ],
+          "image_std": [
+            0.26862954,
+            0.26130258,
+            0.27577711
+          ],
+          "resample": 3,
+          "size": 224
+        },
+        "special_tokens_map.json": {
+          "bos_token": {
+            "content": "<|startoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          },
+          "eos_token": {
+            "content": "<|endoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          },
+          "pad_token": "<|endoftext|>",
+          "unk_token": {
+            "content": "<|endoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          }
+        },
+        "tokenizer_config.json": {
+          "add_prefix_space": false,
+          "bos_token": {
+            "__type": "AddedToken",
+            "content": "<|startoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          },
+          "do_lower_case": true,
+          "eos_token": {
+            "__type": "AddedToken",
+            "content": "<|endoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          },
+          "errors": "replace",
+          "model_max_length": 77,
+          "name_or_path": "./clip_ViT_B_32/",
+          "pad_token": "<|endoftext|>",
+          "unk_token": {
+            "__type": "AddedToken",
+            "content": "<|endoftext|>",
+            "lstrip": false,
+            "normalized": true,
+            "rstrip": false,
+            "single_word": false
+          }
+        }
+      },
+      "files": {
+        "config.json": {
+          "SHA256": "b575ef3c36f2a057fa19e221650105052d61cc9c1a972ec15019c6261ec98770",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/config.json",
+          "git_blob_SHA1": "a2a88b96561196777ca173b15309ea859f4d2ce0",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 4186
+        },
+        "merges.txt": {
+          "SHA256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/merges.txt",
+          "git_blob_SHA1": "bbfec752c9a675946c6dce106def6f35c882dcc2",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 524657
+        },
+        "preprocessor_config.json": {
+          "SHA256": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/preprocessor_config.json",
+          "git_blob_SHA1": "5a12a1eb250987a4eee0e3e7d7338c4b22724be1",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 316
+        },
+        "pytorch_model.bin": {
+          "SHA256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/pytorch_model.bin",
+          "git_blob_SHA1": "c0c935a331cf52e21ce35cee6b9aaa411635bb7a",
+          "hash_evidence": "official pinned revision Git-LFS content SHA256; reverify saved bytes before D1 load",
+          "size": 605247071
+        },
+        "special_tokens_map.json": {
+          "SHA256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/special_tokens_map.json",
+          "git_blob_SHA1": "9bfb42aa97dcd61e89f279ccaee988bccb4fabae",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 389
+        },
+        "tokenizer.json": {
+          "SHA256": "b556ac8c99757ffb677208af34bc8c6721572114111a6e0aaf5fa69ff0b8d842",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/tokenizer.json",
+          "git_blob_SHA1": "564c0ebd5ce29c4ee4864004aee693deadd3128c",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 2224041
+        },
+        "tokenizer_config.json": {
+          "SHA256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/tokenizer_config.json",
+          "git_blob_SHA1": "4fdaf6842dd5a725b940c92b6b692490ce59d548",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 592
+        },
+        "vocab.json": {
+          "SHA256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363",
+          "URL": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/vocab.json",
+          "git_blob_SHA1": "182766ce89b439768edadda342519f33802f5364",
+          "hash_evidence": "downloaded public nonweight file SHA256 and Git blob verified; raw bytes discarded",
+          "size": 862328
+        }
+      },
+      "gated": false,
+      "input_contract": {
+        "dimension": 512,
+        "encoder": "CLIPModel get_text_features/get_image_features projected embeddings, L2 normalize p=2 eps=1e-12, float32 cosine dot product; no logit_scale multiplication",
+        "image": "PyMuPDF RGB crop -> white square letterbox -> pinned CLIPImageProcessor bicubic shorter-edge resize224, center crop224, scale1/255, normalize pinned mean/std",
+        "text": "CLIPTokenizerFast pinned files; original query no prompt prefix; padding=True; right truncation at 77 tokens including BOS/EOS; report truncation count"
+      },
+      "license": "MIT (upstream OpenAI CLIP LICENSE)",
+      "license_source": "https://github.com/openai/CLIP/blob/main/LICENSE",
+      "model_loaded_in_B2": false,
+      "repository": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "weight_file": "pytorch_model.bin",
+      "weights_downloaded_in_B2": false
+    }
+  },
+  "runtime_inference_verified": false,
+  "weights_integrity": "Official pinned Git-LFS SHA256; actual saved weights must match before first D1 model load; no B2 inference qualification claim"
+}

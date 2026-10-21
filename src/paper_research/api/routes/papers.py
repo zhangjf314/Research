@@ -14,7 +14,7 @@ from paper_research.analysis.types import PaperAnalysis
 from paper_research.chunking.structural_chunker import StructuralChunker
 from paper_research.config import get_settings
 from paper_research.db import get_db
-from paper_research.indexing.registry import IndexRegistry
+from paper_research.indexing.registry import CorpusTrustError, IndexIdentityError, IndexRegistry
 from paper_research.indexing.service import IndexingService
 from paper_research.indexing.vector_store import QdrantVectorStore
 from paper_research.ingestion.upload_service import UploadService, UploadValidationError
@@ -40,9 +40,17 @@ def upload_paper(
     file: Annotated[UploadFile, File()],
     db: DbSession,
     source_type: Annotated[str, Form()] = "upload",
+    admission_id: Annotated[str | None, Form()] = None,
+    source_ref: Annotated[str | None, Form()] = None,
 ) -> PaperUploadResponse:
     try:
-        result = UploadService(db, get_settings()).ingest(file, source_type=source_type)
+        settings = get_settings()
+        if admission_id is None or source_ref is None:
+            raise CorpusTrustError("CORPUS_WRITE_NOT_AUTHORIZED")
+        result = IndexRegistry(settings.data_dir / "index_registry.json").intake_source(
+            admission_id, source_ref, file, db, settings)
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=str(exc)) from exc
     except UploadValidationError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
@@ -57,50 +65,10 @@ def upload_paper(
 
 @router.post("/{paper_id}/index")
 def index_paper(paper_id: uuid.UUID, db: DbSession) -> dict[str, int | str]:
-    repository = PaperRepository(db)
-    paper = repository.get(paper_id)
-    if paper is None:
-        raise HTTPException(status_code=404, detail="paper not found")
-    settings = get_settings()
-    blocks_path = settings.parsed_papers_dir / str(paper_id) / "paper_blocks.jsonl"
-    if not blocks_path.exists():
-        raise HTTPException(status_code=409, detail="paper has not been parsed")
-    paper.parse_status = PaperStatus.indexing
-    repository.save(paper)
     try:
-        embedding = build_embedding_provider(settings)
-        store = QdrantVectorStore(
-            QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key),
-            IndexRegistry(settings.data_dir / "index_registry.json").resolve(
-                settings.active_collection
-            ),
-            settings.embedding_dimensions,
-        )
-        chunks_path = settings.parsed_papers_dir / str(paper_id) / (
-            f"paper_chunks.{settings.index_version}.jsonl"
-        )
-        chunks = IndexingService(
-            StructuralChunker(settings.chunk_max_tokens, settings.chunk_overlap_tokens),
-            embedding,
-            store,
-        ).index(
-            str(paper_id),
-            blocks_path,
-            chunks_path,
-            metadata=settings.provider_metadata,
-        )
-        # Baseline compatibility file used by existing local audit scripts.
-        compatibility_path = settings.parsed_papers_dir / str(paper_id) / "paper_chunks.jsonl"
-        compatibility_path.write_text(chunks_path.read_text(encoding="utf-8"), encoding="utf-8")
-        paper.parse_status = PaperStatus.ready
-        paper.index_status = "READY"
-        repository.save(paper)
-        return {"paper_id": str(paper_id), "status": "READY", "chunk_count": len(chunks)}
-    except Exception as exc:
-        paper.index_status = "FAILED"
-        repository.save(paper)
-        detail = f"indexing failed: {type(exc).__name__}"
-        raise HTTPException(status_code=503, detail=detail) from exc
+        IndexRegistry(get_settings().data_dir / "index_registry.json").refuse_direct_mutation()
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=str(exc)) from exc
 
 
 @router.get("/{paper_id}/pdf", response_class=FileResponse)

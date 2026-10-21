@@ -29,8 +29,22 @@ class RerankTraceCandidate(BaseModel):
 
 
 class RetrievalTrace(BaseModel):
+    retrieval_ranking_profile: str = "default"
     trace_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     query: str
+    retrieval_mode: str = "legacy"
+    contextual_retrieval: bool = False
+    contextual_sparse: bool = False
+    contextual_version: str | None = None
+    rerank_triggered: bool = False
+    rerank_reason: str = "legacy_configuration"
+    candidate_top_k: int = 0
+    final_top_k: int = 0
+    dense_candidate_count: int = 0
+    sparse_candidate_count: int = 0
+    fusion_candidate_count: int = 0
+    stage_latency_ms: dict[str, float] = Field(default_factory=dict)
+    candidate_scores: list[dict[str, object]] = Field(default_factory=list)
     routed_query: str | None = None
     query_routing_signals: list[str] = Field(default_factory=list)
     filters: dict[str, object]

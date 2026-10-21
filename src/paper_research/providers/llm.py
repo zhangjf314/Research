@@ -1,3 +1,5 @@
+import base64
+import hashlib
 import json
 import math
 import re
@@ -15,6 +17,8 @@ from pydantic import BaseModel, Field, ValidationError, model_validator
 
 from paper_research.generation.prompts import qa_system_prompt
 from paper_research.retrieval.context_builder import ContextItem
+
+WORKFLOW_SYNTHESIS_MAX_OUTPUT_TOKENS = 8192
 
 
 class ModelUsage(BaseModel):
@@ -156,6 +160,46 @@ class LLMProvider(ABC):
         """Return a schema-validated answer bound to supplied evidence IDs."""
 
 
+class StructuredOutputAdapter(ABC):
+    """Narrow transport boundary for non-tool structured model output."""
+
+    @abstractmethod
+    def generate_structured(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        schema_name: str,
+        request_context: dict[str, Any],
+        max_output_tokens: int | None,
+    ) -> StructuredJSONResult:
+        """Return one provider-schema-validated JSON object."""
+
+
+class DeepSeekResponsesStructuredOutputAdapter(StructuredOutputAdapter):
+    """Workflow-only DeepSeek Responses API JSON-schema transport."""
+
+    def __init__(self, provider: "SiliconFlowLLMProvider") -> None:
+        self._provider = provider
+
+    def generate_structured(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        schema_name: str,
+        request_context: dict[str, Any],
+        max_output_tokens: int | None,
+    ) -> StructuredJSONResult:
+        return self._provider._generate_deepseek_responses_structured_json(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            schema_name=schema_name,
+            request_context=request_context,
+            max_output_tokens=max_output_tokens,
+        )
+
+
 class TemplateLLMProvider(LLMProvider):
     provider_name = "template"
     model_name = "template-v1"
@@ -230,6 +274,7 @@ class SiliconFlowLLMProvider(LLMProvider):
         thinking_enabled: bool = False,
         stream: bool = False,
         provider_name: str | None = None,
+        vision_enabled: bool = False,
     ) -> None:
         if not api_key:
             raise ValueError("LLM API key is required")
@@ -251,6 +296,7 @@ class SiliconFlowLLMProvider(LLMProvider):
         self.response_format = response_format
         self.thinking_enabled = thinking_enabled
         self.stream = stream
+        self.vision_enabled = vision_enabled
         self.input_cost_per_million = input_cost_per_million
         self.output_cost_per_million = output_cost_per_million
         self.client = client or httpx.Client()
@@ -260,10 +306,47 @@ class SiliconFlowLLMProvider(LLMProvider):
         self.response_audit_max_suffix_chars = response_audit_max_suffix_chars
         self.response_audit_max_error_window_chars = response_audit_max_error_window_chars
         self.response_audit_store_full_payload = response_audit_store_full_payload
+        self._responses_structured_output_adapter = DeepSeekResponsesStructuredOutputAdapter(self)
 
     @property
     def endpoint(self) -> str:
         return f"{self.base_url}/chat/completions"
+
+    @property
+    def supports_vision(self) -> bool:
+        return (self.vision_enabled and self.provider_name == "deepseek"
+                and self.endpoint == "https://api.deepseek.com/chat/completions"
+                and self.model_name in {"deepseek-flash", "deepseek-v4-flash",
+                                        "deepseek-v4-flash-vision-exp"})
+
+    def _vision_content(self, text, images):
+        import pymupdf as fitz
+
+        if not self.supports_vision or self.max_retries != 0 or not 1 <= len(images) <= 2:
+            raise LLMProviderError("Visual input unavailable", error_code="VISION_INPUT_UNSUPPORTED")
+        content = [{"type": "text", "text": text}]
+        for item in images:
+            try:
+                prefix, encoded = item["data_url"].split(",", 1)
+                if prefix != "data:image/png;base64":
+                    raise ValueError("PNG data URL required")
+                raw = base64.b64decode(encoded, validate=True)
+                if len(raw) > 8 * 1024 * 1024 or hashlib.sha256(raw).hexdigest() != item["sha256"]:
+                    raise ValueError("Image identity/size mismatch")
+                if not raw.startswith(b"\x89PNG\r\n\x1a\n"):
+                    raise ValueError("PNG bytes required")
+                decoded = fitz.Pixmap(raw)
+                if min(decoded.width, decoded.height) < 1 or max(decoded.width, decoded.height) > 4096:
+                    raise ValueError("Unsupported dimensions")
+                if not isinstance(item["evidence_id"], str) or not re.fullmatch(r"E\d+", item["evidence_id"]):
+                    raise ValueError("Image evidence alias required")
+            except (KeyError, ValueError, OSError, RuntimeError) as exc:
+                raise LLMProviderError("Invalid image media", error_code="VISION_MEDIA_INVALID") from exc
+            content.extend([
+                {"type": "text", "text": "PDF image evidence [" + item["evidence_id"] + "]"},
+                {"type": "image_url", "image_url": {"url": item["data_url"], "detail": "original"}},
+            ])
+        return content
 
     def _structured_transport(
         self,
@@ -281,14 +364,32 @@ class SiliconFlowLLMProvider(LLMProvider):
         if self.provider_name != "deepseek":
             return "json_object", None, None
         tool_name, parameters = _deepseek_structured_tool(schema_name, context)
-        return "function_call", tool_name, {
-            "type": "function",
-            "function": {
-                "name": tool_name,
-                "description": "Return the requested structured result as function arguments.",
-                "parameters": parameters,
+        strict = schema_name == "deep-research-synthesis-v1"
+        return (
+            "function_call",
+            tool_name,
+            {
+                "type": "function",
+                "function": {
+                    "name": tool_name,
+                    "description": "Return the requested structured result as function arguments.",
+                    **({"strict": True} if strict else {}),
+                    "parameters": parameters,
+                },
             },
-        }
+        )
+
+    def _structured_endpoint(self, schema_name: str) -> str:
+        """Use DeepSeek's documented beta endpoint only for strict synthesis."""
+        if self.provider_name == "deepseek" and schema_name == "deep-research-synthesis-v1":
+            if self._endpoint_hostname() != "api.deepseek.com":
+                raise LLMProviderError(
+                    "DeepSeek strict synthesis requires the official API host",
+                    error_code="STRUCTURED_JSON_PROVIDER_CONFIGURATION_ERROR",
+                    stage="STRUCTURED_JSON_REQUEST_BUILD",
+                )
+            return "https://api.deepseek.com/beta/chat/completions"
+        return self.endpoint
 
     def _endpoint_hostname(self) -> str:
         return self.base_url.split("://", 1)[-1].split("/", 1)[0].split(":", 1)[0]
@@ -374,9 +475,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 )
                 audit_path = self._persist_response_audit(audit_payload)
                 if not isinstance(content, str):
-                    audit_path = self._persist_response_audit(
-                        audit_payload, audit_path, force=True
-                    )
+                    audit_path = self._persist_response_audit(audit_payload, audit_path, force=True)
                     raise _ProviderResponseWithAudit("non_string_content", audit_path)
                 try:
                     parsed_payload, normalization_events = normalize_structured_qa_content(
@@ -393,9 +492,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                         normalization_events=[],
                         parse_error=exc,
                     )
-                    audit_path = self._persist_response_audit(
-                        audit_payload, audit_path, force=True
-                    )
+                    audit_path = self._persist_response_audit(audit_payload, audit_path, force=True)
                     raise _MalformedJSONWithAudit(audit_path) from exc
                 except ValueError as exc:
                     audit_payload = self._build_response_audit(
@@ -407,9 +504,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                         normalization_events=[],
                         parse_error=exc,
                     )
-                    audit_path = self._persist_response_audit(
-                        audit_payload, audit_path, force=True
-                    )
+                    audit_path = self._persist_response_audit(audit_payload, audit_path, force=True)
                     raise _MalformedJSONWithAudit(audit_path) from exc
                 diagnostic_attempts.append(
                     {
@@ -441,9 +536,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 raise
             except httpx.TimeoutException as exc:
                 reason = type(exc).__name__
-                error_details = classify_provider_exception(
-                    exc, hostname=self._endpoint_hostname()
-                )
+                error_details = classify_provider_exception(exc, hostname=self._endpoint_hostname())
                 error_code = "CLAIM_QA_PROVIDER_TIMEOUT"
                 stage = "LLM_PROVIDER_TIMEOUT"
                 response_audit_path = str(
@@ -457,9 +550,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 )
             except httpx.NetworkError as exc:
                 reason = type(exc).__name__
-                error_details = classify_provider_exception(
-                    exc, hostname=self._endpoint_hostname()
-                )
+                error_details = classify_provider_exception(exc, hostname=self._endpoint_hostname())
                 error_code = "CLAIM_QA_PROVIDER_NETWORK_ERROR"
                 stage = "LLM_PROVIDER_NETWORK"
                 response_audit_path = str(
@@ -547,24 +638,195 @@ class SiliconFlowLLMProvider(LLMProvider):
             time.sleep(min(2**attempt, 4))
         raise AssertionError("unreachable")
 
-    def generate_structured_json(
+    def _generate_deepseek_responses_structured_json(
         self,
         *,
         system_prompt: str,
         user_prompt: str,
         schema_name: str,
-        request_context: dict[str, Any] | None = None,
-        max_output_tokens: int | None = None,
+        request_context: dict[str, Any],
+        max_output_tokens: int | None,
     ) -> StructuredJSONResult:
-        """Generate one JSON object through the shared chat-completions transport."""
+        """Use Responses ``json_schema`` for long Workflow synthesis only."""
+        if self._endpoint_hostname() != "api.deepseek.com":
+            raise LLMProviderError(
+                "DeepSeek Responses synthesis requires the official API host",
+                error_code="STRUCTURED_JSON_PROVIDER_CONFIGURATION_ERROR",
+                stage="STRUCTURED_JSON_REQUEST_BUILD",
+            )
+        _, schema = _deepseek_structured_tool(schema_name, request_context)
+        payload = {
+            "model": self.model_name,
+            "instructions": system_prompt,
+            "input": user_prompt,
+            "temperature": self.temperature,
+            # Responses counts reasoning and visible text against one output
+            # budget. Synthesis has already completed its planning stages, so
+            # it uses a fixed non-thinking structured-output contract.
+            "max_output_tokens": WORKFLOW_SYNTHESIS_MAX_OUTPUT_TOKENS,
+            "reasoning": {"effort": "none"},
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": schema_name,
+                    "schema": schema,
+                }
+            },
+        }
         started = time.perf_counter()
+        retry_reasons: list[str] = []
+        rate_limits = 0
+        # One provider-level retry is intentionally distinct from the caller's
+        # bounded semantic repair loop.
+        for request_number in range(1, 3):
+            persisted_attempt = int(request_context.get("attempt_number") or request_number)
+            response_audit_path: str | None = None
+            try:
+                response = self.client.post(
+                    f"{self.base_url}/responses",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json=payload,
+                    timeout=self.timeout_seconds,
+                )
+                if response.status_code == 429:
+                    rate_limits += 1
+                if response.status_code >= 400:
+                    reason = f"HTTP {response.status_code}"
+                    if response.status_code == 429 or response.status_code >= 500:
+                        raise _RetryableLLMError(reason)
+                    raise LLMProviderError(
+                        reason,
+                        error_code="STRUCTURED_JSON_PROVIDER_ERROR",
+                        stage="STRUCTURED_JSON_PROVIDER_CALL",
+                        api_request_count=request_number,
+                    )
+                body = response.json()
+                status = str(body.get("status") or "")
+                finish_reason = _responses_finish_reason(body)
+                if status != "completed":
+                    code = (
+                        "STRUCTURED_OUTPUT_TRUNCATED"
+                        if body.get("incomplete_details", {}).get("reason") == "max_output_tokens"
+                        else "STRUCTURED_OUTPUT_PROVIDER_FAILURE"
+                    )
+                    raise LLMProviderError(
+                        "DeepSeek Responses structured output ended with status "
+                        f"{status or 'unknown'}",
+                        error_code=code,
+                        stage="STRUCTURED_OUTPUT_RESPONSE_STATUS",
+                        api_request_count=request_number,
+                        error_details={
+                            "status": status,
+                            "incomplete_details": body.get("incomplete_details"),
+                            "provider_error": body.get("error"),
+                        },
+                    )
+                content = _extract_responses_output_text(body)
+                usage = self._responses_usage(
+                    body.get("usage") if isinstance(body.get("usage"), dict) else {},
+                    prompt_text=f"{system_prompt}\n{user_prompt}",
+                    content_text=content,
+                )
+                usage_record = ProviderUsageRecord(
+                    attempt_number=persisted_attempt,
+                    usage=usage,
+                    provider_request_id=response.headers.get("x-request-id") or body.get("id"),
+                    finish_reason=finish_reason,
+                )
+                raw_path = self._persist_structured_raw_response(
+                    context=request_context,
+                    attempt_number=persisted_attempt,
+                    response=response,
+                    body=body,
+                    content=content,
+                    usage=usage,
+                    finish_reason=finish_reason,
+                    schema_name=schema_name,
+                    transport_mode="responses_json_schema",
+                    tool_name=None,
+                    request_endpoint=f"{self.base_url}/responses",
+                    strict_mode=True,
+                    api_style="responses",
+                )
+                usage_record.raw_response_path = str(raw_path)
+                try:
+                    parsed = json.loads(content)
+                except json.JSONDecodeError as exc:
+                    usage_record.error_category = "PROVIDER_STRUCTURED_OUTPUT_FAILURE"
+                    raise _ResponsesMalformedOutputError(
+                        str(exc), usage_record=usage_record, raw_response_path=str(raw_path)
+                    ) from exc
+                if not isinstance(parsed, dict):
+                    usage_record.error_category = "PROVIDER_STRUCTURED_OUTPUT_FAILURE"
+                    raise _ResponsesMalformedOutputError(
+                        "Responses json_schema output must be an object",
+                        usage_record=usage_record,
+                        raw_response_path=str(raw_path),
+                    )
+                usage_record.schema_valid = True
+                return StructuredJSONResult(
+                    payload=parsed,
+                    provider=self.provider_name,
+                    model=str(body.get("model") or self.model_name),
+                    usage=usage,
+                    usage_records=[usage_record],
+                    request_attempt_count=request_number,
+                    retry_count=len(retry_reasons),
+                    retry_reasons=retry_reasons,
+                    rate_limit_events=rate_limits,
+                    total_latency_ms=round((time.perf_counter() - started) * 1000, 3),
+                    provider_request_id=usage_record.provider_request_id,
+                )
+            except _ResponsesMalformedOutputError as exc:
+                reason = "responses_malformed_output"
+                response_audit_path = exc.raw_response_path
+                usage_records = [exc.usage_record]
+                error_code = "STRUCTURED_OUTPUT_PROVIDER_FAILURE"
+                stage = "STRUCTURED_OUTPUT_PARSE"
+            except _RetryableLLMError as exc:
+                reason = str(exc)
+                usage_records = []
+                error_code = "STRUCTURED_OUTPUT_PROVIDER_FAILURE"
+                stage = "STRUCTURED_OUTPUT_PROVIDER_CALL"
+            except (httpx.TimeoutException, httpx.NetworkError) as exc:
+                reason = type(exc).__name__
+                usage_records = []
+                error_code = "STRUCTURED_OUTPUT_PROVIDER_FAILURE"
+                stage = "STRUCTURED_OUTPUT_PROVIDER_CALL"
+            if request_number >= 2:
+                raise LLMProviderError(
+                    "DeepSeek Responses structured output failed after "
+                    f"{request_number} request(s): {reason}",
+                    error_code=error_code,
+                    stage=stage,
+                    api_request_count=request_number,
+                    retry_reasons=[*retry_reasons, reason],
+                    rate_limit_events=rate_limits,
+                    response_audit_path=response_audit_path,
+                    usage_records=usage_records,
+                ) from None
+            retry_reasons.append(reason)
+            time.sleep(2)
+        raise AssertionError("unreachable")
+
+    def prepare_structured_request(self, *, system_prompt, user_prompt, schema_name,
+                                   request_context=None, max_output_tokens=None, image_inputs=None):
+        """Pure full-payload construction shared by preflight and actual dispatch."""
         context = request_context or {}
+        if schema_name == "unverified-research-notes-vision-v1" and not image_inputs:
+            raise LLMProviderError("Image media required", error_code="VISION_MEDIA_REQUIRED")
+        if image_inputs and schema_name != "unverified-research-notes-vision-v1":
+            raise LLMProviderError("Image schema unsupported", error_code="VISION_SCHEMA_UNSUPPORTED")
         transport_mode, tool_name, tool = self._structured_transport(schema_name, context)
         payload: dict[str, Any] = {
             "model": self.model_name,
             "messages": [
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
+                {"role": "user", "content": self._vision_content(user_prompt, image_inputs)
+                 if image_inputs else user_prompt},
             ],
             "temperature": self.temperature,
             "max_tokens": max_output_tokens or self.max_output_tokens,
@@ -577,6 +839,40 @@ class SiliconFlowLLMProvider(LLMProvider):
             payload["tools"] = [tool]
             payload["tool_choice"] = {"type": "function", "function": {"name": tool_name}}
         payload.update(self._provider_payload_overrides())
+        return payload, transport_mode, tool_name
+
+    def generate_structured_json(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        schema_name: str,
+        request_context: dict[str, Any] | None = None,
+        max_output_tokens: int | None = None,
+        image_inputs: list[dict] | None = None,
+    ) -> StructuredJSONResult:
+        """Generate one JSON object through the configured structured transport."""
+        context = request_context or {}
+        if schema_name == "unverified-research-notes-vision-v1" and not image_inputs:
+            raise LLMProviderError("Image media required", error_code="VISION_MEDIA_REQUIRED")
+        if image_inputs and schema_name != "unverified-research-notes-vision-v1":
+            raise LLMProviderError("Image schema unsupported", error_code="VISION_SCHEMA_UNSUPPORTED")
+        if (
+            self.provider_name == "deepseek"
+            and schema_name == "deep-research-synthesis-v1"
+        ):
+            return self._responses_structured_output_adapter.generate_structured(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                schema_name=schema_name,
+                request_context=context,
+                max_output_tokens=max_output_tokens,
+            )
+        started = time.perf_counter()
+        payload, transport_mode, tool_name = self.prepare_structured_request(
+            system_prompt=system_prompt, user_prompt=user_prompt, schema_name=schema_name,
+            request_context=context, max_output_tokens=max_output_tokens, image_inputs=image_inputs,
+        )
         requests = 0
         rate_limits = 0
         retry_reasons: list[str] = []
@@ -590,7 +886,7 @@ class SiliconFlowLLMProvider(LLMProvider):
             stage = "STRUCTURED_JSON_PROVIDER_CALL"
             try:
                 response = self.client.post(
-                    self.endpoint,
+                    self._structured_endpoint(schema_name),
                     headers={
                         "Authorization": f"Bearer {self.api_key}",
                         "Content-Type": "application/json",
@@ -660,6 +956,12 @@ class SiliconFlowLLMProvider(LLMProvider):
                         schema_name=schema_name,
                         transport_mode=transport_mode,
                         tool_name=tool_name,
+                        request_endpoint=self._structured_endpoint(schema_name),
+                        strict_mode=bool(
+                            self.provider_name == "deepseek"
+                            and schema_name == "deep-research-synthesis-v1"
+                            and transport_mode == "function_call"
+                        ),
                     )
                     usage_record.raw_response_path = str(raw_response_path)
                 except OSError as exc:
@@ -764,9 +1066,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 raise
             except httpx.TimeoutException as exc:
                 reason = type(exc).__name__
-                error_details = classify_provider_exception(
-                    exc, hostname=self._endpoint_hostname()
-                )
+                error_details = classify_provider_exception(exc, hostname=self._endpoint_hostname())
                 error_code = "STRUCTURED_JSON_PROVIDER_TIMEOUT"
                 stage = "STRUCTURED_JSON_PROVIDER_TIMEOUT"
                 response_audit_path = str(
@@ -780,9 +1080,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                 )
             except httpx.NetworkError as exc:
                 reason = type(exc).__name__
-                error_details = classify_provider_exception(
-                    exc, hostname=self._endpoint_hostname()
-                )
+                error_details = classify_provider_exception(exc, hostname=self._endpoint_hostname())
                 error_code = "STRUCTURED_JSON_PROVIDER_NETWORK_ERROR"
                 stage = "STRUCTURED_JSON_PROVIDER_NETWORK"
                 response_audit_path = str(
@@ -859,6 +1157,31 @@ class SiliconFlowLLMProvider(LLMProvider):
             usage_source=usage_source,
         )
 
+    def _responses_usage(
+        self,
+        body: dict[str, Any],
+        *,
+        prompt_text: str,
+        content_text: str,
+    ) -> ModelUsage:
+        if not body:
+            return self._usage({}, prompt_text=prompt_text, content_text=content_text)
+        input_tokens = int(body.get("input_tokens", 0))
+        output_tokens = int(body.get("output_tokens", 0))
+        total_tokens = int(body.get("total_tokens", input_tokens + output_tokens))
+        cost = None
+        if self.input_cost_per_million is not None and self.output_cost_per_million is not None:
+            cost = (
+                input_tokens * self.input_cost_per_million
+                + output_tokens * self.output_cost_per_million
+            ) / 1_000_000
+        return ModelUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=total_tokens,
+            estimated_cost_usd=cost if cost is None or math.isfinite(cost) else None,
+        )
+
     def _provider_payload_overrides(self) -> dict[str, Any]:
         if self.provider_name == "deepseek":
             return {
@@ -881,6 +1204,9 @@ class SiliconFlowLLMProvider(LLMProvider):
         schema_name: str,
         transport_mode: str,
         tool_name: str | None,
+        request_endpoint: str,
+        strict_mode: bool,
+        api_style: str = "chat_completions",
     ) -> Path:
         task_id = str(
             context.get("task_id")
@@ -904,10 +1230,20 @@ class SiliconFlowLLMProvider(LLMProvider):
             "http_status": response.status_code,
             "provider_request_id": response.headers.get("x-request-id"),
             "finish_reason": finish_reason,
-            "api_style": "chat_completions",
-            "response_format": "json_object" if transport_mode == "json_object" else None,
+            "api_style": api_style,
+            "request_endpoint": request_endpoint,
+            "response_format": (
+                "json_schema" if transport_mode == "responses_json_schema"
+                else "json_object" if transport_mode == "json_object" else None
+            ),
             "structured_transport": transport_mode,
             "tool_name": tool_name,
+            "tool_choice": (
+                {"type": "function", "function": {"name": tool_name}}
+                if tool_name
+                else None
+            ),
+            "strict_mode": strict_mode,
             "raw_content": content,
             "content": content,
             "content_sha256": _sha256_text(content),
@@ -1010,10 +1346,7 @@ class SiliconFlowLLMProvider(LLMProvider):
                     for block_id in block_ids
                 )
             else:
-                allowed.update(
-                    (item.paper_id, item.page_start, block_id)
-                    for block_id in block_ids
-                )
+                allowed.update((item.paper_id, item.page_start, block_id) for block_id in block_ids)
         return allowed
 
     @classmethod
@@ -1244,6 +1577,50 @@ class _MalformedJSONWithAudit(RuntimeError):
         self.audit_path = audit_path
 
 
+class _ResponsesMalformedOutputError(RuntimeError):
+    def __init__(
+        self,
+        message: str,
+        *,
+        usage_record: ProviderUsageRecord,
+        raw_response_path: str,
+    ) -> None:
+        super().__init__(message)
+        self.usage_record = usage_record
+        self.raw_response_path = raw_response_path
+
+
+def _responses_finish_reason(body: dict[str, Any]) -> str:
+    if body.get("status") == "completed":
+        return "completed"
+    details = body.get("incomplete_details")
+    if isinstance(details, dict) and details.get("reason"):
+        return str(details["reason"])
+    return str(body.get("status") or "unknown")
+
+
+def _extract_responses_output_text(body: dict[str, Any]) -> str:
+    parts: list[str] = []
+    output = body.get("output")
+    if not isinstance(output, list):
+        raise ValueError("Responses output is not a list")
+    for item in output:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        content = item.get("content")
+        if not isinstance(content, list):
+            continue
+        for part in content:
+            if isinstance(part, dict) and part.get("type") == "output_text":
+                text = part.get("text")
+                if isinstance(text, str):
+                    parts.append(text)
+    text = "".join(parts)
+    if not text:
+        raise ValueError("Responses output has no output_text content")
+    return text
+
+
 class _ProviderResponseWithAudit(RuntimeError):
     def __init__(self, reason: str, audit_path: Path | None) -> None:
         super().__init__(reason)
@@ -1275,12 +1652,86 @@ def _deepseek_structured_tool(
     This is a transport envelope only.  Pydantic models and the evidence/tool
     validators remain authoritative after the model response is decoded.
     """
-    string = {"type": "string", "minLength": 1}
+    string = {"type": "string"}
+    if schema_name in {"research-semantic-review-v1", "research-semantic-review-v2",
+                       "research-semantic-review-v3", "research-semantic-review-v4",
+                       "research-semantic-review-v4-r2"}:
+        span_fields = {"evidence_id": string, "quote": string}
+        if schema_name.endswith("v1"):
+            span_fields.update(start={"type": "integer", "minimum": 0}, end={"type": "integer", "minimum": 1})
+        span = _closed_object(span_fields, list(span_fields))
+        judgment_fields = {"claim_id": string,
+            "verdict": {"type": "string", "enum": ["SUPPORTED", "PARTIAL", "CONTRADICTED", "INSUFFICIENT"]},
+            "rationale": string, "unable_reason": {"type": ["string", "null"]},
+            "spans": {"type": "array", "items": span}}
+        if not schema_name.endswith("v1"):
+            judgment_fields.update(mismatches={"type": "array", "items": string},
+                                   missing_evidence={"type": "array", "items": string})
+        if schema_name.endswith("v3"):
+            judgment_fields.update(supported_parts={"type": "array", "items": string},
+                                   unsupported_parts={"type": "array", "items": string})
+        if schema_name in {"research-semantic-review-v4", "research-semantic-review-v4-r2"}:
+            proposition = _closed_object({
+                "claim_quote": {"type": "string", "minLength": 1},
+                "verdict": {"type": "string", "enum": ["SUPPORTED", "CONTRADICTED", "INSUFFICIENT"]},
+                "scope_match": {"type": "string", "enum": ["MATCHED", "UNRESOLVED", "MISMATCHED"]},
+                "rationale": {"type": "string", "minLength": 1, "maxLength": 2000},
+                "spans": {"type": "array", "items": span},
+            }, ["claim_quote", "verdict", "scope_match", "rationale", "spans"])
+            if schema_name.endswith("v4-r2"):
+                proposition["properties"].update({
+                    "proposition_id": {"type": "string", "minLength": 1, "maxLength": 40},
+                    "depends_on": {"type": "array", "maxItems": 24, "items": string},
+                    "prerequisites_complete": {"type": "boolean"},
+                    "atomicity": {"type": "string", "enum": ["ATOMIC", "COMPOUND", "UNRESOLVED"]},
+                })
+                proposition["required"] = list(proposition["properties"])
+            judgment_fields["propositions"] = {
+                "type": "array", "minItems": 1, "maxItems": 24, "items": proposition,
+            }
+        judgment = _closed_object(judgment_fields, list(judgment_fields))
+        return "submit_independent_claim_review", _closed_object({
+            "judgments": {"type": "array", "items": judgment, "maxItems": 64}}, ["judgments"])
+    if schema_name in {"unverified-research-notes-v1", "unverified-research-notes-vision-v1"}:
+        allowed = [str(item) for item in context.get("allowed_citation_ids") or []]
+        citation = {"type": "string", "enum": allowed} if allowed else string
+        claim = _closed_object({
+            "text": {"type": "string", "minLength": 1},
+            "evidence_ids": {"type": "array", "minItems": 1, "items": citation},
+        }, ["text", "evidence_ids"])
+        fields = {
+            "draft_markdown": {"type": "string", "minLength": 1, "maxLength": 30000},
+            "claims": {"type": "array", "minItems": 1, "maxItems": 24, "items": claim},
+            "evidence_gaps": {"type": "array", "maxItems": 24, "items": string},
+        }
+        if schema_name.endswith("vision-v1"):
+            observation = _closed_object({
+                "claim_index": {"type": "integer", "minimum": 0, "maximum": 23},
+                "evidence_id": citation,
+                "region": {"type": "array", "minItems": 4, "maxItems": 4,
+                           "items": {"type": "number", "minimum": 0, "maximum": 1}},
+            }, ["claim_index", "evidence_id", "region"])
+            fields["visual_observations"] = {"type": "array", "minItems": 1, "maxItems": 5,
+                                             "items": observation}
+        return "submit_unverified_research_notes", _closed_object(fields, list(fields))
+    if schema_name == "ragq4-v4b-evidence-obligations-v1":
+        obligation = _closed_object({"text": string}, ["text"])
+        return "submit_evidence_obligations", _closed_object(
+            {
+                "obligations": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 4,
+                    "items": obligation,
+                }
+            },
+            ["obligations"],
+        )
     if schema_name == "deep-research-synthesis-v1":
         allowed = [str(item) for item in context.get("allowed_citation_ids") or []]
         citation = {"type": "string", "enum": allowed} if allowed else string
         claim = _closed_object(
-            {"text": string, "citation_ids": {"type": "array", "minItems": 1, "items": citation}},
+            {"text": string, "citation_ids": {"type": "array", "items": citation}},
             ["text", "citation_ids"],
         )
         sections = []
@@ -1291,18 +1742,20 @@ def _deepseek_structured_tool(
             section_claim = _closed_object(
                 {
                     "text": string,
-                    "citation_ids": {"type": "array", "minItems": 1, "items": section_citation},
+                    "citation_ids": {"type": "array", "items": section_citation},
                 },
                 ["text", "citation_ids"],
             )
             sections.append(
                 _closed_object(
                     {
-                        "section_id": {"type": "string", "const": section_id},
+                        "section_id": {"type": "string", "enum": [section_id]},
                         "summary": string,
                         "claims": {"type": "array", "items": section_claim},
                         "insufficient_evidence": {"type": "boolean"},
-                        "evidence_gap": {"type": ["string", "null"]},
+                        # DeepSeek strict mode does not document `null`; an empty
+                        # string is deterministically normalized after transport.
+                        "evidence_gap": {"type": "string"},
                     },
                     ["section_id", "summary", "claims", "insufficient_evidence", "evidence_gap"],
                 )
@@ -1321,9 +1774,7 @@ def _deepseek_structured_tool(
                 "executive_summary": string,
                 "sections": {
                     "type": "array",
-                    "minItems": 4,
-                    "maxItems": 4,
-                    "items": {"oneOf": sections},
+                    "items": {"anyOf": sections},
                 },
                 "consensus": {"type": "array", "items": claim},
                 "disagreements": {"type": "array", "items": claim},
@@ -1356,10 +1807,16 @@ def _deepseek_structured_tool(
             },
             ["objective", "subquestions", "completion_criteria"],
         )
-    if schema_name == "research-agent-decision-v1":
+    if schema_name in {"research-agent-decision-v1", "research-agent-decision-v1-multimodal"}:
         action_names = [
-            "retrieve_evidence", "inspect_evidence", "inspect_paper", "verify_evidence", "finish",
+            "retrieve_evidence",
+            "inspect_evidence",
+            "inspect_paper",
+            "verify_evidence",
+            "finish",
         ]
+        if schema_name.endswith("-multimodal"):
+            action_names.append("retrieve_multimodal_evidence")
         return "select_research_action", _closed_object(
             {
                 "action": {"type": "string", "enum": action_names},
@@ -1440,6 +1897,7 @@ class OpenAICompatibleLLMProvider(SiliconFlowLLMProvider):
         response_audit_max_suffix_chars: int = 500,
         response_audit_max_error_window_chars: int = 500,
         response_audit_store_full_payload: bool = False,
+        vision_enabled: bool = False,
     ) -> None:
         super().__init__(
             base_url,
@@ -1462,6 +1920,7 @@ class OpenAICompatibleLLMProvider(SiliconFlowLLMProvider):
             thinking_enabled=thinking_enabled,
             stream=stream,
             provider_name=provider_name,
+            vision_enabled=vision_enabled,
         )
 
 
@@ -1709,9 +2168,7 @@ def _is_transport_retry_reason(reason: str) -> bool:
     }
 
 
-def classify_json_parse_failure(
-    content: str, parse_error: BaseException | None
-) -> dict[str, Any]:
+def classify_json_parse_failure(content: str, parse_error: BaseException | None) -> dict[str, Any]:
     if parse_error is None:
         return {
             "parse_error_type": None,

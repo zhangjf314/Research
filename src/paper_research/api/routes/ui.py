@@ -66,6 +66,17 @@ RESEARCH_MODE_UI = """
   <p><span id='mode-badge' class='muted'>[ WORKFLOW ]</span> Current mode: <strong id='mode-label'>Deep Research Workflow</strong></p>
   <p id='mode-description' class='muted'>Execution path: predefined orchestration → evidence synthesis → verification.</p>
   <p id='research-paper-scope' class='muted'>Paper scope: all indexed papers. <a href='/api/v1/ui/library'>Choose papers in the Library</a>.</p>
+  <fieldset id='agent-options' hidden>
+    <legend>ACTIVE论文与研究草稿</legend>
+    <div id='active-papers'>正在核验ACTIVE来源…</div>
+    <p id='source-error' role='alert'></p>
+    <label><input id='generate-draft' type='checkbox' disabled onchange='toggleDraftOptions()'> 启用LLM研究草稿（默认关闭，可能产生费用）</label>
+    <p id='draft-availability' class='muted'></p>
+    <div id='draft-authorization' hidden>
+      <label>调用令牌 <input id='draft-token' type='password' autocomplete='off' spellcheck='false'></label>
+      <p class='muted'>仅在已获费用授权时启用。令牌只用于本次请求，不保存到浏览器存储。草稿为UNVERIFIED，不是可信报告。</p>
+    </div>
+  </fieldset>
   <textarea id='query' rows='4' style='width:95%' placeholder='Example: Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.'></textarea><br>
   <button id='run-research' type='button' onclick='runResearch()'>Run Workflow</button>
   <button type='button' onclick='fillExampleQuery()'>Fill example</button>
@@ -111,10 +122,16 @@ RESEARCH_MODE_UI = """
     <div id='report-actions' hidden>
       <button type='button' onclick='copyReport()'>Copy Markdown</button>
       <button type='button' onclick='toggleRaw()'>View Raw</button>
+      <button id='save-markdown' type='button' onclick='saveMarkdown()'>保存Markdown</button>
     </div>
   </div>
   <article id='report' class='markdown-body'><p class='muted'>Waiting</p></article>
   <pre id='report-raw' class='report-raw' hidden></pre>
+</section>
+<section id='candidate-section' class='card' hidden>
+  <h2>候选证据 · CANDIDATE</h2>
+  <p class='muted'>具有可追溯来源，不代表已验证其语义或研究结论。</p>
+  <div id='candidate-evidence'></div>
 </section>
 <p class='muted'>Research Agent and Workflow are two independent execution architectures. They share the base retrieval capability but use different research control strategies.</p>
 <script>
@@ -123,6 +140,8 @@ let researchMode = new URLSearchParams(window.location.search).get('mode') === '
 let taskExecutionMode = researchMode;
 let activeTaskRunning = false;
 let runStartedAt = null;
+let activePapers = [];
+let sourcesReady = false;
 const modeAdapters = {
   workflow: {
     label: 'Deep Research Workflow',
@@ -159,8 +178,11 @@ const modeAdapters = {
     heading: 'Research Agent status',
     description: 'Execution path: Planner → Dynamic Tool Selection → Evidence State → Verification.',
     async submit(query) {
+      const generateDraft = document.getElementById('generate-draft').checked;
+      const headers = {'Content-Type':'application/json'};
+      if (generateDraft) headers['X-Research-Draft-Token'] = document.getElementById('draft-token').value;
       const response = await fetch('/api/v1/research/agent',{method:'POST',
-        headers:{'Content-Type':'application/json'},body:JSON.stringify({query,paper_ids:selectedPaperIds()})});
+        headers,body:JSON.stringify({query,paper_ids:selectedPaperIds(),generate_draft:generateDraft})});
       return {response, data: await readJson(response)};
     },
     normalize(data) {
@@ -176,9 +198,9 @@ const modeAdapters = {
         taskId: data.task_id || '',
         status: data.status || data.failure_code || 'UNKNOWN',
         terminal: data.terminal !== false,
-        providerRequests: data.provider_call_count ?? 0,
-        tokens: usage.total_tokens ?? usage.total ?? 0,
-        cost: data.estimated_cost ?? 0,
+        providerRequests: (data.provider_call_count ?? 0) + (data.research_draft?.request_count ?? 0),
+        tokens: (usage.total_tokens ?? usage.total ?? 0) + (data.research_draft?.usage?.total_tokens ?? 0),
+        cost: (data.estimated_cost ?? 0) + (data.research_draft?.usage?.estimated_cost_usd ?? 0),
         report,
         hasReportBody: report.trim().length > 0,
         succeeded: data.status === 'COMPLETED',
@@ -250,11 +272,13 @@ function selectResearchMode(mode) {
   document.getElementById('agent-card').style.outline = researchMode === 'agent' ? '3px solid #155eaa' : '';
   document.getElementById('workflow-telemetry').hidden = researchMode !== 'workflow';
   document.getElementById('agent-telemetry').hidden = researchMode !== 'agent';
+  document.getElementById('agent-options').hidden = researchMode !== 'agent';
   if (window.history?.replaceState) {
     window.history.replaceState(null, '', `/api/v1/ui/research?mode=${researchMode}`);
   }
   assertModeConsistency(researchMode, adapter);
   clearTaskStatus();
+  checkResearchCapabilities();
 }
 function clearTaskStatus() {
   document.getElementById('status-task-id').textContent = '-';
@@ -303,9 +327,14 @@ function updateTaskStatus(normalized, data) {
 async function checkResearchCapabilities(){
   const status=document.getElementById('research-status');
   const button=document.getElementById('run-research');
+  if (researchMode === 'agent') {
+    button.disabled = activeTaskRunning || !sourcesReady;
+    return;
+  }
   try{
     const response=await fetch('/api/v1/capabilities');
     const data=await readJson(response);
+    if (researchMode !== 'workflow') return;
     const capability=data.capabilities?.deep_research || data.capabilities?.research_synthesis;
     if(!response.ok || !capability || capability.status!=='available'){
       button.disabled=true;
@@ -313,7 +342,9 @@ async function checkResearchCapabilities(){
       return;
     }
     status.textContent=`Research runtime ready: ${capability.provider || 'provider'} / ${capability.model || 'model'}`;
+    button.disabled = activeTaskRunning;
   }catch(error){
+    if (researchMode !== 'workflow') return;
     button.disabled=true;
     status.textContent='Research capability check failed.';
   }
@@ -330,6 +361,7 @@ async function renderMarkdown(markdown) {
   return await response.text();
 }
 async function runResearch(){
+  if (activeTaskRunning) return;
   const report = document.getElementById('report');
   const raw = document.getElementById('report-raw');
   const status = document.getElementById('research-status');
@@ -337,6 +369,15 @@ async function runResearch(){
   const query = document.getElementById('query').value.trim();
   taskExecutionMode = researchMode;
   const adapter = modeAdapters[taskExecutionMode];
+  if (taskExecutionMode === 'agent' && (!sourcesReady || !selectedPaperIds().length)) {
+    status.textContent = '请至少选择一篇已核验的ACTIVE论文。';
+    return;
+  }
+  if (taskExecutionMode === 'agent' && document.getElementById('generate-draft').checked
+      && !document.getElementById('draft-token').value.trim()) {
+    status.textContent = '启用草稿需要有效调用令牌与费用授权。';
+    return;
+  }
   if (query.length < 3) {
     status.textContent = 'Please enter a research question with at least 3 characters.';
     return;
@@ -345,6 +386,9 @@ async function runResearch(){
   activeTaskRunning = true;
   runStartedAt = Date.now();
   status.textContent = `${adapter.label} running...`;
+  currentReportMarkdown = '';
+  document.getElementById('candidate-section').hidden = true;
+  document.getElementById('candidate-evidence').replaceChildren();
   setReportControls(false, `${adapter.label} running`);
   report.innerHTML = "<p class='muted'>Generating report...</p>";
   raw.hidden = true;
@@ -356,6 +400,12 @@ async function runResearch(){
     const normalized = adapter.normalize(data);
     updateTaskStatus(normalized, data);
     raw.textContent = JSON.stringify({execution_mode: taskExecutionMode, ...data}, null, 2);
+    if (taskExecutionMode === 'agent' && data.active_provenance
+        && ['PARTIAL', 'COMPLETED', 'PAUSED'].includes(normalized.status)) {
+      await renderCandidateResult(data, normalized);
+      status.textContent = `Research Agent · ${normalized.status} · task ${normalized.taskId}`;
+      return;
+    }
     if (normalized.paused) {
       currentReportMarkdown = '';
       setReportControls(false, `${adapter.label} Paused`);
@@ -441,8 +491,9 @@ async function runResearch(){
     raw.textContent = '';
     status.textContent = `${modeAdapters[taskExecutionMode].label} failed`;
   } finally {
-    button.disabled = false;
     activeTaskRunning = false;
+    document.getElementById('draft-token').value = '';
+    button.disabled = taskExecutionMode === 'agent' && !sourcesReady;
   }
 }
 async function copyReport() {
@@ -463,6 +514,10 @@ function toggleRaw() {
   raw.hidden = !raw.hidden;
 }
 function selectedPaperIds() {
+  if (researchMode === 'agent') {
+    return [...document.querySelectorAll('#active-papers input:checked')].map(input => input.value)
+      .filter(id => activePapers.some(paper => paper.id === id));
+  }
   try {
     const ids = JSON.parse(window.localStorage.getItem('paperResearchSelectedPaperIds') || '[]');
     return Array.isArray(ids) ? ids.filter(id => typeof id === 'string' && id) : [];
@@ -481,15 +536,101 @@ function refreshResearchPaperScope() {
   link.textContent = 'Choose papers in the Library';
   target.append(link, '.');
 }
+async function loadActivePapers() {
+  const target = document.getElementById('active-papers');
+  try {
+    const response = await fetch('/api/v1/ui/research/sources');
+    const data = await readJson(response);
+    if (!response.ok) throw new Error(httpMessage(response, data));
+    activePapers = data.papers;
+    sourcesReady = data.status === 'ACTIVE' && activePapers.length > 0;
+    target.innerHTML = activePapers.map(paper =>
+      `<div><label><input type='checkbox' value='${esc(paper.id)}' checked> ${esc(paper.title)}</label> ` +
+      `<a href='/api/v1/papers/${encodeURIComponent(paper.id)}/pdf' target='_blank' rel='noopener'>PDF</a> ` +
+      `<small>${esc(paper.id)} · ACTIVE</small></div>`).join('');
+    document.getElementById('generate-draft').disabled = !data.draft_enabled;
+    document.getElementById('draft-availability').textContent = data.draft_enabled
+      ? '服务端已配置草稿功能；仍需本次调用的明确授权和令牌。'
+      : '服务端未启用真实LLM草稿或未配置调用令牌；仍可检索候选证据。';
+    if (!sourcesReady) throw new Error('没有可用的ACTIVE论文，请由受信任操作者通过现有CLI准入PDF。');
+  } catch (error) {
+    sourcesReady = false;
+    target.textContent = 'ACTIVE来源不可用';
+    document.getElementById('source-error').textContent = error.message;
+  }
+  checkResearchCapabilities();
+}
+function toggleDraftOptions() {
+  const enabled = document.getElementById('generate-draft').checked;
+  document.getElementById('draft-authorization').hidden = !enabled;
+  if (!enabled) document.getElementById('draft-token').value = '';
+}
+function paperTitle(id) {
+  return activePapers.find(paper => paper.id === id)?.title || id || 'Unknown paper';
+}
+function paperLink(id, page) {
+  return `/api/v1/papers/${encodeURIComponent(id)}/pdf#page=${encodeURIComponent(page || 1)}`;
+}
+async function renderCandidateResult(data, normalized) {
+  const evidence = data.active_provenance.evidence || [];
+  document.getElementById('candidate-section').hidden = false;
+  document.getElementById('candidate-evidence').innerHTML = evidence.map(item =>
+    `<details><summary>${esc(paperTitle(item.paper_id))} · p.${esc(item.page)}–${esc(item.page_end || item.page)} · ${esc(item.verification_status)}</summary>` +
+    `<p><a href='${paperLink(item.paper_id, item.page)}' target='_blank' rel='noopener'>打开原PDF</a></p>` +
+    `<p>paper: ${esc(item.paper_id)}<br>chunk: ${esc(item.chunk_id)}<br>block: ${esc((item.block_ids || []).join(', ') || item.block_id)}</p>` +
+    `<pre style='white-space:pre-wrap'>${esc(item.text_or_reference)}</pre>` +
+    (item.text_proof?.canonical_text_length > (item.text_proof?.display_text_length ?? (item.text_or_reference || '').length)
+      ? '<p class="muted">展示文本已截断，请打开原PDF核对完整上下文。</p>' : '') + '</details>').join('')
+    || '<p>本次没有候选证据。</p>';
+  const draft = data.research_draft;
+  const report = document.getElementById('report');
+  if (draft?.status === 'UNVERIFIED' && typeof draft.markdown === 'string' && draft.markdown.trim()) {
+    const gaps = Array.isArray(draft.evidence_gaps) ? draft.evidence_gaps : [];
+    const sourceLines = (draft.sources || []).map(source =>
+      `- [${source.evidence_id}] ${paperTitle(source.paper_id)} · p.${(source.pages || []).join('–')} · paper: ${source.paper_id} · chunk: ${source.chunk_id}`);
+    currentReportMarkdown = '> UNVERIFIED · CANDIDATE · PARTIAL：未经语义验证，不是可信报告。\\n\\n' + draft.markdown;
+    if (gaps.some(gap => !currentReportMarkdown.includes(gap))) {
+      currentReportMarkdown += '\\n\\n## 证据缺口\\n\\n' + gaps.map(gap => '- ' + gap).join('\\n');
+    }
+    currentReportMarkdown += '\\n\\n## 引用来源\\n\\n' + sourceLines.join('\\n');
+    report.innerHTML = await renderMarkdown(currentReportMarkdown);
+    report.innerHTML += '<h2>完整evidence_gaps</h2><ul id="evidence-gaps">' +
+      gaps.map(gap => `<li>${esc(gap)}</li>`).join('') + '</ul>' +
+      `<p>模型：${esc(draft.model)} · 本次模型请求：${esc(draft.request_count)} · Token：${esc(draft.usage?.total_tokens)} · 费用估算(USD)：${esc(draft.usage?.estimated_cost_usd)}</p>`;
+    setReportControls(true, 'UNVERIFIED研究草稿');
+  } else {
+    currentReportMarkdown = '';
+    setReportControls(false, 'Research Agent · 候选证据');
+    report.textContent = `${normalized.status} · ${evidence.length}条候选证据。` +
+      (draft ? ` 草稿状态：${draft.status}。${draft.reason || ''}` : ' 本次未启用LLM草稿。') +
+      ' 未获得语义验证，不提供可信报告资格。';
+  }
+}
+function saveMarkdown() {
+  if (!currentReportMarkdown) return;
+  const url = URL.createObjectURL(new Blob([currentReportMarkdown], {type:'text/markdown;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  const taskId = document.getElementById('status-task-id').textContent.replace(/[^a-zA-Z0-9_-]/g, '_');
+  link.download = `research-${taskId}.md`;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 function fillExampleQuery() {
   document.getElementById('query').value =
     'Compare the main technical routes, experimental findings, and limitations of retrieval-augmented generation methods.';
 }
 function resetResearchState() {
+  if (activeTaskRunning) return;
   activeTaskRunning = false;
   runStartedAt = null;
   taskExecutionMode = researchMode;
   currentReportMarkdown = '';
+  document.getElementById('generate-draft').checked = false;
+  document.getElementById('draft-token').value = '';
+  toggleDraftOptions();
+  document.getElementById('candidate-section').hidden = true;
+  document.getElementById('candidate-evidence').replaceChildren();
   setReportControls(false, 'Research Output');
   document.getElementById('report').innerHTML = "<p class='muted'>Waiting</p>";
   document.getElementById('report-raw').textContent = '';
@@ -499,7 +640,7 @@ function resetResearchState() {
 }
 selectResearchMode(researchMode);
 refreshResearchPaperScope();
-checkResearchCapabilities();
+loadActivePapers();
 </script>
 """
 
@@ -516,7 +657,7 @@ def page(title: str, body: str) -> HTMLResponse:
         ".report-card{padding:0;overflow:hidden}.report-toolbar{display:flex;"
         "justify-content:space-between;align-items:center;gap:16px;padding:14px 18px;"
         "border-bottom:1px solid #dbe3ee;background:#f8fafc}.report-toolbar div{display:flex;"
-        "gap:8px}.report-toolbar button{padding:7px 11px;font-size:.9rem}.markdown-body{"
+        "gap:8px}#report-actions[hidden]{display:none}.report-toolbar button{padding:7px 11px;font-size:.9rem}.markdown-body{"
         "padding:22px;line-height:1.75;overflow-wrap:anywhere}.markdown-body h1{margin-top:0;"
         "padding-bottom:.4rem;border-bottom:1px solid #dbe3ee}.markdown-body h2{margin-top:2rem;"
         "padding-bottom:.25rem;border-bottom:1px solid #edf2f7}.markdown-body h3{margin-top:1.5rem}"
@@ -837,6 +978,42 @@ def search_page() -> HTMLResponse:
           alert(`Imported ${paper.title}`);
         }</script>""",
     )
+
+
+@router.get("/research/sources")
+def research_sources(db: DbSession) -> dict:
+    """Read-only paper scope from the same ACTIVE admission gate as the Agent."""
+    from qdrant_client import QdrantClient
+
+    from paper_research.indexing.registry import IndexIdentityError, IndexRegistry, runtime_index_identity
+    from paper_research.retrieval.pipeline import retrieval_collection
+
+    settings = get_settings()
+    registry = IndexRegistry(settings.data_dir / "index_registry.json")
+    try:
+        collection = retrieval_collection(settings, registry)
+        client = QdrantClient(url=settings.qdrant_url, api_key=settings.qdrant_api_key)
+        try:
+            with registry.query_admission(
+                settings.active_collection, collection,
+                runtime_index_identity(settings.provider_metadata, collection), client,
+                supported=not settings.retrieval_v2_enabled,
+            ) as (chunks, _):
+                papers = []
+                for paper_id in sorted({chunk.paper_id for chunk in chunks}):
+                    paper = PaperRepository(db).get(uuid.UUID(paper_id))
+                    if paper is None:
+                        raise HTTPException(status_code=503, detail="ACTIVE_PAPER_METADATA_MISSING")
+                    papers.append({"id": paper_id, "title": paper.title or paper_id})
+        finally:
+            client.close()
+        token = settings.research_draft_token
+        return {"status": "ACTIVE", "papers": papers,
+                "draft_enabled": bool(settings.research_draft_enabled and settings.live_model_calls_enabled
+                                      and settings.llm_provider != "template"
+                                      and token and token.get_secret_value())}
+    except IndexIdentityError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.code) from exc
 
 
 @router.get("/research", response_class=HTMLResponse)

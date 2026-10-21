@@ -14,3 +14,15 @@ data/reports
 artifacts/*
 !artifacts/soak-test-portfolio-v1.json
 PaperResearch Agent 椤圭洰瑙勫垝.docx
+
+# Public runtime-only Phase4 dependency closure
+!artifacts/paperresearch-v2/
+!artifacts/paperresearch-v2/**/
+!artifacts/paperresearch-v2/phase4a-r6-source-id-repair/engineering/geometry_v2.py
+!artifacts/paperresearch-v2/phase4a-r6-source-id-repair/engineering/pipeline_v2.py
+!artifacts/paperresearch-v2/phase4b-v3-b2-retrieval-preregistration/engineering/contract.py
+!artifacts/paperresearch-v2/phase4b-v3-b2-retrieval-preregistration/model/frozen_model_manifest.json
+!artifacts/paperresearch-v2/phase4b-v3-b2-d1-dev-retrieval-implementation/engineering/common.py
+!artifacts/paperresearch-v2/phase4b-v3-b2-d1-dev-retrieval-implementation/engineering/retrieval_adapter.py
+!artifacts/paperresearch-v2/phase4b-v3-b2-d1-dev-retrieval-implementation/engineering/index_builder.py
+!artifacts/paperresearch-v2/phase4b-v3-b2-d1-dev-retrieval-implementation/engineering/model_runtime.py

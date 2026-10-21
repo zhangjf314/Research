@@ -147,6 +147,12 @@ def capabilities() -> CapabilitiesResponse:
         if settings.llm_provider == "template":
             deep_research_issues.append("LLM_PROVIDER=template")
     items = {
+        "graph_rag": Capability(
+            status="configured_unverified" if settings.graph_rag_enabled else "disabled",
+            configured=settings.graph_rag_enabled, verified=False,
+            detail=("Opt-in structural Graph/Wiki. ACTIVE source/index validation occurs on "
+                    "every query; not scientific support qualification."),
+        ),
         "pymupdf": Capability(
             status="available", configured=True, verified=True, detail=fitz.VersionBind
         ),

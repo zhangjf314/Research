@@ -6,6 +6,7 @@ LABEL org.opencontainers.image.title="paper-research-agent"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src \
     PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
@@ -16,17 +17,15 @@ RUN apt-get update \
 
 COPY pyproject.toml README.md ./
 COPY src ./src
-COPY migrations ./migrations
 COPY alembic.ini ./
 COPY scripts ./scripts
 COPY docs ./docs
-COPY data/evaluation ./data/evaluation
-COPY artifacts/soak-test-portfolio-v1.json ./artifacts/soak-test-portfolio-v1.json
+COPY artifacts/paperresearch-v2 ./artifacts/paperresearch-v2
 
 RUN pip install --upgrade pip && pip install .
 
 RUN useradd --create-home --uid 10001 appuser \
-    && mkdir -p /app/data/raw /app/data/parsed /app/data/reports \
+    && mkdir -p /app/data/raw /app/data/parsed /app/data/reports /app/.runtime/research-agent \
     && chown -R appuser:appuser /app
 
 USER appuser

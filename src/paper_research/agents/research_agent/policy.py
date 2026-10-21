@@ -11,8 +11,69 @@ from paper_research.agents.research_agent.state import AgentState
 
 class ResearchAgentPolicy:
     def decide(self, state: AgentState) -> ToolAction:
+        if state.multimodal_enabled and state.current_plan:
+            target = state.subquestions[0]
+            # Explicit opt-in supplies each native modality one bounded opportunity.
+            for modality in ("FIGURE", "TABLE", "EQUATION"):
+                if not any(h.get("action", {}).get("action") == "retrieve_multimodal_evidence"
+                           and h.get("action", {}).get("arguments", {}).get("modality") == modality
+                           for h in state.tool_history):
+                    return ToolAction(
+                        action="retrieve_multimodal_evidence",
+                        arguments={"query": {
+                            "FIGURE": "Architecture overview diagram. ",
+                            "TABLE": "Experimental results table, models, metrics and conditions. ",
+                            "EQUATION": "Mathematical objective equation and loss function. ",
+                        }[modality] + state.research_question, "modality": modality,
+                                   "arm": "M1" if modality == "FIGURE" else "N1", "top_k": 5},
+                        target_subquestion_ids=[target.id], decision_reason="explicit_native_modality_probe",
+                    )
+            equations = [e for e in state.evidence_state.items.values()
+                         if getattr(e, "modality", None) == "EQUATION"]
+            if equations and not any(
+                h.get("action", {}).get("decision_reason") == "native_formula_canonical_context"
+                for h in state.tool_history
+            ):
+                return ToolAction(action="retrieve_evidence", arguments={
+                    "query": max(equations, key=lambda e: len(e.readable_text)).readable_text
+                        + " " + state.research_question, "top_k": 12},
+                    target_subquestion_ids=[target.id],
+                    decision_reason="native_formula_canonical_context")
+            if not any(h.get("action", {}).get("decision_reason") == "hybrid_text_evidence"
+                       for h in state.tool_history):
+                # Query canonical context using text actually returned by native
+                # tools, rather than assuming a multilingual question alone
+                # matches equation symbols or table model-group names.
+                native_terms = " ".join(
+                    item.readable_text[:900]
+                    for modality in ("EQUATION", "TABLE")
+                    for item in sorted(
+                        (e for e in state.evidence_state.items.values()
+                         if getattr(e, "modality", None) == modality),
+                        key=lambda e: -len(e.readable_text),
+                    )[:2]
+                )
+                return ToolAction(action="retrieve_evidence", arguments={"query":
+                    "Method objective loss formula; experimental results table and settings. "
+                    + native_terms + " " + state.research_question, "top_k": 20},
+                                  target_subquestion_ids=[target.id], decision_reason="hybrid_text_evidence")
         if state.verification_state and state.verification_state.status == VerificationStatus.PASS:
             return ToolAction(action="finish", decision_reason="verification_passed")
+        scoped = [sq for sq in state.subquestions
+                  if sq.id.startswith("paper:") and sq.id[6:] in (state.paper_ids or [])]
+        if scoped and not state.retry_state.retryable:
+            attempted = {target for observation in state.observations
+                         if observation.tool == "retrieve_evidence"
+                         and observation.status == ObservationStatus.SUCCESS
+                         for target in observation.target_subquestions}
+            for sq in scoped:
+                if sq.id not in attempted:
+                    return ToolAction(
+                        action="retrieve_evidence", target_subquestion_ids=[sq.id],
+                        arguments={"query": sq.question, "paper_ids": [sq.id[6:]], "top_k": 12},
+                        decision_reason="scoped_paper_method_retrieval",
+                    )
+            return ToolAction(action="verify_evidence", decision_reason="scoped_papers_attempted")
         if state.tool_history and state.tool_history[-1].get("phase") == "REPLAN":
             target = state.unresolved_subquestions[:1]
             if target:

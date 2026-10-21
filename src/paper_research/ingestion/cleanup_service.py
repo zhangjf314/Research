@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 
 from paper_research.config import Settings
 from paper_research.indexing.vector_store import QdrantVectorStore
+from paper_research.indexing.registry import IndexRegistry
 from paper_research.repositories.paper import PaperRepository
 
 
@@ -42,6 +43,8 @@ class PaperCleanupService:
         self.repository = PaperRepository(session)
 
     def purge(self, paper_id: uuid.UUID, *, dry_run: bool = True) -> PaperCleanupResult:
+        if not dry_run:
+            IndexRegistry(self.settings.data_dir / "index_registry.json").refuse_direct_mutation()
         paper = self.repository.get(paper_id)
         result = PaperCleanupResult(paper_id=str(paper_id), dry_run=dry_run, deleted=False)
         if paper is None:

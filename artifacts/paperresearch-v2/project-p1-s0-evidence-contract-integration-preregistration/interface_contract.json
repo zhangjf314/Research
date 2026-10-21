@@ -1,0 +1,130 @@
+{
+  "protocol_id": "PAPERRESEARCH_P1_S0_SINGLE_COMPONENT_INTEGRATION_PREREGISTRATION",
+  "protocol_version": 1,
+  "implementation_status": "DESIGN_ONLY_NOT_IMPLEMENTED_NOT_RUNTIME_TESTED",
+  "baseline_source_sha256": "6b76e2dc3f879b191076b432a1b476db953e60670e8b4131ec765bf979e306cd",
+  "endpoint": {"method": "POST", "path": "/api/v1/retrieve", "actual_handler": "paper_research.api.routes.rag.hybrid_retrieve", "source": "src/paper_research/api/routes/rag.py:227"},
+  "feature_flag": {"name": "include_evidence_contract", "location": "request_body", "type": "strict boolean", "default": false, "new_environment_flag": false, "other_endpoints": "No opt-in addition to QA or Research API"},
+  "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "required": ["query"],
+    "properties": {
+      "query": {"type": "string", "minLength": 1},
+      "filters": {"type": "object", "properties": {"paper_ids": {"type": ["array", "null"], "items": {"type": "string"}}, "sections": {"type": ["array", "null"], "items": {"type": "string"}}, "block_types": {"type": ["array", "null"], "items": {"type": "string"}}, "page_from": {"type": ["integer", "null"], "minimum": 1}, "page_to": {"type": ["integer", "null"], "minimum": 1}}},
+      "recall_k": {"type": "integer", "minimum": 1, "maximum": 100, "default": 20},
+      "top_k": {"type": "integer", "minimum": 1, "maximum": 20, "default": 5},
+      "include_evidence_contract": {"type": "boolean", "default": false}
+    },
+    "allOf": [{"if": {"required": ["include_evidence_contract"], "properties": {"include_evidence_contract": {"const": true}}}, "then": {"properties": {"query": {"maxLength": 2000, "pattern": "\\S"}, "filters": {"properties": {"paper_ids": {"type": ["array", "null"], "maxItems": 38, "items": {"type": "string", "format": "uuid"}}}}}}}]
+  },
+  "input_semantics": [
+    "The JSON schema describes prospective shape; existing Pydantic coercions and ignored extra fields remain unchanged for baseline fields. Only the new flag is strict boolean.",
+    "Opt-in query must be non-whitespace and at most 2000 characters; paper scope at most 38 UUIDs, preserving EvidenceContract limits. Violations return 422 before retrieval. False/absent flag imposes no new query/scope limits.",
+    "Caller cannot submit EvidenceItem, source identifiers, contract status, trusted manifest, provider/model/revision or collection overrides to the adapter.",
+    "Exactly one SOURCE requirement is constructed by code. No planner, semantic decomposition, min-source inference, dynamic revision or evidence judgment."
+  ],
+  "internal_input": {
+    "planned_function": "build_readonly_evidence_contract(query, context, trace, *, parsed_root)",
+    "existing_types": ["list[ContextItem]", "RetrievalTrace", "Chunk", "PaperBlock"],
+    "required_precondition": "Existing _run_hybrid succeeded, including P0-R1 registry/physical/actual-provider checks; no IndexIdentityError was caught or downgraded.",
+    "canonical_input": "Only explicit versioned chunk file, its index manifest, and parsed block file for returned, validated paper UUIDs beneath resolved parsed_root. No global glob, legacy fallback, external fetch or scientific backend loader by adapter.",
+    "empty_context": "Legal input after successful retrieval. No canonical file read is needed; typed MISSING_EVIDENCE gap and MISSING availability.",
+    "mutability": "Treat context and trace as immutable inputs; never repair, reorder, overwrite or annotate them in place."
+  },
+  "output_contract": {
+    "default": "Exact existing HybridRetrievalResponse {context, trace}; evidence_contract key absent, not null. No adapter calls or extra provenance reads.",
+    "opt_in": "Existing context and trace plus required evidence_contract sidecar defined by output_schema.",
+    "planned_fastapi_response_model": "HybridRetrievalEvidenceResponse | HybridRetrievalResponse; extension has required evidence_contract. Verify actual serialization in P1-D1; no global exclude_unset.",
+    "baseline_type_references": {"context": "src/paper_research/retrieval/context_builder.py:7 ContextItem", "trace": "src/paper_research/retrieval/trace.py:31 RetrievalTrace"},
+    "qualification_meaning": "Only structural identity/provenance and source availability. No semantic truth, support confidence, correctness, full question coverage or corpus recall qualification."
+  },
+  "output_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object", "additionalProperties": false,
+    "required": ["context", "trace", "evidence_contract"],
+    "properties": {
+      "context": {"type": "array", "items": {"$ref": "#/$defs/ContextItem"}},
+      "trace": {"type": "object", "description": "Exact existing RetrievalTrace serialization, pinned by baseline source and entry_audit. Do not drop defaults or change timing/IDs in place."},
+      "evidence_contract": {"$ref": "#/$defs/ReadOnlyResult"}
+    },
+    "$defs": {
+      "ContextItem": {
+        "type": "object", "additionalProperties": false,
+        "required": ["chunk_id", "paper_id", "block_ids", "block_page_map", "section_path", "page_start", "page_end", "evidence", "score"],
+        "properties": {"chunk_id": {"type": "string"}, "paper_id": {"type": "string"}, "block_ids": {"type": "array", "items": {"type": "string"}}, "block_page_map": {"type": "object", "additionalProperties": {"type": "integer"}}, "section_path": {"type": "array", "items": {"type": "string"}}, "page_start": {"type": "integer"}, "page_end": {"type": "integer"}, "evidence": {"type": "string"}, "score": {"type": "number"}}
+      },
+      "SourceLocator": {"type": "object", "additionalProperties": false, "required": ["paper_id", "block_id", "page", "page_end"], "properties": {"paper_id": {"type": "string", "format": "uuid"}, "block_id": {"type": "string", "minLength": 1}, "page": {"type": "integer", "minimum": 1}, "page_end": {"type": "integer", "minimum": 1}}},
+      "EvidenceItem": {
+        "type": "object", "additionalProperties": false,
+        "required": ["evidence_id", "paper_id", "block_id", "page", "section", "text_or_reference", "source_type", "supports", "contradicts", "discovered_by_tool", "discovered_at_step", "relevance", "verification_status", "chunk_id", "block_ids", "block_page_map", "page_end"],
+        "properties": {
+          "evidence_id": {"type": "string", "minLength": 1}, "paper_id": {"type": "string", "format": "uuid"}, "block_id": {"type": "string", "minLength": 1}, "page": {"type": "integer", "minimum": 1}, "section": {"type": "string"}, "text_or_reference": {"type": "string", "minLength": 1}, "source_type": {"const": "local_retrieval"}, "supports": {"type": "array", "maxItems": 0}, "contradicts": {"type": "array", "maxItems": 0}, "discovered_by_tool": {"const": "readonly_retrieve_adapter"}, "discovered_at_step": {"const": 0}, "relevance": {"type": ["number", "null"]}, "verification_status": {"const": "CANDIDATE"}, "chunk_id": {"type": "string", "minLength": 1}, "block_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}, "block_page_map": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer", "minimum": 1}}, "page_end": {"type": "integer", "minimum": 1}
+        }
+      },
+      "StructuredEvidence": {
+        "type": "object", "additionalProperties": false, "required": ["item", "provenance"],
+        "properties": {
+          "item": {"$ref": "#/$defs/EvidenceItem"},
+          "provenance": {"type": "object", "additionalProperties": false, "required": ["paper_id", "chunk_id", "block_ids", "block_page_map", "page_start", "page_end", "section_path", "sources", "validation", "text_relation"], "properties": {"paper_id": {"type": "string", "format": "uuid"}, "chunk_id": {"type": "string", "minLength": 1}, "block_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "block_page_map": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}}, "page_start": {"type": "integer", "minimum": 1}, "page_end": {"type": "integer", "minimum": 1}, "section_path": {"type": "array", "items": {"type": "string"}}, "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/SourceLocator"}}, "validation": {"const": "CANONICAL_IDENTIFIERS_VALIDATED"}, "text_relation": {"const": "UNCHANGED_CONTEXT_PREFIX_OF_CANONICAL_CHUNK"}}}
+        }
+      },
+      "Requirement": {
+        "type": "object", "additionalProperties": false, "required": ["requirement_id", "description", "requirement_type", "priority", "required", "source_scope", "min_sources", "status"],
+        "properties": {"requirement_id": {"const": "R1"}, "description": {"const": "Observe resolvable document/block/page provenance for this retrieval response."}, "requirement_type": {"const": "SOURCE"}, "priority": {"const": 1}, "required": {"const": true}, "source_scope": {"type": "array", "maxItems": 38, "items": {"type": "string", "format": "uuid"}}, "min_sources": {"const": 1}, "status": {"const": "UNSEARCHED"}}
+      },
+      "Contract": {
+        "type": "object", "additionalProperties": false, "required": ["contract_id", "question", "requirements", "created_by", "contract_version", "parent_contract_version", "change_reason", "added_requirements", "removed_requirements", "modified_requirements"],
+        "properties": {"contract_id": {"type": "string", "pattern": "^EC-[a-f0-9]{16}$"}, "question": {"type": "string", "minLength": 1, "maxLength": 2000}, "requirements": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/Requirement"}}, "created_by": {"const": "readonly_retrieve_adapter"}, "contract_version": {"const": 1}, "parent_contract_version": {"type": "null"}, "change_reason": {"type": "null"}, "added_requirements": {"type": "array", "maxItems": 0}, "removed_requirements": {"type": "array", "maxItems": 0}, "modified_requirements": {"type": "array", "maxItems": 0}}
+      },
+      "Availability": {
+        "type": "object", "additionalProperties": false, "required": ["requirement_id", "availability", "evidence_ids", "valid_evidence_count", "invalid_evidence_count", "unique_document_count", "reason_code", "semantic_status"],
+        "properties": {"requirement_id": {"const": "R1"}, "availability": {"enum": ["AVAILABLE", "PARTIAL", "MISSING", "UNAVAILABLE"]}, "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "valid_evidence_count": {"type": "integer", "minimum": 0}, "invalid_evidence_count": {"type": "integer", "minimum": 0}, "unique_document_count": {"type": "integer", "minimum": 0}, "reason_code": {"enum": ["VALID_SOURCES_RETURNED", "SOME_SOURCES_REJECTED", "NO_RETURNED_EVIDENCE", "PROVENANCE_UNAVAILABLE", "ADAPTER_ERROR"]}, "semantic_status": {"const": "NOT_ASSESSED"}}
+      },
+      "Gap": {
+        "type": "object", "additionalProperties": false, "required": ["gap_id", "requirement_id", "gap_type", "description", "evidence_ids", "severity"],
+        "properties": {"gap_id": {"type": "string"}, "requirement_id": {"const": "R1"}, "gap_type": {"const": "MISSING_EVIDENCE"}, "description": {"type": "string", "maxLength": 600}, "evidence_ids": {"type": "array", "maxItems": 0}, "severity": {"const": 1}}
+      },
+      "Error": {
+        "type": "object", "additionalProperties": false, "required": ["code", "trace_id", "item_index", "paper_id", "chunk_id", "fields"],
+        "properties": {"code": {"enum": ["PROVENANCE_MISSING", "PROVENANCE_INVALID", "SOURCE_ID_UNKNOWN", "SOURCE_SCOPE_MISMATCH", "TEXT_MISMATCH", "ARTIFACT_INDEX_MISMATCH", "UNSUPPORTED_CONTEXT_MODE", "EVIDENCE_ADAPTER_ERROR"]}, "trace_id": {"type": "string"}, "item_index": {"type": ["integer", "null"], "minimum": 0}, "paper_id": {"type": ["string", "null"]}, "chunk_id": {"type": ["string", "null"]}, "fields": {"type": "array", "items": {"type": "string"}}}
+      },
+      "RetrievalIdentity": {
+        "type": "object", "additionalProperties": false, "required": ["embedding_provider", "embedding_model", "embedding_revision", "embedding_dimension", "index_version", "collection"],
+        "properties": {"embedding_provider": {"type": "string"}, "embedding_model": {"type": "string"}, "embedding_revision": {"type": "string"}, "embedding_dimension": {"type": "integer"}, "index_version": {"type": "string"}, "collection": {"type": "string"}}
+      },
+      "ReadOnlyResult": {
+        "type": "object", "additionalProperties": false,
+        "required": ["schema_version", "status", "trace_id", "retrieval_completed", "identity_gate", "retrieval_identity", "semantic_status", "contract", "evidence", "coverage", "gaps", "errors"],
+        "properties": {"schema_version": {"const": "readonly-evidence-contract-v1"}, "status": {"enum": ["OK", "PARTIAL", "ERROR"]}, "trace_id": {"type": "string"}, "retrieval_completed": {"const": true}, "identity_gate": {"const": "UPSTREAM_P0_R1_SUCCEEDED"}, "retrieval_identity": {"$ref": "#/$defs/RetrievalIdentity"}, "semantic_status": {"const": "NOT_ASSESSED"}, "contract": {"$ref": "#/$defs/Contract"}, "evidence": {"type": "array", "maxItems": 20, "items": {"$ref": "#/$defs/StructuredEvidence"}}, "coverage": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/$defs/Availability"}}, "gaps": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/Gap"}}, "errors": {"type": "array", "items": {"$ref": "#/$defs/Error"}}}
+      }
+    }
+  },
+  "cross_field_invariants": [
+    "Contract ID is stable_contract_id(exact query). Question is exact query, never truncated. Contract_id is not globally unique across document scopes: correlate by trace_id plus source_scope plus retrieval_identity.",
+    "R1 source_scope preserves explicit paper filter order/values; empty scope means the existing retrieval scope, not a claim of all-corpus coverage.",
+    "Evidence ID = canonical paper UUID + ':' + unchanged chunk_id, a derived adapter reference, never a claimed preexisting source ID.",
+    "Required provenance is paper_id, nonempty chunk_id, unique nonempty block_ids, complete exact block_page_map, section_path and valid page span, all matching canonical chunk and parsed blocks. Nonempty text must be the unchanged returned prefix of canonical chunk_text. Score must be finite.",
+    "Primary EvidenceItem.block_id = first original block ID; page = authoritative map entry for that block. Full block/page identities and original page_start remain in provenance. Never assume every block is on page_start.",
+    "All evidence/coverage references resolve to validated sidecar evidence. Gaps have empty evidence_ids; rejected candidates are referenced only in errors, never as evidence support.",
+    "All valid items and sources preserve retrieval order. Duplicate identical (paper_id,chunk_id) may share one sidecar reference without deleting original context; conflicting duplicate identities are rejected.",
+    "Status OK + AVAILABLE for valid sources and no errors; OK + MISSING for empty successful retrieval; PARTIAL + PARTIAL for some valid sources with rejected candidates; ERROR + UNAVAILABLE when candidates exist but none can be verified, or adapter fails.",
+    "MISSING/UNAVAILABLE emits one EvidenceGap(MISSING_EVIDENCE). PARTIAL emits one missing structural evidence gap for rejected candidates. AVAILABLE emits no gaps. None means semantic question is answered.",
+    "EvidenceRequirement.status remains UNSEARCHED only because semantic support is unevaluated; retrieval_completed=true makes actual completed retrieval explicit. No RequirementCoverage/SUPPORTED/verdict/confidence output.",
+    "Additional representation errors return 200 with explicit sidecar status/errors after successful retrieval; they never alter or conceal original upstream retrieval errors. HTTP status is not a semantic success signal."
+  ],
+  "failure_semantics": {
+    "upstream_identity_conflict": "Original HTTP 409, no query embedding/search where P0-R1 rejects, no adapter, no result, no fallback.",
+    "upstream_missing_invalid_physical_manifest": "Original HTTP 503, no adapter, no downgrade to typed gap.",
+    "upstream_other_failure": "Original status/error envelope unchanged; no sidecar synthetic success.",
+    "opt_in_validation": "422 before retrieval for new flag/query/scope violations only.",
+    "per_item_structural_failure": "Reject candidate from sidecar, return error code/trace/identity, emit missing structural gap, preserve original context/trace.",
+    "unexpected_adapter_failure": "Return ERROR, empty evidence, UNAVAILABLE coverage, typed missing gap and EVIDENCE_ADAPTER_ERROR; log sanitized code with existing logging. Catch only adapter-stage exceptions.",
+    "error_exposure": "Return necessary identifiers and field names only; no raw exception text, secrets, headers, absolute filesystem paths or full source text in error logs."
+  },
+  "optional_fields": {"relevance": "Existing finite retrieval score, not confidence; nullable only where source type permits, no invented value.", "source_page": "Optional PaperBlock cross-check; output SourceLocator.page is checked page_start.", "bbox_and_parser_annotations": "Remain in unchanged server-owned PaperBlock; not required sidecar output and no new provenance inference.", "unknown_source_id": "No separate source_id exists in current ContextItem/EvidenceItem/PaperBlock. No synthetic replacement or source-id fallback is allowed."},
+  "direct_reuse": ["StrictModel", "EvidenceRequirement", "EvidenceContract", "EvidenceContract.unique_ids", "stable_contract_id", "RequirementType.SOURCE", "EvidenceGap", "GapType.MISSING_EVIDENCE", "EvidenceItem", "EvidenceVerificationStatus.CANDIDATE", "ContextItem.model_validate", "Chunk.model_validate", "PaperBlock.model_validate"],
+  "excluded_calls": ["RuleBasedResearchPlanner.initial_contract_plan", "StructuredContractAdapter", "validate_assessments", "update_coverage", "detect_gaps", "contract_satisfied", "ResearchAgentRunner", "EvidenceDrivenRetrievalController", "FrozenRetrievalBackend loader", "_evidence_from_raw", "EvidenceState.add"],
+  "acceptance_plan": "synthetic_acceptance_plan.md",
+  "actual_execution_in_S0": {"API_calls": 0, "model_inference": 0, "index_builds": 0, "formal_experiments": 0, "integration_e2e": "NOT_RUN_BY_SCOPE"}
+}

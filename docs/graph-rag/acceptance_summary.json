@@ -1,0 +1,191 @@
+{
+  "status": "PAPERRESEARCH_GRAPHRAG_RUNTIME_INTEGRATED",
+  "kind": "REAL_PDF_RUNTIME_INTEGRATION_NOT_SCIENTIFIC_GOLD",
+  "schema_version": "D6_STRUCTURAL_GRAPH_WIKI_V1",
+  "pdfs": [
+    {
+      "sha256": "e519851739a39a69af320cf1fc5954ea70b11758b88419a96140ed8fdf99579a",
+      "bytes": 1116152
+    },
+    {
+      "sha256": "6cd2645d4a50d1a61a261529b33747c674d78851bdbe6993b0961f81a17dc6f2",
+      "bytes": 2436198
+    }
+  ],
+  "source_binding": {
+    "schema_version": "D6_STRUCTURAL_GRAPH_WIKI_V1",
+    "generation_id": "589dfee9-b702-4178-bc86-62146cf0918a",
+    "inventory_digest": "039eab0cfbadf8734bf39f75f5bed1066e605c4802bb073d07c7cbbdc19bbe5e",
+    "seal_digest": "80fc14bbb86b38a5fe97a61c6e5b1f721dbf92753e67c9f9d1a474fdddf63aff",
+    "index_identity": {
+      "collection_name": "graph_wiki_v21_acceptance_aa02af096fae",
+      "distance_metric": "Cosine",
+      "embedding_dimension": 384,
+      "embedding_model": "hash-v1",
+      "embedding_provider": "hash",
+      "embedding_revision": "v1",
+      "index_version": "graph-v21"
+    },
+    "source_hashes": {
+      "runtime:metadata": "908e54198d6985c4342b0f7bbd017a3bdca483e1d0aa51c11bb6c1c5fe4034d7",
+      "runtime:chunks": "24f4647dc0ae00c20d05462ed971bdebd9e236b9a80271bbe2d4c10d083cb2d4"
+    }
+  },
+  "build": {
+    "nodes": 115,
+    "edges": 113,
+    "wiki_pages": 2,
+    "bytes": 748648,
+    "semantic_relations": 0,
+    "model_requests": 0
+  },
+  "comparison": {
+    "scope": "ONE_QUESTION_ENGINEERING_OBSERVATION_NOT_QUALITY_BENCHMARK",
+    "hybrid_wall_ms": 938.7101996690035,
+    "graph_wall_ms": 768.0918001569808,
+    "hybrid_chunk_ids": [
+      "237cbc5a-791e-4170-aa71-c88d7849e89d",
+      "88a2f936-daad-4065-99e0-d427856c7419",
+      "54f22d8b-1453-4229-bb7c-26c0c947b56f",
+      "5e8022d0-78ec-43b9-9efd-8e6716cab43a",
+      "274e5715-c905-4ec3-a8af-ee9d110ca900"
+    ],
+    "graph_chunk_ids": [
+      "237cbc5a-791e-4170-aa71-c88d7849e89d",
+      "88a2f936-daad-4065-99e0-d427856c7419",
+      "54f22d8b-1453-4229-bb7c-26c0c947b56f",
+      "274e5715-c905-4ec3-a8af-ee9d110ca900",
+      "5e8022d0-78ec-43b9-9efd-8e6716cab43a"
+    ],
+    "graph_added": [],
+    "hybrid_lost": [],
+    "graph_query_evidence_units": 16,
+    "wiki_evidence_units": 4
+  },
+  "graph_expansion": {
+    "added_chunk_ids": [],
+    "lost_hybrid_chunk_ids": [],
+    "context_characters": 5646,
+    "context_budget": 16000,
+    "model_forwards": 0,
+    "model_requests": 0,
+    "latency_ms": 77.64740008860826
+  },
+  "graph_traversal_counts": {
+    "max_hops": 2,
+    "nodes_visited": 115,
+    "edges_visited": 113
+  },
+  "agent": {
+    "status": "PARTIAL",
+    "tool_calls": 3,
+    "graph_requests": 3,
+    "evidence_count": 11,
+    "paid_provider_requests": 0,
+    "report_status": "REPORT_INPUT_INVALID",
+    "report_failure_reason": "SEMANTIC_SUPPORT_NOT_ASSESSED",
+    "resume": {
+      "status": "PARTIAL",
+      "graph_options_preserved": true
+    },
+    "checkpoint_count": 17
+  },
+  "citation_occurrences_verified": 36,
+  "negative_tests": [
+    {
+      "name": "unauthorized-paper",
+      "status": "PASS_REJECTED",
+      "http_status": 403
+    },
+    {
+      "name": "stale-generation",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "wrong-edge",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "orphan-node",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "sourceless-wiki",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "gold-schema",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "extra-gold-node",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "node-budget",
+      "status": "PASS_REJECTED",
+      "http_status": 422
+    },
+    {
+      "name": "hop-budget",
+      "status": "PASS_REJECTED",
+      "http_status": 422
+    },
+    {
+      "name": "canonical-tampering",
+      "status": "PASS_REJECTED",
+      "http_status": 503
+    },
+    {
+      "name": "corrupt-runtime",
+      "status": "PASS_REJECTED",
+      "http_status": 409
+    },
+    {
+      "name": "missing-index-and-explicit-fallback",
+      "status": "PASS",
+      "strict_status": 503
+    }
+  ],
+  "benchmark_read_guard": true,
+  "api_stopped": true,
+  "wall_seconds": 26.3807594999671,
+  "paid_cost_usd": 0,
+  "neural_model_forwards": 0,
+  "scientific_multi_hop_accuracy_qualified": false,
+  "resource_measurement_limits": "Peak RAM/CPU not instrumented. Timings are one sequential warm local observation, not a controlled speed benchmark.",
+  "history_freeze": {
+    "files": 635,
+    "mismatches": []
+  },
+  "raw_local_receipts": {
+    "acceptance.json": "cc55a07f03f52967afcdeda19e08bd448afcdc27a55506d3062df5501bdd83a9",
+    "agent-resumed.json": "03d9a1885c9f173d8d0160c76c3100063fa90a526bb124a7602ff9f6c419e4df",
+    "agent.json": "96aa0745a8613cb7421921bdd81e15ae0789ab145707c483d7cf3b5d4765f447",
+    "build_receipt.json": "17ff0d846a72ad62bd47640fb159f221c5539b305fe91d4401c911b9390ae849",
+    "citation_checks.json": "6380255fac99ca6dda23e3cbc252696a995d14fd5484848269403072325f25f7",
+    "explicit-fallback.json": "952fb18e47867f5ca832cc654336166b813b7ebd853522eb78e8895415c35558",
+    "graph-query.json": "9b7a0c378d31b8e9a3522b579286e250f44648a634eb798a90510c81960dc1cc",
+    "graphrag.json": "75d10bffb2b99cf4a70da92a2157407b0b811f3bd456d8e98581e7b8d218100c",
+    "hybrid.json": "fc30692c26dc37492e1fe4a7d325bbe926f07ebfa751aa1482f4ce2f851a70f1",
+    "negative-canonical-tampering.json": "71a309f1066059fbf6144016d37f425fa4c441b783b1273f3c495b72e965ef4f",
+    "negative-corrupt-runtime.json": "8b54586604c46b1b46743a43d3b582339f92354b77cd3c1f25d4630e4bee4761",
+    "negative-extra-gold-node.json": "7e022013cba953a99f8217b47f591f11a023debcc3239329df84964d495aa8b1",
+    "negative-gold-schema.json": "0e29ae6643304dbcb7db9da003e40737d556298726014d2abeae823639191843",
+    "negative-hop-budget.json": "6223334b67755ab74eac6281f9f828f1c907d6b56cfc02c0e74ecc35b6e11396",
+    "negative-missing-index.json": "a615d48a423db32b2955f8e976f740b0c9080009ea16a123589db162ce26b2b2",
+    "negative-node-budget.json": "d81bced5f44a7c0c72da9b4d2d82f3fffe28b85279cea1c3852699a8bd2cd111",
+    "negative-orphan-node.json": "0d92e35079fdbc4e581835ef278de78f218f6b2b56b0dfc27cb20bff7ef437e0",
+    "negative-sourceless-wiki.json": "5bdab99f50ca48331878167ebebd05c9db9aaa030fdbb4a4b99de59e80e111e9",
+    "negative-stale-generation.json": "ab37de28e43b80bb70e2398310d1e19473309b5b36cc89803307e07b55785e2e",
+    "negative-unauthorized-paper.json": "95ed6befd5b917b4537e4680cbb5efd16b48ecc69596f499eddf5e425a11178b",
+    "negative-wrong-edge.json": "07753fd9f7d399e2d1a50873c69b4d0757140fe4ef465bcce54fa77d5cfacbb6",
+    "wiki-query.json": "21b5e81e5432b0f7d6e5189da877be5870477830fbd4305d76d8fcfd3bfaf2b5"
+  }
+}

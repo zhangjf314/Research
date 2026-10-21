@@ -5,6 +5,7 @@ from paper_research.indexing.embedding import (
     EmbeddingProvider,
     HashEmbeddingProvider,
     JinaEmbeddingProvider,
+    LocalQwenEmbeddingProvider,
     OpenAICompatibleEmbeddingProvider,
     SiliconFlowEmbeddingProvider,
 )
@@ -20,6 +21,7 @@ from paper_research.retrieval.reranker import (
     JinaReranker,
     LexicalReranker,
     Reranker,
+    SiliconFlowReranker,
 )
 
 
@@ -43,6 +45,11 @@ def build_embedding_provider(settings: Settings) -> EmbeddingProvider:
         )
     if settings.embedding_provider == "hash":
         return HashEmbeddingProvider(settings.embedding_dimensions)
+    if settings.embedding_provider == "local_qwen3":
+        if settings.embedding_model_path is None or settings.embedding_model != LocalQwenEmbeddingProvider.model_name:
+            raise ProviderConfigurationError("local_qwen3 requires EMBEDDING_MODEL_PATH and Qwen/Qwen3-Embedding-0.6B")
+        return LocalQwenEmbeddingProvider(settings.embedding_model_path, settings.embedding_revision,
+                                          settings.embedding_dimensions, settings.embedding_batch_size)
     if settings.embedding_provider == "jina":
         assert settings.embedding_base_url is not None
         assert settings.embedding_api_key is not None
@@ -103,8 +110,7 @@ def build_provider_bundle(settings: Settings) -> ProviderBundle:
 def build_llm_provider(settings: Settings) -> LLMProvider:
     if settings.llm_configuration_issues:
         raise ProviderConfigurationError(
-            "production LLM is not configured: "
-            + ", ".join(settings.llm_configuration_issues)
+            "production LLM is not configured: " + ", ".join(settings.llm_configuration_issues)
         )
     if settings.llm_provider == "template":
         return TemplateLLMProvider()
@@ -114,10 +120,7 @@ def build_llm_provider(settings: Settings) -> LLMProvider:
     output_cost_per_million = settings.llm_output_cost_per_million
     if input_cost_per_million is None and settings.llm_input_price_per_million_tokens is not None:
         input_cost_per_million = float(settings.llm_input_price_per_million_tokens)
-    if (
-        output_cost_per_million is None
-        and settings.llm_output_price_per_million_tokens is not None
-    ):
+    if output_cost_per_million is None and settings.llm_output_price_per_million_tokens is not None:
         output_cost_per_million = float(settings.llm_output_price_per_million_tokens)
     if settings.llm_provider == "siliconflow":
         return SiliconFlowLLMProvider(
@@ -154,6 +157,7 @@ def build_llm_provider(settings: Settings) -> LLMProvider:
             response_format=settings.llm_response_format,
             thinking_enabled=settings.llm_thinking_enabled,
             stream=settings.llm_stream,
+            vision_enabled=settings.llm_vision_enabled,
             response_audit_enabled=settings.qa_response_audit_enabled,
             response_audit_dir=settings.qa_response_audit_dir,
             response_audit_max_prefix_chars=settings.qa_response_audit_max_prefix_chars,
@@ -210,5 +214,22 @@ def build_reranker(settings: Settings) -> Reranker:
             settings.rerank_api_key,
             settings.rerank_model,
             settings.rerank_timeout_seconds,
+        )
+    elif settings.rerank_provider == "siliconflow":
+        if not settings.rerank_base_url:
+            raise ProviderConfigurationError("RERANK_BASE_URL is required")
+        return SiliconFlowReranker(
+            base_url=settings.rerank_base_url,
+            api_key=(
+                settings.rerank_api_key
+                or settings.embedding_api_key
+                or settings.siliconflow_embedding_api_key
+                or ""
+            ),
+            model=settings.rerank_model,
+            timeout_seconds=settings.rerank_timeout_seconds,
+            max_retries=settings.rerank_max_retries,
+            allow_fallback=settings.rerank_allow_fallback,
+            fallback=LexicalReranker() if settings.rerank_allow_fallback else None,
         )
     raise ProviderConfigurationError(f"unsupported rerank provider: {settings.rerank_provider}")

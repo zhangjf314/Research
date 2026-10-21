@@ -1,0 +1,95 @@
+{
+  "feature": "D6_STRUCTURAL_GRAPH_WIKI_V1",
+  "status": "PAPERRESEARCH_GRAPHRAG_RUNTIME_INTEGRATED",
+  "branch": "feat/graph-wiki-runtime-v2.1",
+  "base_release_commit": "13f124fb24227f01d5be2513aaba5c8c03011b92",
+  "base_main_commit": "7843ad41eaac9b2bf26cbbdf7e21aea2e84ce784",
+  "files": {
+    ".env.example": "8c0e7ecb9748e7626a7118e1461ed70b26e1916045cf0ed859a93ab31bf12b73",
+    "README.md": "017d9a38968981fb9bb8c7e67d37f8454095e72c47ee128e84bca3ad9a9533fa",
+    "docker-compose.yml": "5113a6b638515aea9b3d0fcca21db7806065f5f54f06cbc86764af0dae4e6885",
+    "docs/graph-rag/acceptance_summary.json": "e038d763e35556ffadf9b0aa88fcc6daec719ffc29967428502f8fa61d8783f4",
+    "docs/graph-rag/architecture.md": "5abd5312da5e3d527c97bb603d8de777bdde25a7ee6327796fa4868d00594905",
+    "docs/graph-rag/integration_report.md": "5d9a87e3346b308dd89860bf1d558b99aa325d3e1e9d82295c57fdc4476998c9",
+    "docs/graph-rag/usage.md": "134e331c9a8230b092aad9d72539bb1a685ee3375361e6bde17af65fabc07ba8",
+    "scripts/accept_graph_rag_runtime.py": "f3ce0a123d75819d45d23b1f5f6b1dbda065ac993b8817776f7072064db7897f",
+    "src/paper_research/agents/providers.py": "66142b84f37b4f7d3fd4517e9a7d91aeea609c99935a6e8fe581528cf8073ba6",
+    "src/paper_research/agents/research_agent/checkpoint.py": "cbe9c26669d6a3bd611a0f01a5bd3b6645398f3032adfcf8d3b76056b8785ac6",
+    "src/paper_research/agents/research_agent/runner.py": "6466258401b0df4c27c5203fdd270243c050ed5a1d7f3ec4829c9749cf26cadf",
+    "src/paper_research/agents/research_agent/state.py": "548409691c0a39ca601dec9af2657d3bae87ef5232ae72c0ad5074a5ca0b3b4f",
+    "src/paper_research/api/routes/capabilities.py": "d77915199b1ca397fde91adbeac2c7aa1b8f87189b14c4fa00be301629d41b39",
+    "src/paper_research/api/routes/rag.py": "34415db17db6bc54a61cc61763e140a3ca59079109e0a9ae8bd282b9339deb02",
+    "src/paper_research/api/routes/research.py": "6b3d760821493fc7eb4145e989f6e75458ba31ad247b8a00e16ebaccdca9cb52",
+    "src/paper_research/config.py": "aac84e2669df7037272531e6957dafc4d65780d64e2c0b6dc78144f5d2b6d420",
+    "src/paper_research/evidence_graph/runtime.py": "5d8e8b3ba8eb579b12f79927b0c28e144cd54798ec99d823e8fce2edc570d86f",
+    "src/paper_research/retrieval/graph.py": "497ecb50603b0f4f7ff1b5a9a410e1c72908bcb23a8b00bd535a644188d50e61",
+    "src/paper_research/wiki/runtime.py": "705ebd23131d4c501596496e107af9f0992442b386d0a17b167736e6ee47a8ec",
+    "tests/test_graph_rag_runtime.py": "8e2fe43b34c066f30a472233311c0db8fb52c9525474e72dea96b4fbd6e18d13"
+  },
+  "protected_original_code": {
+    "src/paper_research/evidence_graph/builder.py": "8b038733751b582f65691bbe74ddf5c6e11e29b4e0d0ccc88d32265980ce1f22",
+    "src/paper_research/evidence_graph/query.py": "88f598219e979a4ea9386b82e6f86aec05ee4998f602024656e78ba696b75728",
+    "src/paper_research/evidence_graph/schema.py": "e1bf324d543a11e4d15acf7f07e623bf92f3649830976fe47966300b9d325e7d",
+    "src/paper_research/evidence_graph/validate.py": "c0123b068de8223b8e1c881c5611d7165972b986f403d7ee2f6e8f9c5c0cce27",
+    "src/paper_research/wiki/builder.py": "b5ea329a642768c5ea7c36a9424ba1a2709a420d0a8d5afab1852f2a96eaeb12",
+    "src/paper_research/wiki/query.py": "a7eea5db017e21cb9fd93c363c4f87a0413e3e6afea05ec40a7db07b9f3c18e3",
+    "src/paper_research/wiki/schema.py": "5531d6b2b8cb7030cb04392875e6c4e6825bb188b2767a730889e0afa60f3aeb",
+    "src/paper_research/agents/research_agent/semantic_review.py": "71d5b3b4464622906679785817ef61ec5acb50d52d6be54fb9b66c61d4c007ca",
+    "src/paper_research/agents/research_agent/verifier.py": "355ce94ae013a761e037780bc9189c65cd4d52acbb9f2a9ec6af15b6210d8131"
+  },
+  "tests": {
+    "bounded_suite": {
+      "passed": 135,
+      "skipped": 1
+    },
+    "final_graph_contracts": {
+      "passed": 12
+    },
+    "real_pdf_http_negative_scenarios": 12,
+    "original_head_checkpoint_fixture": "PRE_EXISTING_FAILURE_C1_PROVENANCE_CHECKPOINT_RESUME_FORBIDDEN",
+    "github_ci": "NOT_CONFIGURED"
+  },
+  "safety": {
+    "new_secrets_detected": false,
+    "new_files_over_1MiB": false,
+    "bad_document_links": [],
+    "historical_input_sha_matches": 635,
+    "human_approval_changed": false,
+    "scientific_qualification_granted": false
+  },
+  "history_scan": {
+    "blob_count": 1983,
+    "blob_bytes": 123354515,
+    "credential_pattern_hits": [],
+    "large_blobs_over_10MiB": [
+      {
+        "object": "47f623ad01cc7f26e610aa2d85d46d7cb8e7e4fe",
+        "path": "data/evaluation/evidence-corpus-v1.jsonl",
+        "bytes": 25330326
+      },
+      {
+        "object": "d252954c6f5559f06085dce6c582d2ceb5895816",
+        "path": "data/evaluation/retrieval-context-optimization-v1.json",
+        "bytes": 21379890
+      },
+      {
+        "object": "608c26e469e7dbf4d5953ff253f8618769b8f402",
+        "path": "data/ocr-audit-v1/fully-scanned.pdf",
+        "bytes": 13530300
+      },
+      {
+        "object": "139dde704ff8081705fcedd156cea559ca7bc3a6",
+        "path": "data/ocr-audit-v1/mixed-native-scanned.pdf",
+        "bytes": 13530808
+      }
+    ]
+  },
+  "paid_model_requests": 0,
+  "services": {
+    "task_api_stopped": true,
+    "task_postgres_stopped": true,
+    "preexisting_services_untouched": true
+  },
+  "distribution": "No raw PDFs, model requests, databases, vector indexes, model weights or local runtime logs included.",
+  "sha_scope": "This manifest excludes its own hash. Commit SHA and remote identity are verified separately during publishing."
+}

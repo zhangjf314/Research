@@ -1,4 +1,5 @@
 import time
+import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 
@@ -138,6 +139,20 @@ class HybridRetriever:
         context_candidates = self._context_candidates(
             query, outcome.results, top_k=top_k, retrieval_scope=retrieval_scope
         )
+        if (self.provider_metadata.get("retrieval_ranking_profile") == "semantic_balanced"
+                and retrieval_filter and len(retrieval_filter.paper_ids or []) > 1):
+            # Limit repeated-paper domination within the same recalled candidate set.
+            # Do not invent a candidate or force coverage of absent papers.
+            counts: dict[str, int] = {}
+            context_candidates = []
+            for item in outcome.results:
+                paper = item.chunk.paper_id
+                if counts.get(paper, 0) >= 2:
+                    continue
+                context_candidates.append(item)
+                counts[paper] = counts.get(paper, 0) + 1
+                if len(context_candidates) == top_k:
+                    break
         context = self.context_builder.build(context_candidates)
         context_finished = time.perf_counter()
         trace = self._trace(
@@ -178,6 +193,15 @@ class HybridRetriever:
         routed, signals = self._route_query(
             query, retrieval_scope=retrieval_scope, experiment_design_query=experiment
         )
+        balanced = self.provider_metadata.get("retrieval_ranking_profile") == "semantic_balanced"
+        if balanced:
+            # Remove only scaffolding produced by the existing rule planner.
+            # The user's complete question remains unchanged in the request and trace.
+            for prefix in ("Find background evidence for: ", "Find method or experiment evidence for: "):
+                if routed.startswith(prefix):
+                    routed = routed[len(prefix):]
+                    signals = [*signals, "planner_scaffolding_removed"]
+                    break
         with ThreadPoolExecutor(max_workers=2) as executor:
             dense_future = executor.submit(
                 self.dense.retrieve, routed, retrieval_filter=retrieval_filter, top_k=depth
@@ -186,7 +210,17 @@ class HybridRetriever:
                 self.sparse.retrieve, routed, retrieval_filter=retrieval_filter, top_k=depth
             )
             dense, sparse = dense_future.result(), sparse_future.result()
-        fused = reciprocal_rank_fusion(dense, sparse)
+        fused = reciprocal_rank_fusion(dense, sparse, lexical_weight=0.2 if balanced else 1.0)
+        if balanced:
+            # Very short headers and multi-entry bibliographies are poor standalone
+            # research passages. Discount them; retain their canonical contents.
+            fused = sorted([
+                FusedResult(item.chunk, item.score
+                    * min(1.0, item.chunk.token_count / 80)
+                    * (0.2 if len(re.findall(r"(?m)^\[\d+\]", item.chunk.chunk_text)) >= 3 else 1.0),
+                    item.dense_rank, item.sparse_rank)
+                for item in fused
+            ], key=lambda item: item.score, reverse=True)
         candidate_limit = (
             depth if self.reranker.provider_name == "disabled" else self.rerank_input_k
         )
